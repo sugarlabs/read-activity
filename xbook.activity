@@ -1,0 +1,6 @@
+[Activity]
+name = Xbook
+id = org.laptop.sugar.Xbook
+python_module = xbook.XbookActivity.XbookActivity
+default_type = _xbook_olpc._udp
+show_launcher = yes
