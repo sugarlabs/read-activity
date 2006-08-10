@@ -1,5 +1,3 @@
- 
-
 import gtk
 import evince
 
@@ -11,11 +9,8 @@ class XbookActivity(Activity):
 
 		evince.job_queue_init()
 
-		window = gtk.Window()
-		window.set_default_size(640, 480)
-
 		scrolled = gtk.ScrolledWindow()
-		window.add(scrolled)
+		self.add(scrolled)
 		scrolled.show()
 
 		test_file = 'file:///home/manu/Desktop/OLPC.pdf'
@@ -27,4 +22,3 @@ class XbookActivity(Activity):
 
 		scrolled.add(view)
 		view.show()
-
