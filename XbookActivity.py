@@ -1,3 +1,5 @@
+import os
+
 import gtk
 import evince
 
@@ -13,7 +15,7 @@ class XbookActivity(Activity):
 		self.add(scrolled)
 		scrolled.show()
 
-		test_file = 'file:///home/manu/Desktop/OLPC.pdf'
+		test_file = 'file://' + os.path.expanduser('~/test.pdf')
 
 		view = evince.View()
 		document = evince.factory_get_document(test_file)
