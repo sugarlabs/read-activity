@@ -1,26 +1,36 @@
 import os
-
+from gettext import gettext as _
 import gtk
 import evince
-
 from sugar.activity.Activity import Activity
 
+from toolbar import Toolbar
+
 class XbookActivity(Activity):
-	def __init__(self):
-		Activity.__init__(self)
+    def __init__(self):
+        Activity.__init__(self)
 
-		evince.job_queue_init()
+        self.set_title(_('Read Activity'))
+        
+        evince.job_queue_init()
+        evince_view = evince.View()
+                
+        vbox = gtk.VBox(False, 0)
+        self.add(vbox)
+        vbox.show()
 
-		scrolled = gtk.ScrolledWindow()
-		self.add(scrolled)
-		scrolled.show()
+        toolbar = Toolbar(evince_view)
+        vbox.pack_start(toolbar, False)
+        toolbar.show()
+        
+        scrolled = gtk.ScrolledWindow()
+        vbox.pack_start(scrolled, True, True)
+        scrolled.show()
 
-		test_file = 'file://' + os.path.expanduser('~/test.pdf')
+        scrolled.add(evince_view)
+        evince_view.show()
 
-		view = evince.View()
-		document = evince.factory_get_document(test_file)
-		document.load(test_file)
-		view.set_document(document)
-
-		scrolled.add(view)
-		view.show()
+        test_file = 'file://' + os.path.expanduser('~/test.pdf')
+        document = evince.factory_get_document(test_file)
+        evince_view.set_document(document)
+        toolbar.set_document(document)
