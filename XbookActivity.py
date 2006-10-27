@@ -1,4 +1,3 @@
-import os
 import logging
 from gettext import gettext as _
 import gtk
@@ -21,9 +20,9 @@ class XbookActivity(Activity):
 		self.add(vbox)
 		vbox.show()
 
-		toolbar = Toolbar(self._evince_view)
-		vbox.pack_start(toolbar, False)
-		toolbar.show()
+		self._toolbar = Toolbar(self._evince_view)
+		vbox.pack_start(self._toolbar, False)
+		self._toolbar.show()
 		
 		scrolled = gtk.ScrolledWindow()
 		vbox.pack_start(scrolled, True, True)
@@ -34,9 +33,6 @@ class XbookActivity(Activity):
 
 	def execute(self, command, args):
 		if(command == 'open_document'):
-			#FIXME: Get the entire path from GSugarDownload
-			file_name = '/tmp/' + args[0]
-			
-			document = evince.factory_get_document('file://' + file_name)
+			document = evince.factory_get_document('file://' + args[0])
 			self._evince_view.set_document(document)
-			toolbar.set_document(document)
+			self._toolbar.set_document(document)
