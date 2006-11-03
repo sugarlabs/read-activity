@@ -1,0 +1,5 @@
+[Activity]
+name = Xbook
+service_name = org.laptop.sugar.Xbook
+icon = activity-xbook
+exec = sugar-activity-factory org.laptop.sugar.Xbook XbookActivity.XbookActivity
