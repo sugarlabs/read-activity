@@ -35,4 +35,9 @@ class XbookActivity(Activity):
 		if(command == 'open_document'):
 			document = evince.factory_get_document('file://' + args[0])
 			self._evince_view.set_document(document)
+			
+			# FIXME: Hack for rendering in a fast way by having an integer scale factor.
+			self._evince_view.set_sizing_mode(2)
+			self._evince_view.set_zoom(2.0, False)
+
 			self._toolbar.set_document(document)
