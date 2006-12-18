@@ -4,4 +4,4 @@ service_name = org.laptop.sugar.Xbook
 icon = activity-xbook
 exec = sugar-activity-factory XbookActivity.XbookActivity
 show_launcher = no
-activity_version = 3
+activity_version = 4
