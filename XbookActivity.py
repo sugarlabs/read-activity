@@ -41,3 +41,7 @@ class XbookActivity(Activity):
 			self._evince_view.set_zoom(2.0, False)
 
 			self._toolbar.set_document(document)
+                        return True
+
+                else :
+                	return False
