@@ -16,13 +16,13 @@ class XbookActivity(activity.Activity):
         self.set_title(_('Read Activity'))
         
         evince.job_queue_init()
-        self._evince_view = evince.View()
+        evince_view = evince.View()
                 
         vbox = hippo.CanvasBox()
         self.set_root(vbox)
 
-        self._toolbar = XbookToolbar(self._evince_view)
-        vbox.append(self._toolbar)
+        toolbar = XbookToolbar(evince_view)
+        vbox.append(toolbar)
 
         canvas_widget = hippo.CanvasWidget()
         vbox.append(canvas_widget, hippo.PACK_EXPAND)        
@@ -34,19 +34,9 @@ class XbookActivity(activity.Activity):
         canvas_widget.props.widget = scrolled
         scrolled.show()
 
-        scrolled.add(self._evince_view)
-        self._evince_view.show()
+        scrolled.add(evince_view)
+        evince_view.show()
 
-        document = evince.factory_get_document('file:///home/tomeu/Desktop/olpc/docs/OLS/jones-reprint.pdf')
-        self._evince_view.set_document(document)
-        self._toolbar.set_document(document)
-
-    def execute(self, command, args):
-        if(command == 'open_document'):
-            document = evince.factory_get_document('file://' + args[0])
-            self._evince_view.set_document(document)
-            self._toolbar.set_document(document)
-            
-            return True
-        else:
-            return False
+        document = evince.factory_get_document('file://' + handle.uri)
+        evince_view.set_document(document)
+        toolbar.set_document(document)
