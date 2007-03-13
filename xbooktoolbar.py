@@ -67,10 +67,6 @@ class XbookToolbar(Toolbar):
         self._open.connect("activated", self._open_cb)
         self.append(self._open)
 
-        self._save = IconButton(icon_name='theme:stock-save', active=False)
-        self._save.connect("activated", self._save_cb)
-        self.append(self._save)
-
     def _insert_nav_items(self):
         self._back = IconButton(icon_name='theme:stock-back', active=False)
         self._back.connect("activated", self._go_back_cb)
@@ -158,6 +154,3 @@ class XbookToolbar(Toolbar):
         chooser.destroy()
         if resp == gtk.RESPONSE_ACCEPT and fname:
             self.emit('open-document', fname)
-
-    def _save_cb(self, button):
-        pass
