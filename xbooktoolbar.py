@@ -17,8 +17,6 @@
 import logging
 
 import hippo
-import gtk
-from gettext import gettext as _
 import gobject
 
 from sugar.graphics import font
@@ -33,9 +31,7 @@ class XbookToolbar(Toolbar):
 
     __gsignals__ = {
         'open-document':  (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE,
-                            ([gobject.TYPE_STRING])),
-        'save-document':  (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE,
-                            ([gobject.TYPE_STRING]))
+                            ([]))
     }
 
     def __init__(self, evince_view):
@@ -142,15 +138,4 @@ class XbookToolbar(Toolbar):
         self._next.props.active = self._evince_view.can_find_next()
 
     def _open_cb(self, button):
-        filt = gtk.FileFilter()
-        filt.add_mime_type("application/pdf")
-        filt.add_mime_type("application/x-pdf")
-        chooser = gtk.FileChooserDialog(_("Open a document to read"), \
-                    buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_REJECT, gtk.STOCK_OK, gtk.RESPONSE_ACCEPT))
-        chooser.set_filter(filt)
-        resp = chooser.run()
-        fname = chooser.get_filename()
-        chooser.hide()
-        chooser.destroy()
-        if resp == gtk.RESPONSE_ACCEPT and fname:
-            self.emit('open-document', fname)
+        self.emit('open-document')
