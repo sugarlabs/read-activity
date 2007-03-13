@@ -1,7 +1,7 @@
 [Activity]
-name = Xbook
+name = Read
 service_name = org.laptop.sugar.Xbook
 icon = activity-xbook
 class = XbookActivity.XbookActivity
-show_launcher = no
-activity_version = 6
+show_launcher = yes
+activity_version = 7

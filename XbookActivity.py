@@ -16,12 +16,13 @@ class XbookActivity(activity.Activity):
         self.set_title(_('Read Activity'))
         
         evince.job_queue_init()
-        evince_view = evince.View()
+        self._view = evince.View()
                 
         vbox = hippo.CanvasBox()
         self.set_root(vbox)
 
-        toolbar = XbookToolbar(evince_view)
+        toolbar = XbookToolbar(self._view)
+        toolbar.connect('open-document', self._open_document_cb)
         vbox.append(toolbar)
 
         canvas_widget = hippo.CanvasWidget()
@@ -34,9 +35,16 @@ class XbookActivity(activity.Activity):
         canvas_widget.props.widget = scrolled
         scrolled.show()
 
-        scrolled.add(evince_view)
-        evince_view.show()
+        scrolled.add(self._view)
+        self._view.show()
 
-        document = evince.factory_get_document('file://' + handle.uri)
-        evince_view.set_document(document)
+        if handle.uri:
+            self._load_document(handle.uri)
+
+    def _load_document(self, filename):
+        document = evince.factory_get_document('file://' + filename)
+        self._view.set_document(document)
         toolbar.set_document(document)
+
+    def _open_document_cb(self, widget, fname):
+        self._load_document(fname)

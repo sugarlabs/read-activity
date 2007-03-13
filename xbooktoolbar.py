@@ -17,6 +17,9 @@
 import logging
 
 import hippo
+import gtk
+from gettext import gettext as _
+import gobject
 
 from sugar.graphics import font
 from sugar.graphics import color
@@ -26,12 +29,23 @@ from sugar.graphics.iconbutton import IconButton
 from sugar.graphics.entry import Entry
 
 class XbookToolbar(Toolbar):
+    __gtype_name__ = "XbookToolbar"
+
+    __gsignals__ = {
+        'open-document':  (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE,
+                            ([gobject.TYPE_STRING])),
+        'save-document':  (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE,
+                            ([gobject.TYPE_STRING]))
+    }
+
     def __init__(self, evince_view):
         Toolbar.__init__(self)
 
         self._evince_view = evince_view
         self._document = None
                 
+        self._insert_opensave_items()
+        self._insert_spring()       
         self._insert_nav_items()
         self._insert_spring()       
         self._insert_search_items()
@@ -47,6 +61,15 @@ class XbookToolbar(Toolbar):
     def _insert_spring(self):
         separator = hippo.CanvasBox()
         self.append(separator, hippo.PACK_EXPAND)
+
+    def _insert_opensave_items(self):
+        self._open = IconButton(icon_name='theme:stock-open', active=True)
+        self._open.connect("activated", self._open_cb)
+        self.append(self._open)
+
+        self._save = IconButton(icon_name='theme:stock-save', active=False)
+        self._save.connect("activated", self._save_cb)
+        self.append(self._save)
 
     def _insert_nav_items(self):
         self._back = IconButton(icon_name='theme:stock-back', active=False)
@@ -122,3 +145,19 @@ class XbookToolbar(Toolbar):
         self._prev.props.active = self._evince_view.can_find_previous()
         self._next.props.active = self._evince_view.can_find_next()
 
+    def _open_cb(self, button):
+        filt = gtk.FileFilter()
+        filt.add_mime_type("application/pdf")
+        filt.add_mime_type("application/x-pdf")
+        chooser = gtk.FileChooserDialog(_("Open a document to read"), \
+                    buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_REJECT, gtk.STOCK_OK, gtk.RESPONSE_ACCEPT))
+        chooser.set_filter(filt)
+        resp = chooser.run()
+        fname = chooser.get_filename()
+        chooser.hide()
+        chooser.destroy()
+        if resp == gtk.RESPONSE_ACCEPT and fname:
+            self.emit('open-document', fname)
+
+    def _save_cb(self, button):
+        pass
