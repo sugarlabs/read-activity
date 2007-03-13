@@ -25,15 +25,10 @@ from sugar.activity import activity
 
 from xbooktoolbar import XbookToolbar
 
-DOCUMENTS_DIR = os.path.join(os.path.expanduser("~"), "Documents")
-
 class XbookActivity(activity.Activity):
     def __init__(self, handle):
         activity.Activity.__init__(self, handle)
         self._document = None
-
-        if not os.path.exists(DOCUMENTS_DIR):
-            os.makedirs(DOCUMENTS_DIR)
 
         logging.debug('Starting xbook...')
         self.set_title(_('Read Activity'))
@@ -78,7 +73,7 @@ class XbookActivity(activity.Activity):
         chooser = gtk.FileChooserDialog(_("Open a document to read"), \
                     buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_REJECT, gtk.STOCK_OK, gtk.RESPONSE_ACCEPT))
         chooser.set_filter(filt)
-        chooser.set_current_folder(DOCUMENTS_DIR)
+        chooser.set_current_folder(os.path.expanduser("~"))
         resp = chooser.run()
         fname = chooser.get_filename()
         chooser.hide()
