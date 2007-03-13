@@ -11,6 +11,7 @@ from xbooktoolbar import XbookToolbar
 class XbookActivity(activity.Activity):
     def __init__(self, handle):
         activity.Activity.__init__(self, handle)
+        self._document = None
 
         logging.debug('Starting xbook...')
         self.set_title(_('Read Activity'))
@@ -21,9 +22,9 @@ class XbookActivity(activity.Activity):
         vbox = hippo.CanvasBox()
         self.set_root(vbox)
 
-        toolbar = XbookToolbar(self._view)
-        toolbar.connect('open-document', self._open_document_cb)
-        vbox.append(toolbar)
+        self._toolbar = XbookToolbar(self._view)
+        self._toolbar.connect('open-document', self._open_document_cb)
+        vbox.append(self._toolbar)
 
         canvas_widget = hippo.CanvasWidget()
         vbox.append(canvas_widget, hippo.PACK_EXPAND)        
@@ -42,9 +43,11 @@ class XbookActivity(activity.Activity):
             self._load_document(handle.uri)
 
     def _load_document(self, filename):
-        document = evince.factory_get_document('file://' + filename)
-        self._view.set_document(document)
-        toolbar.set_document(document)
+        if self._document:
+            del self._document
+        self._document = evince.factory_get_document('file://' + filename)
+        self._view.set_document(self._document)
+        self._toolbar.set_document(self._document)
 
     def _open_document_cb(self, widget, fname):
         self._load_document(fname)
