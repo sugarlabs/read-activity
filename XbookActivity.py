@@ -65,6 +65,11 @@ class XbookActivity(activity.Activity):
         self._document = evince.factory_get_document('file://' + filename)
         self._view.set_document(self._document)
         self._toolbar.set_document(self._document)
+        title = _("Read Activity")
+        info = self._document.get_info()
+        if info and info.title:
+            title += ": " + info.title
+        self.set_title(title)
 
     def _open_document_cb(self, widget):
         filt = gtk.FileFilter()
