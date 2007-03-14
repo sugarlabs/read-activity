@@ -74,6 +74,7 @@ class XbookActivity(activity.Activity):
                     buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_REJECT, gtk.STOCK_OK, gtk.RESPONSE_ACCEPT))
         chooser.set_filter(filt)
         chooser.set_current_folder(os.path.expanduser("~"))
+        chooser.set_show_hidden(False)
         resp = chooser.run()
         fname = chooser.get_filename()
         chooser.hide()
