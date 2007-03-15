@@ -21,7 +21,9 @@ import gtk
 import evince
 import hippo
 import os
+
 from sugar.activity import activity
+from sugar.graphics.filechooser import FileChooserDialog
 
 from xbooktoolbar import XbookToolbar
 
@@ -72,14 +74,22 @@ class XbookActivity(activity.Activity):
         self.set_title(title)
 
     def _open_document_cb(self, widget):
-        filt = gtk.FileFilter()
-        filt.add_mime_type("application/pdf")
-        filt.add_mime_type("application/x-pdf")
-        chooser = gtk.FileChooserDialog(_("Open a document to read"), \
+        chooser = FileChooserDialog(_("Open a document to read"), \
                     buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_REJECT, gtk.STOCK_OK, gtk.RESPONSE_ACCEPT))
-        chooser.set_filter(filt)
         chooser.set_current_folder(os.path.expanduser("~"))
         chooser.set_show_hidden(False)
+
+        file_filter = gtk.FileFilter()
+        file_filter.set_name(_("All supported formats"))
+        file_filter.add_mime_type("application/pdf")
+        file_filter.add_mime_type("application/x-pdf")
+        chooser.add_filter(file_filter)
+
+        file_filter = gtk.FileFilter()
+        file_filter.set_name(_("All files"))
+        file_filter.add_pattern("*")
+        chooser.add_filter(file_filter)
+        
         resp = chooser.run()
         fname = chooser.get_filename()
         chooser.hide()
