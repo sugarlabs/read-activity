@@ -74,8 +74,12 @@ class XbookActivity(activity.Activity):
         self.set_title(title)
 
     def _open_document_cb(self, widget):
-        chooser = FileChooserDialog(_("Open a document to read"), \
-                    buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_REJECT, gtk.STOCK_OK, gtk.RESPONSE_ACCEPT))
+        chooser = FileChooserDialog(_("Open a document to read"),
+                                    parent=self,
+                                    buttons=(gtk.STOCK_CANCEL,
+                                             gtk.RESPONSE_REJECT,
+                                             gtk.STOCK_OK,
+                                             gtk.RESPONSE_ACCEPT))
         chooser.set_current_folder(os.path.expanduser("~"))
         chooser.set_show_hidden(False)
 
