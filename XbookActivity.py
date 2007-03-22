@@ -64,7 +64,7 @@ class XbookActivity(activity.Activity):
     def _load_document(self, filename):
         if self._document:
             del self._document
-        self._document = evince.factory_get_document('file://' + filename)
+        self._document = evince.factory_get_document(filename)
         self._view.set_document(self._document)
         self._toolbar.set_document(self._document)
         title = _("Read Activity")
