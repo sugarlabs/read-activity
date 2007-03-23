@@ -15,7 +15,6 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import logging
-from gettext import gettext as _
 
 import gtk
 import evince
@@ -23,6 +22,7 @@ import hippo
 import os
 
 from sugar.activity import activity
+from sugar.activity.locale import _
 from sugar.graphics.filechooser import FileChooserDialog
 
 from xbooktoolbar import XbookToolbar
@@ -99,4 +99,4 @@ class XbookActivity(activity.Activity):
         chooser.hide()
         chooser.destroy()
         if resp == gtk.RESPONSE_ACCEPT and fname:
-            self._load_document(fname)
+            self._load_document('file://%s' % fname)

@@ -1,0 +1,53 @@
+# Spanish translations for PACKAGE package.
+# Copyright (C) 2007 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Tomeu Vizoso <tomeu@tomeuvizoso.net>, 2007.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-03-23 16:48+0100\n"
+"PO-Revision-Date: 2007-03-23 16:50+0100\n"
+"Last-Translator: Tomeu Vizoso <tomeu@tomeuvizoso.net>\n"
+"Language-Team: Spanish <es@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: XbookActivity.py:36 XbookActivity.py:70
+msgid "Read Activity"
+msgstr "Actividad Leer"
+
+#: XbookActivity.py:77
+msgid "Open a document to read"
+msgstr "Abrir un documento para leer"
+
+#: XbookActivity.py:87
+msgid "All supported formats"
+msgstr "Todos los formatos soportados"
+
+#: XbookActivity.py:93
+msgid "All files"
+msgstr "Todos los ficheros"
+
+#: xbooktoolbar.py:63
+msgid "Open"
+msgstr "Abrir"
+
+#: xbooktoolbar.py:69
+msgid "Back"
+msgstr "Volver"
+
+#: xbooktoolbar.py:74
+msgid "Forward"
+msgstr "Avanzar"
+
+#: xbooktoolbar.py:95
+msgid "Previous"
+msgstr "Anterior"
+
+#: xbooktoolbar.py:100
+msgid "Next"
+msgstr "Siguiente"

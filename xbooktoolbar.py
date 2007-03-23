@@ -19,6 +19,7 @@ import logging
 import hippo
 import gobject
 
+from sugar.activity.locale import _
 from sugar.graphics import font
 from sugar.graphics import color
 from sugar.graphics import units
@@ -59,16 +60,18 @@ class XbookToolbar(Toolbar):
         self.append(separator, hippo.PACK_EXPAND)
 
     def _insert_opensave_items(self):
-        self._open = IconButton(icon_name='theme:stock-open', active=True)
+        self._open = IconButton(icon_name='theme:stock-open', tooltip=_('Open'))
         self._open.connect("activated", self._open_cb)
         self.append(self._open)
 
     def _insert_nav_items(self):
-        self._back = IconButton(icon_name='theme:stock-back', active=False)
+        self._back = IconButton(icon_name='theme:stock-back', active=False,
+                                tooltip=_('Back'))
         self._back.connect("activated", self._go_back_cb)
         self.append(self._back)
 
-        self._forward = IconButton(icon_name='theme:stock-forward', active=False)
+        self._forward = IconButton(icon_name='theme:stock-forward', active=False,
+                                   tooltip=_('Forward'))
         self._forward.connect("activated", self._go_forward_cb)
         self.append(self._forward)
         
@@ -88,11 +91,13 @@ class XbookToolbar(Toolbar):
         
         self.append(self._search_entry, hippo.PACK_EXPAND)
 
-        self._prev = IconButton(icon_name='theme:stock-back', active=False)
+        self._prev = IconButton(icon_name='theme:stock-back', active=False,
+                                tooltip=_('Previous'))
         self._prev.connect("activated", self._find_prev_cb)
         self.append(self._prev)
 
-        self._next = IconButton(icon_name='theme:stock-forward', active=False)
+        self._next = IconButton(icon_name='theme:stock-forward', active=False,
+                                tooltip=_('Next'))
         self._next.connect("activated", self._find_next_cb)
         self.append(self._next)
 
