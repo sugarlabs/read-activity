@@ -15,11 +15,11 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import logging
+from gettext import gettext as _
 
 import hippo
 import gobject
 
-from sugar.activity.locale import _
 from sugar.graphics import font
 from sugar.graphics import color
 from sugar.graphics import units
