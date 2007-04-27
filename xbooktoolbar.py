@@ -37,8 +37,8 @@ class XbookToolbar(gtk.Toolbar):
         self._evince_view = evince_view
         self._document = None
                 
-        self._insert_opensave_items()
-        self._insert_spring()       
+#        self._insert_opensave_items()
+#        self._insert_spring()       
         self._insert_nav_items()
         self._insert_spring()       
         self._insert_search_items()

@@ -23,7 +23,6 @@ import hippo
 import os
 
 from sugar.activity import activity
-from sugar.graphics.filechooser import FileChooserDialog
 
 from xbooktoolbar import XbookToolbar
 
@@ -41,7 +40,7 @@ class XbookActivity(activity.Activity):
         toolbox = activity.ActivityToolbox(self)
 
         self._toolbar = XbookToolbar(self._view)
-        self._toolbar.connect('open-document', self._open_document_cb)
+#        self._toolbar.connect('open-document', self._open_document_cb)
         toolbox.add_toolbar(_('View'), self._toolbar)
         self._toolbar.show()
 
