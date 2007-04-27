@@ -37,26 +37,26 @@ class XbookActivity(activity.Activity):
         
         evince.job_queue_init()
         self._view = evince.View()
-                
-        vbox = hippo.CanvasBox()
-        self.set_root(vbox)
+
+        toolbox = activity.ActivityToolbox(self)
 
         self._toolbar = XbookToolbar(self._view)
         self._toolbar.connect('open-document', self._open_document_cb)
-        vbox.append(self._toolbar)
+        toolbox.add_toolbar(_('View'), self._toolbar)
+        self._toolbar.show()
 
-        canvas_widget = hippo.CanvasWidget()
-        vbox.append(canvas_widget, hippo.PACK_EXPAND)        
-        
+        self.set_toolbox(toolbox)
+        toolbox.show()
+
         scrolled = gtk.ScrolledWindow()
         scrolled.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
         scrolled.props.shadow_type = gtk.SHADOW_NONE
 
-        canvas_widget.props.widget = scrolled
-        scrolled.show()
-
         scrolled.add(self._view)
         self._view.show()
+                
+        self.set_canvas(scrolled)
+        scrolled.show()
 
         if handle.uri:
             self._load_document(handle.uri)
