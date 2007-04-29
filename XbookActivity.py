@@ -40,7 +40,6 @@ class XbookActivity(activity.Activity):
         toolbox = activity.ActivityToolbox(self)
 
         self._toolbar = XbookToolbar(self._view)
-#        self._toolbar.connect('open-document', self._open_document_cb)
         toolbox.add_toolbar(_('View'), self._toolbar)
         self._toolbar.show()
 
@@ -71,31 +70,3 @@ class XbookActivity(activity.Activity):
         if info and info.title:
             title += ": " + info.title
         self.set_title(title)
-
-    def _open_document_cb(self, widget):
-        chooser = FileChooserDialog(_("Open a document to read"),
-                                    parent=self,
-                                    buttons=(gtk.STOCK_CANCEL,
-                                             gtk.RESPONSE_REJECT,
-                                             gtk.STOCK_OK,
-                                             gtk.RESPONSE_ACCEPT))
-        chooser.set_current_folder(os.path.expanduser("~"))
-        chooser.set_show_hidden(False)
-
-        file_filter = gtk.FileFilter()
-        file_filter.set_name(_("All supported formats"))
-        file_filter.add_mime_type("application/pdf")
-        file_filter.add_mime_type("application/x-pdf")
-        chooser.add_filter(file_filter)
-
-        file_filter = gtk.FileFilter()
-        file_filter.set_name(_("All files"))
-        file_filter.add_pattern("*")
-        chooser.add_filter(file_filter)
-        
-        resp = chooser.run()
-        fname = chooser.get_filename()
-        chooser.hide()
-        chooser.destroy()
-        if resp == gtk.RESPONSE_ACCEPT and fname:
-            self._load_document('file://%s' % fname)

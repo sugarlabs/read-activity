@@ -26,19 +26,12 @@ from sugar.graphics.toolbutton import ToolButton
 class XbookToolbar(gtk.Toolbar):
     __gtype_name__ = 'XbookToolbar'
 
-    __gsignals__ = {
-        'open-document':  (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE,
-                            ([]))
-    }
-
     def __init__(self, evince_view):
         gtk.Toolbar.__init__(self)
 
         self._evince_view = evince_view
         self._document = None
                 
-#        self._insert_opensave_items()
-#        self._insert_spring()       
         self._insert_nav_items()
         self._insert_spring()       
         self._insert_search_items()
@@ -57,13 +50,6 @@ class XbookToolbar(gtk.Toolbar):
         separator.set_expand(True)
         self.insert(separator, -1)
         separator.show()
-
-    def _insert_opensave_items(self):
-        self._open = ToolButton()
-        self._open.set_icon_name('stock-open')
-        self._open.connect('clicked', self._open_cb)
-        self.insert(self._open, -1)
-        self._open.show()
 
     def _insert_nav_items(self):
         self._back = ToolButton()
@@ -181,6 +167,3 @@ class XbookToolbar(gtk.Toolbar):
     def _update_find_buttons(self):
         self._prev.props.sensitive = self._evince_view.can_find_previous()
         self._next.props.sensitive = self._evince_view.can_find_next()
-
-    def _open_cb(self, button):
-        self.emit('open-document')
