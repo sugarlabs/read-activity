@@ -52,16 +52,14 @@ class XbookToolbar(gtk.Toolbar):
         separator.show()
 
     def _insert_nav_items(self):
-        self._back = ToolButton()
+        self._back = ToolButton('stock-back')
         self._back.props.sensitive = False
-        self._back.set_icon_name('stock-back')
         self._back.connect('clicked', self._go_back_cb)
         self.insert(self._back, -1)
         self._back.show()
 
-        self._forward = ToolButton()
+        self._forward = ToolButton('stock-forward')
         self._back.props.sensitive = False
-        self._forward.set_icon_name('stock-forward')
         self._forward.connect('clicked', self._go_forward_cb)
         self.insert(self._forward, -1)
         self._forward.show()
@@ -113,16 +111,14 @@ class XbookToolbar(gtk.Toolbar):
         self.insert(search_item, -1)
         search_item.show()
 
-        self._prev = ToolButton()
+        self._prev = ToolButton('stock-back')
         self._prev.props.sensitive = False
-        self._prev.set_icon_name('stock-back')
         self._prev.connect('clicked', self._find_prev_cb)
         self.insert(self._prev, -1)
         self._prev.show()
 
-        self._next = ToolButton()
+        self._next = ToolButton('stock-forward')
         self._next.props.sensitive = False
-        self._next.set_icon_name('stock-forward')
         self._next.connect('clicked', self._find_next_cb)
         self.insert(self._next, -1)
         self._next.show()
