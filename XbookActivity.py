@@ -72,8 +72,6 @@ class XbookActivity(activity.Activity):
 
         self.connect("shared", self._shared_cb)
 
-        handle.uri = "file:///home/dcbw/i1040nre.pdf"
-
         if handle.uri:
             self._load_document(handle.uri)
         elif self._shared_activity:
@@ -107,22 +105,6 @@ class XbookActivity(activity.Activity):
         getter.start()
         return False
 
-    def _have_file_reply_handler(self, have_it, buddy):
-        if not have_it:
-            # Try again
-            logging.debug("Error: %s (%s) didn't have it" % (buddy.props.nick, buddy.props.ip4_address))
-            self._tried_buddies.append(buddy)
-            gobject.idle_add(self._get_document)
-            return
-        logging.debug("Trying to download document from %s (%s)" % (buddy.props.nick, buddy.props.ip4_address))
-        gobject.idle_add(self._download_document, buddy)
-
-    def _have_file_error_handler(self, err, buddy):
-        logging.debug("Failed to get document from %s (%s)" % (buddy.props.nick, buddy.props.ip4_address))
-        # Try again
-        self._tried_buddies.append(buddy)
-        gobject.idle_add(self._get_document)
-
     def _get_document(self):
         next_buddy = None
         # Find the next untried buddy with an IP4 address we can try to
@@ -139,12 +121,7 @@ class XbookActivity(activity.Activity):
             logging.debug("Couldn't find a buddy to get the document from.")
             return False
 
-        logging.debug("Will try to get document from %s (%s)" % (buddy.props.nick, buddy.props.ip4_address))
-        proxy = network.GlibServerProxy("http://%s:%d" % (buddy.props.ip4_address, _READ_XMLPC_PORT))
-        proxy.have_file(reply_handler=self._have_file_reply_handler,
-                        error_handler=self._have_file_error_handler,
-                        user_data=buddy)
-
+        gobject.idle_add(self._download_document, buddy)
         return False
 
     def _joined_cb(self, activity):
