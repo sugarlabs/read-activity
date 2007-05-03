@@ -34,9 +34,9 @@ class ReadHTTPRequestHandler(network.ChunkedGlibHTTPRequestHandler):
         return self.server._filepath
 
 class ReadHTTPServer(network.GlibTCPServer):
-    def __init__(self, server_address, request_handler, filepath):
+    def __init__(self, server_address, filepath):
         self._filepath = filepath
-        network.GlibTCPServer.__init__(self, server_address, request_handler);
+        network.GlibTCPServer.__init__(self, server_address, ReadHTTPRequestHandler);
 
 class XbookActivity(activity.Activity):
     def __init__(self, handle):
@@ -71,6 +71,8 @@ class XbookActivity(activity.Activity):
         scrolled.show()
 
         self.connect("shared", self._shared_cb)
+
+        handle.uri = "file:///home/dcbw/i1040nre.pdf"
 
         if handle.uri:
             self._load_document(handle.uri)
@@ -172,7 +174,7 @@ class XbookActivity(activity.Activity):
             self._start_shared_services()
 
     def _start_shared_services(self):
-        self._fileserver = ReadHTTPServer(("", _READ_PORT), ReadHTTPRequestHandler, self._filepath)
+        self._fileserver = ReadHTTPServer(("", _READ_PORT), self._filepath)
 
     def _shared_cb(self, activity):
         self._start_shared_services()
