@@ -27,10 +27,23 @@ from sugar.p2p import network
 
 from xbooktoolbar import XbookToolbar
 
+_READ_PORT = 17982
+
+class ReadHTTPRequestHandler(network.ChunkedGlibHTTPRequestHandler):
+    def translate_path(self, path):
+        return self.server._filepath
+
+class ReadHTTPServer(network.GlibTCPServer):
+    def __init__(self, server_address, request_handler, filepath):
+        self._filepath = filepath
+        network.GlibTCPServer.__init__(self, server_address, request_handler);
+
 class XbookActivity(activity.Activity):
     def __init__(self, handle):
         activity.Activity.__init__(self, handle)
         self._document = None
+        self._filepath = None
+        self._fileserver = None
 
         logging.debug('Starting xbook...')
         self.set_title(_('Read Activity'))
@@ -57,13 +70,15 @@ class XbookActivity(activity.Activity):
         self.set_canvas(scrolled)
         scrolled.show()
 
+        self.connect("shared", self._shared_cb)
+
         if handle.uri:
             self._load_document(handle.uri)
         elif self._shared_activity:
             self._tried_buddies = []
-            if self._shared_activity.props.joined:
+            if self.get_shared():
                 # Already joined for some reason, just get the document
-                self._fetch_document()
+                self._get_document()
             else:
                 # Wait for a successful join before trying to get the document
                 self.connect("joined", self._joined_cb)
@@ -83,7 +98,7 @@ class XbookActivity(activity.Activity):
         gobject.idle_add(self._get_document)
 
     def _download_document(self, buddy):
-        getter = network.GlibURLDownloader("http://%s:8867/document" % buddy.props.ip4_address)
+        getter = network.GlibURLDownloader("http://%s:%d/document" % (buddy.props.ip4_address, _READ_PORT))
         getter.connect("finished", self._download_result_cb, buddy)
         getter.connect("error", self._download_error_cb, buddy)
         logging.debug("Starting download...")
@@ -111,6 +126,8 @@ class XbookActivity(activity.Activity):
         # Find the next untried buddy with an IP4 address we can try to
         # download the document from
         for buddy in self._shared_activity.get_joined_buddies():
+            if buddy.props.owner:
+                continue
             if not buddy in self._tried_buddies:
                 if buddy.props.ip4_address:
                     next_buddy = buddy
@@ -121,7 +138,7 @@ class XbookActivity(activity.Activity):
             return False
 
         logging.debug("Will try to get document from %s (%s)" % (buddy.props.nick, buddy.props.ip4_address))
-        proxy = network.GlibServerProxy("http://%s:8868" % buddy.props.ip4_address)
+        proxy = network.GlibServerProxy("http://%s:%d" % (buddy.props.ip4_address, _READ_XMLPC_PORT))
         proxy.have_file(reply_handler=self._have_file_reply_handler,
                         error_handler=self._have_file_error_handler,
                         user_data=buddy)
@@ -131,10 +148,10 @@ class XbookActivity(activity.Activity):
     def _joined_cb(self, activity):
         gobject.idle_add(self._get_document)
 
-    def _load_document(self, filename):
+    def _load_document(self, filepath):
         if self._document:
             del self._document
-        self._document = evince.factory_get_document(filename)
+        self._document = evince.factory_get_document(filepath)
         self._view.set_document(self._document)
         self._toolbar.set_document(self._document)
         title = _("Read Activity")
@@ -142,3 +159,20 @@ class XbookActivity(activity.Activity):
         if info and info.title:
             title += ": " + info.title
         self.set_title(title)
+
+        import urllib
+        garbage, path = urllib.splittype(filepath)
+        garbage, path = urllib.splithost(path or "")
+        path, garbage = urllib.splitquery(path or "")
+        path, garbage = urllib.splitattr(path or "")
+        self._filepath = os.path.abspath(path)
+
+        # When we get the document, start up our sharing services
+        if self.get_shared():
+            self._start_shared_services()
+
+    def _start_shared_services(self):
+        self._fileserver = ReadHTTPServer(("", _READ_PORT), ReadHTTPRequestHandler, self._filepath)
+
+    def _shared_cb(self, activity):
+        self._start_shared_services()
