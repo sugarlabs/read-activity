@@ -36,7 +36,7 @@ class ReadHTTPRequestHandler(network.ChunkedGlibHTTPRequestHandler):
 class ReadHTTPServer(network.GlibTCPServer):
     def __init__(self, server_address, filepath):
         self._filepath = filepath
-        network.GlibTCPServer.__init__(self, server_address, ReadHTTPRequestHandler);
+        network.GlibTCPServer.__init__(self, server_address, ReadHTTPRequestHandler)
 
 class XbookActivity(activity.Activity):
     def __init__(self, handle):
