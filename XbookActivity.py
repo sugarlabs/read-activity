@@ -23,7 +23,7 @@ import hippo
 import os
 
 from sugar.activity import activity
-from sugar.p2p import network
+from sugar import network
 
 from xbooktoolbar import XbookToolbar
 
