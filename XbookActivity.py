@@ -23,7 +23,7 @@ import hippo
 import os
 
 from sugar.activity import activity
-from sugar.p2p import network
+from sugar import network
 
 from xbooktoolbar import XbookToolbar
 
@@ -82,14 +82,10 @@ class XbookActivity(activity.Activity):
             else:
                 # Wait for a successful join before trying to get the document
                 self.connect("joined", self._joined_cb)
-        else:
-            # FIXME: this should be called by activity.Activity on realize
-            self.read_file()
 
-    def read_file(self):
-        logging.debug('XbookActivity.read_file: ' + self.jobject.file_path)
-        if self.jobject.file_path:
-            self._load_document('file://' + self.jobject.file_path)
+    def read_file(self, file_path):
+        logging.debug('XbookActivity.read_file: ' + file_path)
+        self._load_document('file://' + file_path)
 
     def _download_result_cb(self, getter, tempfile, suggested_name, buddy):
         del self._tried_buddies
