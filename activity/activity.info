@@ -5,3 +5,4 @@ icon = activity-xbook
 class = XbookActivity.XbookActivity
 show_launcher = yes
 activity_version = 18
+mime_types = application/pdf
