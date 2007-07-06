@@ -4,5 +4,5 @@ service_name = org.laptop.sugar.Xbook
 icon = activity-xbook
 class = XbookActivity.XbookActivity
 show_launcher = yes
-activity_version = 19
+activity_version = 20
 mime_types = application/pdf
