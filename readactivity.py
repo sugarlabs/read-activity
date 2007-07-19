@@ -25,7 +25,7 @@ import os
 from sugar.activity import activity
 from sugar import network
 
-from xbooktoolbar import XbookToolbar
+from readtoolbar import ReadToolbar
 
 _READ_PORT = 17982
 
@@ -38,14 +38,14 @@ class ReadHTTPServer(network.GlibTCPServer):
         self._filepath = filepath
         network.GlibTCPServer.__init__(self, server_address, ReadHTTPRequestHandler)
 
-class XbookActivity(activity.Activity):
+class ReadActivity(activity.Activity):
     def __init__(self, handle):
         activity.Activity.__init__(self, handle)
         self._document = None
         self._filepath = None
         self._fileserver = None
 
-        logging.debug('Starting xbook...')
+        logging.debug('Starting read...')
         self.set_title(_('Read Activity'))
         
         evince.job_queue_init()
@@ -53,7 +53,7 @@ class XbookActivity(activity.Activity):
 
         toolbox = activity.ActivityToolbox(self)
 
-        self._toolbar = XbookToolbar(self._view)
+        self._toolbar = ReadToolbar(self._view)
         toolbox.add_toolbar(_('View'), self._toolbar)
         self._toolbar.show()
 
@@ -74,7 +74,8 @@ class XbookActivity(activity.Activity):
 
         if handle.uri:
             self._load_document(handle.uri)
-        elif self._shared_activity:
+
+        if self._shared_activity or not self._document:
             self._tried_buddies = []
             if self.get_shared():
                 # Already joined for some reason, just get the document
@@ -84,16 +85,12 @@ class XbookActivity(activity.Activity):
                 self.connect("joined", self._joined_cb)
 
     def read_file(self, file_path):
-        logging.debug('XbookActivity.read_file: ' + file_path)
+        logging.debug('ReadActivity.read_file: ' + file_path)
         self._load_document('file://' + file_path)
 
     def _download_result_cb(self, getter, tempfile, suggested_name, buddy):
         del self._tried_buddies
         logging.debug("Got document %s (%s) from %s (%s)" % (tempfile, suggested_name, buddy.props.nick, buddy.props.ip4_address))
-        import shutil
-        dest = os.path.join(os.path.expanduser("~"), suggested_name)
-        shutil.copyfile(tempfile, dest)
-        os.remove(tempfile)
         self._load_document("file://%s" % dest)
 
     def _download_error_cb(self, getter, err, buddy):
@@ -106,7 +103,7 @@ class XbookActivity(activity.Activity):
         getter.connect("finished", self._download_result_cb, buddy)
         getter.connect("error", self._download_error_cb, buddy)
         logging.debug("Starting download...")
-        getter.start()
+        getter.start(self.)
         return False
 
     def _get_document(self):

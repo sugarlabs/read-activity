@@ -23,8 +23,8 @@ import gtk
 
 from sugar.graphics.toolbutton import ToolButton
 
-class XbookToolbar(gtk.Toolbar):
-    __gtype_name__ = 'XbookToolbar'
+class ReadToolbar(gtk.Toolbar):
+    __gtype_name__ = 'ReadToolbar'
 
     def __init__(self, evince_view):
         gtk.Toolbar.__init__(self)
