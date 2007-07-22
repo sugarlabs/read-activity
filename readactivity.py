@@ -103,7 +103,7 @@ class ReadActivity(activity.Activity):
         getter.connect("finished", self._download_result_cb, buddy)
         getter.connect("error", self._download_error_cb, buddy)
         logging.debug("Starting download...")
-        getter.start(self.)
+        getter.start()
         return False
 
     def _get_document(self):
