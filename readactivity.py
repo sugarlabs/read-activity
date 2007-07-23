@@ -21,13 +21,13 @@ import gtk, gobject
 import evince
 import hippo
 import os
+import tempfile
+import time
 
 from sugar.activity import activity
 from sugar import network
 
 from readtoolbar import ReadToolbar
-
-_READ_PORT = 17982
 
 class ReadHTTPRequestHandler(network.ChunkedGlibHTTPRequestHandler):
     def translate_path(self, path):
@@ -72,6 +72,9 @@ class ReadActivity(activity.Activity):
 
         self.connect("shared", self._shared_cb)
 
+        h = hash(self._activity_id)
+        self.port = 1024 + (h % 64511)
+
         if handle.uri:
             self._load_document(handle.uri)
 
@@ -85,13 +88,20 @@ class ReadActivity(activity.Activity):
                 self.connect("joined", self._joined_cb)
 
     def read_file(self, file_path):
+        """Load a file from the datastore on activity start"""
         logging.debug('ReadActivity.read_file: ' + file_path)
         self._load_document('file://' + file_path)
+
+    def write_file(self, file_path):
+        # Don't do anything here, file has already been saved
+        pass
 
     def _download_result_cb(self, getter, tempfile, suggested_name, buddy):
         del self._tried_buddies
         logging.debug("Got document %s (%s) from %s (%s)" % (tempfile, suggested_name, buddy.props.nick, buddy.props.ip4_address))
-        self._load_document("file://%s" % dest)
+        self._load_document("file://%s" % tempfile)
+        logging.debug("Saving %s to datastore..." % tempfile)
+        self.save()
 
     def _download_error_cb(self, getter, err, buddy):
         logging.debug("Error getting document from %s (%s): %s" % (buddy.props.nick, buddy.props.ip4_address, err))
@@ -99,14 +109,19 @@ class ReadActivity(activity.Activity):
         gobject.idle_add(self._get_document)
 
     def _download_document(self, buddy):
-        getter = network.GlibURLDownloader("http://%s:%d/document" % (buddy.props.ip4_address, _READ_PORT))
+        getter = network.GlibURLDownloader("http://%s:%d/document" % (buddy.props.ip4_address, self.port))
         getter.connect("finished", self._download_result_cb, buddy)
         getter.connect("error", self._download_error_cb, buddy)
-        logging.debug("Starting download...")
-        getter.start()
+        logging.debug("Starting download to %s..." % self._jobject.file_path)
+        getter.start(self._jobject.file_path)
         return False
 
     def _get_document(self):
+        # Assign a file path to download if one doesn't exist yet
+        if not self._jobject.file_path:
+            self._jobject.file_path = os.path.join(tempfile.gettempdir(), '%i' % time.time())
+            self._owns_file = True
+
         next_buddy = None
         # Find the next untried buddy with an IP4 address we can try to
         # download the document from
@@ -152,7 +167,7 @@ class ReadActivity(activity.Activity):
             self._start_shared_services()
 
     def _start_shared_services(self):
-        self._fileserver = ReadHTTPServer(("", _READ_PORT), self._filepath)
+        self._fileserver = ReadHTTPServer(("", self.port), self._filepath)
 
     def _shared_cb(self, activity):
         self._start_shared_services()
