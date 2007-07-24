@@ -78,6 +78,10 @@ class ReadActivity(activity.Activity):
         # Set up for idle suspend
         self._idle_timer = 0
         self._service = None
+
+        # start with sleep off
+        self._sleep_inhibit = True
+
         if os.path.exists(os.path.expanduser("~/ebook-enable-sleep")):
             try:
                 bus = dbus.SystemBus()
@@ -86,6 +90,9 @@ class ReadActivity(activity.Activity):
                 self._service = dbus.Interface(proxy, _HARDWARE_MANAGER_INTERFACE)
                 scrolled.props.vadjustment.connect("value-changed", self._user_action_cb)
                 scrolled.props.hadjustment.connect("value-changed", self._user_action_cb)
+                self.connect("focus-in-event", self._focus_in_event_cb)
+                self.connect("focus-out-event", self._focus_out_event_cb)
+                self.connect("notify::active", self._now_active_cb)
             except dbus.DBusException, e:
                 logging.info('Hardware manager service not found, no idle suspend.')
 
@@ -93,12 +100,6 @@ class ReadActivity(activity.Activity):
 
         h = hash(self._activity_id)
         self.port = 1024 + (h % 64511)
-
-        # start with sleep off
-        self._sleep_inhibit = True
-        self.connect("focus-in-event", self._focus_in_event_cb)
-        self.connect("focus-out-event", self._focus_out_event_cb)
-        self.connect("notify::active", self._now_active_cb)
 
         if handle.uri:
             self._load_document(handle.uri)
@@ -115,6 +116,8 @@ class ReadActivity(activity.Activity):
     def _now_active_cb(self, widget, pspec):
         if self.props.active:
             # Now active, start initial suspend timeout
+            if self._idle_timer > 0:
+                gobject.source_remove(self._idle_timer)
             self._idle_timer = gobject.timeout_add(15000, self._suspend_cb)
             self._sleep_inhibit = False
         else:
@@ -123,6 +126,7 @@ class ReadActivity(activity.Activity):
 
     def _focus_in_event_cb(self, widget, event):
         self._sleep_inhibit = False
+        self._user_action_cb(self)
 
     def _focus_out_event_cb(self, widget, event):
         self._sleep_inhibit = True
