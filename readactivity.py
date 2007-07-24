@@ -23,11 +23,16 @@ import hippo
 import os
 import tempfile
 import time
+import dbus
 
 from sugar.activity import activity
 from sugar import network
 
 from readtoolbar import ReadToolbar
+
+_HARDWARE_MANAGER_INTERFACE = 'org.laptop.HardwareManager'
+_HARDWARE_MANAGER_SERVICE = 'org.laptop.HardwareManager'
+_HARDWARE_MANAGER_OBJECT_PATH = '/org/laptop/HardwareManager'
 
 class ReadHTTPRequestHandler(network.ChunkedGlibHTTPRequestHandler):
     def translate_path(self, path):
@@ -70,10 +75,30 @@ class ReadActivity(activity.Activity):
         self.set_canvas(scrolled)
         scrolled.show()
 
+        # Set up for idle suspend
+        self._idle_timer = 0
+        self._service = None
+        if os.path.exists(os.path.expanduser("~/ebook-enable-sleep")):
+            try:
+                bus = dbus.SystemBus()
+                proxy = bus.get_object(_HARDWARE_MANAGER_SERVICE,
+                                       _HARDWARE_MANAGER_OBJECT_PATH)
+                self._service = dbus.Interface(proxy, _HARDWARE_MANAGER_INTERFACE)
+                scrolled.props.vadjustment.connect("value-changed", self._user_action_cb)
+                scrolled.props.hadjustment.connect("value-changed", self._user_action_cb)
+            except dbus.DBusException, e:
+                logging.info('Hardware manager service not found, no idle suspend.')
+
         self.connect("shared", self._shared_cb)
 
         h = hash(self._activity_id)
         self.port = 1024 + (h % 64511)
+
+        # start with sleep off
+        self._sleep_inhibit = True
+        self.connect("focus-in-event", self._focus_in_event_cb)
+        self.connect("focus-out-event", self._focus_out_event_cb)
+        self.connect("notify::active", self._now_active_cb)
 
         if handle.uri:
             self._load_document(handle.uri)
@@ -86,6 +111,33 @@ class ReadActivity(activity.Activity):
             else:
                 # Wait for a successful join before trying to get the document
                 self.connect("joined", self._joined_cb)
+
+    def _now_active_cb(self, widget, pspec):
+        if self.props.active:
+            # Now active, start initial suspend timeout
+            self._idle_timer = gobject.timeout_add(15000, self._suspend_cb)
+            self._sleep_inhibit = False
+        else:
+            # Now inactive
+            self._sleep_inhibit = True
+
+    def _focus_in_event_cb(self, widget, event):
+        self._sleep_inhibit = False
+
+    def _focus_out_event_cb(self, widget, event):
+        self._sleep_inhibit = True
+
+    def _user_action_cb(self, widget):
+        if self._idle_timer > 0:
+            gobject.source_remove(self._idle_timer)
+        self._idle_timer = gobject.timeout_add(5000, self._suspend_cb)
+
+    def _suspend_cb(self):
+        # If the machine has been idle for 5 seconds, suspend
+        self._idle_timer = 0
+        if not self._sleep_inhibit:
+            self._service.set_kernel_suspend()
+        return False
 
     def read_file(self, file_path):
         """Load a file from the datastore on activity start"""
