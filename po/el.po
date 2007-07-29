@@ -1,0 +1,40 @@
+# Greek translation of Xbook project.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Simos Xenitellis <simos.lists@googlemail.com>, 2007.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Xbook project\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-06-21 17:38+0200\n"
+"PO-Revision-Date: 2007-07-25 18:53+0100\n"
+"Last-Translator: Simos Xenitellis <simos.lists@googlemail.com>\n"
+"Language-Team: Greek <olpc@grnet.gr>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: XbookActivity.py:49 XbookActivity.py:140
+msgid "Read Activity"
+msgstr "Ανάγνωση δραστηριότητας"
+
+#: XbookActivity.py:57
+msgid "View"
+msgstr "Προβολή"
+
+#: xbooktoolbar.py:56
+msgid "Back"
+msgstr "Πίσω"
+
+#: xbooktoolbar.py:63
+msgid "Forward"
+msgstr "Μπροστά"
+
+#: xbooktoolbar.py:117
+msgid "Previous"
+msgstr "Προηγούμενο"
+
+#: xbooktoolbar.py:124
+msgid "Next"
+msgstr "Επόμενο"
