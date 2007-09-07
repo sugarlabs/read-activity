@@ -62,11 +62,12 @@ class ReadActivity(activity.Activity):
         toolbox = activity.ActivityToolbox(self)
 
         self._edit_toolbar = EditToolbar(self._view)
-        self._edit_toolbar.undo.set_sensitive(False)
-        self._edit_toolbar.redo.set_sensitive(False)
+        self._edit_toolbar.undo.props.visible = False
+        self._edit_toolbar.redo.props.visible = False
+        self._edit_toolbar.separator.props.visible = False
         self._edit_toolbar.copy.set_sensitive(False)
         self._edit_toolbar.copy.connect('clicked', self._edit_toolbar_copy_cb)
-        self._edit_toolbar.paste.set_sensitive(False)
+        self._edit_toolbar.paste.props.visible = False
         toolbox.add_toolbar(_('Edit'), self._edit_toolbar)
         self._edit_toolbar.show()
 
