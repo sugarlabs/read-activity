@@ -4,6 +4,6 @@ service_name = org.laptop.sugar.ReadActivity
 icon = activity-read
 class = readactivity.ReadActivity
 show_launcher = no
-activity_version = 27
+activity_version = 28
 mime_types = application/pdf
 
