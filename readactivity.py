@@ -28,7 +28,7 @@ import dbus
 from sugar.activity import activity
 from sugar import network
 
-from readtoolbar import ReadToolbar
+from readtoolbar import EditToolbar, ReadToolbar, ViewToolbar
 
 _HARDWARE_MANAGER_INTERFACE = 'org.laptop.HardwareManager'
 _HARDWARE_MANAGER_SERVICE = 'org.laptop.HardwareManager'
@@ -50,17 +50,33 @@ class ReadActivity(activity.Activity):
         self._filepath = None
         self._fileserver = None
 
+        self.connect('key-press-event', self._key_press_event_cb)
+
         logging.debug('Starting read...')
         self.set_title(_('Read Activity'))
         
         evince.job_queue_init()
         self._view = evince.View()
+        self._view.connect('notify::has-selection', self._view_notify_has_selection_cb)
 
         toolbox = activity.ActivityToolbox(self)
 
-        self._toolbar = ReadToolbar(self._view)
-        toolbox.add_toolbar(_('View'), self._toolbar)
-        self._toolbar.show()
+        self._edit_toolbar = EditToolbar(self._view)
+        self._edit_toolbar.undo.set_sensitive(False)
+        self._edit_toolbar.redo.set_sensitive(False)
+        self._edit_toolbar.copy.set_sensitive(False)
+        self._edit_toolbar.copy.connect('clicked', self._edit_toolbar_copy_cb)
+        self._edit_toolbar.paste.set_sensitive(False)
+        toolbox.add_toolbar(_('Edit'), self._edit_toolbar)
+        self._edit_toolbar.show()
+
+        self._read_toolbar = ReadToolbar(self._view)
+        toolbox.add_toolbar(_('Read'), self._read_toolbar)
+        self._read_toolbar.show()
+
+        self._view_toolbar = ViewToolbar(self._view)
+        toolbox.add_toolbar(_('View'), self._view_toolbar)
+        self._view_toolbar.show()
 
         self.set_toolbox(toolbox)
         toolbox.show()
@@ -204,7 +220,8 @@ class ReadActivity(activity.Activity):
             del self._document
         self._document = evince.factory_get_document(filepath)
         self._view.set_document(self._document)
-        self._toolbar.set_document(self._document)
+        self._edit_toolbar.set_document(self._document)
+        self._read_toolbar.set_document(self._document)
         title = _("Read Activity")
         info = self._document.get_info()
         if info and info.title:
@@ -227,3 +244,15 @@ class ReadActivity(activity.Activity):
 
     def _shared_cb(self, activity):
         self._start_shared_services()
+
+    def _view_notify_has_selection_cb(self, view, pspec):
+        self._edit_toolbar.copy.set_sensitive(self._view.props.has_selection)
+
+    def _edit_toolbar_copy_cb(self, button):
+        self._view.copy()
+
+    def _key_press_event_cb(self, widget, event):
+        keyname = gtk.gdk.keyval_name(event.keyval)
+        if keyname == 'c' and event.state & gtk.gdk.CONTROL_MASK:
+            self._view.copy()
+
