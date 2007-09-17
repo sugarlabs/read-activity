@@ -1,0 +1,42 @@
+# translation of xbook.master.po to Français
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Gauthier Ancelin <gauthier.ancelin@laposte.net>, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: xbook.master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-06-21 17:41+0200\n"
+"PO-Revision-Date: 2007-07-31 00:03+0200\n"
+"Last-Translator: Gauthier Ancelin <gauthier.ancelin@laposte.net>\n"
+"Language-Team: Français <fedora-trans-fr@redhat.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: XbookActivity.py:49 XbookActivity.py:140
+msgid "Read Activity"
+msgstr "Lecture"
+
+#: XbookActivity.py:57
+msgid "View"
+msgstr "Vue"
+
+#: xbooktoolbar.py:56
+msgid "Back"
+msgstr "Reculer"
+
+#: xbooktoolbar.py:63
+msgid "Forward"
+msgstr "Avancer"
+
+#: xbooktoolbar.py:117
+msgid "Previous"
+msgstr "Précédent"
+
+#: xbooktoolbar.py:124
+msgid "Next"
+msgstr "Suivant"
+
