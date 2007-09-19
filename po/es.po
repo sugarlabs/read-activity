@@ -5,18 +5,20 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: xbook\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-06-21 17:41+0200\n"
-"PO-Revision-Date: 2007-03-23 16:50+0100\n"
-"Last-Translator: Tomeu Vizoso <tomeu@tomeuvizoso.net>\n"
-"Language-Team: Spanish <es@li.org>\n"
+"PO-Revision-Date: 2007-09-18 09:59-0300\n"
+"Last-Translator: Domingo Becker <domingobecker@gmail.com>\n"
+"Language-Team: Fedora Spanish <fedora-trans-es@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Spanish\n"
 
-#: XbookActivity.py:49 XbookActivity.py:140
+#: XbookActivity.py:49
+#: XbookActivity.py:140
 msgid "Read Activity"
 msgstr "Actividad Leer"
 
@@ -42,12 +44,10 @@ msgstr "Siguiente"
 
 #~ msgid "Open a document to read"
 #~ msgstr "Abrir un documento para leer"
-
 #~ msgid "All supported formats"
 #~ msgstr "Todos los formatos soportados"
-
 #~ msgid "All files"
 #~ msgstr "Todos los ficheros"
-
 #~ msgid "Open"
 #~ msgstr "Abrir"
+
