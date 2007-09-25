@@ -16,6 +16,7 @@
 
 import logging
 from gettext import gettext as _
+import re
 
 import pango
 import gobject
@@ -119,6 +120,8 @@ class ReadToolbar(gtk.Toolbar):
         self._num_page_entry = gtk.Entry()
         self._num_page_entry.set_text('0')
         self._num_page_entry.set_alignment(1)
+        self._num_page_entry.connect('insert-text',
+                                     self._num_page_entry_insert_text_cb)
         self._num_page_entry.connect('activate',
                                      self._num_page_entry_activate_cb)
 
@@ -152,9 +155,25 @@ class ReadToolbar(gtk.Toolbar):
         page_cache.connect('page-changed', self._page_changed_cb)    
         self._update_nav_buttons()
 
+    def _num_page_entry_insert_text_cb(self, entry, text, length, position):
+        if not re.match('[0-9]', text):
+            entry.emit_stop_by_name('insert-text')
+            return True
+        return False
+
     def _num_page_entry_activate_cb(self, entry):
-        page = int(entry.props.text) - 1
+        if entry.props.text:
+            page = int(entry.props.text) - 1
+        else:
+            page = 0
+
+        if page >= self._document.get_n_pages():
+            page = self._document.get_n_pages() - 1
+        elif page < 0:
+            page = 0
+
         self._document.get_page_cache().set_current_page(page)
+        entry.props.text = str(page + 1)
         
     def _go_back_cb(self, button):
         self._evince_view.previous_page()

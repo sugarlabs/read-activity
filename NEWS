@@ -1,4 +1,6 @@
 * Update spanish translation
+* #3626, #3462: Do sane things with invalid input in the page number entry
+  box. (tomeu)
 
 31
 
