@@ -53,7 +53,6 @@ class ReadActivity(activity.Activity):
         self.connect('key-press-event', self._key_press_event_cb)
 
         logging.debug('Starting read...')
-        self.set_title(_('Read Activity'))
         
         evince.job_queue_init()
         self._view = evince.View()
