@@ -222,12 +222,12 @@ class ReadActivity(activity.Activity):
         self._view.set_document(self._document)
         self._edit_toolbar.set_document(self._document)
         self._read_toolbar.set_document(self._document)
-        title = _("Read Activity")
-        info = self._document.get_info()
-        if info and info.title:
-            title += ": " + info.title
-        self.set_title(title)
-
+        
+        if not self._jobject.metadata['title_set_by_user'] == '1':
+            info = self._document.get_info()
+            if info and info.title:
+                self.metadata['title'] = info.title
+        
         import urllib
         garbage, path = urllib.splittype(filepath)
         garbage, path = urllib.splithost(path or "")
