@@ -34,6 +34,8 @@ _HARDWARE_MANAGER_INTERFACE = 'org.laptop.HardwareManager'
 _HARDWARE_MANAGER_SERVICE = 'org.laptop.HardwareManager'
 _HARDWARE_MANAGER_OBJECT_PATH = '/org/laptop/HardwareManager'
 
+_TOOLBAR_READ = 2
+
 class ReadHTTPRequestHandler(network.ChunkedGlibHTTPRequestHandler):
     def translate_path(self, path):
         return self.server._filepath
@@ -119,6 +121,9 @@ class ReadActivity(activity.Activity):
 
         if handle.uri:
             self._load_document(handle.uri)
+
+        # start on the read toolbar
+        self.toolbox.set_current_toolbar(_TOOLBAR_READ)
 
         if self._shared_activity or not self._document:
             self._tried_buddies = []
