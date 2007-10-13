@@ -208,15 +208,22 @@ class ViewToolbar(gtk.Toolbar):
         self._zoom_in.connect('clicked', self._zoom_in_cb)
         self.insert(self._zoom_in, -1)
         self._zoom_in.show()
+        
+        self._zoom_out = ToolButton('zoom-out')
+        self._zoom_out.set_tooltip(_('Zoom out'))
+        self._zoom_out.connect('clicked', self._zoom_out_cb)
+        self.insert(self._zoom_out, -1)
+        self._zoom_out.show()
+            
+        self._zoom_to_width = ToolButton('zoom-best-fit')
+        self._zoom_to_width.set_tooltip(_('Zoom to width'))
+        self._zoom_to_width.connect('clicked', self._zoom_to_width_cb)
+        self.insert(self._zoom_to_width, -1)
+        self._zoom_to_width.show()
 
-        palette = self._zoom_in.get_palette()
+        palette = self._zoom_to_width.get_palette()
         menu_item = MenuItem(_('Zoom to fit'))
         menu_item.connect('activate', self._zoom_to_fit_menu_item_activate_cb)
-        palette.menu.append(menu_item)
-        menu_item.show()
-
-        menu_item = MenuItem(_('Zoom to width'))
-        menu_item.connect('activate', self._zoom_to_width_menu_item_activate_cb)
         palette.menu.append(menu_item)
         menu_item.show()
 
@@ -224,12 +231,6 @@ class ViewToolbar(gtk.Toolbar):
         menu_item.connect('activate', self._actual_size_menu_item_activate_cb)
         palette.menu.append(menu_item)
         menu_item.show()
-
-        self._zoom_out = ToolButton('zoom-out')
-        self._zoom_out.set_tooltip(_('Zoom out'))
-        self._zoom_out.connect('clicked', self._zoom_out_cb)
-        self.insert(self._zoom_out, -1)
-        self._zoom_out.show()
 
         tool_item = gtk.ToolItem()
         self.insert(tool_item, -1)
@@ -283,17 +284,20 @@ class ViewToolbar(gtk.Toolbar):
         self._evince_view.zoom_out()
         self._update_zoom_buttons()
 
+    def _zoom_to_width_cb(self, button):
+        self._evince_view.props.sizing_mode = evince.SIZING_FIT_WIDTH
+        self._update_zoom_buttons()
+
     def _update_zoom_buttons(self):
         self._zoom_in.props.sensitive = self._evince_view.can_zoom_in()
         self._zoom_out.props.sensitive = self._evince_view.can_zoom_out()
 
     def _zoom_to_fit_menu_item_activate_cb(self, menu_item):
         self._evince_view.props.sizing_mode = evince.SIZING_BEST_FIT
-
-    def _zoom_to_width_menu_item_activate_cb(self, menu_item):
-        self._evince_view.props.sizing_mode = evince.SIZING_FIT_WIDTH
+        self._update_zoom_buttons()
 
     def _actual_size_menu_item_activate_cb(self, menu_item):
         self._evince_view.props.sizing_mode = evince.SIZING_FREE
         self._evince_view.props.zoom = 1.0
+        self._update_zoom_buttons()
 
