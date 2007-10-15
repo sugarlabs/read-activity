@@ -203,17 +203,17 @@ class ViewToolbar(gtk.Toolbar):
         self._evince_view = evince_view
         self._document = None
             
-        self._zoom_in = ToolButton('zoom-in')
-        self._zoom_in.set_tooltip(_('Zoom in'))
-        self._zoom_in.connect('clicked', self._zoom_in_cb)
-        self.insert(self._zoom_in, -1)
-        self._zoom_in.show()
-        
         self._zoom_out = ToolButton('zoom-out')
         self._zoom_out.set_tooltip(_('Zoom out'))
         self._zoom_out.connect('clicked', self._zoom_out_cb)
         self.insert(self._zoom_out, -1)
         self._zoom_out.show()
+
+        self._zoom_in = ToolButton('zoom-in')
+        self._zoom_in.set_tooltip(_('Zoom in'))
+        self._zoom_in.connect('clicked', self._zoom_in_cb)
+        self.insert(self._zoom_in, -1)
+        self._zoom_in.show()
             
         self._zoom_to_width = ToolButton('zoom-best-fit')
         self._zoom_to_width.set_tooltip(_('Zoom to width'))

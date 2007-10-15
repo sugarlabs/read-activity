@@ -170,9 +170,27 @@ class ReadActivity(activity.Activity):
         self._load_document('file://' + file_path)
 
     def write_file(self, file_path):
-        # Don't do anything here, file has already been saved
-        pass
+        """We only save meta data, not the document itself.
+        current page, view settings, search text."""
 
+        self.metadata['Read_current_page'] = \
+                    str(self._document.get_page_cache().get_current_page())
+
+        self.metadata['Read_zoom'] = str(self._view.props.zoom)
+
+        if self._view.props.sizing_mode == evince.SIZING_BEST_FIT:
+            self.metadata['Read_sizing_mode'] = "best-fit"
+        elif self._view.props.sizing_mode == evince.SIZING_FREE:
+            self.metadata['Read_sizing_mode'] = "free"
+        elif self._view.props.sizing_mode == evince.SIZING_FIT_WIDTH:
+            self.metadata['Read_sizing_mode'] = "fit-width"
+        else:
+            logging.error("Don't know how to save sizing_mode state '%s'" %
+                          self._view.props.sizing_mode)
+            self.metadata['Read_sizing_mode'] = "fit-width"
+            
+        self.metadata['Read_search'] = self._edit_toolbar._search_entry.props.text
+        
     def _download_result_cb(self, getter, tempfile, suggested_name, buddy):
         del self._tried_buddies
         logging.debug("Got document %s (%s) from %s (%s)" % (tempfile, suggested_name, buddy.props.nick, buddy.props.ip4_address))
@@ -228,7 +246,7 @@ class ReadActivity(activity.Activity):
         self._edit_toolbar.set_document(self._document)
         self._read_toolbar.set_document(self._document)
         
-        if not self._jobject.metadata['title_set_by_user'] == '1':
+        if not self.metadata['title_set_by_user'] == '1':
             info = self._document.get_info()
             if info and info.title:
                 self.metadata['title'] = info.title
@@ -239,6 +257,29 @@ class ReadActivity(activity.Activity):
         path, garbage = urllib.splitquery(path or "")
         path, garbage = urllib.splitattr(path or "")
         self._filepath = os.path.abspath(path)
+
+        current_page = int(self.metadata.get('Read_current_page', '0'))
+        self._document.get_page_cache().set_current_page(current_page)
+
+        sizing_mode = self.metadata.get('Read_sizing_mode', 'fit-width')
+        if sizing_mode == "best-fit":
+            self._view.props.sizing_mode = evince.SIZING_BEST_FIT                
+        elif sizing_mode == "free":
+            self._view.props.sizing_mode = evince.SIZING_FREE
+            self._view.props.zoom = float(self.metadata.get('Read_zoom', '1.0'))
+        elif sizing_mode == "fit-width":
+            self._view.props.sizing_mode = evince.SIZING_FIT_WIDTH
+        else:
+            # this may happen when we get a document from a buddy with a later
+            # version of Read, for example. 
+            logging.warning("Unknown sizing_mode state '%s'" % sizing_mode)                          
+            if self.metadata.get('Read_zoom', None) is not None:
+                self._view.props.zoom = float(self.metadata['Read_zoom'])
+                
+        self._view_toolbar._update_zoom_buttons() 
+
+        self._edit_toolbar._search_entry.props.text = \
+                                self.metadata.get('Read_search', '')
 
         # When we get the document, start up our sharing services
         if self.get_shared():

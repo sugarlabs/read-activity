@@ -1,3 +1,7 @@
+* Reverse the zoom buttons so they're in the usual -/+ order found everywhere.
+  (pascals)
+* #2838: Read now saves current page, zoom mode, level and search term in
+  the journal meta and restores them on resume. (pascals)
 * #3706: Add zoom-to-width button and move other zoom actions to its
   palette. (pascals)
 
