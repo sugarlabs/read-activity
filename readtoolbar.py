@@ -56,14 +56,14 @@ class EditToolbar(activity.EditToolbar):
         self.insert(search_item, -1)
         search_item.show()
 
-        self._prev = ToolButton('go-previous')
+        self._prev = ToolButton('go-previous-paired')
         self._prev.set_tooltip(_('Previous'))
         self._prev.props.sensitive = False
         self._prev.connect('clicked', self._find_prev_cb)
         self.insert(self._prev, -1)
         self._prev.show()
 
-        self._next = ToolButton('go-next')
+        self._next = ToolButton('go-next-paired')
         self._next.set_tooltip(_('Next'))
         self._next.props.sensitive = False
         self._next.connect('clicked', self._find_next_cb)
