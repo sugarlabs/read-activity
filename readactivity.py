@@ -53,6 +53,7 @@ class ReadActivity(activity.Activity):
         self._fileserver = None
 
         self.connect('key-press-event', self._key_press_event_cb)
+        self.connect('key-release-event', self._key_release_event_cb)
 
         logging.debug('Starting read...')
         
@@ -172,25 +173,27 @@ class ReadActivity(activity.Activity):
     def write_file(self, file_path):
         """We only save meta data, not the document itself.
         current page, view settings, search text."""
-
-        self.metadata['Read_current_page'] = \
-                    str(self._document.get_page_cache().get_current_page())
-
-        self.metadata['Read_zoom'] = str(self._view.props.zoom)
-
-        if self._view.props.sizing_mode == evince.SIZING_BEST_FIT:
-            self.metadata['Read_sizing_mode'] = "best-fit"
-        elif self._view.props.sizing_mode == evince.SIZING_FREE:
-            self.metadata['Read_sizing_mode'] = "free"
-        elif self._view.props.sizing_mode == evince.SIZING_FIT_WIDTH:
-            self.metadata['Read_sizing_mode'] = "fit-width"
-        else:
-            logging.error("Don't know how to save sizing_mode state '%s'" %
-                          self._view.props.sizing_mode)
-            self.metadata['Read_sizing_mode'] = "fit-width"
+        try:
+            self.metadata['Read_current_page'] = \
+                        str(self._document.get_page_cache().get_current_page())
+    
+            self.metadata['Read_zoom'] = str(self._view.props.zoom)
+    
+            if self._view.props.sizing_mode == evince.SIZING_BEST_FIT:
+                self.metadata['Read_sizing_mode'] = "best-fit"
+            elif self._view.props.sizing_mode == evince.SIZING_FREE:
+                self.metadata['Read_sizing_mode'] = "free"
+            elif self._view.props.sizing_mode == evince.SIZING_FIT_WIDTH:
+                self.metadata['Read_sizing_mode'] = "fit-width"
+            else:
+                logging.error("Don't know how to save sizing_mode state '%s'" %
+                              self._view.props.sizing_mode)
+                self.metadata['Read_sizing_mode'] = "fit-width"
+                
+            self.metadata['Read_search'] = self._edit_toolbar._search_entry.props.text
+        except Exception, e:
+            logging.error('write_file(): %s', e)
             
-        self.metadata['Read_search'] = self._edit_toolbar._search_entry.props.text
-        
     def _download_result_cb(self, getter, tempfile, suggested_name, buddy):
         del self._tried_buddies
         logging.debug("Got document %s (%s) from %s (%s)" % (tempfile, suggested_name, buddy.props.nick, buddy.props.ip4_address))
@@ -299,6 +302,11 @@ class ReadActivity(activity.Activity):
 
     def _key_press_event_cb(self, widget, event):
         keyname = gtk.gdk.keyval_name(event.keyval)
+        logging.debug("Keyname Press: %s, time: %s", keyname, event.time)
         if keyname == 'c' and event.state & gtk.gdk.CONTROL_MASK:
             self._view.copy()
+
+    def _key_release_event_cb(self, widget, event):
+        keyname = gtk.gdk.keyval_name(event.keyval)
+        logging.debug("Keyname Release: %s, time: %s", keyname, event.time)
 

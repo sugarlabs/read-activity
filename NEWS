@@ -1,3 +1,6 @@
+* #4454: Added a broad try..except Exception: to write_file() to allow read to
+  close if write_file has an error.  
+
 34
 
 * Reverse the zoom buttons so they're in the usual -/+ order found everywhere.
