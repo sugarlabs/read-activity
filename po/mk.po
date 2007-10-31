@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-21 17:41+0200\n"
+"POT-Creation-Date: 2007-10-31 09:25+0100\n"
 "PO-Revision-Date: 2007-07-06 13:50+0200\n"
 "Last-Translator: Arangel Angov <arangel@linux.net.mk>\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
@@ -16,27 +16,57 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: XbookActivity.py:49 XbookActivity.py:140
-msgid "Read Activity"
-msgstr "Активност за читање"
+#: activity/activity.info:2 readactivity.py:77
+msgid "Read"
+msgstr ""
 
-#: XbookActivity.py:57
+#: readactivity.py:73
+msgid "Edit"
+msgstr ""
+
+#: readactivity.py:81
 msgid "View"
 msgstr "Поглед"
 
-#: xbooktoolbar.py:56
-msgid "Back"
-msgstr "Назад"
-
-#: xbooktoolbar.py:63
-msgid "Forward"
-msgstr "Напред"
-
-#: xbooktoolbar.py:117
+#: readtoolbar.py:60
 msgid "Previous"
 msgstr "Претходно"
 
-#: xbooktoolbar.py:124
+#: readtoolbar.py:67
 msgid "Next"
 msgstr "Следно"
 
+#: readtoolbar.py:105
+msgid "Back"
+msgstr "Назад"
+
+#: readtoolbar.py:112
+msgid "Forward"
+msgstr "Напред"
+
+#: readtoolbar.py:207
+msgid "Zoom out"
+msgstr ""
+
+#: readtoolbar.py:213
+msgid "Zoom in"
+msgstr ""
+
+#: readtoolbar.py:219
+msgid "Zoom to width"
+msgstr ""
+
+#: readtoolbar.py:225
+msgid "Zoom to fit"
+msgstr ""
+
+#: readtoolbar.py:230
+msgid "Actual size"
+msgstr ""
+
+#: readtoolbar.py:248
+msgid "%"
+msgstr ""
+
+#~ msgid "Read Activity"
+#~ msgstr "Активност за читање"

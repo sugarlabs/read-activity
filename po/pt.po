@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-23 16:48+0100\n"
+"POT-Creation-Date: 2007-10-31 09:25+0100\n"
 "PO-Revision-Date: 2007-03-23 16:51+0100\n"
 "Last-Translator: Tomeu Vizoso <tomeu@tomeuvizoso.net>\n"
 "Language-Team: Portuguese <translation-team-pt@lists.sourceforge.net>\n"
@@ -16,38 +16,69 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: XbookActivity.py:36 XbookActivity.py:70
-msgid "Read Activity"
-msgstr "Actividade Ler"
+#: activity/activity.info:2 readactivity.py:77
+msgid "Read"
+msgstr ""
 
-#: XbookActivity.py:77
-msgid "Open a document to read"
-msgstr "Abrir um documento para o ler"
+#: readactivity.py:73
+msgid "Edit"
+msgstr ""
 
-#: XbookActivity.py:87
-msgid "All supported formats"
-msgstr "Todos os formatos suportados"
+#: readactivity.py:81
+msgid "View"
+msgstr ""
 
-#: XbookActivity.py:93
-msgid "All files"
-msgstr "Todos os ficheiros"
-
-#: xbooktoolbar.py:63
-msgid "Open"
-msgstr "Abrir"
-
-#: xbooktoolbar.py:69
-msgid "Back"
-msgstr "Voltar"
-
-#: xbooktoolbar.py:74
-msgid "Forward"
-msgstr "Avançar"
-
-#: xbooktoolbar.py:95
+#: readtoolbar.py:60
 msgid "Previous"
 msgstr "Anterior"
 
-#: xbooktoolbar.py:100
+#: readtoolbar.py:67
 msgid "Next"
 msgstr "Seguinte"
+
+#: readtoolbar.py:105
+msgid "Back"
+msgstr "Voltar"
+
+#: readtoolbar.py:112
+msgid "Forward"
+msgstr "Avançar"
+
+#: readtoolbar.py:207
+msgid "Zoom out"
+msgstr ""
+
+#: readtoolbar.py:213
+msgid "Zoom in"
+msgstr ""
+
+#: readtoolbar.py:219
+msgid "Zoom to width"
+msgstr ""
+
+#: readtoolbar.py:225
+msgid "Zoom to fit"
+msgstr ""
+
+#: readtoolbar.py:230
+msgid "Actual size"
+msgstr ""
+
+#: readtoolbar.py:248
+msgid "%"
+msgstr ""
+
+#~ msgid "Read Activity"
+#~ msgstr "Actividade Ler"
+
+#~ msgid "Open a document to read"
+#~ msgstr "Abrir um documento para o ler"
+
+#~ msgid "All supported formats"
+#~ msgstr "Todos os formatos suportados"
+
+#~ msgid "All files"
+#~ msgstr "Todos os ficheiros"
+
+#~ msgid "Open"
+#~ msgstr "Abrir"
