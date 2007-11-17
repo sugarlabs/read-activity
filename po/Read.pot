@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-21 17:41+0200\n"
+"POT-Creation-Date: 2007-11-17 20:52+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,26 +16,54 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: XbookActivity.py:49 XbookActivity.py:140
-msgid "Read Activity"
+#: activity/activity.info:2 readactivity.py:84
+msgid "Read"
 msgstr ""
 
-#: XbookActivity.py:57
+#: readactivity.py:80
+msgid "Edit"
+msgstr ""
+
+#: readactivity.py:88
 msgid "View"
 msgstr ""
 
-#: xbooktoolbar.py:56
-msgid "Back"
-msgstr ""
-
-#: xbooktoolbar.py:63
-msgid "Forward"
-msgstr ""
-
-#: xbooktoolbar.py:117
+#: readtoolbar.py:60
 msgid "Previous"
 msgstr ""
 
-#: xbooktoolbar.py:124
+#: readtoolbar.py:67
 msgid "Next"
+msgstr ""
+
+#: readtoolbar.py:105
+msgid "Back"
+msgstr ""
+
+#: readtoolbar.py:112
+msgid "Forward"
+msgstr ""
+
+#: readtoolbar.py:207
+msgid "Zoom out"
+msgstr ""
+
+#: readtoolbar.py:213
+msgid "Zoom in"
+msgstr ""
+
+#: readtoolbar.py:219
+msgid "Zoom to width"
+msgstr ""
+
+#: readtoolbar.py:225
+msgid "Zoom to fit"
+msgstr ""
+
+#: readtoolbar.py:230
+msgid "Actual size"
+msgstr ""
+
+#: readtoolbar.py:248
+msgid "%"
 msgstr ""
