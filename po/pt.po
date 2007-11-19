@@ -2,12 +2,11 @@
 # Copyright (C) 2007 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Tomeu Vizoso <tomeu@tomeuvizoso.net>, 2007.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-31 09:25+0100\n"
+"POT-Creation-Date: 2007-11-17 20:52+0100\n"
 "PO-Revision-Date: 2007-03-23 16:51+0100\n"
 "Last-Translator: Tomeu Vizoso <tomeu@tomeuvizoso.net>\n"
 "Language-Team: Portuguese <translation-team-pt@lists.sourceforge.net>\n"
@@ -15,16 +14,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Translate Toolkit 1.0.1\n"
 
-#: activity/activity.info:2 readactivity.py:77
+#: activity/activity.info:2 readactivity.py:84
 msgid "Read"
 msgstr ""
 
-#: readactivity.py:73
+#: readactivity.py:80
 msgid "Edit"
 msgstr ""
 
-#: readactivity.py:81
+#: readactivity.py:88
 msgid "View"
 msgstr ""
 

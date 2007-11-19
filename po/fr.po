@@ -1,32 +1,32 @@
 # translation of xbook.master.po to Français
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
 # Gauthier Ancelin <gauthier.ancelin@laposte.net>, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: xbook.master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-31 09:25+0100\n"
-"PO-Revision-Date: 2007-07-31 00:03+0200\n"
-"Last-Translator: Gauthier Ancelin <gauthier.ancelin@laposte.net>\n"
+"POT-Creation-Date: 2007-11-17 20:52+0100\n"
+"PO-Revision-Date: 2007-11-19 19:34+0000\n"
+"Last-Translator: samy boutayeb <s.boutayeb@free.fr>\n"
 "Language-Team: Français <fedora-trans-fr@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Pootle 1.0.2\n"
 
-#: activity/activity.info:2 readactivity.py:77
+#: activity/activity.info:2 readactivity.py:84
 msgid "Read"
-msgstr ""
+msgstr "Lire"
 
-#: readactivity.py:73
+#: readactivity.py:80
 msgid "Edit"
-msgstr ""
+msgstr "Éditer"
 
-#: readactivity.py:81
+#: readactivity.py:88
 msgid "View"
-msgstr "Vue"
+msgstr "Afficher"
 
 #: readtoolbar.py:60
 msgid "Previous"
@@ -46,27 +46,27 @@ msgstr "Avancer"
 
 #: readtoolbar.py:207
 msgid "Zoom out"
-msgstr ""
+msgstr "Zoom arrière"
 
 #: readtoolbar.py:213
 msgid "Zoom in"
-msgstr ""
+msgstr "Zoom avant"
 
 #: readtoolbar.py:219
 msgid "Zoom to width"
-msgstr ""
+msgstr "Zoom à la largeur de la page"
 
 #: readtoolbar.py:225
 msgid "Zoom to fit"
-msgstr ""
+msgstr "Zoom plein écran"
 
 #: readtoolbar.py:230
 msgid "Actual size"
-msgstr ""
+msgstr "Dimension actuelle"
 
 #: readtoolbar.py:248
 msgid "%"
-msgstr ""
+msgstr "%"
 
 #~ msgid "Read Activity"
 #~ msgstr "Lecture"
