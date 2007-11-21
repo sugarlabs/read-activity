@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: xbook\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-11-17 20:52+0100\n"
-"PO-Revision-Date: 2007-11-19 20:59+0000\n"
+"PO-Revision-Date: 2007-11-20 22:28+0000\n"
 "Last-Translator: Xavier Alvarez <xavi.alvarez@gmail.com>\n"
 "Language-Team: Fedora Spanish <fedora-trans-es@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -19,11 +19,11 @@ msgstr ""
 
 #: activity/activity.info:2 readactivity.py:84
 msgid "Read"
-msgstr ""
+msgstr "Leer"
 
 #: readactivity.py:80
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
 #: readactivity.py:88
 msgid "View"
