@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: xbook\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-11-17 20:52+0100\n"
-"PO-Revision-Date: 2007-11-21 08:20+0000\n"
+"PO-Revision-Date: 2007-11-22 13:23+0000\n"
 "Last-Translator: Gerhard Steiner <gerhard.steiner@duichwir.at>\n"
 "Language-Team: cvs@fedoraproject.org <fedora-trans-de@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 
 #: activity/activity.info:2 readactivity.py:84
 msgid "Read"
-msgstr ""
+msgstr "Lesen"
 
 #: readactivity.py:80
 msgid "Edit"
@@ -44,23 +44,23 @@ msgstr "Weiter"
 
 #: readtoolbar.py:207
 msgid "Zoom out"
-msgstr ""
+msgstr "Verkleinern"
 
 #: readtoolbar.py:213
 msgid "Zoom in"
-msgstr ""
+msgstr "Vergrößern"
 
 #: readtoolbar.py:219
 msgid "Zoom to width"
-msgstr ""
+msgstr "Breite anpassen"
 
 #: readtoolbar.py:225
 msgid "Zoom to fit"
-msgstr ""
+msgstr "Größe anpassen"
 
 #: readtoolbar.py:230
 msgid "Actual size"
-msgstr ""
+msgstr "Originalgröße"
 
 #: readtoolbar.py:248
 msgid "%"

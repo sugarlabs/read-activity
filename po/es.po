@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: xbook\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-11-17 20:52+0100\n"
-"PO-Revision-Date: 2007-11-20 22:28+0000\n"
+"PO-Revision-Date: 2007-11-22 01:08+0000\n"
 "Last-Translator: Xavier Alvarez <xavi.alvarez@gmail.com>\n"
 "Language-Team: Fedora Spanish <fedora-trans-es@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -47,19 +47,19 @@ msgstr "Avanzar"
 
 #: readtoolbar.py:207
 msgid "Zoom out"
-msgstr ""
+msgstr "Reducir"
 
 #: readtoolbar.py:213
 msgid "Zoom in"
-msgstr ""
+msgstr "Ampliar"
 
 #: readtoolbar.py:219
 msgid "Zoom to width"
-msgstr ""
+msgstr "Ajustar al ancho"
 
 #: readtoolbar.py:225
 msgid "Zoom to fit"
-msgstr ""
+msgstr "Ampliar hasta ajustar"
 
 #: readtoolbar.py:230
 msgid "Actual size"
