@@ -25,6 +25,7 @@ import evince
 
 from sugar.graphics.toolbutton import ToolButton
 from sugar.graphics.menuitem import MenuItem
+from sugar.graphics import iconentry
 from sugar.activity import activity
 
 class EditToolbar(activity.EditToolbar):
@@ -34,6 +35,7 @@ class EditToolbar(activity.EditToolbar):
         activity.EditToolbar.__init__(self)
 
         self._evince_view = evince_view
+        self._evince_view.set_highlight_search(True)
         self._document = None
 
         separator = gtk.SeparatorToolItem()
@@ -44,8 +46,13 @@ class EditToolbar(activity.EditToolbar):
 
         search_item = gtk.ToolItem()
 
-        self._search_entry = gtk.Entry()
+        self._search_entry = iconentry.IconEntry()
+        self._search_entry.set_icon_from_name(iconentry.ICON_ENTRY_PRIMARY,
+                                                'system-search')
+        self._search_entry.add_clear_button()
         self._search_entry.connect('activate', self._search_entry_activate_cb)
+        self._search_entry.connect('changed', self._search_entry_changed_cb)
+        self._search_entry_changed = True
 
         width = int(gtk.gdk.screen_width() / 3)
         self._search_entry.set_size_request(width, -1)
@@ -74,23 +81,71 @@ class EditToolbar(activity.EditToolbar):
         self._document = document
         self._document.connect('find_changed', self._find_changed_cb)  
 
-    def _search_entry_activate_cb(self, entry):
-        current_page = self._document.get_page_cache().get_current_page()
-        self._document.find_begin(0, entry.props.text, False)
+    def _search_find_first(self):
+        text = self._search_entry.props.text
+        if text != "":
+#            current_page = self._document.get_page_cache().get_current_page()
+            self._document.find_begin(0, text, False)
+        else:
+            # FIXME: highlight nothing
+            pass
+
+        self._search_entry_changed = False
         self._update_find_buttons()
+
+    def _search_find_next(self):
+        self._evince_view.find_next()
+
+    def _search_find_last(self):
+        # FIXME: does Evince support find last?
+        return
+
+    def _search_find_prev(self):
+        self._evince_view.find_previous()
+
+    def _search_entry_activate_cb(self, entry):
+        if self._search_entry_changed:
+            self._search_find_first()
+        else:
+            self._search_find_next()
+
+    def _search_entry_changed_cb(self, entry):
+        self._search_entry_changed = True
+        self._update_find_buttons()
+
+# Automatically start search, maybe after timeout?
+#        self._search_find_first()
 
     def _find_changed_cb(self, page, spec):
         self._update_find_buttons()
         
     def _find_prev_cb(self, button):
-        self._evince_view.find_previous()
+        if self._search_entry_changed:
+            self._search_find_last()
+        else:
+            self._search_find_prev()
     
     def _find_next_cb(self, button):
-        self._evince_view.find_next()
+        if self._search_entry_changed:
+            self._search_find_first()
+        else:
+            self._search_find_next()
 
     def _update_find_buttons(self):
-        self._prev.props.sensitive = self._evince_view.can_find_previous()
-        self._next.props.sensitive = self._evince_view.can_find_next()
+        if self._search_entry_changed:
+            if self._search_entry.props.text != "":
+                self._prev.props.sensitive = False
+#                self._prev.set_tooltip(_('Find last'))
+                self._next.props.sensitive = True
+                self._next.set_tooltip(_('Find first'))
+            else:
+                self._prev.props.sensitive = False
+                self._next.props.sensitive = False
+        else:
+            self._prev.props.sensitive = self._evince_view.can_find_previous()
+            self._prev.set_tooltip(_('Find previous'))
+            self._next.props.sensitive = self._evince_view.can_find_next()
+            self._next.set_tooltip(_('Find next'))
 
 class ReadToolbar(gtk.Toolbar):
     __gtype_name__ = 'ReadToolbar'

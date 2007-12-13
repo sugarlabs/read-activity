@@ -41,6 +41,11 @@ _TOOLBAR_READ = 2
 
 _logger = logging.getLogger('read-activity')
 
+def _get_screen_dpi():
+    xft_dpi = gtk.settings_get_default().get_property('gtk-xft-dpi')
+    print 'Setting dpi to %f' % (float(xft_dpi / 1024))
+    return float(xft_dpi / 1024)
+
 class ReadHTTPRequestHandler(network.ChunkedGlibHTTPRequestHandler):
     def translate_path(self, path):
         return self.server._filepath
@@ -55,6 +60,9 @@ READ_STREAM_SERVICE = 'read-activity-http'
 class ReadActivity(activity.Activity):
     def __init__(self, handle):
         activity.Activity.__init__(self, handle)
+
+        evince.evince_embed_init()
+
         self._document = None
         self._filepath = None
         self._fileserver = None
@@ -66,6 +74,7 @@ class ReadActivity(activity.Activity):
         
         evince.job_queue_init()
         self._view = evince.View()
+        self._view.set_screen_dpi(_get_screen_dpi())
         self._view.connect('notify::has-selection', self._view_notify_has_selection_cb)
 
         toolbox = activity.ActivityToolbox(self)
