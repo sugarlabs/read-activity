@@ -31,6 +31,8 @@ import telepathy
 from sugar.activity import activity
 from sugar import network
 
+from sugar.datastore import datastore
+
 from readtoolbar import EditToolbar, ReadToolbar, ViewToolbar
 
 _HARDWARE_MANAGER_INTERFACE = 'org.laptop.HardwareManager'
@@ -64,8 +66,8 @@ class ReadActivity(activity.Activity):
         evince.evince_embed_init()
 
         self._document = None
-        self._filepath = None
         self._fileserver = None
+        self._object_id = handle.object_id
 
         self.connect('key-press-event', self._key_press_event_cb)
         self.connect('key-release-event', self._key_release_event_cb)
@@ -305,13 +307,6 @@ class ReadActivity(activity.Activity):
             if info and info.title:
                 self.metadata['title'] = info.title
 
-        import urllib
-        garbage, path = urllib.splittype(filepath)
-        garbage, path = urllib.splithost(path or "")
-        path, garbage = urllib.splitquery(path or "")
-        path, garbage = urllib.splitattr(path or "")
-        self._filepath = os.path.abspath(path)
-
         current_page = int(self.metadata.get('Read_current_page', '0'))
         self._document.get_page_cache().set_current_page(current_page)
 
@@ -343,7 +338,19 @@ class ReadActivity(activity.Activity):
     def _share_document(self):
         # FIXME: should ideally have the fileserver listen on a Unix socket
         # instead of IPv4 (might be more compatible with Rainbow)
-        self._fileserver = ReadHTTPServer(("", self.port), self._filepath)
+
+        # FIXME: there is an issue with the Activity class and Read that makes
+        # the pdf file disappear; probably related to write_file not writing a
+        # file. This is a dirty fix and should be improved later.
+        if self._jobject is None:
+            self._jobject = datastore.get(self._object_id)
+        elif not os.path.exists(self._jobject.get_file_path()):
+            self._jobject.destroy()
+            self._jobject = datastore.get(self._object_id)
+
+        self._fileserver = ReadHTTPServer(("", self.port),
+            self._jobject.get_file_path())
+
         # Make a tube for it
         chan = self._shared_activity.telepathy_tubes_chan
         iface = chan[telepathy.CHANNEL_TYPE_TUBES]
