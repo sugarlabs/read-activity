@@ -252,6 +252,12 @@ class ReadToolbar(gtk.Toolbar):
 class ViewToolbar(gtk.Toolbar):
     __gtype_name__ = 'ViewToolbar'
 
+    __gsignals__ = {
+        'needs-update-size': (gobject.SIGNAL_RUN_FIRST,
+                              gobject.TYPE_NONE,
+                              ([]))
+    }
+
     def __init__(self, evince_view):
         gtk.Toolbar.__init__(self)
 
@@ -341,6 +347,7 @@ class ViewToolbar(gtk.Toolbar):
 
     def _zoom_to_width_cb(self, button):
         self._evince_view.props.sizing_mode = evince.SIZING_FIT_WIDTH
+        self.emit('needs-update-size')
         self._update_zoom_buttons()
 
     def _update_zoom_buttons(self):
@@ -349,6 +356,7 @@ class ViewToolbar(gtk.Toolbar):
 
     def _zoom_to_fit_menu_item_activate_cb(self, menu_item):
         self._evince_view.props.sizing_mode = evince.SIZING_BEST_FIT
+        self.emit('needs-update-size')
         self._update_zoom_buttons()
 
     def _actual_size_menu_item_activate_cb(self, menu_item):

@@ -96,6 +96,8 @@ class ReadActivity(activity.Activity):
         self._read_toolbar.show()
 
         self._view_toolbar = ViewToolbar(self._view)
+        self._view_toolbar.connect('needs-update-size',
+                self.__view_toolbar_needs_update_size_cb)
         toolbox.add_toolbar(_('View'), self._view_toolbar)
         self._view_toolbar.show()
 
@@ -313,11 +315,13 @@ class ReadActivity(activity.Activity):
         sizing_mode = self.metadata.get('Read_sizing_mode', 'fit-width')
         if sizing_mode == "best-fit":
             self._view.props.sizing_mode = evince.SIZING_BEST_FIT
+            self._view.update_view_size(self.canvas)
         elif sizing_mode == "free":
             self._view.props.sizing_mode = evince.SIZING_FREE
             self._view.props.zoom = float(self.metadata.get('Read_zoom', '1.0'))
         elif sizing_mode == "fit-width":
             self._view.props.sizing_mode = evince.SIZING_FIT_WIDTH
+            self._view.update_view_size(self.canvas)
         else:
             # this may happen when we get a document from a buddy with a later
             # version of Read, for example.
@@ -410,4 +414,7 @@ class ReadActivity(activity.Activity):
     def _key_release_event_cb(self, widget, event):
         keyname = gtk.gdk.keyval_name(event.keyval)
         logging.debug("Keyname Release: %s, time: %s", keyname, event.time)
+
+    def __view_toolbar_needs_update_size_cb(self, view_toolbar):
+        self._view.update_view_size(self.canvas)
 
