@@ -124,8 +124,8 @@ class ReadActivity(activity.Activity):
         self.unused_download_tubes = set()
         self._want_document = True
 
-        fname = os.path.join(activity.get_bundle_path(), 'ebook-enable-sleep')
-        if os.path.exists(fname):
+        fname = os.path.join('/etc', 'inhibit-ebook-sleep')
+        if not os.path.exists(fname):
             try:
                 bus = dbus.SystemBus()
                 proxy = bus.get_object(_HARDWARE_MANAGER_SERVICE,
