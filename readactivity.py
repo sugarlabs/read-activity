@@ -124,7 +124,8 @@ class ReadActivity(activity.Activity):
         self.unused_download_tubes = set()
         self._want_document = True
 
-        if os.path.exists(os.path.expanduser("~/ebook-enable-sleep")):
+        fname = os.path.join(activity.get_bundle_path(), 'ebook-enable-sleep')
+        if os.path.exists(fname):
             try:
                 bus = dbus.SystemBus()
                 proxy = bus.get_object(_HARDWARE_MANAGER_SERVICE,
@@ -135,8 +136,12 @@ class ReadActivity(activity.Activity):
                 self.connect("focus-in-event", self._focus_in_event_cb)
                 self.connect("focus-out-event", self._focus_out_event_cb)
                 self.connect("notify::active", self._now_active_cb)
+
+                logging.debug('Suspend on idle enabled')
             except dbus.DBusException, e:
                 _logger.info('Hardware manager service not found, no idle suspend.')
+        else:
+            logging.debug('Suspend on idle disabled')
 
         self.connect("shared", self._shared_cb)
 

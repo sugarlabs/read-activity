@@ -1,3 +1,5 @@
+* #1396: Use the bundle path to check if we should suspend on idle. (rwh)
+
 40
 
 * Fix zoom to width (tomeu), #5866
