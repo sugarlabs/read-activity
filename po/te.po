@@ -18,64 +18,64 @@ msgstr ""
 
 #: activity/activity.info:2 readactivity.py:95
 msgid "Read"
-msgstr ""
+msgstr "చదువు"
 
 #: readactivity.py:91
 msgid "Edit"
-msgstr ""
+msgstr "కూర్చు"
 
 #: readactivity.py:99
 msgid "View"
-msgstr ""
+msgstr "చూడు"
 
 #: readtoolbar.py:67
 msgid "Previous"
-msgstr ""
+msgstr "ముందుది"
 
 #: readtoolbar.py:74
 msgid "Next"
-msgstr ""
+msgstr "తర్వాతది"
 
 #: readtoolbar.py:140
 msgid "Find first"
-msgstr ""
+msgstr "మొదటిది వెతు"
 
 #: readtoolbar.py:146
 msgid "Find previous"
-msgstr ""
+msgstr "ముందుది వెతుకు"
 
 #: readtoolbar.py:148
 msgid "Find next"
-msgstr ""
+msgstr "తర్వాతది వెతుకు"
 
 #: readtoolbar.py:160
 msgid "Back"
-msgstr ""
+msgstr "వెనుకకు"
 
 #: readtoolbar.py:167
 msgid "Forward"
-msgstr ""
+msgstr "ముందుకు"
 
 #: readtoolbar.py:262
 msgid "Zoom out"
-msgstr ""
+msgstr "దూరంచేసి చూడు"
 
 #: readtoolbar.py:268
 msgid "Zoom in"
-msgstr ""
+msgstr "దగ్గరచేసి చూడు"
 
 #: readtoolbar.py:274
 msgid "Zoom to width"
-msgstr ""
+msgstr "నిండువెడల్పుగా చూడు"
 
 #: readtoolbar.py:280
 msgid "Zoom to fit"
-msgstr ""
+msgstr "అంతా కనపడేలా చూడు"
 
 #: readtoolbar.py:285
 msgid "Actual size"
-msgstr ""
+msgstr "అసలు కొలత "
 
 #: readtoolbar.py:303
 msgid "%"
-msgstr ""
+msgstr "%"
