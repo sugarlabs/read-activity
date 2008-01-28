@@ -5,4 +5,4 @@ icon = activity-read
 exec = sugar-activity readactivity.ReadActivity
 show_launcher = no
 activity_version = 41
-mime_types = application/pdf;image/x.djvu;image/tiff
+mime_types = application/pdf;image/vnd.djvu;image/x.djvu;image/tiff
