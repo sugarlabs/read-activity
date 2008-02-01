@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-17 20:52+0100\n"
-"PO-Revision-Date: 2007-11-24 22:00+0000\n"
+"POT-Creation-Date: 2007-12-23 20:36+0000\n"
+"PO-Revision-Date: 2007-12-30 14:19+0000\n"
 "Last-Translator: Ivo Emanuel Gonçalves <justivo@gmail.com>\n"
 "Language-Team: Portuguese <translation-team-pt@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -16,55 +16,55 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 1.0.2\n"
 
-#: activity/activity.info:2 readactivity.py:84
+#: activity/activity.info:2 readactivity.py:95
 msgid "Read"
 msgstr "Ler"
 
-#: readactivity.py:80
+#: readactivity.py:91
 msgid "Edit"
 msgstr "Editar"
 
-#: readactivity.py:88
+#: readactivity.py:99
 msgid "View"
 msgstr "Ver"
 
-#: readtoolbar.py:60
+#: readtoolbar.py:67
 msgid "Previous"
 msgstr "Anterior"
 
-#: readtoolbar.py:67
+#: readtoolbar.py:74
 msgid "Next"
 msgstr "Seguinte"
 
-#: readtoolbar.py:105
+#: readtoolbar.py:160
 msgid "Back"
 msgstr "Voltar"
 
-#: readtoolbar.py:112
+#: readtoolbar.py:167
 msgid "Forward"
 msgstr "Avançar"
 
-#: readtoolbar.py:207
+#: readtoolbar.py:262
 msgid "Zoom out"
 msgstr "Menos zoom"
 
-#: readtoolbar.py:213
+#: readtoolbar.py:268
 msgid "Zoom in"
 msgstr "Mais zoom"
 
-#: readtoolbar.py:219
+#: readtoolbar.py:274
 msgid "Zoom to width"
 msgstr "Zoom à largura"
 
-#: readtoolbar.py:225
+#: readtoolbar.py:280
 msgid "Zoom to fit"
 msgstr "Zoom até encher"
 
-#: readtoolbar.py:230
+#: readtoolbar.py:285
 msgid "Actual size"
 msgstr "Tamanho real"
 
-#: readtoolbar.py:248
+#: readtoolbar.py:303
 msgid "%"
 msgstr "%"
 
@@ -82,3 +82,15 @@ msgstr "%"
 
 #~ msgid "Open"
 #~ msgstr "Abrir"
+
+#: readtoolbar.py:140
+msgid "Find first"
+msgstr "Encontrar primeiro"
+
+#: readtoolbar.py:146
+msgid "Find previous"
+msgstr "Encontrar anterior"
+
+#: readtoolbar.py:148
+msgid "Find next"
+msgstr "Encontrar próximo"

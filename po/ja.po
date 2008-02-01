@@ -2,68 +2,94 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-17 20:52+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2007-12-23 20:36+0000\n"
+"PO-Revision-Date: 2008-01-01 17:50+0000\n"
+"Last-Translator: Taizo Shiozaki <taizo@shiozaki.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.0.1\n"
+"X-Generator: Pootle 1.0.2\n"
 
-#: activity/activity.info:2 readactivity.py:84
+#: activity/activity.info:2 readactivity.py:95
+#, fuzzy
 msgid "Read"
-msgstr ""
+msgstr "文書閲覧"
 
-#: readactivity.py:80
+#: readactivity.py:91
+#, fuzzy
 msgid "Edit"
-msgstr ""
+msgstr "編集"
 
-#: readactivity.py:88
+#: readactivity.py:99
+#, fuzzy
 msgid "View"
-msgstr ""
-
-#: readtoolbar.py:60
-msgid "Previous"
-msgstr ""
+msgstr "ビュー"
 
 #: readtoolbar.py:67
+#, fuzzy
+msgid "Previous"
+msgstr "一つ前"
+
+#: readtoolbar.py:74
+#, fuzzy
 msgid "Next"
-msgstr ""
+msgstr "次へ"
 
-#: readtoolbar.py:105
+#: readtoolbar.py:160
 msgid "Back"
-msgstr ""
+msgstr "戻る"
 
-#: readtoolbar.py:112
+#: readtoolbar.py:167
+#, fuzzy
 msgid "Forward"
-msgstr ""
+msgstr "進む"
 
-#: readtoolbar.py:207
+#: readtoolbar.py:262
+#, fuzzy
 msgid "Zoom out"
-msgstr ""
+msgstr "縮小"
 
-#: readtoolbar.py:213
+#: readtoolbar.py:268
+#, fuzzy
 msgid "Zoom in"
-msgstr ""
+msgstr "拡大"
 
-#: readtoolbar.py:219
+#: readtoolbar.py:274
+#, fuzzy
 msgid "Zoom to width"
-msgstr ""
+msgstr "幅にあわせて拡大"
 
-#: readtoolbar.py:225
+#: readtoolbar.py:280
+#, fuzzy
 msgid "Zoom to fit"
-msgstr ""
+msgstr "画面にあわせて拡大"
 
-#: readtoolbar.py:230
+#: readtoolbar.py:285
+#, fuzzy
 msgid "Actual size"
-msgstr ""
+msgstr "もとのサイズ"
 
-#: readtoolbar.py:248
+#: readtoolbar.py:303
+#, fuzzy
 msgid "%"
-msgstr ""
+msgstr "%"
+
+#: readtoolbar.py:140
+#, fuzzy
+msgid "Find first"
+msgstr "先頭から検索"
+
+#: readtoolbar.py:146
+#, fuzzy
+msgid "Find previous"
+msgstr "後方に検索"
+
+#: readtoolbar.py:148
+#, fuzzy
+msgid "Find next"
+msgstr "次を検索"

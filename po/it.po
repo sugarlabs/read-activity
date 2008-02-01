@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-17 20:52+0100\n"
-"PO-Revision-Date: 2007-11-23 00:13+0000\n"
+"POT-Creation-Date: 2007-12-23 20:36+0000\n"
+"PO-Revision-Date: 2008-01-02 23:22+0000\n"
 "Last-Translator: Carlo Falciola <cfalciola@yahoo.it>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -20,58 +20,72 @@ msgstr ""
 msgid "Read Activity"
 msgstr "Attività di lettura"
 
-#: readactivity.py:88
+#: readactivity.py:99
 msgid "View"
 msgstr "Vista"
 
-#: readtoolbar.py:105
+#: readtoolbar.py:160
 msgid "Back"
 msgstr "Indietro"
 
-#: readtoolbar.py:112
+#: readtoolbar.py:167
 msgid "Forward"
 msgstr "Avanti"
 
-#: readtoolbar.py:60
-msgid "Previous"
-msgstr "Precendente"
-
 #: readtoolbar.py:67
+msgid "Previous"
+msgstr "Precedente"
+
+#: readtoolbar.py:74
 msgid "Next"
 msgstr "Prossima"
 
-#: activity/activity.info:2 readactivity.py:84
+#: activity/activity.info:2 readactivity.py:95
 msgid "Read"
 msgstr "Leggi"
 
-#: readactivity.py:80
+#: readactivity.py:91
 msgid "Edit"
 msgstr "Modifica"
 
 # Potrebbe essere anche "Rimpicciolire" o "Più piccolo"
-#: readtoolbar.py:207
+#: readtoolbar.py:262
 #, fuzzy
 msgid "Zoom out"
 msgstr "Zoom indietro"
 
 # Potrebbe essere anche "Ingrandire" o "Più grande"
-#: readtoolbar.py:213
+#: readtoolbar.py:268
 #, fuzzy
 msgid "Zoom in"
 msgstr "Zoom avanti"
 
-#: readtoolbar.py:219
+#: readtoolbar.py:274
+#, fuzzy
 msgid "Zoom to width"
-msgstr ""
+msgstr "Zoom alla larghezza"
 
-#: readtoolbar.py:225
+#: readtoolbar.py:280
+#, fuzzy
 msgid "Zoom to fit"
-msgstr ""
+msgstr "Zoom alla pagina"
 
-#: readtoolbar.py:230
+#: readtoolbar.py:285
 msgid "Actual size"
 msgstr "Larghezza attuale"
 
-#: readtoolbar.py:248
+#: readtoolbar.py:303
 msgid "%"
 msgstr "%"
+
+#: readtoolbar.py:140
+msgid "Find first"
+msgstr "Trova il primo"
+
+#: readtoolbar.py:146
+msgid "Find previous"
+msgstr "Trova successivo"
+
+#: readtoolbar.py:148
+msgid "Find next"
+msgstr "Trova prossimo"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: read-activity\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-17 20:52+0100\n"
+"POT-Creation-Date: 2007-12-23 20:36+0000\n"
 "PO-Revision-Date: 2007-11-22 05:18+0000\n"
 "Last-Translator: Ravishankar Shrivastava <raviratlami@aol.in>\n"
 "Language-Team: Hindi <indlinux-hindi@lists.sourceforge.net>\n"
@@ -20,54 +20,66 @@ msgstr ""
 msgid "Read Activity"
 msgstr "पढ़ने के क्रियाकलाप"
 
-#: readactivity.py:88
+#: readactivity.py:99
 msgid "View"
 msgstr "दृश्य"
 
-#: readtoolbar.py:105
+#: readtoolbar.py:160
 msgid "Back"
 msgstr "पीछे जाएँ"
 
-#: readtoolbar.py:112
+#: readtoolbar.py:167
 msgid "Forward"
 msgstr "आगे"
 
-#: readtoolbar.py:60
+#: readtoolbar.py:67
 msgid "Previous"
 msgstr "पिछला"
 
-#: readtoolbar.py:67
+#: readtoolbar.py:74
 msgid "Next"
 msgstr "अगला"
 
-#: activity/activity.info:2 readactivity.py:84
+#: activity/activity.info:2 readactivity.py:95
 msgid "Read"
 msgstr "पढ़ें"
 
-#: readactivity.py:80
+#: readactivity.py:91
 msgid "Edit"
 msgstr "संपादन"
 
-#: readtoolbar.py:207
+#: readtoolbar.py:262
 msgid "Zoom out"
 msgstr "छोटा करें"
 
-#: readtoolbar.py:213
+#: readtoolbar.py:268
 msgid "Zoom in"
 msgstr "बड़ा करें"
 
-#: readtoolbar.py:219
+#: readtoolbar.py:274
 msgid "Zoom to width"
 msgstr "चौड़ाई में बड़ा/छोटा करें"
 
-#: readtoolbar.py:225
+#: readtoolbar.py:280
 msgid "Zoom to fit"
 msgstr "फिट होने लायक बड़ा/छोटा करें"
 
-#: readtoolbar.py:230
+#: readtoolbar.py:285
 msgid "Actual size"
 msgstr "असली आकार"
 
-#: readtoolbar.py:248
+#: readtoolbar.py:303
 msgid "%"
 msgstr "%"
+
+#: readtoolbar.py:140
+msgid "Find first"
+msgstr ""
+
+#: readtoolbar.py:146
+msgid "Find previous"
+msgstr ""
+
+#: readtoolbar.py:148
+msgid "Find next"
+msgstr ""

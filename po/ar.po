@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xbook.master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-17 20:52+0100\n"
-"PO-Revision-Date: 2007-11-19 20:30+0000\n"
+"POT-Creation-Date: 2007-12-23 20:36+0000\n"
+"PO-Revision-Date: 2007-12-27 19:21+0000\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,57 +17,69 @@ msgstr ""
 "n<=10 ? 3 : n>=11 && n<=99 ? 4 : 5;\n"
 "X-Generator: Pootle 1.0.2\n"
 
-#: activity/activity.info:2 readactivity.py:84
+#: activity/activity.info:2 readactivity.py:95
 msgid "Read"
 msgstr "اقرأ"
 
-#: readactivity.py:80
+#: readactivity.py:91
 msgid "Edit"
 msgstr "حرِّر"
 
-#: readactivity.py:88
+#: readactivity.py:99
 msgid "View"
 msgstr "اعرض"
 
-#: readtoolbar.py:60
+#: readtoolbar.py:67
 msgid "Previous"
 msgstr "السابق"
 
-#: readtoolbar.py:67
+#: readtoolbar.py:74
 msgid "Next"
 msgstr "التالي"
 
-#: readtoolbar.py:105
+#: readtoolbar.py:160
 msgid "Back"
 msgstr "للخلف"
 
-#: readtoolbar.py:112
+#: readtoolbar.py:167
 msgid "Forward"
 msgstr "للأمام"
 
-#: readtoolbar.py:207
+#: readtoolbar.py:262
 msgid "Zoom out"
 msgstr "صغّر"
 
-#: readtoolbar.py:213
+#: readtoolbar.py:268
 msgid "Zoom in"
 msgstr "كبّر"
 
-#: readtoolbar.py:219
+#: readtoolbar.py:274
 msgid "Zoom to width"
 msgstr "لائِم العرض"
 
-#: readtoolbar.py:225
+#: readtoolbar.py:280
 msgid "Zoom to fit"
 msgstr "لائِم الصفحة"
 
-#: readtoolbar.py:230
+#: readtoolbar.py:285
 msgid "Actual size"
 msgstr "المقاس الأصلي"
 
-#: readtoolbar.py:248
+#: readtoolbar.py:303
 msgid "%"
 msgstr "%"
 
 #~ msgid "Read Activity"
 #~ msgstr "نشاط القراءة"
+
+#: readtoolbar.py:140
+msgid "Find first"
+msgstr "أوجد الأول"
+
+#: readtoolbar.py:146
+msgid "Find previous"
+msgstr "أوجد السابق"
+
+#: readtoolbar.py:148
+msgid "Find next"
+msgstr "أوجد التالي"
