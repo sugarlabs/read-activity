@@ -2,21 +2,21 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-23 20:36+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2008-02-07 09:42+0100\n"
+"Last-Translator: Satyanarayana Murthy Saladi <saladism@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Translate Toolkit 1.0.1\n"
 
-#: activity/activity.info:2 readactivity.py:95
+#: activity/activity.info:2
+#: readactivity.py:95
 msgid "Read"
 msgstr "చదువు"
 
@@ -38,7 +38,7 @@ msgstr "తర్వాతది"
 
 #: readtoolbar.py:140
 msgid "Find first"
-msgstr "మొదటిది వెతు"
+msgstr "మొదటిది వెతుకు"
 
 #: readtoolbar.py:146
 msgid "Find previous"
@@ -74,8 +74,9 @@ msgstr "అంతా కనపడేలా చూడు"
 
 #: readtoolbar.py:285
 msgid "Actual size"
-msgstr "అసలు కొలత "
+msgstr "అసలు కొలత"
 
 #: readtoolbar.py:303
 msgid "%"
 msgstr "%"
+
