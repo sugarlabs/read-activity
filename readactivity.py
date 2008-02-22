@@ -272,8 +272,6 @@ class ReadActivity(activity.Activity):
         getter.connect("progress", self._download_progress_cb, tube_id)
         getter.connect("error", self._download_error_cb, tube_id)
         _logger.debug("Starting download to %s...", self._jobject.file_path)
-        # Avoid trying to download the document multiple times at once
-        self._want_document = False
         getter.start(self._jobject.file_path)
         return False
 
@@ -294,6 +292,8 @@ class ReadActivity(activity.Activity):
                           e)
             return False
 
+        # Avoid trying to download the document multiple times at once
+        self._want_document = False
         gobject.idle_add(self._download_document, tube_id)
         return False
 
