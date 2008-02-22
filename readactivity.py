@@ -286,7 +286,6 @@ class ReadActivity(activity.Activity):
             self._jobject.file_path = os.path.join(tempfile.gettempdir(), '%i' % time.time())
             self._owns_file = True
 
-        next_buddy = None
         # Pick an arbitrary tube we can try to download the document from
         try:
             tube_id = self.unused_download_tubes.pop()
