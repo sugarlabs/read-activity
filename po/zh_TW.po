@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: OLPC XBook\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-23 20:36+0000\n"
-"PO-Revision-Date: 2008-01-03 11:28+0000\n"
+"PO-Revision-Date: 2008-02-25 00:02-0500\n"
 "Last-Translator: Yuan Chao <yuanchao@gmail.com>\n"
 "Language-Team: Yuan CHAO <yuanchao@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -61,7 +61,7 @@ msgstr "實際大小"
 
 #: readtoolbar.py:303
 msgid "%"
-msgstr "%"
+msgstr "％"
 
 #: readtoolbar.py:140
 msgid "Find first"
