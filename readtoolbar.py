@@ -255,7 +255,10 @@ class ViewToolbar(gtk.Toolbar):
     __gsignals__ = {
         'needs-update-size': (gobject.SIGNAL_RUN_FIRST,
                               gobject.TYPE_NONE,
-                              ([]))
+                              ([])),
+        'go-fullscreen': (gobject.SIGNAL_RUN_FIRST,
+                          gobject.TYPE_NONE,
+                          ([]))
     }
 
     def __init__(self, evince_view):
@@ -318,6 +321,17 @@ class ViewToolbar(gtk.Toolbar):
 
         self._update_zoom_buttons()
 
+        spacer = gtk.SeparatorToolItem()
+        spacer.props.draw = False
+        self.insert(spacer, -1)
+        spacer.show()
+
+        self._fullscreen = ToolButton('view-fullscreen')
+        self._fullscreen.set_tooltip(_('Fullscreen'))
+        self._fullscreen.connect('clicked', self._fullscreen_cb)
+        self.insert(self._fullscreen, -1)
+        self._fullscreen.show()
+
     def _zoom_spin_notify_value_cb(self, zoom_spin, pspec):
         self._evince_view.disconnect(self._view_notify_zoom_handler)
         try:
@@ -364,3 +378,5 @@ class ViewToolbar(gtk.Toolbar):
         self._evince_view.props.zoom = 1.0
         self._update_zoom_buttons()
 
+    def _fullscreen_cb(self, button):
+        self.emit('go-fullscreen')

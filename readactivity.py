@@ -98,6 +98,8 @@ class ReadActivity(activity.Activity):
         self._view_toolbar = ViewToolbar(self._view)
         self._view_toolbar.connect('needs-update-size',
                 self.__view_toolbar_needs_update_size_cb)
+        self._view_toolbar.connect('go-fullscreen',
+                self.__view_toolbar_go_fullscreen_cb)
         toolbox.add_toolbar(_('View'), self._view_toolbar)
         self._view_toolbar.show()
 
@@ -421,4 +423,7 @@ class ReadActivity(activity.Activity):
 
     def __view_toolbar_needs_update_size_cb(self, view_toolbar):
         self._view.update_view_size(self.canvas)
+
+    def __view_toolbar_go_fullscreen_cb(self, view_toolbar):
+        self.fullscreen()
 
