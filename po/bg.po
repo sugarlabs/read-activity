@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-23 20:36+0000\n"
+"POT-Creation-Date: 2008-03-01 00:30-0500\n"
 "PO-Revision-Date: 2008-01-09 09:52+0000\n"
 "Last-Translator: Alexander Todorov <atodorov@redhat.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,7 +23,7 @@ msgstr "Четене"
 msgid "Edit"
 msgstr "Редактиране"
 
-#: readactivity.py:99
+#: readactivity.py:103
 msgid "View"
 msgstr "Изглед"
 
@@ -55,28 +55,32 @@ msgstr "Назад"
 msgid "Forward"
 msgstr "Напред"
 
-#: readtoolbar.py:262
+#: readtoolbar.py:271
 msgid "Zoom out"
 msgstr "Намаляване"
 
-#: readtoolbar.py:268
+#: readtoolbar.py:277
 msgid "Zoom in"
 msgstr "Увеличаване"
 
 # виж превода на evince
-#: readtoolbar.py:274
+#: readtoolbar.py:283
 msgid "Zoom to width"
 msgstr "Запълване на страницата по ширина"
 
 # виж превода на evince
-#: readtoolbar.py:280
+#: readtoolbar.py:289
 msgid "Zoom to fit"
 msgstr "Запълване на страницата"
 
-#: readtoolbar.py:285
+#: readtoolbar.py:294
 msgid "Actual size"
 msgstr "Оригинален размер"
 
-#: readtoolbar.py:303
+#: readtoolbar.py:312
 msgid "%"
 msgstr "%"
+
+#: readtoolbar.py:330
+msgid "Fullscreen"
+msgstr ""
