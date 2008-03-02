@@ -416,6 +416,16 @@ class ReadActivity(activity.Activity):
         logging.debug("Keyname Press: %s, time: %s", keyname, event.time)
         if keyname == 'c' and event.state & gtk.gdk.CONTROL_MASK:
             self._view.copy()
+            return True
+        elif keyname == 'KP_Home':
+            # FIXME: refactor later to self.zoom_in()
+            self._view_toolbar.zoom_in()
+            return True
+        elif keyname == 'KP_End':
+            self._view_toolbar.zoom_out()
+            return True
+        else:
+            return False
 
     def _key_release_event_cb(self, widget, event):
         keyname = gtk.gdk.keyval_name(event.keyval)
@@ -426,4 +436,3 @@ class ReadActivity(activity.Activity):
 
     def __view_toolbar_go_fullscreen_cb(self, view_toolbar):
         self.fullscreen()
-

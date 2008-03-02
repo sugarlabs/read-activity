@@ -349,20 +349,29 @@ class ViewToolbar(gtk.Toolbar):
             self._zoom_spin_notify_value_handler = self._zoom_spin.connect(
                     'notify::value', self._zoom_spin_notify_value_cb)
 
-    def _zoom_in_cb(self, button):
+    def zoom_in(self):
         self._evince_view.props.sizing_mode = evince.SIZING_FREE
         self._evince_view.zoom_in()
         self._update_zoom_buttons()
-        
-    def _zoom_out_cb(self, button):
+
+    def _zoom_in_cb(self, button):
+        self.zoom_in()
+
+    def zoom_out(self):
         self._evince_view.props.sizing_mode = evince.SIZING_FREE
         self._evince_view.zoom_out()
         self._update_zoom_buttons()
+        
+    def _zoom_out_cb(self, button):
+        self.zoom_out()
 
-    def _zoom_to_width_cb(self, button):
+    def zoom_to_width(self):
         self._evince_view.props.sizing_mode = evince.SIZING_FIT_WIDTH
         self.emit('needs-update-size')
         self._update_zoom_buttons()
+
+    def _zoom_to_width_cb(self, button):
+        self.zoom_to_width()
 
     def _update_zoom_buttons(self):
         self._zoom_in.props.sensitive = self._evince_view.can_zoom_in()
