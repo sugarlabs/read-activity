@@ -203,6 +203,10 @@ class ReadActivity(activity.Activity):
         _logger.debug('ReadActivity.read_file: %s', file_path)
         self._load_document('file://' + file_path)
 
+        # FIXME: This should obviously be fixed properly
+        gobject.timeout_add(1000, self.__view_toolbar_needs_update_size_cb,
+            None)
+
     def write_file(self, file_path):
         """We only save meta data, not the document itself.
         current page, view settings, search text."""
@@ -319,12 +323,14 @@ class ReadActivity(activity.Activity):
         self._document.get_page_cache().set_current_page(current_page)
 
         sizing_mode = self.metadata.get('Read_sizing_mode', 'fit-width')
+        logging.debug('Found sizing mode: %s', sizing_mode)
         if sizing_mode == "best-fit":
             self._view.props.sizing_mode = evince.SIZING_BEST_FIT
             self._view.update_view_size(self.canvas)
         elif sizing_mode == "free":
             self._view.props.sizing_mode = evince.SIZING_FREE
             self._view.props.zoom = float(self.metadata.get('Read_zoom', '1.0'))
+            logging.debug('Set zoom to %f', self._view.props.zoom)
         elif sizing_mode == "fit-width":
             self._view.props.sizing_mode = evince.SIZING_FIT_WIDTH
             self._view.update_view_size(self.canvas)
