@@ -194,7 +194,7 @@ class ReadActivity(activity.Activity):
     def _suspend_cb(self):
         # If the machine has been idle for 5 seconds, suspend
         self._idle_timer = 0
-        if not self._sleep_inhibit:
+        if not self._sleep_inhibit and not self.get_shared():
             self._service.set_kernel_suspend()
         return False
 
