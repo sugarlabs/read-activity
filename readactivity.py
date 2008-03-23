@@ -210,6 +210,7 @@ class ReadActivity(activity.Activity):
     def write_file(self, file_path):
         """We only save meta data, not the document itself.
         current page, view settings, search text."""
+
         try:
             self.metadata['Read_current_page'] = \
                         str(self._document.get_page_cache().get_current_page())
@@ -228,6 +229,7 @@ class ReadActivity(activity.Activity):
                 self.metadata['Read_sizing_mode'] = "fit-width"
 
             self.metadata['Read_search'] = self._edit_toolbar._search_entry.props.text
+
         except Exception, e:
             logging.error('write_file(): %s', e)
 
@@ -236,10 +238,14 @@ class ReadActivity(activity.Activity):
     def _download_result_cb(self, getter, tempfile, suggested_name, tube_id):
         del self.unused_download_tubes
 
+        _logger.debug("Moving file %s to datastore...", tempfile)
+        self._jobject.file_path = tempfile
+        datastore.write(self._jobject, transfer_ownership=True)
+
         _logger.debug("Got document %s (%s) from tube %u",
                       tempfile, suggested_name, tube_id)
         self._load_document("file://%s" % tempfile)
-        _logger.debug("Saving %s to datastore...", tempfile)
+
         self.save()
 
     def _download_progress_cb(self, getter, bytes_downloaded, tube_id):
@@ -254,7 +260,7 @@ class ReadActivity(activity.Activity):
         self._want_document = True
         gobject.idle_add(self._get_document)
 
-    def _download_document(self, tube_id):
+    def _download_document(self, tube_id, path):
         # FIXME: should ideally have the CM listen on a Unix socket
         # instead of IPv4 (might be more compatible with Rainbow)
         chan = self._shared_activity.telepathy_tubes_chan
@@ -277,8 +283,8 @@ class ReadActivity(activity.Activity):
         getter.connect("finished", self._download_result_cb, tube_id)
         getter.connect("progress", self._download_progress_cb, tube_id)
         getter.connect("error", self._download_error_cb, tube_id)
-        _logger.debug("Starting download to %s...", self._jobject.file_path)
-        getter.start(self._jobject.file_path)
+        _logger.debug("Starting download to %s...", path)
+        getter.start(path)
         return False
 
     def _get_document(self):
@@ -287,8 +293,10 @@ class ReadActivity(activity.Activity):
 
         # Assign a file path to download if one doesn't exist yet
         if not self._jobject.file_path:
-            self._jobject.file_path = os.path.join(tempfile.gettempdir(), '%i' % time.time())
-            self._owns_file = True
+            path = os.path.join(self.get_activity_root(), 'instance',
+                                '%i' % time.time())
+        else:
+            path = self._jobject.file_path
 
         # Pick an arbitrary tube we can try to download the document from
         try:
@@ -300,7 +308,7 @@ class ReadActivity(activity.Activity):
 
         # Avoid trying to download the document multiple times at once
         self._want_document = False
-        gobject.idle_add(self._download_document, tube_id)
+        gobject.idle_add(self._download_document, tube_id, path)
         return False
 
     def _joined_cb(self, also_self):
@@ -347,9 +355,12 @@ class ReadActivity(activity.Activity):
                                 self.metadata.get('Read_search', '')
 
         # We've got the document, so if we're a shared activity, offer it
-        if self.get_shared():
-            self.watch_for_tubes()
-            self._share_document()
+        try:
+            if self.get_shared():
+                self.watch_for_tubes()
+                self._share_document()
+        except Exception, e:
+            logging.debug('Sharing failed: %s', e)
 
     def _share_document(self):
         # FIXME: should ideally have the fileserver listen on a Unix socket
@@ -361,9 +372,11 @@ class ReadActivity(activity.Activity):
         if self._jobject is None:
             self._jobject = datastore.get(self._object_id)
         elif not os.path.exists(self._jobject.get_file_path()):
+            _logger.debug('_jobject file does not exists; getting from DS...')
             self._jobject.destroy()
             self._jobject = datastore.get(self._object_id)
 
+        logging.debug('Starting HTTP server on port %d', self.port)
         self._fileserver = ReadHTTPServer(("", self.port),
             self._jobject.get_file_path())
 
