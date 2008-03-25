@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xbook\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-23 20:36+0000\n"
-"PO-Revision-Date: 2007-12-31 10:40+0000\n"
+"POT-Creation-Date: 2008-03-01 00:30-0500\n"
+"PO-Revision-Date: 2008-03-04 04:14-0500\n"
 "Last-Translator: Gerhard Steiner <gerhard.steiner@duichwir.at>\n"
 "Language-Team: cvs@fedoraproject.org <fedora-trans-de@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgstr "Lesen"
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: readactivity.py:99
+#: readactivity.py:103
 msgid "View"
 msgstr "Ansehen"
 
@@ -33,41 +33,6 @@ msgstr "Vorheriges"
 #: readtoolbar.py:74
 msgid "Next"
 msgstr "Nächstes"
-
-#: readtoolbar.py:160
-msgid "Back"
-msgstr "Zurück"
-
-#: readtoolbar.py:167
-msgid "Forward"
-msgstr "Weiter"
-
-#: readtoolbar.py:262
-msgid "Zoom out"
-msgstr "Verkleinern"
-
-#: readtoolbar.py:268
-msgid "Zoom in"
-msgstr "Vergrößern"
-
-#: readtoolbar.py:274
-msgid "Zoom to width"
-msgstr "Breite anpassen"
-
-#: readtoolbar.py:280
-msgid "Zoom to fit"
-msgstr "Größe anpassen"
-
-#: readtoolbar.py:285
-msgid "Actual size"
-msgstr "Originalgröße"
-
-#: readtoolbar.py:303
-msgid "%"
-msgstr "%"
-
-#~ msgid "Read Activity"
-#~ msgstr "Lese-Aktivitäten"
 
 #: readtoolbar.py:140
 msgid "Find first"
@@ -80,3 +45,42 @@ msgstr "Suche rückwärts"
 #: readtoolbar.py:148
 msgid "Find next"
 msgstr "Weitersuchen"
+
+#: readtoolbar.py:160
+msgid "Back"
+msgstr "Zurück"
+
+#: readtoolbar.py:167
+msgid "Forward"
+msgstr "Weiter"
+
+#: readtoolbar.py:271
+msgid "Zoom out"
+msgstr "Verkleinern"
+
+#: readtoolbar.py:277
+msgid "Zoom in"
+msgstr "Vergrößern"
+
+#: readtoolbar.py:283
+msgid "Zoom to width"
+msgstr "Breite anpassen"
+
+#: readtoolbar.py:289
+msgid "Zoom to fit"
+msgstr "Größe anpassen"
+
+#: readtoolbar.py:294
+msgid "Actual size"
+msgstr "Originalgröße"
+
+#: readtoolbar.py:312
+msgid "%"
+msgstr "%"
+
+#: readtoolbar.py:330
+msgid "Fullscreen"
+msgstr "Vollanzeige"
+
+#~ msgid "Read Activity"
+#~ msgstr "Lese-Aktivitäten"
