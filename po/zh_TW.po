@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OLPC XBook\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-23 20:36+0000\n"
-"PO-Revision-Date: 2008-02-25 00:02-0500\n"
+"POT-Creation-Date: 2008-03-01 00:30-0500\n"
+"PO-Revision-Date: 2008-03-07 22:30-0500\n"
 "Last-Translator: Yuan Chao <yuanchao@gmail.com>\n"
 "Language-Team: Yuan CHAO <yuanchao@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr "閱讀"
 msgid "Edit"
 msgstr "編輯"
 
-#: readactivity.py:99
+#: readactivity.py:103
 msgid "View"
 msgstr "檢視"
 
@@ -30,38 +30,6 @@ msgstr "上一個"
 #: readtoolbar.py:74
 msgid "Next"
 msgstr "下一個"
-
-#: readtoolbar.py:160
-msgid "Back"
-msgstr "上一頁"
-
-#: readtoolbar.py:167
-msgid "Forward"
-msgstr "下一頁"
-
-#: readtoolbar.py:262
-msgid "Zoom out"
-msgstr "縮小"
-
-#: readtoolbar.py:268
-msgid "Zoom in"
-msgstr "放大"
-
-#: readtoolbar.py:274
-msgid "Zoom to width"
-msgstr "最適寬度"
-
-#: readtoolbar.py:280
-msgid "Zoom to fit"
-msgstr "頁面大小"
-
-#: readtoolbar.py:285
-msgid "Actual size"
-msgstr "實際大小"
-
-#: readtoolbar.py:303
-msgid "%"
-msgstr "％"
 
 #: readtoolbar.py:140
 msgid "Find first"
@@ -74,3 +42,39 @@ msgstr "搜尋前一個"
 #: readtoolbar.py:148
 msgid "Find next"
 msgstr "搜尋下一個"
+
+#: readtoolbar.py:160
+msgid "Back"
+msgstr "上一頁"
+
+#: readtoolbar.py:167
+msgid "Forward"
+msgstr "下一頁"
+
+#: readtoolbar.py:271
+msgid "Zoom out"
+msgstr "縮小"
+
+#: readtoolbar.py:277
+msgid "Zoom in"
+msgstr "放大"
+
+#: readtoolbar.py:283
+msgid "Zoom to width"
+msgstr "最適寬度"
+
+#: readtoolbar.py:289
+msgid "Zoom to fit"
+msgstr "頁面大小"
+
+#: readtoolbar.py:294
+msgid "Actual size"
+msgstr "實際大小"
+
+#: readtoolbar.py:312
+msgid "%"
+msgstr "％"
+
+#: readtoolbar.py:330
+msgid "Fullscreen"
+msgstr "全螢幕顯示"
