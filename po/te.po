@@ -6,17 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-23 20:36+0000\n"
-"PO-Revision-Date: 2008-02-11 06:18+0100\n"
+"POT-Creation-Date: 2008-03-01 00:30-0500\n"
+"PO-Revision-Date: 2008-05-17 11:48+0100\n"
 "Last-Translator: Satyanarayana Murthy Saladi <saladism@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.0.1\n"
+"X-Generator: Pootle 1.1.0rc2\n"
 
-#: activity/activity.info:2
-#: readactivity.py:95
+#: activity/activity.info:2 readactivity.py:95
 msgid "Read"
 msgstr "చదువు"
 
@@ -24,7 +23,7 @@ msgstr "చదువు"
 msgid "Edit"
 msgstr "కూర్చు"
 
-#: readactivity.py:99
+#: readactivity.py:103
 msgid "View"
 msgstr "చూడు"
 
@@ -56,27 +55,30 @@ msgstr "వెనుకకు"
 msgid "Forward"
 msgstr "ముందుకు"
 
-#: readtoolbar.py:262
+#: readtoolbar.py:271
 msgid "Zoom out"
 msgstr "దూరంచేసి చూడు"
 
-#: readtoolbar.py:268
+#: readtoolbar.py:277
 msgid "Zoom in"
 msgstr "దగ్గరచేసి చూడు"
 
-#: readtoolbar.py:274
+#: readtoolbar.py:283
 msgid "Zoom to width"
-msgstr "నిండువెడల్పుగా చూడు"
+msgstr "పూర్తివెడల్పుగా చూడు"
 
-#: readtoolbar.py:280
+#: readtoolbar.py:289
 msgid "Zoom to fit"
 msgstr "అంతా కనపడేలా చూడు"
 
-#: readtoolbar.py:285
+#: readtoolbar.py:294
 msgid "Actual size"
 msgstr "అసలు కొలత"
 
-#: readtoolbar.py:303
+#: readtoolbar.py:312
 msgid "%"
 msgstr "%"
 
+#: readtoolbar.py:330
+msgid "Fullscreen"
+msgstr "తెరనిండుగా"
