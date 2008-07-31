@@ -37,6 +37,18 @@ msgstr "السابق"
 msgid "Next"
 msgstr "التالي"
 
+#: readtoolbar.py:140
+msgid "Find first"
+msgstr "أوجد الأول"
+
+#: readtoolbar.py:146
+msgid "Find previous"
+msgstr "أوجد السابق"
+
+#: readtoolbar.py:148
+msgid "Find next"
+msgstr "أوجد التالي"
+
 #: readtoolbar.py:160
 msgid "Back"
 msgstr "للخلف"
@@ -69,21 +81,9 @@ msgstr "المقاس الأصلي"
 msgid "%"
 msgstr "%"
 
-#~ msgid "Read Activity"
-#~ msgstr "نشاط القراءة"
-
-#: readtoolbar.py:140
-msgid "Find first"
-msgstr "أوجد الأول"
-
-#: readtoolbar.py:146
-msgid "Find previous"
-msgstr "أوجد السابق"
-
-#: readtoolbar.py:148
-msgid "Find next"
-msgstr "أوجد التالي"
-
 #: readtoolbar.py:330
 msgid "Fullscreen"
 msgstr "ملء الشاشة"
+
+#~ msgid "Read Activity"
+#~ msgstr "نشاط القراءة"
