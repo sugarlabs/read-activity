@@ -1,0 +1,88 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-03-01 00:30-0500\n"
+"PO-Revision-Date: 2008-07-23 16:45+0100\n"
+"Last-Translator: Kent Dahl <kentda@pvv.org>\n"
+"Language-Team: Norwegian <i18n-no@lister.ping.uio.no>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.1.1rc4\n"
+
+#: activity/activity.info:2
+#: readactivity.py:95
+msgid "Read"
+msgstr "Les"
+
+#: readactivity.py:91
+msgid "Edit"
+msgstr "Endre"
+
+#: readactivity.py:103
+#, fuzzy
+msgid "View"
+msgstr "Visning"
+
+#: readtoolbar.py:67
+msgid "Previous"
+msgstr "Forrige"
+
+#: readtoolbar.py:74
+msgid "Next"
+msgstr "Neste"
+
+#: readtoolbar.py:140
+msgid "Find first"
+msgstr "Finn første"
+
+#: readtoolbar.py:146
+msgid "Find previous"
+msgstr "Finn forrige"
+
+#: readtoolbar.py:148
+msgid "Find next"
+msgstr "Finn neste"
+
+#: readtoolbar.py:160
+msgid "Back"
+msgstr "Tilbake"
+
+#: readtoolbar.py:167
+msgid "Forward"
+msgstr "Fremover"
+
+#: readtoolbar.py:271
+msgid "Zoom out"
+msgstr "Forminsk"
+
+#: readtoolbar.py:277
+msgid "Zoom in"
+msgstr "Forstørr"
+
+#: readtoolbar.py:283
+#, fuzzy
+msgid "Zoom to width"
+msgstr "Tilpass til bredden"
+
+#: readtoolbar.py:289
+#, fuzzy
+msgid "Zoom to fit"
+msgstr "Tilpass til størrelsen"
+
+#: readtoolbar.py:294
+msgid "Actual size"
+msgstr "Faktisk størrelse"
+
+#: readtoolbar.py:312
+msgid "%"
+msgstr ""
+
+#: readtoolbar.py:330
+msgid "Fullscreen"
+msgstr "Fullskjerm"
