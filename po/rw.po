@@ -2,84 +2,85 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-23 20:36+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2008-03-01 00:30-0500\n"
+"PO-Revision-Date: 2008-07-31 12:01+0200\n"
+"Last-Translator: GASHAYIJA Guillaume <gashayija2002@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Translate Toolkit 1.0.1\n"
 
-#: XbookActivity.py:49 XbookActivity.py:140
-msgid "Read Activity"
-msgstr ""
-
-#: readactivity.py:99
-msgid "View"
-msgstr ""
-
-#: readtoolbar.py:160
-msgid "Back"
-msgstr ""
-
-#: readtoolbar.py:167
-msgid "Forward"
-msgstr ""
-
-#: readtoolbar.py:67
-msgid "Previous"
-msgstr ""
-
-#: readtoolbar.py:74
-msgid "Next"
-msgstr ""
-
-#: activity/activity.info:2 readactivity.py:95
+#: activity/activity.info:2
+#: readactivity.py:95
 msgid "Read"
-msgstr ""
+msgstr "Soma"
 
 #: readactivity.py:91
 msgid "Edit"
-msgstr ""
+msgstr "Hindura"
 
-#: readtoolbar.py:262
-msgid "Zoom out"
-msgstr ""
+#: readactivity.py:103
+msgid "View"
+msgstr "Irebero"
 
-#: readtoolbar.py:268
-msgid "Zoom in"
-msgstr ""
+#: readtoolbar.py:67
+msgid "Previous"
+msgstr "Ibibanziriza"
 
-#: readtoolbar.py:274
-msgid "Zoom to width"
-msgstr ""
-
-#: readtoolbar.py:280
-msgid "Zoom to fit"
-msgstr ""
-
-#: readtoolbar.py:285
-msgid "Actual size"
-msgstr ""
-
-#: readtoolbar.py:303
-msgid "%"
-msgstr ""
+#: readtoolbar.py:74
+msgid "Next"
+msgstr "Ibikurikira"
 
 #: readtoolbar.py:140
 msgid "Find first"
-msgstr ""
+msgstr "Shaka mbere"
 
 #: readtoolbar.py:146
 msgid "Find previous"
-msgstr ""
+msgstr "Shaka Ibibanziriza"
 
 #: readtoolbar.py:148
 msgid "Find next"
-msgstr ""
+msgstr "Shaka ibikurikira"
+
+#: readtoolbar.py:160
+msgid "Back"
+msgstr "Inyuma"
+
+#: readtoolbar.py:167
+msgid "Forward"
+msgstr "Imbere"
+
+#: readtoolbar.py:271
+msgid "Zoom out"
+msgstr "Kwagura"
+
+#: readtoolbar.py:277
+msgid "Zoom in"
+msgstr "Kugabanya"
+
+#: readtoolbar.py:283
+msgid "Zoom to width"
+msgstr "Agura ukigira kigari"
+
+#: readtoolbar.py:289
+msgid "Zoom to fit"
+msgstr "Agura ikntu ugira ngo gikwire ahantu"
+
+#: readtoolbar.py:294
+msgid "Actual size"
+msgstr "Ingano nyayo"
+
+#: readtoolbar.py:312
+msgid "%"
+msgstr "%"
+
+#: readtoolbar.py:330
+msgid "Fullscreen"
+msgstr "Ekarayose"
+
