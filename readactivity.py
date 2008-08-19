@@ -1,5 +1,6 @@
 # Copyright (C) 2007, Red Hat, Inc.
 # Copyright (C) 2007 Collabora Ltd. <http://www.collabora.co.uk/>
+# Copyright 2008 One Laptop Per Child
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,7 +18,6 @@
 
 import logging
 import os
-import tempfile
 import time
 from gettext import gettext as _
 
@@ -25,7 +25,6 @@ import dbus
 import evince
 import gobject
 import gtk
-import hippo
 import telepathy
 
 from sugar.activity import activity
@@ -49,17 +48,32 @@ def _get_screen_dpi():
     return float(xft_dpi / 1024)
 
 class ReadHTTPRequestHandler(network.ChunkedGlibHTTPRequestHandler):
+    """HTTP Request Handler for transferring document while collaborating.
+
+    RequestHandler class that integrates with Glib mainloop. It writes
+    the specified file to the client in chunks, returning control to the
+    mainloop between chunks.
+
+    """
     def translate_path(self, path):
-        return self.server._filepath
+        """Return the filepath to the shared document."""
+        return self.server.filepath
 
 class ReadHTTPServer(network.GlibTCPServer):
+    """HTTP Server for transferring document while collaborating."""
     def __init__(self, server_address, filepath):
-        self._filepath = filepath
-        network.GlibTCPServer.__init__(self, server_address, ReadHTTPRequestHandler)
+        """Set up the GlibTCPServer with the ReadHTTPRequestHandler.
+
+        filepath -- path to shared document to be served.
+        """
+        self.filepath = filepath
+        network.GlibTCPServer.__init__(self, server_address,
+                                       ReadHTTPRequestHandler)
 
 READ_STREAM_SERVICE = 'read-activity-http'
 
 class ReadActivity(activity.Activity):
+    """The Read sugar activity."""
     def __init__(self, handle):
         activity.Activity.__init__(self, handle)
 
@@ -77,7 +91,8 @@ class ReadActivity(activity.Activity):
         evince.job_queue_init()
         self._view = evince.View()
         self._view.set_screen_dpi(_get_screen_dpi())
-        self._view.connect('notify::has-selection', self._view_notify_has_selection_cb)
+        self._view.connect('notify::has-selection',
+                           self._view_notify_has_selection_cb)
 
         toolbox = activity.ActivityToolbox(self)
 
@@ -132,16 +147,20 @@ class ReadActivity(activity.Activity):
                 bus = dbus.SystemBus()
                 proxy = bus.get_object(_HARDWARE_MANAGER_SERVICE,
                                        _HARDWARE_MANAGER_OBJECT_PATH)
-                self._service = dbus.Interface(proxy, _HARDWARE_MANAGER_INTERFACE)
-                scrolled.props.vadjustment.connect("value-changed", self._user_action_cb)
-                scrolled.props.hadjustment.connect("value-changed", self._user_action_cb)
+                self._service = dbus.Interface(proxy,
+                                               _HARDWARE_MANAGER_INTERFACE)
+                scrolled.props.vadjustment.connect("value-changed",
+                                                   self._user_action_cb)
+                scrolled.props.hadjustment.connect("value-changed",
+                                                   self._user_action_cb)
                 self.connect("focus-in-event", self._focus_in_event_cb)
                 self.connect("focus-out-event", self._focus_out_event_cb)
                 self.connect("notify::active", self._now_active_cb)
 
                 logging.debug('Suspend on idle enabled')
             except dbus.DBusException, e:
-                _logger.info('Hardware manager service not found, no idle suspend.')
+                _logger.info(
+                    'Hardware manager service not found, no idle suspend.')
         else:
             logging.debug('Suspend on idle disabled')
 
@@ -180,18 +199,22 @@ class ReadActivity(activity.Activity):
             self._sleep_inhibit = True
 
     def _focus_in_event_cb(self, widget, event):
+        """Enable ebook mode idle sleep since Read has focus."""
         self._sleep_inhibit = False
         self._user_action_cb(self)
 
     def _focus_out_event_cb(self, widget, event):
+        """Disable ebook mode idle sleep since Read lost focus."""
         self._sleep_inhibit = True
 
     def _user_action_cb(self, widget):
+        """Set a timer for going back to ebook mode idle sleep."""
         if self._idle_timer > 0:
             gobject.source_remove(self._idle_timer)
         self._idle_timer = gobject.timeout_add(5000, self._suspend_cb)
 
     def _suspend_cb(self):
+        """Go into ebook mode idle sleep."""
         # If the machine has been idle for 5 seconds, suspend
         self._idle_timer = 0
         if not self._sleep_inhibit and not self.get_shared():
@@ -199,7 +222,7 @@ class ReadActivity(activity.Activity):
         return False
 
     def read_file(self, file_path):
-        """Load a file from the datastore on activity start"""
+        """Load a file from the datastore on activity start."""
         _logger.debug('ReadActivity.read_file: %s', file_path)
         self._load_document('file://' + file_path)
 
@@ -208,9 +231,12 @@ class ReadActivity(activity.Activity):
             None)
 
     def write_file(self, file_path):
-        """We only save meta data, not the document itself.
-        current page, view settings, search text."""
-
+        """Write metadata into datastore for Keep.
+        
+        We only save meta data, not the document itself.
+        current page, view settings, search text.
+        
+        """
         try:
             self.metadata['Read_current_page'] = \
                         str(self._document.get_page_cache().get_current_page())
@@ -228,12 +254,14 @@ class ReadActivity(activity.Activity):
                               self._view.props.sizing_mode)
                 self.metadata['Read_sizing_mode'] = "fit-width"
 
-            self.metadata['Read_search'] = self._edit_toolbar._search_entry.props.text
+            self.metadata['Read_search'] = \
+                    self._edit_toolbar._search_entry.props.text
 
         except Exception, e:
             logging.error('write_file(): %s', e)
 
-        self.metadata['Read_search'] = self._edit_toolbar._search_entry.props.text
+        self.metadata['Read_search'] = \
+                self._edit_toolbar._search_entry.props.text
 
     def _download_result_cb(self, getter, tempfile, suggested_name, tube_id):
         del self.unused_download_tubes
@@ -312,10 +340,19 @@ class ReadActivity(activity.Activity):
         return False
 
     def _joined_cb(self, also_self):
+        """Callback for when a shared activity is joined.
+
+        Get the shared document from another participant.
+        """
         self.watch_for_tubes()
         gobject.idle_add(self._get_document)
 
     def _load_document(self, filepath):
+        """Load the specified document and set up the UI.
+
+        filepath -- string starting with file://
+        
+        """
         self._document = evince.factory_get_document(filepath)
         self._want_document = False
         self._view.set_document(self._document)
@@ -363,6 +400,7 @@ class ReadActivity(activity.Activity):
             logging.debug('Sharing failed: %s', e)
 
     def _share_document(self):
+        """Share the document."""
         # FIXME: should ideally have the fileserver listen on a Unix socket
         # instead of IPv4 (might be more compatible with Rainbow)
 
@@ -390,6 +428,7 @@ class ReadActivity(activity.Activity):
                 telepathy.SOCKET_ACCESS_CONTROL_LOCALHOST, 0)
 
     def watch_for_tubes(self):
+        """Watch for new tubes."""
         tubes_chan = self._shared_activity.telepathy_tubes_chan
 
         tubes_chan[telepathy.CHANNEL_TYPE_TUBES].connect_to_signal('NewTube',
@@ -400,6 +439,7 @@ class ReadActivity(activity.Activity):
 
     def _new_tube_cb(self, tube_id, initiator, tube_type, service, params,
                      state):
+        """Callback when a new tube becomes available."""
         _logger.debug('New tube: ID=%d initator=%d type=%d service=%s '
                       'params=%r state=%d', tube_id, initiator, tube_type,
                       service, params, state)
@@ -411,13 +451,20 @@ class ReadActivity(activity.Activity):
                 gobject.idle_add(self._get_document)
 
     def _list_tubes_reply_cb(self, tubes):
+        """Callback when new tubes are available."""
         for tube_info in tubes:
             self._new_tube_cb(*tube_info)
 
     def _list_tubes_error_cb(self, e):
+        """Handle ListTubes error by logging."""
         _logger.error('ListTubes() failed: %s', e)
 
-    def _shared_cb(self, activity):
+    def _shared_cb(self, activityid):
+        """Callback when activity shared.
+
+        Set up to share the document.
+
+        """
         # We initiated this activity and have now shared it, so by
         # definition we have the file.
         _logger.debug('Activity became shared')
