@@ -263,10 +263,6 @@ class ReadActivity(activity.Activity):
         self.metadata['Read_search'] = \
                 self._edit_toolbar._search_entry.props.text
 
-        # hack that makes the #6488 Keep error go away
-        # FIXME: Move all this self.metadata stuff out of write_file
-        raise NotImplementedError
-
     def _download_result_cb(self, getter, tempfile, suggested_name, tube_id):
         del self.unused_download_tubes
 
