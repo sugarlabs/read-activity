@@ -140,6 +140,9 @@ class ReadActivity(activity.Activity):
 
         self.unused_download_tubes = set()
         self._want_document = True
+        # Status of temp file used for write_file:
+        self._tempfile = None
+        self._close_requested = False
 
         fname = os.path.join('/etc', 'inhibit-ebook-sleep')
         if not os.path.exists(fname):
@@ -224,17 +227,24 @@ class ReadActivity(activity.Activity):
     def read_file(self, file_path):
         """Load a file from the datastore on activity start."""
         _logger.debug('ReadActivity.read_file: %s', file_path)
-        self._load_document('file://' + file_path)
+        tempfile = os.path.join(self.get_activity_root(), 'instance',
+                                'tmp%i' % time.time())
+        os.link(file_path, tempfile)
+        self._tempfile = tempfile
+        self._load_document('file://' + self._tempfile)
 
         # FIXME: This should obviously be fixed properly
         gobject.timeout_add(1000, self.__view_toolbar_needs_update_size_cb,
             None)
 
     def write_file(self, file_path):
-        """Write metadata into datastore for Keep.
+        """Write into datastore for Keep.
         
-        We only save meta data, not the document itself.
-        current page, view settings, search text.
+        The document is saved by hardlinking from the temporary file we
+        keep around instead of "saving".
+
+        The metadata is updated, including current page, view settings,
+        search text.
         
         """
         try:
@@ -263,17 +273,36 @@ class ReadActivity(activity.Activity):
         self.metadata['Read_search'] = \
                 self._edit_toolbar._search_entry.props.text
 
+        os.link(self._tempfile, file_path)
+
+        if self._close_requested:
+            _logger.debug("Removing temp file %s because we will close",
+                          self._tempfile)
+            os.unlink(self._tempfile)
+            self._tempfile = None
+
+    def can_close(self):
+        """Prepare to cleanup on closing.
+        
+        Called from self.close()
+        """
+        self._close_requested = True
+        return True
+
     def _download_result_cb(self, getter, tempfile, suggested_name, tube_id):
         del self.unused_download_tubes
 
-        _logger.debug("Moving file %s to datastore...", tempfile)
-        self._jobject.file_path = tempfile
+        self._tempfile = tempfile
+        file_path = os.path.join(self.get_activity_root(), 'instance',
+                                    '%i' % time.time())
+        _logger.debug("Saving file %s to datastore...", file_path)
+        os.link(tempfile, file_path)
+        self._jobject.file_path = file_path
         datastore.write(self._jobject, transfer_ownership=True)
 
         _logger.debug("Got document %s (%s) from tube %u",
                       tempfile, suggested_name, tube_id)
         self._load_document("file://%s" % tempfile)
-
         self.save()
 
     def _download_progress_cb(self, getter, bytes_downloaded, tube_id):
@@ -322,7 +351,7 @@ class ReadActivity(activity.Activity):
         # Assign a file path to download if one doesn't exist yet
         if not self._jobject.file_path:
             path = os.path.join(self.get_activity_root(), 'instance',
-                                '%i' % time.time())
+                                'tmp%i' % time.time())
         else:
             path = self._jobject.file_path
 
@@ -404,19 +433,9 @@ class ReadActivity(activity.Activity):
         # FIXME: should ideally have the fileserver listen on a Unix socket
         # instead of IPv4 (might be more compatible with Rainbow)
 
-        # FIXME: there is an issue with the Activity class and Read that makes
-        # the pdf file disappear; probably related to write_file not writing a
-        # file. This is a dirty fix and should be improved later.
-        if self._jobject is None:
-            self._jobject = datastore.get(self._object_id)
-        elif not os.path.exists(self._jobject.get_file_path()):
-            _logger.debug('_jobject file does not exists; getting from DS...')
-            self._jobject.destroy()
-            self._jobject = datastore.get(self._object_id)
-
         logging.debug('Starting HTTP server on port %d', self.port)
         self._fileserver = ReadHTTPServer(("", self.port),
-            self._jobject.get_file_path())
+            self._tempfile)
 
         # Make a tube for it
         chan = self._shared_activity.telepathy_tubes_chan
