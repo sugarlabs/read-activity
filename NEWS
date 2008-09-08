@@ -1,3 +1,5 @@
+* #8352 Fix keep error with no document (morgs)
+
 50
 
 * #7948, #7168, #6488 Fix saving to the datastore (morgs)
