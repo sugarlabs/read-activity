@@ -247,6 +247,10 @@ class ReadActivity(activity.Activity):
         search text.
         
         """
+        if self._tempfile is None:
+            # Workaround for closing Read with no document loaded
+            raise NotImplementedError
+
         try:
             self.metadata['Read_current_page'] = \
                         str(self._document.get_page_cache().get_current_page())
