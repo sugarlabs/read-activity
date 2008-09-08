@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-03-01 00:30-0500\n"
-"PO-Revision-Date: 2008-08-27 06:09-0400\n"
+"PO-Revision-Date: 2008-08-31 11:16-0400\n"
 "Last-Translator: Eduardo H. Silva <HoboPrimate@gmail.com>\n"
 "Language-Team: Portuguese <translation-team-pt@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -66,11 +66,11 @@ msgstr "Aproximar Zoom"
 
 #: readtoolbar.py:283
 msgid "Zoom to width"
-msgstr "Aproximar à largura da página"
+msgstr "Zoom até à largura"
 
 #: readtoolbar.py:289
 msgid "Zoom to fit"
-msgstr "Aproximar ao melhor ajuste"
+msgstr "Zoom até caber"
 
 #: readtoolbar.py:294
 msgid "Actual size"
