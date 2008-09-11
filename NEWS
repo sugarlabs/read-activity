@@ -1,3 +1,6 @@
+* Add COPYING with GPL2
+* Remove parameter from bundlebuilder.start
+* #8411: Add license to activity.info
 * #8352 Fix keep error with no document (morgs)
 
 50
