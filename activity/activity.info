@@ -6,3 +6,4 @@ exec = sugar-activity readactivity.ReadActivity
 show_launcher = no
 activity_version = 50
 mime_types = application/pdf;image/vnd.djvu;image/x.djvu;image/tiff
+license = GPLv2+
