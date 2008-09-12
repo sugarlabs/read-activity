@@ -47,6 +47,7 @@ def _get_screen_dpi():
     print 'Setting dpi to %f' % (float(xft_dpi / 1024))
     return float(xft_dpi / 1024)
 
+
 class ReadHTTPRequestHandler(network.ChunkedGlibHTTPRequestHandler):
     """HTTP Request Handler for transferring document while collaborating.
 
@@ -59,6 +60,7 @@ class ReadHTTPRequestHandler(network.ChunkedGlibHTTPRequestHandler):
         """Return the filepath to the shared document."""
         return self.server.filepath
 
+
 class ReadHTTPServer(network.GlibTCPServer):
     """HTTP Server for transferring document while collaborating."""
     def __init__(self, server_address, filepath):
@@ -69,6 +71,22 @@ class ReadHTTPServer(network.GlibTCPServer):
         self.filepath = filepath
         network.GlibTCPServer.__init__(self, server_address,
                                        ReadHTTPRequestHandler)
+
+
+class ReadURLDownloader(network.GlibURLDownloader):
+    """URLDownloader that provides content-length and content-type."""
+
+    def get_content_length(self):
+        """Return the content-length of the download."""
+        if self._info is not None:
+            return int(self._info.headers.get('Content-Length'))
+
+    def get_content_type(self):
+        """Return the content-type of the download."""
+        if self._info is not None:
+            return self._info.headers.get('Content-type')
+        return None
+
 
 READ_STREAM_SERVICE = 'read-activity-http'
 
@@ -140,6 +158,8 @@ class ReadActivity(activity.Activity):
 
         self.unused_download_tubes = set()
         self._want_document = True
+        self._download_content_length = 0
+        self._download_content_type = None
         # Status of temp file used for write_file:
         self._tempfile = None
         self._close_requested = False
@@ -294,6 +314,11 @@ class ReadActivity(activity.Activity):
         return True
 
     def _download_result_cb(self, getter, tempfile, suggested_name, tube_id):
+        if self._download_content_type == 'text/html':
+            # got an error page instead
+            self._download_error_cb(getter, 'HTTP Error', tube_id)
+            return
+
         del self.unused_download_tubes
 
         self._tempfile = tempfile
@@ -310,15 +335,21 @@ class ReadActivity(activity.Activity):
         self.save()
 
     def _download_progress_cb(self, getter, bytes_downloaded, tube_id):
-        # FIXME: signal the expected size somehow, so we can draw a progress
-        # bar
-        _logger.debug("Downloaded %u bytes from tube %u...",
-                      bytes_downloaded, tube_id)
+        # FIXME: Draw a progress bar
+        if self._download_content_length > 0:
+            _logger.debug("Downloaded %u of %u bytes from tube %u...",
+                          bytes_downloaded, self._download_content_length, 
+                          tube_id)
+        else:
+            _logger.debug("Downloaded %u bytes from tube %u...",
+                          bytes_downloaded, tube_id)
 
     def _download_error_cb(self, getter, err, tube_id):
         _logger.debug("Error getting document from tube %u: %s",
                       tube_id, err)
         self._want_document = True
+        self._download_content_length = 0
+        self._download_content_type = None
         gobject.idle_add(self._get_document)
 
     def _download_document(self, tube_id, path):
@@ -339,13 +370,15 @@ class ReadActivity(activity.Activity):
         assert addr[1] > 0 and addr[1] < 65536
         port = int(addr[1])
 
-        getter = network.GlibURLDownloader("http://%s:%d/document"
+        getter = ReadURLDownloader("http://%s:%d/document"
                                            % (addr[0], port))
         getter.connect("finished", self._download_result_cb, tube_id)
         getter.connect("progress", self._download_progress_cb, tube_id)
         getter.connect("error", self._download_error_cb, tube_id)
         _logger.debug("Starting download to %s...", path)
         getter.start(path)
+        self._download_content_length = getter.get_content_length()
+        self._download_content_type = getter.get_content_type()
         return False
 
     def _get_document(self):

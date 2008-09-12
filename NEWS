@@ -1,6 +1,7 @@
-* Add COPYING with GPL2
-* Remove parameter from bundlebuilder.start
-* #8411: Add license to activity.info
+* #7017: Detect and handle 404 Error (morgs)
+* Add COPYING with GPL2 (morgs)
+* Remove parameter from bundlebuilder.start (morgs)
+* #8411: Add license to activity.info (morgs)
 * #8352 Fix keep error with no document (morgs)
 
 50
