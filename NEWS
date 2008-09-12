@@ -1,6 +1,8 @@
-* Add COPYING with GPL2
-* Remove parameter from bundlebuilder.start
-* #8411: Add license to activity.info
+52
+
+* Add COPYING with GPL2 (morgs)
+* Remove parameter from bundlebuilder.start (morgs)
+* #8411: Add license to activity.info (morgs)
 
 51
 
