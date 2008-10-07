@@ -180,12 +180,12 @@ class ReadActivity(activity.Activity):
                 self.connect("focus-out-event", self._focus_out_event_cb)
                 self.connect("notify::active", self._now_active_cb)
 
-                logging.debug('Suspend on idle enabled')
+                _logger.debug('Suspend on idle enabled')
             except dbus.DBusException, e:
                 _logger.info(
                     'Hardware manager service not found, no idle suspend.')
         else:
-            logging.debug('Suspend on idle disabled')
+            _logger.debug('Suspend on idle disabled')
 
         self.connect("shared", self._shared_cb)
 
@@ -284,7 +284,7 @@ class ReadActivity(activity.Activity):
             elif self._view.props.sizing_mode == evince.SIZING_FIT_WIDTH:
                 self.metadata['Read_sizing_mode'] = "fit-width"
             else:
-                logging.error("Don't know how to save sizing_mode state '%s'" %
+                _logger.error("Don't know how to save sizing_mode state '%s'" %
                               self._view.props.sizing_mode)
                 self.metadata['Read_sizing_mode'] = "fit-width"
 
@@ -292,7 +292,7 @@ class ReadActivity(activity.Activity):
                     self._edit_toolbar._search_entry.props.text
 
         except Exception, e:
-            logging.error('write_file(): %s', e)
+            _logger.error('write_file(): %s', e)
 
         self.metadata['Read_search'] = \
                 self._edit_toolbar._search_entry.props.text
@@ -434,14 +434,14 @@ class ReadActivity(activity.Activity):
         self._document.get_page_cache().set_current_page(current_page)
 
         sizing_mode = self.metadata.get('Read_sizing_mode', 'fit-width')
-        logging.debug('Found sizing mode: %s', sizing_mode)
+        _logger.debug('Found sizing mode: %s', sizing_mode)
         if sizing_mode == "best-fit":
             self._view.props.sizing_mode = evince.SIZING_BEST_FIT
             self._view.update_view_size(self.canvas)
         elif sizing_mode == "free":
             self._view.props.sizing_mode = evince.SIZING_FREE
             self._view.props.zoom = float(self.metadata.get('Read_zoom', '1.0'))
-            logging.debug('Set zoom to %f', self._view.props.zoom)
+            _logger.debug('Set zoom to %f', self._view.props.zoom)
         elif sizing_mode == "fit-width":
             self._view.props.sizing_mode = evince.SIZING_FIT_WIDTH
             self._view.update_view_size(self.canvas)
@@ -463,14 +463,14 @@ class ReadActivity(activity.Activity):
                 self.watch_for_tubes()
                 self._share_document()
         except Exception, e:
-            logging.debug('Sharing failed: %s', e)
+            _logger.debug('Sharing failed: %s', e)
 
     def _share_document(self):
         """Share the document."""
         # FIXME: should ideally have the fileserver listen on a Unix socket
         # instead of IPv4 (might be more compatible with Rainbow)
 
-        logging.debug('Starting HTTP server on port %d', self.port)
+        _logger.debug('Starting HTTP server on port %d', self.port)
         self._fileserver = ReadHTTPServer(("", self.port),
             self._tempfile)
 
@@ -535,7 +535,7 @@ class ReadActivity(activity.Activity):
 
     def _key_press_event_cb(self, widget, event):
         keyname = gtk.gdk.keyval_name(event.keyval)
-        logging.debug("Keyname Press: %s, time: %s", keyname, event.time)
+        _logger.debug("Keyname Press: %s, time: %s", keyname, event.time)
         if keyname == 'c' and event.state & gtk.gdk.CONTROL_MASK:
             self._view.copy()
             return True
@@ -551,7 +551,7 @@ class ReadActivity(activity.Activity):
 
     def _key_release_event_cb(self, widget, event):
         keyname = gtk.gdk.keyval_name(event.keyval)
-        logging.debug("Keyname Release: %s, time: %s", keyname, event.time)
+        _logger.debug("Keyname Release: %s, time: %s", keyname, event.time)
 
     def __view_toolbar_needs_update_size_cb(self, view_toolbar):
         self._view.update_view_size(self.canvas)
