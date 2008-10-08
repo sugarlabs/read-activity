@@ -31,6 +31,7 @@ from sugar.activity import activity
 from sugar import network
 
 from sugar.datastore import datastore
+from sugar.graphics.objectchooser import ObjectChooser
 
 from readtoolbar import EditToolbar, ReadToolbar, ViewToolbar
 
@@ -209,6 +210,30 @@ class ReadActivity(activity.Activity):
         # uncomment this and adjust the path for easier testing
         #else:
         #    self._load_document('file:///home/smcv/tmp/test.pdf')
+        self._show_object_picker = gobject.timeout_add(1000,
+                                                       self._show_picker_cb)
+
+    def _show_picker_cb(self):
+        """Show the journal object picker to load a document.
+
+        This is for if Read is launched without a document.
+        """
+        if not self._want_document:
+            return
+        chooser = ObjectChooser(_('Choose document'), self, 
+                                gtk.DIALOG_MODAL | 
+                                gtk.DIALOG_DESTROY_WITH_PARENT)
+        try:
+            result = chooser.run()
+            if result == gtk.RESPONSE_ACCEPT:
+                logging.debug('ObjectChooser: %r' % 
+                              chooser.get_selected_object())
+                jobject = chooser.get_selected_object()
+                if jobject and jobject.file_path:
+                    self.read_file(jobject.file_path)
+        finally:
+            chooser.destroy()
+            del chooser
 
     def _now_active_cb(self, widget, pspec):
         if self.props.active:
