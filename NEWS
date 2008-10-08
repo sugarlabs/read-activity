@@ -1,3 +1,4 @@
+* #8350 Use the journal object picker if launched with no document (morgs)
 * #7017: Detect and handle 404 Error (morgs)
 * Add COPYING with GPL2 (morgs)
 * Remove parameter from bundlebuilder.start (morgs)
