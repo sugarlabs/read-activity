@@ -35,8 +35,10 @@ class EditToolbar(activity.EditToolbar):
         activity.EditToolbar.__init__(self)
 
         self._evince_view = evince_view
-        self._evince_view.set_highlight_search(True)
+        self._evince_view.find_set_highlight_search(True)
+
         self._document = None
+        self._find_job = None
 
         separator = gtk.SeparatorToolItem()
         separator.set_draw(False)
@@ -79,13 +81,22 @@ class EditToolbar(activity.EditToolbar):
 
     def set_document(self, document):
         self._document = document
-        self._document.connect('find_changed', self._find_changed_cb)  
+
+    def _clear_find_job(self):
+        if self._find_job is None:
+            return
+        if not self._find_job.is_finished():
+            self._find_job.cancel()
+        self._find_job.disconnect(self._find_updated_handler)
+        self._find_job = None
 
     def _search_find_first(self):
+        self._clear_find_job()
         text = self._search_entry.props.text
         if text != "":
-#            current_page = self._document.get_page_cache().get_current_page()
-            self._document.find_begin(0, text, False)
+            self._find_job = evince.JobFind(document=self._document, start_page=0, n_pages=self._document.get_n_pages(), text=text, case_sensitive=False)
+            self._find_updated_handler = self._find_job.connect('updated', self._find_updated_cb)
+            evince.job_scheduler_push_job(self._find_job, evince.JOB_PRIORITY_NONE)
         else:
             # FIXME: highlight nothing
             pass
@@ -118,7 +129,10 @@ class EditToolbar(activity.EditToolbar):
 
     def _find_changed_cb(self, page, spec):
         self._update_find_buttons()
-        
+
+    def _find_updated_cb(self, job, page):
+        self._evince_view.find_changed(job, page)
+
     def _find_prev_cb(self, button):
         if self._search_entry_changed:
             self._search_find_last()
@@ -142,9 +156,9 @@ class EditToolbar(activity.EditToolbar):
                 self._prev.props.sensitive = False
                 self._next.props.sensitive = False
         else:
-            self._prev.props.sensitive = self._evince_view.can_find_previous()
+            self._prev.props.sensitive = True
             self._prev.set_tooltip(_('Find previous'))
-            self._next.props.sensitive = self._evince_view.can_find_next()
+            self._next.props.sensitive = True
             self._next.set_tooltip(_('Find next'))
 
 class ReadToolbar(gtk.Toolbar):

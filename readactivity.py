@@ -107,7 +107,6 @@ class ReadActivity(activity.Activity):
 
         _logger.debug('Starting Read...')
         
-        evince.job_queue_init()
         self._view = evince.View()
         self._view.set_screen_dpi(_get_screen_dpi())
         self._view.connect('notify::has-selection',
