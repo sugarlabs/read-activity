@@ -199,7 +199,7 @@ class ReadActivity(activity.Activity):
         # start on the read toolbar
         self.toolbox.set_current_toolbar(_TOOLBAR_READ)
 
-        if self._shared_activity:
+        if self.shared_activity:
             # We're joining
             if self.get_shared():
                 # Already joined for some reason, just get the document
@@ -380,7 +380,7 @@ class ReadActivity(activity.Activity):
     def _download_document(self, tube_id, path):
         # FIXME: should ideally have the CM listen on a Unix socket
         # instead of IPv4 (might be more compatible with Rainbow)
-        chan = self._shared_activity.telepathy_tubes_chan
+        chan = self.shared_activity.telepathy_tubes_chan
         iface = chan[telepathy.CHANNEL_TYPE_TUBES]
         addr = iface.AcceptStreamTube(tube_id,
                 telepathy.SOCKET_ADDRESS_TYPE_IPV4,
@@ -500,7 +500,7 @@ class ReadActivity(activity.Activity):
             self._tempfile)
 
         # Make a tube for it
-        chan = self._shared_activity.telepathy_tubes_chan
+        chan = self.shared_activity.telepathy_tubes_chan
         iface = chan[telepathy.CHANNEL_TYPE_TUBES]
         self._fileserver_tube_id = iface.OfferStreamTube(READ_STREAM_SERVICE,
                 {},
@@ -510,7 +510,7 @@ class ReadActivity(activity.Activity):
 
     def watch_for_tubes(self):
         """Watch for new tubes."""
-        tubes_chan = self._shared_activity.telepathy_tubes_chan
+        tubes_chan = self.shared_activity.telepathy_tubes_chan
 
         tubes_chan[telepathy.CHANNEL_TYPE_TUBES].connect_to_signal('NewTube',
             self._new_tube_cb)
