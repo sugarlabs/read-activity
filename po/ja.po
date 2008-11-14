@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-01 00:30-0500\n"
-"PO-Revision-Date: 2008-09-20 23:18-0400\n"
+"POT-Creation-Date: 2008-10-09 00:31-0400\n"
+"PO-Revision-Date: 2008-11-14 11:05-0500\n"
 "Last-Translator: korakurider <korakurider@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -15,17 +15,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 1.1.0rc2\n"
 
-#: activity/activity.info:2 readactivity.py:95
+#: activity/activity.info:2 readactivity.py:129
 msgid "Read"
 msgstr "Read"
 
-#: readactivity.py:91
+#: readactivity.py:125
 msgid "Edit"
 msgstr "編集"
 
-#: readactivity.py:103
+#: readactivity.py:137
 msgid "View"
 msgstr "ビュー"
+
+#: readactivity.py:223
+msgid "Choose document"
+msgstr "文書を選ぶ"
 
 #: readtoolbar.py:67
 msgid "Previous"
