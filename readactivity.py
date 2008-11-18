@@ -210,10 +210,10 @@ class ReadActivity(activity.Activity):
         # uncomment this and adjust the path for easier testing
         #else:
         #    self._load_document('file:///home/smcv/tmp/test.pdf')
-        self._show_object_picker = gobject.timeout_add(1000,
-                                                       self._show_picker_cb)
+        if self._object_id is None:
+            self._show_journal_object_picker()
 
-    def _show_picker_cb(self):
+    def _show_journal_object_picker(self):
         """Show the journal object picker to load a document.
 
         This is for if Read is launched without a document.
