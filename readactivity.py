@@ -206,11 +206,12 @@ class ReadActivity(activity.Activity):
             else:
                 # Wait for a successful join before trying to get the document
                 self.connect("joined", self._joined_cb)
+        elif self._object_id is None:
+            # Not joining, not resuming
+            self._show_journal_object_picker()
         # uncomment this and adjust the path for easier testing
         #else:
         #    self._load_document('file:///home/smcv/tmp/test.pdf')
-        if self._object_id is None:
-            self._show_journal_object_picker()
 
     def _show_journal_object_picker(self):
         """Show the journal object picker to load a document.
