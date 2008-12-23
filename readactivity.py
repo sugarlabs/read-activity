@@ -45,7 +45,7 @@ _logger = logging.getLogger('read-activity')
 
 def _get_screen_dpi():
     xft_dpi = gtk.settings_get_default().get_property('gtk-xft-dpi')
-    print 'Setting dpi to %f' % (float(xft_dpi / 1024))
+    _logger.debug('Setting dpi to %f', float(xft_dpi / 1024))
     return float(xft_dpi / 1024)
 
 
