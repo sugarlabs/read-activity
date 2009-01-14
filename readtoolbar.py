@@ -218,11 +218,31 @@ class ReadToolbar(gtk.Toolbar):
         self.insert(total_page_item, -1)
         total_page_item.show()
 
+        spacer = gtk.SeparatorToolItem()
+        spacer.props.draw = False
+        self.insert(spacer, -1)
+        spacer.show()
+
+        navitem = gtk.ToolItem()
+
+        self._navigator = gtk.ComboBox()
+        cell = gtk.CellRendererText()
+        self._navigator.pack_start(cell, True)
+        self._navigator.add_attribute(cell, 'text', 0)
+        self._navigator.props.sensitive = False
+
+        navitem.add(self._navigator)
+
+        self.insert(navitem, -1)
+        navitem.show_all()
+
+
     def set_document(self, document):
         self._document = document
         page_cache = self._document.get_page_cache()
         page_cache.connect('page-changed', self._page_changed_cb)    
         self._update_nav_buttons()
+        self._update_toc()
 
     def _num_page_entry_insert_text_cb(self, entry, text, length, position):
         if not re.match('[0-9]', text):
@@ -252,6 +272,8 @@ class ReadToolbar(gtk.Toolbar):
     
     def _page_changed_cb(self, page, proxy):
         self._update_nav_buttons()
+        if self._document.has_document_links():
+            self._toc_select_active_page()
 
     def _update_nav_buttons(self):
         current_page = self._document.get_page_cache().get_current_page()
@@ -262,6 +284,49 @@ class ReadToolbar(gtk.Toolbar):
         self._num_page_entry.props.text = str(current_page + 1)
         self._total_page_label.props.label = \
             ' / ' + str(self._document.get_n_pages())
+
+    def _update_toc(self):
+        if self._document.has_document_links():
+            self._navigator.props.sensitive = True
+
+            self._toc_model = self._document.get_links_model()
+            self._navigator.set_model(self._toc_model)
+            self._navigator.set_active(0)
+
+            self.__navigator_changed_handler_id = \
+                self._navigator.connect('changed', self._navigator_changed_cb)
+
+            self._toc_select_active_page()
+
+    def _navigator_changed_cb(self, combobox):
+        iter = self._navigator.get_active_iter()
+
+        link = self._toc_model.get(iter, 1)[0]
+        self._evince_view.handle_link(link)
+
+    def _toc_select_active_page_foreach(self, model, path, iter, current_page):
+        link = self._toc_model.get(iter, 1)[0]
+
+        if current_page == link.get_page():
+            self._navigator.set_active_iter(iter)
+            return True
+        else:
+            return False
+
+    def _toc_select_active_page(self):
+        iter = self._navigator.get_active_iter()
+        
+        current_link = self._toc_model.get(iter, 1)[0]
+        current_page = self._document.get_page_cache().get_current_page()
+
+        if current_link.get_page() == current_page:
+            # Nothing to do
+            return
+
+        self._navigator.handler_block(self.__navigator_changed_handler_id)
+        self._toc_model.foreach(self._toc_select_active_page_foreach, current_page)
+        self._navigator.handler_unblock(self.__navigator_changed_handler_id)
+
 
 class ViewToolbar(gtk.Toolbar):
     __gtype_name__ = 'ViewToolbar'
