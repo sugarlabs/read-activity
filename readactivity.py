@@ -140,7 +140,7 @@ class ReadActivity(activity.Activity):
         toolbox.show()
 
         scrolled = gtk.ScrolledWindow()
-        scrolled.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
+        scrolled.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
         scrolled.props.shadow_type = gtk.SHADOW_NONE
 
         scrolled.add(self._view)
