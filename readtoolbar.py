@@ -229,12 +229,12 @@ class ReadToolbar(gtk.Toolbar):
         cell = gtk.CellRendererText()
         self._navigator.pack_start(cell, True)
         self._navigator.add_attribute(cell, 'text', 0)
-        self._navigator.props.sensitive = False
+        self._navigator.props.visible = False
 
         navitem.add(self._navigator)
 
         self.insert(navitem, -1)
-        navitem.show_all()
+        navitem.show()
 
 
     def set_document(self, document):
@@ -289,7 +289,7 @@ class ReadToolbar(gtk.Toolbar):
     def _update_toc(self):
         if hasattr(self._document, 'has_document_links'):
             if self._document.has_document_links():
-                self._navigator.props.sensitive = True
+                self._navigator.show_all()
 
                 self._toc_model = self._document.get_links_model()
                 self._navigator.set_model(self._toc_model)
