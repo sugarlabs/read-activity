@@ -23,10 +23,28 @@ import gobject
 import gtk
 import evince
 
+import md5
+
 from sugar.graphics.toolbutton import ToolButton
+from sugar.graphics.toggletoolbutton import ToggleToolButton
 from sugar.graphics.menuitem import MenuItem
 from sugar.graphics import iconentry
 from sugar.activity import activity
+from sugar.graphics.icon import Icon
+from sugar.graphics.xocolor import XoColor
+
+def get_md5(filename): #FIXME: Should be moved somewhere else
+    filename = filename.replace('file://', '') #XXX: hack 
+    fh = open(filename)
+    digest = md5.new()
+    while 1:
+        buf = fh.read(4096)
+        if buf == "":
+            break
+        digest.update(buf)
+    fh.close()
+    return digest.hexdigest()
+
 
 class EditToolbar(activity.EditToolbar):
     __gtype_name__ = 'EditToolbar'
@@ -164,10 +182,11 @@ class EditToolbar(activity.EditToolbar):
 class ReadToolbar(gtk.Toolbar):
     __gtype_name__ = 'ReadToolbar'
 
-    def __init__(self, evince_view):
+    def __init__(self, evince_view, sidebar):
         gtk.Toolbar.__init__(self)
 
         self._evince_view = evince_view
+        self._sidebar = sidebar
         self._document = None
                 
         self._back = ToolButton('go-previous')
@@ -236,13 +255,28 @@ class ReadToolbar(gtk.Toolbar):
         self.insert(navitem, -1)
         navitem.show()
 
+        spacer = gtk.SeparatorToolItem()
+        self.insert(spacer, -1)
+        spacer.show()
+  
+        bookmarkitem = gtk.ToolItem()
+        self._bookmarker = ToggleToolButton('emblem-favorite')
+        self._bookmarker_toggle_handler_id = self._bookmarker.connect('toggled',
+                                      self._bookmarker_toggled_cb)
+  
+        bookmarkitem.add(self._bookmarker)
 
-    def set_document(self, document):
+        self.insert(bookmarkitem, -1)
+        bookmarkitem.show_all()
+        
+    def set_document(self, document, filepath):
+        hash = get_md5(filepath)
         self._document = document
         page_cache = self._document.get_page_cache()
         page_cache.connect('page-changed', self._page_changed_cb)    
         self._update_nav_buttons()
         self._update_toc()
+        self._sidebar.set_bookmarkmanager(hash)
 
     def _num_page_entry_insert_text_cb(self, entry, text, length, position):
         if not re.match('[0-9]', text):
@@ -269,13 +303,26 @@ class ReadToolbar(gtk.Toolbar):
     
     def _go_forward_cb(self, button):
         self._evince_view.next_page()
+
+    def _bookmarker_toggled_cb(self, button):
+        page = self._document.get_page_cache().get_current_page()
+        if self._bookmarker.props.active:
+            self._sidebar.add_bookmark(page)
+        else:
+            self._sidebar.del_bookmark(page)    
     
     def _page_changed_cb(self, page, proxy):
         self._update_nav_buttons()
         if hasattr(self._document, 'has_document_links'):
             if self._document.has_document_links():
                 self._toc_select_active_page()
+                
+        self._sidebar.update_for_page(self._document.get_page_cache().get_current_page())
 
+        self._bookmarker.handler_block(self._bookmarker_toggle_handler_id)
+        self._bookmarker.props.active = self._sidebar.is_showing_local_bookmark()
+        self._bookmarker.handler_unblock(self._bookmarker_toggle_handler_id)
+        
     def _update_nav_buttons(self):
         current_page = self._document.get_page_cache().get_current_page()
         self._back.props.sensitive = current_page > 0

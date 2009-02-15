@@ -34,6 +34,7 @@ from sugar.datastore import datastore
 from sugar.graphics.objectchooser import ObjectChooser
 
 from readtoolbar import EditToolbar, ReadToolbar, ViewToolbar
+from readsidebar import Sidebar
 
 _HARDWARE_MANAGER_INTERFACE = 'org.laptop.HardwareManager'
 _HARDWARE_MANAGER_SERVICE = 'org.laptop.HardwareManager'
@@ -109,6 +110,9 @@ class ReadActivity(activity.Activity):
         self._view.set_screen_dpi(_get_screen_dpi())
         self._view.connect('notify::has-selection',
                            self._view_notify_has_selection_cb)
+        
+        self._sidebar = Sidebar()
+        self._sidebar.show()
 
         toolbox = activity.ActivityToolbox(self)
 
@@ -122,7 +126,7 @@ class ReadActivity(activity.Activity):
         toolbox.add_toolbar(_('Edit'), self._edit_toolbar)
         self._edit_toolbar.show()
 
-        self._read_toolbar = ReadToolbar(self._view)
+        self._read_toolbar = ReadToolbar(self._view, self._sidebar)
         toolbox.add_toolbar(_('Read'), self._read_toolbar)
         self._read_toolbar.show()
 
@@ -137,15 +141,20 @@ class ReadActivity(activity.Activity):
         self.set_toolbox(toolbox)
         toolbox.show()
 
-        scrolled = gtk.ScrolledWindow()
-        scrolled.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
-        scrolled.props.shadow_type = gtk.SHADOW_NONE
+        self._scrolled = gtk.ScrolledWindow()
+        self._scrolled.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+        self._scrolled.props.shadow_type = gtk.SHADOW_NONE
 
-        scrolled.add(self._view)
+        self._scrolled.add(self._view)
         self._view.show()
-                
-        self.set_canvas(scrolled)
-        scrolled.show()
+
+        hbox = gtk.HBox()
+        hbox.pack_start(self._sidebar, expand=False, fill=False)
+        hbox.pack_start(self._scrolled, expand=True, fill=True)
+
+        self.set_canvas(hbox)
+        self._scrolled.show()
+        hbox.show()
 
         # Set up for idle suspend
         self._idle_timer = 0
@@ -170,9 +179,9 @@ class ReadActivity(activity.Activity):
                                        _HARDWARE_MANAGER_OBJECT_PATH)
                 self._service = dbus.Interface(proxy,
                                                _HARDWARE_MANAGER_INTERFACE)
-                scrolled.props.vadjustment.connect("value-changed",
+                self._scrolled.props.vadjustment.connect("value-changed",
                                                    self._user_action_cb)
-                scrolled.props.hadjustment.connect("value-changed",
+                self._scrolled.props.hadjustment.connect("value-changed",
                                                    self._user_action_cb)
                 self.connect("focus-in-event", self._focus_in_event_cb)
                 self.connect("focus-out-event", self._focus_out_event_cb)
@@ -447,7 +456,7 @@ class ReadActivity(activity.Activity):
         self._want_document = False
         self._view.set_document(self._document)
         self._edit_toolbar.set_document(self._document)
-        self._read_toolbar.set_document(self._document)
+        self._read_toolbar.set_document(self._document, filepath)
 
         if not self.metadata['title_set_by_user'] == '1':
             info = self._document.get_info()
@@ -461,14 +470,14 @@ class ReadActivity(activity.Activity):
         _logger.debug('Found sizing mode: %s', sizing_mode)
         if sizing_mode == "best-fit":
             self._view.props.sizing_mode = evince.SIZING_BEST_FIT
-            self._view.update_view_size(self.canvas)
+            self._view.update_view_size(self._scrolled)
         elif sizing_mode == "free":
             self._view.props.sizing_mode = evince.SIZING_FREE
             self._view.props.zoom = float(self.metadata.get('Read_zoom', '1.0'))
             _logger.debug('Set zoom to %f', self._view.props.zoom)
         elif sizing_mode == "fit-width":
             self._view.props.sizing_mode = evince.SIZING_FIT_WIDTH
-            self._view.update_view_size(self.canvas)
+            self._view.update_view_size(self._scrolled)
         else:
             # this may happen when we get a document from a buddy with a later
             # version of Read, for example.
@@ -578,7 +587,7 @@ class ReadActivity(activity.Activity):
         _logger.debug("Keyname Release: %s, time: %s", keyname, event.time)
 
     def __view_toolbar_needs_update_size_cb(self, view_toolbar):
-        self._view.update_view_size(self.canvas)
+        self._view.update_view_size(self._scrolled)
 
     def __view_toolbar_go_fullscreen_cb(self, view_toolbar):
         self.fullscreen()
