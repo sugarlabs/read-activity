@@ -96,8 +96,6 @@ class ReadActivity(activity.Activity):
     def __init__(self, handle):
         activity.Activity.__init__(self, handle)
 
-        evince.evince_embed_init()
-
         self._document = None
         self._fileserver = None
         self._object_id = handle.object_id
