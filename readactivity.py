@@ -270,8 +270,9 @@ class ReadActivity(activity.Activity):
     def read_file(self, file_path):
         """Load a file from the datastore on activity start."""
         _logger.debug('ReadActivity.read_file: %s', file_path)
+        extension = os.path.splitext(file_path)[1]
         tempfile = os.path.join(self.get_activity_root(), 'instance',
-                                'tmp%i' % time.time())
+                                'tmp%i%s' % (time.time(), extension))
         os.link(file_path, tempfile)
         self._tempfile = tempfile
         self._load_document('file://' + self._tempfile)
