@@ -1,4 +1,5 @@
 import logging
+import time
 
 import gtk
 
@@ -35,7 +36,11 @@ class Sidebar(gtk.EventBox):
         xocolor = XoColor(bookmark.color)
         bookmark_icon = Icon(icon_name = 'emblem-favorite', \
             pixel_size = 18, xo_color = xocolor)
-        bookmark_icon.set_tooltip_text(_("Stupid tooltip"))
+
+        tooltip_text = (_('Bookmark added by %(user)s on %(time)s') \
+            % {'user': bookmark.nick, 'time': time.ctime(bookmark.timestamp)})
+        bookmark_icon.set_tooltip_text(tooltip_text)
+
         self._box.pack_start(bookmark_icon ,expand=False,fill=False)
         bookmark_icon.show_all()
         
@@ -76,3 +81,4 @@ class Sidebar(gtk.EventBox):
         
     def is_showing_local_bookmark(self):
         return self._is_showing_local_bookmark
+
