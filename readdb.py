@@ -10,8 +10,8 @@ from readbookmark import Bookmark
 _logger = logging.getLogger('read-activity')
 
 class BookmarkManager:
-    def __init__(self, hash, dbpath='read.db'):
-        self._hash = hash
+    def __init__(self, filehash, dbpath='read.db'):
+        self._filehash = filehash
         self._conn = sqlite3.connect(dbpath)
         self._cur = self._conn.cursor()
         
@@ -26,7 +26,7 @@ class BookmarkManager:
         user = client.get_string("/desktop/sugar/user/nick")
         color = client.get_string("/desktop/sugar/user/color")
 
-        t = (self._hash, page, title, timestamp, user, color, local)
+        t = (self._filehash, page, title, timestamp, user, color, local)
         self._cur.execute('insert into bookmarks values (?, ?, ?, ?, ?, ?, ?)', t)
         self._conn.commit()
         
@@ -38,7 +38,7 @@ class BookmarkManager:
 
         # We delete only the locally made bookmark
         
-        t = (self._hash, page, user)
+        t = (self._filehash, page, user)
         self._cur.execute('delete from bookmarks where md5=? and page=? and user=?', t)
         self._conn.commit()
         
@@ -46,7 +46,7 @@ class BookmarkManager:
 
     def _populate_bookmarks(self):
         # TODO: Figure out if caching the entire set of bookmarks is a good idea or not
-        self._cur.execute('select * from bookmarks where md5=?', (self._hash,))
+        self._cur.execute('select * from bookmarks where md5=?', (self._filehash,))
 
         for row in self._cur:
             self._bookmarks.append(Bookmark(row))

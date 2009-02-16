@@ -270,13 +270,13 @@ class ReadToolbar(gtk.Toolbar):
         bookmarkitem.show_all()
         
     def set_document(self, document, filepath):
-        hash = get_md5(filepath)
+        filehash = get_md5(filepath)
         self._document = document
         page_cache = self._document.get_page_cache()
         page_cache.connect('page-changed', self._page_changed_cb)    
         self._update_nav_buttons()
         self._update_toc()
-        self._sidebar.set_bookmarkmanager(hash)
+        self._sidebar.set_bookmarkmanager(filehash)
 
     def _num_page_entry_insert_text_cb(self, entry, text, length, position):
         if not re.match('[0-9]', text):
