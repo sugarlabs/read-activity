@@ -13,7 +13,6 @@ class BookmarkManager:
     def __init__(self, filehash, dbpath='read.db'):
         self._filehash = filehash
         self._conn = sqlite3.connect(dbpath)
-        self._cur = self._conn.cursor()
         
         self._bookmarks = []
         self._populate_bookmarks()
@@ -27,7 +26,7 @@ class BookmarkManager:
         color = client.get_string("/desktop/sugar/user/color")
 
         t = (self._filehash, page, title, timestamp, user, color, local)
-        self._cur.execute('insert into bookmarks values (?, ?, ?, ?, ?, ?, ?)', t)
+        self._conn.execute('insert into bookmarks values (?, ?, ?, ?, ?, ?, ?)', t)
         self._conn.commit()
         
         self._resync_bookmark_cache()
@@ -39,16 +38,16 @@ class BookmarkManager:
         # We delete only the locally made bookmark
         
         t = (self._filehash, page, user)
-        self._cur.execute('delete from bookmarks where md5=? and page=? and user=?', t)
+        self._conn.execute('delete from bookmarks where md5=? and page=? and user=?', t)
         self._conn.commit()
         
         self._resync_bookmark_cache()
 
     def _populate_bookmarks(self):
         # TODO: Figure out if caching the entire set of bookmarks is a good idea or not
-        self._cur.execute('select * from bookmarks where md5=? order by page', (self._filehash,))
+        rows = self._conn.execute('select * from bookmarks where md5=? order by page', (self._filehash,))
 
-        for row in self._cur:
+        for row in rows:
             self._bookmarks.append(Bookmark(row))
             
     def get_bookmarks_for_page(self, page):
