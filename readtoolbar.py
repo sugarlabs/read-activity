@@ -192,14 +192,32 @@ class ReadToolbar(gtk.Toolbar):
         self._back = ToolButton('go-previous')
         self._back.set_tooltip(_('Back'))
         self._back.props.sensitive = False
+        palette = self._back.get_palette()
+        self._prev_page = MenuItem(text_label= _("Previous page"))
+        palette.menu.append(self._prev_page) 
+        self._prev_page.show_all()        
+        self._prev_bookmark = MenuItem(text_label= _("Previous bookmark"))
+        palette.menu.append(self._prev_bookmark) 
+        self._prev_bookmark.show_all()
         self._back.connect('clicked', self._go_back_cb)
+        self._prev_page.connect('activate', self._go_back_cb)
+        self._prev_bookmark.connect('activate', self._prev_bookmark_activate_cb)
         self.insert(self._back, -1)
         self._back.show()
 
         self._forward = ToolButton('go-next')
         self._forward.set_tooltip(_('Forward'))
         self._forward.props.sensitive = False
+        palette = self._forward.get_palette()
+        self._next_page = MenuItem(text_label= _("Next page"))
+        palette.menu.append(self._next_page) 
+        self._next_page.show_all()        
+        self._next_bookmark = MenuItem(text_label= _("Next bookmark"))
+        palette.menu.append(self._next_bookmark) 
+        self._next_bookmark.show_all()
         self._forward.connect('clicked', self._go_forward_cb)
+        self._next_page.connect('activate', self._go_forward_cb)
+        self._next_bookmark.connect('activate', self._next_bookmark_activate_cb)
         self.insert(self._forward, -1)
         self._forward.show()
 
@@ -304,6 +322,22 @@ class ReadToolbar(gtk.Toolbar):
     def _go_forward_cb(self, button):
         self._evince_view.next_page()
 
+    def _prev_bookmark_activate_cb(self, menuitem):
+        page = self._document.get_page_cache().get_current_page()
+        bookmarkmanager = self._sidebar.get_bookmarkmanager()
+        
+        prev_bookmark = bookmarkmanager.get_prev_bookmark_for_page(page)
+        if prev_bookmark is not None:
+            self._document.get_page_cache().set_current_page(prev_bookmark.page_no)
+                
+    def _next_bookmark_activate_cb(self, menuitem):
+        page = self._document.get_page_cache().get_current_page()
+        bookmarkmanager = self._sidebar.get_bookmarkmanager()
+        
+        next_bookmark = bookmarkmanager.get_next_bookmark_for_page(page)
+        if next_bookmark is not None:
+            self._document.get_page_cache().set_current_page(next_bookmark.page_no)
+        
     def _bookmarker_toggled_cb(self, button):
         page = self._document.get_page_cache().get_current_page()
         if self._bookmarker.props.active:

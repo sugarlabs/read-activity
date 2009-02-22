@@ -46,7 +46,7 @@ class BookmarkManager:
 
     def _populate_bookmarks(self):
         # TODO: Figure out if caching the entire set of bookmarks is a good idea or not
-        self._cur.execute('select * from bookmarks where md5=?', (self._filehash,))
+        self._cur.execute('select * from bookmarks where md5=? order by page', (self._filehash,))
 
         for row in self._cur:
             self._bookmarks.append(Bookmark(row))
@@ -63,3 +63,33 @@ class BookmarkManager:
         # To be called when a new bookmark has been added/removed
         self._bookmarks = []
         self._populate_bookmarks()
+
+
+    def get_prev_bookmark_for_page(self, page, wrap = True):
+        if not len(self._bookmarks):
+            return None
+        
+        if page <= self._bookmarks[0].page_no and wrap:
+            return self._bookmarks[-1]
+        else:
+            for i in range(page-1, -1, -1):
+                for bookmark in self._bookmarks:
+                    if bookmark.belongstopage(i):
+                        return bookmark
+                
+        return None 
+
+
+    def get_next_bookmark_for_page(self, page, wrap = True):
+        if not len(self._bookmarks):
+            return None
+        
+        if page >= self._bookmarks[-1].page_no and wrap:
+            return self._bookmarks[0]
+        else:
+            for i in range(page+1, self._bookmarks[-1].page_no + 1):
+                for bookmark in self._bookmarks:
+                    if bookmark.belongstopage(i):
+                        return bookmark
+        
+        return None            

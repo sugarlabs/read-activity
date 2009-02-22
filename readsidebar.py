@@ -60,6 +60,9 @@ class Sidebar(gtk.EventBox):
     
     def set_bookmarkmanager(self, filehash):
         self._bookmark_manager = BookmarkManager(filehash)
+        
+    def get_bookmarkmanager(self):
+        return (self._bookmark_manager)
     
     def update_for_page(self, page):
         self._clear_bookmarks()
