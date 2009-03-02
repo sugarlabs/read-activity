@@ -6,26 +6,30 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-01 00:30-0500\n"
-"PO-Revision-Date: 2008-03-13 23:47-0400\n"
-"Last-Translator: Prabhas Pokharel <motudai@gmail.com>\n"
+"POT-Creation-Date: 2008-10-09 00:31-0400\n"
+"PO-Revision-Date: 2009-02-25 23:58-0500\n"
+"Last-Translator: Shaksham Thapa <shaksham@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 1.1.0rc2\n"
 
-#: activity/activity.info:2 readactivity.py:95
+#: activity/activity.info:2 readactivity.py:129
 msgid "Read"
 msgstr "पढ"
 
-#: readactivity.py:91
+#: readactivity.py:125
 msgid "Edit"
 msgstr "सम्पादन"
 
-#: readactivity.py:103
+#: readactivity.py:137
 msgid "View"
 msgstr "दृश्य"
+
+#: readactivity.py:223
+msgid "Choose document"
+msgstr "कागतपत्र छान"
 
 #: readtoolbar.py:67
 msgid "Previous"
@@ -77,7 +81,7 @@ msgstr "वास्तविक परिमाण"
 
 #: readtoolbar.py:312
 msgid "%"
-msgstr "प्रतिशत्"
+msgstr "%"
 
 #: readtoolbar.py:330
 msgid "Fullscreen"
