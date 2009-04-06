@@ -272,8 +272,9 @@ class ReadToolbar(gtk.Toolbar):
     
     def _page_changed_cb(self, page, proxy):
         self._update_nav_buttons()
-        if self._document.has_document_links():
-            self._toc_select_active_page()
+        if hasattr(self._document, 'has_document_links'):
+            if self._document.has_document_links():
+                self._toc_select_active_page()
 
     def _update_nav_buttons(self):
         current_page = self._document.get_page_cache().get_current_page()
@@ -286,17 +287,19 @@ class ReadToolbar(gtk.Toolbar):
             ' / ' + str(self._document.get_n_pages())
 
     def _update_toc(self):
-        if self._document.has_document_links():
-            self._navigator.props.sensitive = True
+        if hasattr(self._document, 'has_document_links'):
+            if self._document.has_document_links():
+                self._navigator.props.sensitive = True
 
-            self._toc_model = self._document.get_links_model()
-            self._navigator.set_model(self._toc_model)
-            self._navigator.set_active(0)
+                self._toc_model = self._document.get_links_model()
+                self._navigator.set_model(self._toc_model)
+                self._navigator.set_active(0)
 
-            self.__navigator_changed_handler_id = \
-                self._navigator.connect('changed', self._navigator_changed_cb)
+                self.__navigator_changed_handler_id = \
+                    self._navigator.connect('changed',
+                            self._navigator_changed_cb)
 
-            self._toc_select_active_page()
+                self._toc_select_active_page()
 
     def _navigator_changed_cb(self, combobox):
         iter = self._navigator.get_active_iter()
