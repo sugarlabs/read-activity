@@ -29,6 +29,7 @@ import telepathy
 
 from sugar.activity import activity
 from sugar import network
+from sugar import mime
 
 from sugar.datastore import datastore
 from sugar.graphics.objectchooser import ObjectChooser
@@ -220,7 +221,8 @@ class ReadActivity(activity.Activity):
             return
         chooser = ObjectChooser(_('Choose document'), self, 
                                 gtk.DIALOG_MODAL | 
-                                gtk.DIALOG_DESTROY_WITH_PARENT)
+                                gtk.DIALOG_DESTROY_WITH_PARENT,
+                                what_filter=mime.GENERIC_TYPE_TEXT)
         try:
             result = chooser.run()
             if result == gtk.RESPONSE_ACCEPT:
