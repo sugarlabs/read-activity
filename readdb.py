@@ -17,6 +17,8 @@
 
 import logging
 
+import os, os.path
+import shutil
 import sqlite3
 import time
 
@@ -27,8 +29,17 @@ from readbookmark import Bookmark
 _logger = logging.getLogger('read-activity')
 
 class BookmarkManager:
-    def __init__(self, filehash, dbpath='read.db'):
+    def __init__(self, filehash, dbfile='read.db'):
         self._filehash = filehash
+
+        dbpath = os.path.join(os.environ['SUGAR_ACTIVITY_ROOT'], 'data', \
+                dbfile)
+
+        if not os.path.exists(dbpath):
+            # This makes me nervous
+            srcpath = os.path.join(os.environ['SUGAR_BUNDLE_PATH'], 'read.db')
+            shutil.copy(srcpath, dbpath)
+
         self._conn = sqlite3.connect(dbpath)
         
         self._bookmarks = []
