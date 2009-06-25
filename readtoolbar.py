@@ -23,10 +23,28 @@ import gobject
 import gtk
 import evince
 
+import md5
+
 from sugar.graphics.toolbutton import ToolButton
+from sugar.graphics.toggletoolbutton import ToggleToolButton
 from sugar.graphics.menuitem import MenuItem
 from sugar.graphics import iconentry
 from sugar.activity import activity
+from sugar.graphics.icon import Icon
+from sugar.graphics.xocolor import XoColor
+
+def get_md5(filename): #FIXME: Should be moved somewhere else
+    filename = filename.replace('file://', '') #XXX: hack 
+    fh = open(filename)
+    digest = md5.new()
+    while 1:
+        buf = fh.read(4096)
+        if buf == "":
+            break
+        digest.update(buf)
+    fh.close()
+    return digest.hexdigest()
+
 
 class EditToolbar(activity.EditToolbar):
     __gtype_name__ = 'EditToolbar'
@@ -164,23 +182,42 @@ class EditToolbar(activity.EditToolbar):
 class ReadToolbar(gtk.Toolbar):
     __gtype_name__ = 'ReadToolbar'
 
-    def __init__(self, evince_view):
+    def __init__(self, evince_view, sidebar):
         gtk.Toolbar.__init__(self)
 
         self._evince_view = evince_view
+        self._sidebar = sidebar
         self._document = None
                 
         self._back = ToolButton('go-previous')
         self._back.set_tooltip(_('Back'))
         self._back.props.sensitive = False
+        palette = self._back.get_palette()
+        self._prev_page = MenuItem(text_label= _("Previous page"))
+        palette.menu.append(self._prev_page) 
+        self._prev_page.show_all()        
+        self._prev_bookmark = MenuItem(text_label= _("Previous bookmark"))
+        palette.menu.append(self._prev_bookmark) 
+        self._prev_bookmark.show_all()
         self._back.connect('clicked', self._go_back_cb)
+        self._prev_page.connect('activate', self._go_back_cb)
+        self._prev_bookmark.connect('activate', self._prev_bookmark_activate_cb)
         self.insert(self._back, -1)
         self._back.show()
 
         self._forward = ToolButton('go-next')
         self._forward.set_tooltip(_('Forward'))
         self._forward.props.sensitive = False
+        palette = self._forward.get_palette()
+        self._next_page = MenuItem(text_label= _("Next page"))
+        palette.menu.append(self._next_page) 
+        self._next_page.show_all()        
+        self._next_bookmark = MenuItem(text_label= _("Next bookmark"))
+        palette.menu.append(self._next_bookmark) 
+        self._next_bookmark.show_all()
         self._forward.connect('clicked', self._go_forward_cb)
+        self._next_page.connect('activate', self._go_forward_cb)
+        self._next_bookmark.connect('activate', self._next_bookmark_activate_cb)
         self.insert(self._forward, -1)
         self._forward.show()
 
@@ -229,20 +266,35 @@ class ReadToolbar(gtk.Toolbar):
         cell = gtk.CellRendererText()
         self._navigator.pack_start(cell, True)
         self._navigator.add_attribute(cell, 'text', 0)
-        self._navigator.props.sensitive = False
+        self._navigator.props.visible = False
 
         navitem.add(self._navigator)
 
         self.insert(navitem, -1)
-        navitem.show_all()
+        navitem.show()
 
+        spacer = gtk.SeparatorToolItem()
+        self.insert(spacer, -1)
+        spacer.show()
+  
+        bookmarkitem = gtk.ToolItem()
+        self._bookmarker = ToggleToolButton('emblem-favorite')
+        self._bookmarker_toggle_handler_id = self._bookmarker.connect('toggled',
+                                      self._bookmarker_toggled_cb)
+  
+        bookmarkitem.add(self._bookmarker)
 
-    def set_document(self, document):
+        self.insert(bookmarkitem, -1)
+        bookmarkitem.show_all()
+        
+    def set_document(self, document, filepath):
+        filehash = get_md5(filepath)
         self._document = document
         page_cache = self._document.get_page_cache()
         page_cache.connect('page-changed', self._page_changed_cb)    
         self._update_nav_buttons()
         self._update_toc()
+        self._sidebar.set_bookmarkmanager(filehash)
 
     def _num_page_entry_insert_text_cb(self, entry, text, length, position):
         if not re.match('[0-9]', text):
@@ -269,13 +321,42 @@ class ReadToolbar(gtk.Toolbar):
     
     def _go_forward_cb(self, button):
         self._evince_view.next_page()
+
+    def _prev_bookmark_activate_cb(self, menuitem):
+        page = self._document.get_page_cache().get_current_page()
+        bookmarkmanager = self._sidebar.get_bookmarkmanager()
+        
+        prev_bookmark = bookmarkmanager.get_prev_bookmark_for_page(page)
+        if prev_bookmark is not None:
+            self._document.get_page_cache().set_current_page(prev_bookmark.page_no)
+                
+    def _next_bookmark_activate_cb(self, menuitem):
+        page = self._document.get_page_cache().get_current_page()
+        bookmarkmanager = self._sidebar.get_bookmarkmanager()
+        
+        next_bookmark = bookmarkmanager.get_next_bookmark_for_page(page)
+        if next_bookmark is not None:
+            self._document.get_page_cache().set_current_page(next_bookmark.page_no)
+        
+    def _bookmarker_toggled_cb(self, button):
+        page = self._document.get_page_cache().get_current_page()
+        if self._bookmarker.props.active:
+            self._sidebar.add_bookmark(page)
+        else:
+            self._sidebar.del_bookmark(page)    
     
     def _page_changed_cb(self, page, proxy):
         self._update_nav_buttons()
         if hasattr(self._document, 'has_document_links'):
             if self._document.has_document_links():
                 self._toc_select_active_page()
+                
+        self._sidebar.update_for_page(self._document.get_page_cache().get_current_page())
 
+        self._bookmarker.handler_block(self._bookmarker_toggle_handler_id)
+        self._bookmarker.props.active = self._sidebar.is_showing_local_bookmark()
+        self._bookmarker.handler_unblock(self._bookmarker_toggle_handler_id)
+        
     def _update_nav_buttons(self):
         current_page = self._document.get_page_cache().get_current_page()
         self._back.props.sensitive = current_page > 0
@@ -289,7 +370,7 @@ class ReadToolbar(gtk.Toolbar):
     def _update_toc(self):
         if hasattr(self._document, 'has_document_links'):
             if self._document.has_document_links():
-                self._navigator.props.sensitive = True
+                self._navigator.show_all()
 
                 self._toc_model = self._document.get_links_model()
                 self._navigator.set_model(self._toc_model)
