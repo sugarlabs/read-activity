@@ -36,6 +36,8 @@ from sugar.graphics.objectchooser import ObjectChooser
 
 from readtoolbar import EditToolbar, ReadToolbar, ViewToolbar
 from readsidebar import Sidebar
+import epubadapter
+
 
 _HARDWARE_MANAGER_INTERFACE = 'org.laptop.HardwareManager'
 _HARDWARE_MANAGER_SERVICE = 'org.laptop.HardwareManager'
@@ -102,6 +104,7 @@ class ReadActivity(activity.Activity):
             # if we use evince-2.24
             evince.evince_embed_init()
         
+        self._epub = False
         self._document = None
         self._fileserver = None
         self._object_id = handle.object_id
@@ -111,17 +114,14 @@ class ReadActivity(activity.Activity):
 
         _logger.debug('Starting Read...')
         
-        self._view = evince.View()
-        self._view.set_screen_dpi(_get_screen_dpi())
-        self._view.connect('notify::has-selection',
-                           self._view_notify_has_selection_cb)
+        self._view = None
         
         self._sidebar = Sidebar()
         self._sidebar.show()
 
         toolbox = activity.ActivityToolbox(self)
 
-        self._edit_toolbar = EditToolbar(self._view)
+        self._edit_toolbar = EditToolbar()
         self._edit_toolbar.undo.props.visible = False
         self._edit_toolbar.redo.props.visible = False
         self._edit_toolbar.separator.props.visible = False
@@ -131,11 +131,11 @@ class ReadActivity(activity.Activity):
         toolbox.add_toolbar(_('Edit'), self._edit_toolbar)
         self._edit_toolbar.show()
 
-        self._read_toolbar = ReadToolbar(self._view, self._sidebar)
+        self._read_toolbar = ReadToolbar(self._sidebar)
         toolbox.add_toolbar(_('Read'), self._read_toolbar)
         self._read_toolbar.show()
 
-        self._view_toolbar = ViewToolbar(self._view)
+        self._view_toolbar = ViewToolbar()
         self._view_toolbar.connect('needs-update-size',
                 self.__view_toolbar_needs_update_size_cb)
         self._view_toolbar.connect('go-fullscreen',
@@ -146,20 +146,11 @@ class ReadActivity(activity.Activity):
         self.set_toolbox(toolbox)
         toolbox.show()
 
-        self._scrolled = gtk.ScrolledWindow()
-        self._scrolled.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
-        self._scrolled.props.shadow_type = gtk.SHADOW_NONE
+        self._hbox = gtk.HBox()
+        self._hbox.pack_start(self._sidebar, expand=False, fill=False)
 
-        self._scrolled.add(self._view)
-        self._view.show()
-
-        hbox = gtk.HBox()
-        hbox.pack_start(self._sidebar, expand=False, fill=False)
-        hbox.pack_start(self._scrolled, expand=True, fill=True)
-
-        self.set_canvas(hbox)
-        self._scrolled.show()
-        hbox.show()
+        self.set_canvas(self._hbox)
+        self._hbox.show()
 
         # Set up for idle suspend
         self._idle_timer = 0
@@ -316,15 +307,16 @@ class ReadActivity(activity.Activity):
 
             self.metadata['Read_zoom'] = str(self._view.props.zoom)
 
-            if self._view.props.sizing_mode == evince.SIZING_BEST_FIT:
-                self.metadata['Read_sizing_mode'] = "best-fit"
-            elif self._view.props.sizing_mode == evince.SIZING_FREE:
-                self.metadata['Read_sizing_mode'] = "free"
-            elif self._view.props.sizing_mode == evince.SIZING_FIT_WIDTH:
-                self.metadata['Read_sizing_mode'] = "fit-width"
-            else:
-                _logger.error("Don't know how to save sizing_mode state '%s'" %
-                              self._view.props.sizing_mode)
+            if not self._epub:
+                if self._view.props.sizing_mode == evince.SIZING_BEST_FIT:
+                    self.metadata['Read_sizing_mode'] = "best-fit"
+                elif self._view.props.sizing_mode == evince.SIZING_FREE:
+                    self.metadata['Read_sizing_mode'] = "free"
+                elif self._view.props.sizing_mode == evince.SIZING_FIT_WIDTH:
+                    self.metadata['Read_sizing_mode'] = "fit-width"
+                else:
+                    _logger.error("Don't know how to save sizing_mode state '%s'" %
+                                  self._view.props.sizing_mode)
                 self.metadata['Read_sizing_mode'] = "fit-width"
 
             self.metadata['Read_search'] = \
@@ -452,13 +444,63 @@ class ReadActivity(activity.Activity):
         self.watch_for_tubes()
         gobject.idle_add(self._get_document)
 
+    def _setup_evince_viewer(self):
+        self._view = evince.View()
+        self._scrolled = gtk.ScrolledWindow()
+        self._scrolled.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+        self._scrolled.props.shadow_type = gtk.SHADOW_NONE
+
+        self._scrolled.add(self._view)
+        self._view.show()
+
+        self._hbox.pack_start(self._scrolled, expand=True, fill=True)
+
+
+    def _setup_epub_viewer(self):
+        self._view = epubadapter.View()
+        self._view.set_screen_dpi(_get_screen_dpi())
+        self._view.connect('notify::has-selection',
+                            self._view_notify_has_selection_cb)
+
+        self._hbox.pack_start(self._view, expand=True, fill=True)
+        self._view.show_all()
+
+    def _setup_evince_viewer(self):
+        self._view = evince.View()
+        self._view.set_screen_dpi(_get_screen_dpi())
+        self._view.connect('notify::has-selection',
+                            self._view_notify_has_selection_cb)
+
+        self._scrolled = gtk.ScrolledWindow()
+        self._scrolled.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+        self._scrolled.props.shadow_type = gtk.SHADOW_NONE
+
+        self._scrolled.add(self._view)
+        self._view.show()
+
+        self._hbox.pack_start(self._scrolled, expand=True, fill=True)
+        self._scrolled.show()
+
+
     def _load_document(self, filepath):
         """Load the specified document and set up the UI.
 
         filepath -- string starting with file://
         
         """
-        self._document = evince.factory_get_document(filepath)
+        mimetype = mime.get_for_file(filepath)
+        if mimetype == 'application/epub+zip':
+            self._epub = True
+            self._setup_epub_viewer()
+            self._document = epubadapter.EpubDocument(self._view, filepath.replace('file://', ''))
+        else:
+            self._setup_evince_viewer()
+            self._document = evince.factory_get_document(filepath)
+
+        self._view_toolbar.set_view(self._view)
+        self._edit_toolbar.set_view(self._view)
+        self._read_toolbar.set_view(self._view)        
+
         self._want_document = False
         self._view.set_document(self._document)
         self._edit_toolbar.set_document(self._document)
@@ -469,32 +511,34 @@ class ReadActivity(activity.Activity):
             if info and info.title:
                 self.metadata['title'] = info.title
 
-        current_page = int(self.metadata.get('Read_current_page', '0'))
-        self._document.get_page_cache().set_current_page(current_page)
-
-        sizing_mode = self.metadata.get('Read_sizing_mode', 'fit-width')
-        _logger.debug('Found sizing mode: %s', sizing_mode)
-        if sizing_mode == "best-fit":
-            self._view.props.sizing_mode = evince.SIZING_BEST_FIT
-            self._view.update_view_size(self._scrolled)
-        elif sizing_mode == "free":
-            self._view.props.sizing_mode = evince.SIZING_FREE
-            self._view.props.zoom = float(self.metadata.get('Read_zoom', '1.0'))
-            _logger.debug('Set zoom to %f', self._view.props.zoom)
-        elif sizing_mode == "fit-width":
-            self._view.props.sizing_mode = evince.SIZING_FIT_WIDTH
-            self._view.update_view_size(self._scrolled)
-        else:
-            # this may happen when we get a document from a buddy with a later
-            # version of Read, for example.
-            _logger.warning("Unknown sizing_mode state '%s'", sizing_mode)
-            if self.metadata.get('Read_zoom', None) is not None:
-                self._view.props.zoom = float(self.metadata['Read_zoom'])
+        if not self._epub:
+            sizing_mode = self.metadata.get('Read_sizing_mode', 'fit-width')
+            _logger.debug('Found sizing mode: %s', sizing_mode)
+            if sizing_mode == "best-fit":
+                self._view.props.sizing_mode = evince.SIZING_BEST_FIT
+                self._view.update_view_size(self._scrolled)
+            elif sizing_mode == "free":
+                self._view.props.sizing_mode = evince.SIZING_FREE
+                self._view.props.zoom = float(self.metadata.get('Read_zoom', '1.0'))
+                _logger.debug('Set zoom to %f', self._view.props.zoom)
+            elif sizing_mode == "fit-width":
+                self._view.props.sizing_mode = evince.SIZING_FIT_WIDTH
+                self._view.update_view_size(self._scrolled)
+            else:
+                # this may happen when we get a document from a buddy with a later
+                # version of Read, for example.
+                _logger.warning("Unknown sizing_mode state '%s'", sizing_mode)
+                if self.metadata.get('Read_zoom', None) is not None:
+                    self._view.props.zoom = float(self.metadata['Read_zoom'])
 
         self._view_toolbar._update_zoom_buttons()
 
         self._edit_toolbar._search_entry.props.text = \
                                 self.metadata.get('Read_search', '')
+
+        current_page = int(self.metadata.get('Read_current_page', '0'))
+        _logger.debug('Setting page to: %d', current_page)
+        self._document.get_page_cache().set_current_page(current_page)
 
         # We've got the document, so if we're a shared activity, offer it
         try:
@@ -593,7 +637,8 @@ class ReadActivity(activity.Activity):
         _logger.debug("Keyname Release: %s, time: %s", keyname, event.time)
 
     def __view_toolbar_needs_update_size_cb(self, view_toolbar):
-        self._view.update_view_size(self._scrolled)
+        if not self._epub:
+            self._view.update_view_size(self._scrolled)
 
     def __view_toolbar_go_fullscreen_cb(self, view_toolbar):
         self.fullscreen()

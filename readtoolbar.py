@@ -49,11 +49,10 @@ def get_md5(filename): #FIXME: Should be moved somewhere else
 class EditToolbar(activity.EditToolbar):
     __gtype_name__ = 'EditToolbar'
 
-    def __init__(self, evince_view):
+    def __init__(self):
         activity.EditToolbar.__init__(self)
 
-        self._evince_view = evince_view
-        self._evince_view.find_set_highlight_search(True)
+        self._evince_view = None
 
         self._document = None
         self._find_job = None
@@ -96,6 +95,10 @@ class EditToolbar(activity.EditToolbar):
         self._next.connect('clicked', self._find_next_cb)
         self.insert(self._next, -1)
         self._next.show()
+
+    def set_view(self, view):
+        self._evince_view = view
+        self._evince_view.find_set_highlight_search(True)
 
     def set_document(self, document):
         self._document = document
@@ -182,10 +185,10 @@ class EditToolbar(activity.EditToolbar):
 class ReadToolbar(gtk.Toolbar):
     __gtype_name__ = 'ReadToolbar'
 
-    def __init__(self, evince_view, sidebar):
+    def __init__(self, sidebar):
         gtk.Toolbar.__init__(self)
 
-        self._evince_view = evince_view
+        self._evince_view = None
         self._sidebar = sidebar
         self._document = None
                 
@@ -286,7 +289,10 @@ class ReadToolbar(gtk.Toolbar):
 
         self.insert(bookmarkitem, -1)
         bookmarkitem.show_all()
-        
+
+    def set_view(self, view):
+        self._evince_view = view
+
     def set_document(self, document, filepath):
         filehash = get_md5(filepath)
         self._document = document
@@ -345,7 +351,7 @@ class ReadToolbar(gtk.Toolbar):
         else:
             self._sidebar.del_bookmark(page)    
     
-    def _page_changed_cb(self, page, proxy):
+    def _page_changed_cb(self, page, proxy = None):
         self._update_nav_buttons()
         if hasattr(self._document, 'has_document_links'):
             if self._document.has_document_links():
@@ -391,11 +397,19 @@ class ReadToolbar(gtk.Toolbar):
     def _toc_select_active_page_foreach(self, model, path, iter, current_page):
         link = self._toc_model.get(iter, 1)[0]
 
-        if current_page == link.get_page():
-            self._navigator.set_active_iter(iter)
-            return True
+        if not hasattr(link, 'get_page'):
+            #FIXME: This needs to be implemented in epubadapter, not here
+            filepath = self._evince_view.get_current_file()
+            if filepath.endswith(link):
+                self._navigator.set_active_iter(iter)
+                return True
         else:
-            return False
+            if current_page == link.get_page():
+                self._navigator.set_active_iter(iter)
+                return True
+
+        return False
+
 
     def _toc_select_active_page(self):
         iter = self._navigator.get_active_iter()
@@ -403,9 +417,14 @@ class ReadToolbar(gtk.Toolbar):
         current_link = self._toc_model.get(iter, 1)[0]
         current_page = self._document.get_page_cache().get_current_page()
 
-        if current_link.get_page() == current_page:
-            # Nothing to do
-            return
+
+        if not hasattr(current_link, 'get_page'):
+            filepath = self._evince_view.get_current_file()
+            if filepath is None or filepath.endswith(current_link):
+                return
+        else:
+            if current_link.get_page() == current_page:
+                return
 
         self._navigator.handler_block(self.__navigator_changed_handler_id)
         self._toc_model.foreach(self._toc_select_active_page_foreach, current_page)
@@ -424,10 +443,10 @@ class ViewToolbar(gtk.Toolbar):
                           ([]))
     }
 
-    def __init__(self, evince_view):
+    def __init__(self):
         gtk.Toolbar.__init__(self)
 
-        self._evince_view = evince_view
+        self._evince_view = None
         self._document = None
             
         self._zoom_out = ToolButton('zoom-out')
@@ -466,7 +485,6 @@ class ViewToolbar(gtk.Toolbar):
         self._zoom_spin = gtk.SpinButton()
         self._zoom_spin.set_range(5.409, 400)
         self._zoom_spin.set_increments(1, 10)
-        self._zoom_spin.props.value = self._evince_view.props.zoom * 100
         self._zoom_spin_notify_value_handler = self._zoom_spin.connect(
                 'notify::value', self._zoom_spin_notify_value_cb)
         tool_item.add(self._zoom_spin)
@@ -479,11 +497,6 @@ class ViewToolbar(gtk.Toolbar):
         self.insert(tool_item_zoom_perc_label, -1)
         tool_item_zoom_perc_label.show()
 
-        self._view_notify_zoom_handler = self._evince_view.connect(
-                'notify::zoom', self._view_notify_zoom_cb)
-
-        self._update_zoom_buttons()
-
         spacer = gtk.SeparatorToolItem()
         spacer.props.draw = False
         self.insert(spacer, -1)
@@ -495,10 +508,24 @@ class ViewToolbar(gtk.Toolbar):
         self.insert(self._fullscreen, -1)
         self._fullscreen.show()
 
+        self._view_notify_zoom_handler = None
+
+    def set_view(self, view):
+        self._evince_view = view
+        self._zoom_spin.props.value = self._evince_view.props.zoom * 100
+        self._view_notify_zoom_handler = self._evince_view.connect(
+            'notify::zoom', self._view_notify_zoom_cb)
+
+        self._update_zoom_buttons() 
+
+
     def _zoom_spin_notify_value_cb(self, zoom_spin, pspec):
+        if not self._view_notify_zoom_handler:
+            return
         self._evince_view.disconnect(self._view_notify_zoom_handler)
         try:
-            self._evince_view.props.sizing_mode = evince.SIZING_FREE
+            if hasattr(self._evince_view.props, 'sizing_mode'):
+                self._evince_view.props.sizing_mode = evince.SIZING_FREE
             self._evince_view.props.zoom = zoom_spin.props.value / 100.0
         finally:
             self._view_notify_zoom_handler = self._evince_view.connect(
@@ -513,7 +540,8 @@ class ViewToolbar(gtk.Toolbar):
                     'notify::value', self._zoom_spin_notify_value_cb)
 
     def zoom_in(self):
-        self._evince_view.props.sizing_mode = evince.SIZING_FREE
+        if hasattr(self._evince_view.props, 'sizing_mode'):
+            self._evince_view.props.sizing_mode = evince.SIZING_FREE
         self._evince_view.zoom_in()
         self._update_zoom_buttons()
 
@@ -521,7 +549,8 @@ class ViewToolbar(gtk.Toolbar):
         self.zoom_in()
 
     def zoom_out(self):
-        self._evince_view.props.sizing_mode = evince.SIZING_FREE
+        if hasattr(self._evince_view.props, 'sizing_mode'):
+            self._evince_view.props.sizing_mode = evince.SIZING_FREE
         self._evince_view.zoom_out()
         self._update_zoom_buttons()
         
@@ -529,7 +558,8 @@ class ViewToolbar(gtk.Toolbar):
         self.zoom_out()
 
     def zoom_to_width(self):
-        self._evince_view.props.sizing_mode = evince.SIZING_FIT_WIDTH
+        if hasattr(self._evince_view.props, 'sizing_mode'):
+            self._evince_view.props.sizing_mode = evince.SIZING_FIT_WIDTH
         self.emit('needs-update-size')
         self._update_zoom_buttons()
 
@@ -541,12 +571,14 @@ class ViewToolbar(gtk.Toolbar):
         self._zoom_out.props.sensitive = self._evince_view.can_zoom_out()
 
     def _zoom_to_fit_menu_item_activate_cb(self, menu_item):
-        self._evince_view.props.sizing_mode = evince.SIZING_BEST_FIT
+        if hasattr(self._evince_view.props, 'sizing_mode'): #XXX
+            self._evince_view.props.sizing_mode = evince.SIZING_BEST_FIT
         self.emit('needs-update-size')
         self._update_zoom_buttons()
 
     def _actual_size_menu_item_activate_cb(self, menu_item):
-        self._evince_view.props.sizing_mode = evince.SIZING_FREE
+        if hasattr(self._evince_view.props, 'sizing_mode'):
+            self._evince_view.props.sizing_mode = evince.SIZING_FREE
         self._evince_view.props.zoom = 1.0
         self._update_zoom_buttons()
 
