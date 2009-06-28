@@ -5,5 +5,5 @@ icon = activity-read
 exec = sugar-activity readactivity.ReadActivity
 show_launcher = no
 activity_version = 63
-mime_types = application/pdf;image/vnd.djvu;image/x.djvu;image/tiff;application/x-cbz;application/x-cbr
+mime_types = application/pdf;image/vnd.djvu;image/x.djvu;image/tiff;application/x-cbz;application/x-cbr;application/epub+zip
 license = GPLv2+
