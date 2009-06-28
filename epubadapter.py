@@ -1,13 +1,13 @@
 import gobject
 import logging
 
-from epubview import EpubView, Epub, JobFind
+import epubview
 
 _logger = logging.getLogger('read-activity')
 
-class View(EpubView):
+class View(epubview.EpubView):
     def __init__(self):
-        EpubView.__init__(self)
+        epubview.EpubView.__init__(self)
 
     def _try_load_page(self, n):
         if self._ready:
@@ -44,9 +44,9 @@ class View(EpubView):
         self._load_file(link)
 
 
-class EpubDocument(Epub):
+class EpubDocument(epubview.Epub):
     def __init__(self, view, docpath):
-        Epub.__init__(self, docpath)
+        epubview.Epub.__init__(self, docpath)
         self._page_cache = view
 
     def get_page_cache(self):
@@ -61,6 +61,6 @@ class EpubDocument(Epub):
     def get_links_model(self):
         return self.get_toc_model()
 
-class JobFind(JobFind):
+class JobFind(epubview.JobFind):
     def __init__(self, document, start_page, n_pages, text, case_sensitive=False):
-        JobFind.__init__(self, document, start_page, n_pages, text, case_sensitive=False)
+        epubview.JobFind.__init__(self, document, start_page, n_pages, text, case_sensitive=False)

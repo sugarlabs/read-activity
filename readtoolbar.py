@@ -23,6 +23,8 @@ import gobject
 import gtk
 import evince
 
+import epubadapter
+
 import md5
 
 from sugar.graphics.toolbutton import ToolButton
@@ -115,9 +117,13 @@ class EditToolbar(activity.EditToolbar):
         self._clear_find_job()
         text = self._search_entry.props.text
         if text != "":
-            self._find_job = evince.JobFind(document=self._document, start_page=0, n_pages=self._document.get_n_pages(), text=text, case_sensitive=False)
-            self._find_updated_handler = self._find_job.connect('updated', self._find_updated_cb)
-            evince.job_scheduler_push_job(self._find_job, evince.JOB_PRIORITY_NONE)
+            try:
+                self._find_job = evince.JobFind(document=self._document, start_page=0, n_pages=self._document.get_n_pages(), text=text, case_sensitive=False)
+                self._find_updated_handler = self._find_job.connect('updated', self._find_updated_cb)
+                evince.job_scheduler_push_job(self._find_job, evince.JOB_PRIORITY_NONE)
+            except TypeError:
+                self._find_job = epubadapter.JobFind(document=self._document, start_page=0, n_pages=self._document.get_n_pages(), text=text, case_sensitive=False)
+                self._find_updated_handler = self._find_job.connect('updated', self._find_updated_cb)
         else:
             # FIXME: highlight nothing
             pass
@@ -151,7 +157,7 @@ class EditToolbar(activity.EditToolbar):
     def _find_changed_cb(self, page, spec):
         self._update_find_buttons()
 
-    def _find_updated_cb(self, job, page):
+    def _find_updated_cb(self, job, page = None):
         self._evince_view.find_changed(job, page)
 
     def _find_prev_cb(self, button):
