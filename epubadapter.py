@@ -26,13 +26,14 @@ class View(epubview.EpubView):
         # When the book is being loaded, calling this does not help
         # In such a situation, we go into a loop and try to load the 
         # supplied page when the book has loaded completely
+        n += 1
         if self._ready:
-            self._load_page(n + 1)
+            self._load_page(n)
         else:
-            gobject.timeout_add(200, self._try_load_page, n + 1)
+            gobject.timeout_add(200, self._try_load_page, n)
 
     def get_current_page(self):
-        return self._loaded_page - 1 
+        return int(self._loaded_page - 1)
 
     def find_changed(self, job, page = None):
         self._find_changed(job)
@@ -53,7 +54,7 @@ class EpubDocument(epubview.Epub):
         return self._page_cache
 
     def get_n_pages(self):
-        return self._page_cache.get_pagecount()
+        return int(self._page_cache.get_pagecount())
 
     def has_document_links(self):
         return True
