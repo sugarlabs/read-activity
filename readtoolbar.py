@@ -209,7 +209,7 @@ class ReadToolbar(gtk.Toolbar):
         palette.menu.append(self._prev_bookmark) 
         self._prev_bookmark.show_all()
         self._back.connect('clicked', self._go_back_cb)
-        self._prev_page.connect('activate', self._go_back_cb)
+        self._prev_page.connect('activate', self._go_back_page_cb)
         self._prev_bookmark.connect('activate', self._prev_bookmark_activate_cb)
         self.insert(self._back, -1)
         self._back.show()
@@ -225,7 +225,7 @@ class ReadToolbar(gtk.Toolbar):
         palette.menu.append(self._next_bookmark) 
         self._next_bookmark.show_all()
         self._forward.connect('clicked', self._go_forward_cb)
-        self._next_page.connect('activate', self._go_forward_cb)
+        self._next_page.connect('activate', self._go_forward_page_cb)
         self._next_bookmark.connect('activate', self._next_bookmark_activate_cb)
         self.insert(self._forward, -1)
         self._forward.show()
@@ -327,11 +327,17 @@ class ReadToolbar(gtk.Toolbar):
 
         self._document.get_page_cache().set_current_page(page)
         entry.props.text = str(page + 1)
-        
+    
     def _go_back_cb(self, button):
+        self._evince_view.scroll(gtk.SCROLL_PAGE_BACKWARD, False)
+
+    def _go_forward_cb(self, button):
+        self._evince_view.scroll(gtk.SCROLL_PAGE_FORWARD, False)
+
+    def _go_back_page_cb(self, button):
         self._evince_view.previous_page()
     
-    def _go_forward_cb(self, button):
+    def _go_forward_page_cb(self, button):
         self._evince_view.next_page()
 
     def _prev_bookmark_activate_cb(self, menuitem):
