@@ -6,83 +6,106 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-09 00:31-0400\n"
-"PO-Revision-Date: 2008-11-14 11:05-0500\n"
+"POT-Creation-Date: 2009-06-26 00:33-0400\n"
+"PO-Revision-Date: 2009-07-02 10:43-0400\n"
 "Last-Translator: korakurider <korakurider@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Pootle 1.1.0rc2\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Pootle 1.2.1\n"
 
-#: activity/activity.info:2 readactivity.py:129
+#: activity/activity.info:2 readactivity.py:135
 msgid "Read"
 msgstr "Read"
 
-#: readactivity.py:125
+#: readactivity.py:131
 msgid "Edit"
 msgstr "編集"
 
-#: readactivity.py:137
+#: readactivity.py:143
 msgid "View"
 msgstr "ビュー"
 
-#: readactivity.py:223
+#: readactivity.py:235
 msgid "Choose document"
 msgstr "文書を選ぶ"
 
-#: readtoolbar.py:67
+#: readsidebar.py:57
+#, python-format
+msgid "Bookmark added by %(user)s on %(time)s"
+msgstr "%(user)sが %(time)s に追加したブックマーク"
+
+#: readtoolbar.py:87
 msgid "Previous"
 msgstr "前へ"
 
-#: readtoolbar.py:74
+#: readtoolbar.py:94
 msgid "Next"
 msgstr "次へ"
 
-#: readtoolbar.py:140
+#: readtoolbar.py:172
 msgid "Find first"
 msgstr "最初から検索"
 
-#: readtoolbar.py:146
+#: readtoolbar.py:178
 msgid "Find previous"
 msgstr "前を検索"
 
-#: readtoolbar.py:148
+#: readtoolbar.py:180
 msgid "Find next"
 msgstr "次を検索"
 
-#: readtoolbar.py:160
+#: readtoolbar.py:193
 msgid "Back"
 msgstr "戻る"
 
-#: readtoolbar.py:167
+#: readtoolbar.py:196
+msgid "Previous page"
+msgstr "前ページ"
+
+#: readtoolbar.py:199
+msgid "Previous bookmark"
+msgstr "前のブックマーク"
+
+#: readtoolbar.py:209
 msgid "Forward"
 msgstr "進む"
 
-#: readtoolbar.py:271
+#: readtoolbar.py:212
+msgid "Next page"
+msgstr "次ページ"
+
+#: readtoolbar.py:215
+msgid "Next bookmark"
+msgstr "次のブックマーク"
+
+#: readtoolbar.py:434
 msgid "Zoom out"
 msgstr "縮小"
 
-#: readtoolbar.py:277
+#: readtoolbar.py:440
 msgid "Zoom in"
 msgstr "拡大"
 
-#: readtoolbar.py:283
+#: readtoolbar.py:446
 msgid "Zoom to width"
 msgstr "幅にあわせて拡大"
 
-#: readtoolbar.py:289
+#: readtoolbar.py:452
 msgid "Zoom to fit"
 msgstr "画面にあわせて拡大"
 
-#: readtoolbar.py:294
+#: readtoolbar.py:457
 msgid "Actual size"
 msgstr "実際のサイズ"
 
-#: readtoolbar.py:312
+#: readtoolbar.py:475
 msgid "%"
 msgstr "%"
 
-#: readtoolbar.py:330
+#: readtoolbar.py:493
 msgid "Fullscreen"
 msgstr "全画面"
