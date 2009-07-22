@@ -18,14 +18,18 @@ class NavPoint(object):
 
 
 class NavMap(object):
-    def __init__(self, file, basepath):
+    def __init__(self, opffile, basepath, titlepage):
         self._basepath = basepath
-        self._tree = etree.parse(file)
+        self._tree = etree.parse(opffile)
         self._root = self._tree.getroot()
         self._gtktreestore = gtk.TreeStore(str, str)
         self._flattoc = []
         
         self._populate_toc()
+        
+        if titlepage and self._flattoc[0][1] != titlepage:
+            self._flattoc.insert(0, ('Title Page', titlepage))
+            self._gtktreestore.insert(None, 0, ['Title Page', titlepage])
  
     def _populate_toc(self):
         navmap = self._root.find('{http://www.daisy.org/z3986/2005/ncx/}navMap')       

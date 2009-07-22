@@ -406,6 +406,8 @@ class _View(gtk.HBox):
             self._scroll_page()
     
     def _load_next_file(self):
+        if self._loaded_page == self._pagecount:
+            return
         cur_file = self._paginator.get_file_for_pageno(self._loaded_page)
         pageno = self._loaded_page
         while pageno < self._paginator.get_total_pagecount():
@@ -424,6 +426,8 @@ class _View(gtk.HBox):
                 break
 
     def _load_prev_file(self):
+        if self._loaded_page == 1:
+            return
         cur_file = self._paginator.get_file_for_pageno(self._loaded_page)
         pageno = self._loaded_page
         while pageno > 1:

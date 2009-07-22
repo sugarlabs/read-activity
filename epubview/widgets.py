@@ -1,11 +1,11 @@
+import gtk
+
 try:
     import webkit
 except ImportError:
     import os, sys
     sys.path.append(os.path.join(os.environ['SUGAR_BUNDLE_PATH'], 'epubview', 'modules'))
     import webkit
-
-import gtk
 
 
 class _WebView(webkit.WebView):

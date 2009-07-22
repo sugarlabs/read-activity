@@ -29,6 +29,7 @@ class _Epub(object):
         self._filepath = filepath
         self._zobject = None
         self._obffile = None
+        self._titlepage = None
         self._obfpath = None
         self._ncxpath = None
         self._ncxfile = None
@@ -40,9 +41,10 @@ class _Epub(object):
         
         self._get_obf()
         self._get_ncx()
+        self._get_titlepage()
         
         self._ncxfile = self._zobject.open(self._ncxpath)
-        self._navmap = navmap.NavMap(self._ncxfile, self._basepath)
+        self._navmap = navmap.NavMap(self._ncxfile, self._basepath, self._titlepage)
         
         self._obffile = self._zobject.open(self._obfpath)
         self._info = epubinfo.EpubInfo(self._obffile) 
@@ -94,7 +96,18 @@ class _Epub(object):
         
         obffile.close()
         
+    def _get_titlepage(self):
+        obffile = self._zobject.open(self._obfpath)
+        tree = etree.parse(obffile)
+        root = tree.getroot()
+
+        for element in root.iterfind('.//{http://www.idpf.org/2007/opf}item'):
+            if element.get('id') == 'titlepage':
+                    self._titlepage = self._basepath + element.get('href')
         
+        obffile.close()                    
+        
+                    
     def _verify(self):
         '''
         Method to crudely check to verify that what we 
