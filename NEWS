@@ -1,0 +1,7 @@
+70
+
+* Epub support
+* Bookmarks support
+* Default behaviour of Next/Forward is chunk-wise instead of page-wise.
+* Translation updates (Italian, Japanese)
+* Misc bugfixes
