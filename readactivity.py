@@ -618,7 +618,6 @@ class ReadActivity(activity.Activity):
 
     def _key_press_event_cb(self, widget, event):
         keyname = gtk.gdk.keyval_name(event.keyval)
-        _logger.debug("Keyname Press: %s, time: %s", keyname, event.time)
         if keyname == 'c' and event.state & gtk.gdk.CONTROL_MASK:
             self._view.copy()
             return True
