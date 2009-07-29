@@ -444,18 +444,6 @@ class ReadActivity(activity.Activity):
         self.watch_for_tubes()
         gobject.idle_add(self._get_document)
 
-    def _setup_evince_viewer(self):
-        self._view = evince.View()
-        self._scrolled = gtk.ScrolledWindow()
-        self._scrolled.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
-        self._scrolled.props.shadow_type = gtk.SHADOW_NONE
-
-        self._scrolled.add(self._view)
-        self._view.show()
-
-        self._hbox.pack_start(self._scrolled, expand=True, fill=True)
-
-
     def _setup_epub_viewer(self):
         self._view = epubadapter.View()
         self._view.set_screen_dpi(_get_screen_dpi())
