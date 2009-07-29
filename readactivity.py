@@ -36,6 +36,7 @@ from sugar.graphics.objectchooser import ObjectChooser
 
 from readtoolbar import EditToolbar, ReadToolbar, ViewToolbar
 from readsidebar import Sidebar
+from readtopbar import TopBar
 import epubadapter
 
 
@@ -111,6 +112,7 @@ class ReadActivity(activity.Activity):
 
         self.connect('key-press-event', self._key_press_event_cb)
         self.connect('key-release-event', self._key_release_event_cb)
+        self.connect('window-state-event', self._window_state_event_cb)
 
         _logger.debug('Starting Read...')
         
@@ -146,11 +148,18 @@ class ReadActivity(activity.Activity):
         self.set_toolbox(toolbox)
         toolbox.show()
 
+        self._vbox = gtk.VBox()
+        self._vbox.show()
+
+        self._topbar = TopBar()
+        self._vbox.pack_start(self._topbar, expand = False, fill = False)
+
         self._hbox = gtk.HBox()
+        self._hbox.show()
         self._hbox.pack_start(self._sidebar, expand=False, fill=False)
 
-        self.set_canvas(self._hbox)
-        self._hbox.show()
+        self._vbox.pack_start(self._hbox, expand = True, fill = True)
+        self.set_canvas(self._vbox)
 
         # Set up for idle suspend
         self._idle_timer = 0
@@ -493,6 +502,7 @@ class ReadActivity(activity.Activity):
         self._view.set_document(self._document)
         self._edit_toolbar.set_document(self._document)
         self._read_toolbar.set_document(self._document, filepath)
+        self._topbar.set_document(self._document)
 
         if not self.metadata['title_set_by_user'] == '1':
             info = self._document.get_info()
@@ -622,6 +632,15 @@ class ReadActivity(activity.Activity):
     def _key_release_event_cb(self, widget, event):
         keyname = gtk.gdk.keyval_name(event.keyval)
         _logger.debug("Keyname Release: %s, time: %s", keyname, event.time)
+
+    def _window_state_event_cb(self, window, event):
+        if not (event.changed_mask & gtk.gdk.WINDOW_STATE_FULLSCREEN):
+            return False
+
+        if event.new_window_state & gtk.gdk.WINDOW_STATE_FULLSCREEN:
+            self._topbar.show_all()
+        else:
+            self._topbar.hide()
 
     def __view_toolbar_needs_update_size_cb(self, view_toolbar):
         if not self._epub:
