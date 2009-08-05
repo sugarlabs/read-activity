@@ -23,7 +23,10 @@ import gobject
 import gtk
 import evince
 
-import epubadapter
+try:
+    import epubadapter
+except:
+    pass
 
 import md5
 

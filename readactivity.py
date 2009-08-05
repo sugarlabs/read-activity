@@ -37,7 +37,13 @@ from sugar.graphics.objectchooser import ObjectChooser
 from readtoolbar import EditToolbar, ReadToolbar, ViewToolbar
 from readsidebar import Sidebar
 from readtopbar import TopBar
-import epubadapter
+
+
+_EPUB_SUPPORT = True
+try:
+    import epubadapter
+except:
+    _EPUB_SUPPORT = False
 
 
 _HARDWARE_MANAGER_INTERFACE = 'org.laptop.HardwareManager'
@@ -487,6 +493,8 @@ class ReadActivity(activity.Activity):
         """
         mimetype = mime.get_for_file(filepath)
         if mimetype == 'application/epub+zip':
+            if not _EPUB_SUPPORT:
+                self.close()
             self._epub = True
             self._setup_epub_viewer()
             self._document = epubadapter.EpubDocument(self._view, filepath.replace('file://', ''))
