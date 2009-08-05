@@ -41,11 +41,13 @@ class BookmarkManager:
             shutil.copy(srcpath, dbpath)
 
         self._conn = sqlite3.connect(dbpath)
+        self._conn.text_factory = lambda x: unicode(x, "utf-8", "ignore")
+
         
         self._bookmarks = []
         self._populate_bookmarks()
         
-    def add_bookmark(self, page, title, local=1):
+    def add_bookmark(self, page, content, local=1):
         # locale = 0 means that this is a bookmark originally 
         # created by the person who originally shared the file
         timestamp = time.time()
@@ -53,7 +55,8 @@ class BookmarkManager:
         user = client.get_string("/desktop/sugar/user/nick")
         color = client.get_string("/desktop/sugar/user/color")
 
-        t = (self._filehash, page, title, timestamp, user, color, local)
+        #XXX: the field for content is called title for compatibility reasons
+        t = (self._filehash, page, content, timestamp, user, color, local)
         self._conn.execute('insert into bookmarks values (?, ?, ?, ?, ?, ?, ?)', t)
         self._conn.commit()
         
