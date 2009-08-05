@@ -16,19 +16,24 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import logging
-import time
+import time, cjson
 
 import gtk
 
 from sugar.graphics.icon import Icon
 from sugar.graphics.xocolor import XoColor
+from sugar import profile
+from sugar.util import timestamp_to_elapsed_string
 
 from readbookmark import Bookmark
 from readdb import BookmarkManager
+from readdialog import BookmarkAddDialog, BookmarkEditDialog
 
 from gettext import gettext as _
 
 _logger = logging.getLogger('read-activity')
+
+#TODO: Add support for multiple bookmarks in a single page (required when sharing)
 
 class Sidebar(gtk.EventBox):
     def __init__(self):
@@ -45,35 +50,98 @@ class Sidebar(gtk.EventBox):
         self._box.show()
         self.show()
         
-        self._bookmarks = []
+        self._bookmark_icon = None
         self._bookmark_manager = None
         self._is_showing_local_bookmark = False
 
+        self.add_events(gtk.gdk.BUTTON_PRESS_MASK)
+
     def _add_bookmark_icon(self, bookmark):
         xocolor = XoColor(bookmark.color)
-        bookmark_icon = Icon(icon_name = 'emblem-favorite', \
+        self._bookmark_icon = Icon(icon_name = 'emblem-favorite', \
             pixel_size = 18, xo_color = xocolor)
 
-        tooltip_text = (_('Bookmark added by %(user)s on %(time)s') \
-            % {'user': bookmark.nick, 'time': time.ctime(bookmark.timestamp)})
-        bookmark_icon.set_tooltip_text(tooltip_text)
+        self._bookmark_icon.props.has_tooltip = True
+        self.__bookmark_icon_query_tooltip_cb_id = \
+            self._bookmark_icon.connect('query_tooltip', self.__bookmark_icon_query_tooltip_cb, \
+                bookmark)
 
-        self._box.pack_start(bookmark_icon ,expand=False,fill=False)
-        bookmark_icon.show_all()
-        
-        self._bookmarks.append(bookmark_icon)
+        self.__event_cb_id = \
+            self.connect('event', self.__event_cb, bookmark)
+
+        self._box.pack_start(self._bookmark_icon ,expand=False,fill=False)
+        self._bookmark_icon.show_all()
 
         if bookmark.is_local():
             self._is_showing_local_bookmark = True
         
+    def __bookmark_icon_query_tooltip_cb(self, widget, x, y, keyboard_mode, tip, bookmark):
+        content = cjson.decode(bookmark.title)
+        
+        tooltip_header = content['title']
+        tooltip_body = content['content']
+        #TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
+        #TRANS: automatically)
+        tooltip_footer = (_('Bookmark added by %(user)s %(time)s') \
+                % {'user': bookmark.nick, 'time': timestamp_to_elapsed_string(bookmark.timestamp)})
+
+        vbox = gtk.VBox()
+
+        l = gtk.Label('<big>%s</big>' % tooltip_header)
+        l.set_use_markup(True)
+        l.set_width_chars(40)
+        l.set_line_wrap(True)
+        vbox.pack_start(l, expand = False, fill = False)
+        l.show()
+
+        l = gtk.Label('%s' % tooltip_body)
+        l.set_use_markup(True)
+        l.set_alignment(0, 0)
+        l.set_padding(2, 6)
+        l.set_width_chars(40)
+        l.set_line_wrap(True)
+        l.set_justify(gtk.JUSTIFY_FILL)
+        vbox.pack_start(l, expand = True, fill = True)
+        l.show()
+
+        l = gtk.Label('<small><i>%s</i></small>' % tooltip_footer)
+        l.set_use_markup(True)
+        l.set_width_chars(40)
+        l.set_line_wrap(True)
+        vbox.pack_start(l, expand = False, fill = False)
+        l.show()
+
+        tip.set_custom(vbox)
+
+        return True
+        
+    def __event_cb(self, widget, event, bookmark):
+        if event.type == gtk.gdk.BUTTON_PRESS and \
+                    self._bookmark_icon is not None:
+            content = cjson.decode(bookmark.title)
+            bookmark_title = content['title']
+            bookmark_content = content['content']
+
+            dialog = BookmarkEditDialog(parent_xid = self.get_toplevel().window.xid, \
+                dialog_title = _("Add notes for bookmark: "), \
+                bookmark_title = bookmark_title, \
+                bookmark_content = bookmark_content, page = bookmark.page_no, \
+                sidebarinstance = self)
+            dialog.show_all()
+
+        return False
+
     def _clear_bookmarks(self):
-        for bookmark_icon in self._bookmarks:
-            bookmark_icon.hide() #XXX: Is this needed??
-            bookmark_icon.destroy()
+        if self._bookmark_icon is not None:
+            self._bookmark_icon.disconnect(self.__bookmark_icon_query_tooltip_cb_id)
+            self.disconnect(self.__event_cb_id)
+
+            self._bookmark_icon.hide() #XXX: Is this needed??
+            self._bookmark_icon.destroy()
+            
+            self._bookmark_icon = None
         
-        self._bookmarks = []
-        
-        self._is_showing_local_bookmark = False
+            self._is_showing_local_bookmark = False
     
     def set_bookmarkmanager(self, filehash):
         self._bookmark_manager = BookmarkManager(filehash)
@@ -92,7 +160,17 @@ class Sidebar(gtk.EventBox):
             self._add_bookmark_icon(bookmark)
     
     def add_bookmark(self, page):
-        self._bookmark_manager.add_bookmark(page, '') #TODO: Implement title support
+        bookmark_title = (_("%s's bookmark") % profile.get_nick_name())
+        bookmark_content = (_("Bookmark for page %d") % page)
+        dialog = BookmarkAddDialog(parent_xid = self.get_toplevel().window.xid, \
+            dialog_title = _("Add notes for bookmark: "), \
+            bookmark_title = bookmark_title, \
+            bookmark_content = bookmark_content, page = page, \
+            sidebarinstance = self)
+        dialog.show_all()
+
+    def _real_add_bookmark(self, page, content):
+        self._bookmark_manager.add_bookmark(page, unicode(content))
         self.update_for_page(page)
         
     def del_bookmark(self, page):
