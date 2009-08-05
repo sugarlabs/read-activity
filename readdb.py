@@ -28,17 +28,50 @@ from readbookmark import Bookmark
 
 _logger = logging.getLogger('read-activity')
 
+def _init_db():
+    dbdir = os.path.join(os.environ['SUGAR_ACTIVITY_ROOT'], 'data')
+    dbpath = os.path.join(dbdir, 'read_v1.db')
+    olddbpath = os.path.join(dbdir, 'read.db')
+
+    srcpath = os.path.join(os.environ['SUGAR_BUNDLE_PATH'], 'read_v1.db')
+
+    #Situation 0: Db is existent
+    if os.path.exists(dbpath):
+        return dbpath
+
+    #Situation 1: DB is non-existent at all
+    if not os.path.exists(dbpath) and not os.path.exists(olddbpath):
+        try:
+            os.makedirs(dbdir)
+        except:
+            pass
+        shutil.copy(srcpath, dbpath)
+        return dbpath
+
+    #Situation 2: DB is outdated
+    if not os.path.exists(dbpath) and os.path.exists(olddbpath):
+        shutil.copy(olddbpath, dbpath)
+        
+        conn = sqlite3.connect(dbpath)
+        conn.execute("CREATE TABLE  temp_bookmarks  AS SELECT md5, page, title 'content', timestamp, user, color, local  FROM bookmarks")
+        conn.execute("ALTER TABLE bookmarks RENAME TO bookmarks_old")
+        conn.execute("ALTER TABLE temp_bookmarks RENAME TO bookmarks")
+        conn.execute("DROP TABLE bookmarks_old")
+        conn.commit()
+        conn.close()
+
+        return dbpath
+
+    # Should not reach this point
+    return None
+
 class BookmarkManager:
-    def __init__(self, filehash, dbfile='read.db'):
+    def __init__(self, filehash):
         self._filehash = filehash
 
-        dbpath = os.path.join(os.environ['SUGAR_ACTIVITY_ROOT'], 'data', \
-                dbfile)
+        dbpath = _init_db()
 
-        if not os.path.exists(dbpath):
-            # This makes me nervous
-            srcpath = os.path.join(os.environ['SUGAR_BUNDLE_PATH'], 'read.db')
-            shutil.copy(srcpath, dbpath)
+        assert dbpath != None
 
         self._conn = sqlite3.connect(dbpath)
         self._conn.text_factory = lambda x: unicode(x, "utf-8", "ignore")
@@ -55,7 +88,6 @@ class BookmarkManager:
         user = client.get_string("/desktop/sugar/user/nick")
         color = client.get_string("/desktop/sugar/user/color")
 
-        #XXX: the field for content is called title for compatibility reasons
         t = (self._filehash, page, content, timestamp, user, color, local)
         self._conn.execute('insert into bookmarks values (?, ?, ?, ?, ?, ?, ?)', t)
         self._conn.commit()
