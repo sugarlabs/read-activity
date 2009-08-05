@@ -1,3 +1,9 @@
+71
+
+* Support for notes associated with bookmarks
+* Show a information bar in fullscreen mode, with pagecount and battery information
+* Do not fail to start when Epub specific code does not load
+
 70
 
 * Epub support
