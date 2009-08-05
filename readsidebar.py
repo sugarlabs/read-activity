@@ -16,7 +16,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import logging
-import time, cjson
+import time
 
 import gtk
 
@@ -76,10 +76,8 @@ class Sidebar(gtk.EventBox):
             self._is_showing_local_bookmark = True
         
     def __bookmark_icon_query_tooltip_cb(self, widget, x, y, keyboard_mode, tip, bookmark):
-        content = cjson.decode(bookmark.title)
-        
-        tooltip_header = content['title']
-        tooltip_body = content['content']
+        tooltip_header = bookmark.get_note_title()
+        tooltip_body = bookmark.get_note_body()
         #TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
         #TRANS: automatically)
         tooltip_footer = (_('Bookmark added by %(user)s %(time)s') \
@@ -118,9 +116,9 @@ class Sidebar(gtk.EventBox):
     def __event_cb(self, widget, event, bookmark):
         if event.type == gtk.gdk.BUTTON_PRESS and \
                     self._bookmark_icon is not None:
-            content = cjson.decode(bookmark.title)
-            bookmark_title = content['title']
-            bookmark_content = content['content']
+
+            bookmark_title = bookmark.get_note_title()
+            bookmark_content = bookmark.get_note_body()
 
             dialog = BookmarkEditDialog(parent_xid = self.get_toplevel().window.xid, \
                 dialog_title = _("Add notes for bookmark: "), \

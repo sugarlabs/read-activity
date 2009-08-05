@@ -15,11 +15,13 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import cjson
+
 class Bookmark:
     def __init__(self, data):
         self.md5 = data[0]
         self.page_no = data[1]
-        self.title = data[2]
+        self.content = data[2]
         self.timestamp = data[3]
         self.nick = data[4]
         self.color = data[5]
@@ -30,3 +32,19 @@ class Bookmark:
     
     def is_local(self):
         return bool(self.local)
+
+    def get_note_title(self):
+        if self.content == '' or self.content is None:
+            return ''
+
+        note = cjson.decode(self.content)
+        return note['title']
+
+    def get_note_body(self):
+        if self.content == '' or self.content is None:
+            return ''
+        
+        note = cjson.decode(self.content)
+        return note['body']
+        
+

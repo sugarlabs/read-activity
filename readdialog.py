@@ -165,7 +165,7 @@ class BookmarkAddDialog(BookmarkDialog):
     def accept_clicked_cb(self, widget):
         title = self._title_entry.get_text()
         details = self._content_entry.get_buffer().props.text
-        content = {'title' : unicode(title), 'content' : unicode(details)} 
+        content = {'title' : unicode(title), 'body' : unicode(details)} 
         self._sidebarinstance._real_add_bookmark(self._page, cjson.encode(content))
         self.destroy()
 
@@ -176,7 +176,7 @@ class BookmarkEditDialog(BookmarkDialog):
     def accept_clicked_cb(self, widget):
         title = self._title_entry.get_text()
         details = self._content_entry.get_buffer().props.text
-        content = {'title' : unicode(title), 'content' : unicode(details)} 
+        content = {'title' : unicode(title), 'body' : unicode(details)} 
         self._sidebarinstance.del_bookmark(self._page)
         self._sidebarinstance._real_add_bookmark(self._page, cjson.encode(content))
         self.destroy()
