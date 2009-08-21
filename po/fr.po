@@ -6,85 +6,107 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xbook.master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-09 00:31-0400\n"
-"PO-Revision-Date: 2008-10-20 04:28-0400\n"
+"POT-Creation-Date: 2009-06-26 00:33-0400\n"
+"PO-Revision-Date: 2009-08-21 02:15-0400\n"
 "Last-Translator: samy boutayeb <s.boutayeb@free.fr>\n"
 "Language-Team: Français <fedora-trans-fr@redhat.com>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Pootle 1.1.0rc2\n"
+"X-Generator: Pootle 1.2.1\n"
 
-#: activity/activity.info:2 readactivity.py:129
+#: activity/activity.info:2 readactivity.py:135
 msgid "Read"
 msgstr "Lire"
 
-#: readactivity.py:125
+#: readactivity.py:131
 msgid "Edit"
 msgstr "Éditer"
 
-#: readactivity.py:137
+#: readactivity.py:143
 msgid "View"
 msgstr "Afficher"
 
-#: readactivity.py:223
+#: readactivity.py:235
 msgid "Choose document"
 msgstr "Choisir un document"
 
-#: readtoolbar.py:67
+#: readsidebar.py:57
+#, python-format
+msgid "Bookmark added by %(user)s on %(time)s"
+msgstr "Signet ajouté par %(user)s le %(time)s"
+
+#: readtoolbar.py:87
 msgid "Previous"
 msgstr "Précédent"
 
-#: readtoolbar.py:74
+#: readtoolbar.py:94
 msgid "Next"
 msgstr "Suivant"
 
-#: readtoolbar.py:140
+#: readtoolbar.py:172
 msgid "Find first"
 msgstr "Trouver le premier"
 
-#: readtoolbar.py:146
+#: readtoolbar.py:178
 msgid "Find previous"
 msgstr "Trouver le précédent"
 
-#: readtoolbar.py:148
+#: readtoolbar.py:180
 msgid "Find next"
 msgstr "Trouver le suivant"
 
-#: readtoolbar.py:160
+#: readtoolbar.py:193
 msgid "Back"
 msgstr "Reculer"
 
-#: readtoolbar.py:167
+#: readtoolbar.py:196
+msgid "Previous page"
+msgstr "Page précédente"
+
+#: readtoolbar.py:199
+msgid "Previous bookmark"
+msgstr "Signet précédent"
+
+#: readtoolbar.py:209
 msgid "Forward"
 msgstr "Avancer"
 
-#: readtoolbar.py:271
+#: readtoolbar.py:212
+msgid "Next page"
+msgstr "Page suivante"
+
+#: readtoolbar.py:215
+msgid "Next bookmark"
+msgstr "Signet suivant"
+
+#: readtoolbar.py:434
 msgid "Zoom out"
 msgstr "Zoom arrière"
 
-#: readtoolbar.py:277
+#: readtoolbar.py:440
 msgid "Zoom in"
 msgstr "Zoom avant"
 
-#: readtoolbar.py:283
+#: readtoolbar.py:446
 msgid "Zoom to width"
 msgstr "Zoom à la largeur de la page"
 
-#: readtoolbar.py:289
+#: readtoolbar.py:452
 msgid "Zoom to fit"
 msgstr "Zoom plein écran"
 
-#: readtoolbar.py:294
+#: readtoolbar.py:457
 msgid "Actual size"
 msgstr "Dimension actuelle"
 
-#: readtoolbar.py:312
+#: readtoolbar.py:475
 msgid "%"
 msgstr "%"
 
-#: readtoolbar.py:330
+#: readtoolbar.py:493
 msgid "Fullscreen"
 msgstr "Plein écran"
 
