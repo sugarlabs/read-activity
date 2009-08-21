@@ -638,8 +638,9 @@ class ReadActivity(activity.Activity):
             return False
 
     def _key_release_event_cb(self, widget, event):
-        keyname = gtk.gdk.keyval_name(event.keyval)
-        _logger.debug("Keyname Release: %s, time: %s", keyname, event.time)
+        #keyname = gtk.gdk.keyval_name(event.keyval)
+        #_logger.debug("Keyname Release: %s, time: %s", keyname, event.time)
+        return False
 
     def _window_state_event_cb(self, window, event):
         if not (event.changed_mask & gtk.gdk.WINDOW_STATE_FULLSCREEN):
