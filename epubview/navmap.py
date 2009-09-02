@@ -18,19 +18,34 @@ class NavPoint(object):
 
 
 class NavMap(object):
-    def __init__(self, opffile, basepath, titlepage):
+    def __init__(self, opffile, ncxfile, basepath):
         self._basepath = basepath
-        self._tree = etree.parse(opffile)
+        self._opffile = opffile
+        self._tree = etree.parse(ncxfile)
         self._root = self._tree.getroot()
         self._gtktreestore = gtk.TreeStore(str, str)
         self._flattoc = []
         
+        self._populate_flattoc()
         self._populate_toc()
+         
+    def _populate_flattoc(self):
+        tree = etree.parse(self._opffile)
+        root = tree.getroot()
         
-        if titlepage and self._flattoc[0][1] != titlepage:
-            self._flattoc.insert(0, ('Title Page', titlepage))
-            self._gtktreestore.insert(None, 0, ['Title Page', titlepage])
- 
+        itemmap = {}
+        manifest = root.find('.//{http://www.idpf.org/2007/opf}manifest')
+        for element in manifest.iterfind('{http://www.idpf.org/2007/opf}item'):
+            itemmap[element.get('id')] = element
+        
+        spine = root.find('.//{http://www.idpf.org/2007/opf}spine')        
+        for element in spine.iterfind('{http://www.idpf.org/2007/opf}itemref'):
+            idref = element.get('idref')
+            href = itemmap[idref].get('href')
+            self._flattoc.append(self._basepath + href)
+            
+        self._opffile.close()
+        
     def _populate_toc(self):
         navmap = self._root.find('{http://www.daisy.org/z3986/2005/ncx/}navMap')       
         for navpoint in navmap.iterfind('./{http://www.daisy.org/z3986/2005/ncx/}navPoint'):
@@ -48,8 +63,10 @@ class NavMap(object):
         title = self._gettitle(navpoint)
         content = self._getcontent(navpoint)
         
+        #print title, content
+        
         iter = self._gtktreestore.append(parent, [title, content])
-        self._flattoc.append((title, content))
+        #self._flattoc.append((title, content))
         
         childnavpointlist = list(navpoint.iterfind('./{http://www.daisy.org/z3986/2005/ncx/}navPoint'))
         
@@ -60,9 +77,17 @@ class NavMap(object):
             return
              
     def get_gtktreestore(self):
+        '''
+        Returns a GtkTreeModel representation of the
+        Epub table of contents
+        '''        
         return self._gtktreestore
     
     def get_flattoc(self):
+        '''
+        Returns a flat (linear) list of files to be
+        rendered.
+        '''       
         return self._flattoc
     
 #t = TocParser('/home/sayamindu/Desktop/Test/OPS/fb.ncx')

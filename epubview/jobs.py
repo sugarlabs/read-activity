@@ -52,8 +52,7 @@ class SearchThread(threading.Thread):
         for entry in self.obj.flattoc:
             if self.stopthread.isSet():
                 break
-            name, file = entry
-            filepath = os.path.join(self.obj._document.get_basedir(), file)
+            filepath = os.path.join(self.obj._document.get_basedir(), entry)
             f = open(filepath)
             if self._searchfile(f):
                 self.obj._matchfilelist.append(file)
@@ -168,24 +167,45 @@ class _JobPaginator(gobject.GObject):
             
             
     def get_file_for_pageno(self, pageno):
+        '''
+        Returns the file in which pageno occurs
+        '''        
         return self._pagemap[pageno][0]
     
     def get_scrollfactor_pos_for_pageno(self, pageno):
+        '''
+        Returns the position scrollfactor (fraction) for pageno
+        '''        
         return self._pagemap[pageno][1]
 
     def get_scrollfactor_len_for_pageno(self, pageno):
+        '''
+        Returns the length scrollfactor (fraction) for pageno
+        '''        
         return self._pagemap[pageno][2]
     
     def get_pagecount_for_file(self, file):
+        '''
+        Returns the number of pages in file
+        '''        
         return self._filedict[file][0]
 
     def get_remfactor_for_file(self, file):
+        '''
+        Returns the remainder factor (1 - fraction length of last page in file)
+        '''        
         return self._filedict[file][1]
     
     def get_total_pagecount(self):
+        '''
+        Returns the total pagecount for the Epub file
+        '''
         return self._pagecount
 
     def get_total_height(self):
+        '''
+        Returns the total height of the Epub in pixels
+        '''        
         return self._bookheight
 
 
@@ -215,13 +235,22 @@ class _JobFind(gobject.GObject):
         s_thread.start()
         
     def cancel(self):
+        '''
+        Cancels the search job
+        '''                
         for s_thread in self.threads:
             s_thread.stop()
     
     def is_finished(self):
+        '''
+        Returns True if the entire search job has been finished
+        '''                
         return self._finished
     
     def get_next_file(self):
+        '''
+        Returns the next file which has the search pattern
+        '''                
         self._current_file_index += 1
         try:
             path = self._matchfilelist[self._current_file_index]
@@ -232,6 +261,9 @@ class _JobFind(gobject.GObject):
         return path
 
     def get_prev_file(self):
+        '''
+        Returns the previous file which has the search pattern
+        '''        
         self._current_file_index -= 1
         try:
             path = self._matchfilelist[self._current_file_index]
@@ -242,7 +274,13 @@ class _JobFind(gobject.GObject):
         return path
 
     def get_search_text(self):
+        '''
+        Returns the search text
+        '''        
         return self._text
     
     def get_case_sensitive(self):
+        '''
+        Returns True if the search is case-sensitive
+        '''        
         return self._case_sensitive

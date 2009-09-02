@@ -98,6 +98,9 @@ class _View(gtk.HBox):
         self._view.set_flags(gtk.CAN_DEFAULT|gtk.CAN_FOCUS)        
         
     def set_document(self, epubdocumentinstance):
+        '''
+        Sets document (should be a Epub instance)
+        '''        
         self._epub = epubdocumentinstance
         gobject.idle_add(self._paginate)
 
@@ -116,15 +119,27 @@ class _View(gtk.HBox):
             raise AttributeError, 'unknown property %s' % property.name
     
     def get_has_selection(self):
+        '''
+        Returns True if any part of the content is selected
+        '''        
         return self.get_property('has-selection')
     
     def get_zoom(self):
+        '''
+        Returns the current zoom level
+        '''        
         return self.get_property('zoom')
     
     def set_zoom(self, value):
+        '''
+        Sets the current zoom level
+        '''        
         self.set_property('zoom', value)
     
     def zoom_in(self):
+        '''
+        Zooms in (increases zoom level by 0.1)
+        '''        
         if self.can_zoom_in():
             self.set_zoom(self.get_zoom() + 0.1)
             return True
@@ -132,6 +147,9 @@ class _View(gtk.HBox):
             return False
 
     def zoom_out(self):
+        '''
+        Zooms out (decreases zoom level by 0.1)
+        '''        
         if self.can_zoom_out():
             self.set_zoom(self.get_zoom() - 0.1)
             return True
@@ -139,21 +157,33 @@ class _View(gtk.HBox):
             return False
     
     def can_zoom_in(self):
+        '''
+        Returns True if it is possible to zoom in further
+        '''        
         if self.zoom < 4:
             return True
         else:
             return False
 
     def can_zoom_out(self):
+        '''
+        Returns True if it is possible to zoom out further
+        '''        
         if self.zoom > 0.5:
             return True
         else:
             return False
     
     def get_current_page(self):
+        '''
+        Returns the currently loaded page
+        '''        
         return self._loaded_page
     
     def get_current_file(self):
+        '''
+        Returns the currently loaded XML file
+        '''        
         #return self._loaded_filename
         if self._paginator: 
             return self._paginator.get_file_for_pageno(self._loaded_page)
@@ -161,27 +191,46 @@ class _View(gtk.HBox):
             return None
     
     def get_pagecount(self):
+        '''
+        Returns the pagecount of the loaded file
+        '''        
         return self._pagecount
     
     def set_current_page(self, n):
+        '''
+        Loads page number n
+        '''        
         if n < 1 or n > self._pagecount:
             return False
         self._load_page(n)
         return True
         
     def next_page(self):
+        '''
+        Loads next page if possible
+        Returns True if transition to next page is possible and done
+        '''        
         if self._loaded_page == self._pagecount:
             return False
         self._load_next_page()
         return True
         
     def previous_page(self):
+        '''
+        Loads previous page if possible
+        Returns True if transition to previous page is possible and done
+        '''        
         if self._loaded_page == 1:
             return False
         self._load_prev_page()
         return True
 
     def scroll(self, scrolltype, horizontal):
+        '''
+        Scrolls through the pages.
+        Scrolling is horizontal if horizontal is set to True
+        Valid scrolltypes are: gtk.SCROLL_PAGE_BACKWARD and gtk.SCROLL_PAGE_FORWARD 
+        '''        
         if scrolltype == gtk.SCROLL_PAGE_BACKWARD:
             self.__going_back = True
             self.__going_fwd = False
@@ -196,9 +245,15 @@ class _View(gtk.HBox):
             print ('Got unsupported scrolltype %s' % str(scrolltype))
     
     def copy(self):
+        '''
+        Copies the current selection to clipboard.
+        '''                
         self._view.copy_clipboard()
     
     def find_next(self):
+        '''
+        Highlights the next matching item for current search
+        '''        
         self._view.grab_focus()
         self._view.grab_default()
 
@@ -212,6 +267,9 @@ class _View(gtk.HBox):
             self._load_file(path)
     
     def find_previous(self):
+        '''
+        Highlights the previous matching item for current search
+        '''        
         self._view.grab_focus()
         self._view.grab_default()
 
@@ -335,7 +393,7 @@ class _View(gtk.HBox):
     def _paginate(self):
         filelist = []
         for i in self._epub._navmap.get_flattoc():
-            filelist.append(os.path.join(self._epub._tempdir, i[1]))
+            filelist.append(os.path.join(self._epub._tempdir, i))
             
         self._paginator = _Paginator(filelist)
         self._paginator.connect('paginated', self._paginated_cb)

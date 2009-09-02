@@ -28,26 +28,23 @@ class _Epub(object):
     def __init__(self, filepath):
         self._filepath = filepath
         self._zobject = None
-        self._obffile = None
-        self._titlepage = None
-        self._obfpath = None
+        self._opfpath = None
         self._ncxpath = None
-        self._ncxfile = None
         self._basepath = None
         self._tempdir = tempfile.mkdtemp()
         
         if not self._verify():
             print 'Warning: This does not seem to be a valid epub file'
         
-        self._get_obf()
+        self._get_opf()
         self._get_ncx()
-        self._get_titlepage()
         
-        self._ncxfile = self._zobject.open(self._ncxpath)
-        self._navmap = navmap.NavMap(self._ncxfile, self._basepath, self._titlepage)
+        ncxfile = self._zobject.open(self._ncxpath)
+        opffile = self._zobject.open(self._opfpath)        
+        self._navmap = navmap.NavMap(opffile, ncxfile, self._basepath)
         
-        self._obffile = self._zobject.open(self._obfpath)
-        self._info = epubinfo.EpubInfo(self._obffile) 
+        opffile = self._zobject.open(self._opfpath)
+        self._info = epubinfo.EpubInfo(opffile) 
         
         self._unzip()
         
@@ -65,7 +62,7 @@ class _Epub(object):
         os.chdir(orig_cwd)
 
                 
-    def _get_obf(self):
+    def _get_opf(self):
         containerfile = self._zobject.open('META-INF/container.xml')
         
         tree = etree.parse(containerfile)
@@ -73,10 +70,10 @@ class _Epub(object):
         
         for element in root.iterfind('.//{urn:oasis:names:tc:opendocument:xmlns:container}rootfile'):
             if element.get('media-type') == 'application/oebps-package+xml':
-                self._obfpath = element.get('full-path')
+                self._opfpath = element.get('full-path')
         
-        if self._obfpath.rpartition('/')[0]:        
-            self._basepath = self._obfpath.rpartition('/')[0] + '/'
+        if self._opfpath.rpartition('/')[0]:        
+            self._basepath = self._opfpath.rpartition('/')[0] + '/'
         else:
             self._basepath = ''
             
@@ -84,30 +81,20 @@ class _Epub(object):
 
 
     def _get_ncx(self):
-        obffile = self._zobject.open(self._obfpath)
+        opffile = self._zobject.open(self._opfpath)
         
-        tree = etree.parse(obffile)
+        tree = etree.parse(opffile)
         root = tree.getroot()
 
+        spine = root.find('.//{http://www.idpf.org/2007/opf}spine')
+        tocid = spine.get('toc')
+
         for element in root.iterfind('.//{http://www.idpf.org/2007/opf}item'):
-            if element.get('media-type') == 'application/x-dtbncx+xml' or \
-                element.get('id') == 'ncx':
+            if element.get('id') == tocid:
                 self._ncxpath = self._basepath + element.get('href')
         
-        obffile.close()
-        
-    def _get_titlepage(self):
-        obffile = self._zobject.open(self._obfpath)
-        tree = etree.parse(obffile)
-        root = tree.getroot()
+        opffile.close()
 
-        for element in root.iterfind('.//{http://www.idpf.org/2007/opf}item'):
-            if element.get('id') == 'titlepage':
-                    self._titlepage = self._basepath + element.get('href')
-        
-        obffile.close()                    
-        
-                    
     def _verify(self):
         '''
         Method to crudely check to verify that what we 
@@ -124,23 +111,42 @@ class _Epub(object):
         mtypefile = self._zobject.open('mimetype')
         mimetype = mtypefile.readline()
         
-        if mimetype != 'application/epub+zip':
+        if not mimetype.startswith('application/epub+zip'): # Some files seem to have trailing characters
             return False
         
         return True
     
     def get_toc_model(self):
+        '''
+        Returns a GtkTreeModel representation of the
+        Epub table of contents
+        '''        
         return self._navmap.get_gtktreestore()
     
     def get_flattoc(self):
+        '''
+        Returns a flat (linear) list of files to be
+        rendered.
+        '''                
         return self._navmap.get_flattoc()
     
     def get_basedir(self):
+        '''
+        Returns the base directory where the contents of the
+        epub has been unzipped
+        '''
         return self._tempdir
     
     def get_info(self):
+        '''
+        Returns a EpubInfo object for the open Epub file
+        '''        
         return self._info
     
     def close(self):
+        '''
+        Cleans up (closes open zip files and deletes uncompressed content of Epub. 
+        Please call this when a file is being closed or during application exit. 
+        '''                
         self._zobject.close()
         shutil.rmtree(self._tempdir)

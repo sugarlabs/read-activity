@@ -1,11 +1,5 @@
+import webkit
 import gtk
-
-try:
-    import webkit
-except ImportError:
-    import os, sys
-    sys.path.append(os.path.join(os.environ['SUGAR_BUNDLE_PATH'], 'epubview', 'modules'))
-    import webkit
 
 
 class _WebView(webkit.WebView):
@@ -13,15 +7,25 @@ class _WebView(webkit.WebView):
         webkit.WebView.__init__(self)
         
     def get_page_height(self):
+        '''
+        Gets height (in pixels) of loaded (X)HTML page.
+        This is done via javascript at the moment
+        '''        
         #TODO: Need to check status of page load
         js = 'oldtitle=document.title;document.title=document.body.clientHeight;'
         self.execute_script(js)
         ret = self.get_main_frame().get_title()
         js = 'document.title=oldtitle;'
         self.execute_script(js)
+        if ret is None:
+            return 0
         return int(ret)
         
     def add_bottom_padding(self, incr):
+        '''
+        Adds incr pixels of padding to the end of the loaded (X)HTML page.
+        This is done via javascript at the moment
+        '''        
         js = ('var newdiv = document.createElement("div");newdiv.style.height = "%dpx";document.body.appendChild(newdiv);' % incr)
         self.execute_script(js)
         

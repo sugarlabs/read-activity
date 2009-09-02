@@ -3,8 +3,8 @@ from lxml import etree
 
 
 class EpubInfo(): #TODO: Cover the entire DC range
-    def __init__(self, file):
-        self._tree = etree.parse(file)
+    def __init__(self, opffile):
+        self._tree = etree.parse(opffile)
         self._root = self._tree.getroot()
         self._e_metadata = self._root.find('{http://www.idpf.org/2007/opf}metadata')
         
