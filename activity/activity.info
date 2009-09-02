@@ -4,6 +4,6 @@ service_name = org.laptop.sugar.ReadActivity
 icon = activity-read
 exec = sugar-activity readactivity.ReadActivity
 show_launcher = no
-activity_version = 71
+activity_version = 72
 mime_types = application/pdf;image/vnd.djvu;image/x.djvu;image/tiff;application/x-cbz;application/x-cbr;application/epub+zip
 license = GPLv2+

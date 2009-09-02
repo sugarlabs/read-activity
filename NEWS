@@ -1,3 +1,10 @@
+72
+
+* More robust Epub support
+* Do not print each and every key-event to log (dslo#752)
+* Updated translations (French, Italian)
+* Get rid of the pywebkitgtk binary blob
+
 71
 
 * Support for notes associated with bookmarks
