@@ -1,0 +1,151 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-08-06 00:33-0400\n"
+"PO-Revision-Date: 2009-08-28 03:55-0400\n"
+"Last-Translator: Emilianuspillai Amirthanathan Gnanaseelan "
+"<gnanaseelan2001@yahoo.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ta\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 1.2.1\n"
+
+#: activity/activity.info:2 readactivity.py:143
+msgid "Read"
+msgstr "வாசி"
+
+#: readactivity.py:139
+msgid "Edit"
+msgstr "திருத்து"
+
+#: readactivity.py:151
+msgid "View"
+msgstr "பார்வையிடு"
+
+#: readactivity.py:241
+msgid "Choose document"
+msgstr "ஆவணத்தை தெரிவுசெய்"
+
+#: readdialog.py:49
+msgid "Cancel"
+msgstr "இரத்துசெய்"
+
+#: readdialog.py:55
+msgid "Ok"
+msgstr "எல்லாம் சரி"
+
+#: readdialog.py:109
+msgid "<b>Title</b>:"
+msgstr "<b>Title</b>:"
+
+#: readdialog.py:136
+msgid "<b>Details</b>:"
+msgstr "<b>Details</b>:"
+
+#. TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
+#. TRANS: automatically)
+#: readsidebar.py:83
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr ""
+"புத்தகக் குறி %(பாவனையாளரினால்)களினால் % (தரம்)ங்கள் சேர்க்கப்பட்டுள்ளது"
+
+#: readsidebar.py:124 readsidebar.py:164
+msgid "Add notes for bookmark: "
+msgstr "புத்தகக் குறிக்கு குறிப்புக்களை சேர்க்க:_"
+
+#: readsidebar.py:161
+#, python-format
+msgid "%s's bookmark"
+msgstr "% ல் புத்தகக் குறி"
+
+#: readsidebar.py:162
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "பக்கத்திற்கான புத்தகக் குறி %"
+
+#: readtoolbar.py:91
+msgid "Previous"
+msgstr "முன்னைய"
+
+#: readtoolbar.py:98
+msgid "Next"
+msgstr "அடுத்தது"
+
+#: readtoolbar.py:184
+msgid "Find first"
+msgstr "முதலாவதை கண்டுபிடி"
+
+#: readtoolbar.py:190
+msgid "Find previous"
+msgstr "முன்னையதை கண்டுபிடி"
+
+#: readtoolbar.py:192
+msgid "Find next"
+msgstr "அடுத்தததை கண்டுபிடி"
+
+#: readtoolbar.py:205
+msgid "Back"
+msgstr "பின்னோக்கி அனுப்பு"
+
+#: readtoolbar.py:208
+msgid "Previous page"
+msgstr "முதற்பக்கம்"
+
+#: readtoolbar.py:211
+msgid "Previous bookmark"
+msgstr "முன்னைய புத்தகக்குறி "
+
+#: readtoolbar.py:221
+msgid "Forward"
+msgstr "முன்னோக்கி அனுப்பு"
+
+#: readtoolbar.py:224
+msgid "Next page"
+msgstr "அடுத்த பக்கம்"
+
+#: readtoolbar.py:227
+msgid "Next bookmark"
+msgstr "அடுத்த புத்தகக்குறி "
+
+#: readtoolbar.py:468
+msgid "Zoom out"
+msgstr "சிறிதாக்கிக் காட்டு"
+
+#: readtoolbar.py:474
+msgid "Zoom in"
+msgstr "பெரிதாக்கிக் காட்டு"
+
+#: readtoolbar.py:480
+msgid "Zoom to width"
+msgstr "அகலதிற்கு ஏற்றவாறு பெரிதாக்கு"
+
+#: readtoolbar.py:486
+msgid "Zoom to fit"
+msgstr "பொருந்துமாறு பெரிதாக்கு"
+
+#: readtoolbar.py:491
+msgid "Actual size"
+msgstr "சரியான அளவு"
+
+#: readtoolbar.py:508
+msgid "%"
+msgstr "%"
+
+#: readtoolbar.py:521
+msgid "Fullscreen"
+msgstr "முழுத்திரை"
+
+#. TRANS: Translate this as Page i of m (eg: Page 4 of 334)
+#: readtopbar.py:201
+#, python-format
+msgid "Page %i of %i"
+msgstr "பக்கத்தின் %"
