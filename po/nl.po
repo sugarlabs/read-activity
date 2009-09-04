@@ -6,87 +6,147 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-09 00:31-0400\n"
-"PO-Revision-Date: 2008-10-26 04:02-0400\n"
+"POT-Creation-Date: 2009-08-06 00:33-0400\n"
+"PO-Revision-Date: 2009-09-04 01:53-0400\n"
 "Last-Translator: Myckel Habets <myckel@sdf.lonestar.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 1.1.0rc2\n"
+"X-Generator: Pootle 1.2.1\n"
 
-#: activity/activity.info:2 readactivity.py:129
+#: activity/activity.info:2 readactivity.py:143
 msgid "Read"
 msgstr "Lezen"
 
-#: readactivity.py:125
+#: readactivity.py:139
 msgid "Edit"
 msgstr "Bewerken"
 
-#: readactivity.py:137
+#: readactivity.py:151
 msgid "View"
 msgstr "Beeld"
 
-#: readactivity.py:223
+#: readactivity.py:241
 msgid "Choose document"
 msgstr "Kies document"
 
-#: readtoolbar.py:67
+#: readdialog.py:49
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: readdialog.py:55
+msgid "Ok"
+msgstr "Ok"
+
+#: readdialog.py:109
+msgid "<b>Title</b>:"
+msgstr "<b>Titel</b>:"
+
+#: readdialog.py:136
+msgid "<b>Details</b>:"
+msgstr "<b>Details</b>:"
+
+#. TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
+#. TRANS: automatically)
+#: readsidebar.py:83
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "Bladwijzer toegevoegd door %(user)s %(time)s"
+
+#: readsidebar.py:124 readsidebar.py:164
+msgid "Add notes for bookmark: "
+msgstr "Aantekeningen voor bladwijzer toevoegen: "
+
+#: readsidebar.py:161
+#, python-format
+msgid "%s's bookmark"
+msgstr "%s's bladwijzer"
+
+#: readsidebar.py:162
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "Bladwijzer voor pagina %d"
+
+#: readtoolbar.py:91
 msgid "Previous"
 msgstr "Vorige"
 
-#: readtoolbar.py:74
+#: readtoolbar.py:98
 msgid "Next"
 msgstr "Volgende"
 
-#: readtoolbar.py:140
+#: readtoolbar.py:184
 msgid "Find first"
 msgstr "Zoek eerste"
 
-#: readtoolbar.py:146
+#: readtoolbar.py:190
 msgid "Find previous"
 msgstr "Zoek vorige"
 
-#: readtoolbar.py:148
+#: readtoolbar.py:192
 msgid "Find next"
 msgstr "Zoek volgende"
 
-#: readtoolbar.py:160
+#: readtoolbar.py:205
 msgid "Back"
 msgstr "Terug"
 
-#: readtoolbar.py:167
+#: readtoolbar.py:208
+msgid "Previous page"
+msgstr "Vorige pagina"
+
+#: readtoolbar.py:211
+msgid "Previous bookmark"
+msgstr "Vorige bladwijzer"
+
+#: readtoolbar.py:221
 msgid "Forward"
 msgstr "Vooruit"
 
-#: readtoolbar.py:271
+#: readtoolbar.py:224
+msgid "Next page"
+msgstr "Volgende pagina"
+
+#: readtoolbar.py:227
+msgid "Next bookmark"
+msgstr "Volgende bladwijzer"
+
+#: readtoolbar.py:468
 msgid "Zoom out"
 msgstr "Zoom uit"
 
-#: readtoolbar.py:277
+#: readtoolbar.py:474
 msgid "Zoom in"
 msgstr "Zoom in"
 
-#: readtoolbar.py:283
+#: readtoolbar.py:480
 msgid "Zoom to width"
 msgstr "Zoom naar breedte"
 
-#: readtoolbar.py:289
+#: readtoolbar.py:486
 msgid "Zoom to fit"
 msgstr "Zoom naar hele pagina"
 
-#: readtoolbar.py:294
+#: readtoolbar.py:491
 msgid "Actual size"
 msgstr "Werkelijk formaat"
 
-#: readtoolbar.py:312
+#: readtoolbar.py:508
 msgid "%"
 msgstr "%"
 
-#: readtoolbar.py:330
+#: readtoolbar.py:521
 msgid "Fullscreen"
 msgstr "Schermvullend"
+
+#. TRANS: Translate this as Page i of m (eg: Page 4 of 334)
+#: readtopbar.py:201
+#, python-format
+msgid "Page %i of %i"
+msgstr "Pagina %i van %i"
 
 #~ msgid "Read Activity"
 #~ msgstr "Lezen Activiteit"
