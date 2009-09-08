@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xbook.master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-26 00:33-0400\n"
-"PO-Revision-Date: 2009-08-21 02:15-0400\n"
+"POT-Creation-Date: 2009-08-06 00:33-0400\n"
+"PO-Revision-Date: 2009-09-08 11:06-0400\n"
 "Last-Translator: samy boutayeb <s.boutayeb@free.fr>\n"
 "Language-Team: Français <fedora-trans-fr@redhat.com>\n"
 "Language: fr\n"
@@ -17,98 +17,137 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Pootle 1.2.1\n"
 
-#: activity/activity.info:2 readactivity.py:135
+#: activity/activity.info:2 readactivity.py:143
 msgid "Read"
 msgstr "Lire"
 
-#: readactivity.py:131
+#: readactivity.py:139
 msgid "Edit"
 msgstr "Éditer"
 
-#: readactivity.py:143
+#: readactivity.py:151
 msgid "View"
 msgstr "Afficher"
 
-#: readactivity.py:235
+#: readactivity.py:241
 msgid "Choose document"
 msgstr "Choisir un document"
 
-#: readsidebar.py:57
+#: readdialog.py:49
+msgid "Cancel"
+msgstr "Annuler"
+
+#: readdialog.py:55
+msgid "Ok"
+msgstr "Ok"
+
+#: readdialog.py:109
+msgid "<b>Title</b>:"
+msgstr "<b>Titre</b> :"
+
+#: readdialog.py:136
+msgid "<b>Details</b>:"
+msgstr "<b>Détails</b> :"
+
+#. TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
+#. TRANS: automatically)
+#: readsidebar.py:83
 #, python-format
-msgid "Bookmark added by %(user)s on %(time)s"
+#, fuzzy
+msgid "Bookmark added by %(user)s %(time)s"
 msgstr "Signet ajouté par %(user)s le %(time)s"
 
-#: readtoolbar.py:87
+#: readsidebar.py:124 readsidebar.py:164
+msgid "Add notes for bookmark: "
+msgstr "Ajouter des notes pour le signet :"
+
+#: readsidebar.py:161
+#, python-format
+msgid "%s's bookmark"
+msgstr "Signet de %s"
+
+#: readsidebar.py:162
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "Signet pour la page %s"
+
+#: readtoolbar.py:91
 msgid "Previous"
 msgstr "Précédent"
 
-#: readtoolbar.py:94
+#: readtoolbar.py:98
 msgid "Next"
 msgstr "Suivant"
 
-#: readtoolbar.py:172
+#: readtoolbar.py:184
 msgid "Find first"
 msgstr "Trouver le premier"
 
-#: readtoolbar.py:178
+#: readtoolbar.py:190
 msgid "Find previous"
 msgstr "Trouver le précédent"
 
-#: readtoolbar.py:180
+#: readtoolbar.py:192
 msgid "Find next"
 msgstr "Trouver le suivant"
 
-#: readtoolbar.py:193
+#: readtoolbar.py:205
 msgid "Back"
 msgstr "Reculer"
 
-#: readtoolbar.py:196
+#: readtoolbar.py:208
 msgid "Previous page"
 msgstr "Page précédente"
 
-#: readtoolbar.py:199
+#: readtoolbar.py:211
 msgid "Previous bookmark"
 msgstr "Signet précédent"
 
-#: readtoolbar.py:209
+#: readtoolbar.py:221
 msgid "Forward"
 msgstr "Avancer"
 
-#: readtoolbar.py:212
+#: readtoolbar.py:224
 msgid "Next page"
 msgstr "Page suivante"
 
-#: readtoolbar.py:215
+#: readtoolbar.py:227
 msgid "Next bookmark"
 msgstr "Signet suivant"
 
-#: readtoolbar.py:434
+#: readtoolbar.py:468
 msgid "Zoom out"
 msgstr "Zoom arrière"
 
-#: readtoolbar.py:440
+#: readtoolbar.py:474
 msgid "Zoom in"
 msgstr "Zoom avant"
 
-#: readtoolbar.py:446
+#: readtoolbar.py:480
 msgid "Zoom to width"
 msgstr "Zoom à la largeur de la page"
 
-#: readtoolbar.py:452
+#: readtoolbar.py:486
 msgid "Zoom to fit"
 msgstr "Zoom plein écran"
 
-#: readtoolbar.py:457
+#: readtoolbar.py:491
 msgid "Actual size"
 msgstr "Dimension actuelle"
 
-#: readtoolbar.py:475
+#: readtoolbar.py:508
 msgid "%"
 msgstr "%"
 
-#: readtoolbar.py:493
+#: readtoolbar.py:521
 msgid "Fullscreen"
 msgstr "Plein écran"
+
+#. TRANS: Translate this as Page i of m (eg: Page 4 of 334)
+#: readtopbar.py:201
+#, python-format
+msgid "Page %i of %i"
+msgstr "Page %i sur %i"
 
 #~ msgid "Read Activity"
 #~ msgstr "Lecture"
