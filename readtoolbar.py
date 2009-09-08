@@ -14,11 +14,8 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import logging
 from gettext import gettext as _
-import re
 
-import pango
 import gobject
 import gtk
 import evince
@@ -28,28 +25,10 @@ try:
 except:
     pass
 
-import md5
-
 from sugar.graphics.toolbutton import ToolButton
-from sugar.graphics.toggletoolbutton import ToggleToolButton
 from sugar.graphics.menuitem import MenuItem
 from sugar.graphics import iconentry
 from sugar.activity import activity
-from sugar.graphics.icon import Icon
-from sugar.graphics.xocolor import XoColor
-
-def get_md5(filename): #FIXME: Should be moved somewhere else
-    filename = filename.replace('file://', '') #XXX: hack 
-    fh = open(filename)
-    digest = md5.new()
-    while 1:
-        buf = fh.read(4096)
-        if buf == "":
-            break
-        digest.update(buf)
-    fh.close()
-    return digest.hexdigest()
-
 
 class EditToolbar(activity.EditToolbar):
     __gtype_name__ = 'EditToolbar'
@@ -61,12 +40,6 @@ class EditToolbar(activity.EditToolbar):
 
         self._document = None
         self._find_job = None
-
-        separator = gtk.SeparatorToolItem()
-        separator.set_draw(False)
-        separator.set_expand(True)
-        self.insert(separator, -1)
-        separator.show()
 
         search_item = gtk.ToolItem()
 
@@ -190,260 +163,6 @@ class EditToolbar(activity.EditToolbar):
             self._prev.set_tooltip(_('Find previous'))
             self._next.props.sensitive = True
             self._next.set_tooltip(_('Find next'))
-
-class ReadToolbar(gtk.Toolbar):
-    __gtype_name__ = 'ReadToolbar'
-
-    def __init__(self, sidebar):
-        gtk.Toolbar.__init__(self)
-
-        self._evince_view = None
-        self._sidebar = sidebar
-        self._document = None
-                
-        self._back = ToolButton('go-previous')
-        self._back.set_tooltip(_('Back'))
-        self._back.props.sensitive = False
-        palette = self._back.get_palette()
-        self._prev_page = MenuItem(text_label= _("Previous page"))
-        palette.menu.append(self._prev_page) 
-        self._prev_page.show_all()        
-        self._prev_bookmark = MenuItem(text_label= _("Previous bookmark"))
-        palette.menu.append(self._prev_bookmark) 
-        self._prev_bookmark.show_all()
-        self._back.connect('clicked', self._go_back_cb)
-        self._prev_page.connect('activate', self._go_back_page_cb)
-        self._prev_bookmark.connect('activate', self._prev_bookmark_activate_cb)
-        self.insert(self._back, -1)
-        self._back.show()
-
-        self._forward = ToolButton('go-next')
-        self._forward.set_tooltip(_('Forward'))
-        self._forward.props.sensitive = False
-        palette = self._forward.get_palette()
-        self._next_page = MenuItem(text_label= _("Next page"))
-        palette.menu.append(self._next_page) 
-        self._next_page.show_all()        
-        self._next_bookmark = MenuItem(text_label= _("Next bookmark"))
-        palette.menu.append(self._next_bookmark) 
-        self._next_bookmark.show_all()
-        self._forward.connect('clicked', self._go_forward_cb)
-        self._next_page.connect('activate', self._go_forward_page_cb)
-        self._next_bookmark.connect('activate', self._next_bookmark_activate_cb)
-        self.insert(self._forward, -1)
-        self._forward.show()
-
-        num_page_item = gtk.ToolItem()
-
-        self._num_page_entry = gtk.Entry()
-        self._num_page_entry.set_text('0')
-        self._num_page_entry.set_alignment(1)
-        self._num_page_entry.connect('insert-text',
-                                     self._num_page_entry_insert_text_cb)
-        self._num_page_entry.connect('activate',
-                                     self._num_page_entry_activate_cb)
-
-        self._num_page_entry.set_width_chars(4)
-
-        num_page_item.add(self._num_page_entry)
-        self._num_page_entry.show()
-
-        self.insert(num_page_item, -1)
-        num_page_item.show()
-
-        total_page_item = gtk.ToolItem()
-
-        self._total_page_label = gtk.Label()
-
-        label_attributes = pango.AttrList()
-        label_attributes.insert(pango.AttrSize(14000, 0, -1))
-        label_attributes.insert(pango.AttrForeground(65535, 65535, 65535, 0, -1))
-        self._total_page_label.set_attributes(label_attributes)
-
-        self._total_page_label.set_text(' / 0')
-        total_page_item.add(self._total_page_label)
-        self._total_page_label.show()
-
-        self.insert(total_page_item, -1)
-        total_page_item.show()
-
-        spacer = gtk.SeparatorToolItem()
-        spacer.props.draw = False
-        self.insert(spacer, -1)
-        spacer.show()
-
-        navitem = gtk.ToolItem()
-
-        self._navigator = gtk.ComboBox()
-        cell = gtk.CellRendererText()
-        self._navigator.pack_start(cell, True)
-        self._navigator.add_attribute(cell, 'text', 0)
-        self._navigator.props.visible = False
-
-        navitem.add(self._navigator)
-
-        self.insert(navitem, -1)
-        navitem.show()
-
-        spacer = gtk.SeparatorToolItem()
-        self.insert(spacer, -1)
-        spacer.show()
-  
-        bookmarkitem = gtk.ToolItem()
-        self._bookmarker = ToggleToolButton('emblem-favorite')
-        self._bookmarker_toggle_handler_id = self._bookmarker.connect('toggled',
-                                      self._bookmarker_toggled_cb)
-  
-        bookmarkitem.add(self._bookmarker)
-
-        self.insert(bookmarkitem, -1)
-        bookmarkitem.show_all()
-
-    def set_view(self, view):
-        self._evince_view = view
-
-    def set_document(self, document, filepath):
-        filehash = get_md5(filepath)
-        self._document = document
-        page_cache = self._document.get_page_cache()
-        page_cache.connect('page-changed', self._page_changed_cb)    
-        self._update_nav_buttons()
-        self._update_toc()
-        self._sidebar.set_bookmarkmanager(filehash)
-
-    def _num_page_entry_insert_text_cb(self, entry, text, length, position):
-        if not re.match('[0-9]', text):
-            entry.emit_stop_by_name('insert-text')
-            return True
-        return False
-
-    def _num_page_entry_activate_cb(self, entry):
-        if entry.props.text:
-            page = int(entry.props.text) - 1
-        else:
-            page = 0
-
-        if page >= self._document.get_n_pages():
-            page = self._document.get_n_pages() - 1
-        elif page < 0:
-            page = 0
-
-        self._document.get_page_cache().set_current_page(page)
-        entry.props.text = str(page + 1)
-    
-    def _go_back_cb(self, button):
-        self._evince_view.scroll(gtk.SCROLL_PAGE_BACKWARD, False)
-
-    def _go_forward_cb(self, button):
-        self._evince_view.scroll(gtk.SCROLL_PAGE_FORWARD, False)
-
-    def _go_back_page_cb(self, button):
-        self._evince_view.previous_page()
-    
-    def _go_forward_page_cb(self, button):
-        self._evince_view.next_page()
-
-    def _prev_bookmark_activate_cb(self, menuitem):
-        page = self._document.get_page_cache().get_current_page()
-        bookmarkmanager = self._sidebar.get_bookmarkmanager()
-        
-        prev_bookmark = bookmarkmanager.get_prev_bookmark_for_page(page)
-        if prev_bookmark is not None:
-            self._document.get_page_cache().set_current_page(prev_bookmark.page_no)
-                
-    def _next_bookmark_activate_cb(self, menuitem):
-        page = self._document.get_page_cache().get_current_page()
-        bookmarkmanager = self._sidebar.get_bookmarkmanager()
-        
-        next_bookmark = bookmarkmanager.get_next_bookmark_for_page(page)
-        if next_bookmark is not None:
-            self._document.get_page_cache().set_current_page(next_bookmark.page_no)
-        
-    def _bookmarker_toggled_cb(self, button):
-        page = self._document.get_page_cache().get_current_page()
-        if self._bookmarker.props.active:
-            self._sidebar.add_bookmark(page)
-        else:
-            self._sidebar.del_bookmark(page)    
-    
-    def _page_changed_cb(self, page, proxy = None):
-        self._update_nav_buttons()
-        if hasattr(self._document, 'has_document_links'):
-            if self._document.has_document_links():
-                self._toc_select_active_page()
-                
-        self._sidebar.update_for_page(self._document.get_page_cache().get_current_page())
-
-        self._bookmarker.handler_block(self._bookmarker_toggle_handler_id)
-        self._bookmarker.props.active = self._sidebar.is_showing_local_bookmark()
-        self._bookmarker.handler_unblock(self._bookmarker_toggle_handler_id)
-        
-    def _update_nav_buttons(self):
-        current_page = self._document.get_page_cache().get_current_page()
-        self._back.props.sensitive = current_page > 0
-        self._forward.props.sensitive = \
-            current_page < self._document.get_n_pages() - 1
-        
-        self._num_page_entry.props.text = str(current_page + 1)
-        self._total_page_label.props.label = \
-            ' / ' + str(self._document.get_n_pages())
-
-    def _update_toc(self):
-        if hasattr(self._document, 'has_document_links'):
-            if self._document.has_document_links():
-                self._navigator.show_all()
-
-                self._toc_model = self._document.get_links_model()
-                self._navigator.set_model(self._toc_model)
-                self._navigator.set_active(0)
-
-                self.__navigator_changed_handler_id = \
-                    self._navigator.connect('changed',
-                            self._navigator_changed_cb)
-
-                self._toc_select_active_page()
-
-    def _navigator_changed_cb(self, combobox):
-        iter = self._navigator.get_active_iter()
-
-        link = self._toc_model.get(iter, 1)[0]
-        self._evince_view.handle_link(link)
-
-    def _toc_select_active_page_foreach(self, model, path, iter, current_page):
-        link = self._toc_model.get(iter, 1)[0]
-
-        if not hasattr(link, 'get_page'):
-            #FIXME: This needs to be implemented in epubadapter, not here
-            filepath = self._evince_view.get_current_file()
-            if filepath.endswith(link):
-                self._navigator.set_active_iter(iter)
-                return True
-        else:
-            if current_page == link.get_page():
-                self._navigator.set_active_iter(iter)
-                return True
-
-        return False
-
-
-    def _toc_select_active_page(self):
-        iter = self._navigator.get_active_iter()
-        
-        current_link = self._toc_model.get(iter, 1)[0]
-        current_page = self._document.get_page_cache().get_current_page()
-
-
-        if not hasattr(current_link, 'get_page'):
-            filepath = self._evince_view.get_current_file()
-            if filepath is None or filepath.endswith(current_link):
-                return
-        else:
-            if current_link.get_page() == current_page:
-                return
-
-        self._navigator.handler_block(self.__navigator_changed_handler_id)
-        self._toc_model.foreach(self._toc_select_active_page_foreach, current_page)
-        self._navigator.handler_unblock(self.__navigator_changed_handler_id)
 
 
 class ViewToolbar(gtk.Toolbar):

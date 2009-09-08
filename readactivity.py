@@ -1,6 +1,7 @@
 # Copyright (C) 2007, Red Hat, Inc.
 # Copyright (C) 2007 Collabora Ltd. <http://www.collabora.co.uk/>
 # Copyright 2008 One Laptop Per Child
+# Copyright 2009 Simon Schampijer
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,21 +21,32 @@ import logging
 import os
 import time
 from gettext import gettext as _
+import re
+import md5
 
 import dbus
 import evince
 import gobject
 import gtk
+import pango
+from glib import GError
 import telepathy
 
 from sugar.activity import activity
+from sugar.graphics.toolbutton import ToolButton
+from sugar.graphics.toolbarbox import ToolbarBox
+from sugar.graphics.toolbarbox import ToolbarButton
+from sugar.graphics.toggletoolbutton import ToggleToolButton
+from sugar.graphics.menuitem import MenuItem
+from sugar.activity.widgets import ActivityToolbarButton
+from sugar.activity.widgets import StopButton
 from sugar import network
 from sugar import mime
 
 from sugar.datastore import datastore
 from sugar.graphics.objectchooser import ObjectChooser
 
-from readtoolbar import EditToolbar, ReadToolbar, ViewToolbar
+from readtoolbar import EditToolbar, ViewToolbar
 from readsidebar import Sidebar
 from readtopbar import TopBar
 
@@ -59,6 +71,17 @@ def _get_screen_dpi():
     _logger.debug('Setting dpi to %f', float(xft_dpi / 1024))
     return float(xft_dpi / 1024)
 
+def get_md5(filename): #FIXME: Should be moved somewhere else
+    filename = filename.replace('file://', '') #XXX: hack 
+    fh = open(filename)
+    digest = md5.new()
+    while 1:
+        buf = fh.read(4096)
+        if buf == "":
+            break
+        digest.update(buf)
+    fh.close()
+    return digest.hexdigest()
 
 class ReadHTTPRequestHandler(network.ChunkedGlibHTTPRequestHandler):
     """HTTP Request Handler for transferring document while collaborating.
@@ -127,7 +150,11 @@ class ReadActivity(activity.Activity):
         self._sidebar = Sidebar()
         self._sidebar.show()
 
-        toolbox = activity.ActivityToolbox(self)
+        toolbar_box = ToolbarBox()
+
+        activity_button = ActivityToolbarButton(self)
+        toolbar_box.toolbar.insert(activity_button, 0)
+        activity_button.show()
 
         self._edit_toolbar = EditToolbar()
         self._edit_toolbar.undo.props.visible = False
@@ -136,23 +163,93 @@ class ReadActivity(activity.Activity):
         self._edit_toolbar.copy.set_sensitive(False)
         self._edit_toolbar.copy.connect('clicked', self._edit_toolbar_copy_cb)
         self._edit_toolbar.paste.props.visible = False
-        toolbox.add_toolbar(_('Edit'), self._edit_toolbar)
-        self._edit_toolbar.show()
 
-        self._read_toolbar = ReadToolbar(self._sidebar)
-        toolbox.add_toolbar(_('Read'), self._read_toolbar)
-        self._read_toolbar.show()
+        edit_toolbar_button = ToolbarButton(
+                page=self._edit_toolbar,
+                icon_name='toolbar-edit')
+        self._edit_toolbar.show()
+        toolbar_box.toolbar.insert(edit_toolbar_button, -1)
+        edit_toolbar_button.show()
 
         self._view_toolbar = ViewToolbar()
         self._view_toolbar.connect('needs-update-size',
                 self.__view_toolbar_needs_update_size_cb)
         self._view_toolbar.connect('go-fullscreen',
                 self.__view_toolbar_go_fullscreen_cb)
-        toolbox.add_toolbar(_('View'), self._view_toolbar)
+        view_toolbar_button = ToolbarButton(
+                page=self._view_toolbar,
+                icon_name='toolbar-view')
         self._view_toolbar.show()
+        toolbar_box.toolbar.insert(view_toolbar_button, -1)
+        view_toolbar_button.show()
 
-        self.set_toolbox(toolbox)
-        toolbox.show()
+        self._back_button = self._create_back_button()
+        toolbar_box.toolbar.insert(self._back_button, -1)
+        self._back_button.show()
+
+        self._forward_button = self._create_forward_button()
+        toolbar_box.toolbar.insert(self._forward_button, -1)
+        self._forward_button.show()
+
+        num_page_item = gtk.ToolItem()
+        self._num_page_entry = self._create_search()
+        num_page_item.add(self._num_page_entry)
+        self._num_page_entry.show()
+        toolbar_box.toolbar.insert(num_page_item, -1)
+        num_page_item.show()
+
+        total_page_item = gtk.ToolItem()
+        self._total_page_label = self._create_total_page_label()
+        total_page_item.add(self._total_page_label)
+        self._total_page_label.show()
+        toolbar_box.toolbar.insert(total_page_item, -1)
+        total_page_item.show()
+
+        spacer = gtk.SeparatorToolItem()
+        spacer.props.draw = False
+        toolbar_box.toolbar.insert(spacer, -1)
+        spacer.show()
+
+        navigator_toolbar = gtk.Toolbar()
+        navigator_item = gtk.ToolItem()
+        self._navigator = self._create_navigator()
+        navigator_item.add(self._navigator)
+        self._navigator.show()
+        navigator_toolbar.insert(navigator_item, -1)
+        navigator_item.show()
+        self._navigator_toolbar_button = ToolbarButton(page=navigator_toolbar,
+                                                 icon_name='view-list')
+        navigator_toolbar.show()
+        toolbar_box.toolbar.insert(self._navigator_toolbar_button, -1)
+        #navigator_toolbar_button.show()
+
+        spacer = gtk.SeparatorToolItem()
+        spacer.props.draw = False
+        toolbar_box.toolbar.insert(spacer, -1)
+        spacer.show()
+
+        bookmark_item = gtk.ToolItem()
+        self._bookmarker = self._create_bookmarker()        
+        self._bookmarker_toggle_handler_id = self._bookmarker.connect( \
+                'toggled', self.__bookmarker_toggled_cb)
+        bookmark_item.add(self._bookmarker)
+        self._bookmarker.show()
+        toolbar_box.toolbar.insert(bookmark_item, -1)
+        bookmark_item.show()
+
+        separator = gtk.SeparatorToolItem()
+        separator.props.draw = False
+        separator.set_expand(True)
+        toolbar_box.toolbar.insert(separator, -1)
+        separator.show()
+
+        stop_button = StopButton(self)
+        stop_button.props.accelerator = '<Ctrl><Shift>Q'
+        toolbar_box.toolbar.insert(stop_button, -1)
+        stop_button.show()
+
+        self.set_toolbar_box(toolbar_box)
+        toolbar_box.show()
 
         self._vbox = gtk.VBox()
         self._vbox.show()
@@ -213,9 +310,6 @@ class ReadActivity(activity.Activity):
         if handle.uri:
             self._load_document(handle.uri)
 
-        # start on the read toolbar
-        self.toolbox.set_current_toolbar(_TOOLBAR_READ)
-
         if self.shared_activity:
             # We're joining
             if self.get_shared():
@@ -230,6 +324,208 @@ class ReadActivity(activity.Activity):
         # uncomment this and adjust the path for easier testing
         #else:
         #    self._load_document('file:///home/smcv/tmp/test.pdf')
+
+    def _create_back_button(self):
+        back = ToolButton('go-previous')
+        back.set_tooltip(_('Back'))
+        back.props.sensitive = False
+        palette = back.get_palette()
+        previous_page = MenuItem(text_label= _("Previous page"))
+        palette.menu.append(previous_page) 
+        previous_page.show_all()        
+        previous_bookmark = MenuItem(text_label= _("Previous bookmark"))
+        palette.menu.append(previous_bookmark) 
+        previous_bookmark.show_all()
+        back.connect('clicked', self.__go_back_cb)
+        previous_page.connect('activate', self.__go_back_page_cb)
+        previous_bookmark.connect('activate', self.__prev_bookmark_activate_cb)
+        return back
+
+    def _create_forward_button(self):
+        forward = ToolButton('go-next')
+        forward.set_tooltip(_('Forward'))
+        forward.props.sensitive = False
+        palette = forward.get_palette()
+        next_page = MenuItem(text_label= _("Next page"))
+        palette.menu.append(next_page) 
+        next_page.show_all()        
+        next_bookmark = MenuItem(text_label= _("Next bookmark"))
+        palette.menu.append(next_bookmark) 
+        next_bookmark.show_all()
+        forward.connect('clicked', self.__go_forward_cb)
+        next_page.connect('activate', self.__go_forward_page_cb)
+        next_bookmark.connect('activate', self.__next_bookmark_activate_cb)
+        return forward
+
+    def _create_search(self):
+        num_page_entry = gtk.Entry()
+        num_page_entry.set_text('0')
+        num_page_entry.set_alignment(1)
+        num_page_entry.connect('insert-text',
+                               self.__num_page_entry_insert_text_cb)
+        num_page_entry.connect('activate',
+                               self.__num_page_entry_activate_cb)
+        num_page_entry.set_width_chars(4)
+        return num_page_entry
+
+    def _create_total_page_label(self):
+        total_page_label = gtk.Label()
+
+        label_attributes = pango.AttrList()
+        label_attributes.insert(pango.AttrSize(14000, 0, -1))
+        label_attributes.insert(pango.AttrForeground(65535, 65535, 
+                                                     65535, 0, -1))
+        total_page_label.set_attributes(label_attributes)
+
+        total_page_label.set_text(' / 0')
+        return total_page_label
+    
+    def _create_navigator(self):
+        navigator = gtk.ComboBox()
+        navigator.set_add_tearoffs(True)
+        cell = gtk.CellRendererText()
+        navigator.pack_start(cell, True)
+        navigator.add_attribute(cell, 'text', 0)
+        navigator.props.visible = False
+        return navigator
+
+    def _create_bookmarker(self):
+        bookmarker = ToggleToolButton('emblem-favorite')
+        return bookmarker
+    
+    def __num_page_entry_insert_text_cb(self, entry, text, length, position):
+        if not re.match('[0-9]', text):
+            entry.emit_stop_by_name('insert-text')
+            return True
+        return False
+
+    def __num_page_entry_activate_cb(self, entry):
+        if entry.props.text:
+            page = int(entry.props.text) - 1
+        else:
+            page = 0
+
+        if page >= self._document.get_n_pages():
+            page = self._document.get_n_pages() - 1
+        elif page < 0:
+            page = 0
+
+        self._document.get_page_cache().set_current_page(page)
+        entry.props.text = str(page + 1)
+    
+    def __go_back_cb(self, button):
+        self._view.scroll(gtk.SCROLL_PAGE_BACKWARD, False)
+
+    def __go_forward_cb(self, button):
+        self._view.scroll(gtk.SCROLL_PAGE_FORWARD, False)
+
+    def __go_back_page_cb(self, button):
+        self._view.previous_page()
+    
+    def __go_forward_page_cb(self, button):
+        self._view.next_page()
+
+    def __prev_bookmark_activate_cb(self, menuitem):
+        page = self._document.get_page_cache().get_current_page()
+        bookmarkmanager = self._sidebar.get_bookmarkmanager()
+        
+        prev_bookmark = bookmarkmanager.get_prev_bookmark_for_page(page)
+        if prev_bookmark is not None:
+            self._document.get_page_cache().set_current_page(prev_bookmark.page_no)
+
+    def __next_bookmark_activate_cb(self, menuitem):
+        page = self._document.get_page_cache().get_current_page()
+        bookmarkmanager = self._sidebar.get_bookmarkmanager()
+        
+        next_bookmark = bookmarkmanager.get_next_bookmark_for_page(page)
+        if next_bookmark is not None:
+            self._document.get_page_cache().set_current_page(next_bookmark.page_no)
+
+    def __bookmarker_toggled_cb(self, button):
+        page = self._document.get_page_cache().get_current_page()
+        if self._bookmarker.props.active:
+            self._sidebar.add_bookmark(page)
+        else:
+            self._sidebar.del_bookmark(page)    
+
+    def __page_changed_cb(self, page, proxy = None):
+        self._update_nav_buttons()
+        if hasattr(self._document, 'has_document_links'):
+            if self._document.has_document_links():
+                self._toc_select_active_page()
+                
+        self._sidebar.update_for_page(self._document.get_page_cache().get_current_page())
+
+        self._bookmarker.handler_block(self._bookmarker_toggle_handler_id)
+        self._bookmarker.props.active = self._sidebar.is_showing_local_bookmark()
+        self._bookmarker.handler_unblock(self._bookmarker_toggle_handler_id)
+        
+    def _update_nav_buttons(self):
+        current_page = self._document.get_page_cache().get_current_page()
+        self._back_button.props.sensitive = current_page > 0
+        self._forward_button.props.sensitive = \
+            current_page < self._document.get_n_pages() - 1
+        
+        self._num_page_entry.props.text = str(current_page + 1)
+        self._total_page_label.props.label = \
+            ' / ' + str(self._document.get_n_pages())
+
+    def _update_toc(self):
+        if hasattr(self._document, 'has_document_links'):
+            if self._document.has_document_links():
+                self._navigator_toolbar_button.show()
+                self._navigator.show_all()
+
+                self._toc_model = self._document.get_links_model()
+                self._navigator.set_model(self._toc_model)
+                self._navigator.set_active(0)
+
+                self._navigator_changed_handler_id = \
+                    self._navigator.connect('changed',
+                            self.__navigator_changed_cb)
+
+                self._toc_select_active_page()
+
+    def __navigator_changed_cb(self, combobox):
+        iter = self._navigator.get_active_iter()
+
+        link = self._toc_model.get(iter, 1)[0]
+        self._view.handle_link(link)
+
+    def _toc_select_active_page_foreach(self, model, path, iter, current_page):
+        link = self._toc_model.get(iter, 1)[0]
+
+        if not hasattr(link, 'get_page'):
+            #FIXME: This needs to be implemented in epubadapter, not here
+            filepath = self._view.get_current_file()
+            if filepath.endswith(link):
+                self._navigator.set_active_iter(iter)
+                return True
+        else:
+            if current_page == link.get_page():
+                self._navigator.set_active_iter(iter)
+                return True
+
+        return False
+
+    def _toc_select_active_page(self):
+        iter = self._navigator.get_active_iter()
+        
+        current_link = self._toc_model.get(iter, 1)[0]
+        current_page = self._document.get_page_cache().get_current_page()
+
+
+        if not hasattr(current_link, 'get_page'):
+            filepath = self._view.get_current_file()
+            if filepath is None or filepath.endswith(current_link):
+                return
+        else:
+            if current_link.get_page() == current_page:
+                return
+
+        self._navigator.handler_block(self._navigator_changed_handler_id)
+        self._toc_model.foreach(self._toc_select_active_page_foreach, current_page)
+        self._navigator.handler_unblock(self._navigator_changed_handler_id)
 
     def _show_journal_object_picker(self):
         """Show the journal object picker to load a document.
@@ -500,17 +796,28 @@ class ReadActivity(activity.Activity):
             self._document = epubadapter.EpubDocument(self._view, filepath.replace('file://', ''))
         else:
             self._setup_evince_viewer()
-            self._document = evince.factory_get_document(filepath)
+            try:
+                self._document = evince.factory_get_document(filepath)
+            except GError, e:
+                _logger.error('Can not load document: %s', e)
+                return
 
         self._view_toolbar.set_view(self._view)
         self._edit_toolbar.set_view(self._view)
-        self._read_toolbar.set_view(self._view)        
 
         self._want_document = False
         self._view.set_document(self._document)
         self._edit_toolbar.set_document(self._document)
-        self._read_toolbar.set_document(self._document, filepath)
         self._topbar.set_document(self._document)
+
+        filehash = get_md5(filepath)
+        self._sidebar.set_bookmarkmanager(filehash)
+
+        self._update_nav_buttons()
+        self._update_toc()
+    
+        page_cache = self._document.get_page_cache()
+        page_cache.connect('page-changed', self.__page_changed_cb)
 
         if not self.metadata['title_set_by_user'] == '1':
             info = self._document.get_info()
