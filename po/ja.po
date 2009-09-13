@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-26 00:33-0400\n"
-"PO-Revision-Date: 2009-07-02 10:43-0400\n"
+"POT-Creation-Date: 2009-08-06 00:33-0400\n"
+"PO-Revision-Date: 2009-09-13 11:36-0400\n"
 "Last-Translator: korakurider <korakurider@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ja\n"
@@ -17,95 +17,133 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Pootle 1.2.1\n"
 
-#: activity/activity.info:2 readactivity.py:135
+#: activity/activity.info:2 readactivity.py:143
 msgid "Read"
 msgstr "Read"
 
-#: readactivity.py:131
+#: readactivity.py:139
 msgid "Edit"
 msgstr "編集"
 
-#: readactivity.py:143
+#: readactivity.py:151
 msgid "View"
 msgstr "ビュー"
 
-#: readactivity.py:235
+#: readactivity.py:241
 msgid "Choose document"
 msgstr "文書を選ぶ"
 
-#: readsidebar.py:57
+#: readdialog.py:49
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: readdialog.py:55
+msgid "Ok"
+msgstr "OK"
+
+#: readdialog.py:109
+msgid "<b>Title</b>:"
+msgstr "<b>表題</b>:"
+
+#: readdialog.py:136
+msgid "<b>Details</b>:"
+msgstr "<b>詳細</b>:"
+
+#. TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
+#. TRANS: automatically)
+#: readsidebar.py:83
 #, python-format
-msgid "Bookmark added by %(user)s on %(time)s"
+msgid "Bookmark added by %(user)s %(time)s"
 msgstr "%(user)sが %(time)s に追加したブックマーク"
 
-#: readtoolbar.py:87
+#: readsidebar.py:124 readsidebar.py:164
+msgid "Add notes for bookmark: "
+msgstr "ブックマークにノートを追加:"
+
+#: readsidebar.py:161
+#, python-format
+msgid "%s's bookmark"
+msgstr "%s のブックマーク"
+
+#: readsidebar.py:162
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "ページ %d へのブックマーク"
+
+#: readtoolbar.py:91
 msgid "Previous"
 msgstr "前へ"
 
-#: readtoolbar.py:94
+#: readtoolbar.py:98
 msgid "Next"
 msgstr "次へ"
 
-#: readtoolbar.py:172
+#: readtoolbar.py:184
 msgid "Find first"
 msgstr "最初から検索"
 
-#: readtoolbar.py:178
+#: readtoolbar.py:190
 msgid "Find previous"
 msgstr "前を検索"
 
-#: readtoolbar.py:180
+#: readtoolbar.py:192
 msgid "Find next"
 msgstr "次を検索"
 
-#: readtoolbar.py:193
+#: readtoolbar.py:205
 msgid "Back"
 msgstr "戻る"
 
-#: readtoolbar.py:196
+#: readtoolbar.py:208
 msgid "Previous page"
 msgstr "前ページ"
 
-#: readtoolbar.py:199
+#: readtoolbar.py:211
 msgid "Previous bookmark"
 msgstr "前のブックマーク"
 
-#: readtoolbar.py:209
+#: readtoolbar.py:221
 msgid "Forward"
 msgstr "進む"
 
-#: readtoolbar.py:212
+#: readtoolbar.py:224
 msgid "Next page"
 msgstr "次ページ"
 
-#: readtoolbar.py:215
+#: readtoolbar.py:227
 msgid "Next bookmark"
 msgstr "次のブックマーク"
 
-#: readtoolbar.py:434
+#: readtoolbar.py:468
 msgid "Zoom out"
 msgstr "縮小"
 
-#: readtoolbar.py:440
+#: readtoolbar.py:474
 msgid "Zoom in"
 msgstr "拡大"
 
-#: readtoolbar.py:446
+#: readtoolbar.py:480
 msgid "Zoom to width"
 msgstr "幅にあわせて拡大"
 
-#: readtoolbar.py:452
+#: readtoolbar.py:486
 msgid "Zoom to fit"
 msgstr "画面にあわせて拡大"
 
-#: readtoolbar.py:457
+#: readtoolbar.py:491
 msgid "Actual size"
 msgstr "実際のサイズ"
 
-#: readtoolbar.py:475
+#: readtoolbar.py:508
 msgid "%"
 msgstr "%"
 
-#: readtoolbar.py:493
+#: readtoolbar.py:521
 msgid "Fullscreen"
 msgstr "全画面"
+
+#. TRANS: Translate this as Page i of m (eg: Page 4 of 334)
+#: readtopbar.py:201
+#, python-format
+msgid "Page %i of %i"
+msgstr "ページ %i/%i"
