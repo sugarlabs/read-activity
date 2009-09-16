@@ -38,9 +38,6 @@ class View(epubview.EpubView):
     def find_changed(self, job, page = None):
         self._find_changed(job)
 
-    def update_view_size(self, widget):
-        return
-
     def handle_link(self, link):
         self._load_file(link)
 
