@@ -555,7 +555,7 @@ class ReadActivity(activity.Activity):
             # Now active, start initial suspend timeout
             if self._idle_timer > 0:
                 gobject.source_remove(self._idle_timer)
-            self._idle_timer = gobject.timeout_add(15000, self._suspend_cb)
+            self._idle_timer = gobject.timeout_add_seconds(15, self._suspend_cb)
             self._sleep_inhibit = False
         else:
             # Now inactive
@@ -574,7 +574,7 @@ class ReadActivity(activity.Activity):
         """Set a timer for going back to ebook mode idle sleep."""
         if self._idle_timer > 0:
             gobject.source_remove(self._idle_timer)
-        self._idle_timer = gobject.timeout_add(5000, self._suspend_cb)
+        self._idle_timer = gobject.timeout_add_seconds(5, self._suspend_cb)
 
     def _suspend_cb(self):
         """Go into ebook mode idle sleep."""
@@ -595,7 +595,7 @@ class ReadActivity(activity.Activity):
         self._load_document('file://' + self._tempfile)
 
         # FIXME: This should obviously be fixed properly
-        gobject.timeout_add(1000, self.__view_toolbar_needs_update_size_cb,
+        gobject.timeout_add_seconds(1, self.__view_toolbar_needs_update_size_cb,
             None)
 
     def write_file(self, file_path):
@@ -964,6 +964,8 @@ class ReadActivity(activity.Activity):
     def __view_toolbar_needs_update_size_cb(self, view_toolbar):
         if hasattr(self._view, 'update_view_size'):
             self._view.update_view_size(self._scrolled)
+        else:
+            return False # No need to run this again and again
 
     def __view_toolbar_go_fullscreen_cb(self, view_toolbar):
         self.fullscreen()
