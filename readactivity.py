@@ -638,6 +638,7 @@ class ReadActivity(activity.Activity):
 
         self.metadata['Read_search'] = \
                 self._edit_toolbar._search_entry.props.text
+        self.metadata['activity'] = self.get_bundle_id()
 
         os.link(self._tempfile, file_path)
 
