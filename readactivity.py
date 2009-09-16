@@ -830,14 +830,16 @@ class ReadActivity(activity.Activity):
             _logger.debug('Found sizing mode: %s', sizing_mode)
             if sizing_mode == "best-fit":
                 self._view.props.sizing_mode = evince.SIZING_BEST_FIT
-                self._view.update_view_size(self._scrolled)
+                if hasattr(self._view, 'update_view_size'):
+                    self._view.update_view_size(self._scrolled)
             elif sizing_mode == "free":
                 self._view.props.sizing_mode = evince.SIZING_FREE
                 self._view.props.zoom = float(self.metadata.get('Read_zoom', '1.0'))
                 _logger.debug('Set zoom to %f', self._view.props.zoom)
             elif sizing_mode == "fit-width":
                 self._view.props.sizing_mode = evince.SIZING_FIT_WIDTH
-                self._view.update_view_size(self._scrolled)
+                if hasattr(self._view, 'update_view_size'):
+                    self._view.update_view_size(self._scrolled)
             else:
                 # this may happen when we get a document from a buddy with a later
                 # version of Read, for example.
@@ -960,7 +962,7 @@ class ReadActivity(activity.Activity):
             self._topbar.hide()
 
     def __view_toolbar_needs_update_size_cb(self, view_toolbar):
-        if not self._epub:
+        if hasattr(self._view, 'update_view_size'):
             self._view.update_view_size(self._scrolled)
 
     def __view_toolbar_go_fullscreen_cb(self, view_toolbar):
