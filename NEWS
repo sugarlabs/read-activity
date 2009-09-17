@@ -1,3 +1,10 @@
+74
+
+* Set bundle id in metadata explicitly (addresses dslo#1172)
+* Workaround possible Evince libview API issues. (dslo#1328)
+* Use gobject.timeout_add_seconds instead of gobject.timeout_add
+* Updated translations for French and Japanese
+
 73
 
 * Migration to the new toolbar system
