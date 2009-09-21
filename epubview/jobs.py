@@ -55,7 +55,7 @@ class SearchThread(threading.Thread):
             filepath = os.path.join(self.obj._document.get_basedir(), entry)
             f = open(filepath)
             if self._searchfile(f):
-                self.obj._matchfilelist.append(file)
+                self.obj._matchfilelist.append(entry)
             f.close()
         
         gtk.gdk.threads_enter()
@@ -217,7 +217,7 @@ class _JobFind(gobject.GObject):
     }
     def __init__(self, document, start_page, n_pages, text, case_sensitive=False):
         gobject.GObject.__init__(self)
-        gtk.threads_init()
+        gtk.gdk.threads_init()
         
         self._finished = False
         self._document = document
