@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-09-09 00:33-0400\n"
-"PO-Revision-Date: 2009-09-21 15:24-0400\n"
-"Last-Translator: Odontsetseg Bat-Erdene <obat-erdene@suffolk.edu>\n"
+"PO-Revision-Date: 2009-09-21 20:33-0400\n"
+"Last-Translator: Bulgantamir <ar_uul_us@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: mn\n"
 "MIME-Version: 1.0\n"
@@ -115,11 +115,11 @@ msgstr "Зөв"
 
 #: readdialog.py:109
 msgid "<b>Title</b>:"
-msgstr ""
+msgstr "<b>Гарчиг</b>:"
 
 #: readdialog.py:136
 msgid "<b>Details</b>:"
-msgstr ""
+msgstr "<b>Деталь</b>:"
 
 #. TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
 #. TRANS: automatically)
