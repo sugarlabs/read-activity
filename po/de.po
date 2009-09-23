@@ -4,87 +4,146 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xbook\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-09 00:31-0400\n"
-"PO-Revision-Date: 2008-11-12 15:48-0500\n"
-"Last-Translator: Rita Freudenberg <rita@freudenbergs.de>\n"
+"POT-Creation-Date: 2009-09-09 00:33-0400\n"
+"PO-Revision-Date: 2009-09-23 16:59-0400\n"
+"Last-Translator: Markus Schlager <m.slg@gmx.de>\n"
 "Language-Team: cvs@fedoraproject.org <fedora-trans-de@redhat.com>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Pootle 1.1.0rc2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 1.2.1\n"
 "X-Poedit-Language: German\n"
 
-#: activity/activity.info:2 readactivity.py:129
+#: activity/activity.info:2
 msgid "Read"
 msgstr "Lesen"
 
-#: readactivity.py:125
-msgid "Edit"
-msgstr "Bearbeiten"
-
-#: readactivity.py:137
-msgid "View"
-msgstr "Ansehen"
-
-#: readactivity.py:223
-msgid "Choose document"
-msgstr "Dokument auswählen"
-
-#: readtoolbar.py:67
-msgid "Previous"
-msgstr "Vorheriges"
-
-#: readtoolbar.py:74
-msgid "Next"
-msgstr "Nächstes"
-
-#: readtoolbar.py:140
-msgid "Find first"
-msgstr "Suche vorwärts"
-
-#: readtoolbar.py:146
-msgid "Find previous"
-msgstr "Suche rückwärts"
-
-#: readtoolbar.py:148
-msgid "Find next"
-msgstr "Weitersuchen"
-
-#: readtoolbar.py:160
+#: readactivity.py:330
 msgid "Back"
 msgstr "Zurück"
 
-#: readtoolbar.py:167
+#: readactivity.py:333
+msgid "Previous page"
+msgstr "Vorherige Seite"
+
+#: readactivity.py:336
+msgid "Previous bookmark"
+msgstr "Vorheriges Lesezeichen"
+
+#: readactivity.py:346
 msgid "Forward"
 msgstr "Weiter"
 
-#: readtoolbar.py:271
+#: readactivity.py:349
+msgid "Next page"
+msgstr "Nächste Seite"
+
+#: readactivity.py:352
+msgid "Next bookmark"
+msgstr "Nächstes Lesezeichen"
+
+#: readactivity.py:537
+msgid "Choose document"
+msgstr "Dokument auswählen"
+
+#: readdialog.py:49
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: readdialog.py:55
+msgid "Ok"
+msgstr "Ok"
+
+#: readdialog.py:109
+msgid "<b>Title</b>:"
+msgstr "<b>Titel</b>:"
+
+#: readdialog.py:136
+msgid "<b>Details</b>:"
+msgstr "<b>Details</b>:"
+
+#. TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
+#. TRANS: automatically)
+#: readsidebar.py:83
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "Lesezeichen hinzugefügt von %(user)s %(time)s"
+
+#: readsidebar.py:124 readsidebar.py:164
+msgid "Add notes for bookmark: "
+msgstr "Anmerkungen zu Lesezeichen hinzufügen: "
+
+#: readsidebar.py:161
+#, python-format
+msgid "%s's bookmark"
+msgstr "%ss Lesezeichen"
+
+#: readsidebar.py:162
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "Lesezeichen für Seite %d"
+
+#: readtoolbar.py:64
+msgid "Previous"
+msgstr "Vorheriges"
+
+#: readtoolbar.py:71
+msgid "Next"
+msgstr "Nächstes"
+
+#: readtoolbar.py:157
+msgid "Find first"
+msgstr "Suche vorwärts"
+
+#: readtoolbar.py:163
+msgid "Find previous"
+msgstr "Suche rückwärts"
+
+#: readtoolbar.py:165
+msgid "Find next"
+msgstr "Weitersuchen"
+
+#: readtoolbar.py:187
 msgid "Zoom out"
 msgstr "Verkleinern"
 
-#: readtoolbar.py:277
+#: readtoolbar.py:193
 msgid "Zoom in"
 msgstr "Vergrößern"
 
-#: readtoolbar.py:283
+#: readtoolbar.py:199
 msgid "Zoom to width"
 msgstr "Breite anpassen"
 
-#: readtoolbar.py:289
+#: readtoolbar.py:205
 msgid "Zoom to fit"
 msgstr "Größe anpassen"
 
-#: readtoolbar.py:294
+#: readtoolbar.py:210
 msgid "Actual size"
 msgstr "Originalgröße"
 
-#: readtoolbar.py:312
+#: readtoolbar.py:227
 msgid "%"
 msgstr "%"
 
-#: readtoolbar.py:330
+#: readtoolbar.py:240
 msgid "Fullscreen"
 msgstr "Vollanzeige"
+
+#. TRANS: Translate this as Page i of m (eg: Page 4 of 334)
+#: readtopbar.py:201
+#, python-format
+msgid "Page %i of %i"
+msgstr "Seite %i von %i"
+
+#~ msgid "Edit"
+#~ msgstr "Bearbeiten"
+
+#~ msgid "View"
+#~ msgstr "Ansehen"
 
 #~ msgid "Read Activity"
 #~ msgstr "Lese-Aktivitäten"
