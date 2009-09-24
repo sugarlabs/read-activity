@@ -1,3 +1,8 @@
+75
+
+* Fix search in Epub files (dslo #1319)
+* Updated translations for German, Mongolian and Portuguese
+
 74
 
 * Set bundle id in metadata explicitly (addresses dslo#1172)
