@@ -6,83 +6,142 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-09 00:31-0400\n"
-"PO-Revision-Date: 2009-02-13 07:57-0500\n"
+"POT-Creation-Date: 2009-09-09 00:33-0400\n"
+"PO-Revision-Date: 2009-09-24 10:44-0400\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Pootle 1.1.0rc2\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Pootle 1.2.1\n"
 
-#: activity/activity.info:2 readactivity.py:129
+#: activity/activity.info:2
 msgid "Read"
 msgstr "Đọc"
 
-#: readactivity.py:125
-msgid "Edit"
-msgstr "Sửa"
-
-#: readactivity.py:137
-msgid "View"
-msgstr "Xem"
-
-#: readactivity.py:223
-msgid "Choose document"
-msgstr "Chọn tài liệu"
-
-#: readtoolbar.py:67
-msgid "Previous"
-msgstr "Lùi"
-
-#: readtoolbar.py:74
-msgid "Next"
-msgstr "Tiếp"
-
-#: readtoolbar.py:140
-msgid "Find first"
-msgstr "Tìm mục đầu"
-
-#: readtoolbar.py:146
-msgid "Find previous"
-msgstr "Tìm trước"
-
-#: readtoolbar.py:148
-msgid "Find next"
-msgstr "Tìm tiếp"
-
-#: readtoolbar.py:160
+#: readactivity.py:330
 msgid "Back"
 msgstr "Lùi"
 
-#: readtoolbar.py:167
+#: readactivity.py:333
+msgid "Previous page"
+msgstr "Trang trước"
+
+#: readactivity.py:336
+msgid "Previous bookmark"
+msgstr "Liên kết lưu trước"
+
+#: readactivity.py:346
 msgid "Forward"
 msgstr "Tiếp"
 
-#: readtoolbar.py:271
+#: readactivity.py:349
+msgid "Next page"
+msgstr "Trang sau"
+
+#: readactivity.py:352
+msgid "Next bookmark"
+msgstr "Liên kết lưu sau"
+
+#: readactivity.py:537
+msgid "Choose document"
+msgstr "Chọn tài liệu"
+
+#: readdialog.py:49
+msgid "Cancel"
+msgstr "Thôi"
+
+#: readdialog.py:55
+msgid "Ok"
+msgstr "OK"
+
+#: readdialog.py:109
+msgid "<b>Title</b>:"
+msgstr "<b>Tên</b>:"
+
+#: readdialog.py:136
+msgid "<b>Details</b>:"
+msgstr "<b>Chi tiết</b>:"
+
+#. TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
+#. TRANS: automatically)
+#: readsidebar.py:83
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "Liên kết được lưu bởi %(user)s %(time)s"
+
+#: readsidebar.py:124 readsidebar.py:164
+msgid "Add notes for bookmark: "
+msgstr "Ghi chú về liên kết lưu : "
+
+#: readsidebar.py:161
+#, python-format
+msgid "%s's bookmark"
+msgstr "Liên kết lưu của %s"
+
+#: readsidebar.py:162
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "Liên kết lưu đến trang %d"
+
+#: readtoolbar.py:64
+msgid "Previous"
+msgstr "Lùi"
+
+#: readtoolbar.py:71
+msgid "Next"
+msgstr "Tiếp"
+
+#: readtoolbar.py:157
+msgid "Find first"
+msgstr "Tìm mục đầu"
+
+#: readtoolbar.py:163
+msgid "Find previous"
+msgstr "Tìm trước"
+
+#: readtoolbar.py:165
+msgid "Find next"
+msgstr "Tìm tiếp"
+
+#: readtoolbar.py:187
 msgid "Zoom out"
 msgstr "Thu nhỏ"
 
-#: readtoolbar.py:277
+#: readtoolbar.py:193
 msgid "Zoom in"
 msgstr "Phóng to"
 
-#: readtoolbar.py:283
+#: readtoolbar.py:199
 msgid "Zoom to width"
 msgstr "Phóng tới bề rộng"
 
-#: readtoolbar.py:289
+#: readtoolbar.py:205
 msgid "Zoom to fit"
 msgstr "Phóng vừa"
 
-#: readtoolbar.py:294
+#: readtoolbar.py:210
 msgid "Actual size"
 msgstr "Kích cỡ thật"
 
-#: readtoolbar.py:312
+#: readtoolbar.py:227
 msgid "%"
 msgstr "%"
 
-#: readtoolbar.py:330
+#: readtoolbar.py:240
 msgid "Fullscreen"
 msgstr "Toàn màn hình"
+
+#. TRANS: Translate this as Page i of m (eg: Page 4 of 334)
+#: readtopbar.py:201
+#, python-format
+msgid "Page %i of %i"
+msgstr "Trang %i trên %i"
+
+#~ msgid "Edit"
+#~ msgstr "Sửa"
+
+#~ msgid "View"
+#~ msgstr "Xem"
