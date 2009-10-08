@@ -12,7 +12,7 @@ class _WebView(webkit.WebView):
         This is done via javascript at the moment
         '''        
         #TODO: Need to check status of page load
-        js = 'oldtitle=document.title;document.title=document.body.clientHeight;'
+        js = 'oldtitle=document.title;document.title=Math.max(document.body.scrollHeight, document.body.offsetHeight,document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight);'
         self.execute_script(js)
         ret = self.get_main_frame().get_title()
         js = 'document.title=oldtitle;'
