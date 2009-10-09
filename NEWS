@@ -1,3 +1,7 @@
+68
+
+* Ugly backport to support older 0.84 builds (post 73 bundles won't work with 0.84 due to the new toolbars)
+
 72
 
 * More robust Epub support
