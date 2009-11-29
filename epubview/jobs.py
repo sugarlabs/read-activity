@@ -184,17 +184,27 @@ class _JobPaginator(gobject.GObject):
         '''        
         return self._pagemap[pageno][2]
     
-    def get_pagecount_for_file(self, file):
+    def get_pagecount_for_file(self, filename):
         '''
         Returns the number of pages in file
         '''        
-        return self._filedict[file][0]
+        return self._filedict[filename][0]
 
-    def get_remfactor_for_file(self, file):
+    def get_base_pageno_for_file(self, filename):
+        '''
+        Returns the pageno which begins in filename
+        '''                
+        for key in self._pagemap.keys():
+            if  self._pagemap[key][0].replace('file://', '') == filename:
+                return key
+            
+        return None
+
+    def get_remfactor_for_file(self, filename):
         '''
         Returns the remainder factor (1 - fraction length of last page in file)
         '''        
-        return self._filedict[file][1]
+        return self._filedict[filename][1]
     
     def get_total_pagecount(self):
         '''

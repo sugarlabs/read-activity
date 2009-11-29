@@ -358,6 +358,8 @@ class _View(gtk.HBox):
         if os.path.exists(filename.replace('xhtml', 'xml')):
             filename = filename.replace('xhtml', 'xml') # Hack for making javascript work
         
+        filename = filename.split('#')[0] # Get rid of anchors
+        
         if self._loaded_page < 1 or filename == None:
             return False
         
@@ -380,6 +382,20 @@ class _View(gtk.HBox):
                 self._scroll_page_end()
             else:
                 self._scroll_page()
+                
+        base_pageno = self._paginator.get_base_pageno_for_file(filename)
+        scrollval = self._v_vscrollbar.get_value()
+        scroll_upper = self._v_vscrollbar.props.adjustment.props.upper
+
+        if scroll_upper == 0: # This is a one page file
+            pageno = base_pageno
+        else:
+            offset = (scrollval/scroll_upper) * self._paginator.get_pagecount_for_file(filename)
+            pageno = math.floor(base_pageno + offset)
+        
+        if pageno != self._loaded_page:
+            self._on_page_changed(int(pageno))
+            
 
     def _scroll_page_end(self):
         v_upper = self._v_vscrollbar.props.adjustment.props.upper
