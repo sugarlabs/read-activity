@@ -134,7 +134,7 @@ class _JobPaginator(gobject.GObject):
         self._temp_view.connect('load-finished', self._page_load_finished_cb)
            
         self._temp_win.show_all()
-        self._temp_win.unrealize()
+        self._temp_win.unmap()
         
         self._temp_view.open(self._filelist[self._count])
        
