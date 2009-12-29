@@ -1,6 +1,9 @@
 import gobject
 import logging
 
+import os, sys
+
+sys.path.append(os.path.join(os.environ['SUGAR_BUNDLE_PATH'], 'epubview'))
 import epubview
 
 _logger = logging.getLogger('read-activity')
