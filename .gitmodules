@@ -1,0 +1,3 @@
+[submodule "epubview"]
+	path = epubview
+	url = git://devel.randomink.org/git/pyepubview
