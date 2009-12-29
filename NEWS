@@ -1,3 +1,9 @@
+85
+
+* Support for OLPC XO game keys
+* Fix for footnotes/references/endnotes/intra-document links
+* Speed improvements
+
 69
 
 * Backport of footnotes and links support
