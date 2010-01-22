@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-06 00:33-0400\n"
-"PO-Revision-Date: 2009-09-13 11:36-0400\n"
+"POT-Creation-Date: 2009-09-09 00:33-0400\n"
+"PO-Revision-Date: 2010-01-22 04:15+0200\n"
 "Last-Translator: korakurider <korakurider@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ja\n"
@@ -15,21 +15,37 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Pootle 1.2.1\n"
+"X-Generator: Pootle 2.0.1\n"
 
-#: activity/activity.info:2 readactivity.py:143
+#: activity/activity.info:2
 msgid "Read"
 msgstr "Read"
 
-#: readactivity.py:139
-msgid "Edit"
-msgstr "編集"
+#: readactivity.py:330
+msgid "Back"
+msgstr "戻る"
 
-#: readactivity.py:151
-msgid "View"
-msgstr "ビュー"
+#: readactivity.py:333
+msgid "Previous page"
+msgstr "前ページ"
 
-#: readactivity.py:241
+#: readactivity.py:336
+msgid "Previous bookmark"
+msgstr "前のブックマーク"
+
+#: readactivity.py:346
+msgid "Forward"
+msgstr "進む"
+
+#: readactivity.py:349
+msgid "Next page"
+msgstr "次ページ"
+
+#: readactivity.py:352
+msgid "Next bookmark"
+msgstr "次のブックマーク"
+
+#: readactivity.py:537
 msgid "Choose document"
 msgstr "文書を選ぶ"
 
@@ -58,7 +74,7 @@ msgstr "%(user)sが %(time)s に追加したブックマーク"
 
 #: readsidebar.py:124 readsidebar.py:164
 msgid "Add notes for bookmark: "
-msgstr "ブックマークにノートを追加:"
+msgstr "ブックマークにノートを追加: "
 
 #: readsidebar.py:161
 #, python-format
@@ -70,75 +86,51 @@ msgstr "%s のブックマーク"
 msgid "Bookmark for page %d"
 msgstr "ページ %d へのブックマーク"
 
-#: readtoolbar.py:91
+#: readtoolbar.py:64
 msgid "Previous"
 msgstr "前へ"
 
-#: readtoolbar.py:98
+#: readtoolbar.py:71
 msgid "Next"
 msgstr "次へ"
 
-#: readtoolbar.py:184
+#: readtoolbar.py:157
 msgid "Find first"
 msgstr "最初から検索"
 
-#: readtoolbar.py:190
+#: readtoolbar.py:163
 msgid "Find previous"
 msgstr "前を検索"
 
-#: readtoolbar.py:192
+#: readtoolbar.py:165
 msgid "Find next"
 msgstr "次を検索"
 
-#: readtoolbar.py:205
-msgid "Back"
-msgstr "戻る"
-
-#: readtoolbar.py:208
-msgid "Previous page"
-msgstr "前ページ"
-
-#: readtoolbar.py:211
-msgid "Previous bookmark"
-msgstr "前のブックマーク"
-
-#: readtoolbar.py:221
-msgid "Forward"
-msgstr "進む"
-
-#: readtoolbar.py:224
-msgid "Next page"
-msgstr "次ページ"
-
-#: readtoolbar.py:227
-msgid "Next bookmark"
-msgstr "次のブックマーク"
-
-#: readtoolbar.py:468
+#: readtoolbar.py:187
 msgid "Zoom out"
 msgstr "縮小"
 
-#: readtoolbar.py:474
+#: readtoolbar.py:193
 msgid "Zoom in"
 msgstr "拡大"
 
-#: readtoolbar.py:480
+#: readtoolbar.py:199
 msgid "Zoom to width"
 msgstr "幅にあわせて拡大"
 
-#: readtoolbar.py:486
+#: readtoolbar.py:205
 msgid "Zoom to fit"
 msgstr "画面にあわせて拡大"
 
-#: readtoolbar.py:491
+#: readtoolbar.py:210
 msgid "Actual size"
 msgstr "実際のサイズ"
 
-#: readtoolbar.py:508
+#: readtoolbar.py:227
 msgid "%"
 msgstr "%"
 
-#: readtoolbar.py:521
+#: readtoolbar.py:240
 msgid "Fullscreen"
 msgstr "全画面"
 
@@ -147,3 +139,9 @@ msgstr "全画面"
 #, python-format
 msgid "Page %i of %i"
 msgstr "ページ %i/%i"
+
+#~ msgid "Edit"
+#~ msgstr "編集"
+
+#~ msgid "View"
+#~ msgstr "ビュー"
