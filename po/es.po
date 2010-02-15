@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xbook\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-09 00:31-0400\n"
+"POT-Creation-Date: 2010-01-20 23:23+0530\n"
 "PO-Revision-Date: 2009-03-07 23:32-0500\n"
 "Last-Translator: Chris Leonard <cjl@laptop.org>\n"
 "Language-Team: Fedora Spanish <fedora-trans-es@redhat.com>\n"
@@ -17,75 +17,139 @@ msgstr ""
 "X-Generator: Pootle 1.1.0rc2\n"
 "X-Poedit-Language: Spanish\n"
 
-#: activity/activity.info:2 readactivity.py:129
+#: activity/activity.info:2
+#: /home/sayamindu/Work/Devel/read/readactivity.py:143
 msgid "Read"
 msgstr "Leer"
 
-#: readactivity.py:125
+#: /home/sayamindu/Work/Devel/read/readactivity.py:139
 msgid "Edit"
 msgstr "Editar"
 
-#: readactivity.py:137
+#: /home/sayamindu/Work/Devel/read/readactivity.py:151
 msgid "View"
 msgstr "Ver"
 
-#: readactivity.py:223
+#: /home/sayamindu/Work/Devel/read/readactivity.py:241
 msgid "Choose document"
 msgstr "Escoger documento"
 
-#: readtoolbar.py:67
+#. TRANS: Translate this as Page i of m (eg: Page 4 of 334)
+#: /home/sayamindu/Work/Devel/read/readtopbar.py:201
+#, python-format
+msgid "Page %i of %i"
+msgstr "Pagina %i de %i "
+
+#: /home/sayamindu/Work/Devel/read/readdialog.py:49
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: /home/sayamindu/Work/Devel/read/readdialog.py:55
+msgid "Ok"
+msgstr "Listo"
+
+#: /home/sayamindu/Work/Devel/read/readdialog.py:109
+msgid "<b>Title</b>:"
+msgstr "Titulo"
+
+#: /home/sayamindu/Work/Devel/read/readdialog.py:136
+msgid "<b>Details</b>:"
+msgstr "Detalles"
+
+#. TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
+#. TRANS: automatically)
+#: /home/sayamindu/Work/Devel/read/readsidebar.py:83
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "Marcador añadido por %(user)s %(time)s"
+
+#: /home/sayamindu/Work/Devel/read/readsidebar.py:124
+#: /home/sayamindu/Work/Devel/read/readsidebar.py:164
+msgid "Add notes for bookmark: "
+msgstr "Añadir notas para el marcador"
+
+#: /home/sayamindu/Work/Devel/read/readsidebar.py:161
+#, python-format
+msgid "%s's bookmark"
+msgstr "bookmark de %s"
+
+#: /home/sayamindu/Work/Devel/read/readsidebar.py:162
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "Marcador para pagina %d"
+
+#: /home/sayamindu/Work/Devel/read/readtoolbar.py:91
 msgid "Previous"
 msgstr "Anterior"
 
-#: readtoolbar.py:74
+#: /home/sayamindu/Work/Devel/read/readtoolbar.py:98
 msgid "Next"
 msgstr "Siguiente"
 
-#: readtoolbar.py:140
+#: /home/sayamindu/Work/Devel/read/readtoolbar.py:184
 msgid "Find first"
 msgstr "Encontrar primero"
 
-#: readtoolbar.py:146
+#: /home/sayamindu/Work/Devel/read/readtoolbar.py:190
 msgid "Find previous"
 msgstr "Encontrar previo"
 
-#: readtoolbar.py:148
+#: /home/sayamindu/Work/Devel/read/readtoolbar.py:192
 msgid "Find next"
 msgstr "Encontrar siguiente"
 
-#: readtoolbar.py:160
+#: /home/sayamindu/Work/Devel/read/readtoolbar.py:205
 msgid "Back"
 msgstr "Volver"
 
-#: readtoolbar.py:167
+#: /home/sayamindu/Work/Devel/read/readtoolbar.py:208
+#, fuzzy
+msgid "Previous page"
+msgstr "Anterior"
+
+#: /home/sayamindu/Work/Devel/read/readtoolbar.py:211
+#, fuzzy
+msgid "Previous bookmark"
+msgstr "Anterior marcador"
+
+#: /home/sayamindu/Work/Devel/read/readtoolbar.py:221
 msgid "Forward"
 msgstr "Avanzar"
 
-#: readtoolbar.py:271
+#: /home/sayamindu/Work/Devel/read/readtoolbar.py:224
+#, fuzzy
+msgid "Next page"
+msgstr "Siguiente"
+
+#: /home/sayamindu/Work/Devel/read/readtoolbar.py:227
+msgid "Next bookmark"
+msgstr "Siguiente marcador"
+
+#: /home/sayamindu/Work/Devel/read/readtoolbar.py:468
 msgid "Zoom out"
 msgstr "Reducir"
 
-#: readtoolbar.py:277
+#: /home/sayamindu/Work/Devel/read/readtoolbar.py:474
 msgid "Zoom in"
 msgstr "Ampliar"
 
-#: readtoolbar.py:283
+#: /home/sayamindu/Work/Devel/read/readtoolbar.py:480
 msgid "Zoom to width"
 msgstr "Ajustar al ancho"
 
-#: readtoolbar.py:289
+#: /home/sayamindu/Work/Devel/read/readtoolbar.py:486
 msgid "Zoom to fit"
 msgstr "Ampliar hasta ajustar"
 
-#: readtoolbar.py:294
+#: /home/sayamindu/Work/Devel/read/readtoolbar.py:491
 msgid "Actual size"
 msgstr "Tamaño real"
 
-#: readtoolbar.py:312
+#: /home/sayamindu/Work/Devel/read/readtoolbar.py:508
 msgid "%"
 msgstr "%"
 
-#: readtoolbar.py:330
+#: /home/sayamindu/Work/Devel/read/readtoolbar.py:521
 msgid "Fullscreen"
 msgstr "Pantalla completa"
 
