@@ -2,11 +2,15 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-06 00:33-0400\n"
+"POT-Creation-Date: 2009-09-09 00:33-0400\n"
 "PO-Revision-Date: 2009-09-04 01:53-0400\n"
 "Last-Translator: Myckel Habets <myckel@sdf.lonestar.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,19 +21,35 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 1.2.1\n"
 
-#: activity/activity.info:2 readactivity.py:143
+#: activity/activity.info:2
 msgid "Read"
 msgstr "Lezen"
 
-#: readactivity.py:139
-msgid "Edit"
-msgstr "Bewerken"
+#: readactivity.py:330
+msgid "Back"
+msgstr "Terug"
 
-#: readactivity.py:151
-msgid "View"
-msgstr "Beeld"
+#: readactivity.py:333
+msgid "Previous page"
+msgstr "Vorige pagina"
 
-#: readactivity.py:241
+#: readactivity.py:336
+msgid "Previous bookmark"
+msgstr "Vorige bladwijzer"
+
+#: readactivity.py:346
+msgid "Forward"
+msgstr "Vooruit"
+
+#: readactivity.py:349
+msgid "Next page"
+msgstr "Volgende pagina"
+
+#: readactivity.py:352
+msgid "Next bookmark"
+msgstr "Volgende bladwijzer"
+
+#: readactivity.py:537
 msgid "Choose document"
 msgstr "Kies document"
 
@@ -70,75 +90,51 @@ msgstr "%s's bladwijzer"
 msgid "Bookmark for page %d"
 msgstr "Bladwijzer voor pagina %d"
 
-#: readtoolbar.py:91
+#: readtoolbar.py:64
 msgid "Previous"
 msgstr "Vorige"
 
-#: readtoolbar.py:98
+#: readtoolbar.py:71
 msgid "Next"
 msgstr "Volgende"
 
-#: readtoolbar.py:184
+#: readtoolbar.py:157
 msgid "Find first"
 msgstr "Zoek eerste"
 
-#: readtoolbar.py:190
+#: readtoolbar.py:163
 msgid "Find previous"
 msgstr "Zoek vorige"
 
-#: readtoolbar.py:192
+#: readtoolbar.py:165
 msgid "Find next"
 msgstr "Zoek volgende"
 
-#: readtoolbar.py:205
-msgid "Back"
-msgstr "Terug"
-
-#: readtoolbar.py:208
-msgid "Previous page"
-msgstr "Vorige pagina"
-
-#: readtoolbar.py:211
-msgid "Previous bookmark"
-msgstr "Vorige bladwijzer"
-
-#: readtoolbar.py:221
-msgid "Forward"
-msgstr "Vooruit"
-
-#: readtoolbar.py:224
-msgid "Next page"
-msgstr "Volgende pagina"
-
-#: readtoolbar.py:227
-msgid "Next bookmark"
-msgstr "Volgende bladwijzer"
-
-#: readtoolbar.py:468
+#: readtoolbar.py:187
 msgid "Zoom out"
 msgstr "Zoom uit"
 
-#: readtoolbar.py:474
+#: readtoolbar.py:193
 msgid "Zoom in"
 msgstr "Zoom in"
 
-#: readtoolbar.py:480
+#: readtoolbar.py:199
 msgid "Zoom to width"
 msgstr "Zoom naar breedte"
 
-#: readtoolbar.py:486
+#: readtoolbar.py:205
 msgid "Zoom to fit"
 msgstr "Zoom naar hele pagina"
 
-#: readtoolbar.py:491
+#: readtoolbar.py:210
 msgid "Actual size"
 msgstr "Werkelijk formaat"
 
-#: readtoolbar.py:508
+#: readtoolbar.py:227
 msgid "%"
 msgstr "%"
 
-#: readtoolbar.py:521
+#: readtoolbar.py:240
 msgid "Fullscreen"
 msgstr "Schermvullend"
 
@@ -147,6 +143,12 @@ msgstr "Schermvullend"
 #, python-format
 msgid "Page %i of %i"
 msgstr "Pagina %i van %i"
+
+#~ msgid "Edit"
+#~ msgstr "Bewerken"
+
+#~ msgid "View"
+#~ msgstr "Beeld"
 
 #~ msgid "Read Activity"
 #~ msgstr "Lezen Activiteit"
