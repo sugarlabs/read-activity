@@ -944,16 +944,16 @@ class ReadActivity(activity.Activity):
         elif keyname == 'KP_End':
             self._view_toolbar.zoom_out()
             return True
-        elif keyname == 'KP_Up' or keyname == 'KP_Page_Up':
+        elif keyname == 'Page_Up' or keyname == 'KP_Page_Up':
+            self._view.scroll(gtk.SCROLL_PAGE_BACKWARD, False)
+            return True
+        elif keyname == 'Page_Down' or keyname == 'KP_Page_Down':
+            self._view.scroll(gtk.SCROLL_PAGE_FORWARD, False)
+            return True
+        elif keyname == 'Up' or keyname == 'KP_Up':
             self._view.scroll(gtk.SCROLL_STEP_BACKWARD, False)
             return True
-        elif keyname == 'KP_Down' or keyname == 'KP_Page_Down':
-            self._view.scroll(gtk.SCROLL_STEP_FORWARD, False)
-            return True
-        elif keyname == 'Up':
-            self._view.scroll(gtk.SCROLL_STEP_BACKWARD, False)
-            return True
-        elif keyname == 'Down':
+        elif keyname == 'Down' or keyname == 'KP_Down':
             self._view.scroll(gtk.SCROLL_STEP_FORWARD, False)
             return True
         else:
