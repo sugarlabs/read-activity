@@ -51,9 +51,6 @@ class EpubDocument(epubview.Epub):
         epubview.Epub.__init__(self, docpath)
         self._page_cache = view
 
-    def get_page_cache(self):
-        return self._page_cache
-
     def get_n_pages(self):
         return int(self._page_cache.get_pagecount())
 

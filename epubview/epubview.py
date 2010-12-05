@@ -37,15 +37,14 @@ LOADING_HTML = '''
 class _View(gtk.HBox):
 
     __gproperties__ = {
-        'has-selection': (gobject.TYPE_BOOLEAN, 'whether has selection',
-                          'whether the widget has selection or not',
-                          0, gobject.PARAM_READABLE),
-        'zoom': (gobject.TYPE_FLOAT, 'the zoom level',
-                 'the zoom level of the widget',
-                 0.5, 4.0, 1.0, gobject.PARAM_READWRITE),
+        'scale' : (gobject.TYPE_FLOAT, 'the zoom level',
+                   'the zoom level of the widget',
+                   0.5, 4.0, 1.0, gobject.PARAM_READWRITE),
     }
     __gsignals__ = {
         'page-changed': (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE, ([])),
+        'selection-changed': (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE,
+                              ([])),
     }
 
     def __init__(self):
@@ -63,8 +62,8 @@ class _View(gtk.HBox):
         self.__going_fwd = True
         self.__going_back = False
         self.__page_changed = False
-        self.has_selection = False
-        self.zoom = 1.0
+        self._has_selection = False
+        self.scale = 1.0
         self._epub = None
         self._findjob = None
         self.__in_search = False
@@ -107,9 +106,9 @@ class _View(gtk.HBox):
 
     def do_get_property(self, property):
         if property.name == 'has-selection':
-            return self.has_selection
+            return self._has_selection
         elif property.name == 'zoom':
-            return self.zoom
+            return self.scale
         else:
             raise AttributeError, 'unknown property %s' % property.name
 
@@ -123,7 +122,7 @@ class _View(gtk.HBox):
         '''
         Returns True if any part of the content is selected
         '''
-        return self.get_property('has-selection')
+        return self._has_selection
 
     def get_zoom(self):
         '''
@@ -161,7 +160,7 @@ class _View(gtk.HBox):
         '''
         Returns True if it is possible to zoom in further
         '''
-        if self.zoom < 4:
+        if self.scale < 4:
             return True
         else:
             return False
@@ -170,7 +169,7 @@ class _View(gtk.HBox):
         '''
         Returns True if it is possible to zoom out further
         '''
-        if self.zoom > 0.5:
+        if self.scale > 0.5:
             return True
         else:
             return False
@@ -293,12 +292,11 @@ class _View(gtk.HBox):
 
     def __set_zoom(self, value):
         self._view.set_zoom_level(value)
-        self.zoom = value
+        self.scale = value
 
     def __set_has_selection(self, value):
-        if value != self.has_selection:
-            self.has_selection = value
-            self.notify('has-selection')
+        if value != self._has_selection:
+            self._has_selection = value
 
     def _view_populate_popup_cb(self, view, menu):
         menu.destroy() #HACK
@@ -308,6 +306,7 @@ class _View(gtk.HBox):
         # FIXME: This does not seem to be implemented in
         # webkitgtk yet
         print view.has_selection()
+        self.emit('selection-changed')
 
     def _view_buttonrelease_event_cb(self, view, event):
         # Ugly hack
@@ -350,7 +349,6 @@ class _View(gtk.HBox):
         return False
 
     def _view_load_finished_cb(self, v, frame):
-
         # Normally the line below would not be required - ugly workaround for
         # possible Webkit bug. See : https://bugs.launchpad.net/bugs/483231
         self._sw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_NEVER)

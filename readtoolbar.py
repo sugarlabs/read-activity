@@ -15,6 +15,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from gettext import gettext as _
+import logging
 
 import gobject
 import gtk
@@ -22,7 +23,7 @@ import evince
 
 try:
     import epubadapter
-except:
+except ImportError:
     pass
 
 from sugar.graphics.toolbutton import ToolButton
@@ -98,7 +99,7 @@ class EditToolbar(activity.EditToolbar):
             try:
                 self._find_job = evince.JobFind(document=self._document, start_page=0, n_pages=self._document.get_n_pages(), text=text, case_sensitive=False)
                 self._find_updated_handler = self._find_job.connect('updated', self._find_updated_cb)
-                evince.job_scheduler_push_job(self._find_job, evince.JOB_PRIORITY_NONE)
+                evince.Job.scheduler_push_job(self._find_job, evince.JOB_PRIORITY_NONE)
             except TypeError:
                 self._find_job = epubadapter.JobFind(document=self._document, start_page=0, n_pages=self._document.get_n_pages(), text=text, case_sensitive=False)
                 self._find_updated_handler = self._find_job.connect('updated', self._find_updated_cb)
@@ -126,11 +127,16 @@ class EditToolbar(activity.EditToolbar):
             self._search_find_next()
 
     def _search_entry_changed_cb(self, entry):
+        logging.debug('Search entry: %s' % (entry.props.text))
         self._search_entry_changed = True
         self._update_find_buttons()
 
-# Automatically start search, maybe after timeout?
-#        self._search_find_first()
+    #    gobject.timeout_add(500, self._search_entry_timeout_cb)
+    #
+    #def _search_entry_timeout_cb(self):
+    #    self._clear_find_job()
+    #    self._search_find_first()
+    #    return False
 
     def _find_changed_cb(self, page, spec):
         self._update_find_buttons()
@@ -171,8 +177,6 @@ class ViewToolbar(gtk.Toolbar):
     __gtype_name__ = 'ViewToolbar'
 
     __gsignals__ = {
-        'needs-update-size': (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE,
-                              ([])),
         'go-fullscreen': (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE, ([])),
     }
 
@@ -243,37 +247,48 @@ class ViewToolbar(gtk.Toolbar):
 
         self._view_notify_zoom_handler = None
 
-    def set_view(self, view):
+    def set_view(self, view, model):
+        # FIXME epubview needs fixing, until then toolbar is disabled
+        if model == None:
+            self._zoom_in.props.sensitive = False
+            self._zoom_out.props.sensitive = False
+            self._zoom_to_width.props.sensitive = False
+            self._zoom_spin.props.sensitive = False
+            return
+
+        self._evince_model = model
         self._evince_view = view
-        self._zoom_spin.props.value = self._evince_view.props.zoom * 100
-        self._view_notify_zoom_handler = self._evince_view.connect(
-            'notify::zoom', self._view_notify_zoom_cb)
+
+        self._zoom_spin.props.value = self._evince_model.props.scale * 100
+        self._view_notify_zoom_handler = self._evince_model.connect(
+            'notify::scale', self._view_notify_zoom_cb)
 
         self._update_zoom_buttons()
 
     def _zoom_spin_notify_value_cb(self, zoom_spin, pspec):
+        self._evince_model.props.sizing_mode = evince.SIZING_FREE
+
         if not self._view_notify_zoom_handler:
             return
-        self._evince_view.disconnect(self._view_notify_zoom_handler)
-        try:
-            if hasattr(self._evince_view.props, 'sizing_mode'):
-                self._evince_view.props.sizing_mode = evince.SIZING_FREE
-            self._evince_view.props.zoom = zoom_spin.props.value / 100.0
-        finally:
-            self._view_notify_zoom_handler = self._evince_view.connect(
-                    'notify::zoom', self._view_notify_zoom_cb)
 
-    def _view_notify_zoom_cb(self, evince_view, pspec):
+        self._evince_model.disconnect(self._view_notify_zoom_handler)
+        try:
+            self._evince_model.props.scale = zoom_spin.props.value / 100.0
+        finally:
+            self._view_notify_zoom_handler = self._evince_model.connect(
+                'notify::scale', self._view_notify_zoom_cb)
+
+    def _view_notify_zoom_cb(self, evince_model, pspec):
         self._zoom_spin.disconnect(self._zoom_spin_notify_value_handler)
         try:
-            self._zoom_spin.props.value = round(evince_view.props.zoom * 100.0)
+            self._zoom_spin.props.value = round(evince_model.props.scale *
+                                                100.0)
         finally:
             self._zoom_spin_notify_value_handler = self._zoom_spin.connect(
                     'notify::value', self._zoom_spin_notify_value_cb)
 
     def zoom_in(self):
-        if hasattr(self._evince_view.props, 'sizing_mode'):
-            self._evince_view.props.sizing_mode = evince.SIZING_FREE
+        self._evince_model.props.sizing_mode = evince.SIZING_FREE
         self._evince_view.zoom_in()
         self._update_zoom_buttons()
 
@@ -281,8 +296,7 @@ class ViewToolbar(gtk.Toolbar):
         self.zoom_in()
 
     def zoom_out(self):
-        if hasattr(self._evince_view.props, 'sizing_mode'):
-            self._evince_view.props.sizing_mode = evince.SIZING_FREE
+        self._evince_model.props.sizing_mode = evince.SIZING_FREE
         self._evince_view.zoom_out()
         self._update_zoom_buttons()
 
@@ -290,9 +304,7 @@ class ViewToolbar(gtk.Toolbar):
         self.zoom_out()
 
     def zoom_to_width(self):
-        if hasattr(self._evince_view.props, 'sizing_mode'):
-            self._evince_view.props.sizing_mode = evince.SIZING_FIT_WIDTH
-        self.emit('needs-update-size')
+        self._evince_model.props.sizing_mode = evince.SIZING_FIT_WIDTH
         self._update_zoom_buttons()
 
     def _zoom_to_width_cb(self, button):
@@ -303,15 +315,12 @@ class ViewToolbar(gtk.Toolbar):
         self._zoom_out.props.sensitive = self._evince_view.can_zoom_out()
 
     def _zoom_to_fit_menu_item_activate_cb(self, menu_item):
-        if hasattr(self._evince_view.props, 'sizing_mode'): #XXX
-            self._evince_view.props.sizing_mode = evince.SIZING_BEST_FIT
-        self.emit('needs-update-size')
+        self._evince_model.props.sizing_mode = evince.SIZING_BEST_FIT
         self._update_zoom_buttons()
 
     def _actual_size_menu_item_activate_cb(self, menu_item):
-        if hasattr(self._evince_view.props, 'sizing_mode'):
-            self._evince_view.props.sizing_mode = evince.SIZING_FREE
-        self._evince_view.props.zoom = 1.0
+        self._evince_model.props.sizing_mode = evince.SIZING_FREE
+        self._evince_model.props.scale = 1.0
         self._update_zoom_buttons()
 
     def _fullscreen_cb(self, button):

@@ -18,6 +18,9 @@
 
 import gtk, gobject
 import dbus
+import logging
+
+import evince
 
 from sugar.graphics import style
 from sugar.graphics.icon import Icon, get_icon_state
@@ -133,17 +136,22 @@ class _TopBar(gtk.HBox):
         self._completion_level = 0
         self._progressbar = None
 
-        bus = dbus.Bus(dbus.Bus.TYPE_SYSTEM)
-        proxy = bus.get_object('org.freedesktop.Hal',
-                                '/org/freedesktop/Hal/Manager')
-        hal_manager = dbus.Interface(proxy, 'org.freedesktop.Hal.Manager')
-        udis = hal_manager.FindDeviceByCapability('battery')
-        if len(udis) > 0:
-            self._battery = BattMan(udis[0]) # TODO: Support more than one battery
-            self._battery.connect('notify::level', \
-                self._battery_level_changed_cb)
-        else:
+        try:
+            bus = dbus.Bus(dbus.Bus.TYPE_SYSTEM)
+            proxy = bus.get_object('org.freedesktop.Hal',
+                                    '/org/freedesktop/Hal/Manager')
+            hal_manager = dbus.Interface(proxy, 'org.freedesktop.Hal.Manager')
+            udis = hal_manager.FindDeviceByCapability('battery')
+            if len(udis) > 0:
+                self._battery = BattMan(udis[0]) # TODO: Support more than one battery
+                self._battery.connect('notify::level', \
+                    self._battery_level_changed_cb)
+            else:
+                self._battery = None
+        except dbus.exceptions.DBusException:
             self._battery = None
+            logging.warning('Hardware manager service not found, no idle \
+                            suspend.')
 
         self._icon = None
 
@@ -189,11 +197,12 @@ class TopBar(_TopBar):
     def set_document(self, document):
         self._document = document
 
-        page_cache = self._document.get_page_cache()
-        page_cache.connect('page-changed', self._page_changed_cb)
+        model = evince.DocumentModel()
+        model.props.document = self._document
+        model.connect('page-changed', self._page_changed_cb)
 
-    def _page_changed_cb(self, page, proxy=None):
-        current_page = self._document.get_page_cache().get_current_page()
+    def _page_changed_cb(self, model, page_from, page_to):
+        current_page = self._model.props.page
         n_pages = self._document.get_n_pages()
 
         self.set_completion_level(current_page * 100 / n_pages)
