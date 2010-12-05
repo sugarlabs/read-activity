@@ -24,7 +24,7 @@ class View(epubview.EpubView):
 
     def set_current_page(self, n):
         # When the book is being loaded, calling this does not help
-        # In such a situation, we go into a loop and try to load the 
+        # In such a situation, we go into a loop and try to load the
         # supplied page when the book has loaded completely
         n += 1
         if self._ready:

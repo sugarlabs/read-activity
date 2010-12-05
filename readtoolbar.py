@@ -141,7 +141,7 @@ class EditToolbar(activity.EditToolbar):
             self._search_find_last()
         else:
             self._search_find_prev()
-    
+
     def _find_next_cb(self, button):
         if self._search_entry_changed:
             self._search_find_first()
@@ -182,7 +182,7 @@ class ViewToolbar(gtk.Toolbar):
 
         self._evince_view = None
         self._document = None
-            
+
         self._zoom_out = ToolButton('zoom-out')
         self._zoom_out.set_tooltip(_('Zoom out'))
         self._zoom_out.connect('clicked', self._zoom_out_cb)
@@ -194,7 +194,7 @@ class ViewToolbar(gtk.Toolbar):
         self._zoom_in.connect('clicked', self._zoom_in_cb)
         self.insert(self._zoom_in, -1)
         self._zoom_in.show()
-            
+
         self._zoom_to_width = ToolButton('zoom-best-fit')
         self._zoom_to_width.set_tooltip(_('Zoom to width'))
         self._zoom_to_width.connect('clicked', self._zoom_to_width_cb)
@@ -250,7 +250,7 @@ class ViewToolbar(gtk.Toolbar):
         self._view_notify_zoom_handler = self._evince_view.connect(
             'notify::zoom', self._view_notify_zoom_cb)
 
-        self._update_zoom_buttons() 
+        self._update_zoom_buttons()
 
 
     def _zoom_spin_notify_value_cb(self, zoom_spin, pspec):
@@ -287,7 +287,7 @@ class ViewToolbar(gtk.Toolbar):
             self._evince_view.props.sizing_mode = evince.SIZING_FREE
         self._evince_view.zoom_out()
         self._update_zoom_buttons()
-        
+
     def _zoom_out_cb(self, button):
         self.zoom_out()
 

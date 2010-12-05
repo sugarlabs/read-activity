@@ -72,7 +72,7 @@ def _get_screen_dpi():
     return float(xft_dpi / 1024)
 
 def get_md5(filename): #FIXME: Should be moved somewhere else
-    filename = filename.replace('file://', '') #XXX: hack 
+    filename = filename.replace('file://', '') #XXX: hack
     fh = open(filename)
     digest = md5.new()
     while 1:
@@ -133,7 +133,7 @@ class ReadActivity(activity.Activity):
         if hasattr(evince, 'evince_embed_init'):
             # if we use evince-2.24
             evince.evince_embed_init()
-        
+
         self._epub = False
         self._document = None
         self._fileserver = None
@@ -144,9 +144,9 @@ class ReadActivity(activity.Activity):
         self.connect('window-state-event', self._window_state_event_cb)
 
         _logger.debug('Starting Read...')
-        
+
         self._view = None
-        
+
         self._sidebar = Sidebar()
         self._sidebar.show()
 
@@ -229,7 +229,7 @@ class ReadActivity(activity.Activity):
         spacer.show()
 
         bookmark_item = gtk.ToolItem()
-        self._bookmarker = self._create_bookmarker()        
+        self._bookmarker = self._create_bookmarker()
         self._bookmarker_toggle_handler_id = self._bookmarker.connect( \
                 'toggled', self.__bookmarker_toggled_cb)
         bookmark_item.add(self._bookmarker)
@@ -331,10 +331,10 @@ class ReadActivity(activity.Activity):
         back.props.sensitive = False
         palette = back.get_palette()
         previous_page = MenuItem(text_label= _("Previous page"))
-        palette.menu.append(previous_page) 
-        previous_page.show_all()        
+        palette.menu.append(previous_page)
+        previous_page.show_all()
         previous_bookmark = MenuItem(text_label= _("Previous bookmark"))
-        palette.menu.append(previous_bookmark) 
+        palette.menu.append(previous_bookmark)
         previous_bookmark.show_all()
         back.connect('clicked', self.__go_back_cb)
         previous_page.connect('activate', self.__go_back_page_cb)
@@ -347,10 +347,10 @@ class ReadActivity(activity.Activity):
         forward.props.sensitive = False
         palette = forward.get_palette()
         next_page = MenuItem(text_label= _("Next page"))
-        palette.menu.append(next_page) 
-        next_page.show_all()        
+        palette.menu.append(next_page)
+        next_page.show_all()
         next_bookmark = MenuItem(text_label= _("Next bookmark"))
-        palette.menu.append(next_bookmark) 
+        palette.menu.append(next_bookmark)
         next_bookmark.show_all()
         forward.connect('clicked', self.__go_forward_cb)
         next_page.connect('activate', self.__go_forward_page_cb)
@@ -373,13 +373,13 @@ class ReadActivity(activity.Activity):
 
         label_attributes = pango.AttrList()
         label_attributes.insert(pango.AttrSize(14000, 0, -1))
-        label_attributes.insert(pango.AttrForeground(65535, 65535, 
+        label_attributes.insert(pango.AttrForeground(65535, 65535,
                                                      65535, 0, -1))
         total_page_label.set_attributes(label_attributes)
 
         total_page_label.set_text(' / 0')
         return total_page_label
-    
+
     def _create_navigator(self):
         navigator = gtk.ComboBox()
         navigator.set_add_tearoffs(True)
@@ -392,7 +392,7 @@ class ReadActivity(activity.Activity):
     def _create_bookmarker(self):
         bookmarker = ToggleToolButton('emblem-favorite')
         return bookmarker
-    
+
     def __num_page_entry_insert_text_cb(self, entry, text, length, position):
         if not re.match('[0-9]', text):
             entry.emit_stop_by_name('insert-text')
@@ -412,7 +412,7 @@ class ReadActivity(activity.Activity):
 
         self._document.get_page_cache().set_current_page(page)
         entry.props.text = str(page + 1)
-    
+
     def __go_back_cb(self, button):
         self._view.scroll(gtk.SCROLL_PAGE_BACKWARD, False)
 
@@ -421,14 +421,14 @@ class ReadActivity(activity.Activity):
 
     def __go_back_page_cb(self, button):
         self._view.previous_page()
-    
+
     def __go_forward_page_cb(self, button):
         self._view.next_page()
 
     def __prev_bookmark_activate_cb(self, menuitem):
         page = self._document.get_page_cache().get_current_page()
         bookmarkmanager = self._sidebar.get_bookmarkmanager()
-        
+
         prev_bookmark = bookmarkmanager.get_prev_bookmark_for_page(page)
         if prev_bookmark is not None:
             self._document.get_page_cache().set_current_page(prev_bookmark.page_no)
@@ -436,7 +436,7 @@ class ReadActivity(activity.Activity):
     def __next_bookmark_activate_cb(self, menuitem):
         page = self._document.get_page_cache().get_current_page()
         bookmarkmanager = self._sidebar.get_bookmarkmanager()
-        
+
         next_bookmark = bookmarkmanager.get_next_bookmark_for_page(page)
         if next_bookmark is not None:
             self._document.get_page_cache().set_current_page(next_bookmark.page_no)
@@ -446,26 +446,26 @@ class ReadActivity(activity.Activity):
         if self._bookmarker.props.active:
             self._sidebar.add_bookmark(page)
         else:
-            self._sidebar.del_bookmark(page)    
+            self._sidebar.del_bookmark(page)
 
     def __page_changed_cb(self, page, proxy = None):
         self._update_nav_buttons()
         if hasattr(self._document, 'has_document_links'):
             if self._document.has_document_links():
                 self._toc_select_active_page()
-                
+
         self._sidebar.update_for_page(self._document.get_page_cache().get_current_page())
 
         self._bookmarker.handler_block(self._bookmarker_toggle_handler_id)
         self._bookmarker.props.active = self._sidebar.is_showing_local_bookmark()
         self._bookmarker.handler_unblock(self._bookmarker_toggle_handler_id)
-        
+
     def _update_nav_buttons(self):
         current_page = self._document.get_page_cache().get_current_page()
         self._back_button.props.sensitive = current_page > 0
         self._forward_button.props.sensitive = \
             current_page < self._document.get_n_pages() - 1
-        
+
         self._num_page_entry.props.text = str(current_page + 1)
         self._total_page_label.props.label = \
             ' / ' + str(self._document.get_n_pages())
@@ -510,7 +510,7 @@ class ReadActivity(activity.Activity):
 
     def _toc_select_active_page(self):
         iter = self._navigator.get_active_iter()
-        
+
         current_link = self._toc_model.get(iter, 1)[0]
         current_page = self._document.get_page_cache().get_current_page()
 
@@ -534,14 +534,14 @@ class ReadActivity(activity.Activity):
         """
         if not self._want_document:
             return
-        chooser = ObjectChooser(_('Choose document'), self, 
-                                gtk.DIALOG_MODAL | 
+        chooser = ObjectChooser(_('Choose document'), self,
+                                gtk.DIALOG_MODAL |
                                 gtk.DIALOG_DESTROY_WITH_PARENT,
                                 what_filter=mime.GENERIC_TYPE_TEXT)
         try:
             result = chooser.run()
             if result == gtk.RESPONSE_ACCEPT:
-                logging.debug('ObjectChooser: %r' % 
+                logging.debug('ObjectChooser: %r' %
                               chooser.get_selected_object())
                 jobject = chooser.get_selected_object()
                 if jobject and jobject.file_path:
@@ -600,13 +600,13 @@ class ReadActivity(activity.Activity):
 
     def write_file(self, file_path):
         """Write into datastore for Keep.
-        
+
         The document is saved by hardlinking from the temporary file we
         keep around instead of "saving".
 
         The metadata is updated, including current page, view settings,
         search text.
-        
+
         """
         if self._tempfile is None:
             # Workaround for closing Read with no document loaded
@@ -650,7 +650,7 @@ class ReadActivity(activity.Activity):
 
     def can_close(self):
         """Prepare to cleanup on closing.
-        
+
         Called from self.close()
         """
         self._close_requested = True
@@ -681,7 +681,7 @@ class ReadActivity(activity.Activity):
         # FIXME: Draw a progress bar
         if self._download_content_length > 0:
             _logger.debug("Downloaded %u of %u bytes from tube %u...",
-                          bytes_downloaded, self._download_content_length, 
+                          bytes_downloaded, self._download_content_length,
                           tube_id)
         else:
             _logger.debug("Downloaded %u bytes from tube %u...",
@@ -786,7 +786,7 @@ class ReadActivity(activity.Activity):
         """Load the specified document and set up the UI.
 
         filepath -- string starting with file://
-        
+
         """
         mimetype = mime.get_for_file(filepath)
         if mimetype == 'application/epub+zip':
@@ -816,7 +816,7 @@ class ReadActivity(activity.Activity):
 
         self._update_nav_buttons()
         self._update_toc()
-    
+
         page_cache = self._document.get_page_cache()
         page_cache.connect('page-changed', self.__page_changed_cb)
 

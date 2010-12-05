@@ -46,7 +46,7 @@ class BattMan(gobject.GObject):
 
     def __init__(self, udi):
         gobject.GObject.__init__(self)
-        
+
         bus = dbus.Bus(dbus.Bus.TYPE_SYSTEM)
         proxy = bus.get_object('org.freedesktop.Hal', udi,
                                follow_name_owner_changes=True)
@@ -92,7 +92,7 @@ class BattMan(gobject.GObject):
 
     def do_get_property(self, pspec):
         if pspec.name == 'level':
-            return self._level 
+            return self._level
         if pspec.name == 'charging':
             return self._charging
         if pspec.name == 'discharging':
@@ -174,7 +174,7 @@ class _TopBar(gtk.HBox):
         if self._battery is not None:
             icon_name = get_icon_state(_ICON_NAME, self._battery.props.level, step=-5)
             self._icon = Icon(icon_name=icon_name)
-            self.pack_start(self._icon, expand = False, fill = False) 
+            self.pack_start(self._icon, expand = False, fill = False)
 
     def _battery_level_changed_cb(self, pspec, param):
         icon_name = get_icon_state(_ICON_NAME, self._battery.props.level, step=-5)
@@ -199,6 +199,6 @@ class TopBar(_TopBar):
 
         #TRANS: Translate this as Page i of m (eg: Page 4 of 334)
         self._progressbar.set_text(_("Page %i of %i") % (current_page, n_pages))
-        
-        
+
+
 

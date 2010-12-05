@@ -51,7 +51,7 @@ def _init_db():
     #Situation 2: DB is outdated
     if not os.path.exists(dbpath) and os.path.exists(olddbpath):
         shutil.copy(olddbpath, dbpath)
-        
+
         conn = sqlite3.connect(dbpath)
         conn.execute("CREATE TABLE  temp_bookmarks  AS SELECT md5, page, title 'content', timestamp, user, color, local  FROM bookmarks")
         conn.execute("ALTER TABLE bookmarks RENAME TO bookmarks_old")
@@ -76,12 +76,12 @@ class BookmarkManager:
         self._conn = sqlite3.connect(dbpath)
         self._conn.text_factory = lambda x: unicode(x, "utf-8", "ignore")
 
-        
+
         self._bookmarks = []
         self._populate_bookmarks()
-        
+
     def add_bookmark(self, page, content, local=1):
-        # locale = 0 means that this is a bookmark originally 
+        # locale = 0 means that this is a bookmark originally
         # created by the person who originally shared the file
         timestamp = time.time()
         client = gconf.client_get_default()
@@ -91,19 +91,19 @@ class BookmarkManager:
         t = (self._filehash, page, content, timestamp, user, color, local)
         self._conn.execute('insert into bookmarks values (?, ?, ?, ?, ?, ?, ?)', t)
         self._conn.commit()
-        
+
         self._resync_bookmark_cache()
-        
+
     def del_bookmark(self, page):
         client = gconf.client_get_default()
         user = client.get_string("/desktop/sugar/user/nick")
 
         # We delete only the locally made bookmark
-        
+
         t = (self._filehash, page, user)
         self._conn.execute('delete from bookmarks where md5=? and page=? and user=?', t)
         self._conn.commit()
-        
+
         self._resync_bookmark_cache()
 
     def _populate_bookmarks(self):
@@ -112,15 +112,15 @@ class BookmarkManager:
 
         for row in rows:
             self._bookmarks.append(Bookmark(row))
-            
+
     def get_bookmarks_for_page(self, page):
         bookmarks = []
         for bookmark in self._bookmarks:
             if bookmark.belongstopage(page):
                 bookmarks.append(bookmark)
-        
+
         return bookmarks
-    
+
     def _resync_bookmark_cache(self):
         # To be called when a new bookmark has been added/removed
         self._bookmarks = []
@@ -130,7 +130,7 @@ class BookmarkManager:
     def get_prev_bookmark_for_page(self, page, wrap = True):
         if not len(self._bookmarks):
             return None
-        
+
         if page <= self._bookmarks[0].page_no and wrap:
             return self._bookmarks[-1]
         else:
@@ -138,14 +138,14 @@ class BookmarkManager:
                 for bookmark in self._bookmarks:
                     if bookmark.belongstopage(i):
                         return bookmark
-                
-        return None 
+
+        return None
 
 
     def get_next_bookmark_for_page(self, page, wrap = True):
         if not len(self._bookmarks):
             return None
-        
+
         if page >= self._bookmarks[-1].page_no and wrap:
             return self._bookmarks[0]
         else:
@@ -153,5 +153,5 @@ class BookmarkManager:
                 for bookmark in self._bookmarks:
                     if bookmark.belongstopage(i):
                         return bookmark
-        
-        return None            
+
+        return None

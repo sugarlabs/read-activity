@@ -32,22 +32,22 @@ class _Epub(object):
         self._ncxpath = None
         self._basepath = None
         self._tempdir = tempfile.mkdtemp()
-        
+
         if not self._verify():
             print 'Warning: This does not seem to be a valid epub file'
-        
+
         self._get_opf()
         self._get_ncx()
-        
+
         ncxfile = self._zobject.open(self._ncxpath)
-        opffile = self._zobject.open(self._opfpath)        
-        self._navmap = navmap.NavMap(opffile, ncxfile, self._basepath)
-        
         opffile = self._zobject.open(self._opfpath)
-        self._info = epubinfo.EpubInfo(opffile) 
-        
+        self._navmap = navmap.NavMap(opffile, ncxfile, self._basepath)
+
+        opffile = self._zobject.open(self._opfpath)
+        self._info = epubinfo.EpubInfo(opffile)
+
         self._unzip()
-        
+
     def _unzip(self):
         #self._zobject.extractall(path = self._tempdir) # This is broken upto python 2.7
         orig_cwd = os.getcwd()
@@ -61,28 +61,28 @@ class _Epub(object):
                 self._zobject.extract(name)
         os.chdir(orig_cwd)
 
-                
+
     def _get_opf(self):
         containerfile = self._zobject.open('META-INF/container.xml')
-        
+
         tree = etree.parse(containerfile)
         root = tree.getroot()
-        
+
         for element in root.iterfind('.//{urn:oasis:names:tc:opendocument:xmlns:container}rootfile'):
             if element.get('media-type') == 'application/oebps-package+xml':
                 self._opfpath = element.get('full-path')
-        
-        if self._opfpath.rpartition('/')[0]:        
+
+        if self._opfpath.rpartition('/')[0]:
             self._basepath = self._opfpath.rpartition('/')[0] + '/'
         else:
             self._basepath = ''
-            
+
         containerfile.close()
 
 
     def _get_ncx(self):
         opffile = self._zobject.open(self._opfpath)
-        
+
         tree = etree.parse(opffile)
         root = tree.getroot()
 
@@ -92,61 +92,61 @@ class _Epub(object):
         for element in root.iterfind('.//{http://www.idpf.org/2007/opf}item'):
             if element.get('id') == tocid:
                 self._ncxpath = self._basepath + element.get('href')
-        
+
         opffile.close()
 
     def _verify(self):
         '''
-        Method to crudely check to verify that what we 
+        Method to crudely check to verify that what we
         are dealing with is a epub file or not
         '''
         if not os.path.exists(self._filepath):
             return False
-        
+
         self._zobject = zipfile.ZipFile(self._filepath)
-        
+
         if not 'mimetype' in self._zobject.namelist():
             return False
-        
+
         mtypefile = self._zobject.open('mimetype')
         mimetype = mtypefile.readline()
-        
+
         if not mimetype.startswith('application/epub+zip'): # Some files seem to have trailing characters
             return False
-        
+
         return True
-    
+
     def get_toc_model(self):
         '''
         Returns a GtkTreeModel representation of the
         Epub table of contents
-        '''        
+        '''
         return self._navmap.get_gtktreestore()
-    
+
     def get_flattoc(self):
         '''
         Returns a flat (linear) list of files to be
         rendered.
-        '''                
+        '''
         return self._navmap.get_flattoc()
-    
+
     def get_basedir(self):
         '''
         Returns the base directory where the contents of the
         epub has been unzipped
         '''
         return self._tempdir
-    
+
     def get_info(self):
         '''
         Returns a EpubInfo object for the open Epub file
-        '''        
+        '''
         return self._info
-    
+
     def close(self):
         '''
-        Cleans up (closes open zip files and deletes uncompressed content of Epub. 
-        Please call this when a file is being closed or during application exit. 
-        '''                
+        Cleans up (closes open zip files and deletes uncompressed content of Epub.
+        Please call this when a file is being closed or during application exit.
+        '''
         self._zobject.close()
         shutil.rmtree(self._tempdir)

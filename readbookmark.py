@@ -26,10 +26,10 @@ class Bookmark:
         self.nick = data[4]
         self.color = data[5]
         self.local = data[6]
-        
+
     def belongstopage(self, page_no):
-        return self.page_no == page_no 
-    
+        return self.page_no == page_no
+
     def is_local(self):
         return bool(self.local)
 
@@ -43,8 +43,8 @@ class Bookmark:
     def get_note_body(self):
         if self.content == '' or self.content is None:
             return ''
-        
+
         note = cjson.decode(self.content)
         return note['body']
-        
+
 

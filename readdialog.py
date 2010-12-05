@@ -3,7 +3,7 @@
 # Stolen from the PyGTK demo module by Maik Hertha <maik.hertha@berlin.de>
 
 import gtk
-import gobject 
+import gobject
 
 from sugar.graphics import style
 from sugar.graphics.toolbutton import ToolButton
@@ -56,7 +56,7 @@ class BaseReadDialog(gtk.Window):
         accept.connect('clicked', self.accept_clicked_cb)
         accept.show()
         self.toolbar.insert(accept, -1)
-        
+
         _vbox.pack_start(self.toolbar, expand=False)
         self.toolbar.show()
 
@@ -165,7 +165,7 @@ class BookmarkAddDialog(BookmarkDialog):
     def accept_clicked_cb(self, widget):
         title = self._title_entry.get_text()
         details = self._content_entry.get_buffer().props.text
-        content = {'title' : unicode(title), 'body' : unicode(details)} 
+        content = {'title' : unicode(title), 'body' : unicode(details)}
         self._sidebarinstance._real_add_bookmark(self._page, cjson.encode(content))
         self.destroy()
 
@@ -176,7 +176,7 @@ class BookmarkEditDialog(BookmarkDialog):
     def accept_clicked_cb(self, widget):
         title = self._title_entry.get_text()
         details = self._content_entry.get_buffer().props.text
-        content = {'title' : unicode(title), 'body' : unicode(details)} 
+        content = {'title' : unicode(title), 'body' : unicode(details)}
         self._sidebarinstance.del_bookmark(self._page)
         self._sidebarinstance._real_add_bookmark(self._page, cjson.encode(content))
         self.destroy()

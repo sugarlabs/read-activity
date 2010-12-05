@@ -49,7 +49,7 @@ class Sidebar(gtk.EventBox):
 
         self._box.show()
         self.show()
-        
+
         self._bookmark_icon = None
         self._bookmark_manager = None
         self._is_showing_local_bookmark = False
@@ -74,7 +74,7 @@ class Sidebar(gtk.EventBox):
 
         if bookmark.is_local():
             self._is_showing_local_bookmark = True
-        
+
     def __bookmark_icon_query_tooltip_cb(self, widget, x, y, keyboard_mode, tip, bookmark):
         tooltip_header = bookmark.get_note_title()
         tooltip_body = bookmark.get_note_body()
@@ -112,7 +112,7 @@ class Sidebar(gtk.EventBox):
         tip.set_custom(vbox)
 
         return True
-        
+
     def __event_cb(self, widget, event, bookmark):
         if event.type == gtk.gdk.BUTTON_PRESS and \
                     self._bookmark_icon is not None:
@@ -136,27 +136,27 @@ class Sidebar(gtk.EventBox):
 
             self._bookmark_icon.hide() #XXX: Is this needed??
             self._bookmark_icon.destroy()
-            
+
             self._bookmark_icon = None
-        
+
             self._is_showing_local_bookmark = False
-    
+
     def set_bookmarkmanager(self, filehash):
         self._bookmark_manager = BookmarkManager(filehash)
-        
+
     def get_bookmarkmanager(self):
         return (self._bookmark_manager)
-    
+
     def update_for_page(self, page):
         self._clear_bookmarks()
         if self._bookmark_manager is None:
             return
-        
+
         bookmarks = self._bookmark_manager.get_bookmarks_for_page(page)
-        
+
         for bookmark in bookmarks:
             self._add_bookmark_icon(bookmark)
-    
+
     def add_bookmark(self, page):
         bookmark_title = (_("%s's bookmark") % profile.get_nick_name())
         bookmark_content = (_("Bookmark for page %d") % page)
@@ -170,11 +170,11 @@ class Sidebar(gtk.EventBox):
     def _real_add_bookmark(self, page, content):
         self._bookmark_manager.add_bookmark(page, unicode(content))
         self.update_for_page(page)
-        
+
     def del_bookmark(self, page):
         self._bookmark_manager.del_bookmark(page)
         self.update_for_page(page)
-        
+
     def is_showing_local_bookmark(self):
         return self._is_showing_local_bookmark
 
