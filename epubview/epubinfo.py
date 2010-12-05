@@ -17,7 +17,6 @@ class EpubInfo(): #TODO: Cover the entire DC range
         self.identifier = self._get_identifier()
         self.language = self._get_language()
 
-
     def _get_data(self, tagname):
         element = self._e_metadata.find(tagname)
         return element.text
@@ -67,7 +66,7 @@ class EpubInfo(): #TODO: Cover the entire DC range
         element = self._e_metadata.find('.//{http://purl.org/dc/elements/1.1/}identifier')
 
         if element is not None:
-            return {'id':element.get('id'), 'value':element.text}
+            return {'id': element.get('id'), 'value': element.text}
         else:
             return None
 

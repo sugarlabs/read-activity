@@ -17,7 +17,9 @@
 
 import cjson
 
+
 class Bookmark:
+
     def __init__(self, data):
         self.md5 = data[0]
         self.page_no = data[1]
@@ -46,5 +48,3 @@ class Bookmark:
 
         note = cjson.decode(self.content)
         return note['body']
-
-

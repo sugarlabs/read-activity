@@ -61,7 +61,6 @@ class _Epub(object):
                 self._zobject.extract(name)
         os.chdir(orig_cwd)
 
-
     def _get_opf(self):
         containerfile = self._zobject.open('META-INF/container.xml')
 
@@ -78,7 +77,6 @@ class _Epub(object):
             self._basepath = ''
 
         containerfile.close()
-
 
     def _get_ncx(self):
         opffile = self._zobject.open(self._opfpath)

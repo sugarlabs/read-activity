@@ -33,20 +33,21 @@ LOADING_HTML = '''
 </div>
 '''
 
+
 class _View(gtk.HBox):
+
     __gproperties__ = {
-        'has-selection' : (gobject.TYPE_BOOLEAN, 'whether has selection',
-                  'whether the widget has selection or not',
-                  0, gobject.PARAM_READABLE),
-    'zoom' : (gobject.TYPE_FLOAT, 'the zoom level',
-                  'the zoom level of the widget',
-                  0.5, 4.0, 1.0, gobject.PARAM_READWRITE)
+        'has-selection': (gobject.TYPE_BOOLEAN, 'whether has selection',
+                          'whether the widget has selection or not',
+                          0, gobject.PARAM_READABLE),
+        'zoom': (gobject.TYPE_FLOAT, 'the zoom level',
+                 'the zoom level of the widget',
+                 0.5, 4.0, 1.0, gobject.PARAM_READWRITE),
     }
     __gsignals__ = {
-        'page-changed': (gobject.SIGNAL_RUN_FIRST,
-                          gobject.TYPE_NONE,
-                          ([]))
+        'page-changed': (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE, ([])),
     }
+
     def __init__(self):
         gobject.threads_init()
         gtk.HBox.__init__(self)
@@ -92,10 +93,10 @@ class _View(gtk.HBox):
         self._scrollbar.set_update_policy(gtk.UPDATE_DISCONTINUOUS)
         self._scrollbar_change_value_cb_id = self._scrollbar.connect('change-value', \
                                                                       self._scrollbar_change_value_cb)
-        self.pack_start(self._sw, expand = True, fill = True)
-        self.pack_start(self._scrollbar, expand = False, fill = False)
+        self.pack_start(self._sw, expand=True, fill=True)
+        self.pack_start(self._scrollbar, expand=False, fill=False)
 
-        self._view.set_flags(gtk.CAN_DEFAULT|gtk.CAN_FOCUS)
+        self._view.set_flags(gtk.CAN_DEFAULT | gtk.CAN_FOCUS)
 
     def set_document(self, epubdocumentinstance):
         '''
@@ -367,7 +368,7 @@ class _View(gtk.HBox):
 
         remfactor = self._paginator.get_remfactor_for_file(filename)
         pages = self._paginator.get_pagecount_for_file(filename)
-        extra = int(math.ceil(remfactor * self._view.get_page_height()/(pages-remfactor)))
+        extra = int(math.ceil(remfactor * self._view.get_page_height() / (pages - remfactor)))
         if extra > 0:
             self._view.add_bottom_padding(extra)
 
@@ -390,12 +391,11 @@ class _View(gtk.HBox):
         if scroll_upper == 0: # This is a one page file
             pageno = base_pageno
         else:
-            offset = (scrollval/scroll_upper) * self._paginator.get_pagecount_for_file(filename)
+            offset = (scrollval / scroll_upper) * self._paginator.get_pagecount_for_file(filename)
             pageno = math.floor(base_pageno + offset)
 
         if pageno != self._loaded_page:
             self._on_page_changed(int(pageno))
-
 
     def _scroll_page_end(self):
         v_upper = self._v_vscrollbar.props.adjustment.props.upper
@@ -439,7 +439,7 @@ class _View(gtk.HBox):
 
             scrollfactor_next = self._paginator.get_scrollfactor_pos_for_pageno(self._loaded_page + 1)
             if scrollval > 0:
-                scrollfactor = scrollval/(scroll_upper - scroll_page_size)
+                scrollfactor = scrollval / (scroll_upper - scroll_page_size)
             else:
                 scrollfactor = 0
             if scrollfactor >= scrollfactor_next:
@@ -451,7 +451,7 @@ class _View(gtk.HBox):
 
             scrollfactor_cur = self._paginator.get_scrollfactor_pos_for_pageno(self._loaded_page)
             if scrollval > 0:
-                scrollfactor = scrollval/(scroll_upper - scroll_page_size)
+                scrollfactor = scrollval / (scroll_upper - scroll_page_size)
             else:
                 scrollfactor = 0
 
@@ -556,8 +556,5 @@ class _View(gtk.HBox):
         if self._loaded_page < 1:
             self._load_page(1)
 
-
-
     def _destroy_cb(self, widget):
         self._epub.close()
-

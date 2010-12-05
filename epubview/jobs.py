@@ -32,19 +32,21 @@ import threading
 PAGE_WIDTH = 135
 PAGE_HEIGHT = 216
 
+
 def _pixel_to_mm(pixel, dpi):
-    inches = pixel/dpi
-    return int(inches/0.03937)
+    inches = pixel / dpi
+    return int(inches / 0.03937)
+
 
 def _mm_to_pixel(mm, dpi):
     inches = mm * 0.03937
     return int(inches * dpi)
 
 
-
 class SearchThread(threading.Thread):
+
     def __init__(self, obj):
-        threading.Thread.__init__ (self)
+        threading.Thread.__init__(self)
         self.obj = obj
         self.stopthread = threading.Event()
 
@@ -76,20 +78,19 @@ class SearchThread(threading.Thread):
 
         return False
 
-    def run (self):
+    def run(self):
         self._start_search()
 
     def stop(self):
         self.stopthread.set()
 
 
-
 class _JobPaginator(gobject.GObject):
+
     __gsignals__ = {
-        'paginated': (gobject.SIGNAL_RUN_FIRST,
-                          gobject.TYPE_NONE,
-                          ([]))
+        'paginated': (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE, ([])),
     }
+
     def __init__(self, filelist):
         gobject.GObject.__init__(self)
 
@@ -145,26 +146,25 @@ class _JobPaginator(gobject.GObject):
         if pageheight <= _mm_to_pixel(PAGE_HEIGHT, self._dpi):
             pages = 1
         else:
-            pages = pageheight/float(_mm_to_pixel(PAGE_HEIGHT, self._dpi))
+            pages = pageheight / float(_mm_to_pixel(PAGE_HEIGHT, self._dpi))
         for i in range(1, int(math.ceil(pages) + 1)):
             if pages - i < 0:
-                pagelen = (pages - math.floor(pages))/pages
+                pagelen = (pages - math.floor(pages)) / pages
             else:
-                pagelen = 1/pages
-            self._pagemap[float(self._pagecount + i)] = (f.props.uri, (i-1)/math.ceil(pages), pagelen)
+                pagelen = 1 / pages
+            self._pagemap[float(self._pagecount + i)] = (f.props.uri, (i - 1) / math.ceil(pages), pagelen)
 
         self._pagecount += math.ceil(pages)
         self._filedict[f.props.uri.replace('file://', '')] = (math.ceil(pages), math.ceil(pages) - pages)
         self._bookheight += pageheight
 
-        if self._count+1 >= len(self._filelist):
+        if self._count + 1 >= len(self._filelist):
             self._temp_win.destroy()
             self._screen.set_font_options(self._old_fontoptions)
             self.emit('paginated')
         else:
             self._count += 1
             self._temp_view.open(self._filelist[self._count])
-
 
     def get_file_for_pageno(self, pageno):
         '''
@@ -221,10 +221,9 @@ class _JobPaginator(gobject.GObject):
 
 class _JobFind(gobject.GObject):
     __gsignals__ = {
-        'updated': (gobject.SIGNAL_RUN_FIRST,
-                          gobject.TYPE_NONE,
-                          ([]))
+        'updated': (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE, ([])),
     }
+
     def __init__(self, document, start_page, n_pages, text, case_sensitive=False):
         gobject.GObject.__init__(self)
         gtk.gdk.threads_init()

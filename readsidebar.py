@@ -31,11 +31,14 @@ from readdialog import BookmarkAddDialog, BookmarkEditDialog
 
 from gettext import gettext as _
 
+
 _logger = logging.getLogger('read-activity')
 
 #TODO: Add support for multiple bookmarks in a single page (required when sharing)
 
+
 class Sidebar(gtk.EventBox):
+
     def __init__(self):
         gtk.EventBox.__init__(self)
         self.set_size_request(20, -1)
@@ -58,8 +61,8 @@ class Sidebar(gtk.EventBox):
 
     def _add_bookmark_icon(self, bookmark):
         xocolor = XoColor(bookmark.color)
-        self._bookmark_icon = Icon(icon_name = 'emblem-favorite', \
-            pixel_size = 18, xo_color = xocolor)
+        self._bookmark_icon = Icon(icon_name='emblem-favorite', pixel_size=18,
+                                   xo_color=xocolor)
 
         self._bookmark_icon.props.has_tooltip = True
         self.__bookmark_icon_query_tooltip_cb_id = \
@@ -69,7 +72,7 @@ class Sidebar(gtk.EventBox):
         self.__event_cb_id = \
             self.connect('event', self.__event_cb, bookmark)
 
-        self._box.pack_start(self._bookmark_icon ,expand=False,fill=False)
+        self._box.pack_start(self._bookmark_icon, expand=False, fill=False)
         self._bookmark_icon.show_all()
 
         if bookmark.is_local():
@@ -89,7 +92,7 @@ class Sidebar(gtk.EventBox):
         l.set_use_markup(True)
         l.set_width_chars(40)
         l.set_line_wrap(True)
-        vbox.pack_start(l, expand = False, fill = False)
+        vbox.pack_start(l, expand=False, fill=False)
         l.show()
 
         l = gtk.Label('%s' % tooltip_body)
@@ -99,14 +102,14 @@ class Sidebar(gtk.EventBox):
         l.set_width_chars(40)
         l.set_line_wrap(True)
         l.set_justify(gtk.JUSTIFY_FILL)
-        vbox.pack_start(l, expand = True, fill = True)
+        vbox.pack_start(l, expand=True, fill=True)
         l.show()
 
         l = gtk.Label('<small><i>%s</i></small>' % tooltip_footer)
         l.set_use_markup(True)
         l.set_width_chars(40)
         l.set_line_wrap(True)
-        vbox.pack_start(l, expand = False, fill = False)
+        vbox.pack_start(l, expand=False, fill=False)
         l.show()
 
         tip.set_custom(vbox)
@@ -120,11 +123,12 @@ class Sidebar(gtk.EventBox):
             bookmark_title = bookmark.get_note_title()
             bookmark_content = bookmark.get_note_body()
 
-            dialog = BookmarkEditDialog(parent_xid = self.get_toplevel().window.xid, \
-                dialog_title = _("Add notes for bookmark: "), \
-                bookmark_title = bookmark_title, \
-                bookmark_content = bookmark_content, page = bookmark.page_no, \
-                sidebarinstance = self)
+            dialog = BookmarkEditDialog(
+                parent_xid=self.get_toplevel().window.xid,
+                dialog_title=_("Add notes for bookmark: "),
+                bookmark_title=bookmark_title,
+                bookmark_content=bookmark_content, page=bookmark.page_no,
+                sidebarinstance=self)
             dialog.show_all()
 
         return False
@@ -160,11 +164,12 @@ class Sidebar(gtk.EventBox):
     def add_bookmark(self, page):
         bookmark_title = (_("%s's bookmark") % profile.get_nick_name())
         bookmark_content = (_("Bookmark for page %d") % page)
-        dialog = BookmarkAddDialog(parent_xid = self.get_toplevel().window.xid, \
-            dialog_title = _("Add notes for bookmark: "), \
-            bookmark_title = bookmark_title, \
-            bookmark_content = bookmark_content, page = page, \
-            sidebarinstance = self)
+        dialog = BookmarkAddDialog(
+            parent_xid=self.get_toplevel().window.xid,
+            dialog_title=_("Add notes for bookmark: "),
+            bookmark_title=bookmark_title,
+            bookmark_content=bookmark_content, page=page,
+            sidebarinstance=self)
         dialog.show_all()
 
     def _real_add_bookmark(self, page, content):
@@ -177,4 +182,3 @@ class Sidebar(gtk.EventBox):
 
     def is_showing_local_bookmark(self):
         return self._is_showing_local_bookmark
-

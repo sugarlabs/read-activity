@@ -28,6 +28,7 @@ from readbookmark import Bookmark
 
 _logger = logging.getLogger('read-activity')
 
+
 def _init_db():
     dbdir = os.path.join(os.environ['SUGAR_ACTIVITY_ROOT'], 'data')
     dbpath = os.path.join(dbdir, 'read_v1.db')
@@ -65,7 +66,9 @@ def _init_db():
     # Should not reach this point
     return None
 
+
 class BookmarkManager:
+
     def __init__(self, filehash):
         self._filehash = filehash
 
@@ -75,7 +78,6 @@ class BookmarkManager:
 
         self._conn = sqlite3.connect(dbpath)
         self._conn.text_factory = lambda x: unicode(x, "utf-8", "ignore")
-
 
         self._bookmarks = []
         self._populate_bookmarks()
@@ -108,7 +110,7 @@ class BookmarkManager:
 
     def _populate_bookmarks(self):
         # TODO: Figure out if caching the entire set of bookmarks is a good idea or not
-        rows = self._conn.execute('select * from bookmarks where md5=? order by page', (self._filehash,))
+        rows = self._conn.execute('select * from bookmarks where md5=? order by page', (self._filehash, ))
 
         for row in rows:
             self._bookmarks.append(Bookmark(row))
@@ -126,30 +128,28 @@ class BookmarkManager:
         self._bookmarks = []
         self._populate_bookmarks()
 
-
-    def get_prev_bookmark_for_page(self, page, wrap = True):
+    def get_prev_bookmark_for_page(self, page, wrap=True):
         if not len(self._bookmarks):
             return None
 
         if page <= self._bookmarks[0].page_no and wrap:
             return self._bookmarks[-1]
         else:
-            for i in range(page-1, -1, -1):
+            for i in range(page - 1, -1, -1):
                 for bookmark in self._bookmarks:
                     if bookmark.belongstopage(i):
                         return bookmark
 
         return None
 
-
-    def get_next_bookmark_for_page(self, page, wrap = True):
+    def get_next_bookmark_for_page(self, page, wrap=True):
         if not len(self._bookmarks):
             return None
 
         if page >= self._bookmarks[-1].page_no and wrap:
             return self._bookmarks[0]
         else:
-            for i in range(page+1, self._bookmarks[-1].page_no + 1):
+            for i in range(page + 1, self._bookmarks[-1].page_no + 1):
                 for bookmark in self._bookmarks:
                     if bookmark.belongstopage(i):
                         return bookmark

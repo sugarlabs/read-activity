@@ -28,4 +28,3 @@ class _WebView(webkit.WebView):
         '''
         js = ('var newdiv = document.createElement("div");newdiv.style.height = "%dpx";document.body.appendChild(newdiv);' % incr)
         self.execute_script(js)
-

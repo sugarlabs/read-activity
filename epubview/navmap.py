@@ -1,8 +1,10 @@
 from lxml import etree
 import gtk
 
+
 class NavPoint(object):
-    def __init__(self, label, contentsrc, children = []):
+
+    def __init__(self, label, contentsrc, children=[]):
         self._label = label
         self._contentsrc = contentsrc
         self._children = children
@@ -59,7 +61,7 @@ class NavMap(object):
         text = navpoint.find('./{http://www.daisy.org/z3986/2005/ncx/}content/')
         return self._basepath + text.get('src')
 
-    def _process_navpoint(self, navpoint, parent = None):
+    def _process_navpoint(self, navpoint, parent=None):
         title = self._gettitle(navpoint)
         content = self._getcontent(navpoint)
 
@@ -72,7 +74,7 @@ class NavMap(object):
 
         if len(childnavpointlist):
             for childnavpoint in childnavpointlist:
-                self._process_navpoint(childnavpoint, parent = iter)
+                self._process_navpoint(childnavpoint, parent=iter)
         else:
             return
 

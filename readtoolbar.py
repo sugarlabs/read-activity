@@ -30,7 +30,9 @@ from sugar.graphics.menuitem import MenuItem
 from sugar.graphics import iconentry
 from sugar.activity import activity
 
+
 class EditToolbar(activity.EditToolbar):
+
     __gtype_name__ = 'EditToolbar'
 
     def __init__(self):
@@ -133,7 +135,7 @@ class EditToolbar(activity.EditToolbar):
     def _find_changed_cb(self, page, spec):
         self._update_find_buttons()
 
-    def _find_updated_cb(self, job, page = None):
+    def _find_updated_cb(self, job, page=None):
         self._evince_view.find_changed(job, page)
 
     def _find_prev_cb(self, button):
@@ -169,12 +171,9 @@ class ViewToolbar(gtk.Toolbar):
     __gtype_name__ = 'ViewToolbar'
 
     __gsignals__ = {
-        'needs-update-size': (gobject.SIGNAL_RUN_FIRST,
-                              gobject.TYPE_NONE,
+        'needs-update-size': (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE,
                               ([])),
-        'go-fullscreen': (gobject.SIGNAL_RUN_FIRST,
-                          gobject.TYPE_NONE,
-                          ([]))
+        'go-fullscreen': (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE, ([])),
     }
 
     def __init__(self):
@@ -251,7 +250,6 @@ class ViewToolbar(gtk.Toolbar):
             'notify::zoom', self._view_notify_zoom_cb)
 
         self._update_zoom_buttons()
-
 
     def _zoom_spin_notify_value_cb(self, zoom_spin, pspec):
         if not self._view_notify_zoom_handler:

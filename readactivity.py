@@ -66,12 +66,15 @@ _TOOLBAR_READ = 2
 
 _logger = logging.getLogger('read-activity')
 
+
 def _get_screen_dpi():
     xft_dpi = gtk.settings_get_default().get_property('gtk-xft-dpi')
     _logger.debug('Setting dpi to %f', float(xft_dpi / 1024))
     return float(xft_dpi / 1024)
 
-def get_md5(filename): #FIXME: Should be moved somewhere else
+
+def get_md5(filename):
+    #FIXME: Should be moved somewhere else
     filename = filename.replace('file://', '') #XXX: hack
     fh = open(filename)
     digest = md5.new()
@@ -83,6 +86,7 @@ def get_md5(filename): #FIXME: Should be moved somewhere else
     fh.close()
     return digest.hexdigest()
 
+
 class ReadHTTPRequestHandler(network.ChunkedGlibHTTPRequestHandler):
     """HTTP Request Handler for transferring document while collaborating.
 
@@ -91,6 +95,7 @@ class ReadHTTPRequestHandler(network.ChunkedGlibHTTPRequestHandler):
     mainloop between chunks.
 
     """
+
     def translate_path(self, path):
         """Return the filepath to the shared document."""
         return self.server.filepath
@@ -98,6 +103,7 @@ class ReadHTTPRequestHandler(network.ChunkedGlibHTTPRequestHandler):
 
 class ReadHTTPServer(network.GlibTCPServer):
     """HTTP Server for transferring document while collaborating."""
+
     def __init__(self, server_address, filepath):
         """Set up the GlibTCPServer with the ReadHTTPRequestHandler.
 
@@ -125,8 +131,10 @@ class ReadURLDownloader(network.GlibURLDownloader):
 
 READ_STREAM_SERVICE = 'read-activity-http'
 
+
 class ReadActivity(activity.Activity):
     """The Read sugar activity."""
+
     def __init__(self, handle):
         activity.Activity.__init__(self, handle)
 
@@ -255,13 +263,13 @@ class ReadActivity(activity.Activity):
         self._vbox.show()
 
         self._topbar = TopBar()
-        self._vbox.pack_start(self._topbar, expand = False, fill = False)
+        self._vbox.pack_start(self._topbar, expand=False, fill=False)
 
         self._hbox = gtk.HBox()
         self._hbox.show()
         self._hbox.pack_start(self._sidebar, expand=False, fill=False)
 
-        self._vbox.pack_start(self._hbox, expand = True, fill = True)
+        self._vbox.pack_start(self._hbox, expand=True, fill=True)
         self.set_canvas(self._vbox)
 
         # Set up for idle suspend
@@ -330,10 +338,10 @@ class ReadActivity(activity.Activity):
         back.set_tooltip(_('Back'))
         back.props.sensitive = False
         palette = back.get_palette()
-        previous_page = MenuItem(text_label= _("Previous page"))
+        previous_page = MenuItem(text_label=_("Previous page"))
         palette.menu.append(previous_page)
         previous_page.show_all()
-        previous_bookmark = MenuItem(text_label= _("Previous bookmark"))
+        previous_bookmark = MenuItem(text_label=_("Previous bookmark"))
         palette.menu.append(previous_bookmark)
         previous_bookmark.show_all()
         back.connect('clicked', self.__go_back_cb)
@@ -346,10 +354,10 @@ class ReadActivity(activity.Activity):
         forward.set_tooltip(_('Forward'))
         forward.props.sensitive = False
         palette = forward.get_palette()
-        next_page = MenuItem(text_label= _("Next page"))
+        next_page = MenuItem(text_label=_("Next page"))
         palette.menu.append(next_page)
         next_page.show_all()
-        next_bookmark = MenuItem(text_label= _("Next bookmark"))
+        next_bookmark = MenuItem(text_label=_("Next bookmark"))
         palette.menu.append(next_bookmark)
         next_bookmark.show_all()
         forward.connect('clicked', self.__go_forward_cb)
@@ -448,7 +456,7 @@ class ReadActivity(activity.Activity):
         else:
             self._sidebar.del_bookmark(page)
 
-    def __page_changed_cb(self, page, proxy = None):
+    def __page_changed_cb(self, page, proxy=None):
         self._update_nav_buttons()
         if hasattr(self._document, 'has_document_links'):
             if self._document.has_document_links():
@@ -513,7 +521,6 @@ class ReadActivity(activity.Activity):
 
         current_link = self._toc_model.get(iter, 1)[0]
         current_page = self._document.get_page_cache().get_current_page()
-
 
         if not hasattr(current_link, 'get_page'):
             filepath = self._view.get_current_file()
@@ -780,7 +787,6 @@ class ReadActivity(activity.Activity):
 
         self._hbox.pack_start(self._scrolled, expand=True, fill=True)
         self._scrolled.show()
-
 
     def _load_document(self, filepath):
         """Load the specified document and set up the UI.

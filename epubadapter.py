@@ -3,9 +3,12 @@ import logging
 
 import epubview
 
+
 _logger = logging.getLogger('read-activity')
 
+
 class View(epubview.EpubView):
+
     def __init__(self):
         epubview.EpubView.__init__(self)
 
@@ -35,7 +38,7 @@ class View(epubview.EpubView):
     def get_current_page(self):
         return int(self._loaded_page - 1)
 
-    def find_changed(self, job, page = None):
+    def find_changed(self, job, page=None):
         self._find_changed(job)
 
     def handle_link(self, link):
@@ -43,6 +46,7 @@ class View(epubview.EpubView):
 
 
 class EpubDocument(epubview.Epub):
+
     def __init__(self, view, docpath):
         epubview.Epub.__init__(self, docpath)
         self._page_cache = view
@@ -59,6 +63,8 @@ class EpubDocument(epubview.Epub):
     def get_links_model(self):
         return self.get_toc_model()
 
+
 class JobFind(epubview.JobFind):
+
     def __init__(self, document, start_page, n_pages, text, case_sensitive=False):
         epubview.JobFind.__init__(self, document, start_page, n_pages, text, case_sensitive=False)

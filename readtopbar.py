@@ -24,6 +24,7 @@ from sugar.graphics.icon import Icon, get_icon_state
 
 from gettext import gettext as _
 
+
 _LEVEL_PROP = 'battery.charge_level.percentage'
 _CHARGING_PROP = 'battery.rechargeable.is_charging'
 _DISCHARGING_PROP = 'battery.rechargeable.is_discharging'
@@ -31,17 +32,15 @@ _PRESENT_PROP = 'battery.present'
 
 _ICON_NAME = 'battery'
 
+
 # Taken from sugar/extensions/deviceicon/battery.py
 class BattMan(gobject.GObject):
+
     __gproperties__ = {
-        'level'       : (int, None, None, 0, 100, 0,
-                         gobject.PARAM_READABLE),
-        'charging'    : (bool, None, None, False,
-                         gobject.PARAM_READABLE),
-        'discharging' : (bool, None, None, False,
-                         gobject.PARAM_READABLE),
-        'present'     : (bool, None, None, False,
-                         gobject.PARAM_READABLE)
+        'level': (int, None, None, 0, 100, 0, gobject.PARAM_READABLE),
+        'charging': (bool, None, None, False, gobject.PARAM_READABLE),
+        'discharging': (bool, None, None, False, gobject.PARAM_READABLE),
+        'present': (bool, None, None, False, gobject.PARAM_READABLE),
     }
 
     def __init__(self, udi):
@@ -121,14 +120,14 @@ class BattMan(gobject.GObject):
 
 class _TopBar(gtk.HBox):
     __gproperties__ = {
-        'completion-level' : (float, None, None, 0.0, 100.0, 0.0,
-        gobject.PARAM_READWRITE),
+        'completion-level': (float, None, None, 0.0, 100.0, 0.0,
+                             gobject.PARAM_READWRITE),
     }
 
     def __init__(self):
         gtk.HBox.__init__(self)
 
-        self.set_border_width(int(style.DEFAULT_SPACING/2.0))
+        self.set_border_width(int(style.DEFAULT_SPACING / 2.0))
         self.set_spacing(style.DEFAULT_SPACING * 4)
 
         self._completion_level = 0
@@ -164,23 +163,25 @@ class _TopBar(gtk.HBox):
 
     def set_completion_level(self, value):
         self._completion_level = value
-        self._progressbar.set_fraction(self._completion_level/100.0)
+        self._progressbar.set_fraction(self._completion_level / 100.0)
 
     def _setup(self):
         self._progressbar = gtk.ProgressBar()
         self._progressbar.props.discrete_blocks = 10
-        self._progressbar.set_fraction(self._completion_level/100.0)
-        self.pack_start(self._progressbar, expand = True, fill = True)
+        self._progressbar.set_fraction(self._completion_level / 100.0)
+        self.pack_start(self._progressbar, expand=True, fill=True)
         if self._battery is not None:
             icon_name = get_icon_state(_ICON_NAME, self._battery.props.level, step=-5)
             self._icon = Icon(icon_name=icon_name)
-            self.pack_start(self._icon, expand = False, fill = False)
+            self.pack_start(self._icon, expand=False, fill=False)
 
     def _battery_level_changed_cb(self, pspec, param):
         icon_name = get_icon_state(_ICON_NAME, self._battery.props.level, step=-5)
         self._icon.props.icon_name = icon_name
 
+
 class TopBar(_TopBar):
+
     def __init__(self):
         _TopBar.__init__(self)
         self._document = None
@@ -191,14 +192,11 @@ class TopBar(_TopBar):
         page_cache = self._document.get_page_cache()
         page_cache.connect('page-changed', self._page_changed_cb)
 
-    def _page_changed_cb(self, page, proxy = None):
+    def _page_changed_cb(self, page, proxy=None):
         current_page = self._document.get_page_cache().get_current_page()
         n_pages = self._document.get_n_pages()
 
-        self.set_completion_level(current_page * 100/n_pages)
+        self.set_completion_level(current_page * 100 / n_pages)
 
         #TRANS: Translate this as Page i of m (eg: Page 4 of 334)
         self._progressbar.set_text(_("Page %i of %i") % (current_page, n_pages))
-
-
-
