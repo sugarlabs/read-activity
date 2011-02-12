@@ -20,8 +20,6 @@ import gtk, gobject
 import dbus
 import logging
 
-import evince
-
 from sugar.graphics import style
 from sugar.graphics.icon import Icon, get_icon_state
 
@@ -192,20 +190,17 @@ class TopBar(_TopBar):
 
     def __init__(self):
         _TopBar.__init__(self)
-        self._document = None
+        self._view = None
 
-    def set_document(self, document):
-        self._document = document
-
-        model = evince.DocumentModel()
-        model.props.document = self._document
-        model.connect('page-changed', self._page_changed_cb)
+    def set_view(self, view):
+        self._view = view
+        self._view.connect_page_changed_handler(self._page_changed_cb)
 
     def _page_changed_cb(self, model, page_from, page_to):
-        current_page = self._model.props.page
-        n_pages = self._document.get_n_pages()
+        current_page = self._view.get_current_page()
+        n_pages = self._view.get_pagecount()
 
-        self.set_completion_level(current_page * 100 / n_pages)
+        self.set_completion_level(int(float(current_page) * 100 / float(n_pages)))
 
         #TRANS: Translate this as Page i of m (eg: Page 4 of 334)
         self._progressbar.set_text(_("Page %i of %i") % (current_page, n_pages))

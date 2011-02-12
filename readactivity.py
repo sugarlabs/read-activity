@@ -25,7 +25,6 @@ import re
 import md5
 
 import dbus
-import evince
 import gobject
 import gtk
 import pango
@@ -50,14 +49,8 @@ from readtoolbar import EditToolbar, ViewToolbar
 from readsidebar import Sidebar
 from readtopbar import TopBar
 
-
-_EPUB_SUPPORT = True
-try:
-    import epubadapter
-except ImportError, e:
-    _EPUB_SUPPORT = False
-    logging.warning('Epub support disabled because: %s' % e)
-
+import epubadapter
+import evinceadapter
 
 _HARDWARE_MANAGER_INTERFACE = 'org.laptop.HardwareManager'
 _HARDWARE_MANAGER_SERVICE = 'org.laptop.HardwareManager'
@@ -76,7 +69,7 @@ def _get_screen_dpi():
 
 def get_md5(filename):
     #FIXME: Should be moved somewhere else
-    filename = filename.replace('file://', '') #XXX: hack
+    filename = filename.replace('file://', '')  # XXX: hack
     fh = open(filename)
     digest = md5.new()
     while 1:
@@ -139,10 +132,10 @@ class ReadActivity(activity.Activity):
     def __init__(self, handle):
         activity.Activity.__init__(self, handle)
 
-        self._epub = False
         self._document = None
         self._fileserver = None
         self._object_id = handle.object_id
+        self._toc_model = None
 
         self.connect('key-press-event', self._key_press_event_cb)
         self.connect('key-release-event', self._key_release_event_cb)
@@ -151,7 +144,7 @@ class ReadActivity(activity.Activity):
         _logger.debug('Starting Read...')
 
         self._view = None
-
+        self.dpi = _get_screen_dpi()
         self._sidebar = Sidebar()
         self._sidebar.show()
 
@@ -408,12 +401,7 @@ class ReadActivity(activity.Activity):
         else:
             page = 0
 
-        if page >= self._document.get_n_pages():
-            page = self._document.get_n_pages() - 1
-        elif page < 0:
-            page = 0
-
-        self._model.props.page = page
+        self._view.set_current_page(page)
         entry.props.text = str(page + 1)
 
     def __go_back_cb(self, button):
@@ -429,23 +417,23 @@ class ReadActivity(activity.Activity):
         self._view.next_page()
 
     def __prev_bookmark_activate_cb(self, menuitem):
-        page = self._model.props.page
+        page = self._view.get_current_page()
         bookmarkmanager = self._sidebar.get_bookmarkmanager()
 
         prev_bookmark = bookmarkmanager.get_prev_bookmark_for_page(page)
         if prev_bookmark is not None:
-            self._model.props.page = prev_bookmark.page_no
+            self._view.set_current_page(prev_bookmark.page_no)
 
     def __next_bookmark_activate_cb(self, menuitem):
-        page = self._model.props.page
+        page = self._view.get_current_page()
         bookmarkmanager = self._sidebar.get_bookmarkmanager()
 
         next_bookmark = bookmarkmanager.get_next_bookmark_for_page(page)
         if next_bookmark is not None:
-            self._model.props.page = next_bookmark.page_no
+            self._view.set_current_page(next_bookmark.page_no)
 
     def __bookmarker_toggled_cb(self, button):
-        page = self._model.props.page
+        page = self._view.get_current_page()
         if self._bookmarker.props.active:
             self._sidebar.add_bookmark(page)
         else:
@@ -453,27 +441,31 @@ class ReadActivity(activity.Activity):
 
     def __page_changed_cb(self, model, page_from, page_to):
         self._update_nav_buttons()
-        if hasattr(self._document, 'has_document_links'):
-            if self._document.has_document_links():
-                self._toc_select_active_page()
+        if self._toc_model != None:
+            self._toc_select_active_page()
 
-        self._sidebar.update_for_page(self._model.props.page)
+        self._sidebar.update_for_page(self._view.get_current_page())
 
         self._bookmarker.handler_block(self._bookmarker_toggle_handler_id)
-        self._bookmarker.props.active = self._sidebar.is_showing_local_bookmark()
+        self._bookmarker.props.active = \
+                self._sidebar.is_showing_local_bookmark()
         self._bookmarker.handler_unblock(self._bookmarker_toggle_handler_id)
 
     def _update_nav_buttons(self):
-        current_page = self._model.props.page
+        current_page = self._view.get_current_page()
         self._back_button.props.sensitive = current_page > 0
         self._forward_button.props.sensitive = \
-            current_page < self._document.get_n_pages() - 1
+            current_page < self._view.get_pagecount() - 1
 
         self._num_page_entry.props.text = str(current_page + 1)
         self._total_page_label.props.label = \
-            ' / ' + str(self._document.get_n_pages())
+            ' / ' + str(self._view.get_pagecount())
 
     def _update_toc(self):
+        if self._view.update_toc(self):
+            self._navigator_changed_handler_id = \
+                self._navigator.connect('changed', self.__navigator_changed_cb)
+
         if hasattr(self._document, 'has_document_links'):
             if self._document.has_document_links():
                 self._navigator_toolbar_button.show()
@@ -515,7 +507,7 @@ class ReadActivity(activity.Activity):
         iter = self._navigator.get_active_iter()
 
         current_link = self._toc_model.get(iter, 1)[0]
-        current_page = self._model.props.page
+        current_page = self._view.get_current_page()
 
         if not hasattr(current_link, 'get_page'):
             filepath = self._view.get_current_file()
@@ -526,7 +518,8 @@ class ReadActivity(activity.Activity):
                 return
 
         self._navigator.handler_block(self._navigator_changed_handler_id)
-        self._toc_model.foreach(self._toc_select_active_page_foreach, current_page)
+        self._toc_model.foreach(self._toc_select_active_page_foreach,
+                current_page)
         self._navigator.handler_unblock(self._navigator_changed_handler_id)
 
     def _show_journal_object_picker(self):
@@ -557,7 +550,8 @@ class ReadActivity(activity.Activity):
             # Now active, start initial suspend timeout
             if self._idle_timer > 0:
                 gobject.source_remove(self._idle_timer)
-            self._idle_timer = gobject.timeout_add_seconds(15, self._suspend_cb)
+            self._idle_timer = gobject.timeout_add_seconds(15,
+                    self._suspend_cb)
             self._sleep_inhibit = False
         else:
             # Now inactive
@@ -597,8 +591,8 @@ class ReadActivity(activity.Activity):
         self._load_document('file://' + self._tempfile)
 
         # FIXME: This should obviously be fixed properly
-        gobject.timeout_add_seconds(1, self.__view_toolbar_needs_update_size_cb,
-            None)
+        gobject.timeout_add_seconds(1,
+                self.__view_toolbar_needs_update_size_cb, None)
 
     def write_file(self, file_path):
         """Write into datastore for Keep.
@@ -616,21 +610,9 @@ class ReadActivity(activity.Activity):
 
         try:
             self.metadata['Read_current_page'] = \
-                        str(self._model.props.page)
+                        str(self._view.get_current_page())
 
-            self.metadata['Read_zoom'] = str(self._model.props.scale)
-
-            if not self._epub:
-                if self._model.props.sizing_mode == evince.SIZING_BEST_FIT:
-                    self.metadata['Read_sizing_mode'] = "best-fit"
-                elif self._model.props.sizing_mode == evince.SIZING_FREE:
-                    self.metadata['Read_sizing_mode'] = "free"
-                elif self._model.props.sizing_mode == evince.SIZING_FIT_WIDTH:
-                    self.metadata['Read_sizing_mode'] = "fit-width"
-                else:
-                    _logger.error("Don't know how to save sizing_mode state '%s'" %
-                                  self._model.props.sizing_mode)
-                self.metadata['Read_sizing_mode'] = "fit-width"
+            self._view.update_metadata(self)
 
             self.metadata['Read_search'] = \
                     self._edit_toolbar._search_entry.props.text
@@ -758,30 +740,6 @@ class ReadActivity(activity.Activity):
         self.watch_for_tubes()
         gobject.idle_add(self._get_document)
 
-    def _setup_epub_viewer(self):
-        self._view = epubadapter.View()
-        self._view.set_screen_dpi(_get_screen_dpi())
-        self._view.connect('selection-changed',
-                            self._view_selection_changed_cb)
-
-        self._hbox.pack_start(self._view, expand=True, fill=True)
-        self._view.show_all()
-
-    def _setup_evince_viewer(self):
-        self._view = evince.View()
-        self._view.connect('selection-changed',
-                            self._view_selection_changed_cb)
-
-        self._scrolled = gtk.ScrolledWindow()
-        self._scrolled.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
-        self._scrolled.props.shadow_type = gtk.SHADOW_NONE
-
-        self._scrolled.add(self._view)
-        self._view.show()
-
-        self._hbox.pack_start(self._scrolled, expand=True, fill=True)
-        self._scrolled.show()
-
     def _load_document(self, filepath):
         """Load the specified document and set up the UI.
 
@@ -790,43 +748,19 @@ class ReadActivity(activity.Activity):
         """
         mimetype = mime.get_for_file(filepath)
         if mimetype == 'application/epub+zip':
-            if not _EPUB_SUPPORT:
-                self.close()
-                return
-            self._epub = True
-            self._setup_epub_viewer()
-            self._document = epubadapter.EpubDocument(self._view, filepath.replace('file://', ''))
-            self._model = None
-
-            self._view.set_document(self._document)
+            self._view = epubadapter.EpubViewer()
         else:
-            self._setup_evince_viewer()
-            try:
-                self._document = evince.document_factory_get_document(filepath)
-            except GError, e:
-                _logger.error('Can not load document: %s', e)
-                return
-            else:
-                self._model = evince.DocumentModel()
-                self._model.set_document(self._document)
-                self._view.set_model(self._model)
+            self._view = evinceadapter.EvinceViewer()
 
-                # set dpi
-                dpi = _get_screen_dpi()
-                min_scale = self._model.get_min_scale()
-                max_scale = self._model.get_max_scale()
-                self._model.set_min_scale(min_scale * dpi / 72.0)
-                self._model.set_max_scale(max_scale * dpi / 72.0)
+        self._view.setup(self)
+        self._view.load_document(filepath)
 
         self._want_document = False
 
-        # set dpi
-
-        self._view_toolbar.set_view(self._view, self._model)
+        self._view_toolbar.set_view(self._view)
         self._edit_toolbar.set_view(self._view)
 
-        self._edit_toolbar.set_document(self._document)
-        self._topbar.set_document(self._document)
+        self._topbar.set_view(self._view)
 
         filehash = get_md5(filepath)
         self._sidebar.set_bookmarkmanager(filehash)
@@ -834,34 +768,14 @@ class ReadActivity(activity.Activity):
         self._update_nav_buttons()
         self._update_toc()
 
-        self._model.connect('page-changed', self.__page_changed_cb)
+        self._view.connect_page_changed_handler(self.__page_changed_cb)
 
         if not self.metadata['title_set_by_user'] == '1':
             title = self._document.get_title()
             if title:
                 self.metadata['title'] = title
 
-        if not self._epub:
-            sizing_mode = self.metadata.get('Read_sizing_mode', 'fit-width')
-            _logger.debug('Found sizing mode: %s', sizing_mode)
-            if sizing_mode == "best-fit":
-                self._model.props.sizing_mode = evince.SIZING_BEST_FIT
-                if hasattr(self._view, 'update_view_size'):
-                    self._view.update_view_size(self._scrolled)
-            elif sizing_mode == "free":
-                self._model.props.sizing_mode = evince.SIZING_FREE
-                self._model.props.scale = float(self.metadata.get('Read_zoom', '1.0'))
-                _logger.debug('Set zoom to %f', self._model.props.scale)
-            elif sizing_mode == "fit-width":
-                self._model.props.sizing_mode = evince.SIZING_FIT_WIDTH
-                if hasattr(self._view, 'update_view_size'):
-                    self._view.update_view_size(self._scrolled)
-            else:
-                # this may happen when we get a document from a buddy with a later
-                # version of Read, for example.
-                _logger.warning("Unknown sizing_mode state '%s'", sizing_mode)
-                if self.metadata.get('Read_zoom', None) is not None:
-                    self._model.props.scale = float(self.metadata['Read_zoom'])
+        self._view.load_metadata(self)
 
         self._view_toolbar._update_zoom_buttons()
 
@@ -870,7 +784,7 @@ class ReadActivity(activity.Activity):
 
         current_page = int(self.metadata.get('Read_current_page', '0'))
         _logger.debug('Setting page to: %d', current_page)
-        self._model.props.page = current_page
+        self._view.set_current_page(current_page)
 
         # We've got the document, so if we're a shared activity, offer it
         try:
@@ -993,7 +907,7 @@ class ReadActivity(activity.Activity):
         if hasattr(self._view, 'update_view_size'):
             self._view.update_view_size(self._scrolled)
         else:
-            return False # No need to run this again and again
+            return False  # No need again to run this again and
 
     def __view_toolbar_go_fullscreen_cb(self, view_toolbar):
         self.fullscreen()

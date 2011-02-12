@@ -154,7 +154,7 @@ class _JobPaginator(gobject.GObject):
                 pagelen = 1 / pages
             self._pagemap[float(self._pagecount + i)] = (f.props.uri, (i - 1) / math.ceil(pages), pagelen)
 
-        self._pagecount += math.ceil(pages)
+        self._pagecount += int(math.ceil(pages))
         self._filedict[f.props.uri.replace('file://', '')] = (math.ceil(pages), math.ceil(pages) - pages)
         self._bookheight += pageheight
 

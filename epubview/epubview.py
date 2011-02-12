@@ -42,7 +42,8 @@ class _View(gtk.HBox):
                    0.5, 4.0, 1.0, gobject.PARAM_READWRITE),
     }
     __gsignals__ = {
-        'page-changed': (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE, ([])),
+        'page-changed': (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE,
+                ([int, int])),
         'selection-changed': (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE,
                               ([])),
     }
@@ -107,13 +108,13 @@ class _View(gtk.HBox):
     def do_get_property(self, property):
         if property.name == 'has-selection':
             return self._has_selection
-        elif property.name == 'zoom':
+        elif property.name == 'scale':
             return self.scale
         else:
             raise AttributeError, 'unknown property %s' % property.name
 
     def do_set_property(self, property, value):
-        if property.name == 'zoom':
+        if property.name == 'scale':
             self.__set_zoom(value)
         else:
             raise AttributeError, 'unknown property %s' % property.name
@@ -128,20 +129,32 @@ class _View(gtk.HBox):
         '''
         Returns the current zoom level
         '''
-        return self.get_property('zoom')
+        return self.get_property('scale') * 100.0
 
     def set_zoom(self, value):
         '''
         Sets the current zoom level
         '''
-        self.set_property('zoom', value)
+        self._view.set_zoom_level(value / 100.0)
+
+    def _get_scale(self):
+        '''
+        Returns the current zoom level
+        '''
+        return self.get_property('scale')
+
+    def _set_scale(self, value):
+        '''
+        Sets the current zoom level
+        '''
+        self.set_property('scale', value)
 
     def zoom_in(self):
         '''
         Zooms in (increases zoom level by 0.1)
         '''
         if self.can_zoom_in():
-            self.set_zoom(self.get_zoom() + 0.1)
+            self._set_scale(self._get_scale() + 0.1)
             return True
         else:
             return False
@@ -151,7 +164,7 @@ class _View(gtk.HBox):
         Zooms out (decreases zoom level by 0.1)
         '''
         if self.can_zoom_out():
-            self.set_zoom(self.get_zoom() - 0.1)
+            self._set_scale(self._get_scale() - 0.1)
             return True
         else:
             return False
@@ -297,6 +310,7 @@ class _View(gtk.HBox):
     def __set_has_selection(self, value):
         if value != self._has_selection:
             self._has_selection = value
+            self.emit('selection-changed')
 
     def _view_populate_popup_cb(self, view, menu):
         menu.destroy() #HACK
@@ -305,11 +319,13 @@ class _View(gtk.HBox):
     def _view_selection_changed_cb(self, view):
         # FIXME: This does not seem to be implemented in
         # webkitgtk yet
-        print view.has_selection()
-        self.emit('selection-changed')
+        print "epubview _view_selection_changed_cb", view.has_selection()
+        self.__set_has_selection(view.has_selection())
 
     def _view_buttonrelease_event_cb(self, view, event):
         # Ugly hack
+        print "epubview _view_buttonrelease_event_cb", view.has_selection(), \
+                view.can_copy_clipboard(), view.can_cut_clipboard()
         self.__set_has_selection(view.can_copy_clipboard() \
                                  | view.can_cut_clipboard())
 
@@ -393,7 +409,7 @@ class _View(gtk.HBox):
             pageno = math.floor(base_pageno + offset)
 
         if pageno != self._loaded_page:
-            self._on_page_changed(int(pageno))
+            self._on_page_changed(0, int(pageno))
 
     def _scroll_page_end(self):
         v_upper = self._v_vscrollbar.props.adjustment.props.upper
@@ -441,7 +457,7 @@ class _View(gtk.HBox):
             else:
                 scrollfactor = 0
             if scrollfactor >= scrollfactor_next:
-                self._on_page_changed(self._loaded_page + 1)
+                self._on_page_changed(self._loaded_page, self._loaded_page + 1)
         elif self.__going_back == True and self._loaded_page > 1:
             if self._paginator.get_file_for_pageno(self._loaded_page) != \
                         self._paginator.get_file_for_pageno(self._loaded_page - 1):
@@ -454,22 +470,22 @@ class _View(gtk.HBox):
                 scrollfactor = 0
 
             if scrollfactor <= scrollfactor_cur:
-                self._on_page_changed(self._loaded_page - 1)
+                self._on_page_changed(self._loaded_page, self._loaded_page - 1)
 
-    def _on_page_changed(self, pageno):
+    def _on_page_changed(self, oldpage, pageno):
         self.__page_changed = True
         self._loaded_page = pageno
         self._scrollbar.handler_block(self._scrollbar_change_value_cb_id)
         self._scrollbar.set_value(pageno)
         self._scrollbar.handler_unblock(self._scrollbar_change_value_cb_id)
-        self.emit('page-changed')
+        self.emit('page-changed', oldpage, pageno)
 
     def _load_page(self, pageno):
         if pageno > self._pagecount or pageno < 1:
             #TODO: Cause an exception
             return
 
-        self._on_page_changed(pageno)
+        self._on_page_changed(self._loaded_page, pageno)
         filename = self._paginator.get_file_for_pageno(pageno)
         if filename != self._loaded_filename:
             #self._loaded_filename = filename
