@@ -64,7 +64,14 @@ class EvinceViewer():
         return self._document.get_n_pages()
 
     def load_metadata(self, activity):
+
         self.metadata = activity.metadata
+
+        if not self.metadata['title_set_by_user'] == '1':
+            title = self._document.get_title()
+            if title:
+                self.metadata['title'] = title
+
         sizing_mode = self.metadata.get('Read_sizing_mode', 'fit-width')
         _logger.debug('Found sizing mode: %s', sizing_mode)
         if sizing_mode == "best-fit":

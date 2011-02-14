@@ -23,7 +23,13 @@ class EpubViewer(epubview.EpubView):
         self.set_document(EpubDocument(self, file_path.replace('file://', '')))
 
     def load_metadata(self, activity):
-        pass
+
+        self.metadata = activity.metadata
+
+        if not self.metadata['title_set_by_user'] == '1':
+            title = self._epub._info._get_title()
+            if title:
+                self.metadata['title'] = title
 
     def update_metadata(self, activity):
         pass

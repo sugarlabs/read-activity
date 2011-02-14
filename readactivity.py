@@ -770,10 +770,6 @@ class ReadActivity(activity.Activity):
 
         self._view.connect_page_changed_handler(self.__page_changed_cb)
 
-        if not self.metadata['title_set_by_user'] == '1':
-            title = self._document.get_title()
-            if title:
-                self.metadata['title'] = title
 
         self._view.load_metadata(self)
 
