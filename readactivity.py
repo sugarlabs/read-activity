@@ -51,6 +51,7 @@ from readtopbar import TopBar
 
 import epubadapter
 import evinceadapter
+import textadapter
 
 _HARDWARE_MANAGER_INTERFACE = 'org.laptop.HardwareManager'
 _HARDWARE_MANAGER_SERVICE = 'org.laptop.HardwareManager'
@@ -749,6 +750,8 @@ class ReadActivity(activity.Activity):
         mimetype = mime.get_for_file(filepath)
         if mimetype == 'application/epub+zip':
             self._view = epubadapter.EpubViewer()
+        elif mimetype == 'text/plain':
+            self._view = textadapter.TextViewer()
         else:
             self._view = evinceadapter.EvinceViewer()
 
