@@ -3,6 +3,7 @@ import logging
 import gtk
 import pango
 import gobject
+import threading
 
 from sugar.graphics import style
 
@@ -155,16 +156,32 @@ class TextViewer(gobject.GObject):
         pass
 
     def setup_find_job(self, text, _find_updated_cb):
-        pass
+        self._find_job = _JobFind(self._etext_file, start_page=0,
+                n_pages=self._pagecount,
+                text=text, case_sensitive=False)
+        self._find_updated_handler = self._find_job.connect('updated',
+                _find_updated_cb)
+        return self._find_job, self._find_updated_handler
 
     def find_next(self):
-        pass
+        self._find_job.find_next()
 
     def find_previous(self):
-        pass
+        self._find_job.find_previous()
 
     def find_changed(self, job, page):
-        pass
+        self.set_current_page(job.get_page())
+        self._show_found_text(job.get_founded_tuple())
+
+    def _show_found_text(self, founded_tuple):
+        textbuffer = self.textview.get_buffer()
+        tag = textbuffer.create_tag()
+        tag.set_property('weight', pango.WEIGHT_BOLD)
+        tag.set_property('foreground', 'white')
+        tag.set_property('background', 'black')
+        iterStart = textbuffer.get_iter_at_offset(founded_tuple[1])
+        iterEnd = textbuffer.get_iter_at_offset(founded_tuple[2])
+        textbuffer.apply_tag(tag, iterStart, iterEnd)
 
     def get_zoom(self):
         return self.font_zoom_relation * self._font_size
@@ -210,3 +227,151 @@ class TextViewer(gobject.GObject):
 
     def zoom_to_actual_size(self):
         return False
+
+
+class _JobFind(gobject.GObject):
+
+    __gsignals__ = {
+        'updated': (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE, ([])),
+    }
+
+    def __init__(self, text_file, start_page, n_pages, text, \
+                case_sensitive=False):
+        gobject.GObject.__init__(self)
+        gtk.gdk.threads_init()
+
+        self._finished = False
+        self._text_file = text_file
+        self._start_page = start_page
+        self._n_pages = n_pages
+        self._text = text
+        self._case_sensitive = case_sensitive
+        self.threads = []
+
+        s_thread = _SearchThread(self)
+        self.threads.append(s_thread)
+        s_thread.start()
+
+    def cancel(self):
+        '''
+        Cancels the search job
+        '''
+        for s_thread in self.threads:
+            s_thread.stop()
+
+    def is_finished(self):
+        '''
+        Returns True if the entire search job has been finished
+        '''
+        return self._finished
+
+    def get_search_text(self):
+        '''
+        Returns the search text
+        '''
+        return self._text
+
+    def get_case_sensitive(self):
+        '''
+        Returns True if the search is case-sensitive
+        '''
+        return self._case_sensitive
+
+    def find_next(self):
+        self.threads[-1].find_next()
+
+    def find_previous(self):
+        self.threads[-1].find_previous()
+
+    def get_page(self):
+        return self.threads[-1].get_page()
+
+    def get_founded_tuple(self):
+        return self.threads[-1].get_founded_tuple()
+
+
+class _SearchThread(threading.Thread):
+
+    def __init__(self, obj):
+        threading.Thread.__init__(self)
+        self.obj = obj
+        self.stopthread = threading.Event()
+
+    def _start_search(self):
+        pagecount = 0
+        linecount = 0
+        charcount = 0
+        self._found_records = []
+        self._current_found_item = -1
+        self.obj._text_file.seek(0)
+        while self.obj._text_file:
+            line = unicode(self.obj._text_file.readline(), "iso-8859-1")
+            line_length = len(line)
+            if not line:
+                break
+            line_increment = (len(line) / 80) + 1
+            linecount = linecount + line_increment
+            positions = self._allindices(line.lower(), self.obj._text.lower())
+            for position in positions:
+                found_pos = charcount + position + 3
+                found_tuple = (pagecount, found_pos, \
+                        len(self.obj._text) + found_pos)
+                self._found_records.append(found_tuple)
+                self._current_found_item = 0
+            charcount = charcount + line_length
+            if linecount >= PAGE_SIZE:
+                linecount = 0
+                charcount = 0
+                pagecount = pagecount + 1
+        if self._current_found_item == 0:
+            self.current_found_tuple = \
+                    self._found_records[self._current_found_item]
+            self._page = self.current_found_tuple[0]
+
+        gtk.gdk.threads_enter()
+        self.obj._finished = True
+        self.obj.emit('updated')
+        gtk.gdk.threads_leave()
+
+        return False
+
+    def _allindices(self,  line, search, listindex=None,  offset=0):
+        if listindex is None:
+            listindex = []
+        if (line.find(search) == -1):
+            return listindex
+        else:
+            offset = line.index(search) + offset
+            listindex.append(offset)
+            line = line[(line.index(search) + 1):]
+            return self._allindices(line, search, listindex, offset + 1)
+
+    def run(self):
+        self._start_search()
+
+    def stop(self):
+        self.stopthread.set()
+
+    def find_next(self):
+        self._current_found_item = self._current_found_item + 1
+        if self._current_found_item >= len(self._found_records):
+            self._current_found_item = len(self._found_records) - 1
+        self.current_found_tuple =  \
+                self._found_records[self._current_found_item]
+        self._page = self.current_found_tuple[0]
+        self.obj.emit('updated')
+
+    def find_previous(self):
+        self._current_found_item = self._current_found_item - 1
+        if self._current_found_item <= 0:
+            self._current_found_item = 0
+        self.current_found_tuple = \
+                self._found_records[self._current_found_item]
+        self._page = self.current_found_tuple[0]
+        self.obj.emit('updated')
+
+    def get_page(self):
+        return self._page
+
+    def get_founded_tuple(self):
+        return self.current_found_tuple
