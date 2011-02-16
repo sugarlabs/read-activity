@@ -34,6 +34,11 @@ class TextViewer(gobject.GObject):
         self.textview.set_left_margin(50)
         self.textview.set_right_margin(50)
         self.textview.set_wrap_mode(gtk.WRAP_WORD)
+        self.textview.connect('button-release-event', \
+                self._view_buttonrelease_event_cb)
+        self.connect('selection-changed',
+                            activity._view_selection_changed_cb)
+
         activity._scrolled.add(self.textview)
         self.textview.show()
         activity._scrolled.show()
@@ -147,10 +152,18 @@ class TextViewer(gobject.GObject):
         pass
 
     def copy(self):
-        pass
+        self.textview.get_buffer().copy_clipboard(gtk.Clipboard())
 
     def update_view_size(self, _scrolled):
         pass
+
+    def _view_buttonrelease_event_cb(self, view, event):
+        self._has_selection = \
+                self.textview.get_buffer().get_selection_bounds() != ()
+        self.emit('selection-changed')
+
+    def get_has_selection(self):
+        return self._has_selection
 
     def find_set_highlight_search(self, True):
         pass
