@@ -145,8 +145,8 @@ class Sidebar(gtk.EventBox):
 
             self._is_showing_local_bookmark = False
 
-    def set_bookmarkmanager(self, filehash):
-        self._bookmark_manager = BookmarkManager(filehash)
+    def set_bookmarkmanager(self, bookmark_manager):
+        self._bookmark_manager = bookmark_manager
 
     def get_bookmarkmanager(self):
         return (self._bookmark_manager)

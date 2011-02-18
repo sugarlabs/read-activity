@@ -48,7 +48,7 @@ from sugar.graphics.objectchooser import ObjectChooser
 from readtoolbar import EditToolbar, ViewToolbar
 from readsidebar import Sidebar
 from readtopbar import TopBar
-
+from readdb import BookmarkManager
 import epubadapter
 import evinceadapter
 import textadapter
@@ -234,6 +234,16 @@ class ReadActivity(activity.Activity):
         toolbar_box.toolbar.insert(bookmark_item, -1)
         bookmark_item.show()
 
+        self._highlight_item = gtk.ToolItem()
+        self._highlight = ToggleToolButton('format-text-underline')
+        self._highlight.set_tooltip(_('Highlight'))
+        self._highlight.props.sensitive = False
+        self._highlight_id = self._highlight.connect('clicked', \
+                self.__highlight_cb)
+        self._highlight_item.add(self._highlight)
+        toolbar_box.toolbar.insert(self._highlight_item, -1)
+        self._highlight_item.show_all()
+
         separator = gtk.SeparatorToolItem()
         separator.props.draw = False
         separator.set_expand(True)
@@ -417,19 +427,45 @@ class ReadActivity(activity.Activity):
     def __go_forward_page_cb(self, button):
         self._view.next_page()
 
+    def __highlight_cb(self, button):
+        tuples_list = self._bookmarkmanager.get_highlights(
+                self._view.get_current_page())
+        selection_tuple = self._view.get_selection_bounds()
+        cursor_position = self._view.get_cursor_position()
+
+        old_highlight_found = None
+        for compare_tuple in tuples_list:
+            if selection_tuple:
+                if selection_tuple[0] >= compare_tuple[0] and \
+                        selection_tuple[1] <= compare_tuple[1]:
+                    old_highlight_found = compare_tuple
+                    break
+            if cursor_position >= compare_tuple[0] and \
+               cursor_position <= compare_tuple[1]:
+                old_highlight_found = compare_tuple
+                break
+
+        if old_highlight_found == None:
+            self._bookmarkmanager.add_highlight(
+                    self._view.get_current_page(), selection_tuple)
+        else:
+            self._bookmarkmanager.del_highlight(
+                    self._view.get_current_page(), old_highlight_found)
+
+        self._view.show_highlights(self._bookmarkmanager.get_highlights(
+                self._view.get_current_page()))
+
     def __prev_bookmark_activate_cb(self, menuitem):
         page = self._view.get_current_page()
-        bookmarkmanager = self._sidebar.get_bookmarkmanager()
 
-        prev_bookmark = bookmarkmanager.get_prev_bookmark_for_page(page)
+        prev_bookmark = self._bookmarkmanager.get_prev_bookmark_for_page(page)
         if prev_bookmark is not None:
             self._view.set_current_page(prev_bookmark.page_no)
 
     def __next_bookmark_activate_cb(self, menuitem):
         page = self._view.get_current_page()
-        bookmarkmanager = self._sidebar.get_bookmarkmanager()
 
-        next_bookmark = bookmarkmanager.get_next_bookmark_for_page(page)
+        next_bookmark = self._bookmarkmanager.get_next_bookmark_for_page(page)
         if next_bookmark is not None:
             self._view.set_current_page(next_bookmark.page_no)
 
@@ -451,6 +487,10 @@ class ReadActivity(activity.Activity):
         self._bookmarker.props.active = \
                 self._sidebar.is_showing_local_bookmark()
         self._bookmarker.handler_unblock(self._bookmarker_toggle_handler_id)
+
+        tuples_list = self._bookmarkmanager.get_highlights(
+                self._view.get_current_page())
+        self._view.show_highlights(tuples_list)
 
     def _update_nav_buttons(self):
         current_page = self._view.get_current_page()
@@ -766,17 +806,13 @@ class ReadActivity(activity.Activity):
         self._topbar.set_view(self._view)
 
         filehash = get_md5(filepath)
-        self._sidebar.set_bookmarkmanager(filehash)
-
+        self._bookmarkmanager = BookmarkManager(filehash)
+        self._sidebar.set_bookmarkmanager(self._bookmarkmanager)
         self._update_nav_buttons()
         self._update_toc()
-
         self._view.connect_page_changed_handler(self.__page_changed_cb)
-
-
         self._view.load_metadata(self)
-
-        self._view_toolbar._update_zoom_buttons()
+        self._update_toolbars()
 
         self._edit_toolbar._search_entry.props.text = \
                                 self.metadata.get('Read_search', '')
@@ -792,6 +828,11 @@ class ReadActivity(activity.Activity):
                 self._share_document()
         except Exception, e:
             _logger.debug('Sharing failed: %s', e)
+
+    def _update_toolbars(self):
+        self._view_toolbar._update_zoom_buttons()
+        if not self._view.can_highlight():
+            self._highlight_item.hide()
 
     def _share_document(self):
         """Share the document."""
@@ -857,6 +898,33 @@ class ReadActivity(activity.Activity):
 
     def _view_selection_changed_cb(self, view):
         self._edit_toolbar.copy.props.sensitive = view.get_has_selection()
+        if self._view.can_highlight():
+            # Verify if the selection already exist or the cursor
+            # is in a highlighted area
+            cursor_position = self._view.get_cursor_position()
+            logging.debug('cursor position %d' % cursor_position)
+            selection_tuple = self._view.get_selection_bounds()
+            tuples_list = self._bookmarkmanager.get_highlights( \
+                    self._view.get_current_page())
+            in_bounds = False
+            for highlight_tuple in tuples_list:
+                logging.debug('control tuple  %s' % str(highlight_tuple))
+                if selection_tuple:
+                    if selection_tuple[0] >= highlight_tuple[0] and \
+                       selection_tuple[1] <= highlight_tuple[1]:
+                        in_bounds = True
+                        break
+                if cursor_position >= highlight_tuple[0] and \
+                   cursor_position <= highlight_tuple[1]:
+                    in_bounds = True
+                    break
+
+            self._highlight.props.sensitive = \
+                    view.get_has_selection() or in_bounds
+
+            self._highlight.handler_block(self._highlight_id)
+            self._highlight.set_active(in_bounds)
+            self._highlight.handler_unblock(self._highlight_id)
 
     def _edit_toolbar_copy_cb(self, button):
         self._view.copy()

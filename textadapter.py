@@ -51,6 +51,11 @@ class TextViewer(gobject.GObject):
         self.font_zoom_relation = self._zoom / self._font_size
         self._current_page = 0
 
+        self.highlight_tag = self.textview.get_buffer().create_tag()
+        self.highlight_tag.set_property('underline', 'single')
+        self.highlight_tag.set_property('foreground', 'black')
+        self.highlight_tag.set_property('background', 'yellow')
+
     def load_document(self, file_path):
         self._etext_file = open(file_path.replace('file://', ''), 'r')
 
@@ -87,6 +92,30 @@ class TextViewer(gobject.GObject):
         textbuffer = self.textview.get_buffer()
         label_text = label_text + '\n\n\n'
         textbuffer.set_text(label_text)
+
+    def can_highlight(self):
+        return True
+
+    def get_selection_bounds(self):
+        if self.textview.get_buffer().get_selection_bounds():
+            begin, end = self.textview.get_buffer().get_selection_bounds()
+            return [begin.get_offset(), end.get_offset()]
+        else:
+            return []
+
+    def get_cursor_position(self):
+        insert_mark = self.textview.get_buffer().get_insert()
+        return self.textview.get_buffer().get_iter_at_mark( \
+                insert_mark).get_offset()
+
+    def show_highlights(self, tuples_list):
+        textbuffer = self.textview.get_buffer()
+        bounds = textbuffer.get_bounds()
+        textbuffer.remove_all_tags(bounds[0], bounds[1])
+        for highlight_tuple in tuples_list:
+            iterStart = textbuffer.get_iter_at_offset(highlight_tuple[0])
+            iterEnd = textbuffer.get_iter_at_offset(highlight_tuple[1])
+            textbuffer.apply_tag(self.highlight_tag, iterStart, iterEnd)
 
     def connect_page_changed_handler(self, handler):
         self.connect('page-changed', handler)
@@ -148,7 +177,7 @@ class TextViewer(gobject.GObject):
     def get_current_file(self):
         pass
 
-    def update_metadata(self):
+    def update_metadata(self, activity):
         pass
 
     def copy(self):

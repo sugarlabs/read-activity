@@ -46,6 +46,9 @@ class EpubViewer(epubview.EpubView):
     def can_zoom_to_width(self):
         return False
 
+    def can_highlight(self):
+        return False
+
     def connect_zoom_handler(self, handler):
         self._zoom_handler = handler
         self._view_notify_zoom_handler = \

@@ -17,7 +17,7 @@
 
 import logging
 
-import os, os.path
+import os
 import shutil
 import sqlite3
 import time
@@ -54,7 +54,8 @@ def _init_db():
         shutil.copy(olddbpath, dbpath)
 
         conn = sqlite3.connect(dbpath)
-        conn.execute("CREATE TABLE  temp_bookmarks  AS SELECT md5, page, title 'content', timestamp, user, color, local  FROM bookmarks")
+        conn.execute("CREATE TABLE  temp_bookmarks  AS SELECT md5, page, " + \
+            "title 'content', timestamp, user, color, local  FROM bookmarks")
         conn.execute("ALTER TABLE bookmarks RENAME TO bookmarks_old")
         conn.execute("ALTER TABLE temp_bookmarks RENAME TO bookmarks")
         conn.execute("DROP TABLE bookmarks_old")
@@ -67,6 +68,13 @@ def _init_db():
     return None
 
 
+def _init_db_highlights(conn):
+    conn.execute('CREATE TABLE IF NOT EXISTS HIGHLIGHTS ' +
+                '(md5 TEXT, page INTEGER, ' +
+                'init_pos INTEGER, end_pos INTEGER)')
+    conn.commit()
+
+
 class BookmarkManager:
 
     def __init__(self, filehash):
@@ -77,40 +85,46 @@ class BookmarkManager:
         assert dbpath != None
 
         self._conn = sqlite3.connect(dbpath)
+        _init_db_highlights(self._conn)
+
         self._conn.text_factory = lambda x: unicode(x, "utf-8", "ignore")
 
         self._bookmarks = []
         self._populate_bookmarks()
+        self._highlights = {0:  []}
+        self._populate_highlights()
+
+        client = gconf.client_get_default()
+        self._user = client.get_string("/desktop/sugar/user/nick")
+        self._color = client.get_string("/desktop/sugar/user/color")
 
     def add_bookmark(self, page, content, local=1):
         # locale = 0 means that this is a bookmark originally
         # created by the person who originally shared the file
         timestamp = time.time()
-        client = gconf.client_get_default()
-        user = client.get_string("/desktop/sugar/user/nick")
-        color = client.get_string("/desktop/sugar/user/color")
-
-        t = (self._filehash, page, content, timestamp, user, color, local)
-        self._conn.execute('insert into bookmarks values (?, ?, ?, ?, ?, ?, ?)', t)
+        t = (self._filehash, page, content, timestamp, self._user, \
+                self._color, local)
+        self._conn.execute('insert into bookmarks values ' + \
+                '(?, ?, ?, ?, ?, ?, ?)', t)
         self._conn.commit()
 
         self._resync_bookmark_cache()
 
     def del_bookmark(self, page):
-        client = gconf.client_get_default()
-        user = client.get_string("/desktop/sugar/user/nick")
-
         # We delete only the locally made bookmark
 
-        t = (self._filehash, page, user)
-        self._conn.execute('delete from bookmarks where md5=? and page=? and user=?', t)
+        t = (self._filehash, page, self._user)
+        self._conn.execute('delete from bookmarks ' + \
+                'where md5=? and page=? and user=?', t)
         self._conn.commit()
 
         self._resync_bookmark_cache()
 
     def _populate_bookmarks(self):
-        # TODO: Figure out if caching the entire set of bookmarks is a good idea or not
-        rows = self._conn.execute('select * from bookmarks where md5=? order by page', (self._filehash, ))
+        # TODO: Figure out if caching the entire set of bookmarks
+        # is a good idea or not
+        rows = self._conn.execute('select * from bookmarks ' + \
+            'where md5=? order by page', (self._filehash, ))
 
         for row in rows:
             self._bookmarks.append(Bookmark(row))
@@ -155,3 +169,40 @@ class BookmarkManager:
                         return bookmark
 
         return None
+
+    def get_highlights(self, page):
+        try:
+            return self._highlights[page]
+        except KeyError:
+            self._highlights[page] = []
+            return self._highlights[page]
+
+    def add_highlight(self, page, highlight_tuple):
+        logging.error('Adding hg page %d %s' % (page, highlight_tuple))
+        self.get_highlights(page).append(highlight_tuple)
+
+        t = (self._filehash, page, highlight_tuple[0],
+                highlight_tuple[1])
+        self._conn.execute('insert into highlights values ' + \
+                '(?, ?, ?, ?)', t)
+        self._conn.commit()
+
+    def del_highlight(self, page, highlight_tuple):
+        self._highlights[page].remove(highlight_tuple)
+        t = (self._filehash, page, highlight_tuple[0], \
+                highlight_tuple[1])
+        self._conn.execute('delete from highlights ' + \
+            'where md5=? and page=? and init_pos=? and end_pos=?', \
+            t)
+        self._conn.commit()
+
+    def _populate_highlights(self):
+        rows = self._conn.execute('select * from highlights ' + \
+            'where md5=? order by page', (self._filehash, ))
+        for row in rows:
+            # md5 = row[0]
+            page = row[1]
+            init_pos = row[2]
+            end_pos = row[3]
+            highlight_tuple = [init_pos, end_pos]
+            self.get_highlights(page).append(highlight_tuple)

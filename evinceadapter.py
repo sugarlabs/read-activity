@@ -109,6 +109,9 @@ class EvinceViewer():
                           self._model.props.sizing_mode)
         self.metadata['Read_sizing_mode'] = "fit-width"
 
+    def can_highlight(self):
+        return False
+
     def get_zoom(self):
         '''
         Returns the current zoom level
