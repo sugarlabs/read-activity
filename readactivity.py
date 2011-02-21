@@ -790,7 +790,7 @@ class ReadActivity(activity.Activity):
         mimetype = mime.get_for_file(filepath)
         if mimetype == 'application/epub+zip':
             self._view = epubadapter.EpubViewer()
-        elif mimetype == 'text/plain':
+        elif mimetype == 'text/plain' or mimetype == 'application/zip' :
             self._view = textadapter.TextViewer()
         else:
             self._view = evinceadapter.EvinceViewer()

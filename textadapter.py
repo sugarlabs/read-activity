@@ -1,10 +1,12 @@
 import os
+import zipfile
 import logging
 import gtk
 import pango
 import gobject
 import threading
 
+from sugar import mime
 from sugar.graphics import style
 
 PAGE_SIZE = 38
@@ -22,6 +24,7 @@ class TextViewer(gobject.GObject):
     }
 
     def setup(self, activity):
+        self._activity = activity
         activity._scrolled = gtk.ScrolledWindow()
         activity._scrolled.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
         activity._scrolled.props.shadow_type = gtk.SHADOW_NONE
@@ -57,7 +60,22 @@ class TextViewer(gobject.GObject):
         self.highlight_tag.set_property('background', 'yellow')
 
     def load_document(self, file_path):
-        self._etext_file = open(file_path.replace('file://', ''), 'r')
+
+        file_name = file_path.replace('file://', '')
+        mimetype = mime.get_for_file(file_path)
+        if mimetype == 'application/zip':
+            logging.error('opening zip file')
+            self.zf = zipfile.ZipFile(file_path.replace('file://', ''), 'r')
+            self.book_files = self.zf.namelist()
+            extract_path = os.path.join(self._activity.get_activity_root(),
+                    'instance')
+            for book_file in self.book_files:
+                if (book_file != 'annotations.pkl'):
+                    self.zf.extract(book_file, extract_path)
+                    file_name = os.path.join(extract_path, book_file)
+
+        logging.error('opening file_name %s' % file_name)
+        self._etext_file = open(file_name, 'r')
 
         self.page_index = [0]
         pagecount = 0
