@@ -498,7 +498,8 @@ class ReadActivity(activity.Activity):
 
         tuples_list = self._bookmarkmanager.get_highlights(
                 self._view.get_current_page())
-        self._view.show_highlights(tuples_list)
+        if self._view.can_highlight():
+            self._view.show_highlights(tuples_list)
 
     def _update_nav_buttons(self):
         current_page = self._view.get_current_page()
