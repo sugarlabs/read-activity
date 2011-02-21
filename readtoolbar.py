@@ -20,10 +20,15 @@ import logging
 import gobject
 import gtk
 
+from sugar.graphics.combobox import ComboBox
 from sugar.graphics.toolbutton import ToolButton
+from sugar.graphics.toggletoolbutton import ToggleToolButton
+from sugar.graphics.toolcombobox import ToolComboBox
 from sugar.graphics.menuitem import MenuItem
 from sugar.graphics import iconentry
 from sugar.activity import activity
+
+import speech
 
 
 class EditToolbar(activity.EditToolbar):
@@ -288,3 +293,69 @@ class ViewToolbar(gtk.Toolbar):
 
     def _fullscreen_cb(self, button):
         self.emit('go-fullscreen')
+
+
+class SpeechToolbar(gtk.Toolbar):
+
+    def __init__(self, activity):
+        gtk.Toolbar.__init__(self)
+        voicebar = gtk.Toolbar()
+        self.activity = activity
+        self.sorted_voices = [i for i in speech.voices()]
+        self.sorted_voices.sort(self.compare_voices)
+        default = 0
+        for voice in self.sorted_voices:
+            if voice[0] == 'default':
+                break
+            default = default + 1
+
+        # Play button Image
+        play_img = gtk.Image()
+        play_img.show()
+        play_img.set_from_icon_name('media-playback-start',
+                gtk.ICON_SIZE_LARGE_TOOLBAR)
+
+        # Pause button Image
+        pause_img = gtk.Image()
+        pause_img.show()
+        pause_img.set_from_icon_name('media-playback-pause',
+                gtk.ICON_SIZE_LARGE_TOOLBAR)
+
+        # Play button
+        self.play_btn = ToggleToolButton('media-playback-start')
+        self.play_btn.show()
+        self.play_btn.connect('toggled', self.play_cb, [play_img, pause_img])
+        self.insert(self.play_btn, -1)
+        self.play_btn.set_tooltip(_('Play / Pause'))
+
+        self.voice_combo = ComboBox()
+        for voice in self.sorted_voices:
+            self.voice_combo.append_item(voice, voice[0])
+        self.voice_combo.set_active(default)
+        self.voice_combo.connect('changed', self.voice_changed_cb)
+        speech.voice = self.voice_combo.props.value
+        combotool = ToolComboBox(self.voice_combo)
+        self.insert(combotool, -1)
+        combotool.show()
+
+    def compare_voices(self,  a,  b):
+        if a[0].lower() == b[0].lower():
+            return 0
+        if a[0] .lower() < b[0].lower():
+            return -1
+        if a[0] .lower() > b[0].lower():
+            return 1
+
+    def voice_changed_cb(self, combo):
+        speech.voice = combo.props.value
+        if self.activity != None:
+            speech.say(speech.voice[0])
+
+    def play_cb(self, widget, images):
+        widget.set_icon_widget(images[int(widget.get_active())])
+
+        if widget.get_active():
+            if speech.is_stopped():
+                speech.play(self.activity._view.get_marked_words())
+        else:
+            speech.stop()

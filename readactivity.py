@@ -45,13 +45,16 @@ from sugar import mime
 from sugar.datastore import datastore
 from sugar.graphics.objectchooser import ObjectChooser
 
-from readtoolbar import EditToolbar, ViewToolbar
+from readtoolbar import EditToolbar
+from readtoolbar import ViewToolbar
+from readtoolbar import SpeechToolbar
 from readsidebar import Sidebar
 from readtopbar import TopBar
 from readdb import BookmarkManager
 import epubadapter
 import evinceadapter
 import textadapter
+import speech
 
 _HARDWARE_MANAGER_INTERFACE = 'org.laptop.HardwareManager'
 _HARDWARE_MANAGER_SERVICE = 'org.laptop.HardwareManager'
@@ -243,6 +246,11 @@ class ReadActivity(activity.Activity):
         self._highlight_item.add(self._highlight)
         toolbar_box.toolbar.insert(self._highlight_item, -1)
         self._highlight_item.show_all()
+
+        self.speech_toolbar = SpeechToolbar(self)
+        self.speech_toolbar_button = ToolbarButton(page=self.speech_toolbar,
+                    icon_name='speak')
+        toolbar_box.toolbar.insert(self.speech_toolbar_button, -1)
 
         separator = gtk.SeparatorToolItem()
         separator.props.draw = False
@@ -790,7 +798,7 @@ class ReadActivity(activity.Activity):
         mimetype = mime.get_for_file(filepath)
         if mimetype == 'application/epub+zip':
             self._view = epubadapter.EpubViewer()
-        elif mimetype == 'text/plain' or mimetype == 'application/zip' :
+        elif mimetype == 'text/plain' or mimetype == 'application/zip':
             self._view = textadapter.TextViewer()
         else:
             self._view = evinceadapter.EvinceViewer()
@@ -833,6 +841,9 @@ class ReadActivity(activity.Activity):
         self._view_toolbar._update_zoom_buttons()
         if not self._view.can_highlight():
             self._highlight_item.hide()
+        if speech.supported and self._view.can_do_text_to_speech():
+            self.speech_toolbar_button.show()
+            self.speech_toolbar_button.show()
 
     def _share_document(self):
         """Share the document."""

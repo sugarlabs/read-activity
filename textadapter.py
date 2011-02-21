@@ -9,6 +9,8 @@ import threading
 from sugar import mime
 from sugar.graphics import style
 
+import speech
+
 PAGE_SIZE = 38
 
 
@@ -59,6 +61,14 @@ class TextViewer(gobject.GObject):
         self.highlight_tag.set_property('foreground', 'black')
         self.highlight_tag.set_property('background', 'yellow')
 
+        # text to speech initialization
+        self.current_word = 0
+        self.word_tuples = []
+        self.spoken_word_tag = self.textview.get_buffer().create_tag()
+        self.spoken_word_tag.set_property('weight', pango.WEIGHT_BOLD)
+        self.normal_tag = self.textview.get_buffer().create_tag()
+        self.normal_tag.set_property('weight',  pango.WEIGHT_NORMAL)
+
     def load_document(self, file_path):
 
         file_name = file_path.replace('file://', '')
@@ -94,6 +104,8 @@ class TextViewer(gobject.GObject):
         self._pagecount = pagecount + 1
         self.set_current_page(0)
 
+        speech.highlight_cb = self.highlight_next_word
+
     def _show_page(self, page_number):
         position = self.page_index[page_number]
         self._etext_file.seek(position)
@@ -110,6 +122,7 @@ class TextViewer(gobject.GObject):
         textbuffer = self.textview.get_buffer()
         label_text = label_text + '\n\n\n'
         textbuffer.set_text(label_text)
+        self._prepare_text_to_speech(label_text)
 
     def can_highlight(self):
         return True
@@ -137,6 +150,62 @@ class TextViewer(gobject.GObject):
 
     def connect_page_changed_handler(self, handler):
         self.connect('page-changed', handler)
+
+    def can_do_text_to_speech(self):
+        return True
+
+    def get_marked_words(self):
+        "Adds a mark between each word of text."
+        i = self.current_word
+        marked_up_text = '<speak> '
+        while i < len(self.word_tuples):
+            word_tuple = self.word_tuples[i]
+            marked_up_text = marked_up_text + '<mark name="' + str(i) + '"/>' \
+                    + word_tuple[2]
+            i = i + 1
+        print marked_up_text
+        return marked_up_text + '</speak>'
+
+    def _prepare_text_to_speech(self, page_text):
+        i = 0
+        j = 0
+        word_begin = 0
+        word_end = 0
+        ignore_chars = [' ',  '\n',  u'\r',  '_',  '[', '{', ']', '}', '|',
+                '<',  '>',  '*',  '+',  '/',  '\\']
+        ignore_set = set(ignore_chars)
+        self.word_tuples = []
+        len_page_text = len(page_text)
+        while i < len_page_text:
+            if page_text[i] not in ignore_set:
+                word_begin = i
+                j = i
+                while  j < len_page_text and page_text[j] not in ignore_set:
+                    j = j + 1
+                    word_end = j
+                    i = j
+                word_tuple = (word_begin, word_end,
+                        page_text[word_begin: word_end])
+                if word_tuple[2] != u'\r':
+                    self.word_tuples.append(word_tuple)
+            i = i + 1
+
+    def highlight_next_word(self,  word_count):
+        if word_count < len(self.word_tuples):
+            word_tuple = self.word_tuples[word_count]
+            textbuffer = self.textview.get_buffer()
+            iterStart = textbuffer.get_iter_at_offset(word_tuple[0])
+            iterEnd = textbuffer.get_iter_at_offset(word_tuple[1])
+            bounds = textbuffer.get_bounds()
+            textbuffer.apply_tag(self.normal_tag,  bounds[0], iterStart)
+            textbuffer.apply_tag(self.spoken_word_tag, iterStart, iterEnd)
+            v_adjustment = self._scrolled.get_vadjustment()
+            max = v_adjustment.upper - v_adjustment.page_size
+            max = max * word_count
+            max = max / len(self.word_tuples)
+            v_adjustment.value = max
+            self.current_word = word_count
+        return True
 
     def load_metadata(self, activity):
         pass

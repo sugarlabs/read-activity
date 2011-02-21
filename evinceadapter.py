@@ -112,6 +112,9 @@ class EvinceViewer():
     def can_highlight(self):
         return False
 
+    def can_do_text_to_speech(self):
+        return False
+
     def get_zoom(self):
         '''
         Returns the current zoom level
