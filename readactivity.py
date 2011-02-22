@@ -516,21 +516,6 @@ class ReadActivity(activity.Activity):
             self._navigator_changed_handler_id = \
                 self._navigator.connect('changed', self.__navigator_changed_cb)
 
-        if hasattr(self._document, 'has_document_links'):
-            if self._document.has_document_links():
-                self._navigator_toolbar_button.show()
-                self._navigator.show_all()
-
-                self._toc_model = self._document.get_links_model()
-                self._navigator.set_model(self._toc_model)
-                self._navigator.set_active(0)
-
-                self._navigator_changed_handler_id = \
-                    self._navigator.connect('changed',
-                            self.__navigator_changed_cb)
-
-                self._toc_select_active_page()
-
     def __navigator_changed_cb(self, combobox):
         iter = self._navigator.get_active_iter()
 
