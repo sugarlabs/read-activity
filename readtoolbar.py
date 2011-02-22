@@ -301,6 +301,9 @@ class SpeechToolbar(gtk.Toolbar):
         gtk.Toolbar.__init__(self)
         voicebar = gtk.Toolbar()
         self.activity = activity
+        if not speech.supported:
+            return
+
         self.sorted_voices = [i for i in speech.voices()]
         self.sorted_voices.sort(self.compare_voices)
         default = 0
