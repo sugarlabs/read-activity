@@ -35,7 +35,7 @@ except Exception, e:
         supported = False
         _logger.info('disable speech: %s' % e)
 
-voice = None
+voice = 'default'
 pitch = 0
 rate = 0
 
