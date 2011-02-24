@@ -143,7 +143,6 @@ class ReadActivity(activity.Activity):
 
         self.connect('key-press-event', self._key_press_event_cb)
         self.connect('key-release-event', self._key_release_event_cb)
-        self.connect('window-state-event', self._window_state_event_cb)
 
         _logger.debug('Starting Read...')
 
@@ -339,6 +338,14 @@ class ReadActivity(activity.Activity):
         # uncomment this and adjust the path for easier testing
         #else:
         #    self._load_document('file:///home/smcv/tmp/test.pdf')
+
+    def fullscreen(self):
+        self._topbar.show_all()
+        activity.Activity.fullscreen(self)
+
+    def unfullscreen(self):
+        self._topbar.hide()
+        activity.Activity.unfullscreen(self)
 
     def _create_back_button(self):
         back = ToolButton('go-previous')
@@ -957,15 +964,6 @@ class ReadActivity(activity.Activity):
         #keyname = gtk.gdk.keyval_name(event.keyval)
         #_logger.debug("Keyname Release: %s, time: %s", keyname, event.time)
         return False
-
-    def _window_state_event_cb(self, window, event):
-        if not (event.changed_mask & gtk.gdk.WINDOW_STATE_FULLSCREEN):
-            return False
-
-        if event.new_window_state & gtk.gdk.WINDOW_STATE_FULLSCREEN:
-            self._topbar.show_all()
-        else:
-            self._topbar.hide()
 
     def __view_toolbar_needs_update_size_cb(self, view_toolbar):
         if hasattr(self._view, 'update_view_size'):
