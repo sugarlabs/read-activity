@@ -22,6 +22,7 @@ import widgets
 import os.path
 import math
 import shutil
+import BeautifulSoup
 
 from epub import _Epub
 from jobs import _JobPaginator as _Paginator
@@ -422,6 +423,38 @@ class _View(gtk.HBox):
 
         if pageno != self._loaded_page:
             self._on_page_changed(0, int(pageno))
+
+        # prepare text to speech
+        html_file = open(self._loaded_filename)
+        soup = BeautifulSoup.BeautifulSoup(html_file)
+        body = soup.find('body')
+        tags = body.findAll(text=True)
+        self._all_text = ''.join([tag for tag in tags])
+        self._prepare_text_to_speech(self._all_text)
+
+    def _prepare_text_to_speech(self, page_text):
+        i = 0
+        j = 0
+        word_begin = 0
+        word_end = 0
+        ignore_chars = [' ',  '\n',  u'\r',  '_',  '[', '{', ']', '}', '|',
+                '<',  '>',  '*',  '+',  '/',  '\\']
+        ignore_set = set(ignore_chars)
+        self.word_tuples = []
+        len_page_text = len(page_text)
+        while i < len_page_text:
+            if page_text[i] not in ignore_set:
+                word_begin = i
+                j = i
+                while  j < len_page_text and page_text[j] not in ignore_set:
+                    j = j + 1
+                    word_end = j
+                    i = j
+                word_tuple = (word_begin, word_end,
+                        page_text[word_begin: word_end])
+                if word_tuple[2] != u'\r':
+                    self.word_tuples.append(word_tuple)
+            i = i + 1
 
     def _scroll_page_end(self):
         v_upper = self._v_vscrollbar.props.adjustment.props.upper

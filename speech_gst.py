@@ -23,7 +23,11 @@ _logger = logging.getLogger('read-etexts-activity')
 
 
 def _message_cb(bus, message, pipe):
-    if message.type in (gst.MESSAGE_EOS, gst.MESSAGE_ERROR):
+    if message.type == gst.MESSAGE_EOS:
+        pipe.set_state(gst.STATE_NULL)
+        if speech.end_text_cb != None:
+            speech.end_text_cb()
+    if message.type == gst.MESSAGE_ERROR:
         pipe.set_state(gst.STATE_NULL)
         if pipe is play_speaker[1]:
             speech.reset_cb()
