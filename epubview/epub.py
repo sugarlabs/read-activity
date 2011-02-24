@@ -17,11 +17,12 @@
 
 import zipfile
 import tempfile
-import os, os.path
+import os
 from lxml import etree
 import shutil
 
-import navmap, epubinfo
+import navmap
+import epubinfo
 
 
 class _Epub(object):
@@ -49,11 +50,14 @@ class _Epub(object):
         self._unzip()
 
     def _unzip(self):
-        #self._zobject.extractall(path = self._tempdir) # This is broken upto python 2.7
+        # This is broken upto python 2.7
+        #self._zobject.extractall(path = self._tempdir)
         orig_cwd = os.getcwd()
         os.chdir(self._tempdir)
         for name in self._zobject.namelist():
-            if name.startswith(os.path.sep): # Some weird zip file entries start with a slash, and we don't want to write to the root directory
+            # Some weird zip file entries start with a slash,
+            # and we don't want to write to the root directory
+            if name.startswith(os.path.sep):
                 name = name[1:]
             if name.endswith(os.path.sep) or name.endswith('\\'):
                 os.makedirs(name)
@@ -67,7 +71,8 @@ class _Epub(object):
         tree = etree.parse(containerfile)
         root = tree.getroot()
 
-        for element in root.iterfind('.//{urn:oasis:names:tc:opendocument:xmlns:container}rootfile'):
+        for element in root.iterfind(
+            './/{urn:oasis:names:tc:opendocument:xmlns:container}rootfile'):
             if element.get('media-type') == 'application/oebps-package+xml':
                 self._opfpath = element.get('full-path')
 
@@ -109,7 +114,8 @@ class _Epub(object):
         mtypefile = self._zobject.open('mimetype')
         mimetype = mtypefile.readline()
 
-        if not mimetype.startswith('application/epub+zip'): # Some files seem to have trailing characters
+        # Some files seem to have trailing characters
+        if not mimetype.startswith('application/epub+zip'):
             return False
 
         return True
@@ -143,8 +149,10 @@ class _Epub(object):
 
     def close(self):
         '''
-        Cleans up (closes open zip files and deletes uncompressed content of Epub.
-        Please call this when a file is being closed or during application exit.
+        Cleans up (closes open zip files and deletes
+        uncompressed content of Epub.
+        Please call this when a file is being closed or during
+        application exit.
         '''
         self._zobject.close()
         shutil.rmtree(self._tempdir)

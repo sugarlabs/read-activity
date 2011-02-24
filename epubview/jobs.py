@@ -120,7 +120,8 @@ class _JobPaginator(gobject.GObject):
         settings.props.serif_font_family = 'DejaVu LGC Serif'
         settings.props.monospace_font_family = 'DejaVu LGC Sans Mono'
         settings.props.enforce_96_dpi = True
-        #settings.props.auto_shrink_images = False #FIXME: This does not seem to work
+        #FIXME: This does not seem to work
+        #settings.props.auto_shrink_images = False
         settings.props.enable_plugins = False
         settings.props.default_font_size = 12
         settings.props.default_monospace_font_size = 10
@@ -129,7 +130,8 @@ class _JobPaginator(gobject.GObject):
         sw = gtk.ScrolledWindow()
         sw.set_policy(gtk.POLICY_NEVER, gtk.POLICY_NEVER)
         self._dpi = 96
-        sw.set_size_request(_mm_to_pixel(PAGE_WIDTH, self._dpi), _mm_to_pixel(PAGE_HEIGHT, self._dpi))
+        sw.set_size_request(_mm_to_pixel(PAGE_WIDTH, self._dpi),
+                _mm_to_pixel(PAGE_HEIGHT, self._dpi))
         sw.add(self._temp_view)
         self._temp_win.add(sw)
         self._temp_view.connect('load-finished', self._page_load_finished_cb)
@@ -152,10 +154,12 @@ class _JobPaginator(gobject.GObject):
                 pagelen = (pages - math.floor(pages)) / pages
             else:
                 pagelen = 1 / pages
-            self._pagemap[float(self._pagecount + i)] = (f.props.uri, (i - 1) / math.ceil(pages), pagelen)
+            self._pagemap[float(self._pagecount + i)] = \
+                    (f.props.uri, (i - 1) / math.ceil(pages), pagelen)
 
         self._pagecount += int(math.ceil(pages))
-        self._filedict[f.props.uri.replace('file://', '')] = (math.ceil(pages), math.ceil(pages) - pages)
+        self._filedict[f.props.uri.replace('file://', '')] = \
+                (math.ceil(pages), math.ceil(pages) - pages)
         self._bookheight += pageheight
 
         if self._count + 1 >= len(self._filelist):
@@ -202,7 +206,8 @@ class _JobPaginator(gobject.GObject):
 
     def get_remfactor_for_file(self, filename):
         '''
-        Returns the remainder factor (1 - fraction length of last page in file)
+        Returns the remainder
+        factor (1 - fraction length of last page in file)
         '''
         return self._filedict[filename][1]
 
@@ -224,7 +229,8 @@ class _JobFind(gobject.GObject):
         'updated': (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE, ([])),
     }
 
-    def __init__(self, document, start_page, n_pages, text, case_sensitive=False):
+    def __init__(self, document, start_page, n_pages, text,
+            case_sensitive=False):
         gobject.GObject.__init__(self)
         gtk.gdk.threads_init()
 

@@ -49,16 +49,20 @@ class NavMap(object):
         self._opffile.close()
 
     def _populate_toc(self):
-        navmap = self._root.find('{http://www.daisy.org/z3986/2005/ncx/}navMap')
-        for navpoint in navmap.iterfind('./{http://www.daisy.org/z3986/2005/ncx/}navPoint'):
+        navmap = self._root.find(
+                '{http://www.daisy.org/z3986/2005/ncx/}navMap')
+        for navpoint in navmap.iterfind(
+                './{http://www.daisy.org/z3986/2005/ncx/}navPoint'):
             self._process_navpoint(navpoint)
 
     def _gettitle(self, navpoint):
-        text = navpoint.find('./{http://www.daisy.org/z3986/2005/ncx/}navLabel/{http://www.daisy.org/z3986/2005/ncx/}text')
+        text = navpoint.find('./{http://www.daisy.org/z3986/2005/ncx/}' +
+                'navLabel/{http://www.daisy.org/z3986/2005/ncx/}text')
         return text.text
 
     def _getcontent(self, navpoint):
-        text = navpoint.find('./{http://www.daisy.org/z3986/2005/ncx/}content/')
+        text = navpoint.find(
+                './{http://www.daisy.org/z3986/2005/ncx/}content/')
         return self._basepath + text.get('src')
 
     def _process_navpoint(self, navpoint, parent=None):
@@ -70,7 +74,8 @@ class NavMap(object):
         iter = self._gtktreestore.append(parent, [title, content])
         #self._flattoc.append((title, content))
 
-        childnavpointlist = list(navpoint.iterfind('./{http://www.daisy.org/z3986/2005/ncx/}navPoint'))
+        childnavpointlist = list(navpoint.iterfind(
+                './{http://www.daisy.org/z3986/2005/ncx/}navPoint'))
 
         if len(childnavpointlist):
             for childnavpoint in childnavpointlist:
