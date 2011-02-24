@@ -10,6 +10,7 @@ _logger = logging.getLogger('read-activity')
 class EvinceViewer():
 
     def __init__(self):
+        self._view_notify_zoom_handler = None
         self._view = evince.View()
 
     def setup(self, activity):
