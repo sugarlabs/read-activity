@@ -16,7 +16,8 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import gtk, gobject
+import gtk
+import gobject
 import dbus
 import logging
 
@@ -57,7 +58,8 @@ class _TopBar(gtk.HBox):
 
             for device_path in upower.EnumerateDevices():
                 device = bus.get_object('org.freedesktop.UPower', device_path)
-                device_prop_iface = dbus.Interface(device, dbus.PROPERTIES_IFACE)
+                device_prop_iface = dbus.Interface(device,
+                        dbus.PROPERTIES_IFACE)
                 device_type = device_prop_iface.Get(_UP_DEVICE_IFACE, 'Type')
                 if device_type != _UP_TYPE_BATTERY:
                     continue
@@ -79,13 +81,13 @@ class _TopBar(gtk.HBox):
         if property.name == 'completion-level':
             return self._completion_level
         else:
-            raise AttributeError, 'unknown property %s' % property.name
+            raise AttributeError('unknown property %s' % property.name)
 
     def do_set_property(self, property, value):
         if property.name == 'completion-level':
             self.set_completion_level(value)
         else:
-            raise AttributeError, 'unknown property %s' % property.name
+            raise AttributeError('unknown property %s' % property.name)
 
     def set_completion_level(self, value):
         self._completion_level = value
@@ -131,8 +133,9 @@ class TopBar(_TopBar):
     def _page_changed_cb(self, model, page_from, page_to):
         current_page = self._view.get_current_page()
         n_pages = self._view.get_pagecount()
-
-        self.set_completion_level(int(float(current_page) * 100 / float(n_pages)))
+        completion_level = int(float(current_page) * 100 / float(n_pages))
+        self.set_completion_level(completion_level)
 
         #TRANS: Translate this as Page i of m (eg: Page 4 of 334)
-        self._progressbar.set_text(_("Page %i of %i") % (current_page, n_pages))
+        self._progressbar.set_text(
+                _("Page %i of %i") % (current_page, n_pages))

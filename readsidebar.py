@@ -34,7 +34,8 @@ from gettext import gettext as _
 
 _logger = logging.getLogger('read-activity')
 
-#TODO: Add support for multiple bookmarks in a single page (required when sharing)
+# TODO: Add support for multiple bookmarks in a single page
+# (required when sharing)
 
 
 class Sidebar(gtk.EventBox):
@@ -66,8 +67,8 @@ class Sidebar(gtk.EventBox):
 
         self._bookmark_icon.props.has_tooltip = True
         self.__bookmark_icon_query_tooltip_cb_id = \
-            self._bookmark_icon.connect('query_tooltip', self.__bookmark_icon_query_tooltip_cb, \
-                bookmark)
+            self._bookmark_icon.connect('query_tooltip',
+            self.__bookmark_icon_query_tooltip_cb, bookmark)
 
         self.__event_cb_id = \
             self.connect('event', self.__event_cb, bookmark)
@@ -78,13 +79,15 @@ class Sidebar(gtk.EventBox):
         if bookmark.is_local():
             self._is_showing_local_bookmark = True
 
-    def __bookmark_icon_query_tooltip_cb(self, widget, x, y, keyboard_mode, tip, bookmark):
+    def __bookmark_icon_query_tooltip_cb(self, widget, x, y, keyboard_mode,
+            tip, bookmark):
         tooltip_header = bookmark.get_note_title()
         tooltip_body = bookmark.get_note_body()
-        #TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
-        #TRANS: automatically)
+        #TRANS: This goes like Bookmark added by User 5 days ago
+        #TRANS: (the elapsed string gets translated automatically)
         tooltip_footer = (_('Bookmark added by %(user)s %(time)s') \
-                % {'user': bookmark.nick, 'time': timestamp_to_elapsed_string(bookmark.timestamp)})
+                % {'user': bookmark.nick,
+                'time': timestamp_to_elapsed_string(bookmark.timestamp)})
 
         vbox = gtk.VBox()
 
@@ -135,10 +138,11 @@ class Sidebar(gtk.EventBox):
 
     def _clear_bookmarks(self):
         if self._bookmark_icon is not None:
-            self._bookmark_icon.disconnect(self.__bookmark_icon_query_tooltip_cb_id)
+            self._bookmark_icon.disconnect(
+                    self.__bookmark_icon_query_tooltip_cb_id)
             self.disconnect(self.__event_cb_id)
 
-            self._bookmark_icon.hide() #XXX: Is this needed??
+            self._bookmark_icon.hide()  # XXX: Is this needed??
             self._bookmark_icon.destroy()
 
             self._bookmark_icon = None
