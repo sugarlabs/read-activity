@@ -83,6 +83,7 @@ class EpubViewer(epubview.EpubView):
 
     def highlight_next_word(self,  word_count):
         self.current_word = word_count
+        self._view.highlight_next_word()
         return True
 
     def connect_zoom_handler(self, handler):

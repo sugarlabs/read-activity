@@ -541,6 +541,13 @@ class _View(gtk.HBox):
         filename = self._paginator.get_file_for_pageno(pageno)
         if filename != self._loaded_filename:
             #self._loaded_filename = filename
+
+            # Copy javascript to highligth text to speech
+            destpath, destname = os.path.split(filename.replace('file://', ''))
+            shutil.copy('./epubview/highlight_words.js', destpath)
+            self._insert_js_reference(filename.replace('file://', ''),
+                    destpath)
+
             if filename.endswith('xml'):
                 dest = filename.replace('xml', 'xhtml')
                 shutil.copy(filename.replace('file://', ''),
@@ -550,6 +557,16 @@ class _View(gtk.HBox):
                 self._view.open(filename)
         else:
             self._scroll_page()
+
+    def _insert_js_reference(self, file_name, path):
+        js_reference = '<script type="text/javascript" ' + \
+                'src="./highlight_words.js"></script>'
+        o = open(file_name + '.tmp', 'a')
+        for line in open(file_name):
+            line = line.replace('</head>', js_reference + '</head>')
+            o.write(line + "\n")
+        o.close()
+        shutil.copy(file_name + '.tmp', file_name)
 
     def _load_next_file(self):
         if self._loaded_page == self._pagecount:

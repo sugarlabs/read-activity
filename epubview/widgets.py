@@ -34,3 +34,9 @@ class _WebView(webkit.WebView):
         'newdiv.style.height = "%dpx";document.body.appendChild(newdiv);' \
         % incr)
         self.execute_script(js)
+
+    def highlight_next_word(self):
+        '''
+        Highlight next word (for text to speech)
+        '''
+        self.execute_script('highLightNextWord();')
