@@ -34,7 +34,7 @@ class EvinceViewer():
     def load_document(self, file_path):
         try:
             self._document = evince.document_factory_get_document(file_path)
-        except GError, e:
+        except gobject.GError, e:
             _logger.error('Can not load document: %s', e)
             return
         else:
