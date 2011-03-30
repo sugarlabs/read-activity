@@ -2,84 +2,148 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#, fuzzy
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-23 20:36+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2009-09-09 00:33-0400\n"
+"PO-Revision-Date: 2010-12-08 06:10+0200\n"
+"Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.0.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.0.3\n"
 
-#: XbookActivity.py:49 XbookActivity.py:140
-msgid "Read Activity"
-msgstr ""
-
-#: readactivity.py:99
-msgid "View"
-msgstr ""
-
-#: readtoolbar.py:160
-msgid "Back"
-msgstr ""
-
-#: readtoolbar.py:167
-msgid "Forward"
-msgstr ""
-
-#: readtoolbar.py:67
-msgid "Previous"
-msgstr ""
-
-#: readtoolbar.py:74
-msgid "Next"
-msgstr ""
-
-#: activity/activity.info:2 readactivity.py:95
+#: activity/activity.info:2
 msgid "Read"
-msgstr ""
+msgstr "Read"
 
-#: readactivity.py:91
-msgid "Edit"
-msgstr ""
+#: readactivity.py:330
+msgid "Back"
+msgstr "Back"
 
-#: readtoolbar.py:262
-msgid "Zoom out"
-msgstr ""
+#: readactivity.py:333
+msgid "Previous page"
+msgstr "Previous page"
 
-#: readtoolbar.py:268
-msgid "Zoom in"
-msgstr ""
+#: readactivity.py:336
+msgid "Previous bookmark"
+msgstr "Previous bookmark"
 
-#: readtoolbar.py:274
-msgid "Zoom to width"
-msgstr ""
+#: readactivity.py:346
+msgid "Forward"
+msgstr "Forward"
 
-#: readtoolbar.py:280
-msgid "Zoom to fit"
-msgstr ""
+#: readactivity.py:349
+msgid "Next page"
+msgstr "Next page"
 
-#: readtoolbar.py:285
-msgid "Actual size"
-msgstr ""
+#: readactivity.py:352
+msgid "Next bookmark"
+msgstr "Next bookmark"
 
-#: readtoolbar.py:303
-msgid "%"
-msgstr ""
+#: readactivity.py:537
+msgid "Choose document"
+msgstr "Choose document"
 
-#: readtoolbar.py:140
+#: readdialog.py:49
+msgid "Cancel"
+msgstr "Cancel"
+
+#: readdialog.py:55
+msgid "Ok"
+msgstr "Ok"
+
+#: readdialog.py:109
+msgid "<b>Title</b>:"
+msgstr "<b>Title</b>:"
+
+#: readdialog.py:136
+msgid "<b>Details</b>:"
+msgstr "<b>Details</b>:"
+
+#. TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
+#. TRANS: automatically)
+#: readsidebar.py:83
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "Bookmark added by %(user)s %(time)s"
+
+#: readsidebar.py:124 readsidebar.py:164
+msgid "Add notes for bookmark: "
+msgstr "Add notes for bookmark: "
+
+#: readsidebar.py:161
+#, python-format
+msgid "%s's bookmark"
+msgstr "%s's bookmark"
+
+#: readsidebar.py:162
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "Bookmark for page %d"
+
+#: readtoolbar.py:64
+msgid "Previous"
+msgstr "Previous"
+
+#: readtoolbar.py:71
+msgid "Next"
+msgstr "Next"
+
+#: readtoolbar.py:157
 msgid "Find first"
-msgstr ""
+msgstr "Find first"
 
-#: readtoolbar.py:146
+#: readtoolbar.py:163
 msgid "Find previous"
-msgstr ""
+msgstr "Find previous"
 
-#: readtoolbar.py:148
+#: readtoolbar.py:165
 msgid "Find next"
-msgstr ""
+msgstr "Find next"
+
+#: readtoolbar.py:187
+msgid "Zoom out"
+msgstr "Zoom out"
+
+#: readtoolbar.py:193
+msgid "Zoom in"
+msgstr "Zoom in"
+
+#: readtoolbar.py:199
+msgid "Zoom to width"
+msgstr "Zoom to width"
+
+#: readtoolbar.py:205
+msgid "Zoom to fit"
+msgstr "Zoom to fit"
+
+#: readtoolbar.py:210
+msgid "Actual size"
+msgstr "Actual size"
+
+#: readtoolbar.py:227
+msgid "%"
+msgstr "%"
+
+#: readtoolbar.py:240
+msgid "Fullscreen"
+msgstr "Fullscreen"
+
+#. TRANS: Translate this as Page i of m (eg: Page 4 of 334)
+#: readtopbar.py:201
+#, python-format
+msgid "Page %i of %i"
+msgstr "Page %i of %i"
