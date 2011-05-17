@@ -2,11 +2,19 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-23 20:36+0000\n"
+"POT-Creation-Date: 2011-02-22 00:32-0500\n"
 "PO-Revision-Date: 2008-01-22 09:17+0000\n"
 "Last-Translator: Sankarshan Mukhopadhyay <sankarshan.mukhopadhyay@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,69 +23,143 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 1.0.2\n"
 
-#: activity/activity.info:2 readactivity.py:95
+#: activity/activity.info:2
 msgid "Read"
 msgstr "পড়ুন"
 
-#: readactivity.py:91
-msgid "Edit"
-msgstr "সম্পাদন"
+#: readactivity.py:242
+msgid "Highlight"
+msgstr ""
 
-#: readactivity.py:99
-msgid "View"
-msgstr "প্রদর্শন"
+#: readactivity.py:345
+msgid "Back"
+msgstr "পিছনে"
 
-#: readtoolbar.py:67
+#: readactivity.py:348
+msgid "Previous page"
+msgstr ""
+
+#: readactivity.py:351
+msgid "Previous bookmark"
+msgstr ""
+
+#: readactivity.py:361
+msgid "Forward"
+msgstr "এগিয়ে চলুন"
+
+#: readactivity.py:364
+msgid "Next page"
+msgstr ""
+
+#: readactivity.py:367
+msgid "Next bookmark"
+msgstr ""
+
+#: readactivity.py:582
+msgid "Choose document"
+msgstr ""
+
+#: readdialog.py:51
+msgid "Cancel"
+msgstr ""
+
+#: readdialog.py:57
+msgid "Ok"
+msgstr ""
+
+#: readdialog.py:111
+msgid "<b>Title</b>:"
+msgstr ""
+
+#: readdialog.py:137
+msgid "<b>Details</b>:"
+msgstr ""
+
+#. TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
+#. TRANS: automatically)
+#: readsidebar.py:86
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr ""
+
+#: readsidebar.py:128 readsidebar.py:169
+msgid "Add notes for bookmark: "
+msgstr ""
+
+#: readsidebar.py:165
+#, python-format
+msgid "%s's bookmark"
+msgstr ""
+
+#: readsidebar.py:166
+#, python-format
+msgid "Bookmark for page %d"
+msgstr ""
+
+#: readtoolbar.py:65
 msgid "Previous"
 msgstr "পূর্বের"
 
-#: readtoolbar.py:74
+#: readtoolbar.py:72
 msgid "Next"
 msgstr "পরের"
 
-#: readtoolbar.py:140
+#: readtoolbar.py:155
 msgid "Find first"
 msgstr "প্রথমটি খুঁজে বের করুন"
 
-#: readtoolbar.py:146
+#: readtoolbar.py:161
 #, fuzzy
 msgid "Find previous"
 msgstr "পূর্বেরটি খুঁজে বের করুন"
 
-#: readtoolbar.py:148
+#: readtoolbar.py:163
 #, fuzzy
 msgid "Find next"
 msgstr "পরেরটি খুঁজে বের করুন"
 
-#: readtoolbar.py:160
-msgid "Back"
-msgstr "পিছনে"
-
-#: readtoolbar.py:167
-msgid "Forward"
-msgstr "এগিয়ে চলুন"
-
-#: readtoolbar.py:262
+#: readtoolbar.py:179
 msgid "Zoom out"
 msgstr "ছোট করুন"
 
-#: readtoolbar.py:268
+#: readtoolbar.py:185
 msgid "Zoom in"
 msgstr "বড় করুন"
 
-#: readtoolbar.py:274
+#: readtoolbar.py:191
 #, fuzzy
 msgid "Zoom to width"
 msgstr "প্রস্থের মাপে দেখুন"
 
-#: readtoolbar.py:280
+#: readtoolbar.py:197
+#, fuzzy
 msgid "Zoom to fit"
-msgstr ""
+msgstr "প্রস্থের মাপে দেখুন"
 
-#: readtoolbar.py:285
+#: readtoolbar.py:202
 msgid "Actual size"
 msgstr "প্রকৃত মাপ"
 
-#: readtoolbar.py:303
+#: readtoolbar.py:219
 msgid "%"
 msgstr "%"
+
+#: readtoolbar.py:232
+msgid "Fullscreen"
+msgstr ""
+
+#: readtoolbar.py:329
+msgid "Play / Pause"
+msgstr ""
+
+#. TRANS: Translate this as Page i of m (eg: Page 4 of 334)
+#: readtopbar.py:206
+#, python-format
+msgid "Page %i of %i"
+msgstr ""
+
+#~ msgid "Edit"
+#~ msgstr "সম্পাদন"
+
+#~ msgid "View"
+#~ msgstr "প্রদর্শন"

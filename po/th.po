@@ -2,11 +2,19 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-23 20:36+0000\n"
+"POT-Creation-Date: 2011-02-22 00:32-0500\n"
 "PO-Revision-Date: 2007-12-10 04:23+0000\n"
 "Last-Translator: Manatsawin <manatsawin@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,70 +23,142 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 1.0.2\n"
 
-#: XbookActivity.py:49 XbookActivity.py:140
-msgid "Read Activity"
-msgstr "กิจกรรมอ่าน"
-
-#: readactivity.py:99
-msgid "View"
-msgstr "มุมมอง"
-
-#: readtoolbar.py:160
-msgid "Back"
-msgstr "กลับ"
-
-#: readtoolbar.py:167
-msgid "Forward"
-msgstr "ถัดไป"
-
-#: readtoolbar.py:67
-msgid "Previous"
-msgstr "ก่อนหน้า"
-
-#: readtoolbar.py:74
-msgid "Next"
-msgstr "ถัดไป"
-
-#: activity/activity.info:2 readactivity.py:95
+#: activity/activity.info:2
 msgid "Read"
 msgstr "อ่าน"
 
-#: readactivity.py:91
-msgid "Edit"
-msgstr "แก้ไข"
+#: readactivity.py:242
+msgid "Highlight"
+msgstr ""
 
-#: readtoolbar.py:262
-msgid "Zoom out"
-msgstr "ขยายออก"
+#: readactivity.py:345
+msgid "Back"
+msgstr "กลับ"
 
-#: readtoolbar.py:268
-msgid "Zoom in"
-msgstr "ขยายเข้า"
+#: readactivity.py:348
+msgid "Previous page"
+msgstr ""
 
-#: readtoolbar.py:274
-msgid "Zoom to width"
-msgstr "ขยายเต็มความกว้าง"
+#: readactivity.py:351
+msgid "Previous bookmark"
+msgstr ""
 
-#: readtoolbar.py:280
-msgid "Zoom to fit"
-msgstr "ขยายพอดี"
+#: readactivity.py:361
+msgid "Forward"
+msgstr "ถัดไป"
 
-#: readtoolbar.py:285
-msgid "Actual size"
-msgstr "ขนาดเท่าจริง"
+#: readactivity.py:364
+msgid "Next page"
+msgstr ""
 
-#: readtoolbar.py:303
-msgid "%"
-msgstr "%"
+#: readactivity.py:367
+msgid "Next bookmark"
+msgstr ""
 
-#: readtoolbar.py:140
+#: readactivity.py:582
+msgid "Choose document"
+msgstr ""
+
+#: readdialog.py:51
+msgid "Cancel"
+msgstr ""
+
+#: readdialog.py:57
+msgid "Ok"
+msgstr ""
+
+#: readdialog.py:111
+msgid "<b>Title</b>:"
+msgstr ""
+
+#: readdialog.py:137
+msgid "<b>Details</b>:"
+msgstr ""
+
+#. TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
+#. TRANS: automatically)
+#: readsidebar.py:86
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr ""
+
+#: readsidebar.py:128 readsidebar.py:169
+msgid "Add notes for bookmark: "
+msgstr ""
+
+#: readsidebar.py:165
+#, python-format
+msgid "%s's bookmark"
+msgstr ""
+
+#: readsidebar.py:166
+#, python-format
+msgid "Bookmark for page %d"
+msgstr ""
+
+#: readtoolbar.py:65
+msgid "Previous"
+msgstr "ก่อนหน้า"
+
+#: readtoolbar.py:72
+msgid "Next"
+msgstr "ถัดไป"
+
+#: readtoolbar.py:155
 msgid "Find first"
 msgstr ""
 
-#: readtoolbar.py:146
+#: readtoolbar.py:161
 msgid "Find previous"
 msgstr ""
 
-#: readtoolbar.py:148
+#: readtoolbar.py:163
 msgid "Find next"
 msgstr ""
+
+#: readtoolbar.py:179
+msgid "Zoom out"
+msgstr "ขยายออก"
+
+#: readtoolbar.py:185
+msgid "Zoom in"
+msgstr "ขยายเข้า"
+
+#: readtoolbar.py:191
+msgid "Zoom to width"
+msgstr "ขยายเต็มความกว้าง"
+
+#: readtoolbar.py:197
+msgid "Zoom to fit"
+msgstr "ขยายพอดี"
+
+#: readtoolbar.py:202
+msgid "Actual size"
+msgstr "ขนาดเท่าจริง"
+
+#: readtoolbar.py:219
+msgid "%"
+msgstr "%"
+
+#: readtoolbar.py:232
+msgid "Fullscreen"
+msgstr ""
+
+#: readtoolbar.py:329
+msgid "Play / Pause"
+msgstr ""
+
+#. TRANS: Translate this as Page i of m (eg: Page 4 of 334)
+#: readtopbar.py:206
+#, python-format
+msgid "Page %i of %i"
+msgstr ""
+
+#~ msgid "Edit"
+#~ msgstr "แก้ไข"
+
+#~ msgid "View"
+#~ msgstr "มุมมอง"
+
+#~ msgid "Read Activity"
+#~ msgstr "กิจกรรมอ่าน"

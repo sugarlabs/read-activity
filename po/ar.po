@@ -1,3 +1,7 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # translation of read-activity.po to Arabic
 # Khaled Hosny <khaledhosny@eglug.org>, 2007.
 # Ahmed Mansour <atphalix@users.arabeyes.org>, 2008.
@@ -7,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: read-activity\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-06 00:33-0400\n"
+"POT-Creation-Date: 2011-02-22 00:32-0500\n"
 "PO-Revision-Date: 2009-08-28 15:37-0400\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <en@li.org>\n"
@@ -19,136 +23,142 @@ msgstr ""
 "n<=10 ? 3 : n>=11 && n<=99 ? 4 : 5;\n"
 "X-Generator: Pootle 1.2.1\n"
 
-#: activity/activity.info:2 readactivity.py:143
+#: activity/activity.info:2
 msgid "Read"
 msgstr "اقرأ"
 
-#: readactivity.py:139
-msgid "Edit"
-msgstr "تحرير"
+#: readactivity.py:242
+msgid "Highlight"
+msgstr ""
 
-#: readactivity.py:151
-msgid "View"
-msgstr "عرض"
+#: readactivity.py:345
+msgid "Back"
+msgstr "للخلف"
 
-#: readactivity.py:241
+#: readactivity.py:348
+msgid "Previous page"
+msgstr "الصفحة السابقة"
+
+#: readactivity.py:351
+msgid "Previous bookmark"
+msgstr "العلامة السابقة"
+
+#: readactivity.py:361
+msgid "Forward"
+msgstr "للأمام"
+
+#: readactivity.py:364
+msgid "Next page"
+msgstr "الصفحة التالية"
+
+#: readactivity.py:367
+msgid "Next bookmark"
+msgstr "العلامة التالية"
+
+#: readactivity.py:582
 msgid "Choose document"
 msgstr "اختر الوثيقة"
 
-#: readdialog.py:49
+#: readdialog.py:51
 msgid "Cancel"
 msgstr "ألغِ"
 
-#: readdialog.py:55
+#: readdialog.py:57
 msgid "Ok"
 msgstr "حسنا"
 
-#: readdialog.py:109
+#: readdialog.py:111
 msgid "<b>Title</b>:"
 msgstr "<b>العنوان</b>:"
 
-#: readdialog.py:136
+#: readdialog.py:137
 msgid "<b>Details</b>:"
 msgstr "<b>التفاصيل</b>:"
 
 #. TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
 #. TRANS: automatically)
-#: readsidebar.py:83
+#: readsidebar.py:86
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
 msgstr "علامة أضافها %(user)s‏ %(time)s"
 
-#: readsidebar.py:124 readsidebar.py:164
+#: readsidebar.py:128 readsidebar.py:169
 msgid "Add notes for bookmark: "
 msgstr "أضف ملاحظات للعلامة: "
 
-#: readsidebar.py:161
+#: readsidebar.py:165
 #, python-format
 msgid "%s's bookmark"
 msgstr "علامة %s"
 
-#: readsidebar.py:162
+#: readsidebar.py:166
 #, python-format
 msgid "Bookmark for page %d"
 msgstr "علامة على الصفحة %d"
 
-#: readtoolbar.py:91
+#: readtoolbar.py:65
 msgid "Previous"
 msgstr "السابق"
 
-#: readtoolbar.py:98
+#: readtoolbar.py:72
 msgid "Next"
 msgstr "التالي"
 
-#: readtoolbar.py:184
+#: readtoolbar.py:155
 msgid "Find first"
 msgstr "أوجد الأول"
 
-#: readtoolbar.py:190
+#: readtoolbar.py:161
 msgid "Find previous"
 msgstr "أوجد السابق"
 
-#: readtoolbar.py:192
+#: readtoolbar.py:163
 msgid "Find next"
 msgstr "أوجد التالي"
 
-#: readtoolbar.py:205
-msgid "Back"
-msgstr "للخلف"
-
-#: readtoolbar.py:208
-msgid "Previous page"
-msgstr "الصفحة السابقة"
-
-#: readtoolbar.py:211
-msgid "Previous bookmark"
-msgstr "العلامة السابقة"
-
-#: readtoolbar.py:221
-msgid "Forward"
-msgstr "للأمام"
-
-#: readtoolbar.py:224
-msgid "Next page"
-msgstr "الصفحة التالية"
-
-#: readtoolbar.py:227
-msgid "Next bookmark"
-msgstr "العلامة التالية"
-
-#: readtoolbar.py:468
+#: readtoolbar.py:179
 msgid "Zoom out"
 msgstr "صغّر"
 
-#: readtoolbar.py:474
+#: readtoolbar.py:185
 msgid "Zoom in"
 msgstr "كبّر"
 
-#: readtoolbar.py:480
+#: readtoolbar.py:191
 msgid "Zoom to width"
 msgstr "لائِم العرض"
 
-#: readtoolbar.py:486
+#: readtoolbar.py:197
 msgid "Zoom to fit"
 msgstr "لائِم الصفحة"
 
-#: readtoolbar.py:491
+#: readtoolbar.py:202
 msgid "Actual size"
 msgstr "المقاس الأصلي"
 
-#: readtoolbar.py:508
+#: readtoolbar.py:219
 msgid "%"
 msgstr "%"
 
-#: readtoolbar.py:521
+#: readtoolbar.py:232
 msgid "Fullscreen"
 msgstr "ملء الشاشة"
 
+#: readtoolbar.py:329
+msgid "Play / Pause"
+msgstr ""
+
 #. TRANS: Translate this as Page i of m (eg: Page 4 of 334)
-#: readtopbar.py:201
+#: readtopbar.py:206
 #, python-format
 msgid "Page %i of %i"
 msgstr "صفحة %i من %i"
+
+#~ msgid "Edit"
+#~ msgstr "تحرير"
+
+#~ msgid "View"
+#~ msgstr "عرض"
 
 #~ msgid "Read Activity"
 #~ msgstr "نشاط القراءة"

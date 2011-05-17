@@ -2,79 +2,162 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-23 20:36+0000\n"
-"PO-Revision-Date: 2007-12-30 17:35+0000\n"
-"Last-Translator: Jamil Ahmed <itsjamil@gmail.com>\n"
+"POT-Creation-Date: 2011-02-22 00:32-0500\n"
+"PO-Revision-Date: 2010-01-29 08:28+0200\n"
+"Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: bn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Pootle 1.0.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.0.1\n"
 
-#: activity/activity.info:2 readactivity.py:95
+#: activity/activity.info:2
 msgid "Read"
 msgstr "পড়"
 
-#: readactivity.py:91
-msgid "Edit"
-msgstr "সম্পাদনা"
+#: readactivity.py:242
+msgid "Highlight"
+msgstr ""
 
-#: readactivity.py:99
-msgid "View"
-msgstr "প্রদর্শন"
-
-#: readtoolbar.py:67
-msgid "Previous"
-msgstr "পুর্ববর্তী"
-
-#: readtoolbar.py:74
-msgid "Next"
-msgstr "পরবর্তী"
-
-#: readtoolbar.py:160
+#: readactivity.py:345
 msgid "Back"
 msgstr "পেছনে"
 
-#: readtoolbar.py:167
+#: readactivity.py:348
+msgid "Previous page"
+msgstr "পূর্ববর্তী পাতা"
+
+#: readactivity.py:351
+msgid "Previous bookmark"
+msgstr "পূর্ববর্তী বুকমার্ক"
+
+#: readactivity.py:361
 msgid "Forward"
 msgstr "সামনে"
 
-#: readtoolbar.py:262
-msgid "Zoom out"
-msgstr "ছোট করো"
+#: readactivity.py:364
+msgid "Next page"
+msgstr "পরবর্তী পাতা"
 
-#: readtoolbar.py:268
-msgid "Zoom in"
-msgstr "বড় করো"
+#: readactivity.py:367
+msgid "Next bookmark"
+msgstr "পরবর্তী বুকমার্ক"
 
-#: readtoolbar.py:274
-msgid "Zoom to width"
-msgstr "প্রস্থ অনুসারে বড় করো"
+#: readactivity.py:582
+msgid "Choose document"
+msgstr "নথি বেছে নাও"
 
-#: readtoolbar.py:280
-msgid "Zoom to fit"
-msgstr "প্রয়োজন অনুসারে বড় করো"
+#: readdialog.py:51
+msgid "Cancel"
+msgstr "বাতিল"
 
-#: readtoolbar.py:285
-msgid "Actual size"
-msgstr "আসল আকার"
+#: readdialog.py:57
+msgid "Ok"
+msgstr "ঠিক আছে"
 
-#: readtoolbar.py:303
-msgid "%"
-msgstr "%"
+#: readdialog.py:111
+msgid "<b>Title</b>:"
+msgstr "<b>শিরোনাম</b>:"
 
-#: readtoolbar.py:140
+#: readdialog.py:137
+msgid "<b>Details</b>:"
+msgstr "<b>বিস্তারিত</b>:"
+
+#. TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
+#. TRANS: automatically)
+#: readsidebar.py:86
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "বুকমার্ক যুক্ত করেছে %(user)s %(time)s"
+
+#: readsidebar.py:128 readsidebar.py:169
+msgid "Add notes for bookmark: "
+msgstr "বুকমার্কের জন্য নোট যুক্ত করো: "
+
+#: readsidebar.py:165
+#, python-format
+msgid "%s's bookmark"
+msgstr "%s এর বুকমার্ক"
+
+#: readsidebar.py:166
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "%d পাতার বুকমার্ক"
+
+#: readtoolbar.py:65
+msgid "Previous"
+msgstr "পুর্ববর্তী"
+
+#: readtoolbar.py:72
+msgid "Next"
+msgstr "পরবর্তী"
+
+#: readtoolbar.py:155
 msgid "Find first"
 msgstr "প্রথমটি খুঁজো"
 
-#: readtoolbar.py:146
+#: readtoolbar.py:161
 msgid "Find previous"
 msgstr "আগেরটি খুঁজো"
 
-#: readtoolbar.py:148
+#: readtoolbar.py:163
 msgid "Find next"
 msgstr "পরেরটি খুঁজো"
+
+#: readtoolbar.py:179
+msgid "Zoom out"
+msgstr "ছোট করো"
+
+#: readtoolbar.py:185
+msgid "Zoom in"
+msgstr "বড় করো"
+
+#: readtoolbar.py:191
+msgid "Zoom to width"
+msgstr "প্রস্থ অনুসারে বড় করো"
+
+#: readtoolbar.py:197
+msgid "Zoom to fit"
+msgstr "প্রয়োজন অনুসারে বড় করো"
+
+#: readtoolbar.py:202
+msgid "Actual size"
+msgstr "আসল আকার"
+
+#: readtoolbar.py:219
+msgid "%"
+msgstr "%"
+
+#: readtoolbar.py:232
+msgid "Fullscreen"
+msgstr "পর্দা জুড়ে প্রদর্শন"
+
+#: readtoolbar.py:329
+msgid "Play / Pause"
+msgstr ""
+
+#. TRANS: Translate this as Page i of m (eg: Page 4 of 334)
+#: readtopbar.py:206
+#, python-format
+msgid "Page %i of %i"
+msgstr "%i এর %i তম পৃষ্ঠা"
+
+#~ msgid "Edit"
+#~ msgstr "সম্পাদনা"
+
+#~ msgid "View"
+#~ msgstr "প্রদর্শন"

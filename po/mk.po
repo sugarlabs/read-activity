@@ -1,3 +1,11 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # translation of mk.po to Macedonian
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
@@ -6,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-23 20:36+0000\n"
+"POT-Creation-Date: 2011-02-22 00:32-0500\n"
 "PO-Revision-Date: 2007-11-22 20:59+0000\n"
 "Last-Translator: Arangel Angov <arangel@slobodensoftver.org.mk>\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
@@ -15,69 +23,142 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 1.0.2\n"
 
-#: activity/activity.info:2 readactivity.py:95
+#: activity/activity.info:2
 msgid "Read"
 msgstr "Читај"
 
-#: readactivity.py:91
-msgid "Edit"
-msgstr "Уреди"
+#: readactivity.py:242
+msgid "Highlight"
+msgstr ""
 
-#: readactivity.py:99
-msgid "View"
-msgstr "Поглед"
-
-#: readtoolbar.py:67
-msgid "Previous"
-msgstr "Претходно"
-
-#: readtoolbar.py:74
-msgid "Next"
-msgstr "Следно"
-
-#: readtoolbar.py:160
+#: readactivity.py:345
 msgid "Back"
 msgstr "Назад"
 
-#: readtoolbar.py:167
+#: readactivity.py:348
+msgid "Previous page"
+msgstr ""
+
+#: readactivity.py:351
+msgid "Previous bookmark"
+msgstr ""
+
+#: readactivity.py:361
 msgid "Forward"
 msgstr "Напред"
 
-#: readtoolbar.py:262
-msgid "Zoom out"
-msgstr "Намали"
+#: readactivity.py:364
+msgid "Next page"
+msgstr ""
 
-#: readtoolbar.py:268
-msgid "Zoom in"
-msgstr "Зголеми"
+#: readactivity.py:367
+msgid "Next bookmark"
+msgstr ""
 
-#: readtoolbar.py:274
-msgid "Zoom to width"
-msgstr "Зголеми во ширина"
+#: readactivity.py:582
+msgid "Choose document"
+msgstr ""
 
-#: readtoolbar.py:280
-msgid "Zoom to fit"
-msgstr "Собери"
+#: readdialog.py:51
+msgid "Cancel"
+msgstr ""
 
-#: readtoolbar.py:285
-msgid "Actual size"
-msgstr "Вистинска големина"
+#: readdialog.py:57
+msgid "Ok"
+msgstr ""
 
-#: readtoolbar.py:303
-msgid "%"
-msgstr "%"
+#: readdialog.py:111
+msgid "<b>Title</b>:"
+msgstr ""
 
-#~ msgid "Read Activity"
-#~ msgstr "Активност за читање"
+#: readdialog.py:137
+msgid "<b>Details</b>:"
+msgstr ""
 
-#: readtoolbar.py:140
+#. TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
+#. TRANS: automatically)
+#: readsidebar.py:86
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr ""
+
+#: readsidebar.py:128 readsidebar.py:169
+msgid "Add notes for bookmark: "
+msgstr ""
+
+#: readsidebar.py:165
+#, python-format
+msgid "%s's bookmark"
+msgstr ""
+
+#: readsidebar.py:166
+#, python-format
+msgid "Bookmark for page %d"
+msgstr ""
+
+#: readtoolbar.py:65
+msgid "Previous"
+msgstr "Претходно"
+
+#: readtoolbar.py:72
+msgid "Next"
+msgstr "Следно"
+
+#: readtoolbar.py:155
 msgid "Find first"
 msgstr ""
 
-#: readtoolbar.py:146
+#: readtoolbar.py:161
 msgid "Find previous"
 msgstr ""
 
-#: readtoolbar.py:148
+#: readtoolbar.py:163
 msgid "Find next"
 msgstr ""
+
+#: readtoolbar.py:179
+msgid "Zoom out"
+msgstr "Намали"
+
+#: readtoolbar.py:185
+msgid "Zoom in"
+msgstr "Зголеми"
+
+#: readtoolbar.py:191
+msgid "Zoom to width"
+msgstr "Зголеми во ширина"
+
+#: readtoolbar.py:197
+msgid "Zoom to fit"
+msgstr "Собери"
+
+#: readtoolbar.py:202
+msgid "Actual size"
+msgstr "Вистинска големина"
+
+#: readtoolbar.py:219
+msgid "%"
+msgstr "%"
+
+#: readtoolbar.py:232
+msgid "Fullscreen"
+msgstr ""
+
+#: readtoolbar.py:329
+msgid "Play / Pause"
+msgstr ""
+
+#. TRANS: Translate this as Page i of m (eg: Page 4 of 334)
+#: readtopbar.py:206
+#, python-format
+msgid "Page %i of %i"
+msgstr ""
+
+#~ msgid "Edit"
+#~ msgstr "Уреди"
+
+#~ msgid "View"
+#~ msgstr "Поглед"
+
+#~ msgid "Read Activity"
+#~ msgstr "Активност за читање"

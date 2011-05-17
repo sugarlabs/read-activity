@@ -1,8 +1,16 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: OLPC XBook\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-09 00:33-0400\n"
+"POT-Creation-Date: 2011-02-22 00:32-0500\n"
 "PO-Revision-Date: 2009-10-11 20:11-0400\n"
 "Last-Translator: Yuan Chao <yuanchao@gmail.com>\n"
 "Language-Team: Yuan CHAO <yuanchao@gmail.com>\n"
@@ -17,121 +25,129 @@ msgstr ""
 msgid "Read"
 msgstr "閱讀"
 
-#: readactivity.py:330
+#: readactivity.py:242
+msgid "Highlight"
+msgstr ""
+
+#: readactivity.py:345
 msgid "Back"
 msgstr "後退"
 
-#: readactivity.py:333
+#: readactivity.py:348
 msgid "Previous page"
 msgstr "上一頁"
 
-#: readactivity.py:336
+#: readactivity.py:351
 msgid "Previous bookmark"
 msgstr "上一個書籤"
 
-#: readactivity.py:346
+#: readactivity.py:361
 msgid "Forward"
 msgstr "前進"
 
-#: readactivity.py:349
+#: readactivity.py:364
 msgid "Next page"
 msgstr "下一頁"
 
-#: readactivity.py:352
+#: readactivity.py:367
 msgid "Next bookmark"
 msgstr "下一個書籤"
 
-#: readactivity.py:537
+#: readactivity.py:582
 msgid "Choose document"
 msgstr "選擇文件"
 
-#: readdialog.py:49
+#: readdialog.py:51
 msgid "Cancel"
 msgstr "取消"
 
-#: readdialog.py:55
+#: readdialog.py:57
 msgid "Ok"
 msgstr "確定"
 
-#: readdialog.py:109
+#: readdialog.py:111
 msgid "<b>Title</b>:"
 msgstr "<b>標題</b>："
 
-#: readdialog.py:136
+#: readdialog.py:137
 msgid "<b>Details</b>:"
 msgstr "<b>詳細說明</b>："
 
 #. TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
 #. TRANS: automatically)
-#: readsidebar.py:83
+#: readsidebar.py:86
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
 msgstr "書籤由 %(user)s 於 %(time)s 加入"
 
-#: readsidebar.py:124 readsidebar.py:164
+#: readsidebar.py:128 readsidebar.py:169
 msgid "Add notes for bookmark: "
 msgstr "增加書籤註解："
 
-#: readsidebar.py:161
+#: readsidebar.py:165
 #, python-format
 msgid "%s's bookmark"
 msgstr "%s 的書籤"
 
-#: readsidebar.py:162
+#: readsidebar.py:166
 #, python-format
 msgid "Bookmark for page %d"
 msgstr "第 %d 頁加入書籤"
 
-#: readtoolbar.py:64
+#: readtoolbar.py:65
 msgid "Previous"
 msgstr "上一個"
 
-#: readtoolbar.py:71
+#: readtoolbar.py:72
 msgid "Next"
 msgstr "下一個"
 
-#: readtoolbar.py:157
+#: readtoolbar.py:155
 msgid "Find first"
 msgstr "搜尋第一個"
 
-#: readtoolbar.py:163
+#: readtoolbar.py:161
 msgid "Find previous"
 msgstr "搜尋前一個"
 
-#: readtoolbar.py:165
+#: readtoolbar.py:163
 msgid "Find next"
 msgstr "搜尋下一個"
 
-#: readtoolbar.py:187
+#: readtoolbar.py:179
 msgid "Zoom out"
 msgstr "縮小"
 
-#: readtoolbar.py:193
+#: readtoolbar.py:185
 msgid "Zoom in"
 msgstr "放大"
 
-#: readtoolbar.py:199
+#: readtoolbar.py:191
 msgid "Zoom to width"
 msgstr "最適寬度"
 
-#: readtoolbar.py:205
+#: readtoolbar.py:197
 msgid "Zoom to fit"
 msgstr "頁面大小"
 
-#: readtoolbar.py:210
+#: readtoolbar.py:202
 msgid "Actual size"
 msgstr "實際大小"
 
-#: readtoolbar.py:227
+#: readtoolbar.py:219
 msgid "%"
 msgstr "％"
 
-#: readtoolbar.py:240
+#: readtoolbar.py:232
 msgid "Fullscreen"
 msgstr "全螢幕顯示"
 
+#: readtoolbar.py:329
+msgid "Play / Pause"
+msgstr ""
+
 #. TRANS: Translate this as Page i of m (eg: Page 4 of 334)
-#: readtopbar.py:201
+#: readtopbar.py:206
 #, python-format
 msgid "Page %i of %i"
 msgstr "第 %i 頁 共 %i 頁"
