@@ -699,8 +699,8 @@ class ReadActivity(activity.Activity):
 
         _logger.debug("Got document %s (%s) from tube %u",
                       tempfile, suggested_name, tube_id)
-        self._load_document("file://%s" % tempfile)
         self.save()
+        self._load_document("file://%s" % tempfile)
 
     def _download_progress_cb(self, getter, bytes_downloaded, tube_id):
         # FIXME: Draw a progress bar
@@ -787,6 +787,9 @@ class ReadActivity(activity.Activity):
         filepath -- string starting with file://
 
         """
+        filename = filepath.replace('file://', '')
+        if not os.path.exists(filename) or os.path.getsize(filename) == 0:
+            return
         mimetype = mime.get_for_file(filepath)
         if mimetype == 'application/epub+zip':
             self._view = epubadapter.EpubViewer()
@@ -871,7 +874,7 @@ class ReadActivity(activity.Activity):
         _logger.debug('New tube: ID=%d initator=%d type=%d service=%s '
                       'params=%r state=%d', tube_id, initiator, tube_type,
                       service, params, state)
-        if self._document is None and service == READ_STREAM_SERVICE:
+        if self._view is None and service == READ_STREAM_SERVICE:
             _logger.debug('I could download from that tube')
             self.unused_download_tubes.add(tube_id)
             # if no download is in progress, let's fetch the document
