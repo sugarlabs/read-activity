@@ -14,7 +14,7 @@ class EvinceViewer():
         self._view = evince.View()
 
     def setup(self, activity):
-
+        self._activity = activity
         self._view.connect('selection-changed',
                             activity._view_selection_changed_cb)
 
@@ -222,14 +222,30 @@ class EvinceViewer():
         Scrolls through the pages.
         Scrolling is horizontal if horizontal is set to True
         Valid scrolltypes are:
-        gtk.SCROLL_PAGE_BACKWARD and gtk.SCROLL_PAGE_FORWARD
+        gtk.SCROLL_PAGE_BACKWARD, gtk.SCROLL_PAGE_FORWARD,
+        gtk.SCROLL_STEP_BACKWARD and gtk.SCROLL_STEP_FORWARD
         '''
+        _logger.error('scroll: %s', scrolltype)
+
         if scrolltype == gtk.SCROLL_PAGE_BACKWARD:
             self._view.scroll(gtk.SCROLL_PAGE_BACKWARD, -1)
         elif scrolltype == gtk.SCROLL_PAGE_FORWARD:
             self._view.scroll(gtk.SCROLL_PAGE_FORWARD, 1)
+        elif scrolltype == gtk.SCROLL_STEP_BACKWARD:
+            self._scroll_step(False)
+        elif scrolltype == gtk.SCROLL_STEP_FORWARD:
+            self._scroll_step(True)
         else:
             print ('Got unsupported scrolltype %s' % str(scrolltype))
+
+    def _scroll_step(self, forward):
+        v_adj = self._activity._scrolled.get_vadjustment()
+        v_value = v_adj.get_value()
+        step = v_adj.get_step_increment()
+        if forward:
+            v_adj.set_value(v_value + step)
+        else:
+            v_adj.set_value(v_value - step)
 
     def copy(self):
         self._view.copy()

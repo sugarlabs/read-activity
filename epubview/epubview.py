@@ -27,7 +27,6 @@ import BeautifulSoup
 from epub import _Epub
 from jobs import _JobPaginator as _Paginator
 
-
 LOADING_HTML = '''
 <div style="width:100%;height:100%;text-align:center;padding-top:50%;">
     <h1>Loading...</h1>
@@ -249,7 +248,8 @@ class _View(gtk.HBox):
         Scrolls through the pages.
         Scrolling is horizontal if horizontal is set to True
         Valid scrolltypes are:
-        gtk.SCROLL_PAGE_BACKWARD and gtk.SCROLL_PAGE_FORWARD
+        gtk.SCROLL_PAGE_BACKWARD, gtk.SCROLL_PAGE_FORWARD,
+        gtk.SCROLL_STEP_BACKWARD and gtk.SCROLL_STEP_FORWARD
         '''
         if scrolltype == gtk.SCROLL_PAGE_BACKWARD:
             self.__going_back = True
@@ -261,6 +261,16 @@ class _View(gtk.HBox):
             self.__going_fwd = True
             if not self._do_page_transition():
                 self._view.move_cursor(gtk.MOVEMENT_PAGES, 1)
+        elif scrolltype == gtk.SCROLL_STEP_BACKWARD:
+            self.__going_fwd = False
+            self.__going_back = True
+            if not self._do_page_transition():
+                self._view.move_cursor(gtk.MOVEMENT_DISPLAY_LINES, -1)
+        elif scrolltype == gtk.SCROLL_STEP_FORWARD:
+            self.__going_fwd = True
+            self.__going_back = False
+            if not self._do_page_transition():
+                self._view.move_cursor(gtk.MOVEMENT_DISPLAY_LINES, 1)
         else:
             print ('Got unsupported scrolltype %s' % str(scrolltype))
 
