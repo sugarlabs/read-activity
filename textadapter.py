@@ -216,25 +216,31 @@ class TextViewer(gobject.GObject):
         self._show_page(self._current_page)
         self.emit('page-changed', old_page, self._current_page)
 
-    def scroll(self, direction, horizontal):
+    def scroll(self, scrolltype, horizontal):
         v_adjustment = self._scrolled.get_vadjustment()
-        if direction == gtk.SCROLL_PAGE_BACKWARD:
-            if v_adjustment.value == v_adjustment.lower:
+        v_value = v_adjustment.value
+        if scrolltype in (gtk.SCROLL_PAGE_BACKWARD, gtk.SCROLL_PAGE_FORWARD):
+            step = v_adjustment.page_increment
+        else:
+            step = v_adjustment.step_increment
+
+        if scrolltype in (gtk.SCROLL_PAGE_BACKWARD, gtk.SCROLL_STEP_BACKWARD):
+            if v_value <= v_adjustment.lower:
                 self.previous_page()
+                v_adjustment.value = v_adjustment.upper - \
+                        v_adjustment.page_size
                 return
-            if v_adjustment.value > v_adjustment.lower:
-                new_value = v_adjustment.value - v_adjustment.step_increment
+            if v_value > v_adjustment.lower:
+                new_value = v_value - step
                 if new_value < v_adjustment.lower:
                     new_value = v_adjustment.lower
                 v_adjustment.value = new_value
-        else:
-            if v_adjustment.value == \
-                    v_adjustment.upper - v_adjustment.page_size:
+        elif scrolltype in (gtk.SCROLL_PAGE_FORWARD, gtk.SCROLL_STEP_FORWARD):
+            if v_value >= v_adjustment.upper - v_adjustment.page_size:
                 self.next_page()
                 return
-            if v_adjustment.value < \
-                    v_adjustment.upper - v_adjustment.page_size:
-                new_value = v_adjustment.value + v_adjustment.step_increment
+            if v_value < v_adjustment.upper - v_adjustment.page_size:
+                new_value = v_value + step
                 if new_value > v_adjustment.upper - v_adjustment.page_size:
                     new_value = v_adjustment.upper - v_adjustment.page_size
                 v_adjustment.value = new_value
