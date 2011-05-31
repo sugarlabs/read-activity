@@ -11,19 +11,21 @@ class _WebView(webkit.WebView):
         Gets height (in pixels) of loaded (X)HTML page.
         This is done via javascript at the moment
         '''
-        #TODO: Need to check status of page load
         js = 'oldtitle=document.title;' + \
+        'if (document.body == null) {' + \
+        'document.title = 0} else {' + \
         'document.title=Math.max(document.body.scrollHeight, ' + \
         'document.body.offsetHeight,document.documentElement.clientHeight,' + \
         'document.documentElement.scrollHeight, ' + \
-        'document.documentElement.offsetHeight);'
+        'document.documentElement.offsetHeight)};'
         self.execute_script(js)
         ret = self.get_main_frame().get_title()
         js = 'document.title=oldtitle;'
         self.execute_script(js)
-        if ret is None:
+        try:
+            return int(ret)
+        except ValueError:
             return 0
-        return int(ret)
 
     def add_bottom_padding(self, incr):
         '''
