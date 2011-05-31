@@ -552,11 +552,15 @@ class _View(gtk.HBox):
         if filename != self._loaded_filename:
             #self._loaded_filename = filename
 
+            """
+            TODO: disabled because javascript can't be executed
+            with the velocity needed
             # Copy javascript to highligth text to speech
             destpath, destname = os.path.split(filename.replace('file://', ''))
             shutil.copy('./epubview/highlight_words.js', destpath)
             self._insert_js_reference(filename.replace('file://', ''),
                     destpath)
+            """
 
             if filename.endswith('xml'):
                 dest = filename.replace('xml', 'xhtml')

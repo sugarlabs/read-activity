@@ -82,9 +82,14 @@ class EpubViewer(epubview.EpubView):
             speech.play(more_text)
 
     def highlight_next_word(self,  word_count):
+        pass
+        """
+        TODO: disabled because javascript can't be executed
+        with the velocity needed
         self.current_word = word_count
         self._view.highlight_next_word()
         return True
+        """
 
     def connect_zoom_handler(self, handler):
         self._zoom_handler = handler
