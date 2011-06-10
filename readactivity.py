@@ -28,7 +28,6 @@ import dbus
 import gobject
 import gtk
 import pango
-from glib import GError
 import telepathy
 
 from sugar.activity import activity
