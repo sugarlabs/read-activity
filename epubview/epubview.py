@@ -249,7 +249,8 @@ class _View(gtk.HBox):
         Scrolling is horizontal if horizontal is set to True
         Valid scrolltypes are:
         gtk.SCROLL_PAGE_BACKWARD, gtk.SCROLL_PAGE_FORWARD,
-        gtk.SCROLL_STEP_BACKWARD and gtk.SCROLL_STEP_FORWARD
+        gtk.SCROLL_STEP_BACKWARD, gtk.SCROLL_STEP_FORWARD
+        gtk.SCROLL_STEP_START and gtk.SCROLL_STEP_STOP
         '''
         if scrolltype == gtk.SCROLL_PAGE_BACKWARD:
             self.__going_back = True
@@ -271,6 +272,16 @@ class _View(gtk.HBox):
             self.__going_back = False
             if not self._do_page_transition():
                 self._view.move_cursor(gtk.MOVEMENT_DISPLAY_LINES, 1)
+        elif scrolltype == gtk.SCROLL_START:
+            self.__going_back = True
+            self.__going_fwd = False
+            if not self._do_page_transition():
+                self.set_current_page(1)
+        elif scrolltype == gtk.SCROLL_END:
+            self.__going_back = False
+            self.__going_fwd = True
+            if not self._do_page_transition():
+                self.set_current_page(self._pagecount - 1)
         else:
             print ('Got unsupported scrolltype %s' % str(scrolltype))
 
