@@ -34,6 +34,7 @@ from sugar.activity import activity
 from sugar.graphics.toolbutton import ToolButton
 from sugar.graphics.toolbarbox import ToolbarBox
 from sugar.graphics.toolbarbox import ToolbarButton
+from sugar.graphics.toolcombobox import ToolComboBox
 from sugar.graphics.toggletoolbutton import ToggleToolButton
 from sugar.graphics.menuitem import MenuItem
 from sugar.activity.widgets import ActivityToolbarButton
@@ -209,17 +210,15 @@ class ReadActivity(activity.Activity):
         spacer.show()
 
         navigator_toolbar = gtk.Toolbar()
-        navigator_item = gtk.ToolItem()
         self._navigator = self._create_navigator()
-        navigator_item.add(self._navigator)
+        combotool = ToolComboBox(self._navigator)
+        navigator_toolbar.insert(combotool, -1)
         self._navigator.show()
-        navigator_toolbar.insert(navigator_item, -1)
-        navigator_item.show()
+        combotool.show()
         self._navigator_toolbar_button = ToolbarButton(page=navigator_toolbar,
                                                  icon_name='view-list')
         navigator_toolbar.show()
         toolbar_box.toolbar.insert(self._navigator_toolbar_button, -1)
-        #navigator_toolbar_button.show()
 
         spacer = gtk.SeparatorToolItem()
         spacer.props.draw = False
@@ -402,7 +401,6 @@ class ReadActivity(activity.Activity):
 
     def _create_navigator(self):
         navigator = gtk.ComboBox()
-        navigator.set_add_tearoffs(True)
         cell = gtk.CellRendererText()
         navigator.pack_start(cell, True)
         navigator.add_attribute(cell, 'text', 0)
