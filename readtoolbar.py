@@ -316,22 +316,10 @@ class SpeechToolbar(gtk.Toolbar):
                 break
             default = default + 1
 
-        # Play button Image
-        play_img = gtk.Image()
-        play_img.show()
-        play_img.set_from_icon_name('media-playback-start',
-                gtk.ICON_SIZE_LARGE_TOOLBAR)
-
-        # Pause button Image
-        pause_img = gtk.Image()
-        pause_img.show()
-        pause_img.set_from_icon_name('media-playback-pause',
-                gtk.ICON_SIZE_LARGE_TOOLBAR)
-
         # Play button
         self.play_btn = ToggleToolButton('media-playback-start')
         self.play_btn.show()
-        self.play_btn.connect('toggled', self.play_cb, [play_img, pause_img])
+        self.play_btn.connect('toggled', self.play_cb)
         self.insert(self.play_btn, -1)
         self.play_btn.set_tooltip(_('Play / Pause'))
 
@@ -421,11 +409,11 @@ class SpeechToolbar(gtk.Toolbar):
         finally:
             f.close()
 
-    def play_cb(self, widget, images):
-        widget.set_icon_widget(images[int(widget.get_active())])
-
+    def play_cb(self, widget):
         if widget.get_active():
+            self.play_btn.set_named_icon('media-playback-pause')
             if speech.is_stopped():
                 speech.play(self._activity._view.get_marked_words())
         else:
+            self.play_btn.set_named_icon('media-playback-start')
             speech.stop()
