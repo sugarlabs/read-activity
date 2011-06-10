@@ -947,6 +947,12 @@ class ReadActivity(activity.Activity):
         elif keyname == 'KP_End':
             self._view_toolbar.zoom_out()
             return True
+        elif keyname == 'Home':
+            self._view.scroll(gtk.SCROLL_START, False)
+            return True
+        elif keyname == 'End':
+            self._view.scroll(gtk.SCROLL_END, False)
+            return True
         elif keyname == 'Page_Up' or keyname == 'KP_Page_Up':
             self._view.scroll(gtk.SCROLL_PAGE_BACKWARD, False)
             return True

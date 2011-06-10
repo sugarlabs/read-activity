@@ -223,7 +223,8 @@ class EvinceViewer():
         Scrolling is horizontal if horizontal is set to True
         Valid scrolltypes are:
         gtk.SCROLL_PAGE_BACKWARD, gtk.SCROLL_PAGE_FORWARD,
-        gtk.SCROLL_STEP_BACKWARD and gtk.SCROLL_STEP_FORWARD
+        gtk.SCROLL_STEP_BACKWARD, gtk.SCROLL_STEP_FORWARD,
+        gtk.SCROLL_START and gtk.SCROLL_END
         '''
         _logger.error('scroll: %s', scrolltype)
 
@@ -235,6 +236,10 @@ class EvinceViewer():
             self._scroll_step(False)
         elif scrolltype == gtk.SCROLL_STEP_FORWARD:
             self._scroll_step(True)
+        elif scrolltype == gtk.SCROLL_START:
+            self.set_current_page(0)
+        elif scrolltype == gtk.SCROLL_END:
+            self.set_current_page(self._document.get_n_pages())
         else:
             print ('Got unsupported scrolltype %s' % str(scrolltype))
 
