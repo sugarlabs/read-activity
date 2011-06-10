@@ -244,6 +244,10 @@ class TextViewer(gobject.GObject):
                 if new_value > v_adjustment.upper - v_adjustment.page_size:
                     new_value = v_adjustment.upper - v_adjustment.page_size
                 v_adjustment.value = new_value
+        elif scrolltype == gtk.SCROLL_START:
+            self.set_current_page(0)
+        elif scrolltype == gtk.SCROLL_END:
+            self.set_current_page(self._pagecount - 1)
 
     def previous_page(self):
         v_adjustment = self._scrolled.get_vadjustment()
