@@ -71,6 +71,7 @@ class EpubViewer(epubview.EpubView):
         for word_tuple in self.word_tuples[self.current_word:end_range]:
             file_str.write('<mark name="' + str(i) + '"/>' + word_tuple[2])
             i = i + 1
+        self.current_word = i
         file_str.write('</speak>')
         return file_str.getvalue()
 
