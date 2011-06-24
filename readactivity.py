@@ -29,6 +29,7 @@ import gobject
 import gtk
 import pango
 import telepathy
+import SimpleHTTPServer
 
 from sugar.activity import activity
 from sugar.graphics.toolbutton import ToolButton
@@ -84,8 +85,7 @@ def get_md5(filename):
     fh.close()
     return digest.hexdigest()
 
-
-class ReadHTTPRequestHandler(network.ChunkedGlibHTTPRequestHandler):
+class ReadHTTPRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     """HTTP Request Handler for transferring document while collaborating.
 
     RequestHandler class that integrates with Glib mainloop. It writes
