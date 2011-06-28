@@ -233,9 +233,9 @@ class EvinceViewer():
         elif scrolltype == gtk.SCROLL_PAGE_FORWARD:
             self._view.scroll(gtk.SCROLL_PAGE_FORWARD, 1)
         elif scrolltype == gtk.SCROLL_STEP_BACKWARD:
-            self._scroll_step(False)
+            self._scroll_step(False, horizontal)
         elif scrolltype == gtk.SCROLL_STEP_FORWARD:
-            self._scroll_step(True)
+            self._scroll_step(True, horizontal)
         elif scrolltype == gtk.SCROLL_START:
             self.set_current_page(0)
         elif scrolltype == gtk.SCROLL_END:
@@ -243,14 +243,17 @@ class EvinceViewer():
         else:
             print ('Got unsupported scrolltype %s' % str(scrolltype))
 
-    def _scroll_step(self, forward):
-        v_adj = self._activity._scrolled.get_vadjustment()
-        v_value = v_adj.get_value()
-        step = v_adj.get_step_increment()
-        if forward:
-            v_adj.set_value(v_value + step)
+    def _scroll_step(self, forward, horizontal):
+        if horizontal:
+            adj = self._activity._scrolled.get_hadjustment()
         else:
-            v_adj.set_value(v_value - step)
+            adj = self._activity._scrolled.get_vadjustment()
+        value = adj.get_value()
+        step = adj.get_step_increment()
+        if forward:
+            adj.set_value(value + step)
+        else:
+            adj.set_value(value - step)
 
     def copy(self):
         self._view.copy()

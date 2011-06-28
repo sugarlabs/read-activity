@@ -85,6 +85,7 @@ def get_md5(filename):
     fh.close()
     return digest.hexdigest()
 
+
 class ReadHTTPRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     """HTTP Request Handler for transferring document while collaborating.
 
@@ -961,6 +962,12 @@ class ReadActivity(activity.Activity):
             return True
         elif keyname == 'Down' or keyname == 'KP_Down':
             self._view.scroll(gtk.SCROLL_STEP_FORWARD, False)
+            return True
+        elif keyname == 'Left' or keyname == 'KP_Left':
+            self._view.scroll(gtk.SCROLL_STEP_BACKWARD, True)
+            return True
+        elif keyname == 'Right' or keyname == 'KP_Right':
+            self._view.scroll(gtk.SCROLL_STEP_FORWARD, True)
             return True
         else:
             return False
