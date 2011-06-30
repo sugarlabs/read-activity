@@ -229,9 +229,9 @@ class EvinceViewer():
         _logger.error('scroll: %s', scrolltype)
 
         if scrolltype == gtk.SCROLL_PAGE_BACKWARD:
-            self._view.scroll(gtk.SCROLL_PAGE_BACKWARD, -1)
+            self._view.scroll(gtk.SCROLL_PAGE_BACKWARD, horizontal)
         elif scrolltype == gtk.SCROLL_PAGE_FORWARD:
-            self._view.scroll(gtk.SCROLL_PAGE_FORWARD, 1)
+            self._view.scroll(gtk.SCROLL_PAGE_FORWARD, horizontal)
         elif scrolltype == gtk.SCROLL_STEP_BACKWARD:
             self._scroll_step(False, horizontal)
         elif scrolltype == gtk.SCROLL_STEP_FORWARD:
