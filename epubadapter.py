@@ -76,7 +76,6 @@ class EpubViewer(epubview.EpubView):
         return file_str.getvalue()
 
     def get_more_text(self):
-        self.current_word = self.current_word + 1
         if self.current_word < len(self.word_tuples):
             speech.stop()
             more_text = self.get_marked_words()
