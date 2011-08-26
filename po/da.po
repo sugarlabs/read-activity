@@ -14,11 +14,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-22 00:32-0500\n"
-"PO-Revision-Date: 2011-04-06 03:39+0200\n"
-"Last-Translator: Aputsiaq <aj@isit.gl>\n"
+"POT-Creation-Date: 2011-08-05 11:05-0300\n"
+"PO-Revision-Date: 2011-08-16 01:56+0200\n"
+"Last-Translator: Aputsiaq Niels <aj@isit.gl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: da\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -29,37 +29,123 @@ msgstr ""
 msgid "Read"
 msgstr "Læs"
 
-#: readactivity.py:242
+#: readtoolbar.py:67
+msgid "Previous"
+msgstr "Forrige"
+
+#: readtoolbar.py:74
+msgid "Next"
+msgstr "Næste"
+
+#: readtoolbar.py:157
+msgid "Find first"
+msgstr "Find første"
+
+#: readtoolbar.py:163
+msgid "Find previous"
+msgstr "Find forrige"
+
+#: readtoolbar.py:165
+msgid "Find next"
+msgstr "Find næste"
+
+#: readtoolbar.py:181
+msgid "Zoom out"
+msgstr "Formindsk"
+
+#: readtoolbar.py:187
+msgid "Zoom in"
+msgstr "Forstør"
+
+#: readtoolbar.py:193
+msgid "Zoom to width"
+msgstr "Tilpas til bredde"
+
+#: readtoolbar.py:199
+msgid "Zoom to fit"
+msgstr "Zoomtilpasning"
+
+#: readtoolbar.py:204
+msgid "Actual size"
+msgstr "Aktuel størrelse"
+
+#: readtoolbar.py:221
+msgid "%"
+msgstr "%"
+
+#: readtoolbar.py:234
+msgid "Fullscreen"
+msgstr "Fuldskærm"
+
+#: readtoolbar.py:324
+msgid "Play / Pause"
+msgstr "Afspil / Pause"
+
+#: readtoolbar.py:377
+msgid "pitch adjusted"
+msgstr "tonehøjde tilpasset"
+
+#: readtoolbar.py:382
+msgid "rate adjusted"
+msgstr "hastighed tilpasset"
+
+#. TRANS: This goes like Bookmark added by User 5 days ago
+#. TRANS: (the elapsed string gets translated automatically)
+#: readsidebar.py:88
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "Bogmærker tilføjet af %(user)s %(time)s"
+
+#: readsidebar.py:131 readsidebar.py:173
+msgid "Add notes for bookmark: "
+msgstr "Tilføj noter til bogmærke: "
+
+#: readsidebar.py:169
+#, python-format
+msgid "%s's bookmark"
+msgstr "%s's bogmærke"
+
+#: readsidebar.py:170
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "Bogmærke for side %d"
+
+#: readactivity.py:239
 msgid "Highlight"
 msgstr "Fremhæv"
 
-#: readactivity.py:345
+#: readactivity.py:349
 msgid "Back"
 msgstr "Tilbage"
 
-#: readactivity.py:348
+#: readactivity.py:352
 msgid "Previous page"
 msgstr "Forrige side"
 
-#: readactivity.py:351
+#: readactivity.py:355
 msgid "Previous bookmark"
 msgstr "Forrige bogmærke"
 
-#: readactivity.py:361
+#: readactivity.py:365
 msgid "Forward"
 msgstr "Frem"
 
-#: readactivity.py:364
+#: readactivity.py:368
 msgid "Next page"
 msgstr "Næste side"
 
-#: readactivity.py:367
+#: readactivity.py:371
 msgid "Next bookmark"
 msgstr "Næste bogmærke"
 
-#: readactivity.py:582
+#: readactivity.py:570
 msgid "Choose document"
 msgstr "Vælg dokument"
+
+#: readtopbar.py:141
+#, python-format
+msgid "Page %(current)i of %(total_pages)i"
+msgstr "Side %(current)i af %(total_pages)i"
 
 #: readdialog.py:51
 msgid "Cancel"
@@ -69,92 +155,17 @@ msgstr "Annullér"
 msgid "Ok"
 msgstr "Ok"
 
-#: readdialog.py:111
+#: readdialog.py:112
 msgid "<b>Title</b>:"
 msgstr "<b>Titel</b>:"
 
-#: readdialog.py:137
+#: readdialog.py:138
 msgid "<b>Details</b>:"
 msgstr "<b>Detaljer</b>:"
 
-#. TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
-#. TRANS: automatically)
-#: readsidebar.py:86
 #, python-format
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr "Bogmærker tilføjet af %(user)s %(time)s"
-
-#: readsidebar.py:128 readsidebar.py:169
-msgid "Add notes for bookmark: "
-msgstr "Tilføj noter til bogmærke: "
-
-#: readsidebar.py:165
-#, python-format
-msgid "%s's bookmark"
-msgstr "%s's bogmærke"
-
-#: readsidebar.py:166
-#, python-format
-msgid "Bookmark for page %d"
-msgstr "Bogmærke for side %d"
-
-#: readtoolbar.py:65
-msgid "Previous"
-msgstr "Forrige"
-
-#: readtoolbar.py:72
-msgid "Next"
-msgstr "Næste"
-
-#: readtoolbar.py:155
-msgid "Find first"
-msgstr "Find første"
-
-#: readtoolbar.py:161
-msgid "Find previous"
-msgstr "Find forrige"
-
-#: readtoolbar.py:163
-msgid "Find next"
-msgstr "Find næste"
-
-#: readtoolbar.py:179
-msgid "Zoom out"
-msgstr "Formindsk"
-
-#: readtoolbar.py:185
-msgid "Zoom in"
-msgstr "Forstør"
-
-#: readtoolbar.py:191
-msgid "Zoom to width"
-msgstr "Tilpas til bredde"
-
-#: readtoolbar.py:197
-msgid "Zoom to fit"
-msgstr "Zoomtilpasning"
-
-#: readtoolbar.py:202
-msgid "Actual size"
-msgstr "Aktuel størrelse"
-
-#: readtoolbar.py:219
-msgid "%"
-msgstr "%"
-
-#: readtoolbar.py:232
-msgid "Fullscreen"
-msgstr "Fuldskærm"
-
-#: readtoolbar.py:329
-msgid "Play / Pause"
-msgstr "Afspil / Pause"
-
-#. TRANS: Translate this as Page i of m (eg: Page 4 of 334)
-#: readtopbar.py:206
-#, python-format
-msgid "Page %i of %i"
-msgstr "Side %i af %i"
+#~ msgid "Page %i of %i"
+#~ msgstr "Side %i af %i"
 
 #~ msgid "Edit"
 #~ msgstr "Redigér"
