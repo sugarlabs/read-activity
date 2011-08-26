@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-22 00:32-0500\n"
-"PO-Revision-Date: 2010-01-22 04:15+0200\n"
+"POT-Creation-Date: 2011-08-05 11:05-0300\n"
+"PO-Revision-Date: 2011-08-26 09:04+0200\n"
 "Last-Translator: korakurider <korakurider@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ja\n"
@@ -29,37 +29,123 @@ msgstr ""
 msgid "Read"
 msgstr "Read"
 
-#: readactivity.py:242
-msgid "Highlight"
-msgstr ""
+#: readtoolbar.py:67
+msgid "Previous"
+msgstr "前へ"
 
-#: readactivity.py:345
+#: readtoolbar.py:74
+msgid "Next"
+msgstr "次へ"
+
+#: readtoolbar.py:157
+msgid "Find first"
+msgstr "最初から検索"
+
+#: readtoolbar.py:163
+msgid "Find previous"
+msgstr "前を検索"
+
+#: readtoolbar.py:165
+msgid "Find next"
+msgstr "次を検索"
+
+#: readtoolbar.py:181
+msgid "Zoom out"
+msgstr "縮小"
+
+#: readtoolbar.py:187
+msgid "Zoom in"
+msgstr "拡大"
+
+#: readtoolbar.py:193
+msgid "Zoom to width"
+msgstr "幅にあわせて拡大"
+
+#: readtoolbar.py:199
+msgid "Zoom to fit"
+msgstr "画面にあわせて拡大"
+
+#: readtoolbar.py:204
+msgid "Actual size"
+msgstr "実際のサイズ"
+
+#: readtoolbar.py:221
+msgid "%"
+msgstr "%"
+
+#: readtoolbar.py:234
+msgid "Fullscreen"
+msgstr "全画面"
+
+#: readtoolbar.py:324
+msgid "Play / Pause"
+msgstr "再生/停止"
+
+#: readtoolbar.py:377
+msgid "pitch adjusted"
+msgstr "ピッチを調整しました"
+
+#: readtoolbar.py:382
+msgid "rate adjusted"
+msgstr "レートを調整しました"
+
+#. TRANS: This goes like Bookmark added by User 5 days ago
+#. TRANS: (the elapsed string gets translated automatically)
+#: readsidebar.py:88
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "%(user)sが %(time)s に追加したブックマーク"
+
+#: readsidebar.py:131 readsidebar.py:173
+msgid "Add notes for bookmark: "
+msgstr "ブックマークにノートを追加: "
+
+#: readsidebar.py:169
+#, python-format
+msgid "%s's bookmark"
+msgstr "%s のブックマーク"
+
+#: readsidebar.py:170
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "ページ %d へのブックマーク"
+
+#: readactivity.py:239
+msgid "Highlight"
+msgstr "ハイライト"
+
+#: readactivity.py:349
 msgid "Back"
 msgstr "戻る"
 
-#: readactivity.py:348
+#: readactivity.py:352
 msgid "Previous page"
 msgstr "前ページ"
 
-#: readactivity.py:351
+#: readactivity.py:355
 msgid "Previous bookmark"
 msgstr "前のブックマーク"
 
-#: readactivity.py:361
+#: readactivity.py:365
 msgid "Forward"
 msgstr "進む"
 
-#: readactivity.py:364
+#: readactivity.py:368
 msgid "Next page"
 msgstr "次ページ"
 
-#: readactivity.py:367
+#: readactivity.py:371
 msgid "Next bookmark"
 msgstr "次のブックマーク"
 
-#: readactivity.py:582
+#: readactivity.py:570
 msgid "Choose document"
 msgstr "文書を選ぶ"
+
+#: readtopbar.py:141
+#, python-format
+msgid "Page %(current)i of %(total_pages)i"
+msgstr "ページ %(current)i / %(total_pages)i"
 
 #: readdialog.py:51
 msgid "Cancel"
@@ -69,92 +155,17 @@ msgstr "キャンセル"
 msgid "Ok"
 msgstr "OK"
 
-#: readdialog.py:111
+#: readdialog.py:112
 msgid "<b>Title</b>:"
 msgstr "<b>表題</b>:"
 
-#: readdialog.py:137
+#: readdialog.py:138
 msgid "<b>Details</b>:"
 msgstr "<b>詳細</b>:"
 
-#. TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
-#. TRANS: automatically)
-#: readsidebar.py:86
 #, python-format
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr "%(user)sが %(time)s に追加したブックマーク"
-
-#: readsidebar.py:128 readsidebar.py:169
-msgid "Add notes for bookmark: "
-msgstr "ブックマークにノートを追加: "
-
-#: readsidebar.py:165
-#, python-format
-msgid "%s's bookmark"
-msgstr "%s のブックマーク"
-
-#: readsidebar.py:166
-#, python-format
-msgid "Bookmark for page %d"
-msgstr "ページ %d へのブックマーク"
-
-#: readtoolbar.py:65
-msgid "Previous"
-msgstr "前へ"
-
-#: readtoolbar.py:72
-msgid "Next"
-msgstr "次へ"
-
-#: readtoolbar.py:155
-msgid "Find first"
-msgstr "最初から検索"
-
-#: readtoolbar.py:161
-msgid "Find previous"
-msgstr "前を検索"
-
-#: readtoolbar.py:163
-msgid "Find next"
-msgstr "次を検索"
-
-#: readtoolbar.py:179
-msgid "Zoom out"
-msgstr "縮小"
-
-#: readtoolbar.py:185
-msgid "Zoom in"
-msgstr "拡大"
-
-#: readtoolbar.py:191
-msgid "Zoom to width"
-msgstr "幅にあわせて拡大"
-
-#: readtoolbar.py:197
-msgid "Zoom to fit"
-msgstr "画面にあわせて拡大"
-
-#: readtoolbar.py:202
-msgid "Actual size"
-msgstr "実際のサイズ"
-
-#: readtoolbar.py:219
-msgid "%"
-msgstr "%"
-
-#: readtoolbar.py:232
-msgid "Fullscreen"
-msgstr "全画面"
-
-#: readtoolbar.py:329
-msgid "Play / Pause"
-msgstr ""
-
-#. TRANS: Translate this as Page i of m (eg: Page 4 of 334)
-#: readtopbar.py:206
-#, python-format
-msgid "Page %i of %i"
-msgstr "ページ %i/%i"
+#~ msgid "Page %i of %i"
+#~ msgstr "ページ %i/%i"
 
 #~ msgid "Edit"
 #~ msgstr "編集"
