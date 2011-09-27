@@ -1,0 +1,164 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-05 11:05-0300\n"
+"PO-Revision-Date: 2011-09-11 01:38+0200\n"
+"Last-Translator: <saulleoart@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.0.1\n"
+
+#: activity/activity.info:2
+msgid "Read"
+msgstr "Ajiy"
+
+#: readtoolbar.py:67
+msgid "Previous"
+msgstr "Xi ok'xidh"
+
+#: readtoolbar.py:74
+msgid "Next"
+msgstr "Xi júnakej"
+
+#: readtoolbar.py:157
+msgid "Find first"
+msgstr "Aliy xi k'a'ál"
+
+#: readtoolbar.py:163
+msgid "Find previous"
+msgstr "Aliy xi ok'xidh"
+
+#: readtoolbar.py:165
+msgid "Find next"
+msgstr "Aliy xi júnakej"
+
+#: readtoolbar.py:181
+msgid "Zoom out"
+msgstr "Tsipti'méjdha'"
+
+# Se puede aplicar de igual forma Utuw porque significa acercar y el efecto al acercar cualquier objeto se percibe de mayor tamaño.
+#: readtoolbar.py:187
+msgid "Zoom in"
+msgstr "Puwedha'"
+
+#: readtoolbar.py:193
+msgid "Zoom to width"
+msgstr "Ka junkuw tin ts'ikwtal"
+
+#: readtoolbar.py:199
+msgid "Zoom to fit"
+msgstr "Ka junkuw ti walek"
+
+#: readtoolbar.py:204
+msgid "Actual size"
+msgstr "In léj puwél"
+
+#: readtoolbar.py:221
+msgid "%"
+msgstr "%"
+
+#: readtoolbar.py:234
+msgid "Fullscreen"
+msgstr "Putat walek"
+
+#: readtoolbar.py:324
+msgid "Play / Pause"
+msgstr "K'wajba' / Tonk'iy"
+
+#: readtoolbar.py:377
+msgid "pitch adjusted"
+msgstr "janidhtaláb t'ojojodh"
+
+# tasa ajustada (tasa se refiere a un nivel, índice)
+# Ejemplo: "Tasa de natalidad"="ïndice de natalidad"
+#: readtoolbar.py:382
+msgid "rate adjusted"
+msgstr "bajudh adhiktalab"
+
+#. TRANS: This goes like Bookmark added by User 5 days ago
+#. TRANS: (the elapsed string gets translated automatically)
+#: readsidebar.py:88
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "Pulik tejwa'medhom puk'udh k'al a %(user)s %(time)s"
+
+#: readsidebar.py:131 readsidebar.py:173
+msgid "Add notes for bookmark: "
+msgstr "Ka punk'uy jun i tsakam dhuchlab abal an pulik tejwa'medhom: "
+
+#: readsidebar.py:169
+#, python-format
+msgid "%s's bookmark"
+msgstr "In pulik tejwa'medhom a %s"
+
+#: readsidebar.py:170
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "Pulik tejwa'medhom abal an walxeklek %d"
+
+#: readactivity.py:239
+msgid "Highlight"
+msgstr "Tajaxbédha'"
+
+#: readactivity.py:349
+msgid "Back"
+msgstr "Wíchiy"
+
+#: readactivity.py:352
+msgid "Previous page"
+msgstr "Ok'xidh walxeklek"
+
+#: readactivity.py:355
+msgid "Previous bookmark"
+msgstr "Ok'xidh pulik tejwa'medhom"
+
+#: readactivity.py:365
+msgid "Forward"
+msgstr "Ne'etsnanchj"
+
+#: readactivity.py:368
+msgid "Next page"
+msgstr "Júnakej walxeklek"
+
+#: readactivity.py:371
+msgid "Next bookmark"
+msgstr "Júnakej pulik tejwa'medhom"
+
+#: readactivity.py:570
+msgid "Choose document"
+msgstr "Takuy dhuchadh úw"
+
+#: readtopbar.py:141
+#, python-format
+#, python-format, ,
+msgid "Page %(current)i of %(total_pages)i"
+msgstr "Walxeklek %(current)i a xi ti %(total_pages)i"
+
+#: readdialog.py:51
+msgid "Cancel"
+msgstr "T'apiy"
+
+#: readdialog.py:57
+msgid "Ok"
+msgstr "Ne'ets kin t'aja'"
+
+#: readdialog.py:112
+msgid "<b>Title</b>:"
+msgstr "<b>Bíj</b>:"
+
+#: readdialog.py:138
+msgid "<b>Details</b>:"
+msgstr "<b>Alwa' met'adh</b>:"
+
+#, python-format
+#~ msgid "Page %i of %i"
+#~ msgstr "Walxeklek %i a xi ti %i"
