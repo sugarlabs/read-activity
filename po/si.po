@@ -14,52 +14,138 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-22 00:32-0500\n"
-"PO-Revision-Date: 2009-09-02 00:26-0400\n"
-"Last-Translator: Chris Leonard <cjl@laptop.org>\n"
+"POT-Creation-Date: 2011-08-05 11:05-0300\n"
+"PO-Revision-Date: 2011-09-28 08:05+0200\n"
+"Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: si\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 1.2.1\n"
+"X-Generator: Pootle 2.0.5\n"
 
 #: activity/activity.info:2
 msgid "Read"
 msgstr "කියවන්න"
 
-#: readactivity.py:242
-msgid "Highlight"
-msgstr ""
+#: readtoolbar.py:67
+msgid "Previous"
+msgstr "පෙර"
 
-#: readactivity.py:345
+#: readtoolbar.py:74
+msgid "Next"
+msgstr "ඊලඟ"
+
+#: readtoolbar.py:157
+msgid "Find first"
+msgstr "පලමුව සොයන්න"
+
+#: readtoolbar.py:163
+msgid "Find previous"
+msgstr "පෙර එක සොයන්න"
+
+#: readtoolbar.py:165
+msgid "Find next"
+msgstr "ඊලඟ එක සොයන්න"
+
+#: readtoolbar.py:181
+msgid "Zoom out"
+msgstr "කුඩා කරන්න"
+
+#: readtoolbar.py:187
+msgid "Zoom in"
+msgstr "විශාල කරන්න"
+
+#: readtoolbar.py:193
+msgid "Zoom to width"
+msgstr "පළල තෙක් විශාලනය"
+
+#: readtoolbar.py:199
+msgid "Zoom to fit"
+msgstr "ගැලපීමට විශාලනය"
+
+#: readtoolbar.py:204
+msgid "Actual size"
+msgstr "නියම ප්‍රමාණය"
+
+#: readtoolbar.py:221
+msgid "%"
+msgstr "%"
+
+#: readtoolbar.py:234
+msgid "Fullscreen"
+msgstr "මුළු තිරයම"
+
+#: readtoolbar.py:324
+msgid "Play / Pause"
+msgstr "වාදනය කරන්න / තාවකාලිව නවත්වන්න"
+
+#: readtoolbar.py:377
+msgid "pitch adjusted"
+msgstr "තාරතාව සීරු මාරු කරන ලදි"
+
+#: readtoolbar.py:382
+msgid "rate adjusted"
+msgstr "සීඝ්‍රතාව සීරු මාරු කරන ලදි"
+
+#. TRANS: This goes like Bookmark added by User 5 days ago
+#. TRANS: (the elapsed string gets translated automatically)
+#: readsidebar.py:88
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "%(user)s විසින් %(time)s ට පිටු සලකුණ එක් කරන ලදි"
+
+#: readsidebar.py:131 readsidebar.py:173
+msgid "Add notes for bookmark: "
+msgstr "පිටු සළකුණ සඳහා සටහන් එක් කරන්න: "
+
+#: readsidebar.py:169
+#, python-format
+msgid "%s's bookmark"
+msgstr "%s ගේ පිටු සළකුණ"
+
+#: readsidebar.py:170
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "%d පිටුව සඳහා පිටු සළකුණ"
+
+#: readactivity.py:239
+msgid "Highlight"
+msgstr "ඉස්මතු කරන්න"
+
+#: readactivity.py:349
 msgid "Back"
 msgstr "පසුපසට"
 
-#: readactivity.py:348
+#: readactivity.py:352
 msgid "Previous page"
 msgstr "පෙර පිටුව"
 
-#: readactivity.py:351
+#: readactivity.py:355
 msgid "Previous bookmark"
 msgstr "පෙර පිටු සලකුණ"
 
-#: readactivity.py:361
+#: readactivity.py:365
 msgid "Forward"
 msgstr "ඉදිරියට"
 
-#: readactivity.py:364
+#: readactivity.py:368
 msgid "Next page"
 msgstr "ඊළඟ පිටුව"
 
-#: readactivity.py:367
+#: readactivity.py:371
 msgid "Next bookmark"
 msgstr "ඊළඟ පිටු සලකුණ"
 
-#: readactivity.py:582
+#: readactivity.py:570
 msgid "Choose document"
 msgstr "ලිපි ගොනුව තෝරන්න"
+
+#: readtopbar.py:141
+#, python-format
+msgid "Page %(current)i of %(total_pages)i"
+msgstr "%(total_pages)i කින් %(current)i පිටුව"
 
 #: readdialog.py:51
 msgid "Cancel"
@@ -69,93 +155,13 @@ msgstr "අවලංගු කරන්න"
 msgid "Ok"
 msgstr "හරි"
 
-#: readdialog.py:111
+#: readdialog.py:112
 msgid "<b>Title</b>:"
-msgstr ""
+msgstr "<b>තේමාව</b>:"
 
-#: readdialog.py:137
+#: readdialog.py:138
 msgid "<b>Details</b>:"
-msgstr ""
-
-#. TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
-#. TRANS: automatically)
-#: readsidebar.py:86
-#, python-format
-#, fuzzy
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr "%(user)s විසින් %(time)s ට පිටු සලකුණ එකතු කරන ලදි"
-
-#: readsidebar.py:128 readsidebar.py:169
-msgid "Add notes for bookmark: "
-msgstr ""
-
-#: readsidebar.py:165
-#, python-format
-msgid "%s's bookmark"
-msgstr ""
-
-#: readsidebar.py:166
-#, python-format
-msgid "Bookmark for page %d"
-msgstr ""
-
-#: readtoolbar.py:65
-msgid "Previous"
-msgstr "පෙර"
-
-#: readtoolbar.py:72
-msgid "Next"
-msgstr "ඊලඟ"
-
-#: readtoolbar.py:155
-msgid "Find first"
-msgstr "පලමුව සොයන්න"
-
-#: readtoolbar.py:161
-msgid "Find previous"
-msgstr "පෙර එක සොයන්න"
-
-#: readtoolbar.py:163
-msgid "Find next"
-msgstr "ඊලඟ එක සොයන්න"
-
-#: readtoolbar.py:179
-msgid "Zoom out"
-msgstr "කුඩා කරන්න"
-
-#: readtoolbar.py:185
-msgid "Zoom in"
-msgstr "විශාල කරන්න"
-
-#: readtoolbar.py:191
-msgid "Zoom to width"
-msgstr "පළල තෙක් විශාලනය"
-
-#: readtoolbar.py:197
-msgid "Zoom to fit"
-msgstr "ගැලපීමට විශාලනය"
-
-#: readtoolbar.py:202
-msgid "Actual size"
-msgstr "නියම ප්‍රමාණය"
-
-#: readtoolbar.py:219
-msgid "%"
-msgstr "%"
-
-#: readtoolbar.py:232
-msgid "Fullscreen"
-msgstr "මුළු තිරයම"
-
-#: readtoolbar.py:329
-msgid "Play / Pause"
-msgstr ""
-
-#. TRANS: Translate this as Page i of m (eg: Page 4 of 334)
-#: readtopbar.py:206
-#, python-format
-msgid "Page %i of %i"
-msgstr ""
+msgstr "<b>විස්තර</b>:"
 
 #~ msgid "Edit"
 #~ msgstr "සංස්කරණය කරන්න"
