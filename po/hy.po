@@ -1,0 +1,168 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-05 11:05-0300\n"
+"PO-Revision-Date: 2011-07-19 21:03+0200\n"
+"Last-Translator: Chris <cjl@laptop.org>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Pootle 2.0.1\n"
+
+#: activity/activity.info:2
+msgid "Read"
+msgstr "Կարդալ"
+
+#: readtoolbar.py:67
+msgid "Previous"
+msgstr "Նախորդ"
+
+#: readtoolbar.py:74
+msgid "Next"
+msgstr "Հաջորդ"
+
+#: readtoolbar.py:157
+msgid "Find first"
+msgstr "Գտնել առաջինը"
+
+#: readtoolbar.py:163
+msgid "Find previous"
+msgstr "Գտնել նախորդը"
+
+#: readtoolbar.py:165
+msgid "Find next"
+msgstr "Գտնել հաջորդը"
+
+#: readtoolbar.py:181
+msgid "Zoom out"
+msgstr "Մոտեցնել"
+
+#: readtoolbar.py:187
+msgid "Zoom in"
+msgstr "Հեռվացնել"
+
+#: readtoolbar.py:193
+msgid "Zoom to width"
+msgstr "Հարմարեցնել լայնությամբ"
+
+#: readtoolbar.py:199
+msgid "Zoom to fit"
+msgstr "Հարմարեցնել չափսով"
+
+#: readtoolbar.py:204
+msgid "Actual size"
+msgstr "Սկզբնական չափս"
+
+#: readtoolbar.py:221
+msgid "%"
+msgstr "%"
+
+#: readtoolbar.py:234
+msgid "Fullscreen"
+msgstr "Էկրանի չափով"
+
+#: readtoolbar.py:324
+msgid "Play / Pause"
+msgstr "Նվագարկել / Դադար"
+
+#: readtoolbar.py:377
+msgid "pitch adjusted"
+msgstr ""
+
+#: readtoolbar.py:382
+msgid "rate adjusted"
+msgstr ""
+
+#. TRANS: This goes like Bookmark added by User 5 days ago
+#. TRANS: (the elapsed string gets translated automatically)
+#: readsidebar.py:88
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "Էջանիշը ավելացրել է %(user)s օգտագործողը %(time)s"
+
+#: readsidebar.py:131 readsidebar.py:173
+msgid "Add notes for bookmark: "
+msgstr "Ավելացնել նշումներ էջանիշի համար՝ "
+
+#: readsidebar.py:169
+#, python-format
+msgid "%s's bookmark"
+msgstr "%s - ի էջանիշ"
+
+#: readsidebar.py:170
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "Էջանիշ %d էջի համար"
+
+#: readactivity.py:239
+msgid "Highlight"
+msgstr "Գունանշել"
+
+#: readactivity.py:349
+msgid "Back"
+msgstr "Հետ"
+
+#: readactivity.py:352
+msgid "Previous page"
+msgstr "Նախորդ էջ"
+
+#: readactivity.py:355
+msgid "Previous bookmark"
+msgstr "Նախորդ էջանիշ"
+
+#: readactivity.py:365
+msgid "Forward"
+msgstr "Առաջ"
+
+#: readactivity.py:368
+msgid "Next page"
+msgstr "Հաջորդ էջ"
+
+#: readactivity.py:371
+msgid "Next bookmark"
+msgstr "Հաջորդ էջանիշ"
+
+#: readactivity.py:570
+msgid "Choose document"
+msgstr "Ընտրել փաստաթուղթը"
+
+#: readtopbar.py:141
+#, python-format
+msgid "Page %(current)i of %(total_pages)i"
+msgstr ""
+
+#: readdialog.py:51
+msgid "Cancel"
+msgstr "Չեղարկել"
+
+#: readdialog.py:57
+msgid "Ok"
+msgstr "OK"
+
+#: readdialog.py:112
+msgid "<b>Title</b>:"
+msgstr "<b>Վերնագիր</b>."
+
+#: readdialog.py:138
+msgid "<b>Details</b>:"
+msgstr "<b>Մանրամասներ</b>."
+
+#, python-format
+#~ msgid "Page %i of %i"
+#~ msgstr "%i էջը՝ %i -ից"
