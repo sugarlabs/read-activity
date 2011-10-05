@@ -138,4 +138,5 @@ class TopBar(_TopBar):
 
         #TRANS: Translate this as Page i of m (eg: Page 4 of 334)
         self._progressbar.set_text(
-                _("Page %(current)i of %(total_pages)i") % (current_page, n_pages))
+                _("Page %(current)i of %(total_pages)i") %
+                {'current': current_page, 'total_pages': n_pages})
