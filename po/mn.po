@@ -27,7 +27,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-02-22 00:32-0500\n"
-"PO-Revision-Date: 2011-09-27 12:51+0200\n"
+"PO-Revision-Date: 2011-10-11 18:51+0200\n"
 "Last-Translator: Cris Anderson <anderson861@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: mn\n"
@@ -103,7 +103,7 @@ msgstr "Тэмдэглэгээнд тайлбар хийх: "
 #: readsidebar.py:165
 #, python-format
 msgid "%s's bookmark"
-msgstr "%s-iin тэмдэглэгээ"
+msgstr "%s-ын тэмдэглэгээ"
 
 #: readsidebar.py:166
 #, python-format
