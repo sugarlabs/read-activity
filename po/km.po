@@ -14,11 +14,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-22 00:32-0500\n"
+"POT-Creation-Date: 2011-08-05 11:05-0300\n"
 "PO-Revision-Date: 2011-04-17 06:16+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: km\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -29,36 +29,122 @@ msgstr ""
 msgid "Read"
 msgstr "អាន"
 
-#: readactivity.py:242
+#: readtoolbar.py:67
+msgid "Previous"
+msgstr "ទៅ​ក្រោយ"
+
+#: readtoolbar.py:74
+msgid "Next"
+msgstr "ទៅ​មុខ"
+
+#: readtoolbar.py:157
+msgid "Find first"
+msgstr "រក​ទី​មួយនៃ"
+
+#: readtoolbar.py:163
+msgid "Find previous"
+msgstr "រកទៅ​ក្រោយ​នៃ"
+
+#: readtoolbar.py:165
+msgid "Find next"
+msgstr "រក​ទៅ​មុខ​នៃ"
+
+#: readtoolbar.py:181
+msgid "Zoom out"
+msgstr "ពង្រីក"
+
+#: readtoolbar.py:187
+msgid "Zoom in"
+msgstr "បង្រួម"
+
+#: readtoolbar.py:193
+msgid "Zoom to width"
+msgstr "ប៉ុន​ទទឹង"
+
+#: readtoolbar.py:199
+msgid "Zoom to fit"
+msgstr "អោយ​សម"
+
+#: readtoolbar.py:204
+msgid "Actual size"
+msgstr "ទំហំ​ពិត"
+
+#: readtoolbar.py:221
+msgid "%"
+msgstr "%"
+
+#: readtoolbar.py:234
+msgid "Fullscreen"
+msgstr "ពេញអេក្រង់"
+
+#: readtoolbar.py:324
+msgid "Play / Pause"
+msgstr "ចាក់/ផ្អាក"
+
+#: readtoolbar.py:377
+msgid "pitch adjusted"
+msgstr ""
+
+#: readtoolbar.py:382
+msgid "rate adjusted"
+msgstr ""
+
+#. TRANS: This goes like Bookmark added by User 5 days ago
+#. TRANS: (the elapsed string gets translated automatically)
+#: readsidebar.py:88
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr ""
+
+#: readsidebar.py:131 readsidebar.py:173
+msgid "Add notes for bookmark: "
+msgstr ""
+
+#: readsidebar.py:169
+#, python-format
+msgid "%s's bookmark"
+msgstr ""
+
+#: readsidebar.py:170
+#, python-format
+msgid "Bookmark for page %d"
+msgstr ""
+
+#: readactivity.py:239
 msgid "Highlight"
 msgstr "បន្លិច"
 
-#: readactivity.py:345
+#: readactivity.py:349
 msgid "Back"
 msgstr "ថយ​ក្រោយ"
 
-#: readactivity.py:348
+#: readactivity.py:352
 msgid "Previous page"
-msgstr ""
+msgstr "ទំព័រ​មុន"
 
-#: readactivity.py:351
+#: readactivity.py:355
 msgid "Previous bookmark"
-msgstr ""
+msgstr "កន្លែង​ចំណាំ​​មុន"
 
-#: readactivity.py:361
+#: readactivity.py:365
 msgid "Forward"
 msgstr "ថយទៅមុខ"
 
-#: readactivity.py:364
+#: readactivity.py:368
 msgid "Next page"
-msgstr ""
+msgstr "ទំព័រ​បន្ទាប់"
 
-#: readactivity.py:367
+#: readactivity.py:371
 msgid "Next bookmark"
+msgstr "កន្លែង​ចំណាំ​បន្ទាប់"
+
+#: readactivity.py:570
+msgid "Choose document"
 msgstr ""
 
-#: readactivity.py:582
-msgid "Choose document"
+#: readtopbar.py:141
+#, python-format
+msgid "Page %(current)i of %(total_pages)i"
 msgstr ""
 
 #: readdialog.py:51
@@ -67,97 +153,12 @@ msgstr "បោះបង់"
 
 #: readdialog.py:57
 msgid "Ok"
-msgstr ""
+msgstr "យល់ព្រម"
 
-#: readdialog.py:111
+#: readdialog.py:112
 msgid "<b>Title</b>:"
 msgstr ""
 
-#: readdialog.py:137
+#: readdialog.py:138
 msgid "<b>Details</b>:"
 msgstr ""
-
-#. TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
-#. TRANS: automatically)
-#: readsidebar.py:86
-#, python-format
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr ""
-
-#: readsidebar.py:128 readsidebar.py:169
-msgid "Add notes for bookmark: "
-msgstr ""
-
-#: readsidebar.py:165
-#, python-format
-msgid "%s's bookmark"
-msgstr ""
-
-#: readsidebar.py:166
-#, python-format
-msgid "Bookmark for page %d"
-msgstr ""
-
-#: readtoolbar.py:65
-msgid "Previous"
-msgstr "ទៅ​ក្រោយ"
-
-#: readtoolbar.py:72
-msgid "Next"
-msgstr "ទៅ​មុខ"
-
-#: readtoolbar.py:155
-msgid "Find first"
-msgstr "រក​ទី​មួយនៃ"
-
-#: readtoolbar.py:161
-msgid "Find previous"
-msgstr "រកទៅ​ក្រោយ​នៃ"
-
-#: readtoolbar.py:163
-msgid "Find next"
-msgstr "រក​ទៅ​មុខ​នៃ"
-
-#: readtoolbar.py:179
-msgid "Zoom out"
-msgstr "ពង្រីក"
-
-#: readtoolbar.py:185
-msgid "Zoom in"
-msgstr "បង្រួម"
-
-#: readtoolbar.py:191
-msgid "Zoom to width"
-msgstr "ប៉ុន​ទទឹង"
-
-#: readtoolbar.py:197
-msgid "Zoom to fit"
-msgstr "អោយ​សម"
-
-#: readtoolbar.py:202
-msgid "Actual size"
-msgstr "ទំហំ​ពិត"
-
-#: readtoolbar.py:219
-msgid "%"
-msgstr "%"
-
-#: readtoolbar.py:232
-msgid "Fullscreen"
-msgstr "ពេញអេក្រង់"
-
-#: readtoolbar.py:329
-msgid "Play / Pause"
-msgstr ""
-
-#. TRANS: Translate this as Page i of m (eg: Page 4 of 334)
-#: readtopbar.py:206
-#, python-format
-msgid "Page %i of %i"
-msgstr ""
-
-#~ msgid "Edit"
-#~ msgstr "កែ"
-
-#~ msgid "View"
-#~ msgstr "មើល"
