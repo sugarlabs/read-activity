@@ -16,8 +16,9 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 
-import gobject
-import gtk
+from gi.repository import GObject
+from gi.repository import Gtk
+from gi.repository import Gdk
 import widgets
 import cairo
 
@@ -60,10 +61,10 @@ class SearchThread(threading.Thread):
                 self.obj._matchfilelist.append(entry)
             f.close()
 
-        gtk.gdk.threads_enter()
+        Gdk.threads_enter()
         self.obj._finished = True
         self.obj.emit('updated')
-        gtk.gdk.threads_leave()
+        Gdk.threads_leave()
 
         return False
 
@@ -85,14 +86,14 @@ class SearchThread(threading.Thread):
         self.stopthread.set()
 
 
-class _JobPaginator(gobject.GObject):
+class _JobPaginator(GObject.GObject):
 
     __gsignals__ = {
-        'paginated': (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE, ([])),
+        'paginated': (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ([])),
     }
 
     def __init__(self, filelist):
-        gobject.GObject.__init__(self)
+        GObject.GObject.__init__(self)
 
         self._filelist = filelist
         self._filedict = {}
@@ -102,7 +103,9 @@ class _JobPaginator(gobject.GObject):
         self._count = 0
         self._pagecount = 0
 
-        self._screen = gtk.gdk.screen_get_default()
+        #TODO
+        """
+        self._screen = Gdk.Screen.get_default()
         self._old_fontoptions = self._screen.get_font_options()
         options = cairo.FontOptions()
         options.set_hint_style(cairo.HINT_STYLE_MEDIUM)
@@ -110,8 +113,9 @@ class _JobPaginator(gobject.GObject):
         options.set_subpixel_order(cairo.SUBPIXEL_ORDER_DEFAULT)
         options.set_hint_metrics(cairo.HINT_METRICS_DEFAULT)
         self._screen.set_font_options(options)
+        """
 
-        self._temp_win = gtk.Window()
+        self._temp_win = Gtk.Window()
         self._temp_view = widgets._WebView()
 
         settings = self._temp_view.get_settings()
@@ -127,8 +131,8 @@ class _JobPaginator(gobject.GObject):
         settings.props.default_monospace_font_size = 10
         settings.props.default_encoding = 'utf-8'
 
-        sw = gtk.ScrolledWindow()
-        sw.set_policy(gtk.POLICY_NEVER, gtk.POLICY_NEVER)
+        sw = Gtk.ScrolledWindow()
+        sw.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER)
         self._dpi = 96
         sw.set_size_request(_mm_to_pixel(PAGE_WIDTH, self._dpi),
                 _mm_to_pixel(PAGE_HEIGHT, self._dpi))
@@ -164,7 +168,8 @@ class _JobPaginator(gobject.GObject):
 
         if self._count + 1 >= len(self._filelist):
             self._temp_win.destroy()
-            self._screen.set_font_options(self._old_fontoptions)
+            # TODO
+            #self._screen.set_font_options(self._old_fontoptions)
             self.emit('paginated')
         else:
             self._count += 1
@@ -224,15 +229,15 @@ class _JobPaginator(gobject.GObject):
         return self._bookheight
 
 
-class _JobFind(gobject.GObject):
+class _JobFind(GObject.GObject):
     __gsignals__ = {
-        'updated': (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE, ([])),
+        'updated': (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ([])),
     }
 
     def __init__(self, document, start_page, n_pages, text,
             case_sensitive=False):
-        gobject.GObject.__init__(self)
-        gtk.gdk.threads_init()
+        GObject.GObject.__init__(self)
+        Gdk.threads_init()
 
         self._finished = False
         self._document = document

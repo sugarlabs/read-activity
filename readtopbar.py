@@ -16,13 +16,13 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import gtk
-import gobject
+from gi.repository import GObject
+from gi.repository import Gtk
 import dbus
 import logging
 
-from sugar.graphics import style
-from sugar.graphics.icon import Icon, get_icon_state
+from sugar3.graphics import style
+from sugar3.graphics.icon import Icon, get_icon_state
 
 from gettext import gettext as _
 
@@ -33,14 +33,14 @@ _UP_DEVICE_IFACE = 'org.freedesktop.UPower.Device'
 _UP_TYPE_BATTERY = 2
 
 
-class _TopBar(gtk.HBox):
+class _TopBar(Gtk.HBox):
     __gproperties__ = {
         'completion-level': (float, None, None, 0.0, 100.0, 0.0,
-                             gobject.PARAM_READWRITE),
+                             GObject.ParamFlags.WRITABLE),
     }
 
     def __init__(self):
-        gtk.HBox.__init__(self)
+        Gtk.HBox.__init__(self)
 
         self.set_border_width(int(style.DEFAULT_SPACING / 2.0))
         self.set_spacing(style.DEFAULT_SPACING * 4)
@@ -102,17 +102,16 @@ class _TopBar(gtk.HBox):
             return 0
 
     def _setup(self):
-        self._progressbar = gtk.ProgressBar()
-        self._progressbar.props.discrete_blocks = 10
+        self._progressbar = Gtk.ProgressBar()
         self._progressbar.set_fraction(self._completion_level / 100.0)
-        self.pack_start(self._progressbar, expand=True, fill=True)
+        self.pack_start(self._progressbar, True, True, 0)
         if self._battery_props is None:
             return
 
         level = self._get_battery_level()
         icon_name = get_icon_state(_ICON_NAME, level, step=-5)
         self._icon = Icon(icon_name=icon_name)
-        self.pack_start(self._icon, expand=False, fill=False)
+        self.pack_start(self._icon, False, False, 0)
 
     def __battery_properties_changed_cb(self):
         level = self._get_battery_level()

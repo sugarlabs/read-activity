@@ -1,5 +1,6 @@
 from lxml import etree
-import gtk
+from gi.repository import Gtk
+import logging
 
 
 class NavPoint(object):
@@ -25,7 +26,7 @@ class NavMap(object):
         self._opffile = opffile
         self._tree = etree.parse(ncxfile)
         self._root = self._tree.getroot()
-        self._gtktreestore = gtk.TreeStore(str, str)
+        self._gtktreestore = Gtk.TreeStore(str, str)
         self._flattoc = []
 
         self._populate_flattoc()
@@ -62,8 +63,11 @@ class NavMap(object):
 
     def _getcontent(self, navpoint):
         text = navpoint.find(
-                './{http://www.daisy.org/z3986/2005/ncx/}content/')
-        return self._basepath + text.get('src')
+                './{http://www.daisy.org/z3986/2005/ncx/}content')
+        if text  is not None:
+            return self._basepath + text.get('src')
+        else:
+            return ""
 
     def _process_navpoint(self, navpoint, parent=None):
         title = self._gettitle(navpoint)

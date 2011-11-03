@@ -18,12 +18,14 @@
 import logging
 import time
 
-import gtk
+from gi.repository import Gtk
+from gi.repository import Gdk
 
-from sugar.graphics.icon import Icon
-from sugar.graphics.xocolor import XoColor
-from sugar import profile
-from sugar.util import timestamp_to_elapsed_string
+from sugar3.graphics.icon import Icon
+from sugar3.graphics.xocolor import XoColor
+from sugar3 import profile
+from sugar3.util import timestamp_to_elapsed_string
+from sugar3.graphics import style
 
 from readbookmark import Bookmark
 from readdb import BookmarkManager
@@ -38,17 +40,16 @@ _logger = logging.getLogger('read-activity')
 # (required when sharing)
 
 
-class Sidebar(gtk.EventBox):
+class Sidebar(Gtk.EventBox):
 
     def __init__(self):
-        gtk.EventBox.__init__(self)
+        Gtk.EventBox.__init__(self)
         self.set_size_request(20, -1)
         # Take care of the background first
-        white = gtk.gdk.color_parse("white")
-        self.modify_bg(gtk.STATE_NORMAL, white)
+        self.modify_bg(Gtk.StateType.NORMAL, style.COLOR_WHITE.get_gdk_color())
 
-        self._box = gtk.VButtonBox()
-        self._box.set_layout(gtk.BUTTONBOX_CENTER)
+        self._box = Gtk.VButtonBox()
+        self._box.set_layout(Gtk.ButtonBoxStyle.CENTER)
         self.add(self._box)
 
         self._box.show()
@@ -57,8 +58,7 @@ class Sidebar(gtk.EventBox):
         self._bookmark_icon = None
         self._bookmark_manager = None
         self._is_showing_local_bookmark = False
-
-        self.add_events(gtk.gdk.BUTTON_PRESS_MASK)
+        self.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
 
     def _add_bookmark_icon(self, bookmark):
         xocolor = XoColor(bookmark.color)
@@ -73,7 +73,7 @@ class Sidebar(gtk.EventBox):
         self.__event_cb_id = \
             self.connect('event', self.__event_cb, bookmark)
 
-        self._box.pack_start(self._bookmark_icon, expand=False, fill=False)
+        self._box.pack_start(self._bookmark_icon, False, False, 0)
         self._bookmark_icon.show_all()
 
         if bookmark.is_local():
@@ -89,30 +89,30 @@ class Sidebar(gtk.EventBox):
                 % {'user': bookmark.nick,
                 'time': timestamp_to_elapsed_string(bookmark.timestamp)})
 
-        vbox = gtk.VBox()
+        vbox = Gtk.VBox()
 
-        l = gtk.Label('<big>%s</big>' % tooltip_header)
+        l = Gtk.Label('<big>%s</big>' % tooltip_header)
         l.set_use_markup(True)
         l.set_width_chars(40)
         l.set_line_wrap(True)
-        vbox.pack_start(l, expand=False, fill=False)
+        vbox.pack_start(l, False, False, 0)
         l.show()
 
-        l = gtk.Label('%s' % tooltip_body)
+        l = Gtk.Label('%s' % tooltip_body)
         l.set_use_markup(True)
         l.set_alignment(0, 0)
         l.set_padding(2, 6)
         l.set_width_chars(40)
         l.set_line_wrap(True)
-        l.set_justify(gtk.JUSTIFY_FILL)
-        vbox.pack_start(l, expand=True, fill=True)
+        l.set_justify(Gtk.JUSTIFY_FILL)
+        vbox.pack_start(l, True, True, 0)
         l.show()
 
-        l = gtk.Label('<small><i>%s</i></small>' % tooltip_footer)
+        l = Gtk.Label('<small><i>%s</i></small>' % tooltip_footer)
         l.set_use_markup(True)
         l.set_width_chars(40)
         l.set_line_wrap(True)
-        vbox.pack_start(l, expand=False, fill=False)
+        vbox.pack_start(l, False, False, 0)
         l.show()
 
         tip.set_custom(vbox)
@@ -120,7 +120,7 @@ class Sidebar(gtk.EventBox):
         return True
 
     def __event_cb(self, widget, event, bookmark):
-        if event.type == gtk.gdk.BUTTON_PRESS and \
+        if event.type == Gdk.EventType.BUTTON_PRESS and \
                     self._bookmark_icon is not None:
 
             bookmark_title = bookmark.get_note_title()

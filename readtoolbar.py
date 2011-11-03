@@ -17,18 +17,19 @@
 from gettext import gettext as _
 import logging
 
-import gobject
-import gtk
+from gi.repository import GObject
+from gi.repository import Gtk
+from gi.repository import Gdk
 import os
 import simplejson
 
-from sugar.graphics.combobox import ComboBox
-from sugar.graphics.toolbutton import ToolButton
-from sugar.graphics.toggletoolbutton import ToggleToolButton
-from sugar.graphics.toolcombobox import ToolComboBox
-from sugar.graphics.menuitem import MenuItem
-from sugar.graphics import iconentry
-from sugar.activity import activity
+from sugar3.graphics.combobox import ComboBox
+from sugar3.graphics.toolbutton import ToolButton
+from sugar3.graphics.toggletoolbutton import ToggleToolButton
+from sugar3.graphics.toolcombobox import ToolComboBox
+from sugar3.graphics.menuitem import MenuItem
+from sugar3.graphics import iconentry
+from sugar3.activity import activity
 
 import speech
 
@@ -44,7 +45,7 @@ class EditToolbar(activity.EditToolbar):
 
         self._find_job = None
 
-        search_item = gtk.ToolItem()
+        search_item = Gtk.ToolItem()
 
         self._search_entry = iconentry.IconEntry()
         self._search_entry.set_icon_from_name(iconentry.ICON_ENTRY_PRIMARY,
@@ -54,7 +55,7 @@ class EditToolbar(activity.EditToolbar):
         self._search_entry.connect('changed', self._search_entry_changed_cb)
         self._search_entry_changed = True
 
-        width = int(gtk.gdk.screen_width() / 3)
+        width = int(Gdk.Screen.width() / 3)
         self._search_entry.set_size_request(width, -1)
 
         search_item.add(self._search_entry)
@@ -123,7 +124,7 @@ class EditToolbar(activity.EditToolbar):
         self._search_entry_changed = True
         self._update_find_buttons()
 
-    #    gobject.timeout_add(500, self._search_entry_timeout_cb)
+    #    GObject.timeout_add(500, self._search_entry_timeout_cb)
     #
     #def _search_entry_timeout_cb(self):
     #    self._clear_find_job()
@@ -165,15 +166,16 @@ class EditToolbar(activity.EditToolbar):
             self._next.set_tooltip(_('Find next'))
 
 
-class ViewToolbar(gtk.Toolbar):
+class ViewToolbar(Gtk.Toolbar):
     __gtype_name__ = 'ViewToolbar'
 
     __gsignals__ = {
-        'go-fullscreen': (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE, ([])),
+        'go-fullscreen': (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE,
+                ([])),
     }
 
     def __init__(self):
-        gtk.Toolbar.__init__(self)
+        Gtk.Toolbar.__init__(self)
 
         self._view = None
 
@@ -206,11 +208,11 @@ class ViewToolbar(gtk.Toolbar):
         palette.menu.append(menu_item)
         menu_item.show()
 
-        tool_item = gtk.ToolItem()
+        tool_item = Gtk.ToolItem()
         self.insert(tool_item, -1)
         tool_item.show()
 
-        self._zoom_spin = gtk.SpinButton()
+        self._zoom_spin = Gtk.SpinButton()
         self._zoom_spin.set_range(5.409, 400)
         self._zoom_spin.set_increments(1, 10)
         self._zoom_spin_notify_value_handler = self._zoom_spin.connect(
@@ -218,14 +220,14 @@ class ViewToolbar(gtk.Toolbar):
         tool_item.add(self._zoom_spin)
         self._zoom_spin.show()
 
-        zoom_perc_label = gtk.Label(_("%"))
+        zoom_perc_label = Gtk.Label(_("%"))
         zoom_perc_label.show()
-        tool_item_zoom_perc_label = gtk.ToolItem()
+        tool_item_zoom_perc_label = Gtk.ToolItem()
         tool_item_zoom_perc_label.add(zoom_perc_label)
         self.insert(tool_item_zoom_perc_label, -1)
         tool_item_zoom_perc_label.show()
 
-        spacer = gtk.SeparatorToolItem()
+        spacer = Gtk.SeparatorToolItem()
         spacer.props.draw = False
         self.insert(spacer, -1)
         spacer.show()
@@ -297,11 +299,11 @@ class ViewToolbar(gtk.Toolbar):
         self.emit('go-fullscreen')
 
 
-class SpeechToolbar(gtk.Toolbar):
+class SpeechToolbar(Gtk.Toolbar):
 
     def __init__(self, activity):
-        gtk.Toolbar.__init__(self)
-        voicebar = gtk.Toolbar()
+        Gtk.Toolbar.__init__(self)
+        voicebar = Gtk.Toolbar()
         self._activity = activity
         if not speech.supported:
             return
@@ -333,25 +335,25 @@ class SpeechToolbar(gtk.Toolbar):
         self.insert(combotool, -1)
         combotool.show()
 
-        self.pitchadj = gtk.Adjustment(0, -100, 100, 1, 10, 0)
-        pitchbar = gtk.HScale(self.pitchadj)
+        self.pitchadj = Gtk.Adjustment(0, -100, 100, 1, 10, 0)
+        pitchbar = Gtk.HScale()
+        pitchbar.set_adjustment(self.pitchadj)
         pitchbar.set_draw_value(False)
-        pitchbar.set_update_policy(gtk.UPDATE_DISCONTINUOUS)
         pitchbar.set_size_request(150, 15)
         self.pitchadj.set_value(speech.pitch)
-        pitchtool = gtk.ToolItem()
+        pitchtool = Gtk.ToolItem()
         pitchtool.add(pitchbar)
         pitchtool.show()
         self.insert(pitchtool, -1)
         pitchbar.show()
 
-        self.rateadj = gtk.Adjustment(0, -100, 100, 1, 10, 0)
-        ratebar = gtk.HScale(self.rateadj)
+        self.rateadj = Gtk.Adjustment(0, -100, 100, 1, 10, 0)
+        ratebar = Gtk.HScale()
+        ratebar.set_adjustment(self.rateadj)
         ratebar.set_draw_value(False)
-        ratebar.set_update_policy(gtk.UPDATE_DISCONTINUOUS)
         ratebar.set_size_request(150, 15)
         self.rateadj.set_value(speech.rate)
-        ratetool = gtk.ToolItem()
+        ratetool = Gtk.ToolItem()
         ratetool.add(ratebar)
         ratetool.show()
         self.insert(ratetool, -1)

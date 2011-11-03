@@ -1,44 +1,45 @@
 import os
 import zipfile
 import logging
-import gtk
-import pango
-import gobject
+from gi.repository import Gtk
+from gi.repository import Pango
+from gi.repository import GObject
 import threading
 
-from sugar import mime
-from sugar.graphics import style
+from sugar3 import mime
+from sugar3.graphics import style
 
 import speech
 
 PAGE_SIZE = 38
 
 
-class TextViewer(gobject.GObject):
+class TextViewer(GObject.GObject):
 
     __gsignals__ = {
-        'zoom-changed': (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE,
+        'zoom-changed': (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE,
                 ([int])),
-        'page-changed': (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE,
+        'page-changed': (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE,
                 ([int, int])),
-        'selection-changed': (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE,
+        'selection-changed': (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE,
                               ([])),
     }
 
     def setup(self, activity):
         self._activity = activity
-        activity._scrolled = gtk.ScrolledWindow()
-        activity._scrolled.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
-        activity._scrolled.props.shadow_type = gtk.SHADOW_NONE
+        activity._scrolled = Gtk.ScrolledWindow()
+        activity._scrolled.set_policy(Gtk.PolicyType.NEVER,
+                Gtk.PolicyType.AUTOMATIC)
+        activity._scrolled.props.shadow_type = Gtk.ShadowType.NONE
 
         self._scrolled = activity._scrolled
 
-        self.textview = gtk.TextView()
+        self.textview = Gtk.TextView()
         self.textview.set_editable(False)
         self.textview.set_cursor_visible(False)
         self.textview.set_left_margin(50)
         self.textview.set_right_margin(50)
-        self.textview.set_wrap_mode(gtk.WRAP_WORD)
+        self.textview.set_wrap_mode(Gtk.WrapMode.WORD)
         self.textview.connect('button-release-event', \
                 self._view_buttonrelease_event_cb)
         self.connect('selection-changed',
@@ -47,10 +48,10 @@ class TextViewer(gobject.GObject):
         activity._scrolled.add(self.textview)
         self.textview.show()
         activity._scrolled.show()
-        activity._hbox.pack_start(activity._scrolled, expand=True, fill=True)
+        activity._hbox.pack_start(activity._scrolled, True, True, 0)
 
         self._font_size = style.zoom(10)
-        self.font_desc = pango.FontDescription("sans %d" % self._font_size)
+        self.font_desc = Pango.FontDescription("sans %d" % self._font_size)
         self.textview.modify_font(self.font_desc)
         self._zoom = 100
         self.font_zoom_relation = self._zoom / self._font_size
@@ -65,9 +66,9 @@ class TextViewer(gobject.GObject):
         self.current_word = 0
         self.word_tuples = []
         self.spoken_word_tag = self.textview.get_buffer().create_tag()
-        self.spoken_word_tag.set_property('weight', pango.WEIGHT_BOLD)
+        self.spoken_word_tag.set_property('weight', Pango.Weight.BOLD)
         self.normal_tag = self.textview.get_buffer().create_tag()
-        self.normal_tag.set_property('weight',  pango.WEIGHT_NORMAL)
+        self.normal_tag.set_property('weight',  Pango.Weight.NORMAL)
 
     def load_document(self, file_path):
 
@@ -219,12 +220,14 @@ class TextViewer(gobject.GObject):
     def scroll(self, scrolltype, horizontal):
         v_adjustment = self._scrolled.get_vadjustment()
         v_value = v_adjustment.value
-        if scrolltype in (gtk.SCROLL_PAGE_BACKWARD, gtk.SCROLL_PAGE_FORWARD):
+        if scrolltype in (Gtk.ScrollType.PAGE_BACKWARD,
+                Gtk.ScrollType.PAGE_FORWARD):
             step = v_adjustment.page_increment
         else:
             step = v_adjustment.step_increment
 
-        if scrolltype in (gtk.SCROLL_PAGE_BACKWARD, gtk.SCROLL_STEP_BACKWARD):
+        if scrolltype in (Gtk.ScrollType.PAGE_BACKWARD,
+                Gtk.ScrollType.STEP_BACKWARD):
             if v_value <= v_adjustment.lower:
                 self.previous_page()
                 v_adjustment.value = v_adjustment.upper - \
@@ -235,7 +238,8 @@ class TextViewer(gobject.GObject):
                 if new_value < v_adjustment.lower:
                     new_value = v_adjustment.lower
                 v_adjustment.value = new_value
-        elif scrolltype in (gtk.SCROLL_PAGE_FORWARD, gtk.SCROLL_STEP_FORWARD):
+        elif scrolltype in (Gtk.ScrollType.PAGE_FORWARD,
+                Gtk.ScrollType.STEP_FORWARD):
             if v_value >= v_adjustment.upper - v_adjustment.page_size:
                 self.next_page()
                 return
@@ -244,9 +248,9 @@ class TextViewer(gobject.GObject):
                 if new_value > v_adjustment.upper - v_adjustment.page_size:
                     new_value = v_adjustment.upper - v_adjustment.page_size
                 v_adjustment.value = new_value
-        elif scrolltype == gtk.SCROLL_START:
+        elif scrolltype == Gtk.ScrollType.START:
             self.set_current_page(0)
-        elif scrolltype == gtk.SCROLL_END:
+        elif scrolltype == Gtk.ScrollType.END:
             self.set_current_page(self._pagecount - 1)
 
     def previous_page(self):
@@ -278,7 +282,7 @@ class TextViewer(gobject.GObject):
         pass
 
     def copy(self):
-        self.textview.get_buffer().copy_clipboard(gtk.Clipboard())
+        self.textview.get_buffer().copy_clipboard(Gtk.Clipboard())
 
     def update_view_size(self, _scrolled):
         pass
@@ -315,7 +319,7 @@ class TextViewer(gobject.GObject):
     def _show_found_text(self, founded_tuple):
         textbuffer = self.textview.get_buffer()
         tag = textbuffer.create_tag()
-        tag.set_property('weight', pango.WEIGHT_BOLD)
+        tag.set_property('weight', Pango.Weight.BOLD)
         tag.set_property('foreground', 'white')
         tag.set_property('background', 'black')
         iterStart = textbuffer.get_iter_at_offset(founded_tuple[1])
@@ -368,16 +372,16 @@ class TextViewer(gobject.GObject):
         return False
 
 
-class _JobFind(gobject.GObject):
+class _JobFind(GObject.GObject):
 
     __gsignals__ = {
-        'updated': (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE, ([])),
+        'updated': (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ([])),
     }
 
     def __init__(self, text_file, start_page, n_pages, text, \
                 case_sensitive=False):
-        gobject.GObject.__init__(self)
-        gtk.gdk.threads_init()
+        GObject.GObject.__init__(self)
+        Gtk.gdk.threads_init()
 
         self._finished = False
         self._text_file = text_file
@@ -467,10 +471,10 @@ class _SearchThread(threading.Thread):
                     self._found_records[self._current_found_item]
             self._page = self.current_found_tuple[0]
 
-        gtk.gdk.threads_enter()
+        Gtk.gdk.threads_enter()
         self.obj._finished = True
         self.obj.emit('updated')
-        gtk.gdk.threads_leave()
+        Gtk.gdk.threads_leave()
 
         return False
 

@@ -25,25 +25,25 @@ import re
 import md5
 
 import dbus
-import gobject
-import gtk
-import pango
+from gi.repository import GObject
+from gi.repository import Gtk
+from gi.repository import Gdk
 import telepathy
 
-from sugar.activity import activity
-from sugar.graphics.toolbutton import ToolButton
-from sugar.graphics.toolbarbox import ToolbarBox
-from sugar.graphics.toolbarbox import ToolbarButton
-from sugar.graphics.toolcombobox import ToolComboBox
-from sugar.graphics.toggletoolbutton import ToggleToolButton
-from sugar.graphics.menuitem import MenuItem
-from sugar.activity.widgets import ActivityToolbarButton
-from sugar.activity.widgets import StopButton
-from sugar import network
-from sugar import mime
+from sugar3.activity import activity
+from sugar3.graphics.toolbutton import ToolButton
+from sugar3.graphics.toolbarbox import ToolbarBox
+from sugar3.graphics.toolbarbox import ToolbarButton
+from sugar3.graphics.toolcombobox import ToolComboBox
+from sugar3.graphics.toggletoolbutton import ToggleToolButton
+from sugar3.graphics.menuitem import MenuItem
+from sugar3.activity.widgets import ActivityToolbarButton
+from sugar3.activity.widgets import StopButton
+from sugar3 import network
+from sugar3 import mime
 
-from sugar.datastore import datastore
-from sugar.graphics.objectchooser import ObjectChooser
+from sugar3.datastore import datastore
+from sugar3.graphics.objectchooser import ObjectChooser
 
 from readtoolbar import EditToolbar
 from readtoolbar import ViewToolbar
@@ -66,7 +66,7 @@ _logger = logging.getLogger('read-activity')
 
 
 def _get_screen_dpi():
-    xft_dpi = gtk.settings_get_default().get_property('gtk-xft-dpi')
+    xft_dpi = Gtk.Settings.get_default().get_property('gtk-xft-dpi')
     _logger.debug('Setting dpi to %f', float(xft_dpi / 1024))
     return float(xft_dpi / 1024)
 
@@ -190,26 +190,26 @@ class ReadActivity(activity.Activity):
         toolbar_box.toolbar.insert(self._forward_button, -1)
         self._forward_button.show()
 
-        num_page_item = gtk.ToolItem()
+        num_page_item = Gtk.ToolItem()
         self._num_page_entry = self._create_search()
         num_page_item.add(self._num_page_entry)
         self._num_page_entry.show()
         toolbar_box.toolbar.insert(num_page_item, -1)
         num_page_item.show()
 
-        total_page_item = gtk.ToolItem()
-        self._total_page_label = self._create_total_page_label()
+        total_page_item = Gtk.ToolItem()
+        self._total_page_label = Gtk.Label()
         total_page_item.add(self._total_page_label)
         self._total_page_label.show()
         toolbar_box.toolbar.insert(total_page_item, -1)
         total_page_item.show()
 
-        spacer = gtk.SeparatorToolItem()
+        spacer = Gtk.SeparatorToolItem()
         spacer.props.draw = False
         toolbar_box.toolbar.insert(spacer, -1)
         spacer.show()
 
-        navigator_toolbar = gtk.Toolbar()
+        navigator_toolbar = Gtk.Toolbar()
         self._navigator = self._create_navigator()
         combotool = ToolComboBox(self._navigator)
         navigator_toolbar.insert(combotool, -1)
@@ -220,12 +220,12 @@ class ReadActivity(activity.Activity):
         navigator_toolbar.show()
         toolbar_box.toolbar.insert(self._navigator_toolbar_button, -1)
 
-        spacer = gtk.SeparatorToolItem()
+        spacer = Gtk.SeparatorToolItem()
         spacer.props.draw = False
         toolbar_box.toolbar.insert(spacer, -1)
         spacer.show()
 
-        bookmark_item = gtk.ToolItem()
+        bookmark_item = Gtk.ToolItem()
         self._bookmarker = self._create_bookmarker()
         self._bookmarker_toggle_handler_id = self._bookmarker.connect( \
                 'toggled', self.__bookmarker_toggled_cb)
@@ -234,7 +234,7 @@ class ReadActivity(activity.Activity):
         toolbar_box.toolbar.insert(bookmark_item, -1)
         bookmark_item.show()
 
-        self._highlight_item = gtk.ToolItem()
+        self._highlight_item = Gtk.ToolItem()
         self._highlight = ToggleToolButton('format-text-underline')
         self._highlight.set_tooltip(_('Highlight'))
         self._highlight.props.sensitive = False
@@ -249,7 +249,7 @@ class ReadActivity(activity.Activity):
                     icon_name='speak')
         toolbar_box.toolbar.insert(self.speech_toolbar_button, -1)
 
-        separator = gtk.SeparatorToolItem()
+        separator = Gtk.SeparatorToolItem()
         separator.props.draw = False
         separator.set_expand(True)
         toolbar_box.toolbar.insert(separator, -1)
@@ -262,17 +262,17 @@ class ReadActivity(activity.Activity):
         self.set_toolbar_box(toolbar_box)
         toolbar_box.show()
 
-        self._vbox = gtk.VBox()
+        self._vbox = Gtk.VBox()
         self._vbox.show()
 
         self._topbar = TopBar()
-        self._vbox.pack_start(self._topbar, expand=False, fill=False)
+        self._vbox.pack_start(self._topbar, False, False, 0)
 
-        self._hbox = gtk.HBox()
+        self._hbox = Gtk.HBox()
         self._hbox.show()
-        self._hbox.pack_start(self._sidebar, expand=False, fill=False)
+        self._hbox.pack_start(self._sidebar, False, False, 0)
 
-        self._vbox.pack_start(self._hbox, expand=True, fill=True)
+        self._vbox.pack_start(self._hbox, True, True, 0)
         self.set_canvas(self._vbox)
 
         # Set up for idle suspend
@@ -291,6 +291,7 @@ class ReadActivity(activity.Activity):
         self._close_requested = False
 
         fname = os.path.join('/etc', 'inhibit-ebook-sleep')
+
         if not os.path.exists(fname):
             try:
                 bus = dbus.SystemBus()
@@ -377,7 +378,7 @@ class ReadActivity(activity.Activity):
         return forward
 
     def _create_search(self):
-        num_page_entry = gtk.Entry()
+        num_page_entry = Gtk.Entry()
         num_page_entry.set_text('0')
         num_page_entry.set_alignment(1)
         num_page_entry.connect('insert-text',
@@ -387,21 +388,15 @@ class ReadActivity(activity.Activity):
         num_page_entry.set_width_chars(4)
         return num_page_entry
 
-    def _create_total_page_label(self):
-        total_page_label = gtk.Label()
-
-        label_attributes = pango.AttrList()
-        label_attributes.insert(pango.AttrSize(14000, 0, -1))
-        label_attributes.insert(pango.AttrForeground(65535, 65535,
-                                                     65535, 0, -1))
-        total_page_label.set_attributes(label_attributes)
-
-        total_page_label.set_text(' / 0')
-        return total_page_label
+    def _set_total_page_label(self, value):
+        self._total_page_label.set_use_markup(True)
+        self._total_page_label.set_markup(
+                '<span font_desc="14" foreground="#ffffff"> / %s</span>' %
+                value)
 
     def _create_navigator(self):
-        navigator = gtk.ComboBox()
-        cell = gtk.CellRendererText()
+        navigator = Gtk.ComboBox()
+        cell = Gtk.CellRendererText()
         navigator.pack_start(cell, True)
         navigator.add_attribute(cell, 'text', 0)
         navigator.props.visible = False
@@ -427,10 +422,10 @@ class ReadActivity(activity.Activity):
         entry.props.text = str(page + 1)
 
     def __go_back_cb(self, button):
-        self._view.scroll(gtk.SCROLL_PAGE_BACKWARD, False)
+        self._view.scroll(Gtk.ScrollType.PAGE_BACKWARD, False)
 
     def __go_forward_cb(self, button):
-        self._view.scroll(gtk.SCROLL_PAGE_FORWARD, False)
+        self._view.scroll(Gtk.ScrollType.PAGE_FORWARD, False)
 
     def __go_back_page_cb(self, button):
         self._view.previous_page()
@@ -511,8 +506,7 @@ class ReadActivity(activity.Activity):
             current_page < self._view.get_pagecount() - 1
 
         self._num_page_entry.props.text = str(current_page + 1)
-        self._total_page_label.props.label = \
-            ' / ' + str(self._view.get_pagecount())
+        self._set_total_page_label(self._view.get_pagecount())
 
     def _update_toc(self):
         if self._view.update_toc(self):
@@ -567,13 +561,13 @@ class ReadActivity(activity.Activity):
         """
         if not self._want_document:
             return
-        chooser = ObjectChooser(_('Choose document'), self,
-                                gtk.DIALOG_MODAL |
-                                gtk.DIALOG_DESTROY_WITH_PARENT,
+        chooser = ObjectChooser(_('Choose document'), None,
+                                Gtk.DialogFlags.MODAL |
+                                Gtk.DialogFlags.DESTROY_WITH_PARENT,
                                 what_filter=mime.GENERIC_TYPE_TEXT)
         try:
             result = chooser.run()
-            if result == gtk.RESPONSE_ACCEPT:
+            if result == Gtk.ResponseType.ACCEPT:
                 logging.debug('ObjectChooser: %r' %
                               chooser.get_selected_object())
                 jobject = chooser.get_selected_object()
@@ -587,8 +581,8 @@ class ReadActivity(activity.Activity):
         if self.props.active:
             # Now active, start initial suspend timeout
             if self._idle_timer > 0:
-                gobject.source_remove(self._idle_timer)
-            self._idle_timer = gobject.timeout_add_seconds(15,
+                GObject.source_remove(self._idle_timer)
+            self._idle_timer = GObject.timeout_add_seconds(15,
                     self._suspend_cb)
             self._sleep_inhibit = False
         else:
@@ -607,8 +601,8 @@ class ReadActivity(activity.Activity):
     def _user_action_cb(self, widget):
         """Set a timer for going back to ebook mode idle sleep."""
         if self._idle_timer > 0:
-            gobject.source_remove(self._idle_timer)
-        self._idle_timer = gobject.timeout_add_seconds(5, self._suspend_cb)
+            GObject.source_remove(self._idle_timer)
+        self._idle_timer = GObject.timeout_add_seconds(5, self._suspend_cb)
 
     def _suspend_cb(self):
         """Go into ebook mode idle sleep."""
@@ -629,7 +623,7 @@ class ReadActivity(activity.Activity):
         self._load_document('file://' + self._tempfile)
 
         # FIXME: This should obviously be fixed properly
-        gobject.timeout_add_seconds(1,
+        GObject.timeout_add_seconds(1,
                 self.__view_toolbar_needs_update_size_cb, None)
 
     def write_file(self, file_path):
@@ -715,7 +709,7 @@ class ReadActivity(activity.Activity):
         self._want_document = True
         self._download_content_length = 0
         self._download_content_type = None
-        gobject.idle_add(self._get_document)
+        GObject.idle_add(self._get_document)
 
     def _download_document(self, tube_id, path):
         # FIXME: should ideally have the CM listen on a Unix socket
@@ -767,7 +761,7 @@ class ReadActivity(activity.Activity):
 
         # Avoid trying to download the document multiple times at once
         self._want_document = False
-        gobject.idle_add(self._download_document, tube_id, path)
+        GObject.idle_add(self._download_document, tube_id, path)
         return False
 
     def _joined_cb(self, also_self):
@@ -776,7 +770,7 @@ class ReadActivity(activity.Activity):
         Get the shared document from another participant.
         """
         self.watch_for_tubes()
-        gobject.idle_add(self._get_document)
+        GObject.idle_add(self._get_document)
 
     def _load_document(self, filepath):
         """Load the specified document and set up the UI.
@@ -876,7 +870,7 @@ class ReadActivity(activity.Activity):
             self.unused_download_tubes.add(tube_id)
             # if no download is in progress, let's fetch the document
             if self._want_document:
-                gobject.idle_add(self._get_document)
+                GObject.idle_add(self._get_document)
 
     def _list_tubes_reply_cb(self, tubes):
         """Callback when new tubes are available."""
@@ -933,8 +927,8 @@ class ReadActivity(activity.Activity):
         self._view.copy()
 
     def _key_press_event_cb(self, widget, event):
-        keyname = gtk.gdk.keyval_name(event.keyval)
-        if keyname == 'c' and event.state & gtk.gdk.CONTROL_MASK:
+        keyname = Gdk.keyval_name(event.keyval)
+        if keyname == 'c' and event.state & Gdk.CONTROL_MASK:
             self._view.copy()
             return True
         elif keyname == 'KP_Home':
@@ -945,34 +939,34 @@ class ReadActivity(activity.Activity):
             self._view_toolbar.zoom_out()
             return True
         elif keyname == 'Home':
-            self._view.scroll(gtk.SCROLL_START, False)
+            self._view.scroll(Gtk.ScrollType.START, False)
             return True
         elif keyname == 'End':
-            self._view.scroll(gtk.SCROLL_END, False)
+            self._view.scroll(Gtk.ScrollType.END, False)
             return True
         elif keyname == 'Page_Up' or keyname == 'KP_Page_Up':
-            self._view.scroll(gtk.SCROLL_PAGE_BACKWARD, False)
+            self._view.scroll(Gtk.ScrollType.PAGE_BACKWARD, False)
             return True
         elif keyname == 'Page_Down' or keyname == 'KP_Page_Down':
-            self._view.scroll(gtk.SCROLL_PAGE_FORWARD, False)
+            self._view.scroll(Gtk.ScrollType.PAGE_FORWARD, False)
             return True
         elif keyname == 'Up' or keyname == 'KP_Up':
-            self._view.scroll(gtk.SCROLL_STEP_BACKWARD, False)
+            self._view.scroll(Gtk.ScrollType.STEP_BACKWARD, False)
             return True
         elif keyname == 'Down' or keyname == 'KP_Down':
-            self._view.scroll(gtk.SCROLL_STEP_FORWARD, False)
+            self._view.scroll(Gtk.ScrollType.STEP_FORWARD, False)
             return True
         elif keyname == 'Left' or keyname == 'KP_Left':
-            self._view.scroll(gtk.SCROLL_STEP_BACKWARD, True)
+            self._view.scroll(Gtk.ScrollType.STEP_BACKWARD, True)
             return True
         elif keyname == 'Right' or keyname == 'KP_Right':
-            self._view.scroll(gtk.SCROLL_STEP_FORWARD, True)
+            self._view.scroll(Gtk.ScrollType.STEP_FORWARD, True)
             return True
         else:
             return False
 
     def _key_release_event_cb(self, widget, event):
-        #keyname = gtk.gdk.keyval_name(event.keyval)
+        #keyname = Gdk.keyval_name(event.keyval)
         #_logger.debug("Keyname Release: %s, time: %s", keyname, event.time)
         return False
 
