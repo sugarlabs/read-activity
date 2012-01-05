@@ -1,0 +1,185 @@
+# Irma <sankaypillo@gmail.com>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-05 11:05-0300\n"
+"PO-Revision-Date: 2011-11-19 17:32-0500\n"
+"Last-Translator: Irma <sankaypillo@gmail.com>\n"
+"Language-Team: Voluntarios Quechua Sugar Camp\n"
+"Language: quz\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Virtaal 0.7.0\n"
+
+#  "Leer"
+#: activity/activity.info:2
+msgid "Read"
+msgstr "Ñawichay"
+
+#  "Anterior"
+#: readtoolbar.py:67
+msgid "Previous"
+msgstr "Ñawpaq"
+
+#  "Siguiente"
+#: readtoolbar.py:74
+msgid "Next"
+msgstr "Hamuq"
+
+#  "Buscar primero"
+#: readtoolbar.py:157
+msgid "Find first"
+msgstr "Qallariqta machkay"
+
+#  "Buscar anterior"
+#: readtoolbar.py:163
+msgid "Find previous"
+msgstr "Ñawpaqta machkay"
+
+#  "Buscar siguiente"
+#: readtoolbar.py:165
+msgid "Find next"
+msgstr "Hamuqta machkay"
+
+#  "Alejarse"
+#: readtoolbar.py:181
+msgid "Zoom out"
+msgstr "Huch'uyachiy"
+
+#  "Acercarse"
+#: readtoolbar.py:187
+msgid "Zoom in"
+msgstr "Hatunyachiy"
+
+#  "Ajustar al ancho"
+#: readtoolbar.py:193
+msgid "Zoom to width"
+msgstr "Kinrayninman mat'iy"
+
+#  "Ajustar a la pantalla"
+#: readtoolbar.py:199
+msgid "Zoom to fit"
+msgstr "Pantallaman mat'iy"
+
+#  "Tamaño real"
+#: readtoolbar.py:204
+msgid "Actual size"
+msgstr "Kikin sayan"
+
+#  "%"
+#: readtoolbar.py:221
+msgid "%"
+msgstr "%"
+
+#  "Pantalla completa"
+#: readtoolbar.py:234
+msgid "Fullscreen"
+msgstr "Hunt'asqa pantalla"
+
+#  "Reproducir / Detener"
+#: readtoolbar.py:324
+msgid "Play / Pause"
+msgstr "Purichiy / Utichiy"
+
+#  "tono ajustado"
+#: readtoolbar.py:377
+msgid "pitch adjusted"
+msgstr "Kunka mat'isqa"
+
+#  "velocidad ajustada"
+#: readtoolbar.py:382
+msgid "rate adjusted"
+msgstr "Utqaynin mat'isqa"
+
+#  "Registro agregado por %(user)s %(time)s"
+#. TRANS: This goes like Bookmark added by User 5 days ago
+#. TRANS: (the elapsed string gets translated automatically)
+#: readsidebar.py:88
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "Kaymi qillqachiytaqa yaparin %(user)s %(time)s"
+
+#  "Añadir notas para el marcador: "
+#: readsidebar.py:131 readsidebar.py:173
+msgid "Add notes for bookmark: "
+msgstr "T'upsinapaq huch'uy willakunata yapay:"
+
+#  "Marcador de %s"
+#: readsidebar.py:169
+#, python-format
+msgid "%s's bookmark"
+msgstr "%s kaypa tup'sin"
+
+#  "Marcador para página %d"
+#: readsidebar.py:170
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "Raphipa %d t'upsin"
+
+#  "Resaltar"
+#: readactivity.py:239
+msgid "Highlight"
+msgstr "Yanachaq"
+
+#  "Volver"
+#: readactivity.py:349
+msgid "Back"
+msgstr "Kutiy"
+
+#  "Página anterior"
+#: readactivity.py:352
+msgid "Previous page"
+msgstr "Ñawpa raphi"
+
+#  "Registro anterior"
+#: readactivity.py:355
+msgid "Previous bookmark"
+msgstr "Ñawpa qillqachisqa"
+
+#  "Avanzar"
+#: readactivity.py:365
+msgid "Forward"
+msgstr "Ñawpay"
+
+#  "Página siguiente"
+#: readactivity.py:368
+msgid "Next page"
+msgstr "Hamuq raphi"
+
+#  "Siguiente registro"
+#: readactivity.py:371
+msgid "Next bookmark"
+msgstr "Hamuq qillqachisqa"
+
+#  "Escoger documento"
+#: readactivity.py:570
+msgid "Choose document"
+msgstr "Qillqa khiputa akllay"
+
+#  "Página %(current)i de %(total_pages)i"
+#: readtopbar.py:141
+#, python-format
+msgid "Page %(current)i of %(total_pages)i"
+msgstr "Llapan %(total_pages)i nisqamanta %(current)i kay raphi"
+
+#  "Cancelar"
+#: readdialog.py:51
+msgid "Cancel"
+msgstr "Chinkachiy"
+
+#  "Ok"
+#: readdialog.py:57
+msgid "Ok"
+msgstr "Ok"
+
+#  "<b>Título</b>:"
+#: readdialog.py:112
+msgid "<b>Title</b>:"
+msgstr "<b>Sutinchaynin</b>:"
+
+#  "<b>Detalles</b>:"
+#: readdialog.py:138
+msgid "<b>Details</b>:"
+msgstr "<b>Ima nisqan</b>:"

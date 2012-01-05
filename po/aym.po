@@ -1,168 +1,185 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-05 11:05-0300\n"
-"PO-Revision-Date: 2011-12-18 23:51+0200\n"
+"PO-Revision-Date: 2011-11-23 07:26+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: hy\n"
+"Language: aym\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.0.5\n"
 
+#  "Leer"
 #: activity/activity.info:2
 msgid "Read"
-msgstr "Կարդալ"
+msgstr "Ullaña"
 
+#  "Anterior"
 #: readtoolbar.py:67
 msgid "Previous"
-msgstr "Նախորդ"
+msgstr "Nayrankiri"
 
+#  "Siguiente"
 #: readtoolbar.py:74
 msgid "Next"
-msgstr "Հաջորդ"
+msgstr "Jutiri"
 
+#  "Buscar primero"
 #: readtoolbar.py:157
 msgid "Find first"
-msgstr "Գտնել առաջինը"
+msgstr "Mayiri taqaña"
 
+#  "Buscar anterior"
 #: readtoolbar.py:163
 msgid "Find previous"
-msgstr "Գտնել նախորդը"
+msgstr "Nayrankiri taqaña"
 
+#  "Buscar siguiente"
 #: readtoolbar.py:165
 msgid "Find next"
-msgstr "Գտնել հաջորդը"
+msgstr "Jutiri taqaña"
 
+#  "Alejarse"
 #: readtoolbar.py:181
 msgid "Zoom out"
-msgstr "Հեռացնել"
+msgstr "Jisk'aptayaña"
 
+#  "Acercarse"
 #: readtoolbar.py:187
 msgid "Zoom in"
-msgstr "Մոտեցնել"
+msgstr "Jach'aptayaña"
 
+#  "Ajustar al ancho"
 #: readtoolbar.py:193
 msgid "Zoom to width"
-msgstr "Հարմարեցնել լայնությամբ"
+msgstr "Jach'aptayaña lankhuru"
 
+#  "Ajustar a la pantalla"
 #: readtoolbar.py:199
 msgid "Zoom to fit"
-msgstr "Հարմարեցնել չափսով"
+msgstr "Suma apxataña qatukañjama"
 
+#  "Tamaño real"
 #: readtoolbar.py:204
 msgid "Actual size"
-msgstr "Իրական չափս"
+msgstr "Juq'chajama"
 
+#  "%"
 #: readtoolbar.py:221
 msgid "%"
 msgstr "%"
 
+#  "Pantalla completa"
 #: readtoolbar.py:234
 msgid "Fullscreen"
-msgstr "Էկրանի չափով"
+msgstr "Maypacha uñtawi"
 
+#  "Reproducir / Detener"
 #: readtoolbar.py:324
 msgid "Play / Pause"
-msgstr "Գործարկել / Դադար"
+msgstr "Qaltaña / Suyt'ayaña"
 
+#  "tono ajustado"
 #: readtoolbar.py:377
 msgid "pitch adjusted"
-msgstr "տոնը կարգավորված է"
+msgstr "istaña jitinakayaña"
 
+#  "velocidad ajustada"
 #: readtoolbar.py:382
 msgid "rate adjusted"
-msgstr "արագությունը կարգավորված է"
+msgstr "katakikuna jitinakayaña"
 
+#  "Registro agregado por %(user)s %(time)s"
 #. TRANS: This goes like Bookmark added by User 5 days ago
 #. TRANS: (the elapsed string gets translated automatically)
 #: readsidebar.py:88
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
-msgstr "Էջանիշն ավելացրել է %(user)s օգտագործողը %(time)s"
+msgstr "Chimtaña %(user)s %(time)s uchawjataynta"
 
+#  "Añadir notas para el marcador: "
 #: readsidebar.py:131 readsidebar.py:173
 msgid "Add notes for bookmark: "
-msgstr "Ավելացնել նշումներ էջանիշի համար. "
+msgstr "Chimtañanaka yapkataña: "
 
+#  "Marcador de %s"
 #: readsidebar.py:169
 #, python-format
 msgid "%s's bookmark"
-msgstr "%s - ի էջանիշ"
+msgstr "%s's chimtaña"
 
+#  "Marcador para página %d"
 #: readsidebar.py:170
 #, python-format
 msgid "Bookmark for page %d"
-msgstr "Էջանիշ %d էջի համար"
+msgstr "Chimtaña laphiru %d"
 
+#  "Resaltar"
 #: readactivity.py:239
 msgid "Highlight"
-msgstr "Ցայտուն դարձնել"
+msgstr "Qhanstayaña"
 
+#  "Volver"
 #: readactivity.py:349
 msgid "Back"
-msgstr "Հետ"
+msgstr "Qutaña"
 
+#  "Página anterior"
 #: readactivity.py:352
 msgid "Previous page"
-msgstr "Նախորդ էջ"
+msgstr "Qutir laphi"
 
+#  "Registro anterior"
 #: readactivity.py:355
 msgid "Previous bookmark"
-msgstr "Նախորդ էջանիշ"
+msgstr "Qutir chimtata"
 
+#  "Avanzar"
 #: readactivity.py:365
 msgid "Forward"
-msgstr "Առաջ"
+msgstr "Nayrt'aña"
 
+#  "Página siguiente"
 #: readactivity.py:368
 msgid "Next page"
-msgstr "Հաջորդ էջ"
+msgstr "Jutiri laphi"
 
+#  "Siguiente registro"
 #: readactivity.py:371
 msgid "Next bookmark"
-msgstr "Հաջորդ էջանիշ"
+msgstr "Jutiri chimtaña"
 
+#  "Escoger documento"
 #: readactivity.py:570
 msgid "Choose document"
-msgstr "Ընտրել փաստաթուղթը"
+msgstr "Wakichaña qatukaña"
 
+#  "Página 
 #: readtopbar.py:141
 #, python-format
 msgid "Page %(current)i of %(total_pages)i"
-msgstr "Էջ %(current)i of %(total_pages)i"
+msgstr "Laphi %(current)i qipatsti %(total_pages)i"
 
+#  "Cancelar"
 #: readdialog.py:51
 msgid "Cancel"
-msgstr "Չեղարկել"
+msgstr "Saytayaña"
 
+#  "Ok"
 #: readdialog.py:57
 msgid "Ok"
-msgstr "OK"
+msgstr "Walikiwa"
 
+#  "<b>Título</b>:"
 #: readdialog.py:112
 msgid "<b>Title</b>:"
-msgstr "<b>Վերնագիր</b>."
+msgstr "<b>Sutipa</b>:"
 
+#  "<b>Detalles</b>:"
 #: readdialog.py:138
 msgid "<b>Details</b>:"
-msgstr "<b>Մանրամասներ</b>."
-
-#, python-format
-#~ msgid "Page %i of %i"
-#~ msgstr "%i էջը՝ %i -ից"
+msgstr "<b>Kunjamanaka</b>:"
