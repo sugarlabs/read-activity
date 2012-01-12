@@ -29,17 +29,17 @@ from sugar3.graphics.toggletoolbutton import ToggleToolButton
 from sugar3.graphics.toolcombobox import ToolComboBox
 from sugar3.graphics.menuitem import MenuItem
 from sugar3.graphics import iconentry
-from sugar3.activity import activity
+from sugar3.activity.widgets import EditToolbar as BaseEditToolbar
 
 import speech
 
 
-class EditToolbar(activity.EditToolbar):
+class EditToolbar(BaseEditToolbar):
 
     __gtype_name__ = 'EditToolbar'
 
     def __init__(self):
-        activity.EditToolbar.__init__(self)
+        BaseEditToolbar.__init__(self)
 
         self._view = None
 
