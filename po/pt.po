@@ -15,15 +15,15 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-05 11:05-0300\n"
-"PO-Revision-Date: 2011-07-24 23:01+0200\n"
-"Last-Translator: Eduardo H. Silva <HoboPrimate@gmail.com>\n"
+"PO-Revision-Date: 2012-01-14 23:05+0200\n"
+"Last-Translator: Eduardo H. <hoboprimate@gmail.com>\n"
 "Language-Team: Portuguese <translation-team-pt@lists.sourceforge.net>\n"
-"Language: \n"
+"Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.1\n"
+"X-Generator: Pootle 2.0.5\n"
 
 #: activity/activity.info:2
 msgid "Read"
@@ -83,11 +83,11 @@ msgstr "Tocar / Pausar"
 
 #: readtoolbar.py:377
 msgid "pitch adjusted"
-msgstr ""
+msgstr "tom ajustado"
 
 #: readtoolbar.py:382
 msgid "rate adjusted"
-msgstr ""
+msgstr "velocidade ajustada"
 
 #. TRANS: This goes like Bookmark added by User 5 days ago
 #. TRANS: (the elapsed string gets translated automatically)
@@ -112,7 +112,7 @@ msgstr "Marcador para a página %d"
 
 #: readactivity.py:239
 msgid "Highlight"
-msgstr ""
+msgstr "Destacar"
 
 #: readactivity.py:349
 msgid "Back"
@@ -145,7 +145,7 @@ msgstr "Escolhe o documento"
 #: readtopbar.py:141
 #, python-format
 msgid "Page %(current)i of %(total_pages)i"
-msgstr ""
+msgstr "Página %(current)i de %(total_pages)i"
 
 #: readdialog.py:51
 msgid "Cancel"
