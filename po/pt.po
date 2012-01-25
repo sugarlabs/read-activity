@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-05 11:05-0300\n"
-"PO-Revision-Date: 2012-01-14 23:05+0200\n"
+"PO-Revision-Date: 2012-01-25 23:00+0200\n"
 "Last-Translator: Eduardo H. <hoboprimate@gmail.com>\n"
 "Language-Team: Portuguese <translation-team-pt@lists.sourceforge.net>\n"
 "Language: pt\n"
@@ -75,7 +75,7 @@ msgstr "%"
 
 #: readtoolbar.py:234
 msgid "Fullscreen"
-msgstr "Ecrã completo"
+msgstr "Ecrã inteiro"
 
 #: readtoolbar.py:324
 msgid "Play / Pause"
@@ -83,7 +83,7 @@ msgstr "Tocar / Pausar"
 
 #: readtoolbar.py:377
 msgid "pitch adjusted"
-msgstr "tom ajustado"
+msgstr "altura do som ajustada"
 
 #: readtoolbar.py:382
 msgid "rate adjusted"
