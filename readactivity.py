@@ -561,10 +561,7 @@ class ReadActivity(activity.Activity):
         """
         if not self._want_document:
             return
-        chooser = ObjectChooser(_('Choose document'), None,
-                                Gtk.DialogFlags.MODAL |
-                                Gtk.DialogFlags.DESTROY_WITH_PARENT,
-                                what_filter=mime.GENERIC_TYPE_TEXT)
+        chooser = ObjectChooser(None, what_filter=mime.GENERIC_TYPE_TEXT)
         try:
             result = chooser.run()
             if result == Gtk.ResponseType.ACCEPT:
