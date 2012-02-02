@@ -549,6 +549,8 @@ class _View(Gtk.HBox):
                 self._on_page_changed(self._loaded_page, self._loaded_page - 1)
 
     def _on_page_changed(self, oldpage, pageno):
+        if oldpage == pageno:
+            return
         self.__page_changed = True
         self._loaded_page = pageno
         self._scrollbar.handler_block(self._scrollbar_change_value_cb_id)
