@@ -89,19 +89,25 @@ class _View(Gtk.HBox):
                 self._view_populate_popup_cb)
 
         self._sw.add(self._view)
-        self._sw.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.NEVER)
         self._v_vscrollbar = self._sw.get_vscrollbar()
         self._v_scrollbar_value_changed_cb_id = \
                 self._v_vscrollbar.connect('value-changed', \
                 self._v_scrollbar_value_changed_cb)
         self._scrollbar = Gtk.VScrollbar()
-        # TODO
-        # self._scrollbar.set_update_policy(Gtk.UPDATE_DISCONTINUOUS)
         self._scrollbar_change_value_cb_id = \
                 self._scrollbar.connect('change-value', \
                 self._scrollbar_change_value_cb)
-        self.pack_start(self._sw, True, True, 0)
-        self.pack_start(self._scrollbar, False, False, 0)
+
+        overlay = Gtk.Overlay()
+        hbox = Gtk.HBox()
+        overlay.add(hbox)
+        hbox.add(self._sw)
+
+        self._scrollbar.props.halign = Gtk.Align.END
+        self._scrollbar.props.valign = Gtk.Align.FILL
+        overlay.add_overlay(self._scrollbar)
+
+        self.pack_start(overlay, True, True, 0)
 
         self._view.set_can_default(True)
         self._view.set_can_focus(True)
@@ -399,9 +405,6 @@ class _View(Gtk.HBox):
         return False
 
     def _view_load_finished_cb(self, v, frame):
-        # Normally the line below would not be required - ugly workaround for
-        # possible Webkit bug. See : https://bugs.launchpad.net/bugs/483231
-        self._sw.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.NEVER)
 
         filename = self._view.props.uri.replace('file://', '')
         if os.path.exists(filename.replace('xhtml', 'xml')):
@@ -449,12 +452,14 @@ class _View(Gtk.HBox):
             self._on_page_changed(0, int(pageno))
 
         # prepare text to speech
+        """
         html_file = open(self._loaded_filename)
         soup = BeautifulSoup.BeautifulSoup(html_file)
         body = soup.find('body')
         tags = body.findAll(text=True)
         self._all_text = ''.join([tag for tag in tags])
         self._prepare_text_to_speech(self._all_text)
+        """
 
     def _prepare_text_to_speech(self, page_text):
         i = 0
