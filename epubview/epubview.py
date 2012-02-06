@@ -590,9 +590,9 @@ class _View(Gtk.HBox):
             if filename.endswith('xml'):
                 dest = filename.replace('xml', 'xhtml')
                 os.symlink(filename, dest)
-                self._view.open('file://' + dest)
+                self._view.load_uri('file://' + dest)
             else:
-                self._view.open('file://' + filename)
+                self._view.load_uri('file://' + filename)
         else:
             self._scroll_page()
 
