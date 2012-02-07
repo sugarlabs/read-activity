@@ -58,6 +58,7 @@ class _View(Gtk.HBox):
         self._ready = False
         self._paginator = None
         self._loaded_page = -1
+        self._file_loaded = True
         #self._old_scrollval = -1
         self._loaded_filename = None
         self._pagecount = -1
@@ -394,18 +395,19 @@ class _View(Gtk.HBox):
             if self._v_vscrollbar.get_value() >= \
                 self._v_vscrollbar.props.adjustment.props.upper - \
                     self._v_vscrollbar.props.adjustment.props.page_size:
-                self._load_next_file()
+                self._load_page(self._loaded_page + 1)
                 return True
         elif self.__going_back:
             if self._v_vscrollbar.get_value() == \
                     self._v_vscrollbar.props.adjustment.props.lower:
-                self._load_prev_file()
+                self._load_page(self._loaded_page - 1)
                 return True
 
         return False
 
     def _view_load_finished_cb(self, v, frame):
 
+        self._file_loaded = True
         filename = self._view.props.uri.replace('file://', '')
         if os.path.exists(filename.replace('xhtml', 'xml')):
             # Hack for making javascript work
@@ -576,6 +578,10 @@ class _View(Gtk.HBox):
 
         if filename != self._loaded_filename:
             self._loaded_filename = filename
+            if not self._file_loaded:
+                # wait until the file is loaded
+                return
+            self._file_loaded = False
 
             """
             TODO: disabled because javascript can't be executed
@@ -606,18 +612,6 @@ class _View(Gtk.HBox):
         o.close()
         shutil.copy(file_name + '.tmp', file_name)
 
-    def _load_next_file(self):
-        if self._loaded_page == self._pagecount:
-            return
-        cur_file = self._paginator.get_file_for_pageno(self._loaded_page)
-        pageno = self._loaded_page
-        while pageno < self._paginator.get_total_pagecount():
-            pageno += 1
-            if self._paginator.get_file_for_pageno(pageno) != cur_file:
-                break
-
-        self._load_page(pageno)
-
     def _load_file(self, path):
         #TODO: This is a bit suboptimal - fix it
         for pageno in range(1, self.get_pagecount()):
@@ -625,18 +619,6 @@ class _View(Gtk.HBox):
             if filepath.endswith(path):
                 self._load_page(pageno)
                 break
-
-    def _load_prev_file(self):
-        if self._loaded_page == 1:
-            return
-        cur_file = self._paginator.get_file_for_pageno(self._loaded_page)
-        pageno = self._loaded_page
-        while pageno > 1:
-            pageno -= 1
-            if self._paginator.get_file_for_pageno(pageno) != cur_file:
-                break
-
-        self._load_page(pageno)
 
     def _scrollbar_change_value_cb(self, range, scrolltype, value):
         if scrolltype == Gtk.ScrollType.STEP_FORWARD:
