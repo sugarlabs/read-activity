@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-05 11:05-0300\n"
+"POT-Creation-Date: 2012-02-07 00:33-0500\n"
 "PO-Revision-Date: 2011-08-16 01:56+0200\n"
 "Last-Translator: Aputsiaq Niels <aj@isit.gl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,65 +29,49 @@ msgstr ""
 msgid "Read"
 msgstr "Læs"
 
-#: readtoolbar.py:67
-msgid "Previous"
-msgstr "Forrige"
+#: readactivity.py:239
+msgid "Highlight"
+msgstr "Fremhæv"
 
-#: readtoolbar.py:74
-msgid "Next"
-msgstr "Næste"
+#: readactivity.py:350
+msgid "Back"
+msgstr "Tilbage"
 
-#: readtoolbar.py:157
-msgid "Find first"
-msgstr "Find første"
+#: readactivity.py:353
+msgid "Previous page"
+msgstr "Forrige side"
 
-#: readtoolbar.py:163
-msgid "Find previous"
-msgstr "Find forrige"
+#: readactivity.py:356
+msgid "Previous bookmark"
+msgstr "Forrige bogmærke"
 
-#: readtoolbar.py:165
-msgid "Find next"
-msgstr "Find næste"
+#: readactivity.py:366
+msgid "Forward"
+msgstr "Frem"
 
-#: readtoolbar.py:181
-msgid "Zoom out"
-msgstr "Formindsk"
+#: readactivity.py:369
+msgid "Next page"
+msgstr "Næste side"
 
-#: readtoolbar.py:187
-msgid "Zoom in"
-msgstr "Forstør"
+#: readactivity.py:372
+msgid "Next bookmark"
+msgstr "Næste bogmærke"
 
-#: readtoolbar.py:193
-msgid "Zoom to width"
-msgstr "Tilpas til bredde"
+#: readdialog.py:52
+msgid "Cancel"
+msgstr "Annullér"
 
-#: readtoolbar.py:199
-msgid "Zoom to fit"
-msgstr "Zoomtilpasning"
+#: readdialog.py:58
+msgid "Ok"
+msgstr "Ok"
 
-#: readtoolbar.py:204
-msgid "Actual size"
-msgstr "Aktuel størrelse"
+#: readdialog.py:113
+msgid "<b>Title</b>:"
+msgstr "<b>Titel</b>:"
 
-#: readtoolbar.py:221
-msgid "%"
-msgstr "%"
-
-#: readtoolbar.py:234
-msgid "Fullscreen"
-msgstr "Fuldskærm"
-
-#: readtoolbar.py:324
-msgid "Play / Pause"
-msgstr "Afspil / Pause"
-
-#: readtoolbar.py:377
-msgid "pitch adjusted"
-msgstr "tonehøjde tilpasset"
-
-#: readtoolbar.py:382
-msgid "rate adjusted"
-msgstr "hastighed tilpasset"
+#: readdialog.py:139
+msgid "<b>Details</b>:"
+msgstr "<b>Detaljer</b>:"
 
 #. TRANS: This goes like Bookmark added by User 5 days ago
 #. TRANS: (the elapsed string gets translated automatically)
@@ -110,58 +94,73 @@ msgstr "%s's bogmærke"
 msgid "Bookmark for page %d"
 msgstr "Bogmærke for side %d"
 
-#: readactivity.py:239
-msgid "Highlight"
-msgstr "Fremhæv"
+#: readtoolbar.py:68
+msgid "Previous"
+msgstr "Forrige"
 
-#: readactivity.py:349
-msgid "Back"
-msgstr "Tilbage"
+#: readtoolbar.py:75
+msgid "Next"
+msgstr "Næste"
 
-#: readactivity.py:352
-msgid "Previous page"
-msgstr "Forrige side"
+#: readtoolbar.py:158
+msgid "Find first"
+msgstr "Find første"
 
-#: readactivity.py:355
-msgid "Previous bookmark"
-msgstr "Forrige bogmærke"
+#: readtoolbar.py:164
+msgid "Find previous"
+msgstr "Find forrige"
 
-#: readactivity.py:365
-msgid "Forward"
-msgstr "Frem"
+#: readtoolbar.py:166
+msgid "Find next"
+msgstr "Find næste"
 
-#: readactivity.py:368
-msgid "Next page"
-msgstr "Næste side"
+#: readtoolbar.py:183
+msgid "Zoom out"
+msgstr "Formindsk"
 
-#: readactivity.py:371
-msgid "Next bookmark"
-msgstr "Næste bogmærke"
+#: readtoolbar.py:189
+msgid "Zoom in"
+msgstr "Forstør"
 
-#: readactivity.py:570
-msgid "Choose document"
-msgstr "Vælg dokument"
+#: readtoolbar.py:195
+msgid "Zoom to width"
+msgstr "Tilpas til bredde"
 
-#: readtopbar.py:141
+#: readtoolbar.py:201
+msgid "Zoom to fit"
+msgstr "Zoomtilpasning"
+
+#: readtoolbar.py:206
+msgid "Actual size"
+msgstr "Aktuel størrelse"
+
+#: readtoolbar.py:223
+msgid "%"
+msgstr "%"
+
+#: readtoolbar.py:236
+msgid "Fullscreen"
+msgstr "Fuldskærm"
+
+#: readtoolbar.py:326
+msgid "Play / Pause"
+msgstr "Afspil / Pause"
+
+#: readtoolbar.py:379
+msgid "pitch adjusted"
+msgstr "tonehøjde tilpasset"
+
+#: readtoolbar.py:384
+msgid "rate adjusted"
+msgstr "hastighed tilpasset"
+
+#: readtopbar.py:140
 #, python-format
 msgid "Page %(current)i of %(total_pages)i"
 msgstr "Side %(current)i af %(total_pages)i"
 
-#: readdialog.py:51
-msgid "Cancel"
-msgstr "Annullér"
-
-#: readdialog.py:57
-msgid "Ok"
-msgstr "Ok"
-
-#: readdialog.py:112
-msgid "<b>Title</b>:"
-msgstr "<b>Titel</b>:"
-
-#: readdialog.py:138
-msgid "<b>Details</b>:"
-msgstr "<b>Detaljer</b>:"
+#~ msgid "Choose document"
+#~ msgstr "Vælg dokument"
 
 #, python-format
 #~ msgid "Page %i of %i"
