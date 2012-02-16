@@ -14,11 +14,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-05 11:05-0300\n"
+"POT-Creation-Date: 2012-02-07 00:33-0500\n"
 "PO-Revision-Date: 2011-12-18 23:51+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: hy\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -29,65 +29,49 @@ msgstr ""
 msgid "Read"
 msgstr "Կարդալ"
 
-#: readtoolbar.py:67
-msgid "Previous"
-msgstr "Նախորդ"
+#: readactivity.py:239
+msgid "Highlight"
+msgstr "Ցայտուն դարձնել"
 
-#: readtoolbar.py:74
-msgid "Next"
-msgstr "Հաջորդ"
+#: readactivity.py:350
+msgid "Back"
+msgstr "Հետ"
 
-#: readtoolbar.py:157
-msgid "Find first"
-msgstr "Գտնել առաջինը"
+#: readactivity.py:353
+msgid "Previous page"
+msgstr "Նախորդ էջ"
 
-#: readtoolbar.py:163
-msgid "Find previous"
-msgstr "Գտնել նախորդը"
+#: readactivity.py:356
+msgid "Previous bookmark"
+msgstr "Նախորդ էջանիշ"
 
-#: readtoolbar.py:165
-msgid "Find next"
-msgstr "Գտնել հաջորդը"
+#: readactivity.py:366
+msgid "Forward"
+msgstr "Առաջ"
 
-#: readtoolbar.py:181
-msgid "Zoom out"
-msgstr "Հեռացնել"
+#: readactivity.py:369
+msgid "Next page"
+msgstr "Հաջորդ էջ"
 
-#: readtoolbar.py:187
-msgid "Zoom in"
-msgstr "Մոտեցնել"
+#: readactivity.py:372
+msgid "Next bookmark"
+msgstr "Հաջորդ էջանիշ"
 
-#: readtoolbar.py:193
-msgid "Zoom to width"
-msgstr "Հարմարեցնել լայնությամբ"
+#: readdialog.py:52
+msgid "Cancel"
+msgstr "Չեղարկել"
 
-#: readtoolbar.py:199
-msgid "Zoom to fit"
-msgstr "Հարմարեցնել չափսով"
+#: readdialog.py:58
+msgid "Ok"
+msgstr "OK"
 
-#: readtoolbar.py:204
-msgid "Actual size"
-msgstr "Իրական չափս"
+#: readdialog.py:113
+msgid "<b>Title</b>:"
+msgstr "<b>Վերնագիր</b>."
 
-#: readtoolbar.py:221
-msgid "%"
-msgstr "%"
-
-#: readtoolbar.py:234
-msgid "Fullscreen"
-msgstr "Էկրանի չափով"
-
-#: readtoolbar.py:324
-msgid "Play / Pause"
-msgstr "Գործարկել / Դադար"
-
-#: readtoolbar.py:377
-msgid "pitch adjusted"
-msgstr "տոնը կարգավորված է"
-
-#: readtoolbar.py:382
-msgid "rate adjusted"
-msgstr "արագությունը կարգավորված է"
+#: readdialog.py:139
+msgid "<b>Details</b>:"
+msgstr "<b>Մանրամասներ</b>."
 
 #. TRANS: This goes like Bookmark added by User 5 days ago
 #. TRANS: (the elapsed string gets translated automatically)
@@ -110,58 +94,73 @@ msgstr "%s - ի էջանիշ"
 msgid "Bookmark for page %d"
 msgstr "Էջանիշ %d էջի համար"
 
-#: readactivity.py:239
-msgid "Highlight"
-msgstr "Ցայտուն դարձնել"
+#: readtoolbar.py:68
+msgid "Previous"
+msgstr "Նախորդ"
 
-#: readactivity.py:349
-msgid "Back"
-msgstr "Հետ"
+#: readtoolbar.py:75
+msgid "Next"
+msgstr "Հաջորդ"
 
-#: readactivity.py:352
-msgid "Previous page"
-msgstr "Նախորդ էջ"
+#: readtoolbar.py:158
+msgid "Find first"
+msgstr "Գտնել առաջինը"
 
-#: readactivity.py:355
-msgid "Previous bookmark"
-msgstr "Նախորդ էջանիշ"
+#: readtoolbar.py:164
+msgid "Find previous"
+msgstr "Գտնել նախորդը"
 
-#: readactivity.py:365
-msgid "Forward"
-msgstr "Առաջ"
+#: readtoolbar.py:166
+msgid "Find next"
+msgstr "Գտնել հաջորդը"
 
-#: readactivity.py:368
-msgid "Next page"
-msgstr "Հաջորդ էջ"
+#: readtoolbar.py:183
+msgid "Zoom out"
+msgstr "Հեռացնել"
 
-#: readactivity.py:371
-msgid "Next bookmark"
-msgstr "Հաջորդ էջանիշ"
+#: readtoolbar.py:189
+msgid "Zoom in"
+msgstr "Մոտեցնել"
 
-#: readactivity.py:570
-msgid "Choose document"
-msgstr "Ընտրել փաստաթուղթը"
+#: readtoolbar.py:195
+msgid "Zoom to width"
+msgstr "Հարմարեցնել լայնությամբ"
 
-#: readtopbar.py:141
+#: readtoolbar.py:201
+msgid "Zoom to fit"
+msgstr "Հարմարեցնել չափսով"
+
+#: readtoolbar.py:206
+msgid "Actual size"
+msgstr "Իրական չափս"
+
+#: readtoolbar.py:223
+msgid "%"
+msgstr "%"
+
+#: readtoolbar.py:236
+msgid "Fullscreen"
+msgstr "Էկրանի չափով"
+
+#: readtoolbar.py:326
+msgid "Play / Pause"
+msgstr "Գործարկել / Դադար"
+
+#: readtoolbar.py:379
+msgid "pitch adjusted"
+msgstr "տոնը կարգավորված է"
+
+#: readtoolbar.py:384
+msgid "rate adjusted"
+msgstr "արագությունը կարգավորված է"
+
+#: readtopbar.py:140
 #, python-format
 msgid "Page %(current)i of %(total_pages)i"
 msgstr "Էջ %(current)i of %(total_pages)i"
 
-#: readdialog.py:51
-msgid "Cancel"
-msgstr "Չեղարկել"
-
-#: readdialog.py:57
-msgid "Ok"
-msgstr "OK"
-
-#: readdialog.py:112
-msgid "<b>Title</b>:"
-msgstr "<b>Վերնագիր</b>."
-
-#: readdialog.py:138
-msgid "<b>Details</b>:"
-msgstr "<b>Մանրամասներ</b>."
+#~ msgid "Choose document"
+#~ msgstr "Ընտրել փաստաթուղթը"
 
 #, python-format
 #~ msgid "Page %i of %i"
