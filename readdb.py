@@ -22,7 +22,7 @@ import shutil
 import sqlite3
 import time
 
-import gconf
+from sugar3 import profile
 
 from readbookmark import Bookmark
 
@@ -94,9 +94,8 @@ class BookmarkManager:
         self._highlights = {0:  []}
         self._populate_highlights()
 
-        client = gconf.client_get_default()
-        self._user = client.get_string("/desktop/sugar/user/nick")
-        self._color = client.get_string("/desktop/sugar/user/color")
+        self._user = profile.get_nick_name()
+        self._color = profile.get_color()
 
     def add_bookmark(self, page, content, local=1):
         # locale = 0 means that this is a bookmark originally
