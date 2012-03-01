@@ -67,6 +67,12 @@ class EvinceViewer():
             page = 0
         self._model.props.page = page
 
+    def next_page(self):
+        self._view.next_page()
+
+    def previous_page(self):
+        self._view.previous_page()
+
     def get_pagecount(self):
         '''
         Returns the pagecount of the loaded file
