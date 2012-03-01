@@ -55,6 +55,7 @@ import epubadapter
 import evinceadapter
 import textadapter
 import speech
+from sugarmenuitem import SugarMenuItem
 
 _HARDWARE_MANAGER_INTERFACE = 'org.laptop.HardwareManager'
 _HARDWARE_MANAGER_SERVICE = 'org.laptop.HardwareManager'
@@ -350,15 +351,21 @@ class ReadActivity(activity.Activity):
         back.set_tooltip(_('Back'))
         back.props.sensitive = False
         palette = back.get_palette()
-        previous_page = MenuItem(text_label=_("Previous page"))
-        palette.menu.append(previous_page)
-        previous_page.show_all()
-        previous_bookmark = MenuItem(text_label=_("Previous bookmark"))
-        palette.menu.append(previous_bookmark)
-        previous_bookmark.show_all()
+
+        vbox_menu = Gtk.VBox()
+        previous_page = SugarMenuItem(text_label=_("Previous page"))
+        vbox_menu.add(previous_page)
+        previous_bookmark = SugarMenuItem(text_label=_("Previous bookmark"))
+        vbox_menu.add(previous_bookmark)
+        vbox_menu.show_all()
+
+        palette.set_content(vbox_menu)
+        # HACK
+        palette._content.set_border_width(1)
+
         back.connect('clicked', self.__go_back_cb)
-        previous_page.connect('activate', self.__go_back_page_cb)
-        previous_bookmark.connect('activate', self.__prev_bookmark_activate_cb)
+        previous_page.connect('clicked', self.__go_back_page_cb)
+        previous_bookmark.connect('clicked', self.__prev_bookmark_activate_cb)
         return back
 
     def _create_forward_button(self):
@@ -366,15 +373,21 @@ class ReadActivity(activity.Activity):
         forward.set_tooltip(_('Forward'))
         forward.props.sensitive = False
         palette = forward.get_palette()
-        next_page = MenuItem(text_label=_("Next page"))
-        palette.menu.append(next_page)
-        next_page.show_all()
-        next_bookmark = MenuItem(text_label=_("Next bookmark"))
-        palette.menu.append(next_bookmark)
-        next_bookmark.show_all()
+
+        vbox_menu = Gtk.VBox()
+        next_page = SugarMenuItem(text_label=_("Next page"))
+        vbox_menu.add(next_page)
+        next_bookmark = SugarMenuItem(text_label=_("Next bookmark"))
+        vbox_menu.add(next_bookmark)
+        vbox_menu.show_all()
+
+        palette.set_content(vbox_menu)
+        # HACK
+        palette._content.set_border_width(1)
+
         forward.connect('clicked', self.__go_forward_cb)
-        next_page.connect('activate', self.__go_forward_page_cb)
-        next_bookmark.connect('activate', self.__next_bookmark_activate_cb)
+        next_page.connect('clicked', self.__go_forward_page_cb)
+        next_bookmark.connect('clicked', self.__next_bookmark_activate_cb)
         return forward
 
     def _create_search(self):
