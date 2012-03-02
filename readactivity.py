@@ -221,11 +221,6 @@ class ReadActivity(activity.Activity):
         navigator_toolbar.show()
         toolbar_box.toolbar.insert(self._navigator_toolbar_button, -1)
 
-        spacer = Gtk.SeparatorToolItem()
-        spacer.props.draw = False
-        toolbar_box.toolbar.insert(spacer, -1)
-        spacer.show()
-
         bookmark_item = Gtk.ToolItem()
         self._bookmarker = self._create_bookmarker()
         self._bookmarker_toggle_handler_id = self._bookmarker.connect( \
