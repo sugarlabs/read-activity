@@ -14,8 +14,10 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import gst
 import logging
+import pygst
+pygst.require("0.10")
+from gi.repository import Gst
 
 import speech
 
@@ -23,27 +25,30 @@ _logger = logging.getLogger('read-etexts-activity')
 
 
 def _message_cb(bus, message, pipe):
-    if message.type == gst.MESSAGE_EOS:
-        pipe.set_state(gst.STATE_NULL)
+    if message is None:
+        return
+    if message.type == Gst.Message.EOS:
+        pipe.set_state(Gst.State.NULL)
         if speech.end_text_cb != None:
             speech.end_text_cb()
-    if message.type == gst.MESSAGE_ERROR:
-        pipe.set_state(gst.STATE_NULL)
+    if message.type == Gst.Message.ERROR:
+        pipe.set_state(Gst.State.NULL)
         if pipe is play_speaker[1]:
             speech.reset_cb()
-    elif message.type == gst.MESSAGE_ELEMENT and \
+    elif message.type == Gst.Message.ELEMENT and \
             message.structure.get_name() == 'espeak-mark':
         mark = message.structure['mark']
         speech.highlight_cb(int(mark))
 
 
 def _create_pipe():
-    pipe = gst.Pipeline('pipeline')
+    pipe = Gst.Pipeline()
+    pipe.set_name('pipeline')
 
-    source = gst.element_factory_make('espeak', 'source')
+    source = Gst.ElementFactory.make('espeak', 'source')
     pipe.add(source)
 
-    sink = gst.element_factory_make('autoaudiosink', 'sink')
+    sink = Gst.ElementFactory.make('autoaudiosink', 'sink')
     pipe.add(sink)
     source.link(sink)
 
@@ -59,10 +64,10 @@ def _speech(speaker, words):
     speaker[0].props.rate = speech.rate
     speaker[0].props.voice = speech.voice[1]
     speaker[0].props.text = words
-    speaker[1].set_state(gst.STATE_NULL)
-    speaker[1].set_state(gst.STATE_PLAYING)
+    speaker[1].set_state(Gst.State.NULL)
+    speaker[1].set_state(Gst.State.PLAYING)
 
-
+Gst.init_check(None)
 info_speaker = _create_pipe()
 play_speaker = _create_pipe()
 play_speaker[0].props.track = 2
@@ -81,11 +86,11 @@ def play(words):
 
 
 def is_stopped():
-    for i in play_speaker[1].get_state():
-        if isinstance(i, gst.State) and i == gst.STATE_NULL:
+    for i in play_speaker[1].get_state(1):
+        if isinstance(i, Gst.State) and i == Gst.State.NULL:
             return True
     return False
 
 
 def stop():
-    play_speaker[1].set_state(gst.STATE_NULL)
+    play_speaker[1].set_state(Gst.State.NULL)

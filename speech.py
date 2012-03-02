@@ -22,8 +22,10 @@ _logger = logging.getLogger('read-etexts-activity')
 supported = True
 
 try:
-    import gst
-    gst.element_factory_make('espeak')
+    import pygst
+    pygst.require("0.10")
+    from gi.repository import Gst
+    #Gst.ElementFactory.make('espeak', 'source')
     from speech_gst import *
     _logger.info('use gst-plugins-espeak')
 except Exception, e:
