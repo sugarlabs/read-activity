@@ -347,7 +347,7 @@ class ReadActivity(activity.Activity):
         activity.Activity.unfullscreen(self)
 
     def _create_back_button(self):
-        back = ToolButton('go-previous')
+        back = ToolButton('go-previous-paired')
         back.set_tooltip(_('Back'))
         back.props.sensitive = False
         palette = back.get_palette()
@@ -369,7 +369,7 @@ class ReadActivity(activity.Activity):
         return back
 
     def _create_forward_button(self):
-        forward = ToolButton('go-next')
+        forward = ToolButton('go-next-paired')
         forward.set_tooltip(_('Forward'))
         forward.props.sensitive = False
         palette = forward.get_palette()
