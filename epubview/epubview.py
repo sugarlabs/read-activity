@@ -593,7 +593,8 @@ class _View(Gtk.HBox):
 
             if filename.endswith('xml'):
                 dest = filename.replace('xml', 'xhtml')
-                os.symlink(filename, dest)
+                if not os.path.exists(dest):
+                    os.symlink(filename, dest)
                 self._view.load_uri('file://' + dest)
             else:
                 self._view.load_uri('file://' + filename)
