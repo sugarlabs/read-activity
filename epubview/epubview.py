@@ -454,14 +454,12 @@ class _View(Gtk.HBox):
             self._on_page_changed(0, int(pageno))
 
         # prepare text to speech
-        """
         html_file = open(self._loaded_filename)
         soup = BeautifulSoup.BeautifulSoup(html_file)
         body = soup.find('body')
         tags = body.findAll(text=True)
         self._all_text = ''.join([tag for tag in tags])
         self._prepare_text_to_speech(self._all_text)
-        """
 
     def _prepare_text_to_speech(self, page_text):
         i = 0
