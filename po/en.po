@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-05 11:05-0300\n"
+"POT-Creation-Date: 2012-02-07 00:33-0500\n"
 "PO-Revision-Date: 2011-08-16 03:36+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,65 +29,49 @@ msgstr ""
 msgid "Read"
 msgstr "Read"
 
-#: readtoolbar.py:67
-msgid "Previous"
-msgstr "Previous"
+#: readactivity.py:239
+msgid "Highlight"
+msgstr "Highlight"
 
-#: readtoolbar.py:74
-msgid "Next"
-msgstr "Next"
+#: readactivity.py:350
+msgid "Back"
+msgstr "Back"
 
-#: readtoolbar.py:157
-msgid "Find first"
-msgstr "Find first"
+#: readactivity.py:353
+msgid "Previous page"
+msgstr "Previous page"
 
-#: readtoolbar.py:163
-msgid "Find previous"
-msgstr "Find previous"
+#: readactivity.py:356
+msgid "Previous bookmark"
+msgstr "Previous bookmark"
 
-#: readtoolbar.py:165
-msgid "Find next"
-msgstr "Find next"
+#: readactivity.py:366
+msgid "Forward"
+msgstr "Forward"
 
-#: readtoolbar.py:181
-msgid "Zoom out"
-msgstr "Zoom out"
+#: readactivity.py:369
+msgid "Next page"
+msgstr "Next page"
 
-#: readtoolbar.py:187
-msgid "Zoom in"
-msgstr "Zoom in"
+#: readactivity.py:372
+msgid "Next bookmark"
+msgstr "Next bookmark"
 
-#: readtoolbar.py:193
-msgid "Zoom to width"
-msgstr "Zoom to width"
+#: readdialog.py:52
+msgid "Cancel"
+msgstr "Cancel"
 
-#: readtoolbar.py:199
-msgid "Zoom to fit"
-msgstr "Zoom to fit"
+#: readdialog.py:58
+msgid "Ok"
+msgstr "Ok"
 
-#: readtoolbar.py:204
-msgid "Actual size"
-msgstr "Actual size"
+#: readdialog.py:113
+msgid "<b>Title</b>:"
+msgstr "<b>Title</b>:"
 
-#: readtoolbar.py:221
-msgid "%"
-msgstr "%"
-
-#: readtoolbar.py:234
-msgid "Fullscreen"
-msgstr "Fullscreen"
-
-#: readtoolbar.py:324
-msgid "Play / Pause"
-msgstr "Play / Pause"
-
-#: readtoolbar.py:377
-msgid "pitch adjusted"
-msgstr "pitch adjusted"
-
-#: readtoolbar.py:382
-msgid "rate adjusted"
-msgstr "rate adjusted"
+#: readdialog.py:139
+msgid "<b>Details</b>:"
+msgstr "<b>Details</b>:"
 
 #. TRANS: This goes like Bookmark added by User 5 days ago
 #. TRANS: (the elapsed string gets translated automatically)
@@ -110,58 +94,73 @@ msgstr "%s's bookmark"
 msgid "Bookmark for page %d"
 msgstr "Bookmark for page %d"
 
-#: readactivity.py:239
-msgid "Highlight"
-msgstr "Highlight"
+#: readtoolbar.py:68
+msgid "Previous"
+msgstr "Previous"
 
-#: readactivity.py:349
-msgid "Back"
-msgstr "Back"
+#: readtoolbar.py:75
+msgid "Next"
+msgstr "Next"
 
-#: readactivity.py:352
-msgid "Previous page"
-msgstr "Previous page"
+#: readtoolbar.py:158
+msgid "Find first"
+msgstr "Find first"
 
-#: readactivity.py:355
-msgid "Previous bookmark"
-msgstr "Previous bookmark"
+#: readtoolbar.py:164
+msgid "Find previous"
+msgstr "Find previous"
 
-#: readactivity.py:365
-msgid "Forward"
-msgstr "Forward"
+#: readtoolbar.py:166
+msgid "Find next"
+msgstr "Find next"
 
-#: readactivity.py:368
-msgid "Next page"
-msgstr "Next page"
+#: readtoolbar.py:183
+msgid "Zoom out"
+msgstr "Zoom out"
 
-#: readactivity.py:371
-msgid "Next bookmark"
-msgstr "Next bookmark"
+#: readtoolbar.py:189
+msgid "Zoom in"
+msgstr "Zoom in"
 
-#: readactivity.py:570
-msgid "Choose document"
-msgstr "Choose document"
+#: readtoolbar.py:195
+msgid "Zoom to width"
+msgstr "Zoom to width"
 
-#: readtopbar.py:141
+#: readtoolbar.py:201
+msgid "Zoom to fit"
+msgstr "Zoom to fit"
+
+#: readtoolbar.py:206
+msgid "Actual size"
+msgstr "Actual size"
+
+#: readtoolbar.py:223
+msgid "%"
+msgstr "%"
+
+#: readtoolbar.py:236
+msgid "Fullscreen"
+msgstr "Fullscreen"
+
+#: readtoolbar.py:326
+msgid "Play / Pause"
+msgstr "Play / Pause"
+
+#: readtoolbar.py:379
+msgid "pitch adjusted"
+msgstr "pitch adjusted"
+
+#: readtoolbar.py:384
+msgid "rate adjusted"
+msgstr "rate adjusted"
+
+#: readtopbar.py:140
 #, python-format
 msgid "Page %(current)i of %(total_pages)i"
 msgstr "Page %(current)i of %(total_pages)i"
 
-#: readdialog.py:51
-msgid "Cancel"
-msgstr "Cancel"
-
-#: readdialog.py:57
-msgid "Ok"
-msgstr "Ok"
-
-#: readdialog.py:112
-msgid "<b>Title</b>:"
-msgstr "<b>Title</b>:"
-
-#: readdialog.py:138
-msgid "<b>Details</b>:"
-msgstr "<b>Details</b>:"
+#~ msgid "Choose document"
+#~ msgstr "Choose document"
 
 #, python-format
 #~ msgid "Page %i of %i"
