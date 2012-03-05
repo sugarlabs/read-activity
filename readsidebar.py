@@ -81,8 +81,8 @@ class Sidebar(Gtk.EventBox):
 
     def __bookmark_icon_query_tooltip_cb(self, widget, x, y, keyboard_mode,
             tip, bookmark):
-        tooltip_header = bookmark.get_note_title()
-        tooltip_body = bookmark.get_note_body()
+        tooltip_header = bookmark.get_note_title().encode('utf-8')
+        tooltip_body = bookmark.get_note_body().encode('utf-8')
         #TRANS: This goes like Bookmark added by User 5 days ago
         #TRANS: (the elapsed string gets translated automatically)
         tooltip_footer = (_('Bookmark added by %(user)s %(time)s') \
