@@ -95,7 +95,7 @@ class BookmarkManager:
         self._populate_highlights()
 
         self._user = profile.get_nick_name()
-        self._color = profile.get_color()
+        self._color = str(profile.get_color())
 
     def add_bookmark(self, page, content, local=1):
         # locale = 0 means that this is a bookmark originally
