@@ -74,11 +74,11 @@ class BaseReadDialog(Gtk.Window):
         self._canvas = canvas
 
     def __realize_cb(self, widget):
-        self.window.set_type_hint(Gdk.WindowType._HINT_DIALOG)
-        self.window.set_accept_focus(True)
+        self.get_window().set_type_hint(Gdk.WindowType._HINT_DIALOG)
+        self.get_window().set_accept_focus(True)
 
         parent = Gdk.window_foreign_new(self._parent_window_xid)
-        self.window.set_transient_for(parent)
+        self.get_window().set_transient_for(parent)
 
         self.modify_bg(Gtk.StateType.NORMAL,
                             style.COLOR_WHITE.get_gdk_color())

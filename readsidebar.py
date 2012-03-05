@@ -127,7 +127,7 @@ class Sidebar(Gtk.EventBox):
             bookmark_content = bookmark.get_note_body()
 
             dialog = BookmarkEditDialog(
-                parent_xid=self.get_toplevel().window.xid,
+                parent_xid=self.get_toplevel().get_window(),
                 dialog_title=_("Add notes for bookmark: "),
                 bookmark_title=bookmark_title,
                 bookmark_content=bookmark_content, page=bookmark.page_no,
@@ -169,7 +169,7 @@ class Sidebar(Gtk.EventBox):
         bookmark_title = (_("%s's bookmark") % profile.get_nick_name())
         bookmark_content = (_("Bookmark for page %d") % page)
         dialog = BookmarkAddDialog(
-            parent_xid=self.get_toplevel().window.xid,
+            parent_xid=self.get_toplevel().get_window(),
             dialog_title=_("Add notes for bookmark: "),
             bookmark_title=bookmark_title,
             bookmark_content=bookmark_content, page=page,
