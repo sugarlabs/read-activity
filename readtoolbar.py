@@ -20,18 +20,11 @@ import logging
 from gi.repository import GObject
 from gi.repository import Gtk
 from gi.repository import Gdk
-import os
-import simplejson
 
-from sugar3.graphics.combobox import ComboBox
 from sugar3.graphics.toolbutton import ToolButton
-from sugar3.graphics.toggletoolbutton import ToggleToolButton
-from sugar3.graphics.toolcombobox import ToolComboBox
 from sugar3.graphics.menuitem import MenuItem
 from sugar3.graphics import iconentry
 from sugar3.activity.widgets import EditToolbar as BaseEditToolbar
-
-import speech
 
 
 class EditToolbar(BaseEditToolbar):
@@ -297,125 +290,3 @@ class ViewToolbar(Gtk.Toolbar):
 
     def _fullscreen_cb(self, button):
         self.emit('go-fullscreen')
-
-
-class SpeechToolbar(Gtk.Toolbar):
-
-    def __init__(self, activity):
-        Gtk.Toolbar.__init__(self)
-        voicebar = Gtk.Toolbar()
-        self._activity = activity
-        if not speech.supported:
-            return
-
-        self.load_speech_parameters()
-
-        self.sorted_voices = [i for i in speech.voices()]
-        self.sorted_voices.sort(self.compare_voices)
-        default = 0
-        for voice in self.sorted_voices:
-            if voice[0] == speech.voice[0]:
-                break
-            default = default + 1
-
-        # Play button
-        self.play_btn = ToggleToolButton('media-playback-start')
-        self.play_btn.show()
-        self.play_btn.connect('toggled', self.play_cb)
-        self.insert(self.play_btn, -1)
-        self.play_btn.set_tooltip(_('Play / Pause'))
-
-        self.voice_combo = ComboBox()
-        for voice in self.sorted_voices:
-            self.voice_combo.append_item(voice, voice[0])
-        self.voice_combo.set_active(default)
-
-        self.voice_combo.connect('changed', self.voice_changed_cb)
-        combotool = ToolComboBox(self.voice_combo)
-        self.insert(combotool, -1)
-        combotool.show()
-
-        self.pitchadj = Gtk.Adjustment(0, -100, 100, 1, 10, 0)
-        pitchbar = Gtk.HScale()
-        pitchbar.set_adjustment(self.pitchadj)
-        pitchbar.set_draw_value(False)
-        pitchbar.set_size_request(150, 15)
-        self.pitchadj.set_value(speech.pitch)
-        pitchtool = Gtk.ToolItem()
-        pitchtool.add(pitchbar)
-        pitchtool.show()
-        self.insert(pitchtool, -1)
-        pitchbar.show()
-
-        self.rateadj = Gtk.Adjustment(0, -100, 100, 1, 10, 0)
-        ratebar = Gtk.HScale()
-        ratebar.set_adjustment(self.rateadj)
-        ratebar.set_draw_value(False)
-        ratebar.set_size_request(150, 15)
-        self.rateadj.set_value(speech.rate)
-        ratetool = Gtk.ToolItem()
-        ratetool.add(ratebar)
-        ratetool.show()
-        self.insert(ratetool, -1)
-        ratebar.show()
-        self.pitchadj.connect("value_changed", self.pitch_adjusted_cb)
-        self.rateadj.connect("value_changed", self.rate_adjusted_cb)
-
-    def compare_voices(self,  a,  b):
-        if a[0].lower() == b[0].lower():
-            return 0
-        if a[0] .lower() < b[0].lower():
-            return -1
-        if a[0] .lower() > b[0].lower():
-            return 1
-
-    def voice_changed_cb(self, combo):
-        speech.voice = combo.props.value
-        speech.say(speech.voice[0])
-        self.save_speech_parameters()
-
-    def pitch_adjusted_cb(self, get):
-        speech.pitch = int(get.value)
-        speech.say(_("pitch adjusted"))
-        self.save_speech_parameters()
-
-    def rate_adjusted_cb(self, get):
-        speech.rate = int(get.value)
-        speech.say(_("rate adjusted"))
-        self.save_speech_parameters()
-
-    def load_speech_parameters(self):
-        speech_parameters = {}
-        data_path = os.path.join(self._activity.get_activity_root(), 'data')
-        data_file_name = os.path.join(data_path, 'speech_params.json')
-        if os.path.exists(data_file_name):
-            f = open(data_file_name, 'r')
-            try:
-                speech_parameters = simplejson.load(f)
-                speech.pitch = speech_parameters['pitch']
-                speech.rate = speech_parameters['rate']
-                speech.voice = speech_parameters['voice']
-            finally:
-                f.close()
-
-    def save_speech_parameters(self):
-        speech_parameters = {}
-        speech_parameters['pitch'] = speech.pitch
-        speech_parameters['rate'] = speech.rate
-        speech_parameters['voice'] = speech.voice
-        data_path = os.path.join(self._activity.get_activity_root(), 'data')
-        data_file_name = os.path.join(data_path, 'speech_params.json')
-        f = open(data_file_name, 'w')
-        try:
-            simplejson.dump(speech_parameters, f)
-        finally:
-            f.close()
-
-    def play_cb(self, widget):
-        if widget.get_active():
-            self.play_btn.set_named_icon('media-playback-pause')
-            if speech.is_stopped():
-                speech.play(self._activity._view.get_marked_words())
-        else:
-            self.play_btn.set_named_icon('media-playback-start')
-            speech.stop()

@@ -49,7 +49,6 @@ from sugar3.graphics.objectchooser import ObjectChooser
 
 from readtoolbar import EditToolbar
 from readtoolbar import ViewToolbar
-from readtoolbar import SpeechToolbar
 from readsidebar import Sidebar
 from readtopbar import TopBar
 from readdb import BookmarkManager
@@ -238,9 +237,7 @@ class ReadActivity(activity.Activity):
         toolbar_box.toolbar.insert(self._highlight_item, -1)
         self._highlight_item.show_all()
 
-        self.speech_toolbar = SpeechToolbar(self)
-        self.speech_toolbar_button = ToolbarButton(page=self.speech_toolbar,
-                    icon_name='speak')
+        self.speech_toolbar_button = ToolbarButton(icon_name='speak')
         toolbar_box.toolbar.insert(self.speech_toolbar_button, -1)
 
         separator = Gtk.SeparatorToolItem()
@@ -835,8 +832,10 @@ class ReadActivity(activity.Activity):
             self._highlight_item.hide()
         if self._view.can_do_text_to_speech():
             import speech
+            from speechtoolbar import SpeechToolbar
             if speech.supported:
-                self.speech_toolbar_button.show()
+                self.speech_toolbar = SpeechToolbar(self)
+                self.speech_toolbar_button.set_page(self.speech_toolbar)
                 self.speech_toolbar_button.show()
 
     def _share_document(self):
