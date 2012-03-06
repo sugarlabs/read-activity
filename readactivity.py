@@ -39,7 +39,6 @@ from sugar3.graphics.toolbarbox import ToolbarBox
 from sugar3.graphics.toolbarbox import ToolbarButton
 from sugar3.graphics.toolcombobox import ToolComboBox
 from sugar3.graphics.toggletoolbutton import ToggleToolButton
-from sugar3.graphics.menuitem import MenuItem
 from sugar3.activity.widgets import ActivityToolbarButton
 from sugar3.activity.widgets import StopButton
 from sugar3 import network
