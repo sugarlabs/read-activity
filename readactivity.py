@@ -53,7 +53,6 @@ from readtoolbar import SpeechToolbar
 from readsidebar import Sidebar
 from readtopbar import TopBar
 from readdb import BookmarkManager
-import speech
 from sugarmenuitem import SugarMenuItem
 
 _HARDWARE_MANAGER_INTERFACE = 'org.laptop.HardwareManager'
@@ -834,9 +833,11 @@ class ReadActivity(activity.Activity):
         self._view_toolbar._update_zoom_buttons()
         if not self._view.can_highlight():
             self._highlight_item.hide()
-        if speech.supported and self._view.can_do_text_to_speech():
-            self.speech_toolbar_button.show()
-            self.speech_toolbar_button.show()
+        if self._view.can_do_text_to_speech():
+            import speech
+            if speech.supported:
+                self.speech_toolbar_button.show()
+                self.speech_toolbar_button.show()
 
     def _share_document(self):
         """Share the document."""
