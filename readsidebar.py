@@ -81,13 +81,14 @@ class Sidebar(Gtk.EventBox):
 
     def __bookmark_icon_query_tooltip_cb(self, widget, x, y, keyboard_mode,
             tip, bookmark):
-        tooltip_header = bookmark.get_note_title().encode('utf-8')
-        tooltip_body = bookmark.get_note_body().encode('utf-8')
+        tooltip_header = bookmark.get_note_title()
+        tooltip_body = bookmark.get_note_body()
+        time = timestamp_to_elapsed_string(bookmark.timestamp)
         #TRANS: This goes like Bookmark added by User 5 days ago
         #TRANS: (the elapsed string gets translated automatically)
         tooltip_footer = (_('Bookmark added by %(user)s %(time)s') \
-                % {'user': bookmark.nick,
-                'time': timestamp_to_elapsed_string(bookmark.timestamp)})
+                % {'user': bookmark.nick.decode('utf-8'),
+                'time': time.decode('utf-8')})
 
         vbox = Gtk.VBox()
 
@@ -104,7 +105,7 @@ class Sidebar(Gtk.EventBox):
         l.set_padding(2, 6)
         l.set_width_chars(40)
         l.set_line_wrap(True)
-        l.set_justify(Gtk.JUSTIFY_FILL)
+        l.set_justify(Gtk.Justification.FILL)
         vbox.pack_start(l, True, True, 0)
         l.show()
 
