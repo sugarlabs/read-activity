@@ -167,13 +167,16 @@ class _JobPaginator(GObject.GObject):
         self._bookheight += pageheight
 
         if self._count + 1 >= len(self._filelist):
-            self._temp_win.destroy()
             # TODO
             #self._screen.set_font_options(self._old_fontoptions)
             self.emit('paginated')
+            GObject.idle_add(self._cleanup)
         else:
             self._count += 1
             self._temp_view.open(self._filelist[self._count])
+
+    def _cleanup(self):
+        self._temp_win.destroy()
 
     def get_file_for_pageno(self, pageno):
         '''
