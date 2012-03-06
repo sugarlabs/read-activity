@@ -19,6 +19,7 @@ import simplejson
 from gettext import gettext as _
 
 from gi.repository import Gtk
+from gi.repository import GConf
 
 from sugar3.graphics.toggletoolbutton import ToggleToolButton
 from sugar3.graphics.combobox import ComboBox
@@ -35,6 +36,7 @@ class SpeechToolbar(Gtk.Toolbar):
         if not speech.supported:
             return
 
+        self._cnf_client = GConf.Client.get_default()
         self.load_speech_parameters()
 
         self.sorted_voices = [i for i in speech.voices()]
@@ -84,12 +86,25 @@ class SpeechToolbar(Gtk.Toolbar):
             try:
                 speech_parameters = simplejson.load(f)
                 speech.voice = speech_parameters['voice']
-
-                # load from gconf
-                #speech.pitch = speech_parameters['pitch']
-                #speech.rate = speech_parameters['rate']
             finally:
                 f.close()
+
+        self._cnf_client.add_dir('/desktop/sugar/speech',
+                GConf.ClientPreloadType.PRELOAD_NONE)
+        speech.pitch = self._cnf_client.get_int('/desktop/sugar/speech/pitch')
+        speech.rate = self._cnf_client.get_int('/desktop/sugar/speech/rate')
+        self._cnf_client.notify_add('/desktop/sugar/speech/pitch', \
+                self.__conf_changed_cb, None)
+        self._cnf_client.notify_add('/desktop/sugar/speech/rate', \
+                self.__conf_changed_cb, None)
+
+    def __conf_changed_cb(self, client, connection_id, entry, args):
+        key = entry.get_key()
+        value = client.get_int(key)
+        if key == '/desktop/sugar/speech/pitch':
+            speech.pitch = value
+        if key == '/desktop/sugar/speech/rate':
+            speech.rate = value
 
     def save_speech_parameters(self):
         speech_parameters = {}
