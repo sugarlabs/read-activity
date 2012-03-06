@@ -16,7 +16,6 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import logging
-import time
 
 from gi.repository import Gtk
 from gi.repository import Gdk
@@ -27,8 +26,6 @@ from sugar3 import profile
 from sugar3.util import timestamp_to_elapsed_string
 from sugar3.graphics import style
 
-from readbookmark import Bookmark
-from readdb import BookmarkManager
 from readdialog import BookmarkAddDialog, BookmarkEditDialog
 
 from gettext import gettext as _

@@ -2,7 +2,6 @@
 
 # Stolen from the PyGTK demo module by Maik Hertha <maik.hertha@berlin.de>
 
-from gi.repository import GObject
 from gi.repository import Gtk
 from gi.repository import Gdk
 
