@@ -28,6 +28,9 @@ import dbus
 from gi.repository import GObject
 from gi.repository import Gtk
 from gi.repository import Gdk
+
+GObject.threads_init()
+
 import telepathy
 
 from sugar3.activity import activity
@@ -51,9 +54,6 @@ from readtoolbar import SpeechToolbar
 from readsidebar import Sidebar
 from readtopbar import TopBar
 from readdb import BookmarkManager
-import epubadapter
-import evinceadapter
-import textadapter
 import speech
 from sugarmenuitem import SugarMenuItem
 
@@ -788,10 +788,13 @@ class ReadActivity(activity.Activity):
             return
         mimetype = mime.get_for_file(filepath)
         if mimetype == 'application/epub+zip':
+            import epubadapter
             self._view = epubadapter.EpubViewer()
         elif mimetype == 'text/plain' or mimetype == 'application/zip':
+            import textadapter
             self._view = textadapter.TextViewer()
         else:
+            import evinceadapter
             self._view = evinceadapter.EvinceViewer()
 
         self._view.setup(self)

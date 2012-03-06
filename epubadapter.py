@@ -2,6 +2,7 @@ from gi.repository import GObject
 import logging
 
 import epubview
+
 import speech
 
 from cStringIO import StringIO
