@@ -1,9 +1,17 @@
+from gettext import gettext as _
+import os
+import logging
+import time
+
 from gi.repository import GObject
 from gi.repository import Gtk
-import logging
 
 from gi.repository import EvinceDocument
 from gi.repository import EvinceView
+
+from sugar3 import profile
+from sugar3.activity.activity import get_activity_root, show_object_in_journal
+from sugar3.datastore import datastore
 
 _logger = logging.getLogger('read-activity')
 
@@ -19,6 +27,7 @@ class EvinceViewer():
         self._activity = activity
         self._view.connect('selection-changed',
                             activity._view_selection_changed_cb)
+        self._view.connect('external-link', self.__handle_link_cb)
 
         activity._scrolled = Gtk.ScrolledWindow()
         activity._scrolled.set_policy(Gtk.PolicyType.AUTOMATIC,
@@ -56,6 +65,28 @@ class EvinceViewer():
             self._model.set_min_scale(min_scale * self.dpi / 72.0)
             self._model.set_max_scale(max_scale * self.dpi / 72.0)
             """
+
+    def __handle_link_cb(self, widget, url_object):
+        url = url_object.get_uri()
+        logging.debug('Create journal entry for URL: %s', url)
+        jobject = datastore.create()
+        metadata = {
+            'title': "%s: %s" % (_('URL from Read'), url),
+            'title_set_by_user': '1',
+            'icon-color': profile.get_color().to_string(),
+            'mime_type': 'text/uri-list',
+            }
+        for k, v in metadata.items():
+            jobject.metadata[k] = v
+        file_path = os.path.join(get_activity_root(),
+                'instance', '%i_' % time.time())
+        open(file_path, 'w').write(url + '\r\n')
+        os.chmod(file_path, 0755)
+        jobject.set_file_path(file_path)
+        datastore.write(jobject)
+        show_object_in_journal(jobject.object_id)
+        jobject.destroy()
+        os.unlink(file_path)
 
     def get_current_page(self):
         return self._model.props.page
