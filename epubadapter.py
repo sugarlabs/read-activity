@@ -71,7 +71,8 @@ class EpubViewer(epubview.EpubView):
         if end_range > len(self.word_tuples):
             end_range = len(self.word_tuples)
         for word_tuple in self.word_tuples[self.current_word:end_range]:
-            file_str.write('<mark name="' + str(i) + '"/>' + word_tuple[2])
+            file_str.write('<mark name="' + str(i) + '"/>' + \
+                    word_tuple[2].encode('utf-8'))
             i = i + 1
         self.current_word = i
         file_str.write('</speak>')
