@@ -29,6 +29,7 @@ class EpubViewer(epubview.EpubView):
     def load_document(self, file_path):
         self.set_document(EpubDocument(self, file_path.replace('file://', '')))
         speech.highlight_cb = self.highlight_next_word
+        speech.reset_cb = self.reset_text_to_speech
         speech.end_text_cb = self.get_more_text
 
     def load_metadata(self, activity):
@@ -81,6 +82,12 @@ class EpubViewer(epubview.EpubView):
             speech.stop()
             more_text = self.get_marked_words()
             speech.play(more_text)
+        else:
+            if speech.reset_buttons_cb is not None:
+                speech.reset_buttons_cb()
+
+    def reset_text_to_speech(self):
+        self.current_word = 0
 
     def highlight_next_word(self,  word_count):
         pass

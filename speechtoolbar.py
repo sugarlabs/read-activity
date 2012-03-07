@@ -21,6 +21,7 @@ from gettext import gettext as _
 from gi.repository import Gtk
 from gi.repository import GConf
 
+from sugar3.graphics.toolbutton import ToolButton
 from sugar3.graphics.toggletoolbutton import ToggleToolButton
 from sugar3.graphics.combobox import ComboBox
 from sugar3.graphics.toolcombobox import ToolComboBox
@@ -54,6 +55,14 @@ class SpeechToolbar(Gtk.Toolbar):
         self.insert(self.play_btn, -1)
         self.play_btn.set_tooltip(_('Play / Pause'))
 
+        # Stop button
+        self.stop_btn = ToolButton('media-playback-stop')
+        self.stop_btn.show()
+        self.stop_btn.connect('clicked', self.stop_cb)
+        self.stop_btn.set_sensitive(False)
+        self.insert(self.stop_btn, -1)
+        self.stop_btn.set_tooltip(_('Stop'))
+
         self.voice_combo = ComboBox()
         for voice in self.sorted_voices:
             self.voice_combo.append_item(voice, voice[0])
@@ -63,6 +72,7 @@ class SpeechToolbar(Gtk.Toolbar):
         combotool = ToolComboBox(self.voice_combo)
         self.insert(combotool, -1)
         combotool.show()
+        speech.reset_buttons_cb = self.reset_buttons_cb
 
     def compare_voices(self,  a,  b):
         if a[0].lower() == b[0].lower():
@@ -117,11 +127,23 @@ class SpeechToolbar(Gtk.Toolbar):
         finally:
             f.close()
 
+    def reset_buttons_cb(self):
+        logging.error('reset buttons')
+        self.play_btn.set_named_icon('media-playback-start')
+        self.stop_btn.set_sensitive(False)
+
     def play_cb(self, widget):
+        self.stop_btn.set_sensitive(True)
         if widget.get_active():
             self.play_btn.set_named_icon('media-playback-pause')
             if speech.is_stopped():
                 speech.play(self._activity._view.get_marked_words())
         else:
             self.play_btn.set_named_icon('media-playback-start')
-            speech.stop()
+            speech.pause()
+
+    def stop_cb(self, widget):
+        self.stop_btn.set_sensitive(False)
+        self.play_btn.set_named_icon('media-playback-start')
+        self.play_btn.set_active(False)
+        speech.stop()

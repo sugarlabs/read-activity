@@ -44,3 +44,4 @@ rate = 0
 highlight_cb = None
 end_text_cb = None
 reset_cb = None
+reset_buttons_cb = None

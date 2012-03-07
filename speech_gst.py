@@ -25,6 +25,7 @@ _logger = logging.getLogger('read-etexts-activity')
 
 
 def _message_cb(bus, message, pipe):
+    logging.error('gstreamer message %s', message)
     if message is None:
         return
     if message.type == Gst.Message.EOS:
@@ -34,7 +35,10 @@ def _message_cb(bus, message, pipe):
     if message.type == Gst.Message.ERROR:
         pipe.set_state(Gst.State.NULL)
         if pipe is play_speaker[1]:
-            speech.reset_cb()
+            if speech.reset_cb is not None:
+                speech.reset_cb()
+            if speech.reset_buttons_cb is not None:
+                speech.reset_buttons_cb()
     elif message.type == Gst.Message.ELEMENT and \
             message.structure.get_name() == 'espeak-mark':
         mark = message.structure['mark']
@@ -54,7 +58,9 @@ def _create_pipe():
 
     bus = pipe.get_bus()
     bus.add_signal_watch()
+    logging.error('before adding message callback')
     bus.connect('message', _message_cb, pipe)
+    logging.error('ater adding message callback')
 
     return (source, pipe)
 
@@ -92,5 +98,14 @@ def is_stopped():
     return False
 
 
+def pause():
+    play_speaker[1].set_state(Gst.State.NULL)
+
+
 def stop():
     play_speaker[1].set_state(Gst.State.NULL)
+    play_speaker[0].props.text = ''
+    if speech.reset_cb is not None:
+        speech.reset_cb()
+    if speech.reset_buttons_cb is not None:
+        speech.reset_buttons_cb()

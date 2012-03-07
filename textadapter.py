@@ -106,6 +106,7 @@ class TextViewer(GObject.GObject):
         self.set_current_page(0)
 
         speech.highlight_cb = self.highlight_next_word
+        speech.reset_cb = self.reset_text_to_speech
 
     def _show_page(self, page_number):
         position = self.page_index[page_number]
@@ -166,6 +167,9 @@ class TextViewer(GObject.GObject):
             i = i + 1
         print marked_up_text
         return marked_up_text + '</speak>'
+
+    def reset_text_to_speech(self):
+        self.current_word = 0
 
     def _prepare_text_to_speech(self, page_text):
         i = 0

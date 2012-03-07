@@ -55,6 +55,10 @@ def is_stopped():
     return done
 
 
+def pause():
+    pass
+
+
 def stop():
     global done
     done = True
@@ -113,6 +117,9 @@ class EspeakThread(threading.Thread):
             Gdk.threads_enter()
             if speech.reset_cb is not None:
                 speech.reset_cb()
+            if speech.reset_buttons_cb is not None:
+                speech.reset_buttons_cb()
+
             Gdk.threads_leave()
             global done
             done = True
