@@ -14,150 +14,156 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-07 00:33-0500\n"
-"PO-Revision-Date: 2011-08-16 01:56+0200\n"
+"POT-Creation-Date: 2012-03-08 00:34-0500\n"
+"PO-Revision-Date: 2012-03-16 21:52+0200\n"
 "Last-Translator: Aputsiaq Niels <aj@isit.gl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.1\n"
+"X-Generator: Pootle 2.0.5\n"
 
 #: activity/activity.info:2
 msgid "Read"
 msgstr "Læs"
 
-#: readactivity.py:239
+#: evinceadapter.py:74
+msgid "URL from Read"
+msgstr "URL fra Læs"
+
+#: readactivity.py:232
 msgid "Highlight"
 msgstr "Fremhæv"
 
-#: readactivity.py:350
+#: readactivity.py:341
 msgid "Back"
 msgstr "Tilbage"
 
-#: readactivity.py:353
+#: readactivity.py:346
 msgid "Previous page"
 msgstr "Forrige side"
 
-#: readactivity.py:356
+#: readactivity.py:348
 msgid "Previous bookmark"
 msgstr "Forrige bogmærke"
 
-#: readactivity.py:366
+#: readactivity.py:363
 msgid "Forward"
 msgstr "Frem"
 
-#: readactivity.py:369
+#: readactivity.py:368
 msgid "Next page"
 msgstr "Næste side"
 
-#: readactivity.py:372
+#: readactivity.py:370
 msgid "Next bookmark"
 msgstr "Næste bogmærke"
 
-#: readdialog.py:52
+#: readdialog.py:51
 msgid "Cancel"
 msgstr "Annullér"
 
-#: readdialog.py:58
+#: readdialog.py:57
 msgid "Ok"
 msgstr "Ok"
 
-#: readdialog.py:113
+#: readdialog.py:112
 msgid "<b>Title</b>:"
 msgstr "<b>Titel</b>:"
 
-#: readdialog.py:139
+#: readdialog.py:138
 msgid "<b>Details</b>:"
 msgstr "<b>Detaljer</b>:"
 
 #. TRANS: This goes like Bookmark added by User 5 days ago
 #. TRANS: (the elapsed string gets translated automatically)
-#: readsidebar.py:88
+#: readsidebar.py:86
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
 msgstr "Bogmærker tilføjet af %(user)s %(time)s"
 
-#: readsidebar.py:131 readsidebar.py:173
+#: readsidebar.py:129 readsidebar.py:171
 msgid "Add notes for bookmark: "
 msgstr "Tilføj noter til bogmærke: "
 
-#: readsidebar.py:169
+#: readsidebar.py:167
 #, python-format
 msgid "%s's bookmark"
 msgstr "%s's bogmærke"
 
-#: readsidebar.py:170
+#: readsidebar.py:168
 #, python-format
 msgid "Bookmark for page %d"
 msgstr "Bogmærke for side %d"
 
-#: readtoolbar.py:68
+#: readtoolbar.py:61
 msgid "Previous"
 msgstr "Forrige"
 
-#: readtoolbar.py:75
+#: readtoolbar.py:68
 msgid "Next"
 msgstr "Næste"
 
-#: readtoolbar.py:158
+#: readtoolbar.py:151
 msgid "Find first"
 msgstr "Find første"
 
-#: readtoolbar.py:164
+#: readtoolbar.py:157
 msgid "Find previous"
 msgstr "Find forrige"
 
-#: readtoolbar.py:166
+#: readtoolbar.py:159
 msgid "Find next"
 msgstr "Find næste"
 
-#: readtoolbar.py:183
+#: readtoolbar.py:176
 msgid "Zoom out"
 msgstr "Formindsk"
 
-#: readtoolbar.py:189
+#: readtoolbar.py:182
 msgid "Zoom in"
 msgstr "Forstør"
 
-#: readtoolbar.py:195
+#: readtoolbar.py:188
 msgid "Zoom to width"
 msgstr "Tilpas til bredde"
 
-#: readtoolbar.py:201
+#: readtoolbar.py:194
 msgid "Zoom to fit"
 msgstr "Zoomtilpasning"
 
-#: readtoolbar.py:206
+#: readtoolbar.py:199
 msgid "Actual size"
 msgstr "Aktuel størrelse"
 
-#: readtoolbar.py:223
+#: readtoolbar.py:216
 msgid "%"
 msgstr "%"
 
-#: readtoolbar.py:236
+#: readtoolbar.py:229
 msgid "Fullscreen"
 msgstr "Fuldskærm"
-
-#: readtoolbar.py:326
-msgid "Play / Pause"
-msgstr "Afspil / Pause"
-
-#: readtoolbar.py:379
-msgid "pitch adjusted"
-msgstr "tonehøjde tilpasset"
-
-#: readtoolbar.py:384
-msgid "rate adjusted"
-msgstr "hastighed tilpasset"
 
 #: readtopbar.py:140
 #, python-format
 msgid "Page %(current)i of %(total_pages)i"
 msgstr "Side %(current)i af %(total_pages)i"
+
+#: speechtoolbar.py:56
+msgid "Play / Pause"
+msgstr "Afspil / Pause"
+
+#: speechtoolbar.py:64
+msgid "Stop"
+msgstr "Stop"
+
+#~ msgid "pitch adjusted"
+#~ msgstr "tonehøjde tilpasset"
+
+#~ msgid "rate adjusted"
+#~ msgstr "hastighed tilpasset"
 
 #~ msgid "Choose document"
 #~ msgstr "Vælg dokument"
