@@ -14,144 +14,155 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-22 00:32-0500\n"
-"PO-Revision-Date: 2008-07-31 12:01+0200\n"
-"Last-Translator: GASHAYIJA Guillaume <gashayija2002@yahoo.com>\n"
+"POT-Creation-Date: 2012-03-08 00:34-0500\n"
+"PO-Revision-Date: 2011-10-16 21:17+0200\n"
+"Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.0.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1) ;\n"
+"X-Generator: Pootle 2.0.5\n"
 
 #: activity/activity.info:2
 msgid "Read"
 msgstr "Soma"
 
-#: readactivity.py:242
-msgid "Highlight"
+#: evinceadapter.py:74
+msgid "URL from Read"
 msgstr ""
 
-#: readactivity.py:345
+#: readactivity.py:232
+#, fuzzy
+msgid "Highlight"
+msgstr "Igaragaza cyane"
+
+#: readactivity.py:341
 msgid "Back"
 msgstr "Inyuma"
 
-#: readactivity.py:348
+#: readactivity.py:346
+#, fuzzy
 msgid "Previous page"
-msgstr ""
+msgstr "Ipaji ibanje"
 
-#: readactivity.py:351
+#: readactivity.py:348
+#, fuzzy
 msgid "Previous bookmark"
-msgstr ""
+msgstr "Akamenyetso kabanza"
 
-#: readactivity.py:361
+#: readactivity.py:363
 msgid "Forward"
 msgstr "Imbere"
 
-#: readactivity.py:364
+#: readactivity.py:368
+#, fuzzy
 msgid "Next page"
-msgstr ""
+msgstr "Ipaji ikurikira"
 
-#: readactivity.py:367
+#: readactivity.py:370
+#, fuzzy
 msgid "Next bookmark"
-msgstr ""
-
-#: readactivity.py:582
-msgid "Choose document"
-msgstr ""
+msgstr "Akamenyetso gakurikira"
 
 #: readdialog.py:51
 msgid "Cancel"
-msgstr ""
+msgstr "Kureka"
 
 #: readdialog.py:57
+#, fuzzy
 msgid "Ok"
-msgstr ""
+msgstr "Yego"
 
-#: readdialog.py:111
+#: readdialog.py:112
 msgid "<b>Title</b>:"
-msgstr ""
+msgstr "<b>Umutwe</b>:"
 
-#: readdialog.py:137
+#: readdialog.py:138
 msgid "<b>Details</b>:"
-msgstr ""
+msgstr "<b>Birambuye</b>:"
 
-#. TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
-#. TRANS: automatically)
+#. TRANS: This goes like Bookmark added by User 5 days ago
+#. TRANS: (the elapsed string gets translated automatically)
 #: readsidebar.py:86
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
 msgstr ""
 
-#: readsidebar.py:128 readsidebar.py:169
+#: readsidebar.py:129 readsidebar.py:171
 msgid "Add notes for bookmark: "
 msgstr ""
 
-#: readsidebar.py:165
+#: readsidebar.py:167
 #, python-format
 msgid "%s's bookmark"
 msgstr ""
 
-#: readsidebar.py:166
+#: readsidebar.py:168
 #, python-format
 msgid "Bookmark for page %d"
 msgstr ""
 
-#: readtoolbar.py:65
+#: readtoolbar.py:61
 msgid "Previous"
 msgstr "Ibibanziriza"
 
-#: readtoolbar.py:72
+#: readtoolbar.py:68
 msgid "Next"
 msgstr "Ibikurikira"
 
-#: readtoolbar.py:155
+#: readtoolbar.py:151
 msgid "Find first"
 msgstr "Shaka mbere"
 
-#: readtoolbar.py:161
+#: readtoolbar.py:157
 msgid "Find previous"
 msgstr "Shaka Ibibanziriza"
 
-#: readtoolbar.py:163
+#: readtoolbar.py:159
 msgid "Find next"
 msgstr "Shaka ibikurikira"
 
-#: readtoolbar.py:179
+#: readtoolbar.py:176
 msgid "Zoom out"
 msgstr "Kwagura"
 
-#: readtoolbar.py:185
+#: readtoolbar.py:182
 msgid "Zoom in"
 msgstr "Kugabanya"
 
-#: readtoolbar.py:191
+#: readtoolbar.py:188
 msgid "Zoom to width"
 msgstr "Agura ukigira kigari"
 
-#: readtoolbar.py:197
+#: readtoolbar.py:194
 msgid "Zoom to fit"
 msgstr "Agura ikntu ugira ngo gikwire ahantu"
 
-#: readtoolbar.py:202
+#: readtoolbar.py:199
 msgid "Actual size"
 msgstr "Ingano nyayo"
 
-#: readtoolbar.py:219
+#: readtoolbar.py:216
 msgid "%"
 msgstr "%"
 
-#: readtoolbar.py:232
+#: readtoolbar.py:229
 msgid "Fullscreen"
 msgstr "Ekarayose"
 
-#: readtoolbar.py:329
+#: readtopbar.py:140
+#, python-format
+msgid "Page %(current)i of %(total_pages)i"
+msgstr ""
+
+#: speechtoolbar.py:56
 msgid "Play / Pause"
 msgstr ""
 
-#. TRANS: Translate this as Page i of m (eg: Page 4 of 334)
-#: readtopbar.py:206
-#, python-format
-msgid "Page %i of %i"
+#: speechtoolbar.py:64
+msgid "Stop"
 msgstr ""
 
 #~ msgid "Edit"
