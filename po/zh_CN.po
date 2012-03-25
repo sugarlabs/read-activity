@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: OLPC XBook\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-08 00:34-0500\n"
-"PO-Revision-Date: 2012-03-25 06:51+0200\n"
+"PO-Revision-Date: 2012-03-25 07:31+0200\n"
 "Last-Translator: Xin <dram.wang@gmail.com>\n"
 "Language-Team: Yuan CHAO <yuanchao@gmail.com>\n"
 "Language: zh_CN\n"
@@ -27,7 +27,7 @@ msgstr "阅读"
 
 #: evinceadapter.py:74
 msgid "URL from Read"
-msgstr ""
+msgstr "来自阅读的网址"
 
 #: readactivity.py:232
 msgid "Highlight"
