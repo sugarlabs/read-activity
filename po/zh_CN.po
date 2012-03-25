@@ -11,14 +11,15 @@ msgstr ""
 "Project-Id-Version: OLPC XBook\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-08 00:34-0500\n"
-"PO-Revision-Date: 2008-11-25 05:13-0500\n"
-"Last-Translator: Alice Zhang <zhl924505@gmail.com>\n"
+"PO-Revision-Date: 2012-03-25 06:51+0200\n"
+"Last-Translator: Xin <dram.wang@gmail.com>\n"
 "Language-Team: Yuan CHAO <yuanchao@gmail.com>\n"
-"Language: \n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Pootle 1.1.0rc2\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Pootle 2.0.5\n"
 
 #: activity/activity.info:2
 msgid "Read"
@@ -30,68 +31,68 @@ msgstr ""
 
 #: readactivity.py:232
 msgid "Highlight"
-msgstr ""
+msgstr "高亮"
 
 #: readactivity.py:341
 msgid "Back"
-msgstr "上一页"
+msgstr "后退"
 
 #: readactivity.py:346
 msgid "Previous page"
-msgstr ""
+msgstr "上一页"
 
 #: readactivity.py:348
 msgid "Previous bookmark"
-msgstr ""
+msgstr "上一个书签"
 
 #: readactivity.py:363
 msgid "Forward"
-msgstr "下一页"
+msgstr "前进"
 
 #: readactivity.py:368
 msgid "Next page"
-msgstr ""
+msgstr "下一页"
 
 #: readactivity.py:370
 msgid "Next bookmark"
-msgstr ""
+msgstr "下一个书签"
 
 #: readdialog.py:51
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 #: readdialog.py:57
 msgid "Ok"
-msgstr ""
+msgstr "确定"
 
 #: readdialog.py:112
 msgid "<b>Title</b>:"
-msgstr ""
+msgstr "<b>标题</b>："
 
 #: readdialog.py:138
 msgid "<b>Details</b>:"
-msgstr ""
+msgstr "<b>详细说明</b>："
 
 #. TRANS: This goes like Bookmark added by User 5 days ago
 #. TRANS: (the elapsed string gets translated automatically)
 #: readsidebar.py:86
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
-msgstr ""
+msgstr "由 %(user)s 在 %(time)s 加入的书签"
 
 #: readsidebar.py:129 readsidebar.py:171
 msgid "Add notes for bookmark: "
-msgstr ""
+msgstr "为书签添加说明："
 
 #: readsidebar.py:167
 #, python-format
 msgid "%s's bookmark"
-msgstr ""
+msgstr "%s 的书签"
 
 #: readsidebar.py:168
 #, python-format
 msgid "Bookmark for page %d"
-msgstr ""
+msgstr "第 %d 页的书签"
 
 #: readtoolbar.py:61
 msgid "Previous"
@@ -144,15 +145,15 @@ msgstr "全屏显示"
 #: readtopbar.py:140
 #, python-format
 msgid "Page %(current)i of %(total_pages)i"
-msgstr ""
+msgstr "%(current)i / %(total_pages)i"
 
 #: speechtoolbar.py:56
 msgid "Play / Pause"
-msgstr ""
+msgstr "播放 / 暂停"
 
 #: speechtoolbar.py:64
 msgid "Stop"
-msgstr ""
+msgstr "停止"
 
 #~ msgid "Choose document"
 #~ msgstr "选择文档"
