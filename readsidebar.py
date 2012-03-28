@@ -58,7 +58,7 @@ class Sidebar(Gtk.EventBox):
         self.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
 
     def _add_bookmark_icon(self, bookmark):
-        xocolor = XoColor(bookmark.color)
+        xocolor = XoColor(str(bookmark.color))
         self._bookmark_icon = Icon(icon_name='emblem-favorite', pixel_size=18,
                                    xo_color=xocolor)
 
