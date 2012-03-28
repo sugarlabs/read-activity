@@ -22,6 +22,7 @@ class BaseReadDialog(Gtk.Window):
         self.set_decorated(False)
         self.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
         self.set_border_width(style.LINE_WIDTH)
+        self.set_resizable(False)
 
         width = Gdk.Screen.width() - style.GRID_CELL_SIZE * 4
         height = Gdk.Screen.height() - style.GRID_CELL_SIZE * 4
@@ -73,11 +74,10 @@ class BaseReadDialog(Gtk.Window):
         self._canvas = canvas
 
     def __realize_cb(self, widget):
-        self.get_window().set_type_hint(Gdk.WindowType._HINT_DIALOG)
+        self.get_window().set_type_hint(Gdk.WindowTypeHint.DIALOG)
         self.get_window().set_accept_focus(True)
-
-        parent = Gdk.window_foreign_new(self._parent_window_xid)
-        self.get_window().set_transient_for(parent)
+        self.get_window().set_decorations(Gdk.WMDecoration.BORDER)
+        self.get_window().set_transient_for(self._parent_window_xid)
 
         self.modify_bg(Gtk.StateType.NORMAL,
                             style.COLOR_WHITE.get_gdk_color())
