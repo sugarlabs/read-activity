@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-05 11:05-0300\n"
+"POT-Creation-Date: 2012-03-08 00:34-0500\n"
 "PO-Revision-Date: 2010-01-29 08:28+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,104 +29,27 @@ msgstr ""
 msgid "Read"
 msgstr "পড়"
 
-#: readtoolbar.py:67
-msgid "Previous"
-msgstr "পুর্ববর্তী"
-
-#: readtoolbar.py:74
-msgid "Next"
-msgstr "পরবর্তী"
-
-#: readtoolbar.py:157
-msgid "Find first"
-msgstr "প্রথমটি খুঁজো"
-
-#: readtoolbar.py:163
-msgid "Find previous"
-msgstr "আগেরটি খুঁজো"
-
-#: readtoolbar.py:165
-msgid "Find next"
-msgstr "পরেরটি খুঁজো"
-
-#: readtoolbar.py:181
-msgid "Zoom out"
-msgstr "ছোট করো"
-
-#: readtoolbar.py:187
-msgid "Zoom in"
-msgstr "বড় করো"
-
-#: readtoolbar.py:193
-msgid "Zoom to width"
-msgstr "প্রস্থ অনুসারে বড় করো"
-
-#: readtoolbar.py:199
-msgid "Zoom to fit"
-msgstr "প্রয়োজন অনুসারে বড় করো"
-
-#: readtoolbar.py:204
-msgid "Actual size"
-msgstr "আসল আকার"
-
-#: readtoolbar.py:221
-msgid "%"
-msgstr "%"
-
-#: readtoolbar.py:234
-msgid "Fullscreen"
-msgstr "পর্দা জুড়ে প্রদর্শন"
-
-#: readtoolbar.py:324
-msgid "Play / Pause"
+#: evinceadapter.py:74
+msgid "URL from Read"
 msgstr ""
 
-#: readtoolbar.py:377
-msgid "pitch adjusted"
-msgstr ""
-
-#: readtoolbar.py:382
-msgid "rate adjusted"
-msgstr ""
-
-#. TRANS: This goes like Bookmark added by User 5 days ago
-#. TRANS: (the elapsed string gets translated automatically)
-#: readsidebar.py:88
-#, python-format
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr "বুকমার্ক যুক্ত করেছে %(user)s %(time)s"
-
-#: readsidebar.py:131 readsidebar.py:173
-msgid "Add notes for bookmark: "
-msgstr "বুকমার্কের জন্য নোট যুক্ত করো: "
-
-#: readsidebar.py:169
-#, python-format
-msgid "%s's bookmark"
-msgstr "%s এর বুকমার্ক"
-
-#: readsidebar.py:170
-#, python-format
-msgid "Bookmark for page %d"
-msgstr "%d পাতার বুকমার্ক"
-
-#: readactivity.py:239
+#: readactivity.py:232
 msgid "Highlight"
 msgstr ""
 
-#: readactivity.py:349
+#: readactivity.py:341
 msgid "Back"
 msgstr "পেছনে"
 
-#: readactivity.py:352
+#: readactivity.py:346
 msgid "Previous page"
 msgstr "পূর্ববর্তী পাতা"
 
-#: readactivity.py:355
+#: readactivity.py:348
 msgid "Previous bookmark"
 msgstr "পূর্ববর্তী বুকমার্ক"
 
-#: readactivity.py:365
+#: readactivity.py:363
 msgid "Forward"
 msgstr "সামনে"
 
@@ -134,18 +57,9 @@ msgstr "সামনে"
 msgid "Next page"
 msgstr "পরবর্তী পাতা"
 
-#: readactivity.py:371
+#: readactivity.py:370
 msgid "Next bookmark"
 msgstr "পরবর্তী বুকমার্ক"
-
-#: readactivity.py:570
-msgid "Choose document"
-msgstr "নথি বেছে নাও"
-
-#: readtopbar.py:141
-#, python-format
-msgid "Page %(current)i of %(total_pages)i"
-msgstr ""
 
 #: readdialog.py:51
 msgid "Cancel"
@@ -162,6 +76,91 @@ msgstr "<b>শিরোনাম</b>:"
 #: readdialog.py:138
 msgid "<b>Details</b>:"
 msgstr "<b>বিস্তারিত</b>:"
+
+#. TRANS: This goes like Bookmark added by User 5 days ago
+#. TRANS: (the elapsed string gets translated automatically)
+#: readsidebar.py:86
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "বুকমার্ক যুক্ত করেছে %(user)s %(time)s"
+
+#: readsidebar.py:129 readsidebar.py:171
+msgid "Add notes for bookmark: "
+msgstr "বুকমার্কের জন্য নোট যুক্ত করো: "
+
+#: readsidebar.py:167
+#, python-format
+msgid "%s's bookmark"
+msgstr "%s এর বুকমার্ক"
+
+#: readsidebar.py:168
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "%d পাতার বুকমার্ক"
+
+#: readtoolbar.py:61
+msgid "Previous"
+msgstr "পুর্ববর্তী"
+
+#: readtoolbar.py:68
+msgid "Next"
+msgstr "পরবর্তী"
+
+#: readtoolbar.py:151
+msgid "Find first"
+msgstr "প্রথমটি খুঁজো"
+
+#: readtoolbar.py:157
+msgid "Find previous"
+msgstr "আগেরটি খুঁজো"
+
+#: readtoolbar.py:159
+msgid "Find next"
+msgstr "পরেরটি খুঁজো"
+
+#: readtoolbar.py:176
+msgid "Zoom out"
+msgstr "ছোট করো"
+
+#: readtoolbar.py:182
+msgid "Zoom in"
+msgstr "বড় করো"
+
+#: readtoolbar.py:188
+msgid "Zoom to width"
+msgstr "প্রস্থ অনুসারে বড় করো"
+
+#: readtoolbar.py:194
+msgid "Zoom to fit"
+msgstr "প্রয়োজন অনুসারে বড় করো"
+
+#: readtoolbar.py:199
+msgid "Actual size"
+msgstr "আসল আকার"
+
+#: readtoolbar.py:216
+msgid "%"
+msgstr "%"
+
+#: readtoolbar.py:229
+msgid "Fullscreen"
+msgstr "পর্দা জুড়ে প্রদর্শন"
+
+#: readtopbar.py:140
+#, python-format
+msgid "Page %(current)i of %(total_pages)i"
+msgstr ""
+
+#: speechtoolbar.py:56
+msgid "Play / Pause"
+msgstr ""
+
+#: speechtoolbar.py:64
+msgid "Stop"
+msgstr ""
+
+#~ msgid "Choose document"
+#~ msgstr "নথি বেছে নাও"
 
 #, python-format
 #~ msgid "Page %i of %i"

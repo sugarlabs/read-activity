@@ -10,119 +10,42 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OLPC XBook\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-05 11:05-0300\n"
-"PO-Revision-Date: 2011-08-26 11:44+0200\n"
-"Last-Translator: Yuan Chao <yuanchao@gmail.com>\n"
+"POT-Creation-Date: 2012-03-08 00:34-0500\n"
+"PO-Revision-Date: 2012-03-21 19:11+0200\n"
+"Last-Translator: Yuan <yuanchao@gmail.com>\n"
 "Language-Team: Yuan CHAO <yuanchao@gmail.com>\n"
-"Language: \n"
+"Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Pootle 2.0.1\n"
+"X-Generator: Pootle 2.0.5\n"
 
 #: activity/activity.info:2
 msgid "Read"
 msgstr "閱讀"
 
-#: readtoolbar.py:67
-msgid "Previous"
-msgstr "上一個"
+#: evinceadapter.py:74
+msgid "URL from Read"
+msgstr "閱讀的網址URL"
 
-#: readtoolbar.py:74
-msgid "Next"
-msgstr "下一個"
-
-#: readtoolbar.py:157
-msgid "Find first"
-msgstr "搜尋第一個"
-
-#: readtoolbar.py:163
-msgid "Find previous"
-msgstr "搜尋前一個"
-
-#: readtoolbar.py:165
-msgid "Find next"
-msgstr "搜尋下一個"
-
-#: readtoolbar.py:181
-msgid "Zoom out"
-msgstr "縮小"
-
-#: readtoolbar.py:187
-msgid "Zoom in"
-msgstr "放大"
-
-#: readtoolbar.py:193
-msgid "Zoom to width"
-msgstr "最適寬度"
-
-#: readtoolbar.py:199
-msgid "Zoom to fit"
-msgstr "頁面大小"
-
-#: readtoolbar.py:204
-msgid "Actual size"
-msgstr "實際大小"
-
-#: readtoolbar.py:221
-msgid "%"
-msgstr "％"
-
-#: readtoolbar.py:234
-msgid "Fullscreen"
-msgstr "全螢幕顯示"
-
-#: readtoolbar.py:324
-msgid "Play / Pause"
-msgstr "播放/暫停"
-
-#: readtoolbar.py:377
-msgid "pitch adjusted"
-msgstr "音高已調整"
-
-#: readtoolbar.py:382
-msgid "rate adjusted"
-msgstr "速度已調整"
-
-#. TRANS: This goes like Bookmark added by User 5 days ago
-#. TRANS: (the elapsed string gets translated automatically)
-#: readsidebar.py:88
-#, python-format
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr "書籤由 %(user)s 於 %(time)s 加入"
-
-#: readsidebar.py:131 readsidebar.py:173
-msgid "Add notes for bookmark: "
-msgstr "增加書籤註解："
-
-#: readsidebar.py:169
-#, python-format
-msgid "%s's bookmark"
-msgstr "%s 的書籤"
-
-#: readsidebar.py:170
-#, python-format
-msgid "Bookmark for page %d"
-msgstr "第 %d 頁加入書籤"
-
-#: readactivity.py:239
+#: readactivity.py:232
 msgid "Highlight"
 msgstr "強調"
 
-#: readactivity.py:349
+#: readactivity.py:341
 msgid "Back"
 msgstr "後退"
 
-#: readactivity.py:352
+#: readactivity.py:346
 msgid "Previous page"
 msgstr "上一頁"
 
-#: readactivity.py:355
+#: readactivity.py:348
 msgid "Previous bookmark"
 msgstr "上一個書籤"
 
-#: readactivity.py:365
+#: readactivity.py:363
 msgid "Forward"
 msgstr "前進"
 
@@ -130,18 +53,9 @@ msgstr "前進"
 msgid "Next page"
 msgstr "下一頁"
 
-#: readactivity.py:371
+#: readactivity.py:370
 msgid "Next bookmark"
 msgstr "下一個書籤"
-
-#: readactivity.py:570
-msgid "Choose document"
-msgstr "選擇文件"
-
-#: readtopbar.py:141
-#, python-format
-msgid "Page %(current)i of %(total_pages)i"
-msgstr "%(total_pages)i 頁中的第 %(current)i 頁"
 
 #: readdialog.py:51
 msgid "Cancel"
@@ -158,6 +72,97 @@ msgstr "<b>標題</b>："
 #: readdialog.py:138
 msgid "<b>Details</b>:"
 msgstr "<b>詳細說明</b>："
+
+#. TRANS: This goes like Bookmark added by User 5 days ago
+#. TRANS: (the elapsed string gets translated automatically)
+#: readsidebar.py:86
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "書籤由 %(user)s 於 %(time)s 加入"
+
+#: readsidebar.py:129 readsidebar.py:171
+msgid "Add notes for bookmark: "
+msgstr "增加書籤註解："
+
+#: readsidebar.py:167
+#, python-format
+msgid "%s's bookmark"
+msgstr "%s 的書籤"
+
+#: readsidebar.py:168
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "第 %d 頁加入書籤"
+
+#: readtoolbar.py:61
+msgid "Previous"
+msgstr "上一個"
+
+#: readtoolbar.py:68
+msgid "Next"
+msgstr "下一個"
+
+#: readtoolbar.py:151
+msgid "Find first"
+msgstr "搜尋第一個"
+
+#: readtoolbar.py:157
+msgid "Find previous"
+msgstr "搜尋前一個"
+
+#: readtoolbar.py:159
+msgid "Find next"
+msgstr "搜尋下一個"
+
+#: readtoolbar.py:176
+msgid "Zoom out"
+msgstr "縮小"
+
+#: readtoolbar.py:182
+msgid "Zoom in"
+msgstr "放大"
+
+#: readtoolbar.py:188
+msgid "Zoom to width"
+msgstr "最適寬度"
+
+#: readtoolbar.py:194
+msgid "Zoom to fit"
+msgstr "頁面大小"
+
+#: readtoolbar.py:199
+msgid "Actual size"
+msgstr "實際大小"
+
+#: readtoolbar.py:216
+msgid "%"
+msgstr "％"
+
+#: readtoolbar.py:229
+msgid "Fullscreen"
+msgstr "全螢幕顯示"
+
+#: readtopbar.py:140
+#, python-format
+msgid "Page %(current)i of %(total_pages)i"
+msgstr "%(total_pages)i 頁中的第 %(current)i 頁"
+
+#: speechtoolbar.py:56
+msgid "Play / Pause"
+msgstr "播放/暫停"
+
+#: speechtoolbar.py:64
+msgid "Stop"
+msgstr "停止"
+
+#~ msgid "pitch adjusted"
+#~ msgstr "音高已調整"
+
+#~ msgid "rate adjusted"
+#~ msgstr "速度已調整"
+
+#~ msgid "Choose document"
+#~ msgstr "選擇文件"
 
 #, python-format
 #~ msgid "Page %i of %i"

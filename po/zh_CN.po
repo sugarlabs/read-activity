@@ -10,145 +10,153 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OLPC XBook\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-22 00:32-0500\n"
-"PO-Revision-Date: 2008-11-25 05:13-0500\n"
-"Last-Translator: Alice Zhang <zhl924505@gmail.com>\n"
+"POT-Creation-Date: 2012-03-08 00:34-0500\n"
+"PO-Revision-Date: 2012-03-25 07:31+0200\n"
+"Last-Translator: Xin <dram.wang@gmail.com>\n"
 "Language-Team: Yuan CHAO <yuanchao@gmail.com>\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Pootle 1.1.0rc2\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Pootle 2.0.5\n"
 
 #: activity/activity.info:2
 msgid "Read"
 msgstr "阅读"
 
-#: readactivity.py:242
-msgid "Highlight"
-msgstr ""
+#: evinceadapter.py:74
+msgid "URL from Read"
+msgstr "来自阅读的网址"
 
-#: readactivity.py:345
+#: readactivity.py:232
+msgid "Highlight"
+msgstr "高亮"
+
+#: readactivity.py:341
 msgid "Back"
+msgstr "后退"
+
+#: readactivity.py:346
+msgid "Previous page"
 msgstr "上一页"
 
 #: readactivity.py:348
-msgid "Previous page"
-msgstr ""
-
-#: readactivity.py:351
 msgid "Previous bookmark"
-msgstr ""
+msgstr "上一个书签"
 
-#: readactivity.py:361
+#: readactivity.py:363
 msgid "Forward"
+msgstr "前进"
+
+#: readactivity.py:368
+msgid "Next page"
 msgstr "下一页"
 
-#: readactivity.py:364
-msgid "Next page"
-msgstr ""
-
-#: readactivity.py:367
+#: readactivity.py:370
 msgid "Next bookmark"
-msgstr ""
-
-#: readactivity.py:582
-msgid "Choose document"
-msgstr "选择文档"
+msgstr "下一个书签"
 
 #: readdialog.py:51
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 #: readdialog.py:57
 msgid "Ok"
-msgstr ""
+msgstr "确定"
 
-#: readdialog.py:111
+#: readdialog.py:112
 msgid "<b>Title</b>:"
-msgstr ""
+msgstr "<b>标题</b>："
 
-#: readdialog.py:137
+#: readdialog.py:138
 msgid "<b>Details</b>:"
-msgstr ""
+msgstr "<b>详细说明</b>："
 
-#. TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
-#. TRANS: automatically)
+#. TRANS: This goes like Bookmark added by User 5 days ago
+#. TRANS: (the elapsed string gets translated automatically)
 #: readsidebar.py:86
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
-msgstr ""
+msgstr "由 %(user)s 在 %(time)s 加入的书签"
 
-#: readsidebar.py:128 readsidebar.py:169
+#: readsidebar.py:129 readsidebar.py:171
 msgid "Add notes for bookmark: "
-msgstr ""
+msgstr "为书签添加说明："
 
-#: readsidebar.py:165
+#: readsidebar.py:167
 #, python-format
 msgid "%s's bookmark"
-msgstr ""
+msgstr "%s 的书签"
 
-#: readsidebar.py:166
+#: readsidebar.py:168
 #, python-format
 msgid "Bookmark for page %d"
-msgstr ""
+msgstr "第 %d 页的书签"
 
-#: readtoolbar.py:65
+#: readtoolbar.py:61
 msgid "Previous"
 msgstr "上一个"
 
-#: readtoolbar.py:72
+#: readtoolbar.py:68
 msgid "Next"
 msgstr "下一个"
 
-#: readtoolbar.py:155
+#: readtoolbar.py:151
 msgid "Find first"
 msgstr "寻找第一个"
 
-#: readtoolbar.py:161
+#: readtoolbar.py:157
 msgid "Find previous"
 msgstr "寻找前一个"
 
-#: readtoolbar.py:163
+#: readtoolbar.py:159
 msgid "Find next"
 msgstr "寻找下一个"
 
-#: readtoolbar.py:179
+#: readtoolbar.py:176
 msgid "Zoom out"
 msgstr "缩小"
 
-#: readtoolbar.py:185
+#: readtoolbar.py:182
 msgid "Zoom in"
 msgstr "放大"
 
-#: readtoolbar.py:191
+#: readtoolbar.py:188
 msgid "Zoom to width"
 msgstr "最适宽度"
 
-#: readtoolbar.py:197
+#: readtoolbar.py:194
 msgid "Zoom to fit"
 msgstr "页面大小"
 
-#: readtoolbar.py:202
+#: readtoolbar.py:199
 msgid "Actual size"
 msgstr "实际大小"
 
-#: readtoolbar.py:219
+#: readtoolbar.py:216
 msgid "%"
 msgstr "%"
 
-#: readtoolbar.py:232
+#: readtoolbar.py:229
 msgid "Fullscreen"
 msgstr "全屏显示"
 
-#: readtoolbar.py:329
-msgid "Play / Pause"
-msgstr ""
-
-#. TRANS: Translate this as Page i of m (eg: Page 4 of 334)
-#: readtopbar.py:206
+#: readtopbar.py:140
 #, python-format
-msgid "Page %i of %i"
-msgstr ""
+msgid "Page %(current)i of %(total_pages)i"
+msgstr "%(current)i / %(total_pages)i"
+
+#: speechtoolbar.py:56
+msgid "Play / Pause"
+msgstr "播放 / 暂停"
+
+#: speechtoolbar.py:64
+msgid "Stop"
+msgstr "停止"
+
+#~ msgid "Choose document"
+#~ msgstr "选择文档"
 
 #~ msgid "Edit"
 #~ msgstr "编辑"
