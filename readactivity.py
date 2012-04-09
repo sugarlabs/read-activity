@@ -486,24 +486,22 @@ class ReadActivity(activity.Activity):
             self._sidebar.del_bookmark(page)
 
     def __page_changed_cb(self, model, page_from, page_to):
-        self._update_nav_buttons()
+        self._update_nav_buttons(page_to)
         if self._toc_model != None:
             self._toc_select_active_page()
 
-        self._sidebar.update_for_page(self._view.get_current_page())
+        self._sidebar.update_for_page(page_to)
 
         self._bookmarker.handler_block(self._bookmarker_toggle_handler_id)
         self._bookmarker.props.active = \
                 self._sidebar.is_showing_local_bookmark()
         self._bookmarker.handler_unblock(self._bookmarker_toggle_handler_id)
 
-        tuples_list = self._bookmarkmanager.get_highlights(
-                self._view.get_current_page())
+        tuples_list = self._bookmarkmanager.get_highlights(page_to)
         if self._view.can_highlight():
             self._view.show_highlights(tuples_list)
 
-    def _update_nav_buttons(self):
-        current_page = self._view.get_current_page()
+    def _update_nav_buttons(self, current_page):
         self._back_button.props.sensitive = current_page > 0
         self._forward_button.props.sensitive = \
             current_page < self._view.get_pagecount() - 1
@@ -805,7 +803,6 @@ class ReadActivity(activity.Activity):
         filehash = get_md5(filepath)
         self._bookmarkmanager = BookmarkManager(filehash)
         self._sidebar.set_bookmarkmanager(self._bookmarkmanager)
-        self._update_nav_buttons()
         self._update_toc()
         self._view.connect_page_changed_handler(self.__page_changed_cb)
         self._view.load_metadata(self)

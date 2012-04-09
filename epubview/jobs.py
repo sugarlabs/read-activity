@@ -116,7 +116,7 @@ class _JobPaginator(GObject.GObject):
         """
 
         self._temp_win = Gtk.Window()
-        self._temp_view = widgets._WebView()
+        self._temp_view = widgets._WebView(only_to_measure=True)
 
         settings = self._temp_view.get_settings()
         settings.props.default_font_family = 'DejaVu LGC Serif'

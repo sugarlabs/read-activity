@@ -439,20 +439,6 @@ class _View(Gtk.HBox):
             else:
                 self._scroll_page()
 
-        base_pageno = self._paginator.get_base_pageno_for_file(filename)
-        scrollval = self._v_vscrollbar.get_value()
-        scroll_upper = self._v_vscrollbar.props.adjustment.props.upper
-
-        if scroll_upper == 0:  # This is a one page file
-            pageno = base_pageno
-        else:
-            offset = (scrollval / scroll_upper) * \
-                    self._paginator.get_pagecount_for_file(filename)
-            pageno = math.floor(base_pageno + offset)
-
-        if pageno != self._loaded_page:
-            self._on_page_changed(0, int(pageno))
-
         # prepare text to speech
         html_file = open(self._loaded_filename)
         soup = BeautifulSoup.BeautifulSoup(html_file)
@@ -599,6 +585,7 @@ class _View(Gtk.HBox):
             else:
                 self._view.load_uri('file://' + filename)
         else:
+            self._loaded_page = pageno
             self._scroll_page()
 
     def _insert_js_reference(self, file_name, path):
@@ -658,8 +645,6 @@ class _View(Gtk.HBox):
         self._scrollbar.set_increments(1.0, 1.0)
         self._view.grab_focus()
         self._view.grab_default()
-        if self._loaded_page < 1:
-            self._load_page(1)
 
     def _destroy_cb(self, widget):
         self._epub.close()
