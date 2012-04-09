@@ -25,6 +25,7 @@ from sugar3.graphics.toolbutton import ToolButton
 from sugar3.graphics.menuitem import MenuItem
 from sugar3.graphics import iconentry
 from sugar3.activity.widgets import EditToolbar as BaseEditToolbar
+from sugarmenuitem import SugarMenuItem
 
 
 class EditToolbar(BaseEditToolbar):
@@ -190,16 +191,20 @@ class ViewToolbar(Gtk.Toolbar):
         self.insert(self._zoom_to_width, -1)
         self._zoom_to_width.show()
 
-        palette = self._zoom_to_width.get_palette()
-        menu_item = MenuItem(_('Zoom to fit'))
-        menu_item.connect('activate', self._zoom_to_fit_menu_item_activate_cb)
-        palette.menu.append(menu_item)
-        menu_item.show()
+        vbox_menu = Gtk.VBox()
+        fit_menu = SugarMenuItem(text_label=_('Zoom to fit'))
+        fit_menu.connect('clicked', self._zoom_to_fit_menu_item_activate_cb)
+        vbox_menu.add(fit_menu)
+        actual_size_menu = SugarMenuItem(text_label=_('Actual size'))
+        actual_size_menu.connect('clicked',
+                self._actual_size_menu_item_activate_cb)
+        vbox_menu.add(actual_size_menu)
+        vbox_menu.show_all()
 
-        menu_item = MenuItem(_('Actual size'))
-        menu_item.connect('activate', self._actual_size_menu_item_activate_cb)
-        palette.menu.append(menu_item)
-        menu_item.show()
+        palette = self._zoom_to_width.get_palette()
+        palette.set_content(vbox_menu)
+        # HACK
+        palette._content.set_border_width(1)
 
         tool_item = Gtk.ToolItem()
         self.insert(tool_item, -1)
