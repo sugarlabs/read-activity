@@ -103,6 +103,7 @@ class _TopBar(Gtk.HBox):
 
     def _setup(self):
         self._progressbar = Gtk.ProgressBar()
+        self._progressbar.set_show_text(True)
         self._progressbar.set_fraction(self._completion_level / 100.0)
         self.pack_start(self._progressbar, True, True, 0)
         if self._battery_props is None:
@@ -128,9 +129,13 @@ class TopBar(_TopBar):
     def set_view(self, view):
         self._view = view
         self._view.connect_page_changed_handler(self._page_changed_cb)
+        self._set_page(self._view.get_current_page() + 1)
 
     def _page_changed_cb(self, model, page_from, page_to):
-        current_page = self._view.get_current_page()
+        #current_page = self._view.get_current_page() + 1
+        self._set_page(page_to + 1)
+
+    def _set_page(self, current_page):
         n_pages = self._view.get_pagecount()
         completion_level = int(float(current_page) * 100 / float(n_pages))
         self.set_completion_level(completion_level)
