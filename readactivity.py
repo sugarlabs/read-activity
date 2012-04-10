@@ -152,9 +152,9 @@ class ReadActivity(activity.Activity):
 
         toolbar_box = ToolbarBox()
 
-        activity_button = ActivityToolbarButton(self)
-        toolbar_box.toolbar.insert(activity_button, 0)
-        activity_button.show()
+        self.activity_button = ActivityToolbarButton(self)
+        toolbar_box.toolbar.insert(self.activity_button, 0)
+        self.activity_button.show()
 
         self._edit_toolbar = EditToolbar()
         self._edit_toolbar.undo.props.visible = False
@@ -931,6 +931,8 @@ class ReadActivity(activity.Activity):
         self._view.copy()
 
     def _key_press_event_cb(self, widget, event):
+        if self.activity_button.page.title_button.has_focus():
+            return False
         keyname = Gdk.keyval_name(event.keyval)
         if keyname == 'c' and event.state & Gdk.CONTROL_MASK:
             self._view.copy()
