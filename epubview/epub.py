@@ -18,7 +18,7 @@
 import zipfile
 import tempfile
 import os
-from lxml import etree
+import xml.etree.ElementTree as etree
 import shutil
 
 import navmap

@@ -1,4 +1,4 @@
-from lxml import etree
+import xml.etree.ElementTree as etree
 from gi.repository import Gtk
 import logging
 
