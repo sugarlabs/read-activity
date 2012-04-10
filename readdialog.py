@@ -50,7 +50,7 @@ class BaseReadDialog(Gtk.Window):
         separator.show()
         stop = ToolButton(icon_name='dialog-cancel')
         stop.set_tooltip(_('Cancel'))
-        stop.connect('clicked', lambda *w: self.destroy())
+        stop.connect('clicked', self.cancel_clicked_cb)
         self.toolbar.insert(stop, -1)
         stop.show()
 
@@ -93,6 +93,8 @@ class BaseReadDialog(Gtk.Window):
     def accept_clicked_cb(self, widget):
         raise NotImplementedError
 
+    def cancel_clicked_cb(self, widget):
+        self.destroy()
 
 class BookmarkDialog(BaseReadDialog):
     def __init__(self, parent_xid, dialog_title, bookmark_title,
@@ -160,6 +162,10 @@ class BookmarkDialog(BaseReadDialog):
 
         self.set_canvas(vbox)
 
+    def cancel_clicked_cb(self, widget):
+        self._sidebarinstance.notify_bookmark_change()
+        BaseReadDialog.cancel_clicked_cb(self,widget)
+
 
 class BookmarkAddDialog(BookmarkDialog):
 
@@ -176,6 +182,10 @@ class BookmarkAddDialog(BookmarkDialog):
         self._sidebarinstance._real_add_bookmark(self._page,
                 cjson.encode(content))
         self.destroy()
+
+    def cancel_clicked_cb(self, widget):
+        self._sidebarinstance.notify_bookmark_change()
+        BaseReadDialog.cancel_clicked_cb(self,widget)
 
 
 class BookmarkEditDialog(BookmarkDialog):

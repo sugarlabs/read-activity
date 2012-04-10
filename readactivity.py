@@ -148,6 +148,7 @@ class ReadActivity(activity.Activity):
         self.dpi = _get_screen_dpi()
         self._sidebar = Sidebar()
         self._sidebar.show()
+        self._sidebar.connect('bookmark-changed', self._update_bookmark_cb)
 
         toolbar_box = ToolbarBox()
 
@@ -218,14 +219,11 @@ class ReadActivity(activity.Activity):
         navigator_toolbar.show()
         toolbar_box.toolbar.insert(self._navigator_toolbar_button, -1)
 
-        bookmark_item = Gtk.ToolItem()
-        self._bookmarker = self._create_bookmarker()
+        self._bookmarker = ToggleToolButton('emblem-favorite')
         self._bookmarker_toggle_handler_id = self._bookmarker.connect( \
                 'toggled', self.__bookmarker_toggled_cb)
-        bookmark_item.add(self._bookmarker)
         self._bookmarker.show()
-        toolbar_box.toolbar.insert(bookmark_item, -1)
-        bookmark_item.show()
+        toolbar_box.toolbar.insert(self._bookmarker, -1)
 
         self._highlight_item = Gtk.ToolItem()
         self._highlight = ToggleToolButton('format-text-underline')
@@ -405,10 +403,6 @@ class ReadActivity(activity.Activity):
         navigator.props.visible = False
         return navigator
 
-    def _create_bookmarker(self):
-        bookmarker = ToggleToolButton('emblem-favorite')
-        return bookmarker
-
     def __num_page_entry_insert_text_cb(self, entry, text, length, position):
         if not re.match('[0-9]', text):
             entry.emit_stop_by_name('insert-text')
@@ -491,15 +485,21 @@ class ReadActivity(activity.Activity):
             self._toc_select_active_page()
 
         self._sidebar.update_for_page(page_to)
-
-        self._bookmarker.handler_block(self._bookmarker_toggle_handler_id)
-        self._bookmarker.props.active = \
-                self._sidebar.is_showing_local_bookmark()
-        self._bookmarker.handler_unblock(self._bookmarker_toggle_handler_id)
+        self.update_bookmark_button()
 
         tuples_list = self._bookmarkmanager.get_highlights(page_to)
         if self._view.can_highlight():
             self._view.show_highlights(tuples_list)
+
+    def _update_bookmark_cb(self, sidebar):
+        logging.error('update bookmark event')
+        self.update_bookmark_button()
+
+    def update_bookmark_button(self):
+        self._bookmarker.handler_block(self._bookmarker_toggle_handler_id)
+        self._bookmarker.props.active = \
+                self._sidebar.is_showing_local_bookmark()
+        self._bookmarker.handler_unblock(self._bookmarker_toggle_handler_id)
 
     def _update_nav_buttons(self, current_page):
         self._back_button.props.sensitive = current_page > 0

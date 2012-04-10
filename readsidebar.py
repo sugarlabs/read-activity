@@ -17,6 +17,7 @@
 
 import logging
 
+from gi.repository import GObject
 from gi.repository import Gtk
 from gi.repository import Gdk
 
@@ -38,6 +39,11 @@ _logger = logging.getLogger('read-activity')
 
 
 class Sidebar(Gtk.EventBox):
+
+    __gsignals__ = {
+        'bookmark-changed': (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE,
+                              ([])),
+    }
 
     def __init__(self):
         Gtk.EventBox.__init__(self)
@@ -135,13 +141,13 @@ class Sidebar(Gtk.EventBox):
         return False
 
     def _clear_bookmarks(self):
-        if self._bookmark_icon is not None:
-            self._bookmark_icon.disconnect(
+        for bookmark_icon in self._box.get_children():
+            bookmark_icon.disconnect(
                     self.__bookmark_icon_query_tooltip_cb_id)
             self.disconnect(self.__event_cb_id)
 
-            self._bookmark_icon.hide()  # XXX: Is this needed??
-            self._bookmark_icon.destroy()
+            bookmark_icon.hide()  # XXX: Is this needed??
+            bookmark_icon.destroy()
 
             self._bookmark_icon = None
 
@@ -154,6 +160,7 @@ class Sidebar(Gtk.EventBox):
         return (self._bookmark_manager)
 
     def update_for_page(self, page):
+
         self._clear_bookmarks()
         if self._bookmark_manager is None:
             return
@@ -162,10 +169,14 @@ class Sidebar(Gtk.EventBox):
 
         for bookmark in bookmarks:
             self._add_bookmark_icon(bookmark)
+        self.notify_bookmark_change()
+
+    def notify_bookmark_change(self):
+        self.emit('bookmark-changed')
 
     def add_bookmark(self, page):
         bookmark_title = (_("%s's bookmark") % profile.get_nick_name())
-        bookmark_content = (_("Bookmark for page %d") % page)
+        bookmark_content = (_("Bookmark for page %d") % (int(page) + 1))
         dialog = BookmarkAddDialog(
             parent_xid=self.get_toplevel().get_window(),
             dialog_title=_("Add notes for bookmark: "),
