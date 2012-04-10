@@ -193,6 +193,7 @@ class ReadActivity(activity.Activity):
         self._num_page_entry = self._create_search()
         num_page_item.add(self._num_page_entry)
         self._num_page_entry.show()
+        self._num_page_entry.set_text('1')
         toolbar_box.toolbar.insert(num_page_item, -1)
         num_page_item.show()
 
