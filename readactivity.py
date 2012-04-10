@@ -932,7 +932,7 @@ class ReadActivity(activity.Activity):
         self._view.copy()
 
     def _key_press_event_cb(self, widget, event):
-        if self.activity_button.page.title_button.has_focus():
+        if self.activity_button.page.title.has_focus():
             return False
         keyname = Gdk.keyval_name(event.keyval)
         if keyname == 'c' and event.state & Gdk.CONTROL_MASK:
