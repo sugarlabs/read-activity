@@ -35,7 +35,8 @@ class BaseReadDialog(Gtk.Window):
 
         self.toolbar = Gtk.Toolbar()
         label = Gtk.Label()
-        label.set_markup('<b>  %s</b>' % dialog_title)
+        label.set_markup('<b><span foreground="#ffffff">  %s</span></b>' %
+                dialog_title)
         label.set_alignment(0, 0.5)
         tool_item = Gtk.ToolItem()
         tool_item.add(label)
@@ -81,6 +82,9 @@ class BaseReadDialog(Gtk.Window):
 
         self.modify_bg(Gtk.StateType.NORMAL,
                             style.COLOR_WHITE.get_gdk_color())
+        self.toolbar.modify_bg(Gtk.StateType.NORMAL,
+                            style.COLOR_BLACK.get_gdk_color())
+
 
         if self._canvas is not None:
             self._canvas.modify_bg(Gtk.StateType.NORMAL,
