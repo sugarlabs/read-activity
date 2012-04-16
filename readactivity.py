@@ -193,7 +193,6 @@ class ReadActivity(activity.Activity):
         self._num_page_entry = self._create_search()
         num_page_item.add(self._num_page_entry)
         self._num_page_entry.show()
-        self._num_page_entry.set_text('1')
         toolbar_box.toolbar.insert(num_page_item, -1)
         num_page_item.show()
 
@@ -815,6 +814,7 @@ class ReadActivity(activity.Activity):
         current_page = int(self.metadata.get('Read_current_page', '0'))
         _logger.debug('Setting page to: %d', current_page)
         self._view.set_current_page(current_page)
+        self._update_nav_buttons(current_page)
 
         # We've got the document, so if we're a shared activity, offer it
         try:
