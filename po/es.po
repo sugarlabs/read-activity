@@ -26,120 +26,43 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xbook\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-05 11:05-0300\n"
-"PO-Revision-Date: 2011-08-29 20:27+0200\n"
-"Last-Translator: Gonzalo <godiard@sugarlabs.org>\n"
+"POT-Creation-Date: 2012-03-08 00:34-0500\n"
+"PO-Revision-Date: 2012-03-17 06:15+0200\n"
+"Last-Translator: AlanJAS <alanjas@hotmail.com>\n"
 "Language-Team: Fedora Spanish <fedora-trans-es@redhat.com>\n"
-"Language: \n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.1\n"
+"X-Generator: Pootle 2.0.5\n"
 "X-Poedit-Language: Spanish\n"
 
 #: activity/activity.info:2
 msgid "Read"
 msgstr "Leer"
 
-#: readtoolbar.py:67
-msgid "Previous"
-msgstr "Anterior"
+#: evinceadapter.py:74
+msgid "URL from Read"
+msgstr "URL de Leer"
 
-#: readtoolbar.py:74
-msgid "Next"
-msgstr "Siguiente"
-
-#: readtoolbar.py:157
-msgid "Find first"
-msgstr "Buscar primero"
-
-#: readtoolbar.py:163
-msgid "Find previous"
-msgstr "Buscar anterior"
-
-#: readtoolbar.py:165
-msgid "Find next"
-msgstr "Buscar siguiente"
-
-#: readtoolbar.py:181
-msgid "Zoom out"
-msgstr "Alejarse"
-
-#: readtoolbar.py:187
-msgid "Zoom in"
-msgstr "Acercarse"
-
-#: readtoolbar.py:193
-msgid "Zoom to width"
-msgstr "Ajustar al ancho"
-
-#: readtoolbar.py:199
-msgid "Zoom to fit"
-msgstr "Ajustar a la pantalla"
-
-#: readtoolbar.py:204
-msgid "Actual size"
-msgstr "Tamaño real"
-
-#: readtoolbar.py:221
-msgid "%"
-msgstr "%"
-
-#: readtoolbar.py:234
-msgid "Fullscreen"
-msgstr "Pantalla completa"
-
-#: readtoolbar.py:324
-msgid "Play / Pause"
-msgstr "Reproducir / Detener"
-
-#: readtoolbar.py:377
-msgid "pitch adjusted"
-msgstr "tono ajustado"
-
-#: readtoolbar.py:382
-msgid "rate adjusted"
-msgstr "velocidad ajustada"
-
-#. TRANS: This goes like Bookmark added by User 5 days ago
-#. TRANS: (the elapsed string gets translated automatically)
-#: readsidebar.py:88
-#, python-format
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr "Registro agregado por %(user)s %(time)s"
-
-#: readsidebar.py:131 readsidebar.py:173
-msgid "Add notes for bookmark: "
-msgstr "Añadir notas para el marcador: "
-
-#: readsidebar.py:169
-#, python-format
-msgid "%s's bookmark"
-msgstr "Marcador de %s"
-
-#: readsidebar.py:170
-#, python-format
-msgid "Bookmark for page %d"
-msgstr "Marcador para página %d"
-
-#: readactivity.py:239
+#: readactivity.py:232
 msgid "Highlight"
 msgstr "Resaltar"
 
-#: readactivity.py:349
+#: readactivity.py:341
 msgid "Back"
 msgstr "Volver"
 
-#: readactivity.py:352
+#: readactivity.py:346
 msgid "Previous page"
 msgstr "Página anterior"
 
-#: readactivity.py:355
+#: readactivity.py:348
 msgid "Previous bookmark"
 msgstr "Registro anterior"
 
-#: readactivity.py:365
+#: readactivity.py:363
 msgid "Forward"
 msgstr "Avanzar"
 
@@ -147,18 +70,9 @@ msgstr "Avanzar"
 msgid "Next page"
 msgstr "Página siguiente"
 
-#: readactivity.py:371
+#: readactivity.py:370
 msgid "Next bookmark"
 msgstr "Siguiente registro"
-
-#: readactivity.py:570
-msgid "Choose document"
-msgstr "Escoger documento"
-
-#: readtopbar.py:141
-#, python-format
-msgid "Page %(current)i of %(total_pages)i"
-msgstr "Página %(current)i de %(total_pages)i"
 
 #: readdialog.py:51
 msgid "Cancel"
@@ -175,6 +89,97 @@ msgstr "<b>Título</b>:"
 #: readdialog.py:138
 msgid "<b>Details</b>:"
 msgstr "<b>Detalles</b>:"
+
+#. TRANS: This goes like Bookmark added by User 5 days ago
+#. TRANS: (the elapsed string gets translated automatically)
+#: readsidebar.py:86
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "Registro agregado por %(user)s %(time)s"
+
+#: readsidebar.py:129 readsidebar.py:171
+msgid "Add notes for bookmark: "
+msgstr "Añadir notas para el marcador: "
+
+#: readsidebar.py:167
+#, python-format
+msgid "%s's bookmark"
+msgstr "Marcador de %s"
+
+#: readsidebar.py:168
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "Marcador para página %d"
+
+#: readtoolbar.py:61
+msgid "Previous"
+msgstr "Anterior"
+
+#: readtoolbar.py:68
+msgid "Next"
+msgstr "Siguiente"
+
+#: readtoolbar.py:151
+msgid "Find first"
+msgstr "Buscar primero"
+
+#: readtoolbar.py:157
+msgid "Find previous"
+msgstr "Buscar anterior"
+
+#: readtoolbar.py:159
+msgid "Find next"
+msgstr "Buscar siguiente"
+
+#: readtoolbar.py:176
+msgid "Zoom out"
+msgstr "Alejarse"
+
+#: readtoolbar.py:182
+msgid "Zoom in"
+msgstr "Acercarse"
+
+#: readtoolbar.py:188
+msgid "Zoom to width"
+msgstr "Ajustar al ancho"
+
+#: readtoolbar.py:194
+msgid "Zoom to fit"
+msgstr "Ajustar a la pantalla"
+
+#: readtoolbar.py:199
+msgid "Actual size"
+msgstr "Tamaño real"
+
+#: readtoolbar.py:216
+msgid "%"
+msgstr "%"
+
+#: readtoolbar.py:229
+msgid "Fullscreen"
+msgstr "Pantalla completa"
+
+#: readtopbar.py:140
+#, python-format
+msgid "Page %(current)i of %(total_pages)i"
+msgstr "Página %(current)i de %(total_pages)i"
+
+#: speechtoolbar.py:56
+msgid "Play / Pause"
+msgstr "Reproducir / Detener"
+
+#: speechtoolbar.py:64
+msgid "Stop"
+msgstr "Detener"
+
+#~ msgid "pitch adjusted"
+#~ msgstr "tono ajustado"
+
+#~ msgid "rate adjusted"
+#~ msgstr "velocidad ajustada"
+
+#~ msgid "Choose document"
+#~ msgstr "Escoger documento"
 
 #, python-format
 #~ msgid "Page %i of %i"
