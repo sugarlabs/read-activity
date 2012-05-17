@@ -14,11 +14,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-22 00:32-0500\n"
+"POT-Creation-Date: 2012-03-08 00:34-0500\n"
 "PO-Revision-Date: 2011-03-13 17:45+0200\n"
 "Last-Translator: <klpeter@windowslive.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: hu\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -29,37 +29,37 @@ msgstr ""
 msgid "Read"
 msgstr "Olvas"
 
-#: readactivity.py:242
+#: evinceadapter.py:74
+msgid "URL from Read"
+msgstr ""
+
+#: readactivity.py:232
 msgid "Highlight"
 msgstr ""
 
-#: readactivity.py:345
+#: readactivity.py:341
 msgid "Back"
 msgstr "Vissza"
 
-#: readactivity.py:348
+#: readactivity.py:346
 msgid "Previous page"
 msgstr "Előző oldal"
 
-#: readactivity.py:351
+#: readactivity.py:348
 msgid "Previous bookmark"
 msgstr "Előző könyvjelző"
 
-#: readactivity.py:361
+#: readactivity.py:363
 msgid "Forward"
 msgstr "Előre"
 
-#: readactivity.py:364
+#: readactivity.py:368
 msgid "Next page"
 msgstr "Következő oldal"
 
-#: readactivity.py:367
+#: readactivity.py:370
 msgid "Next bookmark"
 msgstr "Következő könyvjelző"
-
-#: readactivity.py:582
-msgid "Choose document"
-msgstr "Dokumentum kiválasztása"
 
 #: readdialog.py:51
 msgid "Cancel"
@@ -69,89 +69,99 @@ msgstr "Mégse"
 msgid "Ok"
 msgstr "Ok"
 
-#: readdialog.py:111
+#: readdialog.py:112
 msgid "<b>Title</b>:"
 msgstr "<b>Cím</b>:"
 
-#: readdialog.py:137
+#: readdialog.py:138
 msgid "<b>Details</b>:"
 msgstr "<b>Adatok</b>:"
 
-#. TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
-#. TRANS: automatically)
+#. TRANS: This goes like Bookmark added by User 5 days ago
+#. TRANS: (the elapsed string gets translated automatically)
 #: readsidebar.py:86
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
 msgstr "Könyvjelző ozzáadva %(user)s %(time)s"
 
-#: readsidebar.py:128 readsidebar.py:169
+#: readsidebar.py:129 readsidebar.py:171
 msgid "Add notes for bookmark: "
 msgstr "Megjegyzés hozzáadása a könyvjelzőhöz"
 
-#: readsidebar.py:165
+#: readsidebar.py:167
 #, python-format
 msgid "%s's bookmark"
 msgstr "%s's könyvjelző"
 
-#: readsidebar.py:166
+#: readsidebar.py:168
 #, python-format
 msgid "Bookmark for page %d"
 msgstr "Oldal hozzáadása a könyvjelzőköz %d"
 
-#: readtoolbar.py:65
+#: readtoolbar.py:61
 msgid "Previous"
 msgstr "Előző"
 
-#: readtoolbar.py:72
+#: readtoolbar.py:68
 msgid "Next"
 msgstr "Következő"
 
-#: readtoolbar.py:155
+#: readtoolbar.py:151
 msgid "Find first"
 msgstr "Keresd az elsőt"
 
-#: readtoolbar.py:161
+#: readtoolbar.py:157
 msgid "Find previous"
 msgstr "Keresd az előzőt"
 
-#: readtoolbar.py:163
+#: readtoolbar.py:159
 msgid "Find next"
 msgstr "Keresd a következőt"
 
-#: readtoolbar.py:179
+#: readtoolbar.py:176
 msgid "Zoom out"
 msgstr "Kicsinyítés"
 
-#: readtoolbar.py:185
+#: readtoolbar.py:182
 msgid "Zoom in"
 msgstr "Nagyítás"
 
-#: readtoolbar.py:191
+#: readtoolbar.py:188
 msgid "Zoom to width"
 msgstr "Teljes szélesség"
 
-#: readtoolbar.py:197
+#: readtoolbar.py:194
 msgid "Zoom to fit"
 msgstr "Igazítás"
 
-#: readtoolbar.py:202
+#: readtoolbar.py:199
 msgid "Actual size"
 msgstr "Eredeti méret"
 
-#: readtoolbar.py:219
+#: readtoolbar.py:216
 msgid "%"
 msgstr "%"
 
-#: readtoolbar.py:232
+#: readtoolbar.py:229
 msgid "Fullscreen"
 msgstr "Teljes képernyő "
 
-#: readtoolbar.py:329
+#: readtopbar.py:140
+#, python-format
+msgid "Page %(current)i of %(total_pages)i"
+msgstr ""
+
+#: speechtoolbar.py:56
 msgid "Play / Pause"
 msgstr ""
 
-#. TRANS: Translate this as Page i of m (eg: Page 4 of 334)
-#: readtopbar.py:206
+#: speechtoolbar.py:64
+msgid "Stop"
+msgstr ""
+
+#~ msgid "Choose document"
+#~ msgstr "Dokumentum kiválasztása"
+
 #, python-format
-msgid "Page %i of %i"
-msgstr "Oldal %i ból %i"
+#~ msgid "Page %i of %i"
+#~ msgstr "Oldal %i ból %i"

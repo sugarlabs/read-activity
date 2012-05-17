@@ -14,119 +14,42 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xbook project\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-05 11:05-0300\n"
-"PO-Revision-Date: 2011-03-25 20:51+0200\n"
-"Last-Translator: Yannis <kiolalis@gmail.com>\n"
+"POT-Creation-Date: 2012-03-08 00:34-0500\n"
+"PO-Revision-Date: 2011-10-21 08:44+0200\n"
+"Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: Greek <olpc@grnet.gr>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.1\n"
+"X-Generator: Pootle 2.0.5\n"
 
 #: activity/activity.info:2
 msgid "Read"
 msgstr "Ανάγνωση"
 
-#: readtoolbar.py:67
-msgid "Previous"
-msgstr "Προηγούμενο"
-
-#: readtoolbar.py:74
-msgid "Next"
-msgstr "Επόμενο"
-
-#: readtoolbar.py:157
-msgid "Find first"
-msgstr "Εύρεση του πρώτου"
-
-#: readtoolbar.py:163
-msgid "Find previous"
-msgstr "Εύρεση του προηγούμενου"
-
-#: readtoolbar.py:165
-msgid "Find next"
-msgstr "Εύρεση του επόμενου"
-
-#: readtoolbar.py:181
-msgid "Zoom out"
-msgstr "Σμίκρυνση"
-
-#: readtoolbar.py:187
-msgid "Zoom in"
-msgstr "Μεγέθυνση"
-
-#: readtoolbar.py:193
-msgid "Zoom to width"
-msgstr "Προσαρμογή στο πλάτος"
-
-#: readtoolbar.py:199
-msgid "Zoom to fit"
-msgstr "Προσαρμογή στη σελίδα"
-
-#: readtoolbar.py:204
-msgid "Actual size"
-msgstr "Πραγματικό μέγεθος"
-
-#: readtoolbar.py:221
-msgid "%"
-msgstr "%"
-
-#: readtoolbar.py:234
-msgid "Fullscreen"
-msgstr "Πλήρης οθόνη"
-
-#: readtoolbar.py:324
-msgid "Play / Pause"
-msgstr "Αναπαραγωγή / Παύση"
-
-#: readtoolbar.py:377
-msgid "pitch adjusted"
+#: evinceadapter.py:74
+msgid "URL from Read"
 msgstr ""
 
-#: readtoolbar.py:382
-msgid "rate adjusted"
-msgstr ""
-
-#. TRANS: This goes like Bookmark added by User 5 days ago
-#. TRANS: (the elapsed string gets translated automatically)
-#: readsidebar.py:88
-#, python-format
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr "Σελιδοδείκτης που προστέθηκε από τον %(user)s %(time)s"
-
-#: readsidebar.py:131 readsidebar.py:173
-msgid "Add notes for bookmark: "
-msgstr "Προσθήκη σημειώσεων για τον σελιδοδείκτη: "
-
-#: readsidebar.py:169
-#, python-format
-msgid "%s's bookmark"
-msgstr "%s's σελιδοδείκτης"
-
-#: readsidebar.py:170
-#, python-format
-msgid "Bookmark for page %d"
-msgstr "Σελιδοδείκτης για τη σελίδα %d"
-
-#: readactivity.py:239
+#: readactivity.py:232
 msgid "Highlight"
 msgstr "Επισήμανση"
 
-#: readactivity.py:349
+#: readactivity.py:341
 msgid "Back"
 msgstr "Πίσω"
 
-#: readactivity.py:352
+#: readactivity.py:346
 msgid "Previous page"
 msgstr "Προηγούμενη σελίδα"
 
-#: readactivity.py:355
+#: readactivity.py:348
 msgid "Previous bookmark"
 msgstr "Προηγούμενος σελιδοδείκτης"
 
-#: readactivity.py:365
+#: readactivity.py:363
 msgid "Forward"
 msgstr "Μπροστά"
 
@@ -134,18 +57,9 @@ msgstr "Μπροστά"
 msgid "Next page"
 msgstr "Επόμενη σελίδα"
 
-#: readactivity.py:371
+#: readactivity.py:370
 msgid "Next bookmark"
 msgstr "Επόμενος σελιδοδείκτης"
-
-#: readactivity.py:570
-msgid "Choose document"
-msgstr "Επιλογή εγγράφου"
-
-#: readtopbar.py:141
-#, python-format
-msgid "Page %(current)i of %(total_pages)i"
-msgstr ""
 
 #: readdialog.py:51
 msgid "Cancel"
@@ -162,6 +76,98 @@ msgstr "<b>Τίτλος</b>:"
 #: readdialog.py:138
 msgid "<b>Details</b>:"
 msgstr "<b>Λεπτομέρειες</b>:"
+
+#. TRANS: This goes like Bookmark added by User 5 days ago
+#. TRANS: (the elapsed string gets translated automatically)
+#: readsidebar.py:86
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "Σελιδοδείκτης που προστέθηκε από τον %(user)s %(time)s"
+
+#: readsidebar.py:129 readsidebar.py:171
+msgid "Add notes for bookmark: "
+msgstr "Προσθήκη σημειώσεων για τον σελιδοδείκτη: "
+
+#: readsidebar.py:167
+#, python-format
+msgid "%s's bookmark"
+msgstr "%s's σελιδοδείκτης"
+
+#: readsidebar.py:168
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "Σελιδοδείκτης για τη σελίδα %d"
+
+#: readtoolbar.py:61
+msgid "Previous"
+msgstr "Προηγούμενο"
+
+#: readtoolbar.py:68
+msgid "Next"
+msgstr "Επόμενο"
+
+#: readtoolbar.py:151
+msgid "Find first"
+msgstr "Εύρεση του πρώτου"
+
+#: readtoolbar.py:157
+msgid "Find previous"
+msgstr "Εύρεση του προηγούμενου"
+
+#: readtoolbar.py:159
+msgid "Find next"
+msgstr "Εύρεση του επόμενου"
+
+#: readtoolbar.py:176
+msgid "Zoom out"
+msgstr "Σμίκρυνση"
+
+#: readtoolbar.py:182
+msgid "Zoom in"
+msgstr "Μεγέθυνση"
+
+#: readtoolbar.py:188
+msgid "Zoom to width"
+msgstr "Προσαρμογή στο πλάτος"
+
+#: readtoolbar.py:194
+msgid "Zoom to fit"
+msgstr "Προσαρμογή στη σελίδα"
+
+#: readtoolbar.py:199
+msgid "Actual size"
+msgstr "Πραγματικό μέγεθος"
+
+#: readtoolbar.py:216
+msgid "%"
+msgstr "%"
+
+#: readtoolbar.py:229
+msgid "Fullscreen"
+msgstr "Πλήρης οθόνη"
+
+#: readtopbar.py:140
+#, python-format
+#, python-format,
+msgid "Page %(current)i of %(total_pages)i"
+msgstr "Σελίδα %(current)i από %(total_pages)i"
+
+#: speechtoolbar.py:56
+msgid "Play / Pause"
+msgstr "Αναπαραγωγή / Παύση"
+
+#: speechtoolbar.py:64
+msgid "Stop"
+msgstr ""
+
+#~ msgid "pitch adjusted"
+#~ msgstr "ο τόνος ρυθμίστηκε"
+
+#~ msgid "rate adjusted"
+#~ msgstr "ο ρυθμός ρυθμίστηκε"
+
+#~ msgid "Choose document"
+#~ msgstr "Επιλογή εγγράφου"
 
 #, python-format
 #~ msgid "Page %i of %i"

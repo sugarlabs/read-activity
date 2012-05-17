@@ -14,11 +14,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-05 11:05-0300\n"
+"POT-Creation-Date: 2012-03-08 00:34-0500\n"
 "PO-Revision-Date: 2011-09-28 19:52+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: ru\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -30,104 +30,27 @@ msgstr ""
 msgid "Read"
 msgstr "Читать"
 
-#: readtoolbar.py:67
-msgid "Previous"
-msgstr "Предыдущий"
-
-#: readtoolbar.py:74
-msgid "Next"
-msgstr "Следующий"
-
-#: readtoolbar.py:157
-msgid "Find first"
-msgstr "Найти первый"
-
-#: readtoolbar.py:163
-msgid "Find previous"
-msgstr "Найти предыдущий"
-
-#: readtoolbar.py:165
-msgid "Find next"
-msgstr "Найти следующий"
-
-#: readtoolbar.py:181
-msgid "Zoom out"
-msgstr "Увеличить"
-
-#: readtoolbar.py:187
-msgid "Zoom in"
-msgstr "Уменьшить"
-
-#: readtoolbar.py:193
-msgid "Zoom to width"
-msgstr "Масштабировать по ширине"
-
-#: readtoolbar.py:199
-msgid "Zoom to fit"
-msgstr "Масштабировать по размеру"
-
-#: readtoolbar.py:204
-msgid "Actual size"
-msgstr "Оригинальный размер"
-
-#: readtoolbar.py:221
-msgid "%"
-msgstr "%"
-
-#: readtoolbar.py:234
-msgid "Fullscreen"
-msgstr "Полный экран"
-
-#: readtoolbar.py:324
-msgid "Play / Pause"
-msgstr "Воспроизвести/Пауза"
-
-#: readtoolbar.py:377
-msgid "pitch adjusted"
+#: evinceadapter.py:74
+msgid "URL from Read"
 msgstr ""
 
-#: readtoolbar.py:382
-msgid "rate adjusted"
-msgstr ""
-
-#. TRANS: This goes like Bookmark added by User 5 days ago
-#. TRANS: (the elapsed string gets translated automatically)
-#: readsidebar.py:88
-#, python-format
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr "Закладка добавлена %(time)s пользователем %(user)s"
-
-#: readsidebar.py:131 readsidebar.py:173
-msgid "Add notes for bookmark: "
-msgstr "Добавить заметку к закладке: "
-
-#: readsidebar.py:169
-#, python-format
-msgid "%s's bookmark"
-msgstr "%s's закладка"
-
-#: readsidebar.py:170
-#, python-format
-msgid "Bookmark for page %d"
-msgstr "Закладка страницы %d"
-
-#: readactivity.py:239
+#: readactivity.py:232
 msgid "Highlight"
 msgstr "Выделить"
 
-#: readactivity.py:349
+#: readactivity.py:341
 msgid "Back"
 msgstr "Назад"
 
-#: readactivity.py:352
+#: readactivity.py:346
 msgid "Previous page"
 msgstr "Предыдущая страница"
 
-#: readactivity.py:355
+#: readactivity.py:348
 msgid "Previous bookmark"
 msgstr "Предыдущая закладка"
 
-#: readactivity.py:365
+#: readactivity.py:363
 msgid "Forward"
 msgstr "Вперед"
 
@@ -135,18 +58,9 @@ msgstr "Вперед"
 msgid "Next page"
 msgstr "Следующая страница"
 
-#: readactivity.py:371
+#: readactivity.py:370
 msgid "Next bookmark"
 msgstr "Следующая закладка"
-
-#: readactivity.py:570
-msgid "Choose document"
-msgstr "Выбрать документ"
-
-#: readtopbar.py:141
-#, python-format
-msgid "Page %(current)i of %(total_pages)i"
-msgstr ""
 
 #: readdialog.py:51
 msgid "Cancel"
@@ -163,6 +77,91 @@ msgstr "<b>Заголовок</b>:"
 #: readdialog.py:138
 msgid "<b>Details</b>:"
 msgstr "<b>Детали</b>:"
+
+#. TRANS: This goes like Bookmark added by User 5 days ago
+#. TRANS: (the elapsed string gets translated automatically)
+#: readsidebar.py:86
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "Закладка добавлена %(time)s пользователем %(user)s"
+
+#: readsidebar.py:129 readsidebar.py:171
+msgid "Add notes for bookmark: "
+msgstr "Добавить заметку к закладке: "
+
+#: readsidebar.py:167
+#, python-format
+msgid "%s's bookmark"
+msgstr "%s's закладка"
+
+#: readsidebar.py:168
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "Закладка страницы %d"
+
+#: readtoolbar.py:61
+msgid "Previous"
+msgstr "Предыдущий"
+
+#: readtoolbar.py:68
+msgid "Next"
+msgstr "Следующий"
+
+#: readtoolbar.py:151
+msgid "Find first"
+msgstr "Найти первый"
+
+#: readtoolbar.py:157
+msgid "Find previous"
+msgstr "Найти предыдущий"
+
+#: readtoolbar.py:159
+msgid "Find next"
+msgstr "Найти следующий"
+
+#: readtoolbar.py:176
+msgid "Zoom out"
+msgstr "Увеличить"
+
+#: readtoolbar.py:182
+msgid "Zoom in"
+msgstr "Уменьшить"
+
+#: readtoolbar.py:188
+msgid "Zoom to width"
+msgstr "Масштабировать по ширине"
+
+#: readtoolbar.py:194
+msgid "Zoom to fit"
+msgstr "Масштабировать по размеру"
+
+#: readtoolbar.py:199
+msgid "Actual size"
+msgstr "Оригинальный размер"
+
+#: readtoolbar.py:216
+msgid "%"
+msgstr "%"
+
+#: readtoolbar.py:229
+msgid "Fullscreen"
+msgstr "Полный экран"
+
+#: readtopbar.py:140
+#, python-format
+msgid "Page %(current)i of %(total_pages)i"
+msgstr ""
+
+#: speechtoolbar.py:56
+msgid "Play / Pause"
+msgstr "Воспроизвести/Пауза"
+
+#: speechtoolbar.py:64
+msgid "Stop"
+msgstr ""
+
+#~ msgid "Choose document"
+#~ msgstr "Выбрать документ"
 
 #, python-format
 #~ msgid "Page %i of %i"

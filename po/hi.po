@@ -18,52 +18,52 @@ msgid ""
 msgstr ""
 "Project-Id-Version: read-activity\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-22 00:32-0500\n"
-"PO-Revision-Date: 2010-03-22 22:50+0200\n"
+"POT-Creation-Date: 2012-03-08 00:34-0500\n"
+"PO-Revision-Date: 2011-10-13 05:21+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: Hindi <indlinux-hindi@lists.sourceforge.net>\n"
-"Language: hi\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.3\n"
+"X-Generator: Pootle 2.0.5\n"
 
 #: activity/activity.info:2
 msgid "Read"
 msgstr "पढ़ें"
 
-#: readactivity.py:242
-msgid "Highlight"
+#: evinceadapter.py:74
+msgid "URL from Read"
 msgstr ""
 
-#: readactivity.py:345
+#: readactivity.py:232
+msgid "Highlight"
+msgstr "उभारना"
+
+#: readactivity.py:341
 msgid "Back"
 msgstr "पीछे"
 
-#: readactivity.py:348
+#: readactivity.py:346
 msgid "Previous page"
 msgstr "पिछला पेज"
 
-#: readactivity.py:351
+#: readactivity.py:348
 msgid "Previous bookmark"
 msgstr "पिछला पसंदीदा"
 
-#: readactivity.py:361
+#: readactivity.py:363
 msgid "Forward"
 msgstr "आगे"
 
-#: readactivity.py:364
+#: readactivity.py:368
 msgid "Next page"
 msgstr "अगला पेज"
 
-#: readactivity.py:367
+#: readactivity.py:370
 msgid "Next bookmark"
 msgstr "अगला पसंदीदा"
-
-#: readactivity.py:582
-msgid "Choose document"
-msgstr "दस्तावेज़ चुनें"
 
 #: readdialog.py:51
 msgid "Cancel"
@@ -73,92 +73,109 @@ msgstr "रद्द करें"
 msgid "Ok"
 msgstr "ठीक"
 
-#: readdialog.py:111
+#: readdialog.py:112
 msgid "<b>Title</b>:"
 msgstr "<b>शीर्षक</b>:"
 
-#: readdialog.py:137
+#: readdialog.py:138
 msgid "<b>Details</b>:"
 msgstr "<b>विवरण</b>:"
 
-#. TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
-#. TRANS: automatically)
+#. TRANS: This goes like Bookmark added by User 5 days ago
+#. TRANS: (the elapsed string gets translated automatically)
 #: readsidebar.py:86
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
 msgstr "%(user)s %(time)s द्वारा पसंदीदा जोड़े गए"
 
-#: readsidebar.py:128 readsidebar.py:169
+#: readsidebar.py:129 readsidebar.py:171
 msgid "Add notes for bookmark: "
 msgstr "पसंदीदा के लिए टीप जोड़ें: "
 
-#: readsidebar.py:165
+#: readsidebar.py:167
 #, python-format
 msgid "%s's bookmark"
 msgstr "%s का पसंदीदा"
 
-#: readsidebar.py:166
+#: readsidebar.py:168
 #, python-format
 msgid "Bookmark for page %d"
 msgstr "पृष्ठ %d के लिए पसंदीदा"
 
-#: readtoolbar.py:65
+#: readtoolbar.py:61
 msgid "Previous"
 msgstr "पिछला"
 
-#: readtoolbar.py:72
+#: readtoolbar.py:68
 msgid "Next"
 msgstr "अगला"
 
-#: readtoolbar.py:155
+#: readtoolbar.py:151
 msgid "Find first"
 msgstr "पहीले ढूँढें"
 
-#: readtoolbar.py:161
+#: readtoolbar.py:157
 msgid "Find previous"
 msgstr "पिछला ढूंढें"
 
-#: readtoolbar.py:163
+#: readtoolbar.py:159
 msgid "Find next"
 msgstr "अगला ढूंढें"
 
-#: readtoolbar.py:179
+#: readtoolbar.py:176
 msgid "Zoom out"
 msgstr "छोटे आकार में दिखाएँ"
 
-#: readtoolbar.py:185
+#: readtoolbar.py:182
 msgid "Zoom in"
 msgstr "बड़े आकार में दिखाएँ"
 
-#: readtoolbar.py:191
+#: readtoolbar.py:188
 msgid "Zoom to width"
 msgstr "चौड़ाई में बड़ा करें"
 
-#: readtoolbar.py:197
+#: readtoolbar.py:194
 msgid "Zoom to fit"
 msgstr "फिट होने लायक बड़ा करें"
 
-#: readtoolbar.py:202
+#: readtoolbar.py:199
 msgid "Actual size"
 msgstr "असली आकार"
 
-#: readtoolbar.py:219
+#: readtoolbar.py:216
 msgid "%"
 msgstr "%"
 
-#: readtoolbar.py:232
+#: readtoolbar.py:229
 msgid "Fullscreen"
 msgstr "पूर्ण स्क्रीन"
 
-#: readtoolbar.py:329
+#: readtopbar.py:140
+#, python-format
+#, python-format,
+msgid "Page %(current)i of %(total_pages)i"
+msgstr "पेज %(current)i मैं %(total_pages)i"
+
+#: speechtoolbar.py:56
 msgid "Play / Pause"
+msgstr "प्ले करें / ठहरें"
+
+#: speechtoolbar.py:64
+msgid "Stop"
 msgstr ""
 
-#. TRANS: Translate this as Page i of m (eg: Page 4 of 334)
-#: readtopbar.py:206
+#~ msgid "pitch adjusted"
+#~ msgstr "पिच समायोजित"
+
+#~ msgid "rate adjusted"
+#~ msgstr "दर समायोजित"
+
+#~ msgid "Choose document"
+#~ msgstr "दस्तावेज़ चुनें"
+
 #, python-format
-msgid "Page %i of %i"
-msgstr "पृष्ठ %i में से: %i"
+#~ msgid "Page %i of %i"
+#~ msgstr "पृष्ठ %i में से: %i"
 
 #~ msgid "Edit"
 #~ msgstr "संपादन"

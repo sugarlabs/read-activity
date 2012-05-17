@@ -14,11 +14,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-22 00:32-0500\n"
+"POT-Creation-Date: 2012-03-08 00:34-0500\n"
 "PO-Revision-Date: 2010-02-28 20:33+0200\n"
 "Last-Translator: <empetronia@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: pap\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -29,37 +29,37 @@ msgstr ""
 msgid "Read"
 msgstr "Lesa"
 
-#: readactivity.py:242
+#: evinceadapter.py:74
+msgid "URL from Read"
+msgstr ""
+
+#: readactivity.py:232
 msgid "Highlight"
 msgstr ""
 
-#: readactivity.py:345
+#: readactivity.py:341
 msgid "Back"
 msgstr "Bèk"
 
-#: readactivity.py:348
+#: readactivity.py:346
 msgid "Previous page"
 msgstr "Pagina anterior"
 
-#: readactivity.py:351
+#: readactivity.py:348
 msgid "Previous bookmark"
 msgstr "Buklèger anterior"
 
-#: readactivity.py:361
+#: readactivity.py:363
 msgid "Forward"
 msgstr "Avànsa"
 
-#: readactivity.py:364
+#: readactivity.py:368
 msgid "Next page"
 msgstr "Pagina sigiente"
 
-#: readactivity.py:367
+#: readactivity.py:370
 msgid "Next bookmark"
 msgstr "Sigiente buklèger"
-
-#: readactivity.py:582
-msgid "Choose document"
-msgstr "Skohe dokumento"
 
 #: readdialog.py:51
 msgid "Cancel"
@@ -69,93 +69,103 @@ msgstr "Kanselá"
 msgid "Ok"
 msgstr "Ok"
 
-#: readdialog.py:111
+#: readdialog.py:112
 msgid "<b>Title</b>:"
 msgstr "<b>Título</b>:"
 
-#: readdialog.py:137
+#: readdialog.py:138
 msgid "<b>Details</b>:"
 msgstr "<b>Detaynan</b>:"
 
-#. TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
-#. TRANS: automatically)
+#. TRANS: This goes like Bookmark added by User 5 days ago
+#. TRANS: (the elapsed string gets translated automatically)
 #: readsidebar.py:86
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
 msgstr "Markador agrega pa %(user)s %(time)s"
 
-#: readsidebar.py:128 readsidebar.py:169
+#: readsidebar.py:129 readsidebar.py:171
 msgid "Add notes for bookmark: "
 msgstr "Agregá notisianan pa buklèger: "
 
-#: readsidebar.py:165
+#: readsidebar.py:167
 #, python-format
 msgid "%s's bookmark"
 msgstr "%s's buklèger"
 
-#: readsidebar.py:166
+#: readsidebar.py:168
 #, python-format
 msgid "Bookmark for page %d"
 msgstr "Bukelèger pa página %d"
 
-#: readtoolbar.py:65
+#: readtoolbar.py:61
 msgid "Previous"
 msgstr "Anterior"
 
-#: readtoolbar.py:72
+#: readtoolbar.py:68
 msgid "Next"
 msgstr "Sigiente"
 
-#: readtoolbar.py:155
+#: readtoolbar.py:151
 msgid "Find first"
 msgstr "Buska promé"
 
-#: readtoolbar.py:161
+#: readtoolbar.py:157
 msgid "Find previous"
 msgstr "Buska anterior"
 
-#: readtoolbar.py:163
+#: readtoolbar.py:159
 msgid "Find next"
 msgstr "Buska sigiente"
 
-#: readtoolbar.py:179
+#: readtoolbar.py:176
 msgid "Zoom out"
 msgstr "Hala serka leho"
 
-#: readtoolbar.py:185
+#: readtoolbar.py:182
 msgid "Zoom in"
 msgstr "Hala serka"
 
-#: readtoolbar.py:191
+#: readtoolbar.py:188
 msgid "Zoom to width"
 msgstr "Agusta e hanchura"
 
-#: readtoolbar.py:197
+#: readtoolbar.py:194
 msgid "Zoom to fit"
 msgstr "Hala serka pa fit"
 
-#: readtoolbar.py:202
+#: readtoolbar.py:199
 msgid "Actual size"
 msgstr "Tamánjo aktual"
 
-#: readtoolbar.py:219
+#: readtoolbar.py:216
 msgid "%"
 msgstr "%"
 
-#: readtoolbar.py:232
+#: readtoolbar.py:229
 msgid "Fullscreen"
 msgstr "Pantaya kompleto"
 
-#: readtoolbar.py:329
+#: readtopbar.py:140
+#, python-format
+msgid "Page %(current)i of %(total_pages)i"
+msgstr ""
+
+#: speechtoolbar.py:56
 msgid "Play / Pause"
 msgstr ""
 
+#: speechtoolbar.py:64
+msgid "Stop"
+msgstr ""
+
+#~ msgid "Choose document"
+#~ msgstr "Skohe dokumento"
+
 # TRANS: Tradusi e  saki komo página i di m (pe: Pagina 4 di 334)
-#. TRANS: Translate this as Page i of m (eg: Page 4 of 334)
-#: readtopbar.py:206
 #, python-format
-msgid "Page %i of %i"
-msgstr "Pagina %iof%i"
+#~ msgid "Page %i of %i"
+#~ msgstr "Pagina %iof%i"
 
 #~ msgid "Edit"
 #~ msgstr "Edita"

@@ -14,11 +14,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-22 00:32-0500\n"
+"POT-Creation-Date: 2012-03-08 00:34-0500\n"
 "PO-Revision-Date: 2009-08-25 15:36-0400\n"
 "Last-Translator: Chris Leonard <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: sk\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -29,38 +29,38 @@ msgstr ""
 msgid "Read"
 msgstr "Čítať"
 
-#: readactivity.py:242
+#: evinceadapter.py:74
+msgid "URL from Read"
+msgstr ""
+
+#: readactivity.py:232
 msgid "Highlight"
 msgstr ""
 
-#: readactivity.py:345
+#: readactivity.py:341
 msgid "Back"
 msgstr "Späť"
 
-#: readactivity.py:348
+#: readactivity.py:346
 #, fuzzy
 msgid "Previous page"
 msgstr "Predchádzajúci strana"
 
-#: readactivity.py:351
+#: readactivity.py:348
 msgid "Previous bookmark"
 msgstr ""
 
-#: readactivity.py:361
+#: readactivity.py:363
 msgid "Forward"
 msgstr "Dopredu"
 
-#: readactivity.py:364
+#: readactivity.py:368
 #, fuzzy
 msgid "Next page"
 msgstr "Ďaľší strana"
 
-#: readactivity.py:367
+#: readactivity.py:370
 msgid "Next bookmark"
-msgstr ""
-
-#: readactivity.py:582
-msgid "Choose document"
 msgstr ""
 
 #: readdialog.py:51
@@ -71,92 +71,95 @@ msgstr "Zrušiť"
 msgid "Ok"
 msgstr "Ok"
 
-#: readdialog.py:111
+#: readdialog.py:112
 msgid "<b>Title</b>:"
 msgstr ""
 
-#: readdialog.py:137
+#: readdialog.py:138
 msgid "<b>Details</b>:"
 msgstr ""
 
-#. TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
-#. TRANS: automatically)
+#. TRANS: This goes like Bookmark added by User 5 days ago
+#. TRANS: (the elapsed string gets translated automatically)
 #: readsidebar.py:86
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
 msgstr ""
 
-#: readsidebar.py:128 readsidebar.py:169
+#: readsidebar.py:129 readsidebar.py:171
 msgid "Add notes for bookmark: "
 msgstr ""
 
-#: readsidebar.py:165
+#: readsidebar.py:167
 #, python-format
 msgid "%s's bookmark"
 msgstr ""
 
-#: readsidebar.py:166
+#: readsidebar.py:168
 #, python-format
 msgid "Bookmark for page %d"
 msgstr ""
 
-#: readtoolbar.py:65
+#: readtoolbar.py:61
 msgid "Previous"
 msgstr "Predchádzajúci"
 
-#: readtoolbar.py:72
+#: readtoolbar.py:68
 msgid "Next"
 msgstr "Ďaľší"
 
-#: readtoolbar.py:155
+#: readtoolbar.py:151
 msgid "Find first"
 msgstr "Hľadať prvý"
 
-#: readtoolbar.py:161
+#: readtoolbar.py:157
 msgid "Find previous"
 msgstr "Nájsť predchádzajúci"
 
-#: readtoolbar.py:163
+#: readtoolbar.py:159
 #, fuzzy
 msgid "Find next"
 msgstr "Hľadať ďalej"
 
-#: readtoolbar.py:179
+#: readtoolbar.py:176
 msgid "Zoom out"
 msgstr "Oddialiť"
 
-#: readtoolbar.py:185
+#: readtoolbar.py:182
 msgid "Zoom in"
 msgstr "Priblížiť"
 
-#: readtoolbar.py:191
+#: readtoolbar.py:188
 msgid "Zoom to width"
 msgstr ""
 
-#: readtoolbar.py:197
+#: readtoolbar.py:194
 msgid "Zoom to fit"
 msgstr ""
 
-#: readtoolbar.py:202
+#: readtoolbar.py:199
 msgid "Actual size"
 msgstr "Aktuálna veľkosť"
 
-#: readtoolbar.py:219
+#: readtoolbar.py:216
 msgid "%"
 msgstr "%"
 
-#: readtoolbar.py:232
+#: readtoolbar.py:229
 msgid "Fullscreen"
 msgstr ""
 
-#: readtoolbar.py:329
+#: readtopbar.py:140
+#, python-format
+msgid "Page %(current)i of %(total_pages)i"
+msgstr ""
+
+#: speechtoolbar.py:56
 msgid "Play / Pause"
 msgstr ""
 
-#. TRANS: Translate this as Page i of m (eg: Page 4 of 334)
-#: readtopbar.py:206
-#, python-format
-msgid "Page %i of %i"
+#: speechtoolbar.py:64
+msgid "Stop"
 msgstr ""
 
 #~ msgid "Edit"

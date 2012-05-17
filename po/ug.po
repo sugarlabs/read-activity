@@ -10,147 +10,158 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-22 00:32-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2012-03-08 00:34-0500\n"
+"PO-Revision-Date: 2012-02-27 06:40+0200\n"
+"Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.1.1rc4\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Pootle 2.0.5\n"
 
 #: activity/activity.info:2
 msgid "Read"
 msgstr ""
 
-#: readactivity.py:242
+#: evinceadapter.py:74
+msgid "URL from Read"
+msgstr ""
+
+#: readactivity.py:232
 msgid "Highlight"
 msgstr ""
 
-#: readactivity.py:345
+#: readactivity.py:341
+#, fuzzy
 msgid "Back"
-msgstr ""
+msgstr "كەينى"
 
-#: readactivity.py:348
+#: readactivity.py:346
 msgid "Previous page"
 msgstr ""
 
-#: readactivity.py:351
+#: readactivity.py:348
 msgid "Previous bookmark"
 msgstr ""
 
-#: readactivity.py:361
+#: readactivity.py:363
+#, fuzzy
 msgid "Forward"
-msgstr ""
+msgstr "ئالدىغا"
 
-#: readactivity.py:364
+#: readactivity.py:368
 msgid "Next page"
 msgstr ""
 
-#: readactivity.py:367
+#: readactivity.py:370
 msgid "Next bookmark"
 msgstr ""
 
-#: readactivity.py:582
-msgid "Choose document"
-msgstr ""
-
 #: readdialog.py:51
+#, fuzzy
 msgid "Cancel"
-msgstr ""
+msgstr "بىكار قىلىش"
 
 #: readdialog.py:57
 msgid "Ok"
 msgstr ""
 
-#: readdialog.py:111
+#: readdialog.py:112
+#, fuzzy
 msgid "<b>Title</b>:"
-msgstr ""
+msgstr "<b>ماۋزۇ</b>:"
 
-#: readdialog.py:137
+#: readdialog.py:138
+#, fuzzy
 msgid "<b>Details</b>:"
-msgstr ""
+msgstr "<b>تەپسىلاتى</b>:"
 
-#. TRANS: This goes like Bookmark added by User 5 days ago (the elapsed string gets translated
-#. TRANS: automatically)
+#. TRANS: This goes like Bookmark added by User 5 days ago
+#. TRANS: (the elapsed string gets translated automatically)
 #: readsidebar.py:86
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
 msgstr ""
 
-#: readsidebar.py:128 readsidebar.py:169
+#: readsidebar.py:129 readsidebar.py:171
 msgid "Add notes for bookmark: "
 msgstr ""
 
-#: readsidebar.py:165
+#: readsidebar.py:167
 #, python-format
 msgid "%s's bookmark"
 msgstr ""
 
-#: readsidebar.py:166
+#: readsidebar.py:168
 #, python-format
 msgid "Bookmark for page %d"
 msgstr ""
 
-#: readtoolbar.py:65
+#: readtoolbar.py:61
+#, fuzzy
 msgid "Previous"
-msgstr ""
+msgstr "ئ‍الدىنقى"
 
-#: readtoolbar.py:72
+#: readtoolbar.py:68
+#, fuzzy
 msgid "Next"
-msgstr ""
+msgstr "كېيىنكى"
 
-#: readtoolbar.py:155
+#: readtoolbar.py:151
 msgid "Find first"
 msgstr ""
 
-#: readtoolbar.py:161
+#: readtoolbar.py:157
 msgid "Find previous"
 msgstr ""
 
-#: readtoolbar.py:163
+#: readtoolbar.py:159
 msgid "Find next"
 msgstr ""
 
-#: readtoolbar.py:179
+#: readtoolbar.py:176
 msgid "Zoom out"
 msgstr ""
 
-#: readtoolbar.py:185
+#: readtoolbar.py:182
 msgid "Zoom in"
 msgstr ""
 
-#: readtoolbar.py:191
+#: readtoolbar.py:188
 msgid "Zoom to width"
 msgstr ""
 
-#: readtoolbar.py:197
+#: readtoolbar.py:194
 msgid "Zoom to fit"
 msgstr ""
 
-#: readtoolbar.py:202
+#: readtoolbar.py:199
 msgid "Actual size"
 msgstr ""
 
-#: readtoolbar.py:219
+#: readtoolbar.py:216
 msgid "%"
 msgstr ""
 
-#: readtoolbar.py:232
+#: readtoolbar.py:229
 msgid "Fullscreen"
 msgstr ""
 
-#: readtoolbar.py:329
+#: readtopbar.py:140
+#, python-format
+msgid "Page %(current)i of %(total_pages)i"
+msgstr ""
+
+#: speechtoolbar.py:56
 msgid "Play / Pause"
 msgstr ""
 
-#. TRANS: Translate this as Page i of m (eg: Page 4 of 334)
-#: readtopbar.py:206
-#, python-format
-msgid "Page %i of %i"
+#: speechtoolbar.py:64
+msgid "Stop"
 msgstr ""

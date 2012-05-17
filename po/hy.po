@@ -14,11 +14,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-07 00:33-0500\n"
-"PO-Revision-Date: 2011-12-18 23:51+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"POT-Creation-Date: 2012-03-08 00:34-0500\n"
+"PO-Revision-Date: 2012-05-07 05:16+0200\n"
+"Last-Translator: Jasmine <udea_jasmine@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: hy\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -29,135 +29,141 @@ msgstr ""
 msgid "Read"
 msgstr "Կարդալ"
 
-#: readactivity.py:239
+#: evinceadapter.py:74
+msgid "URL from Read"
+msgstr ""
+
+#: readactivity.py:232
 msgid "Highlight"
 msgstr "Ցայտուն դարձնել"
 
-#: readactivity.py:350
+#: readactivity.py:341
 msgid "Back"
 msgstr "Հետ"
 
-#: readactivity.py:353
+#: readactivity.py:346
 msgid "Previous page"
 msgstr "Նախորդ էջ"
 
-#: readactivity.py:356
+#: readactivity.py:348
 msgid "Previous bookmark"
 msgstr "Նախորդ էջանիշ"
 
-#: readactivity.py:366
+#: readactivity.py:363
 msgid "Forward"
 msgstr "Առաջ"
 
-#: readactivity.py:369
+#: readactivity.py:368
 msgid "Next page"
 msgstr "Հաջորդ էջ"
 
-#: readactivity.py:372
+#: readactivity.py:370
 msgid "Next bookmark"
 msgstr "Հաջորդ էջանիշ"
 
-#: readdialog.py:52
+#: readdialog.py:51
 msgid "Cancel"
 msgstr "Չեղարկել"
 
-#: readdialog.py:58
+#: readdialog.py:57
 msgid "Ok"
 msgstr "OK"
 
-#: readdialog.py:113
+#: readdialog.py:112
 msgid "<b>Title</b>:"
 msgstr "<b>Վերնագիր</b>."
 
-#: readdialog.py:139
+#: readdialog.py:138
 msgid "<b>Details</b>:"
 msgstr "<b>Մանրամասներ</b>."
 
 #. TRANS: This goes like Bookmark added by User 5 days ago
 #. TRANS: (the elapsed string gets translated automatically)
-#: readsidebar.py:88
+#: readsidebar.py:86
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
 msgstr "Էջանիշն ավելացրել է %(user)s օգտագործողը %(time)s"
 
-#: readsidebar.py:131 readsidebar.py:173
+#: readsidebar.py:129 readsidebar.py:171
 msgid "Add notes for bookmark: "
 msgstr "Ավելացնել նշումներ էջանիշի համար. "
 
-#: readsidebar.py:169
+#: readsidebar.py:167
 #, python-format
 msgid "%s's bookmark"
 msgstr "%s - ի էջանիշ"
 
-#: readsidebar.py:170
+#: readsidebar.py:168
 #, python-format
 msgid "Bookmark for page %d"
 msgstr "Էջանիշ %d էջի համար"
 
-#: readtoolbar.py:68
+#: readtoolbar.py:61
 msgid "Previous"
 msgstr "Նախորդ"
 
-#: readtoolbar.py:75
+#: readtoolbar.py:68
 msgid "Next"
 msgstr "Հաջորդ"
 
-#: readtoolbar.py:158
+#: readtoolbar.py:151
 msgid "Find first"
 msgstr "Գտնել առաջինը"
 
-#: readtoolbar.py:164
+#: readtoolbar.py:157
 msgid "Find previous"
 msgstr "Գտնել նախորդը"
 
-#: readtoolbar.py:166
+#: readtoolbar.py:159
 msgid "Find next"
 msgstr "Գտնել հաջորդը"
 
-#: readtoolbar.py:183
+#: readtoolbar.py:176
 msgid "Zoom out"
 msgstr "Հեռացնել"
 
-#: readtoolbar.py:189
+#: readtoolbar.py:182
 msgid "Zoom in"
 msgstr "Մոտեցնել"
 
-#: readtoolbar.py:195
+#: readtoolbar.py:188
 msgid "Zoom to width"
 msgstr "Հարմարեցնել լայնությամբ"
 
-#: readtoolbar.py:201
+#: readtoolbar.py:194
 msgid "Zoom to fit"
 msgstr "Հարմարեցնել չափսով"
 
-#: readtoolbar.py:206
+#: readtoolbar.py:199
 msgid "Actual size"
 msgstr "Իրական չափս"
 
-#: readtoolbar.py:223
+#: readtoolbar.py:216
 msgid "%"
 msgstr "%"
 
-#: readtoolbar.py:236
+#: readtoolbar.py:229
 msgid "Fullscreen"
 msgstr "Էկրանի չափով"
-
-#: readtoolbar.py:326
-msgid "Play / Pause"
-msgstr "Գործարկել / Դադար"
-
-#: readtoolbar.py:379
-msgid "pitch adjusted"
-msgstr "տոնը կարգավորված է"
-
-#: readtoolbar.py:384
-msgid "rate adjusted"
-msgstr "արագությունը կարգավորված է"
 
 #: readtopbar.py:140
 #, python-format
 msgid "Page %(current)i of %(total_pages)i"
 msgstr "Էջ %(current)i of %(total_pages)i"
+
+#: speechtoolbar.py:56
+msgid "Play / Pause"
+msgstr "Գործարկել / Դադար"
+
+#: speechtoolbar.py:64
+msgid "Stop"
+msgstr "Կանգ"
+
+#~ msgid "pitch adjusted"
+#~ msgstr "տոնը կարգավորված է"
+
+#~ msgid "rate adjusted"
+#~ msgstr "արագությունը կարգավորված է"
 
 #~ msgid "Choose document"
 #~ msgstr "Ընտրել փաստաթուղթը"

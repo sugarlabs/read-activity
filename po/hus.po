@@ -6,122 +6,42 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-05 11:05-0300\n"
-"PO-Revision-Date: 2011-09-11 01:38+0200\n"
-"Last-Translator: <saulleoart@gmail.com>\n"
+"POT-Creation-Date: 2012-03-08 00:34-0500\n"
+"PO-Revision-Date: 2012-05-04 07:47+0200\n"
+"Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: hus\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.1\n"
+"X-Generator: Pootle 2.0.5\n"
 
 #: activity/activity.info:2
 msgid "Read"
 msgstr "Ajiy"
 
-#: readtoolbar.py:67
-msgid "Previous"
-msgstr "Xi ok'xidh"
+#: evinceadapter.py:74
+msgid "URL from Read"
+msgstr ""
 
-#: readtoolbar.py:74
-msgid "Next"
-msgstr "Xi júnakej"
-
-#: readtoolbar.py:157
-msgid "Find first"
-msgstr "Aliy xi k'a'ál"
-
-#: readtoolbar.py:163
-msgid "Find previous"
-msgstr "Aliy xi ok'xidh"
-
-#: readtoolbar.py:165
-msgid "Find next"
-msgstr "Aliy xi júnakej"
-
-#: readtoolbar.py:181
-msgid "Zoom out"
-msgstr "Tsipti'méjdha'"
-
-# Se puede aplicar de igual forma Utuw porque significa acercar y el efecto al acercar cualquier objeto se percibe de mayor tamaño.
-#: readtoolbar.py:187
-msgid "Zoom in"
-msgstr "Puwedha'"
-
-#: readtoolbar.py:193
-msgid "Zoom to width"
-msgstr "Ka junkuw tin ts'ikwtal"
-
-#: readtoolbar.py:199
-msgid "Zoom to fit"
-msgstr "Ka junkuw ti walek"
-
-#: readtoolbar.py:204
-msgid "Actual size"
-msgstr "In léj puwél"
-
-#: readtoolbar.py:221
-msgid "%"
-msgstr "%"
-
-#: readtoolbar.py:234
-msgid "Fullscreen"
-msgstr "Putat walek"
-
-#: readtoolbar.py:324
-msgid "Play / Pause"
-msgstr "K'wajba' / Tonk'iy"
-
-#: readtoolbar.py:377
-msgid "pitch adjusted"
-msgstr "janidhtaláb t'ojojodh"
-
-# tasa ajustada (tasa se refiere a un nivel, índice)
-# Ejemplo: "Tasa de natalidad"="ïndice de natalidad"
-#: readtoolbar.py:382
-msgid "rate adjusted"
-msgstr "bajudh adhiktalab"
-
-#. TRANS: This goes like Bookmark added by User 5 days ago
-#. TRANS: (the elapsed string gets translated automatically)
-#: readsidebar.py:88
-#, python-format
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr "Pulik tejwa'medhom puk'udh k'al a %(user)s %(time)s"
-
-#: readsidebar.py:131 readsidebar.py:173
-msgid "Add notes for bookmark: "
-msgstr "Ka punk'uy jun i tsakam dhuchlab abal an pulik tejwa'medhom: "
-
-#: readsidebar.py:169
-#, python-format
-msgid "%s's bookmark"
-msgstr "In pulik tejwa'medhom a %s"
-
-#: readsidebar.py:170
-#, python-format
-msgid "Bookmark for page %d"
-msgstr "Pulik tejwa'medhom abal an walxeklek %d"
-
-#: readactivity.py:239
+#: readactivity.py:232
 msgid "Highlight"
 msgstr "Tajaxbédha'"
 
-#: readactivity.py:349
+#: readactivity.py:341
 msgid "Back"
 msgstr "Wíchiy"
 
-#: readactivity.py:352
+#: readactivity.py:346
 msgid "Previous page"
 msgstr "Ok'xidh walxeklek"
 
-#: readactivity.py:355
+#: readactivity.py:348
 msgid "Previous bookmark"
 msgstr "Ok'xidh pulik tejwa'medhom"
 
-#: readactivity.py:365
+#: readactivity.py:363
 msgid "Forward"
 msgstr "Ne'etsnanchj"
 
@@ -129,19 +49,9 @@ msgstr "Ne'etsnanchj"
 msgid "Next page"
 msgstr "Júnakej walxeklek"
 
-#: readactivity.py:371
+#: readactivity.py:370
 msgid "Next bookmark"
 msgstr "Júnakej pulik tejwa'medhom"
-
-#: readactivity.py:570
-msgid "Choose document"
-msgstr "Takuy dhuchadh úw"
-
-#: readtopbar.py:141
-#, python-format
-#, python-format, ,
-msgid "Page %(current)i of %(total_pages)i"
-msgstr "Walxeklek %(current)i a xi ti %(total_pages)i"
 
 #: readdialog.py:51
 msgid "Cancel"
@@ -158,6 +68,101 @@ msgstr "<b>Bíj</b>:"
 #: readdialog.py:138
 msgid "<b>Details</b>:"
 msgstr "<b>Alwa' met'adh</b>:"
+
+#. TRANS: This goes like Bookmark added by User 5 days ago
+#. TRANS: (the elapsed string gets translated automatically)
+#: readsidebar.py:86
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "Pulik tejwa'medhom puk'udh k'al a %(user)s %(time)s"
+
+#: readsidebar.py:129 readsidebar.py:171
+msgid "Add notes for bookmark: "
+msgstr "Ka punk'uy jun i tsakam dhuchlab abal an pulik tejwa'medhom: "
+
+#: readsidebar.py:167
+#, python-format
+msgid "%s's bookmark"
+msgstr "In pulik tejwa'medhom a %s"
+
+#: readsidebar.py:168
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "Pulik tejwa'medhom abal an walxeklek %d"
+
+#: readtoolbar.py:61
+msgid "Previous"
+msgstr "Xi ok'xidh"
+
+#: readtoolbar.py:68
+msgid "Next"
+msgstr "Xi júnakej"
+
+#: readtoolbar.py:151
+msgid "Find first"
+msgstr "Aliy xi k'a'ál"
+
+#: readtoolbar.py:157
+msgid "Find previous"
+msgstr "Aliy xi ok'xidh"
+
+#: readtoolbar.py:159
+msgid "Find next"
+msgstr "Aliy xi júnakej"
+
+#: readtoolbar.py:176
+msgid "Zoom out"
+msgstr "Tsipti'méjdha'"
+
+# Se puede aplicar de igual forma Utuw porque significa acercar y el efecto al acercar cualquier objeto se percibe de mayor tamaño.
+#: readtoolbar.py:182
+msgid "Zoom in"
+msgstr "Puwedha'"
+
+#: readtoolbar.py:188
+msgid "Zoom to width"
+msgstr "Ka junkuw tin ts'ikwtal"
+
+#: readtoolbar.py:194
+msgid "Zoom to fit"
+msgstr "Ka junkuw ti walek"
+
+#: readtoolbar.py:199
+msgid "Actual size"
+msgstr "In léj puwél"
+
+#: readtoolbar.py:216
+msgid "%"
+msgstr "%"
+
+#: readtoolbar.py:229
+msgid "Fullscreen"
+msgstr "Putat walek"
+
+#: readtopbar.py:140
+#, python-format
+#, python-format, ,
+msgid "Page %(current)i of %(total_pages)i"
+msgstr "Walxeklek %(current)i a xi ti %(total_pages)i"
+
+#: speechtoolbar.py:56
+msgid "Play / Pause"
+msgstr "K'wajba' / Tonk'iy"
+
+#: speechtoolbar.py:64
+msgid "Stop"
+msgstr "Kuba'"
+
+#~ msgid "pitch adjusted"
+#~ msgstr "janidhtaláb t'ojojodh"
+
+# tasa ajustada (tasa se refiere a un nivel, índice)
+# Ejemplo: "Tasa de natalidad"="ïndice de natalidad"
+#~ msgid "rate adjusted"
+#~ msgstr "bajudh adhiktalab"
+
+#~ msgid "Choose document"
+#~ msgstr "Takuy dhuchadh úw"
 
 #, python-format
 #~ msgid "Page %i of %i"

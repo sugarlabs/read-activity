@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-05 11:05-0300\n"
+"POT-Creation-Date: 2012-03-08 00:34-0500\n"
 "PO-Revision-Date: 2011-08-31 18:03+0200\n"
 "Last-Translator: Thangamani <thangam.arunx@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,105 +29,27 @@ msgstr ""
 msgid "Read"
 msgstr "வாசி"
 
-#: readtoolbar.py:67
-msgid "Previous"
-msgstr "முன்னைய"
+#: evinceadapter.py:74
+msgid "URL from Read"
+msgstr ""
 
-#: readtoolbar.py:74
-msgid "Next"
-msgstr "அடுத்தது"
-
-#: readtoolbar.py:157
-msgid "Find first"
-msgstr "முதலாவதை கண்டுபிடி"
-
-#: readtoolbar.py:163
-msgid "Find previous"
-msgstr "முன்னையதை கண்டுபிடி"
-
-#: readtoolbar.py:165
-msgid "Find next"
-msgstr "அடுத்தததை கண்டுபிடி"
-
-#: readtoolbar.py:181
-msgid "Zoom out"
-msgstr "சிறிதாக்கிக் காட்டு"
-
-#: readtoolbar.py:187
-msgid "Zoom in"
-msgstr "பெரிதாக்கிக் காட்டு"
-
-#: readtoolbar.py:193
-msgid "Zoom to width"
-msgstr "அகலதிற்கு ஏற்றவாறு பெரிதாக்கு"
-
-#: readtoolbar.py:199
-msgid "Zoom to fit"
-msgstr "பொருந்துமாறு பெரிதாக்கு"
-
-#: readtoolbar.py:204
-msgid "Actual size"
-msgstr "சரியான அளவு"
-
-#: readtoolbar.py:221
-msgid "%"
-msgstr "%"
-
-#: readtoolbar.py:234
-msgid "Fullscreen"
-msgstr "முழுத்திரை"
-
-#: readtoolbar.py:324
-msgid "Play / Pause"
-msgstr "இயக்கு / இடைநிறுத்து"
-
-#: readtoolbar.py:377
-msgid "pitch adjusted"
-msgstr "சுருதி சரிபார்க்கப்பட்டது"
-
-#: readtoolbar.py:382
-msgid "rate adjusted"
-msgstr "விகிதம் சரிபார்க்கப்பட்டது"
-
-#. TRANS: This goes like Bookmark added by User 5 days ago
-#. TRANS: (the elapsed string gets translated automatically)
-#: readsidebar.py:88
-#, python-format
-#, python-format,
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr "புத்தகக் குறி %(user)s %(time)s சேர்க்கப்பட்டுள்ளது"
-
-#: readsidebar.py:131 readsidebar.py:173
-msgid "Add notes for bookmark: "
-msgstr "புத்தகக் குறிக்கு குறிப்புக்களை சேர்க்க: "
-
-#: readsidebar.py:169
-#, python-format
-msgid "%s's bookmark"
-msgstr "%s ல் புத்தகக் குறி"
-
-#: readsidebar.py:170
-#, python-format
-msgid "Bookmark for page %d"
-msgstr "பக்கத்திற்கான புத்தகக் குறி %d"
-
-#: readactivity.py:239
+#: readactivity.py:232
 msgid "Highlight"
 msgstr "மேலோங்கிக்காட்டு"
 
-#: readactivity.py:349
+#: readactivity.py:341
 msgid "Back"
 msgstr "பின்னோக்கி அனுப்பு"
 
-#: readactivity.py:352
+#: readactivity.py:346
 msgid "Previous page"
 msgstr "முதற்பக்கம்"
 
-#: readactivity.py:355
+#: readactivity.py:348
 msgid "Previous bookmark"
 msgstr "முன்னைய புத்தகக்குறி"
 
-#: readactivity.py:365
+#: readactivity.py:363
 msgid "Forward"
 msgstr "முன்னோக்கி அனுப்பு"
 
@@ -135,18 +57,9 @@ msgstr "முன்னோக்கி அனுப்பு"
 msgid "Next page"
 msgstr "அடுத்த பக்கம்"
 
-#: readactivity.py:371
+#: readactivity.py:370
 msgid "Next bookmark"
 msgstr "அடுத்த புத்தகக்குறி"
-
-#: readactivity.py:570
-msgid "Choose document"
-msgstr "ஆவணத்தை தெரிவுசெய்"
-
-#: readtopbar.py:141
-#, python-format
-msgid "Page %(current)i of %(total_pages)i"
-msgstr "பக்கம் %(current)i யின் %(total_pages)i"
 
 #: readdialog.py:51
 msgid "Cancel"
@@ -163,6 +76,98 @@ msgstr "<b>தலைப்பு</b>:"
 #: readdialog.py:138
 msgid "<b>Details</b>:"
 msgstr "<b>விவரங்கள்</b>:"
+
+#. TRANS: This goes like Bookmark added by User 5 days ago
+#. TRANS: (the elapsed string gets translated automatically)
+#: readsidebar.py:86
+#, python-format
+#, python-format,
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "புத்தகக் குறி %(user)s %(time)s சேர்க்கப்பட்டுள்ளது"
+
+#: readsidebar.py:129 readsidebar.py:171
+msgid "Add notes for bookmark: "
+msgstr "புத்தகக் குறிக்கு குறிப்புக்களை சேர்க்க: "
+
+#: readsidebar.py:167
+#, python-format
+msgid "%s's bookmark"
+msgstr "%s ல் புத்தகக் குறி"
+
+#: readsidebar.py:168
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "பக்கத்திற்கான புத்தகக் குறி %d"
+
+#: readtoolbar.py:61
+msgid "Previous"
+msgstr "முன்னைய"
+
+#: readtoolbar.py:68
+msgid "Next"
+msgstr "அடுத்தது"
+
+#: readtoolbar.py:151
+msgid "Find first"
+msgstr "முதலாவதை கண்டுபிடி"
+
+#: readtoolbar.py:157
+msgid "Find previous"
+msgstr "முன்னையதை கண்டுபிடி"
+
+#: readtoolbar.py:159
+msgid "Find next"
+msgstr "அடுத்தததை கண்டுபிடி"
+
+#: readtoolbar.py:176
+msgid "Zoom out"
+msgstr "சிறிதாக்கிக் காட்டு"
+
+#: readtoolbar.py:182
+msgid "Zoom in"
+msgstr "பெரிதாக்கிக் காட்டு"
+
+#: readtoolbar.py:188
+msgid "Zoom to width"
+msgstr "அகலதிற்கு ஏற்றவாறு பெரிதாக்கு"
+
+#: readtoolbar.py:194
+msgid "Zoom to fit"
+msgstr "பொருந்துமாறு பெரிதாக்கு"
+
+#: readtoolbar.py:199
+msgid "Actual size"
+msgstr "சரியான அளவு"
+
+#: readtoolbar.py:216
+msgid "%"
+msgstr "%"
+
+#: readtoolbar.py:229
+msgid "Fullscreen"
+msgstr "முழுத்திரை"
+
+#: readtopbar.py:140
+#, python-format
+msgid "Page %(current)i of %(total_pages)i"
+msgstr "பக்கம் %(current)i யின் %(total_pages)i"
+
+#: speechtoolbar.py:56
+msgid "Play / Pause"
+msgstr "இயக்கு / இடைநிறுத்து"
+
+#: speechtoolbar.py:64
+msgid "Stop"
+msgstr ""
+
+#~ msgid "pitch adjusted"
+#~ msgstr "சுருதி சரிபார்க்கப்பட்டது"
+
+#~ msgid "rate adjusted"
+#~ msgstr "விகிதம் சரிபார்க்கப்பட்டது"
+
+#~ msgid "Choose document"
+#~ msgstr "ஆவணத்தை தெரிவுசெய்"
 
 #, python-format, 
 #~ msgid "Page %i of %i"

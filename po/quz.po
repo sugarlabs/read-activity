@@ -1,145 +1,53 @@
-# Irma <sankaypillo@gmail.com>, 2011.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-05 11:05-0300\n"
-"PO-Revision-Date: 2011-11-19 17:32-0500\n"
-"Last-Translator: Irma <sankaypillo@gmail.com>\n"
+"POT-Creation-Date: 2012-03-08 00:34-0500\n"
+"PO-Revision-Date: 2012-05-16 01:29+0200\n"
+"Last-Translator: Irma  <sankaypillo@gmail.com>\n"
 "Language-Team: Voluntarios Quechua Sugar Camp\n"
 "Language: quz\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Virtaal 0.7.0\n"
+"Plural-Forms: nplurals=2; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : 1;\n"
+"X-Generator: Pootle 2.0.5\n"
 
 #  "Leer"
 #: activity/activity.info:2
 msgid "Read"
 msgstr "Ñawichay"
 
-#  "Anterior"
-#: readtoolbar.py:67
-msgid "Previous"
-msgstr "Ñawpaq"
-
-#  "Siguiente"
-#: readtoolbar.py:74
-msgid "Next"
-msgstr "Hamuq"
-
-#  "Buscar primero"
-#: readtoolbar.py:157
-msgid "Find first"
-msgstr "Qallariqta machkay"
-
-#  "Buscar anterior"
-#: readtoolbar.py:163
-msgid "Find previous"
-msgstr "Ñawpaqta machkay"
-
-#  "Buscar siguiente"
-#: readtoolbar.py:165
-msgid "Find next"
-msgstr "Hamuqta machkay"
-
-#  "Alejarse"
-#: readtoolbar.py:181
-msgid "Zoom out"
-msgstr "Huch'uyachiy"
-
-#  "Acercarse"
-#: readtoolbar.py:187
-msgid "Zoom in"
-msgstr "Hatunyachiy"
-
-#  "Ajustar al ancho"
-#: readtoolbar.py:193
-msgid "Zoom to width"
-msgstr "Kinrayninman mat'iy"
-
-#  "Ajustar a la pantalla"
-#: readtoolbar.py:199
-msgid "Zoom to fit"
-msgstr "Pantallaman mat'iy"
-
-#  "Tamaño real"
-#: readtoolbar.py:204
-msgid "Actual size"
-msgstr "Kikin sayan"
-
-#  "%"
-#: readtoolbar.py:221
-msgid "%"
-msgstr "%"
-
-#  "Pantalla completa"
-#: readtoolbar.py:234
-msgid "Fullscreen"
-msgstr "Hunt'asqa pantalla"
-
-#  "Reproducir / Detener"
-#: readtoolbar.py:324
-msgid "Play / Pause"
-msgstr "Purichiy / Utichiy"
-
-#  "tono ajustado"
-#: readtoolbar.py:377
-msgid "pitch adjusted"
-msgstr "Kunka mat'isqa"
-
-#  "velocidad ajustada"
-#: readtoolbar.py:382
-msgid "rate adjusted"
-msgstr "Utqaynin mat'isqa"
-
-#  "Registro agregado por %(user)s %(time)s"
-#. TRANS: This goes like Bookmark added by User 5 days ago
-#. TRANS: (the elapsed string gets translated automatically)
-#: readsidebar.py:88
-#, python-format
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr "Kaymi qillqachiytaqa yaparin %(user)s %(time)s"
-
-#  "Añadir notas para el marcador: "
-#: readsidebar.py:131 readsidebar.py:173
-msgid "Add notes for bookmark: "
-msgstr "T'upsinapaq huch'uy willakunata yapay:"
-
-#  "Marcador de %s"
-#: readsidebar.py:169
-#, python-format
-msgid "%s's bookmark"
-msgstr "%s kaypa tup'sin"
-
-#  "Marcador para página %d"
-#: readsidebar.py:170
-#, python-format
-msgid "Bookmark for page %d"
-msgstr "Raphipa %d t'upsin"
+#: evinceadapter.py:74
+msgid "URL from Read"
+msgstr "Ñawichanamanta URL"
 
 #  "Resaltar"
-#: readactivity.py:239
+#: readactivity.py:232
 msgid "Highlight"
 msgstr "Yanachaq"
 
 #  "Volver"
-#: readactivity.py:349
+#: readactivity.py:341
 msgid "Back"
 msgstr "Kutiy"
 
 #  "Página anterior"
-#: readactivity.py:352
+#: readactivity.py:346
 msgid "Previous page"
 msgstr "Ñawpa raphi"
 
 #  "Registro anterior"
-#: readactivity.py:355
+#: readactivity.py:348
 msgid "Previous bookmark"
 msgstr "Ñawpa qillqachisqa"
 
 #  "Avanzar"
-#: readactivity.py:365
+#: readactivity.py:363
 msgid "Forward"
 msgstr "Ñawpay"
 
@@ -149,20 +57,9 @@ msgid "Next page"
 msgstr "Hamuq raphi"
 
 #  "Siguiente registro"
-#: readactivity.py:371
+#: readactivity.py:370
 msgid "Next bookmark"
 msgstr "Hamuq qillqachisqa"
-
-#  "Escoger documento"
-#: readactivity.py:570
-msgid "Choose document"
-msgstr "Qillqa khiputa akllay"
-
-#  "Página %(current)i de %(total_pages)i"
-#: readtopbar.py:141
-#, python-format
-msgid "Page %(current)i of %(total_pages)i"
-msgstr "Llapan %(total_pages)i nisqamanta %(current)i kay raphi"
 
 #  "Cancelar"
 #: readdialog.py:51
@@ -183,3 +80,103 @@ msgstr "<b>Sutinchaynin</b>:"
 #: readdialog.py:138
 msgid "<b>Details</b>:"
 msgstr "<b>Ima nisqan</b>:"
+
+#  "Registro agregado por %(user)s %(time)s"
+#. TRANS: This goes like Bookmark added by User 5 days ago
+#. TRANS: (the elapsed string gets translated automatically)
+#: readsidebar.py:86
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "Kaymi qillqachiytaqa yaparin %(user)s %(time)s"
+
+#  "Añadir notas para el marcador: "
+#: readsidebar.py:129 readsidebar.py:171
+msgid "Add notes for bookmark: "
+msgstr "T'upsinapaq huch'uy willakunata yapay: "
+
+#  "Marcador de %s"
+#: readsidebar.py:167
+#, python-format
+msgid "%s's bookmark"
+msgstr "%s kaypa tup'sin"
+
+#  "Marcador para página %d"
+#: readsidebar.py:168
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "Raphipa %d t'upsin"
+
+#  "Anterior"
+#: readtoolbar.py:61
+msgid "Previous"
+msgstr "Ñawpaq"
+
+#  "Siguiente"
+#: readtoolbar.py:68
+msgid "Next"
+msgstr "Hamuq"
+
+#  "Buscar primero"
+#: readtoolbar.py:151
+msgid "Find first"
+msgstr "Qallariqta machkay"
+
+#  "Buscar anterior"
+#: readtoolbar.py:157
+msgid "Find previous"
+msgstr "Ñawpaqta machkay"
+
+#  "Buscar siguiente"
+#: readtoolbar.py:159
+msgid "Find next"
+msgstr "Hamuqta machkay"
+
+#  "Alejarse"
+#: readtoolbar.py:176
+msgid "Zoom out"
+msgstr "Huch'uyachiy"
+
+#  "Acercarse"
+#: readtoolbar.py:182
+msgid "Zoom in"
+msgstr "Hatunyachiy"
+
+#  "Ajustar al ancho"
+#: readtoolbar.py:188
+msgid "Zoom to width"
+msgstr "Kinrayninman mat'iy"
+
+#  "Ajustar a la pantalla"
+#: readtoolbar.py:194
+msgid "Zoom to fit"
+msgstr "Pantallaman mat'iy"
+
+#  "Tamaño real"
+#: readtoolbar.py:199
+msgid "Actual size"
+msgstr "Kikin sayan"
+
+#  "%"
+#: readtoolbar.py:216
+msgid "%"
+msgstr "%"
+
+#  "Pantalla completa"
+#: readtoolbar.py:229
+msgid "Fullscreen"
+msgstr "Hunt'asqa pantalla"
+
+#  "Página %(current)i de %(total_pages)i"
+#: readtopbar.py:140
+#, python-format
+msgid "Page %(current)i of %(total_pages)i"
+msgstr "Llapan %(total_pages)i nisqamanta %(current)i kay raphi"
+
+#  "Reproducir / Detener"
+#: speechtoolbar.py:56
+msgid "Play / Pause"
+msgstr "Purichiy / Utichiy"
+
+#: speechtoolbar.py:64
+msgid "Stop"
+msgstr "Sayachiy"
