@@ -39,6 +39,7 @@ from sugar3.graphics.toolbarbox import ToolbarBox
 from sugar3.graphics.toolbarbox import ToolbarButton
 from sugar3.graphics.toolcombobox import ToolComboBox
 from sugar3.graphics.toggletoolbutton import ToggleToolButton
+from sugar3.graphics.alert import ConfirmationAlert
 from sugar3.activity.widgets import ActivityToolbarButton
 from sugar3.activity.widgets import StopButton
 from sugar3 import network
@@ -477,7 +478,24 @@ class ReadActivity(activity.Activity):
         if self._bookmarker.props.active:
             self._sidebar.add_bookmark(page)
         else:
+            alert = ConfirmationAlert()
+            alert.props.title = _('Delete bookmark')
+            alert.props.msg = _('All the information related '
+                                'with this bookmark will be lost')
+            self.add_alert(alert)
+            alert.connect('response', self.__alert_response_cb, page)
+            alert.show()
+
+    def __alert_response_cb(self, alert, response_id, page):
+        self.remove_alert(alert)
+
+        if response_id is Gtk.ResponseType.OK:
             self._sidebar.del_bookmark(page)
+        elif response_id is Gtk.ResponseType.CANCEL:
+            self._bookmarker.handler_block(self._bookmarker_toggle_handler_id)
+            self._bookmarker.props.active = True
+            self._bookmarker.handler_unblock(\
+                self._bookmarker_toggle_handler_id)
 
     def __page_changed_cb(self, model, page_from, page_to):
         self._update_nav_buttons(page_to)
