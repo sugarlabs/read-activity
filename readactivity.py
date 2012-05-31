@@ -834,6 +834,11 @@ class ReadActivity(activity.Activity):
         self._view.set_current_page(current_page)
         self._update_nav_buttons(current_page)
 
+        # README: bookmark sidebar is not showing the bookmark in the
+        # first page because this is updated just if the page number changes
+        if current_page == 0:
+            self._sidebar.update_for_page(current_page)
+
         # We've got the document, so if we're a shared activity, offer it
         try:
             if self.get_shared():
