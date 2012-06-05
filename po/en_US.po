@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-08 00:34-0500\n"
-"PO-Revision-Date: 2012-03-17 07:47+0200\n"
+"POT-Creation-Date: 2012-06-02 00:31-0400\n"
+"PO-Revision-Date: 2012-06-05 07:36+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en_US\n"
@@ -33,120 +33,128 @@ msgstr "Read"
 msgid "URL from Read"
 msgstr "URL from Read"
 
-#: readactivity.py:232
+#: readactivity.py:231
 msgid "Highlight"
 msgstr "Highlight"
 
-#: readactivity.py:341
+#: readactivity.py:340
 msgid "Back"
 msgstr "Back"
 
-#: readactivity.py:346
+#: readactivity.py:345
 msgid "Previous page"
 msgstr "Previous page"
 
-#: readactivity.py:348
+#: readactivity.py:347
 msgid "Previous bookmark"
 msgstr "Previous bookmark"
 
-#: readactivity.py:363
+#: readactivity.py:362
 msgid "Forward"
 msgstr "Forward"
 
-#: readactivity.py:368
+#: readactivity.py:367
 msgid "Next page"
 msgstr "Next page"
 
-#: readactivity.py:370
+#: readactivity.py:369
 msgid "Next bookmark"
 msgstr "Next bookmark"
 
-#: readdialog.py:51
+#: readactivity.py:482
+msgid "Delete bookmark"
+msgstr "Delete bookmark"
+
+#: readactivity.py:483
+msgid "All the information related with this bookmark will be lost"
+msgstr "All the information related with this bookmark will be lost"
+
+#: readdialog.py:53
 msgid "Cancel"
 msgstr "Cancel"
 
-#: readdialog.py:57
+#: readdialog.py:59
 msgid "Ok"
 msgstr "Ok"
 
-#: readdialog.py:112
+#: readdialog.py:118
 msgid "<b>Title</b>:"
 msgstr "<b>Title</b>:"
 
-#: readdialog.py:138
+#: readdialog.py:144
 msgid "<b>Details</b>:"
 msgstr "<b>Details</b>:"
 
 #. TRANS: This goes like Bookmark added by User 5 days ago
 #. TRANS: (the elapsed string gets translated automatically)
-#: readsidebar.py:86
+#: readsidebar.py:92
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
 msgstr "Bookmark added by %(user)s %(time)s"
 
-#: readsidebar.py:129 readsidebar.py:171
+#: readsidebar.py:135 readsidebar.py:182
 msgid "Add notes for bookmark: "
 msgstr "Add notes for bookmark: "
 
-#: readsidebar.py:167
+#: readsidebar.py:178
 #, python-format
 msgid "%s's bookmark"
 msgstr "%s's bookmark"
 
-#: readsidebar.py:168
+#: readsidebar.py:179
 #, python-format
 msgid "Bookmark for page %d"
 msgstr "Bookmark for page %d"
 
-#: readtoolbar.py:61
+#: readtoolbar.py:62
 msgid "Previous"
 msgstr "Previous"
 
-#: readtoolbar.py:68
+#: readtoolbar.py:69
 msgid "Next"
 msgstr "Next"
 
-#: readtoolbar.py:151
+#: readtoolbar.py:152
 msgid "Find first"
 msgstr "Find first"
 
-#: readtoolbar.py:157
+#: readtoolbar.py:158
 msgid "Find previous"
 msgstr "Find previous"
 
-#: readtoolbar.py:159
+#: readtoolbar.py:160
 msgid "Find next"
 msgstr "Find next"
 
-#: readtoolbar.py:176
+#: readtoolbar.py:177
 msgid "Zoom out"
 msgstr "Zoom out"
 
-#: readtoolbar.py:182
+#: readtoolbar.py:183
 msgid "Zoom in"
 msgstr "Zoom in"
 
-#: readtoolbar.py:188
+#: readtoolbar.py:189
 msgid "Zoom to width"
 msgstr "Zoom to width"
 
-#: readtoolbar.py:194
+#: readtoolbar.py:195
 msgid "Zoom to fit"
 msgstr "Zoom to fit"
 
-#: readtoolbar.py:199
+#: readtoolbar.py:198
 msgid "Actual size"
 msgstr "Actual size"
 
-#: readtoolbar.py:216
+#: readtoolbar.py:221
 msgid "%"
 msgstr "%"
 
-#: readtoolbar.py:229
+#: readtoolbar.py:234
 msgid "Fullscreen"
 msgstr "Fullscreen"
 
-#: readtopbar.py:140
+#: readtopbar.py:145
 #, python-format
 msgid "Page %(current)i of %(total_pages)i"
 msgstr "Page %(current)i of %(total_pages)i"
