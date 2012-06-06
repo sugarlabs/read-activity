@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-08 00:34-0500\n"
-"PO-Revision-Date: 2012-05-16 01:29+0200\n"
+"POT-Creation-Date: 2012-06-02 00:31-0400\n"
+"PO-Revision-Date: 2012-06-05 18:08+0200\n"
 "Last-Translator: Irma  <sankaypillo@gmail.com>\n"
 "Language-Team: Voluntarios Quechua Sugar Camp\n"
 "Language: quz\n"
@@ -27,147 +27,155 @@ msgid "URL from Read"
 msgstr "Ñawichanamanta URL"
 
 #  "Resaltar"
-#: readactivity.py:232
+#: readactivity.py:231
 msgid "Highlight"
 msgstr "Yanachaq"
 
 #  "Volver"
-#: readactivity.py:341
+#: readactivity.py:340
 msgid "Back"
 msgstr "Kutiy"
 
 #  "Página anterior"
-#: readactivity.py:346
+#: readactivity.py:345
 msgid "Previous page"
 msgstr "Ñawpa raphi"
 
 #  "Registro anterior"
-#: readactivity.py:348
+#: readactivity.py:347
 msgid "Previous bookmark"
 msgstr "Ñawpa qillqachisqa"
 
 #  "Avanzar"
-#: readactivity.py:363
+#: readactivity.py:362
 msgid "Forward"
 msgstr "Ñawpay"
 
 #  "Página siguiente"
-#: readactivity.py:368
+#: readactivity.py:367
 msgid "Next page"
 msgstr "Hamuq raphi"
 
 #  "Siguiente registro"
-#: readactivity.py:370
+#: readactivity.py:369
 msgid "Next bookmark"
-msgstr "Hamuq qillqachisqa"
+msgstr "Hamuq T'upsichiq"
+
+#: readactivity.py:482
+msgid "Delete bookmark"
+msgstr "T'upsichiqta pichay"
+
+#: readactivity.py:483
+msgid "All the information related with this bookmark will be lost"
+msgstr "T'upsichiqwan llapan willanakuna masichakuqqa chinkarunqan,"
 
 #  "Cancelar"
-#: readdialog.py:51
+#: readdialog.py:53
 msgid "Cancel"
 msgstr "Chinkachiy"
 
 #  "Ok"
-#: readdialog.py:57
+#: readdialog.py:59
 msgid "Ok"
 msgstr "Ok"
 
 #  "<b>Título</b>:"
-#: readdialog.py:112
+#: readdialog.py:118
 msgid "<b>Title</b>:"
 msgstr "<b>Sutinchaynin</b>:"
 
 #  "<b>Detalles</b>:"
-#: readdialog.py:138
+#: readdialog.py:144
 msgid "<b>Details</b>:"
 msgstr "<b>Ima nisqan</b>:"
 
 #  "Registro agregado por %(user)s %(time)s"
 #. TRANS: This goes like Bookmark added by User 5 days ago
 #. TRANS: (the elapsed string gets translated automatically)
-#: readsidebar.py:86
+#: readsidebar.py:92
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
 msgstr "Kaymi qillqachiytaqa yaparin %(user)s %(time)s"
 
 #  "Añadir notas para el marcador: "
-#: readsidebar.py:129 readsidebar.py:171
+#: readsidebar.py:135 readsidebar.py:182
 msgid "Add notes for bookmark: "
 msgstr "T'upsinapaq huch'uy willakunata yapay: "
 
 #  "Marcador de %s"
-#: readsidebar.py:167
+#: readsidebar.py:178
 #, python-format
 msgid "%s's bookmark"
 msgstr "%s kaypa tup'sin"
 
 #  "Marcador para página %d"
-#: readsidebar.py:168
+#: readsidebar.py:179
 #, python-format
 msgid "Bookmark for page %d"
 msgstr "Raphipa %d t'upsin"
 
 #  "Anterior"
-#: readtoolbar.py:61
+#: readtoolbar.py:62
 msgid "Previous"
 msgstr "Ñawpaq"
 
 #  "Siguiente"
-#: readtoolbar.py:68
+#: readtoolbar.py:69
 msgid "Next"
 msgstr "Hamuq"
 
 #  "Buscar primero"
-#: readtoolbar.py:151
+#: readtoolbar.py:152
 msgid "Find first"
-msgstr "Qallariqta machkay"
+msgstr "Qallariqta machkhay"
 
 #  "Buscar anterior"
-#: readtoolbar.py:157
+#: readtoolbar.py:158
 msgid "Find previous"
 msgstr "Ñawpaqta machkay"
 
 #  "Buscar siguiente"
-#: readtoolbar.py:159
+#: readtoolbar.py:160
 msgid "Find next"
 msgstr "Hamuqta machkay"
 
 #  "Alejarse"
-#: readtoolbar.py:176
+#: readtoolbar.py:177
 msgid "Zoom out"
 msgstr "Huch'uyachiy"
 
 #  "Acercarse"
-#: readtoolbar.py:182
+#: readtoolbar.py:183
 msgid "Zoom in"
 msgstr "Hatunyachiy"
 
 #  "Ajustar al ancho"
-#: readtoolbar.py:188
+#: readtoolbar.py:189
 msgid "Zoom to width"
 msgstr "Kinrayninman mat'iy"
 
 #  "Ajustar a la pantalla"
-#: readtoolbar.py:194
+#: readtoolbar.py:195
 msgid "Zoom to fit"
 msgstr "Pantallaman mat'iy"
 
 #  "Tamaño real"
-#: readtoolbar.py:199
+#: readtoolbar.py:198
 msgid "Actual size"
 msgstr "Kikin sayan"
 
 #  "%"
-#: readtoolbar.py:216
+#: readtoolbar.py:221
 msgid "%"
 msgstr "%"
 
 #  "Pantalla completa"
-#: readtoolbar.py:229
+#: readtoolbar.py:234
 msgid "Fullscreen"
 msgstr "Hunt'asqa pantalla"
 
 #  "Página %(current)i de %(total_pages)i"
-#: readtopbar.py:140
+#: readtopbar.py:145
 #, python-format
 msgid "Page %(current)i of %(total_pages)i"
 msgstr "Llapan %(total_pages)i nisqamanta %(current)i kay raphi"
