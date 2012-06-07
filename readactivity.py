@@ -958,7 +958,7 @@ class ReadActivity(activity.Activity):
         if self.activity_button.page.title.has_focus():
             return False
         keyname = Gdk.keyval_name(event.keyval)
-        if keyname == 'c' and event.state & Gdk.CONTROL_MASK:
+        if keyname == 'c' and event.state & Gdk.ModifierType.CONTROL_MASK:
             self._view.copy()
             return True
         elif keyname == 'KP_Home':
