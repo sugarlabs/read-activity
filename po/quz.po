@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-02 00:31-0400\n"
-"PO-Revision-Date: 2012-06-05 18:08+0200\n"
-"Last-Translator: Irma  <sankaypillo@gmail.com>\n"
+"PO-Revision-Date: 2012-06-16 03:37+0200\n"
+"Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: Voluntarios Quechua Sugar Camp\n"
 "Language: quz\n"
 "MIME-Version: 1.0\n"
@@ -43,6 +43,7 @@ msgstr "Ñawpa raphi"
 
 #  "Registro anterior"
 #: readactivity.py:347
+#, fuzzy
 msgid "Previous bookmark"
 msgstr "Ñawpa qillqachisqa"
 
@@ -59,7 +60,7 @@ msgstr "Hamuq raphi"
 #  "Siguiente registro"
 #: readactivity.py:369
 msgid "Next bookmark"
-msgstr "Hamuq T'upsichiq"
+msgstr "Hamuq t'upsichiq"
 
 #: readactivity.py:482
 msgid "Delete bookmark"
