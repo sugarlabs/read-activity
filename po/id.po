@@ -14,150 +14,158 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-08 00:34-0500\n"
-"PO-Revision-Date: 2011-07-22 05:23+0200\n"
+"POT-Creation-Date: 2012-06-02 00:31-0400\n"
+"PO-Revision-Date: 2012-06-25 19:21+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Pootle 2.0.1\n"
+"X-Generator: Pootle 2.0.5\n"
 
 #: activity/activity.info:2
 msgid "Read"
-msgstr ""
+msgstr "Baca"
 
 #: evinceadapter.py:74
 msgid "URL from Read"
-msgstr ""
+msgstr "URL dari Baca"
 
-#: readactivity.py:232
+#: readactivity.py:231
 msgid "Highlight"
-msgstr ""
+msgstr "Sorot"
 
-#: readactivity.py:341
+#: readactivity.py:340
 msgid "Back"
-msgstr "Kembali"
+msgstr "Mundur"
 
-#: readactivity.py:346
+#: readactivity.py:345
 msgid "Previous page"
-msgstr ""
+msgstr "Halaman sebelumnya"
 
-#: readactivity.py:348
+#: readactivity.py:347
 msgid "Previous bookmark"
-msgstr ""
+msgstr "Penanda taut sebelumnya"
 
-#: readactivity.py:363
+#: readactivity.py:362
 msgid "Forward"
-msgstr ""
+msgstr "Maju"
 
-#: readactivity.py:368
+#: readactivity.py:367
 msgid "Next page"
-msgstr ""
+msgstr "Halaman selanjutnya"
 
-#: readactivity.py:370
+#: readactivity.py:369
 msgid "Next bookmark"
-msgstr ""
+msgstr "Penanda taut selanjutnya"
 
-#: readdialog.py:51
+#: readactivity.py:482
+msgid "Delete bookmark"
+msgstr "Hapus penanda taut"
+
+#: readactivity.py:483
+msgid "All the information related with this bookmark will be lost"
+msgstr "Semua informasi terkait dengan penanda taut ini akan hilang"
+
+#: readdialog.py:53
 msgid "Cancel"
-msgstr ""
+msgstr "Batal"
 
-#: readdialog.py:57
+#: readdialog.py:59
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
-#: readdialog.py:112
+#: readdialog.py:118
 msgid "<b>Title</b>:"
 msgstr "<b>Judul</b>:"
 
-#: readdialog.py:138
+#: readdialog.py:144
 msgid "<b>Details</b>:"
-msgstr ""
+msgstr "<b>Rincian</b>:"
 
 #. TRANS: This goes like Bookmark added by User 5 days ago
 #. TRANS: (the elapsed string gets translated automatically)
-#: readsidebar.py:86
+#: readsidebar.py:92
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
-msgstr ""
+msgstr "Penanda taut ditambahkan oleh %(user)s %(time)s"
 
-#: readsidebar.py:129 readsidebar.py:171
+#: readsidebar.py:135 readsidebar.py:182
 msgid "Add notes for bookmark: "
-msgstr ""
+msgstr "Tambahkan catatan bagi penanda taut: "
 
-#: readsidebar.py:167
+#: readsidebar.py:178
 #, python-format
 msgid "%s's bookmark"
-msgstr ""
+msgstr "Penanda taut %s"
 
-#: readsidebar.py:168
+#: readsidebar.py:179
 #, python-format
 msgid "Bookmark for page %d"
-msgstr ""
+msgstr "Penanda taut bagi halaman %d"
 
-#: readtoolbar.py:61
+#: readtoolbar.py:62
 msgid "Previous"
-msgstr ""
+msgstr "Sebelumnya"
 
-#: readtoolbar.py:68
+#: readtoolbar.py:69
 msgid "Next"
 msgstr "Selanjutnya"
 
-#: readtoolbar.py:151
+#: readtoolbar.py:152
 msgid "Find first"
-msgstr ""
+msgstr "Cari yang pertama"
 
-#: readtoolbar.py:157
+#: readtoolbar.py:158
 msgid "Find previous"
-msgstr ""
+msgstr "Cari yang sebelumnya"
 
-#: readtoolbar.py:159
+#: readtoolbar.py:160
 msgid "Find next"
-msgstr ""
+msgstr "Cari yang selanjutnya"
 
-#: readtoolbar.py:176
+#: readtoolbar.py:177
 msgid "Zoom out"
-msgstr ""
+msgstr "Perkecil"
 
-#: readtoolbar.py:182
+#: readtoolbar.py:183
 msgid "Zoom in"
-msgstr ""
+msgstr "Perbesar"
 
-#: readtoolbar.py:188
+#: readtoolbar.py:189
 msgid "Zoom to width"
-msgstr ""
+msgstr "Paskan sesuai lebar"
 
-#: readtoolbar.py:194
+#: readtoolbar.py:195
 msgid "Zoom to fit"
-msgstr ""
+msgstr "Paskan halaman"
 
-#: readtoolbar.py:199
+#: readtoolbar.py:198
 msgid "Actual size"
-msgstr ""
+msgstr "Ukuran sebenarnya"
 
-#: readtoolbar.py:216
+#: readtoolbar.py:221
 msgid "%"
-msgstr ""
+msgstr "%"
 
-#: readtoolbar.py:229
+#: readtoolbar.py:234
 msgid "Fullscreen"
-msgstr ""
+msgstr "Layar penuh"
 
-#: readtopbar.py:140
+#: readtopbar.py:145
 #, python-format
 msgid "Page %(current)i of %(total_pages)i"
-msgstr ""
+msgstr "Halaman %(current)i dari %(total_pages)i"
 
 #: speechtoolbar.py:56
 msgid "Play / Pause"
-msgstr ""
+msgstr "Putar / Jeda"
 
 #: speechtoolbar.py:64
 msgid "Stop"
-msgstr ""
+msgstr "Berhenti"
 
 #~ msgid "Choose document"
 #~ msgstr "Pilih dokumen"
