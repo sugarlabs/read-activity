@@ -2,14 +2,6 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -167,16 +159,3 @@ msgstr "Գործարկել / Դադար"
 #: speechtoolbar.py:64
 msgid "Stop"
 msgstr "Կանգ"
-
-#~ msgid "pitch adjusted"
-#~ msgstr "տոնը կարգավորված է"
-
-#~ msgid "rate adjusted"
-#~ msgstr "արագությունը կարգավորված է"
-
-#~ msgid "Choose document"
-#~ msgstr "Ընտրել փաստաթուղթը"
-
-#, python-format
-#~ msgid "Page %i of %i"
-#~ msgstr "%i էջը՝ %i -ից"
