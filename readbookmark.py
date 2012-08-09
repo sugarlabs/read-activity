@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import cjson
+import json
 
 
 class Bookmark:
@@ -39,12 +39,12 @@ class Bookmark:
         if self.content == '' or self.content is None:
             return ''
 
-        note = cjson.decode(self.content)
+        note = json.loads(self.content)
         return note['title']
 
     def get_note_body(self):
         if self.content == '' or self.content is None:
             return ''
 
-        note = cjson.decode(self.content)
+        note = json.loads(self.content)
         return note['body']

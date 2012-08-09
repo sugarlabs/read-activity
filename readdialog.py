@@ -9,7 +9,7 @@ from sugar3.graphics import style
 from sugar3.graphics.toolbutton import ToolButton
 
 from gettext import gettext as _
-import cjson
+import json
 
 
 class BaseReadDialog(Gtk.Window):
@@ -180,7 +180,7 @@ class BookmarkAddDialog(BookmarkDialog):
         content = {'title': title.decode('utf-8'),
                 'body': details.decode('utf-8')}
         self._sidebarinstance._real_add_bookmark(self._page,
-                cjson.encode(content))
+                json.dumps(content))
         self.destroy()
 
     def cancel_clicked_cb(self, widget):
@@ -202,5 +202,5 @@ class BookmarkEditDialog(BookmarkDialog):
                 'body': details.decode('utf-8')}
         self._sidebarinstance.del_bookmark(self._page)
         self._sidebarinstance._real_add_bookmark(self._page,
-                cjson.encode(content))
+                json.dumps(content))
         self.destroy()
