@@ -47,14 +47,15 @@ class Sidebar(Gtk.EventBox):
 
     def __init__(self):
         Gtk.EventBox.__init__(self)
-        self.set_size_request(20, -1)
-        # Take care of the background first
-        self.modify_bg(Gtk.StateType.NORMAL, style.COLOR_WHITE.get_gdk_color())
+        self.set_size_request(style.GRID_CELL_SIZE,
+                style.GRID_CELL_SIZE * 2)
+        self._xo_color = profile.get_color()
+        self._fill_color = style.Color(self._xo_color.get_fill_color())
+        self._stroke_color = style.Color(self._xo_color.get_stroke_color())
 
         self._box = Gtk.VButtonBox()
         self._box.set_layout(Gtk.ButtonBoxStyle.CENTER)
         self.add(self._box)
-
         self._box.show()
         self.show()
 
@@ -62,6 +63,25 @@ class Sidebar(Gtk.EventBox):
         self._bookmark_manager = None
         self._is_showing_local_bookmark = False
         self.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
+        self._box.connect('draw', self.__draw_cb)
+
+    def __draw_cb(self, widget, ctx):
+        width = style.GRID_CELL_SIZE
+        height = style.GRID_CELL_SIZE * 2
+
+        ctx.rectangle(0, 0, width, height)
+        ctx.set_source_rgba(*self._fill_color.get_rgba())
+        ctx.paint()
+
+        ctx.new_path()
+        ctx.move_to(0, 0)
+        ctx.line_to(width, 0)
+        ctx.line_to(width, height)
+        ctx.line_to(width / 2, height - width / 2)
+        ctx.line_to(0, height)
+        ctx.close_path()
+        ctx.set_source_rgba(*self._stroke_color.get_rgba())
+        ctx.fill()
 
     def _add_bookmark_icon(self, bookmark):
         xocolor = XoColor(str(bookmark.color))
@@ -166,6 +186,11 @@ class Sidebar(Gtk.EventBox):
             return
 
         bookmarks = self._bookmark_manager.get_bookmarks_for_page(page)
+
+        if bookmarks:
+            self.show()
+        else:
+            self.hide()
 
         for bookmark in bookmarks:
             self._add_bookmark_icon(bookmark)

@@ -47,6 +47,7 @@ from sugar3 import mime
 
 from sugar3.datastore import datastore
 from sugar3.graphics.objectchooser import ObjectChooser
+from sugar3.graphics import style
 
 from readtoolbar import EditToolbar
 from readtoolbar import ViewToolbar
@@ -258,11 +259,18 @@ class ReadActivity(activity.Activity):
         self._topbar = TopBar()
         self._vbox.pack_start(self._topbar, False, False, 0)
 
+        overlay = Gtk.Overlay()
+
         self._hbox = Gtk.HBox()
         self._hbox.show()
-        self._hbox.pack_start(self._sidebar, False, False, 0)
+        overlay.add(self._hbox)
 
-        self._vbox.pack_start(self._hbox, True, True, 0)
+        self._sidebar.props.halign = Gtk.Align.END
+        self._sidebar.props.valign = Gtk.Align.START
+        self._sidebar.props.margin_right = style.GRID_CELL_SIZE / 2
+        overlay.add_overlay(self._sidebar)
+        overlay.show()
+        self._vbox.pack_start(overlay, True, True, 0)
         self.set_canvas(self._vbox)
 
         # Set up for idle suspend
