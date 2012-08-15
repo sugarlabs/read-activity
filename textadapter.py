@@ -205,10 +205,10 @@ class TextViewer(GObject.GObject):
             textbuffer.apply_tag(self.normal_tag,  bounds[0], iterStart)
             textbuffer.apply_tag(self.spoken_word_tag, iterStart, iterEnd)
             v_adjustment = self._scrolled.get_vadjustment()
-            max = v_adjustment.upper - v_adjustment.page_size
-            max = max * word_count
-            max = max / len(self.word_tuples)
-            v_adjustment.value = max
+            max_pos = v_adjustment.get_upper() - v_adjustment.get_page_size()
+            max_pos = max_pos * word_count
+            max_pos = max_pos / len(self.word_tuples)
+            v_adjustment.set_value(max_pos)
             self.current_word = word_count
         return True
 
@@ -223,35 +223,39 @@ class TextViewer(GObject.GObject):
 
     def scroll(self, scrolltype, horizontal):
         v_adjustment = self._scrolled.get_vadjustment()
-        v_value = v_adjustment.value
+        v_value = v_adjustment.get_value()
         if scrolltype in (Gtk.ScrollType.PAGE_BACKWARD,
                 Gtk.ScrollType.PAGE_FORWARD):
-            step = v_adjustment.page_increment
+            step = v_adjustment.get_page_increment()
         else:
-            step = v_adjustment.step_increment
+            step = v_adjustment.get_step_increment()
 
         if scrolltype in (Gtk.ScrollType.PAGE_BACKWARD,
                 Gtk.ScrollType.STEP_BACKWARD):
-            if v_value <= v_adjustment.lower:
+            if v_value <= v_adjustment.get_lower():
                 self.previous_page()
-                v_adjustment.value = v_adjustment.upper - \
-                        v_adjustment.page_size
+                v_adjustment.set_value(v_adjustment.get_upper() - \
+                        v_adjustment.get_page_size())
                 return
-            if v_value > v_adjustment.lower:
+            if v_value > v_adjustment.get_lower():
                 new_value = v_value - step
-                if new_value < v_adjustment.lower:
-                    new_value = v_adjustment.lower
-                v_adjustment.value = new_value
+                if new_value < v_adjustment.get_lower():
+                    new_value = v_adjustment.get_lower()
+                v_adjustment.set_value(new_value)
         elif scrolltype in (Gtk.ScrollType.PAGE_FORWARD,
                 Gtk.ScrollType.STEP_FORWARD):
-            if v_value >= v_adjustment.upper - v_adjustment.page_size:
+            if v_value >= v_adjustment.get_upper() - \
+                                                v_adjustment.get_page_size():
                 self.next_page()
                 return
-            if v_value < v_adjustment.upper - v_adjustment.page_size:
+            if v_value < v_adjustment.get_upper() - \
+                                                v_adjustment.get_page_size():
                 new_value = v_value + step
-                if new_value > v_adjustment.upper - v_adjustment.page_size:
-                    new_value = v_adjustment.upper - v_adjustment.page_size
-                v_adjustment.value = new_value
+                if new_value > v_adjustment.get_upper() - \
+                                                v_adjustment.get_page_size():
+                    new_value = v_adjustment.get_upper() - \
+                            v_adjustment.get_page_size()
+                v_adjustment.set_value(new_value)
         elif scrolltype == Gtk.ScrollType.START:
             self.set_current_page(0)
         elif scrolltype == Gtk.ScrollType.END:
@@ -259,12 +263,13 @@ class TextViewer(GObject.GObject):
 
     def previous_page(self):
         v_adjustment = self._scrolled.get_vadjustment()
-        v_adjustment.value = v_adjustment.upper - v_adjustment.page_size
+        v_adjustment.set_value(v_adjustment.get_upper() -
+                v_adjustment.get_page_size())
         self.set_current_page(self.get_current_page() - 1)
 
     def next_page(self):
         v_adjustment = self._scrolled.get_vadjustment()
-        v_adjustment.value = v_adjustment.lower
+        v_adjustment.set_value(v_adjustment.get_lower())
         self.set_current_page(self.get_current_page() + 1)
 
     def get_current_page(self):
