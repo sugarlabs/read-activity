@@ -280,6 +280,8 @@ class ViewToolbar(Gtk.Toolbar):
         self._zoom_in.props.sensitive = self._view.can_zoom_in()
         self._zoom_out.props.sensitive = self._view.can_zoom_out()
         self._zoom_to_width.props.sensitive = self._view.can_zoom_to_width()
+        self._zoom_to_fit.props.sensitive = self._view.can_zoom_to_width()
+        self._zoom_to_original.props.sensitive = self._view.can_zoom_to_width()
 
     def _zoom_to_fit_cb(self, menu_item):
         self._view.zoom_to_best_fit()
