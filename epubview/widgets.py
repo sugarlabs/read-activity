@@ -16,7 +16,8 @@ class _WebView(WebKit.WebView):
             hide_scrollbar_js = \
                     'document.documentElement.style.overflow = "hidden";'
 
-        js = 'oldtitle=document.title;' + \
+        js = 'document.documentElement.style.margin = "50px";' + \
+        'oldtitle=document.title;' + \
         'if (document.body == null) {' + \
         'document.title = 0} else {' + \
         hide_scrollbar_js + \
