@@ -267,7 +267,14 @@ class ReadActivity(activity.Activity):
 
         self._sidebar.props.halign = Gtk.Align.END
         self._sidebar.props.valign = Gtk.Align.START
-        self._sidebar.props.margin_right = style.GRID_CELL_SIZE / 2
+        # HACK: This is to calculate the scrollbar width
+        # defined in sugar-artwork gtk-widgets.css.em
+        if style.zoom(1):
+            scrollbar_width = 15
+        else:
+            scrollbar_width = 11
+
+        self._sidebar.props.margin_right = scrollbar_width
         overlay.add_overlay(self._sidebar)
         overlay.show()
         self._vbox.pack_start(overlay, True, True, 0)
