@@ -88,9 +88,8 @@ class Sidebar(Gtk.EventBox):
         self._bookmark_icon = Icon(icon_name='emblem-favorite', pixel_size=18,
                                    xo_color=xocolor)
 
-        self._bookmark_icon.props.has_tooltip = True
-        self.__bookmark_icon_query_tooltip_cb_id = \
-            self._bookmark_icon.connect('query_tooltip',
+        self._box.props.has_tooltip = True
+        self.__box_query_tooltip_cb_id = self._box.connect('query_tooltip',
             self.__bookmark_icon_query_tooltip_cb, bookmark)
 
         self.__event_cb_id = \
@@ -162,8 +161,7 @@ class Sidebar(Gtk.EventBox):
 
     def _clear_bookmarks(self):
         for bookmark_icon in self._box.get_children():
-            bookmark_icon.disconnect(
-                    self.__bookmark_icon_query_tooltip_cb_id)
+            self._box.disconnect(self.__box_query_tooltip_cb_id)
             self.disconnect(self.__event_cb_id)
 
             bookmark_icon.hide()  # XXX: Is this needed??
