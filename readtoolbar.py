@@ -22,7 +22,6 @@ from gi.repository import Gtk
 from gi.repository import Gdk
 
 from sugar3.graphics.toolbutton import ToolButton
-from sugar3.graphics.menuitem import MenuItem
 from sugar3.graphics import iconentry
 from sugar3.activity.widgets import EditToolbar as BaseEditToolbar
 
@@ -202,25 +201,6 @@ class ViewToolbar(Gtk.Toolbar):
         self.insert(self._zoom_to_original, -1)
         self._zoom_to_original.show()
 
-        tool_item = Gtk.ToolItem()
-        self.insert(tool_item, -1)
-        tool_item.show()
-
-        self._zoom_spin = Gtk.SpinButton()
-        self._zoom_spin.set_range(5.409, 400)
-        self._zoom_spin.set_increments(1, 10)
-        self._zoom_spin_notify_value_handler = self._zoom_spin.connect(
-                'notify::value', self._zoom_spin_notify_value_cb)
-        tool_item.add(self._zoom_spin)
-        self._zoom_spin.show()
-
-        zoom_perc_label = Gtk.Label(_("%"))
-        zoom_perc_label.show()
-        tool_item_zoom_perc_label = Gtk.ToolItem()
-        tool_item_zoom_perc_label.add(zoom_perc_label)
-        self.insert(tool_item_zoom_perc_label, -1)
-        tool_item_zoom_perc_label.show()
-
         spacer = Gtk.SeparatorToolItem()
         spacer.props.draw = False
         self.insert(spacer, -1)
@@ -235,25 +215,8 @@ class ViewToolbar(Gtk.Toolbar):
         self._view_notify_zoom_handler = None
 
     def set_view(self, view):
-
         self._view = view
-
-        self._zoom_spin.props.value = self._view.get_zoom()
-        self._view_notify_zoom_handler = \
-                self._view.connect_zoom_handler(self._view_notify_zoom_cb)
-
         self._update_zoom_buttons()
-
-    def _zoom_spin_notify_value_cb(self, zoom_spin, pspec):
-        self._view.set_zoom(zoom_spin.props.value)
-
-    def _view_notify_zoom_cb(self, model, pspec):
-        self._zoom_spin.disconnect(self._zoom_spin_notify_value_handler)
-        try:
-            self._zoom_spin.props.value = round(self._view.get_zoom())
-        finally:
-            self._zoom_spin_notify_value_handler = self._zoom_spin.connect(
-                    'notify::value', self._zoom_spin_notify_value_cb)
 
     def zoom_in(self):
         self._view.zoom_in()
