@@ -212,8 +212,19 @@ class TextViewer(GObject.GObject):
             self.current_word = word_count
         return True
 
+    def update_metadata(self, activity):
+        self.metadata = activity.metadata
+        logging.error('Saving zoom %s', self.get_zoom())
+        self.metadata['Read_zoom'] = self.get_zoom()
+
     def load_metadata(self, activity):
-        pass
+        self.metadata = activity.metadata
+        if 'Read_zoom' in self.metadata:
+            try:
+                logging.error('Loading zoom %s', self.metadata['Read_zoom'])
+                self.set_zoom(float(self.metadata['Read_zoom']))
+            except:
+                pass
 
     def set_current_page(self, page):
         old_page = self._current_page
@@ -285,9 +296,6 @@ class TextViewer(GObject.GObject):
         pass
 
     def get_current_file(self):
-        pass
-
-    def update_metadata(self, activity):
         pass
 
     def copy(self):

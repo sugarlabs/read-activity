@@ -40,9 +40,17 @@ class EpubViewer(epubview.EpubView):
             title = self._epub._info._get_title()
             if title:
                 self.metadata['title'] = title
+        if 'Read_zoom' in self.metadata:
+            try:
+                logging.error('Loading zoom %s', self.metadata['Read_zoom'])
+                self.set_zoom(float(self.metadata['Read_zoom']))
+            except:
+                pass
 
     def update_metadata(self, activity):
-        pass
+        self.metadata = activity.metadata
+        logging.error('Saving zoom %s', self.get_zoom())
+        self.metadata['Read_zoom'] = self.get_zoom()
 
     def zoom_to_width(self):
         pass
