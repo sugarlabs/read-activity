@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-02 00:31-0400\n"
-"PO-Revision-Date: 2012-06-16 03:37+0200\n"
+"PO-Revision-Date: 2012-07-16 01:28+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: Voluntarios Quechua Sugar Camp\n"
 "Language: quz\n"
@@ -34,7 +34,7 @@ msgstr "Yanachaq"
 #  "Volver"
 #: readactivity.py:340
 msgid "Back"
-msgstr "Kutiy"
+msgstr "Kutichiy"
 
 #  "Página anterior"
 #: readactivity.py:345
@@ -78,7 +78,7 @@ msgstr "Chinkachiy"
 #  "Ok"
 #: readdialog.py:59
 msgid "Ok"
-msgstr "Ok"
+msgstr "Chaskiy"
 
 #  "<b>Título</b>:"
 #: readdialog.py:118
@@ -183,6 +183,7 @@ msgstr "Llapan %(total_pages)i nisqamanta %(current)i kay raphi"
 
 #  "Reproducir / Detener"
 #: speechtoolbar.py:56
+#, fuzzy
 msgid "Play / Pause"
 msgstr "Purichiy / Utichiy"
 

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-08 00:34-0500\n"
+"POT-Creation-Date: 2012-06-02 00:31-0400\n"
 "PO-Revision-Date: 2008-12-19 23:48-0500\n"
 "Last-Translator: Chris Leonard <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,134 +33,142 @@ msgstr "קריאה"
 msgid "URL from Read"
 msgstr ""
 
-#: readactivity.py:232
+#: readactivity.py:231
 msgid "Highlight"
 msgstr ""
 
-#: readactivity.py:341
+#: readactivity.py:340
 #, fuzzy
 msgid "Back"
 msgstr "אחורה"
 
-#: readactivity.py:346
+#: readactivity.py:345
 msgid "Previous page"
 msgstr ""
 
-#: readactivity.py:348
+#: readactivity.py:347
 msgid "Previous bookmark"
 msgstr ""
 
-#: readactivity.py:363
+#: readactivity.py:362
 #, fuzzy
 msgid "Forward"
 msgstr "קדימה"
 
-#: readactivity.py:368
+#: readactivity.py:367
 msgid "Next page"
 msgstr ""
 
-#: readactivity.py:370
+#: readactivity.py:369
 msgid "Next bookmark"
 msgstr ""
 
-#: readdialog.py:51
+#: readactivity.py:482
+msgid "Delete bookmark"
+msgstr ""
+
+#: readactivity.py:483
+msgid "All the information related with this bookmark will be lost"
+msgstr ""
+
+#: readdialog.py:53
 msgid "Cancel"
 msgstr ""
 
-#: readdialog.py:57
+#: readdialog.py:59
 msgid "Ok"
 msgstr ""
 
-#: readdialog.py:112
+#: readdialog.py:118
 msgid "<b>Title</b>:"
 msgstr ""
 
-#: readdialog.py:138
+#: readdialog.py:144
 msgid "<b>Details</b>:"
 msgstr ""
 
 #. TRANS: This goes like Bookmark added by User 5 days ago
 #. TRANS: (the elapsed string gets translated automatically)
-#: readsidebar.py:86
+#: readsidebar.py:92
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
 msgstr ""
 
-#: readsidebar.py:129 readsidebar.py:171
+#: readsidebar.py:135 readsidebar.py:182
 msgid "Add notes for bookmark: "
 msgstr ""
 
-#: readsidebar.py:167
+#: readsidebar.py:178
 #, python-format
 msgid "%s's bookmark"
 msgstr ""
 
-#: readsidebar.py:168
+#: readsidebar.py:179
 #, python-format
 msgid "Bookmark for page %d"
 msgstr ""
 
-#: readtoolbar.py:61
+#: readtoolbar.py:62
 #, fuzzy
 msgid "Previous"
 msgstr "קודם"
 
-#: readtoolbar.py:68
+#: readtoolbar.py:69
 #, fuzzy
 msgid "Next"
 msgstr "הבא"
 
-#: readtoolbar.py:151
+#: readtoolbar.py:152
 #, fuzzy
 msgid "Find first"
 msgstr "מצא ראשון"
 
-#: readtoolbar.py:157
+#: readtoolbar.py:158
 #, fuzzy
 msgid "Find previous"
 msgstr "מצא קודם"
 
-#: readtoolbar.py:159
+#: readtoolbar.py:160
 #, fuzzy
 msgid "Find next"
 msgstr "מצא הבא"
 
-#: readtoolbar.py:176
+#: readtoolbar.py:177
 #, fuzzy
 msgid "Zoom out"
 msgstr "התרחק"
 
-#: readtoolbar.py:182
+#: readtoolbar.py:183
 #, fuzzy
 msgid "Zoom in"
 msgstr "התקרב"
 
-#: readtoolbar.py:188
+#: readtoolbar.py:189
 #, fuzzy
 msgid "Zoom to width"
 msgstr "צפייה בהתאמה לרוחב"
 
-#: readtoolbar.py:194
+#: readtoolbar.py:195
 #, fuzzy
 msgid "Zoom to fit"
 msgstr "תקריב להתאמה"
 
-#: readtoolbar.py:199
+#: readtoolbar.py:198
 #, fuzzy
 msgid "Actual size"
 msgstr "גודל אמיתי"
 
-#: readtoolbar.py:216
+#: readtoolbar.py:221
 #, fuzzy
 msgid "%"
 msgstr "%"
 
-#: readtoolbar.py:229
+#: readtoolbar.py:234
 #, fuzzy
 msgid "Fullscreen"
 msgstr "מסך מלא"
 
-#: readtopbar.py:140
+#: readtopbar.py:145
 #, python-format
 msgid "Page %(current)i of %(total_pages)i"
 msgstr ""
