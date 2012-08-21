@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-02 00:31-0400\n"
-"PO-Revision-Date: 2012-04-30 09:03+0200\n"
+"PO-Revision-Date: 2012-08-20 13:15+0200\n"
 "Last-Translator: whe <heppew@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: nl\n"
@@ -67,11 +67,11 @@ msgstr "Volgende bladwijzer"
 
 #: readactivity.py:482
 msgid "Delete bookmark"
-msgstr ""
+msgstr "Verwijder bladwijzer"
 
 #: readactivity.py:483
 msgid "All the information related with this bookmark will be lost"
-msgstr ""
+msgstr "Alle informatie bij deze bladwijzer raakt je kwijt"
 
 #: readdialog.py:53
 msgid "Cancel"
