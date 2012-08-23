@@ -206,6 +206,7 @@ class ReadActivity(activity.Activity):
         total_page_item.show()
 
         spacer = Gtk.SeparatorToolItem()
+        spacer.set_size_request(0, -1)
         spacer.props.draw = False
         toolbar_box.toolbar.insert(spacer, -1)
         spacer.show()
@@ -227,21 +228,19 @@ class ReadActivity(activity.Activity):
         self._bookmarker.show()
         toolbar_box.toolbar.insert(self._bookmarker, -1)
 
-        self._highlight_item = Gtk.ToolItem()
         self._highlight = ToggleToolButton('format-text-underline')
         self._highlight.set_tooltip(_('Highlight'))
         self._highlight.props.sensitive = False
         self._highlight_id = self._highlight.connect('clicked', \
                 self.__highlight_cb)
-        self._highlight_item.add(self._highlight)
-        toolbar_box.toolbar.insert(self._highlight_item, -1)
-        self._highlight_item.show_all()
+        toolbar_box.toolbar.insert(self._highlight, -1)
 
         self.speech_toolbar_button = ToolbarButton(icon_name='speak')
         toolbar_box.toolbar.insert(self.speech_toolbar_button, -1)
 
         separator = Gtk.SeparatorToolItem()
         separator.props.draw = False
+        separator.set_size_request(0, -1)
         separator.set_expand(True)
         toolbar_box.toolbar.insert(separator, -1)
         separator.show()
@@ -406,10 +405,7 @@ class ReadActivity(activity.Activity):
         return num_page_entry
 
     def _set_total_page_label(self, value):
-        self._total_page_label.set_use_markup(True)
-        self._total_page_label.set_markup(
-                '<span font_desc="14" foreground="#ffffff"> / %s</span>' %
-                value)
+        self._total_page_label.set_text(' / %s' % value)
 
     def _create_navigator(self):
         navigator = Gtk.ComboBox()
@@ -864,8 +860,8 @@ class ReadActivity(activity.Activity):
 
     def _update_toolbars(self):
         self._view_toolbar._update_zoom_buttons()
-        if not self._view.can_highlight():
-            self._highlight_item.hide()
+        if self._view.can_highlight():
+            self._highlight.show()
         if self._view.can_do_text_to_speech():
             import speech
             from speechtoolbar import SpeechToolbar
