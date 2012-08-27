@@ -153,7 +153,6 @@ class EvinceViewer():
         else:
             _logger.error("Don't know how to save sizing_mode state '%s'" %
                           self._model.get_sizing_mode())
-        self.metadata['Read_sizing_mode'] = "fit-width"
 
     def can_highlight(self):
         return False
