@@ -51,7 +51,7 @@ from sugar3.graphics import style
 
 from readtoolbar import EditToolbar
 from readtoolbar import ViewToolbar
-from readsidebar import Sidebar
+from bookmarkview import BookmarkView
 from readtopbar import TopBar
 from readdb import BookmarkManager
 from sugarmenuitem import SugarMenuItem
@@ -148,9 +148,10 @@ class ReadActivity(activity.Activity):
 
         self._view = None
         self.dpi = _get_screen_dpi()
-        self._sidebar = Sidebar()
-        self._sidebar.show()
-        self._sidebar.connect('bookmark-changed', self._update_bookmark_cb)
+        self._bookmark_view = BookmarkView()
+        self._bookmark_view.show()
+        self._bookmark_view.connect('bookmark-changed',
+                self._update_bookmark_cb)
 
         toolbar_box = ToolbarBox()
 
@@ -264,8 +265,8 @@ class ReadActivity(activity.Activity):
         self._hbox.show()
         overlay.add(self._hbox)
 
-        self._sidebar.props.halign = Gtk.Align.END
-        self._sidebar.props.valign = Gtk.Align.START
+        self._bookmark_view.props.halign = Gtk.Align.END
+        self._bookmark_view.props.valign = Gtk.Align.START
         # HACK: This is to calculate the scrollbar width
         # defined in sugar-artwork gtk-widgets.css.em
         if style.zoom(1):
@@ -273,8 +274,8 @@ class ReadActivity(activity.Activity):
         else:
             scrollbar_width = 11
 
-        self._sidebar.props.margin_right = scrollbar_width
-        overlay.add_overlay(self._sidebar)
+        self._bookmark_view.props.margin_right = scrollbar_width
+        overlay.add_overlay(self._bookmark_view)
         overlay.show()
         self._vbox.pack_start(overlay, True, True, 0)
         self.set_canvas(self._vbox)
@@ -487,7 +488,7 @@ class ReadActivity(activity.Activity):
     def __bookmarker_toggled_cb(self, button):
         page = self._view.get_current_page()
         if self._bookmarker.props.active:
-            self._sidebar.add_bookmark(page)
+            self._bookmark_view.add_bookmark(page)
         else:
             alert = ConfirmationAlert()
             alert.props.title = _('Delete bookmark')
@@ -501,7 +502,7 @@ class ReadActivity(activity.Activity):
         self.remove_alert(alert)
 
         if response_id is Gtk.ResponseType.OK:
-            self._sidebar.del_bookmark(page)
+            self._bookmark_view.del_bookmark(page)
         elif response_id is Gtk.ResponseType.CANCEL:
             self._bookmarker.handler_block(self._bookmarker_toggle_handler_id)
             self._bookmarker.props.active = True
@@ -513,7 +514,7 @@ class ReadActivity(activity.Activity):
         if self._toc_model != None:
             self._toc_select_active_page()
 
-        self._sidebar.update_for_page(page_to)
+        self._bookmark_view.update_for_page(page_to)
         self.update_bookmark_button()
 
         tuples_list = self._bookmarkmanager.get_highlights(page_to)
@@ -527,7 +528,7 @@ class ReadActivity(activity.Activity):
     def update_bookmark_button(self):
         self._bookmarker.handler_block(self._bookmarker_toggle_handler_id)
         self._bookmarker.props.active = \
-                self._sidebar.is_showing_local_bookmark()
+                self._bookmark_view.is_showing_local_bookmark()
         self._bookmarker.handler_unblock(self._bookmarker_toggle_handler_id)
 
     def _update_nav_buttons(self, current_page):
@@ -831,7 +832,7 @@ class ReadActivity(activity.Activity):
 
         filehash = get_md5(filepath)
         self._bookmarkmanager = BookmarkManager(filehash)
-        self._sidebar.set_bookmarkmanager(self._bookmarkmanager)
+        self._bookmark_view.set_bookmarkmanager(self._bookmarkmanager)
         self._update_toc()
         self._view.connect_page_changed_handler(self.__page_changed_cb)
         self._view.load_metadata(self)
@@ -848,7 +849,7 @@ class ReadActivity(activity.Activity):
         # README: bookmark sidebar is not showing the bookmark in the
         # first page because this is updated just if the page number changes
         if current_page == 0:
-            self._sidebar.update_for_page(current_page)
+            self._bookmark_view.update_for_page(current_page)
 
         # We've got the document, so if we're a shared activity, offer it
         try:

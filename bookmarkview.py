@@ -38,7 +38,7 @@ _logger = logging.getLogger('read-activity')
 # (required when sharing)
 
 
-class Sidebar(Gtk.EventBox):
+class BookmarkView(Gtk.EventBox):
 
     __gsignals__ = {
         'bookmark-changed': (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE,
