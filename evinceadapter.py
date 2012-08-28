@@ -242,7 +242,44 @@ class EvinceViewer():
         self._model.connect('page-changed', handler)
 
     def update_toc(self, activity):
-        return False
+        doc = self._model.get_document()
+        if not doc.has_document_links():
+            logging.error('The pdf file does not have a index')
+            return False
+        else:
+            self._job_links = EvinceView.JobLinks.new(document=doc)
+            self._job_links.connect('finished', self.__index_loaded_cb,
+                    activity)
+        EvinceView.Job.scheduler_push_job(self._job_links,
+                EvinceView.JobPriority.PRIORITY_NONE)
+
+    def __index_loaded_cb(self, job, activity):
+        logging.error('__index_loaded_cb %s %s', job.__class__, dir(job))
+        logging.error('job.succeeded %s', job.succeeded())
+        logging.error('job.is_finished %s', job.is_finished())
+
+        self._index_model = job.model
+
+        logging.error('index_model loaded %s', job.model.__class__)
+        if job.model is None:
+            return False
+        """
+        _iter = job.model.get_iter_first()
+        while True:
+            value = job.model.get_value(_iter, 0)
+            logging.error('value %s', value)
+            _iter = job.model.iter_next(_iter)
+            if _iter is None:
+                break
+        """
+
+        activity._navigator_toolbar_button.show()
+        activity._navigator.show_all()
+
+        activity._toc_model = self._index_model
+        activity._navigator.set_model(activity._toc_model)
+        activity._navigator.set_active(0)
+        return True
 
     def find_set_highlight_search(self, set_highlight_search):
         self._view.find_set_highlight_search(set_highlight_search)
