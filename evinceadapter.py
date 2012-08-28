@@ -228,13 +228,14 @@ class EvinceViewer():
         return self._view_notify_zoom_handler
 
     def setup_find_job(self, text, updated_cb):
-        self._find_job = evince.JobFind(document=self._document, start_page=0,
+        self._find_job = EvinceView.JobFind.new(document=self._document,
+                start_page=0,
                 n_pages=self._document.get_n_pages(),
                 text=text, case_sensitive=False)
         self._find_updated_handler = self._find_job.connect('updated',
                 updated_cb)
-        evince.Job.scheduler_push_job(self._find_job,
-                evince.JOB_PRIORITY_NONE)
+        EvinceView.Job.scheduler_push_job(self._find_job,
+                EvinceView.JobPriority.PRIORITY_NONE)
         return self._find_job, self._find_updated_handler
 
     def connect_page_changed_handler(self, handler):
