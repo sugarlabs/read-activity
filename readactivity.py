@@ -149,7 +149,6 @@ class ReadActivity(activity.Activity):
         self._view = None
         self.dpi = _get_screen_dpi()
         self._bookmark_view = BookmarkView()
-        self._bookmark_view.show()
         self._bookmark_view.connect('bookmark-changed',
                 self._update_bookmark_cb)
 
