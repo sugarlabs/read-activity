@@ -22,6 +22,7 @@ from gi.repository import Gtk
 from gi.repository import Gdk
 
 from sugar3.graphics.toolbutton import ToolButton
+from sugar3.graphics.toggletoolbutton import ToggleToolButton
 from sugar3.graphics import iconentry
 from sugar3.activity.widgets import EditToolbar as BaseEditToolbar
 
@@ -164,12 +165,23 @@ class ViewToolbar(Gtk.Toolbar):
     __gsignals__ = {
         'go-fullscreen': (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE,
                 ([])),
+        'toggle-index-show': (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE,
+                ([bool])),
     }
 
     def __init__(self):
         Gtk.Toolbar.__init__(self)
 
         self._view = None
+
+        self._navigator_button = ToggleToolButton('view-list')
+        self._navigator_button.set_tooltip(_('Table of contents'))
+        self._navigator_button.connect('toggled', self.__navigator_toggled_cb)
+        self.insert(self._navigator_button, -1)
+
+        self._spacer_navigator = Gtk.SeparatorToolItem()
+        self._spacer_navigator.props.draw = False
+        self.insert(self._spacer_navigator, -1)
 
         self._zoom_out = ToolButton('zoom-out')
         self._zoom_out.set_tooltip(_('Zoom out'))
@@ -218,6 +230,10 @@ class ViewToolbar(Gtk.Toolbar):
         self._view = view
         self._update_zoom_buttons()
 
+    def show_nav_button(self):
+        self._navigator_button.show()
+        self._spacer_navigator.show()
+
     def zoom_in(self):
         self._view.zoom_in()
         self._update_zoom_buttons()
@@ -238,6 +254,9 @@ class ViewToolbar(Gtk.Toolbar):
 
     def _zoom_to_width_cb(self, button):
         self.zoom_to_width()
+
+    def __navigator_toggled_cb(self, button):
+        self.emit('toggle-index-show', button.get_active())
 
     def _update_zoom_buttons(self):
         self._zoom_in.props.sensitive = self._view.can_zoom_in()

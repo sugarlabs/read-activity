@@ -177,6 +177,8 @@ class ReadActivity(activity.Activity):
         self._view_toolbar = ViewToolbar()
         self._view_toolbar.connect('go-fullscreen',
                 self.__view_toolbar_go_fullscreen_cb)
+        self._view_toolbar.connect('toggle-index-show',
+                self.__toogle_navigator_cb)
         view_toolbar_button = ToolbarButton(
                 page=self._view_toolbar,
                 icon_name='toolbar-view')
@@ -211,17 +213,6 @@ class ReadActivity(activity.Activity):
         spacer.props.draw = False
         toolbar_box.toolbar.insert(spacer, -1)
         spacer.show()
-
-        navigator_toolbar = Gtk.Toolbar()
-        self._navigator = self._create_navigator()
-        combotool = ToolComboBox(self._navigator)
-        navigator_toolbar.insert(combotool, -1)
-        self._navigator.show()
-        combotool.show()
-        self._navigator_toolbar_button = ToolbarButton(page=navigator_toolbar,
-                                                 icon_name='view-list')
-        navigator_toolbar.show()
-        toolbar_box.toolbar.insert(self._navigator_toolbar_button, -1)
 
         self._bookmarker = ToggleToolButton('emblem-favorite')
         self._bookmarker_toggle_handler_id = self._bookmarker.connect( \
@@ -279,6 +270,8 @@ class ReadActivity(activity.Activity):
         overlay.show()
         self._vbox.pack_start(overlay, True, True, 0)
         self.set_canvas(self._vbox)
+
+        self._navigator = self._create_navigator()
 
         # Set up for idle suspend
         self._idle_timer = 0
@@ -408,13 +401,50 @@ class ReadActivity(activity.Activity):
     def _set_total_page_label(self, value):
         self._total_page_label.set_text(' / %s' % value)
 
+    def show_navigator_button(self):
+        self._view_toolbar.show_nav_button()
+
     def _create_navigator(self):
-        navigator = Gtk.ComboBox()
+        self._toc_visible = False
+        self._update_toc_view = False
+        toc_navigator = Gtk.TreeView()
+        toc_navigator.set_enable_search(False)
+        toc_selection = toc_navigator.get_selection()
+        toc_selection.set_mode(Gtk.SelectionMode.SINGLE)
+
         cell = Gtk.CellRendererText()
-        navigator.pack_start(cell, True)
-        navigator.add_attribute(cell, 'text', 0)
-        navigator.props.visible = False
-        return navigator
+        self.treecol_toc = Gtk.TreeViewColumn(_('Index'), cell, text=0)
+        toc_navigator.append_column(self.treecol_toc)
+
+        self._toc_scroller = Gtk.ScrolledWindow(hadjustment=None,
+                vadjustment=None)
+        self._toc_scroller.set_policy(Gtk.PolicyType.AUTOMATIC,
+                Gtk.PolicyType.AUTOMATIC)
+        self._toc_scroller.add(toc_navigator)
+        self._hbox.pack_start(self._toc_scroller, expand=False, fill=False,
+                padding=0)
+        self._toc_separator = Gtk.VSeparator()
+        self._hbox.pack_start(self._toc_separator, expand=False,
+                fill=False, padding=1)
+        return toc_navigator
+
+    def set_navigator_model(self, model):
+        self._toc_model = model
+        self._navigator.set_model(model)
+
+    def __toogle_navigator_cb(self, button, visible):
+        if visible:
+            self._toc_visible = True
+            self._update_toc_view = True
+            self._toc_select_active_page()
+            self._toc_scroller.set_size_request(int(Gdk.Screen.width() / 4),
+                    -1)
+            self._toc_scroller.show_all()
+            self._toc_separator.show()
+        else:
+            self._toc_visible = False
+            self._toc_scroller.hide()
+            self._toc_separator.hide()
 
     def __num_page_entry_insert_text_cb(self, entry, text, length, position):
         if not re.match('[0-9]', text):
@@ -542,48 +572,47 @@ class ReadActivity(activity.Activity):
     def _update_toc(self):
         if self._view.update_toc(self):
             self._navigator_changed_handler_id = \
-                self._navigator.connect('changed', self.__navigator_changed_cb)
+                    self._navigator.connect('cursor-changed',
+                    self.__navigator_cursor_changed_cb)
 
-    def __navigator_changed_cb(self, combobox):
-        iter = self._navigator.get_active_iter()
+    def __navigator_cursor_changed_cb(self, toc_treeview):
+        treestore, toc_selected = toc_treeview.get_selection().get_selected()
 
-        link = self._toc_model.get(iter, 1)[0]
-        self._view.handle_link(link)
-
-    def _toc_select_active_page_foreach(self, model, path, iter, current_page):
-        link = self._toc_model.get(iter, 1)[0]
-
-        if not hasattr(link, 'get_page'):
-            #FIXME: This needs to be implemented in epubadapter, not here
-            filepath = self._view.get_current_file()
-            if filepath.endswith(link):
-                self._navigator.set_active_iter(iter)
-                return True
-        else:
-            if current_page == link.get_page():
-                self._navigator.set_active_iter(iter)
-                return True
-
-        return False
+        if toc_selected is not None:
+            link = self._toc_model.get(toc_selected, 1)[0]
+            logging.debug('View handle link %s', link)
+            self._update_toc_view = False
+            self._view.handle_link(link)
+            self._update_toc_view = True
 
     def _toc_select_active_page(self):
-        iter = self._navigator.get_active_iter()
+        if not self._toc_visible or not self._update_toc_view:
+            return
 
-        current_link = self._toc_model.get(iter, 1)[0]
-        current_page = self._view.get_current_page()
+        _store, toc_selected = self._navigator.get_selection().get_selected()
 
-        if not hasattr(current_link, 'get_page'):
-            filepath = self._view.get_current_file()
-            if filepath is None or filepath.endswith(current_link):
-                return
+        if toc_selected is not None:
+            selected_link = self._toc_model.get(toc_selected, 1)[0]
         else:
-            if current_link.get_page() == current_page:
-                return
+            selected_link = ""
+        current_link = self._view.get_current_link()
 
-        self._navigator.handler_block(self._navigator_changed_handler_id)
-        self._toc_model.foreach(self._toc_select_active_page_foreach,
-                current_page)
-        self._navigator.handler_unblock(self._navigator_changed_handler_id)
+        if current_link == selected_link:
+            return
+
+        link_iter = self._toc_model.get_iter_first()
+
+        while link_iter is not None and \
+                self._toc_model.get_value(link_iter, 1) != current_link:
+            link_iter = self._toc_model.iter_next(link_iter)
+
+        if link_iter is not None:
+            self._navigator.handler_block(self._navigator_changed_handler_id)
+            toc_selection = self._navigator.get_selection()
+            toc_selection.select_iter(link_iter)
+            self._navigator.handler_unblock(self._navigator_changed_handler_id)
+        else:
+            logging.debug('link "%s" not found in the toc model', current_link)
 
     def _show_journal_object_picker(self):
         """Show the journal object picker to load a document.
