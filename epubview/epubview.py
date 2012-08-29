@@ -556,7 +556,6 @@ class _View(Gtk.HBox):
         if self._loaded_page == pageno:
             return
 
-        self._on_page_changed(self._loaded_page, pageno)
         filename = self._paginator.get_file_for_pageno(pageno)
         filename = filename.replace('file://', '')
 
@@ -587,6 +586,7 @@ class _View(Gtk.HBox):
         else:
             self._loaded_page = pageno
             self._scroll_page()
+        self._on_page_changed(self._loaded_page, pageno)
 
     def _insert_js_reference(self, file_name, path):
         js_reference = '<script type="text/javascript" ' + \

@@ -91,6 +91,10 @@ class EvinceViewer():
     def get_current_page(self):
         return self._model.props.page
 
+    def get_current_link(self):
+        # TODO
+        return ""
+
     def set_current_page(self, page):
         if page >= self._document.get_n_pages():
             page = self._document.get_n_pages() - 1
@@ -273,12 +277,8 @@ class EvinceViewer():
                 break
         """
 
-        activity._navigator_toolbar_button.show()
-        activity._navigator.show_all()
-
-        activity._toc_model = self._index_model
-        activity._navigator.set_model(activity._toc_model)
-        activity._navigator.set_active(0)
+        activity.show_navigator_button()
+        activity.set_navigator_model(self._epub.get_links_model())
         return True
 
     def find_set_highlight_search(self, set_highlight_search):

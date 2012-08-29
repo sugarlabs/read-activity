@@ -144,14 +144,15 @@ class EpubViewer(epubview.EpubView):
     def get_current_page(self):
         return int(self._loaded_page) - 1
 
+    def get_current_link(self):
+        # the _loaded_filename include all the path,
+        # need only the part included in the link
+        return self._loaded_filename[len(self._epub._tempdir) + 1:]
+
     def update_toc(self, activity):
         if self._epub.has_document_links():
-            activity._navigator_toolbar_button.show()
-            activity._navigator.show_all()
-
-            activity._toc_model = self._epub.get_links_model()
-            activity._navigator.set_model(activity._toc_model)
-            activity._navigator.set_active(0)
+            activity.show_navigator_button()
+            activity.set_navigator_model(self._epub.get_links_model())
             return True
         else:
             return False
