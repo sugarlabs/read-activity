@@ -57,7 +57,6 @@ class BookmarkView(Gtk.EventBox):
         self._box.set_layout(Gtk.ButtonBoxStyle.CENTER)
         self.add(self._box)
         self._box.show()
-        self.show()
 
         self._bookmark_icon = None
         self._bookmark_manager = None
