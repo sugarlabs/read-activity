@@ -96,7 +96,9 @@ class BaseReadDialog(Gtk.Window):
     def cancel_clicked_cb(self, widget):
         self.destroy()
 
+
 class BookmarkDialog(BaseReadDialog):
+
     def __init__(self, parent_xid, dialog_title, bookmark_title,
             bookmark_content, page, sidebarinstance):
         BaseReadDialog.__init__(self, parent_xid, dialog_title)
@@ -164,7 +166,7 @@ class BookmarkDialog(BaseReadDialog):
 
     def cancel_clicked_cb(self, widget):
         self._sidebarinstance.notify_bookmark_change()
-        BaseReadDialog.cancel_clicked_cb(self,widget)
+        BaseReadDialog.cancel_clicked_cb(self, widget)
 
 
 class BookmarkAddDialog(BookmarkDialog):
@@ -185,7 +187,7 @@ class BookmarkAddDialog(BookmarkDialog):
 
     def cancel_clicked_cb(self, widget):
         self._sidebarinstance.notify_bookmark_change()
-        BaseReadDialog.cancel_clicked_cb(self,widget)
+        BaseReadDialog.cancel_clicked_cb(self, widget)
 
 
 class BookmarkEditDialog(BookmarkDialog):
