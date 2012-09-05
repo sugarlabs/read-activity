@@ -5,6 +5,7 @@ import time
 
 from gi.repository import GObject
 from gi.repository import Gtk
+from gi.repository import Gdk
 
 from gi.repository import EvinceDocument
 from gi.repository import EvinceView
@@ -37,6 +38,10 @@ class EvinceViewer():
         activity._scrolled.add(self._view)
         self._view.show()
 
+        self._view.set_events(self._view.get_events() |
+                Gdk.EventMask.TOUCH_MASK)
+        self._view.connect('event', self.__view_touch_event_cb)
+
         activity._hbox.pack_start(activity._scrolled, True, True, 0)
         activity._scrolled.show()
 
@@ -65,6 +70,15 @@ class EvinceViewer():
             self._model.set_min_scale(min_scale * self.dpi / 72.0)
             self._model.set_max_scale(max_scale * self.dpi / 72.0)
             """
+
+    def __view_touch_event_cb(self, widget, event):
+        if event.type == Gdk.EventType.TOUCH_BEGIN:
+            x = event.touch.x
+            view_width = widget.get_allocation().width
+            if x > view_width * 3 / 4:
+                self._view.scroll(Gtk.ScrollType.PAGE_FORWARD, False)
+            elif x < view_width * 1 / 4:
+                self._view.scroll(Gtk.ScrollType.PAGE_BACKWARD, False)
 
     def __handle_link_cb(self, widget, url_object):
         url = url_object.get_uri()
