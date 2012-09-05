@@ -246,6 +246,9 @@ class EvinceViewer():
         self._model.connect('page-changed', handler)
 
     def update_toc(self, activity):
+        return False
+        """
+        Commented because does not work and crash with old evince
         doc = self._model.get_document()
         if not doc.has_document_links():
             logging.error('The pdf file does not have a index')
@@ -256,6 +259,7 @@ class EvinceViewer():
                     activity)
         EvinceView.Job.scheduler_push_job(self._job_links,
                 EvinceView.JobPriority.PRIORITY_NONE)
+        """
 
     def __index_loaded_cb(self, job, activity):
         logging.error('__index_loaded_cb %s %s', job.__class__, dir(job))
