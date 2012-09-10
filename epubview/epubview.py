@@ -153,7 +153,9 @@ class _View(Gtk.HBox):
         '''
         Sets the current zoom level
         '''
+        scrollbar_pos = self.get_vertical_pos()
         self._view.set_zoom_level(value / 100.0)
+        self.set_vertical_pos(scrollbar_pos)
 
     def _get_scale(self):
         '''
@@ -172,7 +174,9 @@ class _View(Gtk.HBox):
         Zooms in (increases zoom level by 0.1)
         '''
         if self.can_zoom_in():
+            scrollbar_pos = self.get_vertical_pos()
             self._set_scale(self._get_scale() + 0.1)
+            self.set_vertical_pos(scrollbar_pos)
             return True
         else:
             return False
@@ -182,10 +186,25 @@ class _View(Gtk.HBox):
         Zooms out (decreases zoom level by 0.1)
         '''
         if self.can_zoom_out():
+            scrollbar_pos = self.get_vertical_pos()
             self._set_scale(self._get_scale() - 0.1)
+            self.set_vertical_pos(scrollbar_pos)
             return True
         else:
             return False
+
+    def get_vertical_pos(self):
+        """
+        Used to save the scrolled position and restore when needed
+        """
+        return self._v_vscrollbar.get_adjustment().get_value()
+
+    def set_vertical_pos(self, position):
+        """
+        Used to save the scrolled position and restore when needed
+        """
+        self._v_vscrollbar.get_adjustment().set_value(position)
+
 
     def can_zoom_in(self):
         '''
