@@ -603,7 +603,8 @@ class _View(Gtk.HBox):
         self._scrollbar.handler_block(self._scrollbar_change_value_cb_id)
         self._scrollbar.set_value(pageno)
         self._scrollbar.handler_unblock(self._scrollbar_change_value_cb_id)
-        self.emit('page-changed', oldpage, pageno)
+        # the indexes in read activity are zero based
+        self.emit('page-changed', (oldpage - 1), (pageno - 1))
 
     def _load_page(self, pageno):
         if pageno > self._pagecount or pageno < 1:
