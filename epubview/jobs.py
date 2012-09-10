@@ -134,8 +134,9 @@ class _JobPaginator(GObject.GObject):
         sw = Gtk.ScrolledWindow()
         sw.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER)
         self._dpi = 96
+        self._single_page_height = _mm_to_pixel(PAGE_HEIGHT, self._dpi)
         sw.set_size_request(_mm_to_pixel(PAGE_WIDTH, self._dpi),
-                _mm_to_pixel(PAGE_HEIGHT, self._dpi))
+                self._single_page_height)
         sw.add(self._temp_view)
         self._temp_win.add(sw)
         self._temp_view.connect('load-finished', self._page_load_finished_cb)
@@ -145,14 +146,28 @@ class _JobPaginator(GObject.GObject):
 
         self._temp_view.open(self._filelist[self._count])
 
+    def get_single_page_height(self):
+        """
+        Returns the height in pixels of a single page
+        """
+        return self._single_page_height
+
+    def get_next_filename(self, actual_filename):
+        for n in range(len(self._filelist)):
+            filename = self._filelist[n]
+            if filename == actual_filename:
+                if n < len(self._filelist):
+                    return self._filelist[n + 1]
+        return None
+
     def _page_load_finished_cb(self, v, frame):
         f = v.get_main_frame()
         pageheight = v.get_page_height()
 
-        if pageheight <= _mm_to_pixel(PAGE_HEIGHT, self._dpi):
+        if pageheight <= self._single_page_height:
             pages = 1
         else:
-            pages = pageheight / float(_mm_to_pixel(PAGE_HEIGHT, self._dpi))
+            pages = pageheight / float(self._single_page_height)
         for i in range(1, int(math.ceil(pages) + 1)):
             if pages - i < 0:
                 pagelen = (pages - math.floor(pages)) / pages

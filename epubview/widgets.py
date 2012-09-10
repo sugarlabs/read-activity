@@ -49,3 +49,33 @@ class _WebView(WebKit.WebView):
         Highlight next word (for text to speech)
         '''
         self.execute_script('highLightNextWord();')
+
+    def go_to_link(self, id_link):
+        self.execute_script('window.location.href = "%s";' % id_link)
+
+    def get_vertical_position_element(self, id_link):
+        '''
+        Get the vertical position of a element, in pixels
+        '''
+        # remove the first '#' char
+        id_link = id_link[1:]
+        js = "oldtitle = document.title;" \
+                "obj = document.getElementById('%s');" \
+                "var top = 0;" \
+                "if(obj.offsetParent) {" \
+                "    while(1) {" \
+                "      top += obj.offsetTop;" \
+                "      if(!obj.offsetParent) {break;};" \
+                "      obj = obj.offsetParent;" \
+                "    };" \
+                "}" \
+                "else if(obj.y) { top += obj.y; };" \
+                "document.title=top;" % id_link
+        self.execute_script(js)
+        ret = self.get_main_frame().get_title()
+        js = 'document.title=oldtitle;'
+        self.execute_script(js)
+        try:
+            return int(ret)
+        except ValueError:
+            return 0

@@ -157,6 +157,18 @@ class EpubViewer(epubview.EpubView):
         else:
             return False
 
+    def get_link_iter(self, current_link):
+        """
+        Returns the iter related to a link
+        """
+        link_iter = self._epub.get_links_model().get_iter_first()
+
+        while link_iter is not None and \
+                self._epub.get_links_model().get_value(link_iter, 1) \
+                        != current_link:
+            link_iter = self._epub.get_links_model().iter_next(link_iter)
+        return link_iter
+
     def find_changed(self, job, page=None):
         self._find_changed(job)
 

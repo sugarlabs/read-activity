@@ -599,11 +599,7 @@ class ReadActivity(activity.Activity):
         if current_link == selected_link:
             return
 
-        link_iter = self._toc_model.get_iter_first()
-
-        while link_iter is not None and \
-                self._toc_model.get_value(link_iter, 1) != current_link:
-            link_iter = self._toc_model.iter_next(link_iter)
+        link_iter = self._view.get_link_iter(current_link)
 
         if link_iter is not None:
             self._navigator.handler_block(self._navigator_changed_handler_id)

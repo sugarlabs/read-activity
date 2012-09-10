@@ -20,6 +20,7 @@ from gi.repository import GObject
 from gi.repository import Gdk
 import widgets
 
+import logging
 import os.path
 import math
 import shutil
@@ -71,6 +72,8 @@ class _View(Gtk.HBox):
         self._findjob = None
         self.__in_search = False
         self.__search_fwd = True
+        self._filelist = None
+        self._internal_link = None
 
         self._sw = Gtk.ScrolledWindow()
         self._view = widgets._WebView()
@@ -439,13 +442,40 @@ class _View(Gtk.HBox):
             else:
                 self._scroll_page()
 
-        # prepare text to speech
-        html_file = open(self._loaded_filename)
-        soup = BeautifulSoup.BeautifulSoup(html_file)
-        body = soup.find('body')
-        tags = body.findAll(text=True)
-        self._all_text = ''.join([tag for tag in tags])
-        self._prepare_text_to_speech(self._all_text)
+        process_file = True
+        if self._internal_link is not None:
+            self._view.go_to_link(self._internal_link)
+            vertical_pos = \
+                self._view.get_vertical_position_element(self._internal_link)
+            # set the page number based in the vertical position
+            initial_page = self._paginator.get_base_pageno_for_file(filename)
+            self._loaded_page = initial_page + int(vertical_pos /
+                    self._paginator.get_single_page_height())
+
+            # There are epub files, created with Calibre,
+            # where the link in the index points to the end of the previos
+            # file to the needed chapter.
+            # if the link is at the bottom of the page, we open the next file
+            one_page_height = self._paginator.get_single_page_height()
+            self._internal_link = None
+            if vertical_pos > self._view.get_page_height() - one_page_height:
+                logging.error('bottom page link, go to next file')
+                next_file = self._paginator.get_next_filename(filename)
+                if next_file is not None:
+                    logging.error('load next file %s', next_file)
+                    self.__in_search = False
+                    self.__going_back = False
+                    process_file = False
+                    GObject.idle_add(self._load_file, next_file)
+
+        if process_file:
+            # prepare text to speech
+            html_file = open(self._loaded_filename)
+            soup = BeautifulSoup.BeautifulSoup(html_file)
+            body = soup.find('body')
+            tags = body.findAll(text=True)
+            self._all_text = ''.join([tag for tag in tags])
+            self._prepare_text_to_speech(self._all_text)
 
     def _prepare_text_to_speech(self, page_text):
         i = 0
@@ -489,9 +519,16 @@ class _View(Gtk.HBox):
         filelist = []
         for i in self._epub._navmap.get_flattoc():
             filelist.append(os.path.join(self._epub._tempdir, i))
-
+        # init files info
+        self._filelist = filelist
         self._paginator = _Paginator(filelist)
         self._paginator.connect('paginated', self._paginated_cb)
+
+    def get_filelist(self):
+        return self._filelist
+
+    def get_tempdir(self):
+        return self._epub._tempdir
 
     def _load_next_page(self):
         self._load_page(self._loaded_page + 1)
@@ -599,11 +636,19 @@ class _View(Gtk.HBox):
         shutil.copy(file_name + '.tmp', file_name)
 
     def _load_file(self, path):
-        #TODO: This is a bit suboptimal - fix it
-        for pageno in range(1, self.get_pagecount()):
-            filepath = self._paginator.get_file_for_pageno(pageno)
+        self._internal_link = None
+        if path.find('#') > -1:
+            self._internal_link = path[path.find('#'):]
+            path = path[:path.find('#')]
+
+        for filepath in self._filelist:
             if filepath.endswith(path):
-                self._load_page(pageno)
+                self._view.load_uri('file://' + filepath)
+                oldpage = self._loaded_page
+                self._loaded_page = \
+                        self._paginator.get_base_pageno_for_file(filepath)
+                self._scroll_page()
+                self._on_page_changed(oldpage, self._loaded_page)
                 break
 
     def _scrollbar_change_value_cb(self, range, scrolltype, value):
