@@ -91,6 +91,7 @@ class _View(Gtk.HBox):
                 self._view_selection_changed_cb)
         self._view.connect_after('populate-popup',
                 self._view_populate_popup_cb)
+        self._view.connect('touch-change-page', self.__touch_page_changed_cb)
 
         self._sw.add(self._view)
         self._v_vscrollbar = self._sw.get_vscrollbar()
@@ -115,6 +116,12 @@ class _View(Gtk.HBox):
 
         self._view.set_can_default(True)
         self._view.set_can_focus(True)
+
+        def map_cp(widget):
+            widget.setup_touch()
+            widget.disconnect(self._setup_handle)
+
+        self._setup_handle = self._view.connect('map', map_cp)
 
     def set_document(self, epubdocumentinstance):
         '''
@@ -204,7 +211,6 @@ class _View(Gtk.HBox):
         Used to save the scrolled position and restore when needed
         """
         self._v_vscrollbar.get_adjustment().set_value(position)
-
 
     def can_zoom_in(self):
         '''
@@ -316,6 +322,12 @@ class _View(Gtk.HBox):
                 self.set_current_page(self._pagecount - 1)
         else:
             print ('Got unsupported scrolltype %s' % str(scrolltype))
+
+    def __touch_page_changed_cb(self, widget, forward):
+        if forward:
+            self.scroll(Gtk.ScrollType.PAGE_FORWARD, False)
+        else:
+            self.scroll(Gtk.ScrollType.PAGE_BACKWARD, False)
 
     def copy(self):
         '''

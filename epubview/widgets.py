@@ -1,10 +1,32 @@
 from gi.repository import WebKit
+from gi.repository import Gdk
+from gi.repository import GObject
 
 
 class _WebView(WebKit.WebView):
+
+    __gsignals__ = {
+        'touch-change-page': (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE,
+                ([bool])),
+    }
+
     def __init__(self, only_to_measure=False):
         WebKit.WebView.__init__(self)
         self._only_to_measure = only_to_measure
+
+    def setup_touch(self):
+        self.get_window().set_events(self.get_window().get_events() |
+                Gdk.EventMask.TOUCH_MASK)
+        self.connect('event', self.__event_cb)
+
+    def __event_cb(self, widget, event):
+        if event.type == Gdk.EventType.TOUCH_BEGIN:
+            x = event.touch.x
+            view_width = widget.get_allocation().width
+            if x > view_width * 3 / 4:
+                self.emit('touch-change-page', True)
+            elif x < view_width * 1 / 4:
+                self.emit('touch-change-page', False)
 
     def get_page_height(self):
         '''
