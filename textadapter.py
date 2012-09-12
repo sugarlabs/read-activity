@@ -2,6 +2,7 @@ import os
 import zipfile
 import logging
 from gi.repository import Gtk
+from gi.repository import Gdk
 from gi.repository import Pango
 from gi.repository import GObject
 import threading
@@ -44,6 +45,10 @@ class TextViewer(GObject.GObject):
                 self._view_buttonrelease_event_cb)
         self.connect('selection-changed',
                             activity._view_selection_changed_cb)
+
+        self.textview.set_events(self.textview.get_events() | \
+                Gdk.EventMask.TOUCH_MASK)
+        self.textview.connect('event', self.__touch_event_cb)
 
         activity._scrolled.add(self.textview)
         self.textview.show()
@@ -125,6 +130,15 @@ class TextViewer(GObject.GObject):
         label_text = label_text + '\n\n\n'
         textbuffer.set_text(label_text)
         self._prepare_text_to_speech(label_text)
+
+    def __touch_event_cb(self, widget, event):
+        if event.type == Gdk.EventType.TOUCH_BEGIN:
+            x = event.touch.x
+            view_width = widget.get_allocation().width
+            if x > view_width * 3 / 4:
+                self.scroll(Gtk.ScrollType.PAGE_FORWARD, False)
+            elif x < view_width * 1 / 4:
+                self.scroll(Gtk.ScrollType.PAGE_BACKWARD, False)
 
     def can_highlight(self):
         return True
