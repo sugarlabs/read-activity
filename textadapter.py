@@ -28,12 +28,9 @@ class TextViewer(GObject.GObject):
 
     def setup(self, activity):
         self._activity = activity
-        activity._scrolled = Gtk.ScrolledWindow()
-        activity._scrolled.set_policy(Gtk.PolicyType.NEVER,
-                Gtk.PolicyType.AUTOMATIC)
-        activity._scrolled.props.shadow_type = Gtk.ShadowType.NONE
 
-        self._scrolled = activity._scrolled
+        self.__going_fwd = False
+        self.__going_back = True
 
         self.textview = Gtk.TextView()
         self.textview.set_editable(False)
@@ -50,10 +47,28 @@ class TextViewer(GObject.GObject):
                 Gdk.EventMask.TOUCH_MASK)
         self.textview.connect('event', self.__touch_event_cb)
 
-        activity._scrolled.add(self.textview)
-        self.textview.show()
-        activity._scrolled.show()
-        activity._hbox.pack_start(activity._scrolled, True, True, 0)
+        self._sw = Gtk.ScrolledWindow()
+        self._sw.add(self.textview)
+        self._v_vscrollbar = self._sw.get_vscrollbar()
+        self._v_scrollbar_value_changed_cb_id = \
+                self._v_vscrollbar.connect('value-changed', \
+                self._v_scrollbar_value_changed_cb)
+        self._scrollbar = Gtk.VScrollbar()
+        self._scrollbar_change_value_cb_id = \
+                self._scrollbar.connect('change-value', \
+                self._scrollbar_change_value_cb)
+
+        overlay = Gtk.Overlay()
+        hbox = Gtk.HBox()
+        overlay.add(hbox)
+        hbox.add(self._sw)
+
+        self._scrollbar.props.halign = Gtk.Align.END
+        self._scrollbar.props.valign = Gtk.Align.FILL
+        overlay.add_overlay(self._scrollbar)
+        overlay.show_all()
+
+        activity._hbox.pack_start(overlay, True, True, 0)
 
         self._font_size = style.zoom(10)
         self.font_desc = Pango.FontDescription("sans %d" % self._font_size)
@@ -109,6 +124,8 @@ class TextViewer(GObject.GObject):
                 pagecount = pagecount + 1
         self._pagecount = pagecount + 1
         self.set_current_page(0)
+        self._scrollbar.set_range(1.0, self._pagecount - 1.0)
+        self._scrollbar.set_increments(1.0, 1.0)
 
         speech.highlight_cb = self.highlight_next_word
         speech.reset_cb = self.reset_text_to_speech
@@ -130,6 +147,51 @@ class TextViewer(GObject.GObject):
         label_text = label_text + '\n\n\n'
         textbuffer.set_text(label_text)
         self._prepare_text_to_speech(label_text)
+
+    def _v_scrollbar_value_changed_cb(self, scrollbar):
+        """
+        This is the real scrollbar containing the text view
+        """
+        if self._current_page < 1:
+            return
+        scrollval = scrollbar.get_value()
+        scroll_upper = self._v_vscrollbar.props.adjustment.props.upper
+        scroll_page_size = self._v_vscrollbar.props.adjustment.props.page_size
+
+        if self.__going_fwd == True and \
+            not self._current_page == self._pagecount:
+
+            if scrollval == scroll_upper:
+                self.set_current_page(self._current_page + 1)
+        elif self.__going_back == True and self._current_page > 1:
+            if scrollval == 0.0:
+                self.set_current_page(self._current_page - 1)
+
+    def _scrollbar_change_value_cb(self, range, scrolltype, value):
+        """
+        This is the fake scrollbar visible, used to show the lenght of the book
+        """
+        old_page = self._current_page
+        if scrolltype == Gtk.ScrollType.STEP_FORWARD:
+            self.__going_fwd = True
+            self.__going_back = False
+        elif scrolltype == Gtk.ScrollType.STEP_BACKWARD:
+            self.__going_fwd = False
+            self.__going_back = True
+        elif scrolltype == Gtk.ScrollType.JUMP or \
+            scrolltype == Gtk.ScrollType.PAGE_FORWARD or \
+                scrolltype == Gtk.ScrollType.PAGE_BACKWARD:
+            if value > self._scrollbar.props.adjustment.props.upper:
+                value = self._pagecount
+            self._show_page(int(value))
+            self._current_page = int(value)
+            self.emit('page-changed', old_page, self._current_page)
+        else:
+            print 'Warning: unknown scrolltype %s with value %f' \
+                    % (str(scrolltype), value)
+
+        #FIXME: This should not be needed here
+        self._scrollbar.set_value(self._current_page)
 
     def __touch_event_cb(self, widget, event):
         if event.type == Gdk.EventType.TOUCH_BEGIN:
@@ -218,7 +280,7 @@ class TextViewer(GObject.GObject):
             bounds = textbuffer.get_bounds()
             textbuffer.apply_tag(self.normal_tag,  bounds[0], iterStart)
             textbuffer.apply_tag(self.spoken_word_tag, iterStart, iterEnd)
-            v_adjustment = self._scrolled.get_vadjustment()
+            v_adjustment = self._sw.get_vadjustment()
             max_pos = v_adjustment.get_upper() - v_adjustment.get_page_size()
             max_pos = max_pos * word_count
             max_pos = max_pos / len(self.word_tuples)
@@ -244,10 +306,13 @@ class TextViewer(GObject.GObject):
         old_page = self._current_page
         self._current_page = page
         self._show_page(self._current_page)
+        self._scrollbar.handler_block(self._scrollbar_change_value_cb_id)
+        self._scrollbar.set_value(self._current_page)
+        self._scrollbar.handler_unblock(self._scrollbar_change_value_cb_id)
         self.emit('page-changed', old_page, self._current_page)
 
     def scroll(self, scrolltype, horizontal):
-        v_adjustment = self._scrolled.get_vadjustment()
+        v_adjustment = self._sw.get_vadjustment()
         v_value = v_adjustment.get_value()
         if scrolltype in (Gtk.ScrollType.PAGE_BACKWARD,
                 Gtk.ScrollType.PAGE_FORWARD):
@@ -257,6 +322,8 @@ class TextViewer(GObject.GObject):
 
         if scrolltype in (Gtk.ScrollType.PAGE_BACKWARD,
                 Gtk.ScrollType.STEP_BACKWARD):
+            self.__going_fwd = False
+            self.__going_back = True
             if v_value <= v_adjustment.get_lower():
                 self.previous_page()
                 v_adjustment.set_value(v_adjustment.get_upper() - \
@@ -269,6 +336,9 @@ class TextViewer(GObject.GObject):
                 v_adjustment.set_value(new_value)
         elif scrolltype in (Gtk.ScrollType.PAGE_FORWARD,
                 Gtk.ScrollType.STEP_FORWARD):
+            self.__going_fwd = True
+            self.__going_back = False
+
             if v_value >= v_adjustment.get_upper() - \
                                                 v_adjustment.get_page_size():
                 self.next_page()
@@ -287,13 +357,13 @@ class TextViewer(GObject.GObject):
             self.set_current_page(self._pagecount - 1)
 
     def previous_page(self):
-        v_adjustment = self._scrolled.get_vadjustment()
+        v_adjustment = self._sw.get_vadjustment()
         v_adjustment.set_value(v_adjustment.get_upper() -
                 v_adjustment.get_page_size())
         self.set_current_page(self.get_current_page() - 1)
 
     def next_page(self):
-        v_adjustment = self._scrolled.get_vadjustment()
+        v_adjustment = self._sw.get_vadjustment()
         v_adjustment.set_value(v_adjustment.get_lower())
         self.set_current_page(self.get_current_page() + 1)
 
@@ -314,9 +384,6 @@ class TextViewer(GObject.GObject):
 
     def copy(self):
         self.textview.get_buffer().copy_clipboard(Gtk.Clipboard())
-
-    def update_view_size(self, _scrolled):
-        pass
 
     def _view_buttonrelease_event_cb(self, view, event):
         self._has_selection = \
@@ -412,7 +479,7 @@ class _JobFind(GObject.GObject):
     def __init__(self, text_file, start_page, n_pages, text, \
                 case_sensitive=False):
         GObject.GObject.__init__(self)
-        Gtk.gdk.threads_init()
+        Gdk.threads_init()
 
         self._finished = False
         self._text_file = text_file
@@ -502,10 +569,10 @@ class _SearchThread(threading.Thread):
                     self._found_records[self._current_found_item]
             self._page = self.current_found_tuple[0]
 
-        Gtk.gdk.threads_enter()
+        Gdk.threads_enter()
         self.obj._finished = True
         self.obj.emit('updated')
-        Gtk.gdk.threads_leave()
+        Gdk.threads_leave()
 
         return False
 
