@@ -14,6 +14,13 @@ import speech
 
 PAGE_SIZE = 38
 
+# remove hard line breaks, apply a simple logic to try identify
+# the unneeded
+def _clean_text(line):
+    if line != '\r\n':
+        if line[-3] not in ('.', ',', '-', ';') and len(line) > 60:
+            line = line[:-2]
+    return line
 
 class TextViewer(GObject.GObject):
 
@@ -37,6 +44,7 @@ class TextViewer(GObject.GObject):
         self.textview.set_cursor_visible(False)
         self.textview.set_left_margin(50)
         self.textview.set_right_margin(50)
+        self.textview.set_justification(Gtk.Justification.FILL)
         self.textview.set_wrap_mode(Gtk.WrapMode.WORD)
         self.textview.connect('button-release-event', \
                 self._view_buttonrelease_event_cb)
@@ -140,6 +148,7 @@ class TextViewer(GObject.GObject):
             if not line:
                 break
             else:
+                line = _clean_text(line)
                 label_text = label_text + unicode(line,  "iso-8859-1")
             line_increment = (len(line) / 80) + 1
             linecount = linecount + line_increment
@@ -547,6 +556,7 @@ class _SearchThread(threading.Thread):
         self.obj._text_file.seek(0)
         while self.obj._text_file:
             line = unicode(self.obj._text_file.readline(), "iso-8859-1")
+            line = _clean_text(line)
             line_length = len(line)
             if not line:
                 break
