@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-18 00:32-0400\n"
-"PO-Revision-Date: 2012-06-05 07:36+0200\n"
+"POT-Creation-Date: 2012-09-11 00:31-0400\n"
+"PO-Revision-Date: 2012-09-14 07:50+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en\n"
@@ -29,43 +29,68 @@ msgstr ""
 msgid "Read"
 msgstr "Read"
 
-#: evinceadapter.py:74
+#. TRANS: This goes like Bookmark added by User 5 days ago
+#. TRANS: (the elapsed string gets translated automatically)
+#: bookmarkview.py:110
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "Bookmark added by %(user)s %(time)s"
+
+#: bookmarkview.py:153 bookmarkview.py:204
+msgid "Add notes for bookmark: "
+msgstr "Add notes for bookmark: "
+
+#: bookmarkview.py:200
+#, python-format
+msgid "%s's bookmark"
+msgstr "%s's bookmark"
+
+#: bookmarkview.py:201
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "Bookmark for page %d"
+
+#: evinceadapter.py:88
 msgid "URL from Read"
 msgstr "URL from Read"
 
-#: readactivity.py:232
+#: readactivity.py:223
 msgid "Highlight"
 msgstr "Highlight"
 
-#: readactivity.py:355
+#: readactivity.py:347
 msgid "Back"
 msgstr "Back"
 
-#: readactivity.py:360
+#: readactivity.py:352
 msgid "Previous page"
 msgstr "Previous page"
 
-#: readactivity.py:362
+#: readactivity.py:354
 msgid "Previous bookmark"
 msgstr "Previous bookmark"
 
-#: readactivity.py:377
+#: readactivity.py:369
 msgid "Forward"
 msgstr "Forward"
 
-#: readactivity.py:382
+#: readactivity.py:374
 msgid "Next page"
 msgstr "Next page"
 
-#: readactivity.py:384
+#: readactivity.py:376
 msgid "Next bookmark"
 msgstr "Next bookmark"
 
-#: readactivity.py:497
+#: readactivity.py:415
+msgid "Index"
+msgstr "Index"
+
+#: readactivity.py:525
 msgid "Delete bookmark"
 msgstr "Delete bookmark"
 
-#: readactivity.py:498
+#: readactivity.py:526
 msgid "All the information related with this bookmark will be lost"
 msgstr "All the information related with this bookmark will be lost"
 
@@ -77,76 +102,59 @@ msgstr "Cancel"
 msgid "Ok"
 msgstr "Ok"
 
-#: readdialog.py:114
+#: readdialog.py:116
 msgid "<b>Title</b>:"
 msgstr "<b>Title</b>:"
 
-#: readdialog.py:140
+#: readdialog.py:142
 msgid "<b>Details</b>:"
 msgstr "<b>Details</b>:"
 
-#. TRANS: This goes like Bookmark added by User 5 days ago
-#. TRANS: (the elapsed string gets translated automatically)
-#: readsidebar.py:111
-#, python-format
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr "Bookmark added by %(user)s %(time)s"
-
-#: readsidebar.py:154 readsidebar.py:205
-msgid "Add notes for bookmark: "
-msgstr "Add notes for bookmark: "
-
-#: readsidebar.py:201
-#, python-format
-msgid "%s's bookmark"
-msgstr "%s's bookmark"
-
-#: readsidebar.py:202
-#, python-format
-msgid "Bookmark for page %d"
-msgstr "Bookmark for page %d"
-
-#: readtoolbar.py:60
+#: readtoolbar.py:61
 msgid "Previous"
 msgstr "Previous"
 
-#: readtoolbar.py:67
+#: readtoolbar.py:68
 msgid "Next"
 msgstr "Next"
 
-#: readtoolbar.py:150
+#: readtoolbar.py:151
 msgid "Find first"
 msgstr "Find first"
 
-#: readtoolbar.py:156
+#: readtoolbar.py:157
 msgid "Find previous"
 msgstr "Find previous"
 
-#: readtoolbar.py:158
+#: readtoolbar.py:159
 msgid "Find next"
 msgstr "Find next"
 
-#: readtoolbar.py:175
+#: readtoolbar.py:178
+msgid "Table of contents"
+msgstr "Table of contents"
+
+#: readtoolbar.py:187
 msgid "Zoom out"
 msgstr "Zoom out"
 
-#: readtoolbar.py:181
+#: readtoolbar.py:193
 msgid "Zoom in"
 msgstr "Zoom in"
 
-#: readtoolbar.py:187
+#: readtoolbar.py:199
 msgid "Zoom to width"
 msgstr "Zoom to width"
 
-#: readtoolbar.py:193
+#: readtoolbar.py:205
 msgid "Zoom to fit"
 msgstr "Zoom to fit"
 
-#: readtoolbar.py:199
+#: readtoolbar.py:211
 msgid "Actual size"
 msgstr "Actual size"
 
-#: readtoolbar.py:210
+#: readtoolbar.py:222
 msgid "Fullscreen"
 msgstr "Fullscreen"
 
