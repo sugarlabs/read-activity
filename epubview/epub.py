@@ -20,6 +20,7 @@ import tempfile
 import os
 import xml.etree.ElementTree as etree
 import shutil
+import logging
 
 import navmap
 import epubinfo
@@ -57,10 +58,13 @@ class _Epub(object):
         for name in self._zobject.namelist():
             # Some weird zip file entries start with a slash,
             # and we don't want to write to the root directory
-            if name.startswith(os.path.sep):
-                name = name[1:]
-            if name.endswith(os.path.sep) or name.endswith('\\'):
-                os.makedirs(name)
+            try:
+                if name.startswith(os.path.sep):
+                    name = name[1:]
+                if name.endswith(os.path.sep) or name.endswith('\\'):
+                    os.makedirs(name)
+            except:
+                logging.error('ERROR unziping %s', name)
             else:
                 self._zobject.extract(name)
         os.chdir(orig_cwd)
