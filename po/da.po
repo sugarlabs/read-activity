@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-02 00:31-0400\n"
-"PO-Revision-Date: 2012-06-05 11:41+0200\n"
+"POT-Creation-Date: 2012-09-11 00:31-0400\n"
+"PO-Revision-Date: 2012-09-17 10:55+0200\n"
 "Last-Translator: Aputsiaq Niels <aj@isit.gl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: da\n"
@@ -29,128 +29,132 @@ msgstr ""
 msgid "Read"
 msgstr "Læs"
 
-#: evinceadapter.py:74
-msgid "URL from Read"
-msgstr "URL fra Læs"
-
-#: readactivity.py:231
-msgid "Highlight"
-msgstr "Fremhæv"
-
-#: readactivity.py:340
-msgid "Back"
-msgstr "Tilbage"
-
-#: readactivity.py:345
-msgid "Previous page"
-msgstr "Forrige side"
-
-#: readactivity.py:347
-msgid "Previous bookmark"
-msgstr "Forrige bogmærke"
-
-#: readactivity.py:362
-msgid "Forward"
-msgstr "Frem"
-
-#: readactivity.py:367
-msgid "Next page"
-msgstr "Næste side"
-
-#: readactivity.py:369
-msgid "Next bookmark"
-msgstr "Næste bogmærke"
-
-#: readactivity.py:482
-msgid "Delete bookmark"
-msgstr "Slet bogmærke"
-
-#: readactivity.py:483
-msgid "All the information related with this bookmark will be lost"
-msgstr "Al information relateret til dette bogmærke vil blive tabt"
-
-#: readdialog.py:53
-msgid "Cancel"
-msgstr "Annullér"
-
-#: readdialog.py:59
-msgid "Ok"
-msgstr "Ok"
-
-#: readdialog.py:118
-msgid "<b>Title</b>:"
-msgstr "<b>Titel</b>:"
-
-#: readdialog.py:144
-msgid "<b>Details</b>:"
-msgstr "<b>Detaljer</b>:"
-
 #. TRANS: This goes like Bookmark added by User 5 days ago
 #. TRANS: (the elapsed string gets translated automatically)
-#: readsidebar.py:92
+#: bookmarkview.py:110
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
 msgstr "Bogmærker tilføjet af %(user)s %(time)s"
 
-#: readsidebar.py:135 readsidebar.py:182
+#: bookmarkview.py:153 bookmarkview.py:204
 msgid "Add notes for bookmark: "
 msgstr "Tilføj noter til bogmærke: "
 
-#: readsidebar.py:178
+#: bookmarkview.py:200
 #, python-format
 msgid "%s's bookmark"
 msgstr "%s's bogmærke"
 
-#: readsidebar.py:179
+#: bookmarkview.py:201
 #, python-format
 msgid "Bookmark for page %d"
 msgstr "Bogmærke for side %d"
 
-#: readtoolbar.py:62
+#: evinceadapter.py:88
+msgid "URL from Read"
+msgstr "URL fra Læs"
+
+#: readactivity.py:223
+msgid "Highlight"
+msgstr "Fremhæv"
+
+#: readactivity.py:347
+msgid "Back"
+msgstr "Tilbage"
+
+#: readactivity.py:352
+msgid "Previous page"
+msgstr "Forrige side"
+
+#: readactivity.py:354
+msgid "Previous bookmark"
+msgstr "Forrige bogmærke"
+
+#: readactivity.py:369
+msgid "Forward"
+msgstr "Frem"
+
+#: readactivity.py:374
+msgid "Next page"
+msgstr "Næste side"
+
+#: readactivity.py:376
+msgid "Next bookmark"
+msgstr "Næste bogmærke"
+
+#: readactivity.py:415
+msgid "Index"
+msgstr "Indeks"
+
+#: readactivity.py:525
+msgid "Delete bookmark"
+msgstr "Slet bogmærke"
+
+#: readactivity.py:526
+msgid "All the information related with this bookmark will be lost"
+msgstr "Al information relateret til dette bogmærke vil blive tabt"
+
+#: readdialog.py:52
+msgid "Cancel"
+msgstr "Annullér"
+
+#: readdialog.py:58
+msgid "Ok"
+msgstr "Ok"
+
+#: readdialog.py:116
+msgid "<b>Title</b>:"
+msgstr "<b>Titel</b>:"
+
+#: readdialog.py:142
+msgid "<b>Details</b>:"
+msgstr "<b>Detaljer</b>:"
+
+#: readtoolbar.py:61
 msgid "Previous"
 msgstr "Forrige"
 
-#: readtoolbar.py:69
+#: readtoolbar.py:68
 msgid "Next"
 msgstr "Næste"
 
-#: readtoolbar.py:152
+#: readtoolbar.py:151
 msgid "Find first"
 msgstr "Find første"
 
-#: readtoolbar.py:158
+#: readtoolbar.py:157
 msgid "Find previous"
 msgstr "Find forrige"
 
-#: readtoolbar.py:160
+#: readtoolbar.py:159
 msgid "Find next"
 msgstr "Find næste"
 
-#: readtoolbar.py:177
+#: readtoolbar.py:178
+msgid "Table of contents"
+msgstr "Indholdsfortegnelse"
+
+#: readtoolbar.py:187
 msgid "Zoom out"
 msgstr "Formindsk"
 
-#: readtoolbar.py:183
+#: readtoolbar.py:193
 msgid "Zoom in"
 msgstr "Forstør"
 
-#: readtoolbar.py:189
+#: readtoolbar.py:199
 msgid "Zoom to width"
 msgstr "Tilpas til bredde"
 
-#: readtoolbar.py:195
+#: readtoolbar.py:205
 msgid "Zoom to fit"
 msgstr "Zoomtilpasning"
 
-#: readtoolbar.py:198
+#: readtoolbar.py:211
 msgid "Actual size"
 msgstr "Aktuel størrelse"
 
-#: readtoolbar.py:221
-msgid "%"
-msgstr "%"
-
-#: readtoolbar.py:234
+#: readtoolbar.py:222
 msgid "Fullscreen"
 msgstr "Fuldskærm"
 
@@ -166,6 +170,9 @@ msgstr "Afspil / Pause"
 #: speechtoolbar.py:64
 msgid "Stop"
 msgstr "Stop"
+
+#~ msgid "%"
+#~ msgstr "%"
 
 #~ msgid "pitch adjusted"
 #~ msgstr "tonehøjde tilpasset"
