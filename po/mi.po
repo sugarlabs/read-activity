@@ -2,167 +2,163 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-02 00:31-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2012-09-11 00:31-0400\n"
+"PO-Revision-Date: 2012-09-21 11:16+0200\n"
+"Last-Translator: hariru <hariruroa@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: mi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.1.1rc4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.0.5\n"
 
 #: activity/activity.info:2
 msgid "Read"
-msgstr ""
-
-#: evinceadapter.py:74
-msgid "URL from Read"
-msgstr ""
-
-#: readactivity.py:231
-msgid "Highlight"
-msgstr ""
-
-#: readactivity.py:340
-msgid "Back"
-msgstr ""
-
-#: readactivity.py:345
-msgid "Previous page"
-msgstr ""
-
-#: readactivity.py:347
-msgid "Previous bookmark"
-msgstr ""
-
-#: readactivity.py:362
-msgid "Forward"
-msgstr ""
-
-#: readactivity.py:367
-msgid "Next page"
-msgstr ""
-
-#: readactivity.py:369
-msgid "Next bookmark"
-msgstr ""
-
-#: readactivity.py:482
-msgid "Delete bookmark"
-msgstr ""
-
-#: readactivity.py:483
-msgid "All the information related with this bookmark will be lost"
-msgstr ""
-
-#: readdialog.py:53
-msgid "Cancel"
-msgstr ""
-
-#: readdialog.py:59
-msgid "Ok"
-msgstr ""
-
-#: readdialog.py:118
-msgid "<b>Title</b>:"
-msgstr ""
-
-#: readdialog.py:144
-msgid "<b>Details</b>:"
-msgstr ""
+msgstr "Pānui"
 
 #. TRANS: This goes like Bookmark added by User 5 days ago
 #. TRANS: (the elapsed string gets translated automatically)
-#: readsidebar.py:92
+#: bookmarkview.py:110
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
-msgstr ""
+msgstr "Tohuwāhi kua tāpirihia e %(user)s %(time)s"
 
-#: readsidebar.py:135 readsidebar.py:182
+#: bookmarkview.py:153 bookmarkview.py:204
 msgid "Add notes for bookmark: "
-msgstr ""
+msgstr "Tāpiri tuhipoka mō te tohuwāhi: "
 
-#: readsidebar.py:178
+#: bookmarkview.py:200
 #, python-format
 msgid "%s's bookmark"
-msgstr ""
+msgstr "%s's tohuwāhi"
 
-#: readsidebar.py:179
+#: bookmarkview.py:201
 #, python-format
 msgid "Bookmark for page %d"
-msgstr ""
+msgstr "Tohuwāhi mō te whārangi %d"
 
-#: readtoolbar.py:62
+#: evinceadapter.py:88
+msgid "URL from Read"
+msgstr "URL mai i te Pānui"
+
+#: readactivity.py:223
+msgid "Highlight"
+msgstr "Miramira"
+
+#: readactivity.py:347
+msgid "Back"
+msgstr "Hoki"
+
+#: readactivity.py:352
+msgid "Previous page"
+msgstr "Whārangi tōmua"
+
+#: readactivity.py:354
+msgid "Previous bookmark"
+msgstr "Tohuwāhi tōmua"
+
+#: readactivity.py:369
+msgid "Forward"
+msgstr "Whakamua"
+
+#: readactivity.py:374
+msgid "Next page"
+msgstr "Whārangi panuku"
+
+#: readactivity.py:376
+msgid "Next bookmark"
+msgstr "Tohuwāhi panuku"
+
+#: readactivity.py:415
+msgid "Index"
+msgstr "Taupū"
+
+#: readactivity.py:525
+msgid "Delete bookmark"
+msgstr "Muku tohuwāhi"
+
+#: readactivity.py:526
+msgid "All the information related with this bookmark will be lost"
+msgstr "Ka ngaro ngā mōhiohio katoa e hāngai ana ki tēnei tohuwāhi"
+
+#: readdialog.py:52
+msgid "Cancel"
+msgstr "Whakakore"
+
+#: readdialog.py:58
+msgid "Ok"
+msgstr "Āe"
+
+#: readdialog.py:116
+msgid "<b>Title</b>:"
+msgstr "<b>Taitara</b>:"
+
+#: readdialog.py:142
+msgid "<b>Details</b>:"
+msgstr "<b>Taipitopito</b>:"
+
+#: readtoolbar.py:61
 msgid "Previous"
-msgstr ""
+msgstr "Tōmua"
 
-#: readtoolbar.py:69
+#: readtoolbar.py:68
 msgid "Next"
-msgstr ""
+msgstr "Panuku"
 
-#: readtoolbar.py:152
+#: readtoolbar.py:151
 msgid "Find first"
-msgstr ""
+msgstr "Kimi i te tuatahi"
 
-#: readtoolbar.py:158
+#: readtoolbar.py:157
 msgid "Find previous"
-msgstr ""
+msgstr "Kimi tōmua"
 
-#: readtoolbar.py:160
+#: readtoolbar.py:159
 msgid "Find next"
-msgstr ""
+msgstr "Kimi panuku"
 
-#: readtoolbar.py:177
+#: readtoolbar.py:178
+msgid "Table of contents"
+msgstr "Ngā Ihirangi"
+
+#: readtoolbar.py:187
 msgid "Zoom out"
-msgstr ""
+msgstr "Topa atu"
 
-#: readtoolbar.py:183
+#: readtoolbar.py:193
 msgid "Zoom in"
-msgstr ""
+msgstr "Topa mai"
 
-#: readtoolbar.py:189
+#: readtoolbar.py:199
 msgid "Zoom to width"
-msgstr ""
+msgstr "Topa ki te whānuitanga"
 
-#: readtoolbar.py:195
+#: readtoolbar.py:205
 msgid "Zoom to fit"
-msgstr ""
+msgstr "Topa kia uru"
 
-#: readtoolbar.py:198
+#: readtoolbar.py:211
 msgid "Actual size"
-msgstr ""
+msgstr "Rahi tūturu"
 
-#: readtoolbar.py:221
-msgid "%"
-msgstr ""
-
-#: readtoolbar.py:234
+#: readtoolbar.py:222
 msgid "Fullscreen"
-msgstr ""
+msgstr "Matakatoa"
 
 #: readtopbar.py:145
 #, python-format
 msgid "Page %(current)i of %(total_pages)i"
-msgstr ""
+msgstr "Whārangi %(current)i o %(total_pages)i"
 
 #: speechtoolbar.py:56
 msgid "Play / Pause"
-msgstr ""
+msgstr "Pūrei / Tatari"
 
 #: speechtoolbar.py:64
 msgid "Stop"
-msgstr ""
+msgstr "Tū"
