@@ -52,7 +52,6 @@ from sugar3.graphics import style
 from readtoolbar import EditToolbar
 from readtoolbar import ViewToolbar
 from bookmarkview import BookmarkView
-from readtopbar import TopBar
 from readdb import BookmarkManager
 from sugarmenuitem import SugarMenuItem
 
@@ -246,9 +245,6 @@ class ReadActivity(activity.Activity):
         self._vbox = Gtk.VBox()
         self._vbox.show()
 
-        self._topbar = TopBar()
-        self._vbox.pack_start(self._topbar, False, False, 0)
-
         overlay = Gtk.Overlay()
 
         self._hbox = Gtk.HBox()
@@ -335,11 +331,9 @@ class ReadActivity(activity.Activity):
         #    self._load_document('file:///home/smcv/tmp/test.pdf')
 
     def fullscreen(self):
-        self._topbar.show_all()
         activity.Activity.fullscreen(self)
 
     def unfullscreen(self):
-        self._topbar.hide()
         activity.Activity.unfullscreen(self)
 
     def _create_back_button(self):
@@ -853,8 +847,6 @@ class ReadActivity(activity.Activity):
 
         self._view_toolbar.set_view(self._view)
         self._edit_toolbar.set_view(self._view)
-
-        self._topbar.set_view(self._view)
 
         filehash = get_md5(filepath)
         self._bookmarkmanager = BookmarkManager(filehash)
