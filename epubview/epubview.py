@@ -85,8 +85,6 @@ class _View(Gtk.HBox):
         self._view.connect('load-finished', self._view_load_finished_cb)
         self._view.connect('scroll-event', self._view_scroll_event_cb)
         self._view.connect('key-press-event', self._view_keypress_event_cb)
-        self._view.connect('button-release-event',
-                self._view_buttonrelease_event_cb)
         self._view.connect('selection-changed',
                 self._view_selection_changed_cb)
         self._view.connect_after('populate-popup',
@@ -148,7 +146,7 @@ class _View(Gtk.HBox):
         '''
         Returns True if any part of the content is selected
         '''
-        return self._has_selection
+        return self._view.can_copy_clipboard()
 
     def get_zoom(self):
         '''
@@ -381,27 +379,12 @@ class _View(Gtk.HBox):
         self._view.set_zoom_level(value)
         self.scale = value
 
-    def __set_has_selection(self, value):
-        if value != self._has_selection:
-            self._has_selection = value
-            self.emit('selection-changed')
-
     def _view_populate_popup_cb(self, view, menu):
         menu.destroy()  # HACK
         return
 
     def _view_selection_changed_cb(self, view):
-        # FIXME: This does not seem to be implemented in
-        # webkitgtk yet
-        print "epubview _view_selection_changed_cb", view.has_selection()
-        self.__set_has_selection(view.has_selection())
-
-    def _view_buttonrelease_event_cb(self, view, event):
-        # Ugly hack
-        print "epubview _view_buttonrelease_event_cb", view.has_selection(), \
-                view.can_copy_clipboard(), view.can_cut_clipboard()
-        self.__set_has_selection(view.can_copy_clipboard() \
-                                 | view.can_cut_clipboard())
+        self.emit('selection-changed')
 
     def _view_keypress_event_cb(self, view, event):
         name = Gdk.keyval_name(event.keyval)
