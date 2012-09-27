@@ -261,44 +261,69 @@ class EvinceViewer():
         self._model.connect('page-changed', handler)
 
     def update_toc(self, activity):
-        return False
-        """
-        Commented because does not work and crash with old evince
-        doc = self._model.get_document()
-        if not doc.has_document_links():
-            logging.error('The pdf file does not have a index')
-            return False
+        if self._validate_min_version(3, 5, 92):
+            # check version because does not work and crash with older evince
+            doc = self._model.get_document()
+            if not doc.has_document_links():
+                logging.error('The pdf file does not have a index')
+                return False
+            else:
+                self._job_links = EvinceView.JobLinks.new(document=doc)
+                self._job_links.connect('finished', self.__index_loaded_cb,
+                        activity)
+                EvinceView.Job.scheduler_push_job(self._job_links,
+                        EvinceView.JobPriority.PRIORITY_NONE)
+                return True
         else:
-            self._job_links = EvinceView.JobLinks.new(document=doc)
-            self._job_links.connect('finished', self.__index_loaded_cb,
-                    activity)
-        EvinceView.Job.scheduler_push_job(self._job_links,
-                EvinceView.JobPriority.PRIORITY_NONE)
+            return False
+
+    def handle_link(self, link):
+        self._view.handle_link(link)
+
+    def _validate_min_version(self, major, minor, micro):
         """
+        Check if Evince version is at major or equal than the requested
+        """
+        return EvinceDocument.MAJOR_VERSION >= major and \
+                EvinceDocument.MINOR_VERSION >= minor and \
+                EvinceDocument.MICRO_VERSION >= micro
 
     def __index_loaded_cb(self, job, activity):
-        logging.error('__index_loaded_cb %s %s', job.__class__, dir(job))
-        logging.error('job.succeeded %s', job.succeeded())
-        logging.error('job.is_finished %s', job.is_finished())
-
-        self._index_model = job.model
-
-        logging.error('index_model loaded %s', job.model.__class__)
-        if job.model is None:
+        self._index_model = job.get_model()
+        if job.get_model() is None:
             return False
-        """
-        _iter = job.model.get_iter_first()
-        while True:
-            value = job.model.get_value(_iter, 0)
-            logging.error('value %s', value)
-            _iter = job.model.iter_next(_iter)
-            if _iter is None:
-                break
-        """
 
         activity.show_navigator_button()
-        activity.set_navigator_model(self._epub.get_links_model())
+        activity.set_navigator_model(self._index_model)
         return True
+
+    def get_current_link(self):
+        _iter = self._index_model.get_iter_first()
+        link_found = ""
+        current_page = self._model.props.page
+        while True:
+            value = self._index_model.get_value(_iter, 0)
+            link = self._index_model.get_value(_iter, 1)
+            if self._document.get_link_page(link) > current_page:
+                break
+            else:
+                link_found = link
+                _iter = self._index_model.iter_next(_iter)
+                if _iter is None:
+                    break
+        return link_found
+
+    def get_link_iter(self, link):
+        _iter = self._index_model.get_iter_first()
+        while True:
+            value = self._index_model.get_value(_iter, 1)
+            if value == link:
+                break
+            else:
+                _iter = self._index_model.iter_next(_iter)
+                if _iter is None:
+                    break
+        return _iter
 
     def find_set_highlight_search(self, set_highlight_search):
         self._view.find_set_highlight_search(set_highlight_search)

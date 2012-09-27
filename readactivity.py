@@ -426,7 +426,9 @@ class ReadActivity(activity.Activity):
         self._navigator.set_model(model)
 
     def __toogle_navigator_cb(self, button, visible):
-        scrollbar_pos = self._view.get_vertical_pos()
+        scrollbar_pos = -1
+        if hasattr(self._view, 'get_vertical_pos'):
+            scrollbar_pos = self._view.get_vertical_pos()
         if visible:
             self._toc_visible = True
             self._update_toc_view = True
@@ -439,7 +441,8 @@ class ReadActivity(activity.Activity):
             self._toc_visible = False
             self._toc_scroller.hide()
             self._toc_separator.hide()
-        self._view.set_vertical_pos(scrollbar_pos)
+        if scrollbar_pos > -1:
+            self._view.set_vertical_pos(scrollbar_pos)
 
     def __num_page_entry_insert_text_cb(self, entry, text, length, position):
         if not re.match('[0-9]', text):
