@@ -17,7 +17,7 @@ PAGE_SIZE = 38
 # remove hard line breaks, apply a simple logic to try identify
 # the unneeded
 def _clean_text(line):
-    if line != '\r\n':
+    if line != '\r\n' and len(line) > 2:
         if line[-3] not in ('.', ',', '-', ';') and len(line) > 60:
             line = line[:-2]
     return line
@@ -606,7 +606,7 @@ class _SearchThread(threading.Thread):
     def find_next(self):
         self._current_found_item = self._current_found_item + 1
         if self._current_found_item >= len(self._found_records):
-            self._current_found_item = len(self._found_records) - 1
+            self._current_found_item = 0
         self.current_found_tuple =  \
                 self._found_records[self._current_found_item]
         self._page = self.current_found_tuple[0]
@@ -615,7 +615,7 @@ class _SearchThread(threading.Thread):
     def find_previous(self):
         self._current_found_item = self._current_found_item - 1
         if self._current_found_item <= 0:
-            self._current_found_item = 0
+            self._current_found_item = len(self._found_records) - 1
         self.current_found_tuple = \
                 self._found_records[self._current_found_item]
         self._page = self.current_found_tuple[0]
