@@ -338,7 +338,6 @@ class _View(Gtk.HBox):
         Highlights the next matching item for current search
         '''
         self._view.grab_focus()
-        self._view.grab_default()
 
         if self._view.search_text(self._findjob.get_search_text(),
                 self._findjob.get_case_sensitive(),
@@ -356,7 +355,6 @@ class _View(Gtk.HBox):
         Highlights the previous matching item for current search
         '''
         self._view.grab_focus()
-        self._view.grab_default()
 
         if self._view.search_text(self._findjob.get_search_text(),
                                 self._findjob.get_case_sensitive(),
@@ -371,9 +369,15 @@ class _View(Gtk.HBox):
 
     def _find_changed(self, job):
         self._view.grab_focus()
-        self._view.grab_default()
         self._findjob = job
+        self._mark_found_text()
         self.find_next()
+
+    def _mark_found_text(self):
+        self._view.unmark_text_matches()
+        self._view.mark_text_matches(self._findjob.get_search_text(),
+                case_sensitive=self._findjob.get_case_sensitive(), limit=0)
+        self._view.set_highlight_text_matches(True)
 
     def __set_zoom(self, value):
         self._view.set_zoom_level(value)
@@ -445,6 +449,7 @@ class _View(Gtk.HBox):
             self._view.add_bottom_padding(extra)
 
         if self.__in_search:
+            self._mark_found_text()
             self._view.search_text(self._findjob.get_search_text(), \
                                self._findjob.get_case_sensitive(), \
                                self.__search_fwd, False)

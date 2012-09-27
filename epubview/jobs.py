@@ -18,10 +18,8 @@
 
 from gi.repository import GObject
 from gi.repository import Gtk
-from gi.repository import Gdk
 import widgets
 import cairo
-
 import math
 import os.path
 import BeautifulSoup
@@ -61,10 +59,8 @@ class SearchThread(threading.Thread):
                 self.obj._matchfilelist.append(entry)
             f.close()
 
-        Gdk.threads_enter()
         self.obj._finished = True
-        self.obj.emit('updated')
-        Gdk.threads_leave()
+        GObject.idle_add(self.obj.emit, 'updated')
 
         return False
 
@@ -255,7 +251,6 @@ class _JobFind(GObject.GObject):
     def __init__(self, document, start_page, n_pages, text,
             case_sensitive=False):
         GObject.GObject.__init__(self)
-        Gdk.threads_init()
 
         self._finished = False
         self._document = document
