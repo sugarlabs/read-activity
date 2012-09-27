@@ -252,6 +252,7 @@ class EvinceViewer():
                 text=text, case_sensitive=False)
         self._find_updated_handler = self._find_job.connect('updated',
                 updated_cb)
+        self._view.find_started(self._find_job)
         EvinceView.Job.scheduler_push_job(self._find_job,
                 EvinceView.JobPriority.PRIORITY_NONE)
         return self._find_job, self._find_updated_handler
@@ -315,7 +316,7 @@ class EvinceViewer():
         self._view.find_previous()
 
     def find_changed(self, job, page=None):
-        self._view.find_changed(job, page)
+        pass
 
     def scroll(self, scrolltype, horizontal):
         '''
