@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-02 00:31-0400\n"
-"PO-Revision-Date: 2012-03-17 16:00+0200\n"
-"Last-Translator: FRKS <frks@frks.pl>\n"
+"POT-Creation-Date: 2012-09-27 14:56-0400\n"
+"PO-Revision-Date: 2012-10-01 13:18+0200\n"
+"Last-Translator: KatSitko <xanthe1808@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -26,139 +26,147 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.0.5\n"
 
-#: activity/activity.info:2
+#. TRANS: "name" option from activity.info file
 msgid "Read"
 msgstr "Czytaj"
 
-#: evinceadapter.py:74
-msgid "URL from Read"
-msgstr "URL z Napisz"
-
-#: readactivity.py:231
-msgid "Highlight"
-msgstr "Podświetlenie"
-
-#: readactivity.py:340
-msgid "Back"
-msgstr "Wstecz"
-
-#: readactivity.py:345
-msgid "Previous page"
-msgstr "Poprzednia strona"
-
-#: readactivity.py:347
-msgid "Previous bookmark"
-msgstr "Poprzednia zakładka"
-
-#: readactivity.py:362
-msgid "Forward"
-msgstr "Dalej"
-
-#: readactivity.py:367
-msgid "Next page"
-msgstr "Następna strona"
-
-#: readactivity.py:369
-msgid "Next bookmark"
-msgstr "Następna zakładka"
-
-#: readactivity.py:482
-msgid "Delete bookmark"
+#. TRANS: "summary" option from activity.info file
+#. TRANS: "description" option from activity.info file
+msgid ""
+"Use this activity when you are ready to read! Remember to flip your computer "
+"around to feel like you are really holding a book!"
 msgstr ""
-
-#: readactivity.py:483
-msgid "All the information related with this bookmark will be lost"
-msgstr ""
-
-#: readdialog.py:53
-msgid "Cancel"
-msgstr "Anuluj"
-
-#: readdialog.py:59
-msgid "Ok"
-msgstr "Ok"
-
-#: readdialog.py:118
-msgid "<b>Title</b>:"
-msgstr "<b>Tytuł</b>:"
-
-#: readdialog.py:144
-msgid "<b>Details</b>:"
-msgstr "<b>Szczegóły</b>:"
+"Użyj tej aktywności, gdy będziesz gotowy, aby przeczytać. Pamiętaj, aby "
+"obracać komputerem tak, jakby to była książka."
 
 #. TRANS: This goes like Bookmark added by User 5 days ago
 #. TRANS: (the elapsed string gets translated automatically)
-#: readsidebar.py:92
+#: bookmarkview.py:110
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
 msgstr "Zakładka dodana przez %(user)s %(time)s"
 
-#: readsidebar.py:135 readsidebar.py:182
+#: bookmarkview.py:153 bookmarkview.py:204
 msgid "Add notes for bookmark: "
 msgstr "Dodaj notatki do zakładki: "
 
-#: readsidebar.py:178
+#: bookmarkview.py:200
 #, python-format
 msgid "%s's bookmark"
 msgstr "Zakładka użytk.: %s"
 
-#: readsidebar.py:179
+#: bookmarkview.py:201
 #, python-format
 msgid "Bookmark for page %d"
 msgstr "Zakładka na stronie %d"
 
-#: readtoolbar.py:62
+#: evinceadapter.py:88
+msgid "URL from Read"
+msgstr "URL z Napisz"
+
+#: readactivity.py:222
+msgid "Highlight"
+msgstr "Podświetlenie"
+
+#: readactivity.py:341
+msgid "Back"
+msgstr "Wstecz"
+
+#: readactivity.py:346
+msgid "Previous page"
+msgstr "Poprzednia strona"
+
+#: readactivity.py:348
+msgid "Previous bookmark"
+msgstr "Poprzednia zakładka"
+
+#: readactivity.py:363
+msgid "Forward"
+msgstr "Dalej"
+
+#: readactivity.py:368
+msgid "Next page"
+msgstr "Następna strona"
+
+#: readactivity.py:370
+msgid "Next bookmark"
+msgstr "Następna zakładka"
+
+#: readactivity.py:409
+msgid "Index"
+msgstr "Indeks"
+
+#: readactivity.py:519
+msgid "Delete bookmark"
+msgstr "Usuń zakładkę"
+
+#: readactivity.py:520
+msgid "All the information related with this bookmark will be lost"
+msgstr "Wszelkie informacje dotyczące tej zakładki zostaną utracone"
+
+#: readdialog.py:52
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: readdialog.py:58
+msgid "Ok"
+msgstr "Ok"
+
+#: readdialog.py:116
+msgid "<b>Title</b>:"
+msgstr "<b>Tytuł</b>:"
+
+#: readdialog.py:142
+msgid "<b>Details</b>:"
+msgstr "<b>Szczegóły</b>:"
+
+#: readtoolbar.py:61
 msgid "Previous"
 msgstr "Poprzedni"
 
-#: readtoolbar.py:69
+#: readtoolbar.py:68
 msgid "Next"
 msgstr "Następny"
 
-#: readtoolbar.py:152
+#: readtoolbar.py:151
 msgid "Find first"
 msgstr "Znajdź pierwszy"
 
-#: readtoolbar.py:158
+#: readtoolbar.py:157
 msgid "Find previous"
 msgstr "Znajdź poprzedni"
 
-#: readtoolbar.py:160
+#: readtoolbar.py:159
 msgid "Find next"
 msgstr "Znajdź następny"
 
-#: readtoolbar.py:177
+#: readtoolbar.py:178
+msgid "Table of contents"
+msgstr "Zawartość"
+
+#: readtoolbar.py:187
 msgid "Zoom out"
 msgstr "Zmniejsz"
 
-#: readtoolbar.py:183
+#: readtoolbar.py:193
 msgid "Zoom in"
 msgstr "Powiększ"
 
-#: readtoolbar.py:189
+#: readtoolbar.py:199
 msgid "Zoom to width"
 msgstr "Dopasuj do szerokości"
 
-#: readtoolbar.py:195
+#: readtoolbar.py:205
 msgid "Zoom to fit"
 msgstr "Dopasuj"
 
-#: readtoolbar.py:198
+#: readtoolbar.py:211
 msgid "Actual size"
 msgstr "Aktualny rozmiar"
 
-#: readtoolbar.py:221
-msgid "%"
-msgstr "%"
-
-#: readtoolbar.py:234
+#: readtoolbar.py:222
 msgid "Fullscreen"
 msgstr "Pełny ekran"
-
-#: readtopbar.py:145
-#, python-format
-msgid "Page %(current)i of %(total_pages)i"
-msgstr "Strona %(current)i z %(total_pages)i"
 
 #: speechtoolbar.py:56
 msgid "Play / Pause"
@@ -167,6 +175,13 @@ msgstr "Odtwarzaj / Pauza"
 #: speechtoolbar.py:64
 msgid "Stop"
 msgstr "Zatrzymaj"
+
+#, python-format
+#~ msgid "Page %(current)i of %(total_pages)i"
+#~ msgstr "Strona %(current)i z %(total_pages)i"
+
+#~ msgid "%"
+#~ msgstr "%"
 
 #~ msgid "pitch adjusted"
 #~ msgstr "wysokość ustawiona"
