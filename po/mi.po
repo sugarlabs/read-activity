@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-11 00:31-0400\n"
-"PO-Revision-Date: 2012-09-21 11:16+0200\n"
+"POT-Creation-Date: 2012-09-27 14:56-0400\n"
+"PO-Revision-Date: 2012-10-01 06:37+0200\n"
 "Last-Translator: hariru <hariruroa@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: mi\n"
@@ -17,9 +17,18 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.0.5\n"
 
-#: activity/activity.info:2
+#. TRANS: "name" option from activity.info file
 msgid "Read"
 msgstr "Pānui"
+
+#. TRANS: "summary" option from activity.info file
+#. TRANS: "description" option from activity.info file
+msgid ""
+"Use this activity when you are ready to read! Remember to flip your computer "
+"around to feel like you are really holding a book!"
+msgstr ""
+"Whakamahi i tēnei hohe kia reri koe ki te pānui! Me maumahara ki te tītaka i "
+"tō rorohiko kia pērā ki te pukapuka!"
 
 #. TRANS: This goes like Bookmark added by User 5 days ago
 #. TRANS: (the elapsed string gets translated automatically)
@@ -46,43 +55,43 @@ msgstr "Tohuwāhi mō te whārangi %d"
 msgid "URL from Read"
 msgstr "URL mai i te Pānui"
 
-#: readactivity.py:223
+#: readactivity.py:222
 msgid "Highlight"
 msgstr "Miramira"
 
-#: readactivity.py:347
+#: readactivity.py:341
 msgid "Back"
 msgstr "Hoki"
 
-#: readactivity.py:352
+#: readactivity.py:346
 msgid "Previous page"
 msgstr "Whārangi tōmua"
 
-#: readactivity.py:354
+#: readactivity.py:348
 msgid "Previous bookmark"
 msgstr "Tohuwāhi tōmua"
 
-#: readactivity.py:369
+#: readactivity.py:363
 msgid "Forward"
 msgstr "Whakamua"
 
-#: readactivity.py:374
+#: readactivity.py:368
 msgid "Next page"
 msgstr "Whārangi panuku"
 
-#: readactivity.py:376
+#: readactivity.py:370
 msgid "Next bookmark"
 msgstr "Tohuwāhi panuku"
 
-#: readactivity.py:415
+#: readactivity.py:409
 msgid "Index"
 msgstr "Taupū"
 
-#: readactivity.py:525
+#: readactivity.py:519
 msgid "Delete bookmark"
 msgstr "Muku tohuwāhi"
 
-#: readactivity.py:526
+#: readactivity.py:520
 msgid "All the information related with this bookmark will be lost"
 msgstr "Ka ngaro ngā mōhiohio katoa e hāngai ana ki tēnei tohuwāhi"
 
@@ -150,11 +159,6 @@ msgstr "Rahi tūturu"
 msgid "Fullscreen"
 msgstr "Matakatoa"
 
-#: readtopbar.py:145
-#, python-format
-msgid "Page %(current)i of %(total_pages)i"
-msgstr "Whārangi %(current)i o %(total_pages)i"
-
 #: speechtoolbar.py:56
 msgid "Play / Pause"
 msgstr "Pūrei / Tatari"
@@ -162,3 +166,7 @@ msgstr "Pūrei / Tatari"
 #: speechtoolbar.py:64
 msgid "Stop"
 msgstr "Tū"
+
+#, python-format
+#~ msgid "Page %(current)i of %(total_pages)i"
+#~ msgstr "Whārangi %(current)i o %(total_pages)i"
