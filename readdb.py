@@ -21,7 +21,9 @@ import os
 import shutil
 import sqlite3
 import time
+import base64
 
+from gi.repository import GObject
 from sugar3 import profile
 
 from readbookmark import Bookmark
@@ -75,9 +77,24 @@ def _init_db_highlights(conn):
     conn.commit()
 
 
-class BookmarkManager:
+def _init_db_previews(conn):
+    conn.execute('CREATE TABLE IF NOT EXISTS PREVIEWS ' +
+                '(md5 TEXT, page INTEGER, ' +
+                'preview)')
+    conn.commit()
+
+
+class BookmarkManager(GObject.GObject):
+
+    __gsignals__ = {
+        'added_bookmark': (GObject.SignalFlags.RUN_FIRST,
+                     None, ([int])),
+        'removed_bookmark': (GObject.SignalFlags.RUN_FIRST,
+                     None, ([int])),
+        }
 
     def __init__(self, filehash):
+        GObject.GObject.__init__(self)
         self._filehash = filehash
 
         dbpath = _init_db()
@@ -86,6 +103,7 @@ class BookmarkManager:
 
         self._conn = sqlite3.connect(dbpath)
         _init_db_highlights(self._conn)
+        _init_db_previews(self._conn)
 
         self._conn.text_factory = lambda x: unicode(x, "utf-8", "ignore")
 
@@ -98,6 +116,7 @@ class BookmarkManager:
         self._color = profile.get_color().to_string()
 
     def add_bookmark(self, page, content, local=1):
+        logging.debug('add_bookmark page %d', page)
         # locale = 0 means that this is a bookmark originally
         # created by the person who originally shared the file
         timestamp = time.time()
@@ -108,16 +127,40 @@ class BookmarkManager:
         self._conn.commit()
 
         self._resync_bookmark_cache()
+        self.emit('added_bookmark', page + 1)
 
     def del_bookmark(self, page):
         # We delete only the locally made bookmark
-
+        logging.debug('del_bookmark page %d', page)
         t = (self._filehash, page, self._user)
         self._conn.execute('delete from bookmarks ' + \
                 'where md5=? and page=? and user=?', t)
         self._conn.commit()
-
+        self._del_bookmark_preview(page)
         self._resync_bookmark_cache()
+        self.emit('removed_bookmark', page + 1)
+
+    def add_bookmark_preview(self, page, preview):
+        logging.debug('add_bookmark_preview page %d', page)
+        t = (self._filehash, page, base64.b64encode(preview))
+        self._conn.execute('insert into previews values ' + \
+                '(?, ?, ?)', t)
+        self._conn.commit()
+
+    def _del_bookmark_preview(self, page):
+        logging.debug('del_bookmark_preview page %d', page)
+        t = (self._filehash, page)
+        self._conn.execute('delete from previews ' + \
+                'where md5=? and page=?', t)
+        self._conn.commit()
+
+    def get_bookmark_preview(self, page):
+        logging.debug('get_bookmark page %d', page)
+        rows = self._conn.execute('select preview from previews ' + \
+            'where md5=? and page=?', (self._filehash, page))
+        for row in rows:
+            return base64.b64decode(row[0])
+        return None
 
     def _populate_bookmarks(self):
         # TODO: Figure out if caching the entire set of bookmarks
@@ -127,6 +170,10 @@ class BookmarkManager:
 
         for row in rows:
             self._bookmarks.append(Bookmark(row))
+        logging.debug('loading %d bookmarks', len(self._bookmarks))
+
+    def get_bookmarks(self):
+        return self._bookmarks
 
     def get_bookmarks_for_page(self, page):
         bookmarks = []

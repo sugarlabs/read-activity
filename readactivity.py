@@ -23,6 +23,8 @@ import time
 from gettext import gettext as _
 import re
 import md5
+import StringIO
+import cairo
 
 import dbus
 from gi.repository import GObject
@@ -42,8 +44,10 @@ from sugar3.graphics.toggletoolbutton import ToggleToolButton
 from sugar3.graphics.alert import ConfirmationAlert
 from sugar3.activity.widgets import ActivityToolbarButton
 from sugar3.activity.widgets import StopButton
+from sugar3.graphics.tray import HTray
 from sugar3 import network
 from sugar3 import mime
+from sugar3 import profile
 
 from sugar3.datastore import datastore
 from sugar3.graphics.objectchooser import ObjectChooser
@@ -54,6 +58,7 @@ from readtoolbar import ViewToolbar
 from bookmarkview import BookmarkView
 from readdb import BookmarkManager
 from sugarmenuitem import SugarMenuItem
+from linkbutton import LinkButton
 
 _HARDWARE_MANAGER_INTERFACE = 'org.laptop.HardwareManager'
 _HARDWARE_MANAGER_SERVICE = 'org.laptop.HardwareManager'
@@ -151,6 +156,9 @@ class ReadActivity(activity.Activity):
         self._bookmark_view.connect('bookmark-changed',
                 self._update_bookmark_cb)
 
+        tray = HTray()
+        self.set_tray(tray, Gtk.PositionType.BOTTOM)
+
         toolbar_box = ToolbarBox()
 
         self.activity_button = ActivityToolbarButton(self)
@@ -177,6 +185,8 @@ class ReadActivity(activity.Activity):
                 self.__view_toolbar_go_fullscreen_cb)
         self._view_toolbar.connect('toggle-index-show',
                 self.__toogle_navigator_cb)
+        self._view_toolbar.connect('toggle-tray-show',
+                self.__toogle_tray_cb)
         view_toolbar_button = ToolbarButton(
                 page=self._view_toolbar,
                 icon_name='toolbar-view')
@@ -443,6 +453,14 @@ class ReadActivity(activity.Activity):
             self._toc_separator.hide()
         if scrollbar_pos > -1:
             self._view.set_vertical_pos(scrollbar_pos)
+
+    def __toogle_tray_cb(self, button, visible):
+        if visible:
+            logging.error('Show tray')
+            self.tray.show()
+        else:
+            logging.error('Hide tray')
+            self.tray.hide()
 
     def __num_page_entry_insert_text_cb(self, entry, text, length, position):
         if not re.match('[0-9]', text):
@@ -853,6 +871,24 @@ class ReadActivity(activity.Activity):
 
         filehash = get_md5(filepath)
         self._bookmarkmanager = BookmarkManager(filehash)
+        self._bookmarkmanager.connect('added_bookmark',
+                self._added_bookmark_cb)
+        self._bookmarkmanager.connect('removed_bookmark',
+                self._removed_bookmark_cb)
+
+        # Add the bookmarks to the tray
+        color = profile.get_color().to_string()
+        owner = profile.get_nick_name()
+        for bookmark in self._bookmarkmanager.get_bookmarks():
+            page = bookmark.page_no
+            title = _('Page %d') % page
+            thumb = self._bookmarkmanager.get_bookmark_preview(page)
+            if thumb is None:
+                logging.error('Preview NOT FOUND')
+                thumb = self._get_screenshot()
+            logging.error('Add link to tray page %d preview %s', page, thumb)
+            self._add_link_totray(page, thumb, color, title, owner)
+
         self._bookmark_view.set_bookmarkmanager(self._bookmarkmanager)
         self._update_toc()
         self._view.connect_page_changed_handler(self.__page_changed_cb)
@@ -1042,3 +1078,86 @@ class ReadActivity(activity.Activity):
 
     def __view_toolbar_go_fullscreen_cb(self, view_toolbar):
         self.fullscreen()
+
+    def _added_bookmark_cb(self, bookmarkmanager, page):
+        logging.error('Bookmark added page %d', page)
+        title = _('Page %d') % page
+        color = profile.get_color().to_string()
+        owner = profile.get_nick_name()
+        thumb = self._get_screenshot()
+        self._add_link_totray(page, thumb, color, title, owner)
+        bookmarkmanager.add_bookmark_preview(page - 1, thumb)
+
+    def _removed_bookmark_cb(self, bookmarkmanager, page):
+        logging.error('Bookmark removed page %d', page)
+        # remove button from tray
+        for button in self.tray.get_children():
+            if button.page == page:
+                self.tray.remove_item(button)
+        if len(self.tray.get_children()) == 0:
+            self.tray.hide()
+            self._view_toolbar.traybutton.props.active = False
+
+    def _add_link_totray(self, page, buf, color, title, owner):
+        ''' add a link to the tray '''
+        item = LinkButton(buf, color, title, owner, page)
+        item.connect('clicked', self._bookmark_button_clicked_cb, page)
+        item.connect('remove_link', self._bookmark_button_removed_cb)
+        self.tray.show()
+        self.tray.add_item(item)
+        item.show()
+        self._view_toolbar.traybutton.props.active = True
+
+    def _bookmark_button_clicked_cb(self, button, page):
+        self._view.set_current_page(page - 1)
+
+    def _bookmark_button_removed_cb(self, button, page):
+        self._bookmark_view.del_bookmark(page - 1)
+
+    def _get_screenshot(self):
+        """Copied from activity.get_preview()
+        """
+        if self.canvas is None or not hasattr(self.canvas, 'get_window'):
+            return None
+
+        window = self.canvas.get_window()
+        alloc = self.canvas.get_allocation()
+
+        dummy_cr = Gdk.cairo_create(window)
+        target = dummy_cr.get_target()
+        canvas_width, canvas_height = alloc.width, alloc.height
+        screenshot_surface = target.create_similar(cairo.CONTENT_COLOR,
+                                                   canvas_width, canvas_height)
+        del dummy_cr, target
+
+        cr = cairo.Context(screenshot_surface)
+        r, g, b, a_ = style.COLOR_PANEL_GREY.get_rgba()
+        cr.set_source_rgb(r, g, b)
+        cr.paint()
+        self.canvas.draw(cr)
+        del cr
+
+        preview_width, preview_height = style.zoom(100), style.zoom(80)
+        preview_surface = cairo.ImageSurface(cairo.FORMAT_ARGB32,
+                                             preview_width, preview_height)
+        cr = cairo.Context(preview_surface)
+
+        scale_w = preview_width * 1.0 / canvas_width
+        scale_h = preview_height * 1.0 / canvas_height
+        scale = min(scale_w, scale_h)
+
+        translate_x = int((preview_width - (canvas_width * scale)) / 2)
+        translate_y = int((preview_height - (canvas_height * scale)) / 2)
+
+        cr.translate(translate_x, translate_y)
+        cr.scale(scale, scale)
+
+        cr.set_source_rgba(1, 1, 1, 0)
+        cr.set_operator(cairo.OPERATOR_SOURCE)
+        cr.paint()
+        cr.set_source_surface(screenshot_surface)
+        cr.paint()
+
+        preview_str = StringIO.StringIO()
+        preview_surface.write_to_png(preview_str)
+        return preview_str.getvalue()
