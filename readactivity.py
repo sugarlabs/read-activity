@@ -888,7 +888,6 @@ class ReadActivity(activity.Activity):
             if thumb is None:
                 logging.error('Preview NOT FOUND')
                 thumb = self._get_screenshot()
-            logging.error('Add link to tray page %d preview %s', page, thumb)
             self._add_link_totray(page, thumb, color, title, owner)
 
         self._bookmark_view.set_bookmarkmanager(self._bookmarkmanager)
