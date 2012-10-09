@@ -592,6 +592,8 @@ class ReadActivity(activity.Activity):
                     self.__navigator_cursor_changed_cb)
 
     def __navigator_cursor_changed_cb(self, toc_treeview):
+        if toc_treeview.get_selection() == None:
+            return
         treestore, toc_selected = toc_treeview.get_selection().get_selected()
 
         if toc_selected is not None:
