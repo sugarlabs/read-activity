@@ -14,6 +14,7 @@ import speech
 
 PAGE_SIZE = 38
 
+
 # remove hard line breaks, apply a simple logic to try identify
 # the unneeded
 def _clean_text(line):
@@ -21,6 +22,7 @@ def _clean_text(line):
         if line[-3] not in ('.', ',', '-', ';') and len(line) > 60:
             line = line[:-2]
     return line
+
 
 class TextViewer(GObject.GObject):
 
