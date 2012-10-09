@@ -726,6 +726,7 @@ class ReadActivity(activity.Activity):
         self.metadata['Read_search'] = \
                 self._edit_toolbar._search_entry.props.text
         self.metadata['activity'] = self.get_bundle_id()
+        self.metadata['filehash'] = self.filehash
 
         os.link(self._tempfile, file_path)
 
@@ -871,8 +872,13 @@ class ReadActivity(activity.Activity):
         self._view_toolbar.set_view(self._view)
         self._edit_toolbar.set_view(self._view)
 
-        filehash = get_md5(filepath)
-        self._bookmarkmanager = BookmarkManager(filehash)
+
+        self.filehash = self.metadata.get('filehash', None)
+        if self.filehash is None:
+            self.filehash = get_md5(filepath)
+            logging.error('Calculate hash %s', self.filehash)
+
+        self._bookmarkmanager = BookmarkManager(self.filehash)
         self._bookmarkmanager.connect('added_bookmark',
                 self._added_bookmark_cb)
         self._bookmarkmanager.connect('removed_bookmark',
