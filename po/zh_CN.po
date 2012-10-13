@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OLPC XBook\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-02 00:31-0400\n"
-"PO-Revision-Date: 2012-06-06 03:20+0200\n"
+"POT-Creation-Date: 2012-10-10 00:31-0400\n"
+"PO-Revision-Date: 2012-10-11 05:28+0200\n"
 "Last-Translator: lite <litekok@gmail.com>\n"
 "Language-Team: Yuan CHAO <yuanchao@gmail.com>\n"
 "Language: zh_CN\n"
@@ -21,139 +21,166 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Pootle 2.0.5\n"
 
-#: activity/activity.info:2
+#. TRANS: "name" option from activity.info file
 msgid "Read"
 msgstr "阅读"
 
-#: evinceadapter.py:74
-msgid "URL from Read"
-msgstr "来自阅读的网址"
-
-#: readactivity.py:231
-msgid "Highlight"
-msgstr "高亮"
-
-#: readactivity.py:340
-msgid "Back"
-msgstr "后退"
-
-#: readactivity.py:345
-msgid "Previous page"
-msgstr "上一页"
-
-#: readactivity.py:347
-msgid "Previous bookmark"
-msgstr "上一个书签"
-
-#: readactivity.py:362
-msgid "Forward"
-msgstr "前进"
-
-#: readactivity.py:367
-msgid "Next page"
-msgstr "下一页"
-
-#: readactivity.py:369
-msgid "Next bookmark"
-msgstr "下一个书签"
-
-#: readactivity.py:482
-msgid "Delete bookmark"
-msgstr "删除书签"
-
-#: readactivity.py:483
-msgid "All the information related with this bookmark will be lost"
-msgstr "此书签相关的所有信息都将丢失"
-
-#: readdialog.py:53
-msgid "Cancel"
-msgstr "取消"
-
-#: readdialog.py:59
-msgid "Ok"
-msgstr "确定"
-
-#: readdialog.py:118
-msgid "<b>Title</b>:"
-msgstr "<b>标题</b>："
-
-#: readdialog.py:144
-msgid "<b>Details</b>:"
-msgstr "<b>详细说明</b>："
+#. TRANS: "summary" option from activity.info file
+#. TRANS: "description" option from activity.info file
+msgid ""
+"Use this activity when you are ready to read! Remember to flip your computer "
+"around to feel like you are really holding a book!"
+msgstr "当你准备读书时，请使用此活动！请记住，好像你真的拿着一本书一样翻转你的电脑！"
 
 #. TRANS: This goes like Bookmark added by User 5 days ago
 #. TRANS: (the elapsed string gets translated automatically)
-#: readsidebar.py:92
+#: bookmarkview.py:110
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
 msgstr "由 %(user)s 在 %(time)s 加入的书签"
 
-#: readsidebar.py:135 readsidebar.py:182
+#: bookmarkview.py:153 bookmarkview.py:204
 msgid "Add notes for bookmark: "
 msgstr "为书签添加说明："
 
-#: readsidebar.py:178
+#: bookmarkview.py:200
 #, python-format
 msgid "%s's bookmark"
 msgstr "%s 的书签"
 
-#: readsidebar.py:179
+#: bookmarkview.py:201
 #, python-format
 msgid "Bookmark for page %d"
 msgstr "第 %d 页的书签"
 
-#: readtoolbar.py:62
+#: evinceadapter.py:88
+msgid "URL from Read"
+msgstr "来自阅读的网址"
+
+#: linkbutton.py:94
+msgid "Go to Bookmark"
+msgstr "转到书签"
+
+#: linkbutton.py:99
+msgid "Remove"
+msgstr "删除"
+
+#: readactivity.py:232
+msgid "Highlight"
+msgstr "高亮"
+
+#: readactivity.py:351
+msgid "Back"
+msgstr "后退"
+
+#: readactivity.py:355
+msgid "Previous page"
+msgstr "上一页"
+
+#: readactivity.py:357
+msgid "Previous bookmark"
+msgstr "上一个书签"
+
+#: readactivity.py:369
+msgid "Forward"
+msgstr "前进"
+
+#: readactivity.py:373
+msgid "Next page"
+msgstr "下一页"
+
+#: readactivity.py:375
+msgid "Next bookmark"
+msgstr "下一个书签"
+
+#: readactivity.py:412
+msgid "Index"
+msgstr "索引"
+
+#: readactivity.py:533
+msgid "Delete bookmark"
+msgstr "删除书签"
+
+#: readactivity.py:534
+msgid "All the information related with this bookmark will be lost"
+msgstr "此书签相关的所有信息都将丢失"
+
+#: readactivity.py:885 readactivity.py:1084
+#, python-format
+msgid "Page %d"
+msgstr "%d 页"
+
+#: readdialog.py:52
+msgid "Cancel"
+msgstr "取消"
+
+#: readdialog.py:58
+msgid "Ok"
+msgstr "确定"
+
+#: readdialog.py:116
+msgid "<b>Title</b>:"
+msgstr "<b>标题</b>："
+
+#: readdialog.py:142
+msgid "<b>Details</b>:"
+msgstr "<b>详细说明</b>："
+
+#: readtoolbar.py:61
 msgid "Previous"
 msgstr "上一个"
 
-#: readtoolbar.py:69
+#: readtoolbar.py:68
 msgid "Next"
 msgstr "下一个"
 
-#: readtoolbar.py:152
+#: readtoolbar.py:151
 msgid "Find first"
 msgstr "寻找第一个"
 
-#: readtoolbar.py:158
+#: readtoolbar.py:157
 msgid "Find previous"
 msgstr "寻找前一个"
 
-#: readtoolbar.py:160
+#: readtoolbar.py:159
 msgid "Find next"
 msgstr "寻找下一个"
 
-#: readtoolbar.py:177
+#: readtoolbar.py:180
+msgid "Table of contents"
+msgstr "目录"
+
+#: readtoolbar.py:189
 msgid "Zoom out"
 msgstr "缩小"
 
-#: readtoolbar.py:183
+#: readtoolbar.py:195
 msgid "Zoom in"
 msgstr "放大"
 
-#: readtoolbar.py:189
+#: readtoolbar.py:201
 msgid "Zoom to width"
 msgstr "最适宽度"
 
-#: readtoolbar.py:195
+#: readtoolbar.py:207
 msgid "Zoom to fit"
 msgstr "页面大小"
 
-#: readtoolbar.py:198
+#: readtoolbar.py:213
 msgid "Actual size"
 msgstr "实际大小"
 
-#: readtoolbar.py:221
-msgid "%"
-msgstr "%"
-
-#: readtoolbar.py:234
+#: readtoolbar.py:224
 msgid "Fullscreen"
 msgstr "全屏显示"
 
-#: readtopbar.py:145
-#, python-format
-msgid "Page %(current)i of %(total_pages)i"
-msgstr "%(current)i / %(total_pages)i"
+#: readtoolbar.py:292
+msgid "Show Tray"
+msgstr "显示托盘"
+
+#: readtoolbar.py:294
+msgid "Hide Tray"
+msgstr "隐藏托盘"
 
 #: speechtoolbar.py:56
 msgid "Play / Pause"
@@ -162,6 +189,13 @@ msgstr "播放 / 暂停"
 #: speechtoolbar.py:64
 msgid "Stop"
 msgstr "停止"
+
+#, python-format
+#~ msgid "Page %(current)i of %(total_pages)i"
+#~ msgstr "%(current)i / %(total_pages)i"
+
+#~ msgid "%"
+#~ msgstr "%"
 
 #~ msgid "Choose document"
 #~ msgstr "选择文档"
