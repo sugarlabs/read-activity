@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 14:56-0400\n"
+"POT-Creation-Date: 2012-10-10 00:31-0400\n"
 "PO-Revision-Date: 2012-10-01 06:37+0200\n"
 "Last-Translator: hariru <hariruroa@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,45 +55,58 @@ msgstr "Tohuwāhi mō te whārangi %d"
 msgid "URL from Read"
 msgstr "URL mai i te Pānui"
 
-#: readactivity.py:222
+#: linkbutton.py:94
+msgid "Go to Bookmark"
+msgstr ""
+
+#: linkbutton.py:99
+msgid "Remove"
+msgstr ""
+
+#: readactivity.py:232
 msgid "Highlight"
 msgstr "Miramira"
 
-#: readactivity.py:341
+#: readactivity.py:351
 msgid "Back"
 msgstr "Hoki"
 
-#: readactivity.py:346
+#: readactivity.py:355
 msgid "Previous page"
 msgstr "Whārangi tōmua"
 
-#: readactivity.py:348
+#: readactivity.py:357
 msgid "Previous bookmark"
 msgstr "Tohuwāhi tōmua"
 
-#: readactivity.py:363
+#: readactivity.py:369
 msgid "Forward"
 msgstr "Whakamua"
 
-#: readactivity.py:368
+#: readactivity.py:373
 msgid "Next page"
 msgstr "Whārangi panuku"
 
-#: readactivity.py:370
+#: readactivity.py:375
 msgid "Next bookmark"
 msgstr "Tohuwāhi panuku"
 
-#: readactivity.py:409
+#: readactivity.py:412
 msgid "Index"
 msgstr "Taupū"
 
-#: readactivity.py:519
+#: readactivity.py:533
 msgid "Delete bookmark"
 msgstr "Muku tohuwāhi"
 
-#: readactivity.py:520
+#: readactivity.py:534
 msgid "All the information related with this bookmark will be lost"
 msgstr "Ka ngaro ngā mōhiohio katoa e hāngai ana ki tēnei tohuwāhi"
+
+#: readactivity.py:885 readactivity.py:1084
+#, python-format
+msgid "Page %d"
+msgstr ""
 
 #: readdialog.py:52
 msgid "Cancel"
@@ -131,33 +144,41 @@ msgstr "Kimi tōmua"
 msgid "Find next"
 msgstr "Kimi panuku"
 
-#: readtoolbar.py:178
+#: readtoolbar.py:180
 msgid "Table of contents"
 msgstr "Ngā Ihirangi"
 
-#: readtoolbar.py:187
+#: readtoolbar.py:189
 msgid "Zoom out"
 msgstr "Topa atu"
 
-#: readtoolbar.py:193
+#: readtoolbar.py:195
 msgid "Zoom in"
 msgstr "Topa mai"
 
-#: readtoolbar.py:199
+#: readtoolbar.py:201
 msgid "Zoom to width"
 msgstr "Topa ki te whānuitanga"
 
-#: readtoolbar.py:205
+#: readtoolbar.py:207
 msgid "Zoom to fit"
 msgstr "Topa kia uru"
 
-#: readtoolbar.py:211
+#: readtoolbar.py:213
 msgid "Actual size"
 msgstr "Rahi tūturu"
 
-#: readtoolbar.py:222
+#: readtoolbar.py:224
 msgid "Fullscreen"
 msgstr "Matakatoa"
+
+#: readtoolbar.py:292
+msgid "Show Tray"
+msgstr ""
+
+#: readtoolbar.py:294
+msgid "Hide Tray"
+msgstr ""
 
 #: speechtoolbar.py:56
 msgid "Play / Pause"

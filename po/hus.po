@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 14:56-0400\n"
+"POT-Creation-Date: 2012-10-10 00:31-0400\n"
 "PO-Revision-Date: 2012-06-24 02:13+0200\n"
 "Last-Translator: ing.arturo.lara <ing.arturo.lara@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,44 +53,57 @@ msgstr "Pulik tejwa'medhom abal an walxeklek %d"
 msgid "URL from Read"
 msgstr ""
 
-#: readactivity.py:222
+#: linkbutton.py:94
+msgid "Go to Bookmark"
+msgstr ""
+
+#: linkbutton.py:99
+msgid "Remove"
+msgstr ""
+
+#: readactivity.py:232
 msgid "Highlight"
 msgstr "Tajaxbédha'"
 
-#: readactivity.py:341
+#: readactivity.py:351
 msgid "Back"
 msgstr "Wíchiy"
 
-#: readactivity.py:346
+#: readactivity.py:355
 msgid "Previous page"
 msgstr "Ok'xidh walxeklek"
 
-#: readactivity.py:348
+#: readactivity.py:357
 msgid "Previous bookmark"
 msgstr "Ok'xidh pulik tejwa'medhom"
 
-#: readactivity.py:363
+#: readactivity.py:369
 msgid "Forward"
 msgstr "Ne'etsnanchj"
 
-#: readactivity.py:368
+#: readactivity.py:373
 msgid "Next page"
 msgstr "Júnakej walxeklek"
 
-#: readactivity.py:370
+#: readactivity.py:375
 msgid "Next bookmark"
 msgstr "Júnakej pulik tejwa'medhom"
 
-#: readactivity.py:409
+#: readactivity.py:412
 msgid "Index"
 msgstr ""
 
-#: readactivity.py:519
+#: readactivity.py:533
 msgid "Delete bookmark"
 msgstr ""
 
-#: readactivity.py:520
+#: readactivity.py:534
 msgid "All the information related with this bookmark will be lost"
+msgstr ""
+
+#: readactivity.py:885 readactivity.py:1084
+#, python-format
+msgid "Page %d"
 msgstr ""
 
 #: readdialog.py:52
@@ -129,34 +142,42 @@ msgstr "Aliy xi ok'xidh"
 msgid "Find next"
 msgstr "Aliy xi júnakej"
 
-#: readtoolbar.py:178
+#: readtoolbar.py:180
 msgid "Table of contents"
 msgstr ""
 
-#: readtoolbar.py:187
+#: readtoolbar.py:189
 msgid "Zoom out"
 msgstr "Tsipti'méjdha'"
 
 # Se puede aplicar de igual forma Utuw porque significa acercar y el efecto al acercar cualquier objeto se percibe de mayor tamaño.
-#: readtoolbar.py:193
+#: readtoolbar.py:195
 msgid "Zoom in"
 msgstr "Puwedha'"
 
-#: readtoolbar.py:199
+#: readtoolbar.py:201
 msgid "Zoom to width"
 msgstr "Ka junkuw tin ts'ikwtal"
 
-#: readtoolbar.py:205
+#: readtoolbar.py:207
 msgid "Zoom to fit"
 msgstr "Ka junkuw ti walek"
 
-#: readtoolbar.py:211
+#: readtoolbar.py:213
 msgid "Actual size"
 msgstr "In léj puwél"
 
-#: readtoolbar.py:222
+#: readtoolbar.py:224
 msgid "Fullscreen"
 msgstr "Putat walek"
+
+#: readtoolbar.py:292
+msgid "Show Tray"
+msgstr ""
+
+#: readtoolbar.py:294
+msgid "Hide Tray"
+msgstr ""
 
 #: speechtoolbar.py:56
 msgid "Play / Pause"

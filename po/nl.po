@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 14:56-0400\n"
+"POT-Creation-Date: 2012-10-10 00:31-0400\n"
 "PO-Revision-Date: 2012-09-29 23:01+0200\n"
 "Last-Translator: whe <heppew@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,45 +68,58 @@ msgstr "Bladwijzer voor pagina %d"
 msgid "URL from Read"
 msgstr "URL van Lezen"
 
-#: readactivity.py:222
+#: linkbutton.py:94
+msgid "Go to Bookmark"
+msgstr ""
+
+#: linkbutton.py:99
+msgid "Remove"
+msgstr ""
+
+#: readactivity.py:232
 msgid "Highlight"
 msgstr "Markeren"
 
-#: readactivity.py:341
+#: readactivity.py:351
 msgid "Back"
 msgstr "Terug"
 
-#: readactivity.py:346
+#: readactivity.py:355
 msgid "Previous page"
 msgstr "Vorige pagina"
 
-#: readactivity.py:348
+#: readactivity.py:357
 msgid "Previous bookmark"
 msgstr "Vorige bladwijzer"
 
-#: readactivity.py:363
+#: readactivity.py:369
 msgid "Forward"
 msgstr "Vooruit"
 
-#: readactivity.py:368
+#: readactivity.py:373
 msgid "Next page"
 msgstr "Volgende pagina"
 
-#: readactivity.py:370
+#: readactivity.py:375
 msgid "Next bookmark"
 msgstr "Volgende bladwijzer"
 
-#: readactivity.py:409
+#: readactivity.py:412
 msgid "Index"
 msgstr "Index"
 
-#: readactivity.py:519
+#: readactivity.py:533
 msgid "Delete bookmark"
 msgstr "Verwijder bladwijzer"
 
-#: readactivity.py:520
+#: readactivity.py:534
 msgid "All the information related with this bookmark will be lost"
 msgstr "Alle informatie bij deze bladwijzer raakt je kwijt"
+
+#: readactivity.py:885 readactivity.py:1084
+#, python-format
+msgid "Page %d"
+msgstr ""
 
 #: readdialog.py:52
 msgid "Cancel"
@@ -144,33 +157,41 @@ msgstr "Zoek vorige"
 msgid "Find next"
 msgstr "Zoek volgende"
 
-#: readtoolbar.py:178
+#: readtoolbar.py:180
 msgid "Table of contents"
 msgstr "Inhoudsopgave"
 
-#: readtoolbar.py:187
+#: readtoolbar.py:189
 msgid "Zoom out"
 msgstr "Zoom uit"
 
-#: readtoolbar.py:193
+#: readtoolbar.py:195
 msgid "Zoom in"
 msgstr "Zoom in"
 
-#: readtoolbar.py:199
+#: readtoolbar.py:201
 msgid "Zoom to width"
 msgstr "Zoom naar breedte"
 
-#: readtoolbar.py:205
+#: readtoolbar.py:207
 msgid "Zoom to fit"
 msgstr "Zoom naar hele pagina"
 
-#: readtoolbar.py:211
+#: readtoolbar.py:213
 msgid "Actual size"
 msgstr "Werkelijk formaat"
 
-#: readtoolbar.py:222
+#: readtoolbar.py:224
 msgid "Fullscreen"
 msgstr "Schermvullend"
+
+#: readtoolbar.py:292
+msgid "Show Tray"
+msgstr ""
+
+#: readtoolbar.py:294
+msgid "Hide Tray"
+msgstr ""
 
 #: speechtoolbar.py:56
 msgid "Play / Pause"

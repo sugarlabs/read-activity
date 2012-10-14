@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 14:56-0400\n"
-"PO-Revision-Date: 2012-10-01 13:18+0200\n"
-"Last-Translator: KatSitko <xanthe1808@gmail.com>\n"
+"POT-Creation-Date: 2012-10-10 00:31-0400\n"
+"PO-Revision-Date: 2012-10-13 19:25+0200\n"
+"Last-Translator: Karolina <karo.zaklika@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -64,45 +64,58 @@ msgstr "Zakładka na stronie %d"
 msgid "URL from Read"
 msgstr "URL z Napisz"
 
-#: readactivity.py:222
+#: linkbutton.py:94
+msgid "Go to Bookmark"
+msgstr "Idź do Zakładka"
+
+#: linkbutton.py:99
+msgid "Remove"
+msgstr "Usuń"
+
+#: readactivity.py:232
 msgid "Highlight"
 msgstr "Podświetlenie"
 
-#: readactivity.py:341
+#: readactivity.py:351
 msgid "Back"
 msgstr "Wstecz"
 
-#: readactivity.py:346
+#: readactivity.py:355
 msgid "Previous page"
 msgstr "Poprzednia strona"
 
-#: readactivity.py:348
+#: readactivity.py:357
 msgid "Previous bookmark"
 msgstr "Poprzednia zakładka"
 
-#: readactivity.py:363
+#: readactivity.py:369
 msgid "Forward"
 msgstr "Dalej"
 
-#: readactivity.py:368
+#: readactivity.py:373
 msgid "Next page"
 msgstr "Następna strona"
 
-#: readactivity.py:370
+#: readactivity.py:375
 msgid "Next bookmark"
 msgstr "Następna zakładka"
 
-#: readactivity.py:409
+#: readactivity.py:412
 msgid "Index"
 msgstr "Indeks"
 
-#: readactivity.py:519
+#: readactivity.py:533
 msgid "Delete bookmark"
 msgstr "Usuń zakładkę"
 
-#: readactivity.py:520
+#: readactivity.py:534
 msgid "All the information related with this bookmark will be lost"
 msgstr "Wszelkie informacje dotyczące tej zakładki zostaną utracone"
+
+#: readactivity.py:885 readactivity.py:1084
+#, python-format
+msgid "Page %d"
+msgstr "Strona %d"
 
 #: readdialog.py:52
 msgid "Cancel"
@@ -140,33 +153,41 @@ msgstr "Znajdź poprzedni"
 msgid "Find next"
 msgstr "Znajdź następny"
 
-#: readtoolbar.py:178
+#: readtoolbar.py:180
 msgid "Table of contents"
 msgstr "Zawartość"
 
-#: readtoolbar.py:187
+#: readtoolbar.py:189
 msgid "Zoom out"
 msgstr "Zmniejsz"
 
-#: readtoolbar.py:193
+#: readtoolbar.py:195
 msgid "Zoom in"
 msgstr "Powiększ"
 
-#: readtoolbar.py:199
+#: readtoolbar.py:201
 msgid "Zoom to width"
 msgstr "Dopasuj do szerokości"
 
-#: readtoolbar.py:205
+#: readtoolbar.py:207
 msgid "Zoom to fit"
 msgstr "Dopasuj"
 
-#: readtoolbar.py:211
+#: readtoolbar.py:213
 msgid "Actual size"
 msgstr "Aktualny rozmiar"
 
-#: readtoolbar.py:222
+#: readtoolbar.py:224
 msgid "Fullscreen"
 msgstr "Pełny ekran"
+
+#: readtoolbar.py:292
+msgid "Show Tray"
+msgstr ""
+
+#: readtoolbar.py:294
+msgid "Hide Tray"
+msgstr ""
 
 #: speechtoolbar.py:56
 msgid "Play / Pause"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-11 00:31-0400\n"
+"POT-Creation-Date: 2012-10-10 00:31-0400\n"
 "PO-Revision-Date: 2012-09-21 15:07+0200\n"
 "Last-Translator: EdgarQuispeChambi <quispedgar@yahoo.es>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,9 +18,16 @@ msgstr ""
 "X-Generator: Pootle 2.0.5\n"
 
 #  "Leer"
-#: activity/activity.info:2
+#. TRANS: "name" option from activity.info file
 msgid "Read"
 msgstr "Ullaña"
+
+#. TRANS: "summary" option from activity.info file
+#. TRANS: "description" option from activity.info file
+msgid ""
+"Use this activity when you are ready to read! Remember to flip your computer "
+"around to feel like you are really holding a book!"
+msgstr ""
 
 #  "Registro agregado por %(user)s %(time)s"
 #. TRANS: This goes like Bookmark added by User 5 days ago
@@ -51,23 +58,31 @@ msgstr "Chimtaña laphiru %d"
 msgid "URL from Read"
 msgstr "URL sutini ullañataki"
 
+#: linkbutton.py:94
+msgid "Go to Bookmark"
+msgstr ""
+
+#: linkbutton.py:99
+msgid "Remove"
+msgstr ""
+
 #  "Resaltar"
-#: readactivity.py:223
+#: readactivity.py:232
 msgid "Highlight"
 msgstr "Qhanstayaña"
 
 #  "Volver"
-#: readactivity.py:347
+#: readactivity.py:351
 msgid "Back"
 msgstr "Qutaña"
 
 #  "Página anterior"
-#: readactivity.py:352
+#: readactivity.py:355
 msgid "Previous page"
 msgstr "Qutir laphi"
 
 #  "Registro anterior"
-#: readactivity.py:354
+#: readactivity.py:357
 msgid "Previous bookmark"
 msgstr "Qutir chimtata"
 
@@ -77,26 +92,31 @@ msgid "Forward"
 msgstr "Nayrt'aña"
 
 #  "Página siguiente"
-#: readactivity.py:374
+#: readactivity.py:373
 msgid "Next page"
 msgstr "Jutiri laphi"
 
 #  "Siguiente registro"
-#: readactivity.py:376
+#: readactivity.py:375
 msgid "Next bookmark"
 msgstr "Jutiri chimtaña"
 
-#: readactivity.py:415
+#: readactivity.py:412
 msgid "Index"
 msgstr "Wakichata sutinaka siqi"
 
-#: readactivity.py:525
+#: readactivity.py:533
 msgid "Delete bookmark"
 msgstr "Chhijlliri chhaqtayaña"
 
-#: readactivity.py:526
+#: readactivity.py:534
 msgid "All the information related with this bookmark will be lost"
 msgstr "Chhijllata taqi kuna tuqita yatiyäwinaka chhaqtaniwa"
+
+#: readactivity.py:885 readactivity.py:1084
+#, python-format
+msgid "Page %d"
+msgstr ""
 
 #  "Cancelar"
 #: readdialog.py:52
@@ -143,45 +163,47 @@ msgstr "Nayrankiri taqaña"
 msgid "Find next"
 msgstr "Jutiri taqaña"
 
-#: readtoolbar.py:178
+#: readtoolbar.py:180
 msgid "Table of contents"
 msgstr "Wakichata sutinaka siqi wakichata"
 
 #  "Alejarse"
-#: readtoolbar.py:187
+#: readtoolbar.py:189
 msgid "Zoom out"
 msgstr "Jisk'aptayaña"
 
 #  "Acercarse"
-#: readtoolbar.py:193
+#: readtoolbar.py:195
 msgid "Zoom in"
 msgstr "Jach'aptayaña"
 
 #  "Ajustar al ancho"
-#: readtoolbar.py:199
+#: readtoolbar.py:201
 msgid "Zoom to width"
 msgstr "Jach'aptayaña lankhuru"
 
 #  "Ajustar a la pantalla"
-#: readtoolbar.py:205
+#: readtoolbar.py:207
 msgid "Zoom to fit"
 msgstr "Suma apxataña qatukañjama"
 
 #  "Tamaño real"
-#: readtoolbar.py:211
+#: readtoolbar.py:213
 msgid "Actual size"
 msgstr "Juq'chajama"
 
 #  "Pantalla completa"
-#: readtoolbar.py:222
+#: readtoolbar.py:224
 msgid "Fullscreen"
 msgstr "Maypacha uñtawi"
 
-#  "Página
-#: readtopbar.py:145
-#, python-format
-msgid "Page %(current)i of %(total_pages)i"
-msgstr "Laphi %(current)i qipatsti %(total_pages)i"
+#: readtoolbar.py:292
+msgid "Show Tray"
+msgstr ""
+
+#: readtoolbar.py:294
+msgid "Hide Tray"
+msgstr ""
 
 #  "Reproducir / Detener"
 #: speechtoolbar.py:56
@@ -191,6 +213,11 @@ msgstr "Qaltaña / Suyt'ayaña"
 #: speechtoolbar.py:64
 msgid "Stop"
 msgstr "Sayt'ayaña"
+
+#  "Página
+#, python-format
+#~ msgid "Page %(current)i of %(total_pages)i"
+#~ msgstr "Laphi %(current)i qipatsti %(total_pages)i"
 
 #  "%"
 #~ msgid "%"

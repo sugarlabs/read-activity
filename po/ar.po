@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: read-activity\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-02 00:31-0400\n"
+"POT-Creation-Date: 2012-10-10 00:31-0400\n"
 "PO-Revision-Date: 2011-08-24 08:35+0200\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
@@ -22,139 +22,166 @@ msgstr ""
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
 "X-Generator: Virtaal 0.7.0\n"
 
-#: activity/activity.info:2
+#. TRANS: "name" option from activity.info file
 msgid "Read"
 msgstr "اقرأ"
 
-#: evinceadapter.py:74
-msgid "URL from Read"
+#. TRANS: "summary" option from activity.info file
+#. TRANS: "description" option from activity.info file
+msgid ""
+"Use this activity when you are ready to read! Remember to flip your computer "
+"around to feel like you are really holding a book!"
 msgstr ""
-
-#: readactivity.py:231
-msgid "Highlight"
-msgstr "أبرِز"
-
-#: readactivity.py:340
-msgid "Back"
-msgstr "للخلف"
-
-#: readactivity.py:345
-msgid "Previous page"
-msgstr "الصفحة السابقة"
-
-#: readactivity.py:347
-msgid "Previous bookmark"
-msgstr "العلامة السابقة"
-
-#: readactivity.py:362
-msgid "Forward"
-msgstr "للأمام"
-
-#: readactivity.py:367
-msgid "Next page"
-msgstr "الصفحة التالية"
-
-#: readactivity.py:369
-msgid "Next bookmark"
-msgstr "العلامة التالية"
-
-#: readactivity.py:482
-msgid "Delete bookmark"
-msgstr ""
-
-#: readactivity.py:483
-msgid "All the information related with this bookmark will be lost"
-msgstr ""
-
-#: readdialog.py:53
-msgid "Cancel"
-msgstr "ألغِ"
-
-#: readdialog.py:59
-msgid "Ok"
-msgstr "حسنا"
-
-#: readdialog.py:118
-msgid "<b>Title</b>:"
-msgstr "<b>العنوان</b>:"
-
-#: readdialog.py:144
-msgid "<b>Details</b>:"
-msgstr "<b>التفاصيل</b>:"
 
 #. TRANS: This goes like Bookmark added by User 5 days ago
 #. TRANS: (the elapsed string gets translated automatically)
-#: readsidebar.py:92
+#: bookmarkview.py:110
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
 msgstr "علامة أضافها %(user)s‏ %(time)s"
 
-#: readsidebar.py:135 readsidebar.py:182
+#: bookmarkview.py:153 bookmarkview.py:204
 msgid "Add notes for bookmark: "
 msgstr "أضف ملاحظات للعلامة: "
 
-#: readsidebar.py:178
+#: bookmarkview.py:200
 #, python-format
 msgid "%s's bookmark"
 msgstr "علامة %s"
 
-#: readsidebar.py:179
+#: bookmarkview.py:201
 #, python-format
 msgid "Bookmark for page %d"
 msgstr "علامة على الصفحة %d"
 
-#: readtoolbar.py:62
+#: evinceadapter.py:88
+msgid "URL from Read"
+msgstr ""
+
+#: linkbutton.py:94
+msgid "Go to Bookmark"
+msgstr ""
+
+#: linkbutton.py:99
+msgid "Remove"
+msgstr ""
+
+#: readactivity.py:232
+msgid "Highlight"
+msgstr "أبرِز"
+
+#: readactivity.py:351
+msgid "Back"
+msgstr "للخلف"
+
+#: readactivity.py:355
+msgid "Previous page"
+msgstr "الصفحة السابقة"
+
+#: readactivity.py:357
+msgid "Previous bookmark"
+msgstr "العلامة السابقة"
+
+#: readactivity.py:369
+msgid "Forward"
+msgstr "للأمام"
+
+#: readactivity.py:373
+msgid "Next page"
+msgstr "الصفحة التالية"
+
+#: readactivity.py:375
+msgid "Next bookmark"
+msgstr "العلامة التالية"
+
+#: readactivity.py:412
+msgid "Index"
+msgstr ""
+
+#: readactivity.py:533
+msgid "Delete bookmark"
+msgstr ""
+
+#: readactivity.py:534
+msgid "All the information related with this bookmark will be lost"
+msgstr ""
+
+#: readactivity.py:885 readactivity.py:1084
+#, python-format
+msgid "Page %d"
+msgstr ""
+
+#: readdialog.py:52
+msgid "Cancel"
+msgstr "ألغِ"
+
+#: readdialog.py:58
+msgid "Ok"
+msgstr "حسنا"
+
+#: readdialog.py:116
+msgid "<b>Title</b>:"
+msgstr "<b>العنوان</b>:"
+
+#: readdialog.py:142
+msgid "<b>Details</b>:"
+msgstr "<b>التفاصيل</b>:"
+
+#: readtoolbar.py:61
 msgid "Previous"
 msgstr "السابق"
 
-#: readtoolbar.py:69
+#: readtoolbar.py:68
 msgid "Next"
 msgstr "التالي"
 
-#: readtoolbar.py:152
+#: readtoolbar.py:151
 msgid "Find first"
 msgstr "أوجد الأول"
 
-#: readtoolbar.py:158
+#: readtoolbar.py:157
 msgid "Find previous"
 msgstr "أوجد السابق"
 
-#: readtoolbar.py:160
+#: readtoolbar.py:159
 msgid "Find next"
 msgstr "أوجد التالي"
 
-#: readtoolbar.py:177
+#: readtoolbar.py:180
+msgid "Table of contents"
+msgstr ""
+
+#: readtoolbar.py:189
 msgid "Zoom out"
 msgstr "صغّر"
 
-#: readtoolbar.py:183
+#: readtoolbar.py:195
 msgid "Zoom in"
 msgstr "كبّر"
 
-#: readtoolbar.py:189
+#: readtoolbar.py:201
 msgid "Zoom to width"
 msgstr "لائِم العرض"
 
-#: readtoolbar.py:195
+#: readtoolbar.py:207
 msgid "Zoom to fit"
 msgstr "لائِم الصفحة"
 
-#: readtoolbar.py:198
+#: readtoolbar.py:213
 msgid "Actual size"
 msgstr "المقاس الأصلي"
 
-#: readtoolbar.py:221
-msgid "%"
-msgstr "%"
-
-#: readtoolbar.py:234
+#: readtoolbar.py:224
 msgid "Fullscreen"
 msgstr "ملء الشاشة"
 
-#: readtopbar.py:145
-#, python-format
-msgid "Page %(current)i of %(total_pages)i"
-msgstr "صفحة %(current)i من %(total_pages)i"
+#: readtoolbar.py:292
+msgid "Show Tray"
+msgstr ""
+
+#: readtoolbar.py:294
+msgid "Hide Tray"
+msgstr ""
 
 #: speechtoolbar.py:56
 msgid "Play / Pause"
@@ -163,6 +190,13 @@ msgstr "شغّل / ألبِث"
 #: speechtoolbar.py:64
 msgid "Stop"
 msgstr ""
+
+#, python-format
+#~ msgid "Page %(current)i of %(total_pages)i"
+#~ msgstr "صفحة %(current)i من %(total_pages)i"
+
+#~ msgid "%"
+#~ msgstr "%"
 
 #~ msgid "pitch adjusted"
 #~ msgstr "ضُبِطت الشَّدة"

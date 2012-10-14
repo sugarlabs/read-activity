@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-18 00:32-0400\n"
+"POT-Creation-Date: 2012-10-10 00:31-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,48 +16,93 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: activity/activity.info:2
+#. TRANS: "name" option from activity.info file
 msgid "Read"
 msgstr ""
 
-#: evinceadapter.py:74
+#. TRANS: "summary" option from activity.info file
+#. TRANS: "description" option from activity.info file
+msgid ""
+"Use this activity when you are ready to read! Remember to flip your computer "
+"around to feel like you are really holding a book!"
+msgstr ""
+
+#. TRANS: This goes like Bookmark added by User 5 days ago
+#. TRANS: (the elapsed string gets translated automatically)
+#: bookmarkview.py:110
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr ""
+
+#: bookmarkview.py:153 bookmarkview.py:204
+msgid "Add notes for bookmark: "
+msgstr ""
+
+#: bookmarkview.py:200
+#, python-format
+msgid "%s's bookmark"
+msgstr ""
+
+#: bookmarkview.py:201
+#, python-format
+msgid "Bookmark for page %d"
+msgstr ""
+
+#: evinceadapter.py:88
 msgid "URL from Read"
+msgstr ""
+
+#: linkbutton.py:94
+msgid "Go to Bookmark"
+msgstr ""
+
+#: linkbutton.py:99
+msgid "Remove"
 msgstr ""
 
 #: readactivity.py:232
 msgid "Highlight"
 msgstr ""
 
-#: readactivity.py:355
+#: readactivity.py:351
 msgid "Back"
 msgstr ""
 
-#: readactivity.py:360
+#: readactivity.py:355
 msgid "Previous page"
 msgstr ""
 
-#: readactivity.py:362
+#: readactivity.py:357
 msgid "Previous bookmark"
 msgstr ""
 
-#: readactivity.py:377
+#: readactivity.py:369
 msgid "Forward"
 msgstr ""
 
-#: readactivity.py:382
+#: readactivity.py:373
 msgid "Next page"
 msgstr ""
 
-#: readactivity.py:384
+#: readactivity.py:375
 msgid "Next bookmark"
 msgstr ""
 
-#: readactivity.py:497
+#: readactivity.py:412
+msgid "Index"
+msgstr ""
+
+#: readactivity.py:533
 msgid "Delete bookmark"
 msgstr ""
 
-#: readactivity.py:498
+#: readactivity.py:534
 msgid "All the information related with this bookmark will be lost"
+msgstr ""
+
+#: readactivity.py:885 readactivity.py:1084
+#, python-format
+msgid "Page %d"
 msgstr ""
 
 #: readdialog.py:52
@@ -68,82 +113,68 @@ msgstr ""
 msgid "Ok"
 msgstr ""
 
-#: readdialog.py:114
+#: readdialog.py:116
 msgid "<b>Title</b>:"
 msgstr ""
 
-#: readdialog.py:140
+#: readdialog.py:142
 msgid "<b>Details</b>:"
 msgstr ""
 
-#. TRANS: This goes like Bookmark added by User 5 days ago
-#. TRANS: (the elapsed string gets translated automatically)
-#: readsidebar.py:111
-#, python-format
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr ""
-
-#: readsidebar.py:154 readsidebar.py:205
-msgid "Add notes for bookmark: "
-msgstr ""
-
-#: readsidebar.py:201
-#, python-format
-msgid "%s's bookmark"
-msgstr ""
-
-#: readsidebar.py:202
-#, python-format
-msgid "Bookmark for page %d"
-msgstr ""
-
-#: readtoolbar.py:60
+#: readtoolbar.py:61
 msgid "Previous"
 msgstr ""
 
-#: readtoolbar.py:67
+#: readtoolbar.py:68
 msgid "Next"
 msgstr ""
 
-#: readtoolbar.py:150
+#: readtoolbar.py:151
 msgid "Find first"
 msgstr ""
 
-#: readtoolbar.py:156
+#: readtoolbar.py:157
 msgid "Find previous"
 msgstr ""
 
-#: readtoolbar.py:158
+#: readtoolbar.py:159
 msgid "Find next"
 msgstr ""
 
-#: readtoolbar.py:175
+#: readtoolbar.py:180
+msgid "Table of contents"
+msgstr ""
+
+#: readtoolbar.py:189
 msgid "Zoom out"
 msgstr ""
 
-#: readtoolbar.py:181
+#: readtoolbar.py:195
 msgid "Zoom in"
 msgstr ""
 
-#: readtoolbar.py:187
+#: readtoolbar.py:201
 msgid "Zoom to width"
 msgstr ""
 
-#: readtoolbar.py:193
+#: readtoolbar.py:207
 msgid "Zoom to fit"
 msgstr ""
 
-#: readtoolbar.py:199
+#: readtoolbar.py:213
 msgid "Actual size"
 msgstr ""
 
-#: readtoolbar.py:210
+#: readtoolbar.py:224
 msgid "Fullscreen"
 msgstr ""
 
-#: readtopbar.py:145
-#, python-format
-msgid "Page %(current)i of %(total_pages)i"
+#: readtoolbar.py:292
+msgid "Show Tray"
+msgstr ""
+
+#: readtoolbar.py:294
+msgid "Hide Tray"
 msgstr ""
 
 #: speechtoolbar.py:56
