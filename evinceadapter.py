@@ -284,9 +284,9 @@ class EvinceViewer():
         """
         Check if Evince version is at major or equal than the requested
         """
-        return EvinceDocument.MAJOR_VERSION >= major and \
-                EvinceDocument.MINOR_VERSION >= minor and \
-                EvinceDocument.MICRO_VERSION >= micro
+        evince_version = [EvinceDocument.MAJOR_VERSION,
+                EvinceDocument.MINOR_VERSION, EvinceDocument.MICRO_VERSION]
+        return evince_version >= [major, minor, micro]
 
     def __index_loaded_cb(self, job, activity):
         self._index_model = job.get_model()
