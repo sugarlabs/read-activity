@@ -336,15 +336,6 @@ class ReadActivity(activity.Activity):
         elif self._object_id is None:
             # Not joining, not resuming
             self._show_journal_object_picker()
-        # uncomment this and adjust the path for easier testing
-        #else:
-        #    self._load_document('file:///home/smcv/tmp/test.pdf')
-
-    def fullscreen(self):
-        activity.Activity.fullscreen(self)
-
-    def unfullscreen(self):
-        activity.Activity.unfullscreen(self)
 
     def _create_back_button(self):
         back = ToolButton('go-previous-paired')
