@@ -25,6 +25,7 @@ import re
 import md5
 import StringIO
 import cairo
+import emptypanel
 
 import dbus
 from gi.repository import GObject
@@ -336,7 +337,9 @@ class ReadActivity(activity.Activity):
                 self.connect("joined", self._joined_cb)
         elif self._object_id is None:
             # Not joining, not resuming
-            self._show_journal_object_picker()
+            emptypanel.show(self, 'activity-read',
+                            _('No book'), _('Choose something to read'),
+                            self._show_journal_object_picker_cb)
 
     def _create_back_button(self):
         back = ToolButton('go-previous-paired')
@@ -627,7 +630,7 @@ class ReadActivity(activity.Activity):
         else:
             logging.debug('link "%s" not found in the toc model', current_link)
 
-    def _show_journal_object_picker(self):
+    def _show_journal_object_picker_cb(self, button):
         """Show the journal object picker to load a document.
 
         This is for if Read is launched without a document.
@@ -643,6 +646,7 @@ class ReadActivity(activity.Activity):
                 jobject = chooser.get_selected_object()
                 if jobject and jobject.file_path:
                     self.read_file(jobject.file_path)
+                    self.set_canvas(self._vbox)
         finally:
             chooser.destroy()
             del chooser
