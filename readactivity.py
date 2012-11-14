@@ -873,12 +873,14 @@ class ReadActivity(activity.Activity):
         owner = profile.get_nick_name()
         for bookmark in self._bookmarkmanager.get_bookmarks():
             page = bookmark.page_no
-            title = _('Page %d') % page
             thumb = self._bookmarkmanager.get_bookmark_preview(page)
             if thumb is None:
                 logging.error('Preview NOT FOUND')
                 thumb = self._get_screenshot()
-            self._add_link_totray(page, thumb, color, title, owner)
+            # The database is zero based
+            num_page = int(page) + 1
+            title = _('Page %d') % num_page
+            self._add_link_totray(num_page, thumb, color, title, owner)
 
         self._bookmark_view.set_bookmarkmanager(self._bookmarkmanager)
         self._update_toc()
@@ -1093,6 +1095,7 @@ class ReadActivity(activity.Activity):
         ''' add a link to the tray '''
         item = LinkButton(buf, color, title, owner, page)
         item.connect('clicked', self._bookmark_button_clicked_cb, page)
+        item.connect('go_to_bookmark', self._bookmark_button_clicked_cb)
         item.connect('remove_link', self._bookmark_button_removed_cb)
         self.tray.show()
         self.tray.add_item(item)
@@ -1100,10 +1103,12 @@ class ReadActivity(activity.Activity):
         self._view_toolbar.traybutton.props.active = True
 
     def _bookmark_button_clicked_cb(self, button, page):
-        self._view.set_current_page(page - 1)
+        num_page = int(page) - 1
+        self._view.set_current_page(num_page)
 
     def _bookmark_button_removed_cb(self, button, page):
-        self._bookmark_view.del_bookmark(page - 1)
+        num_page = int(page) - 1
+        self._bookmark_view.del_bookmark(num_page)
 
     def _get_screenshot(self):
         """Copied from activity.get_preview()
