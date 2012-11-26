@@ -392,10 +392,24 @@ class ReadActivity(activity.Activity):
         self._view_toolbar.show_nav_button()
 
     def _create_navigator(self):
+        def __cursor_changed_cb(treeview):
+            selection = treeview.get_selection()
+            store, index_iter = selection.get_selected()
+            if index_iter is None:
+                # Nothing selected. This happens at startup
+                return
+            if store.iter_has_child(index_iter):
+                path = store.get_path(index_iter)
+                if treeview.row_expanded(path):
+                    treeview.collapse_row(path)
+                else:
+                    treeview.expand_row(path, False)
+
         self._toc_visible = False
         self._update_toc_view = False
         toc_navigator = Gtk.TreeView()
         toc_navigator.set_enable_search(False)
+        toc_navigator.connect('cursor-changed', __cursor_changed_cb)
         toc_selection = toc_navigator.get_selection()
         toc_selection.set_mode(Gtk.SelectionMode.SINGLE)
 
