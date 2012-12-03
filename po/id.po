@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-10 00:31-0400\n"
-"PO-Revision-Date: 2012-09-29 17:00+0200\n"
+"PO-Revision-Date: 2012-12-03 05:44+0200\n"
 "Last-Translator: andika <andika@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: id\n"
@@ -65,11 +65,11 @@ msgstr "URL dari Baca"
 
 #: linkbutton.py:94
 msgid "Go to Bookmark"
-msgstr ""
+msgstr "Ke Penanda Taut"
 
 #: linkbutton.py:99
 msgid "Remove"
-msgstr ""
+msgstr "Hapus"
 
 #: readactivity.py:232
 msgid "Highlight"
@@ -114,7 +114,7 @@ msgstr "Semua informasi terkait dengan penanda taut ini akan hilang"
 #: readactivity.py:885 readactivity.py:1084
 #, python-format
 msgid "Page %d"
-msgstr ""
+msgstr "Halaman %d"
 
 #: readdialog.py:52
 msgid "Cancel"
@@ -182,11 +182,11 @@ msgstr "Layar penuh"
 
 #: readtoolbar.py:292
 msgid "Show Tray"
-msgstr ""
+msgstr "Tampilkan Baki"
 
 #: readtoolbar.py:294
 msgid "Hide Tray"
-msgstr ""
+msgstr "Sembunyikan Baki"
 
 #: speechtoolbar.py:56
 msgid "Play / Pause"
