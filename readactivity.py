@@ -144,6 +144,7 @@ class ReadActivity(activity.Activity):
         self._fileserver = None
         self._object_id = handle.object_id
         self._toc_model = None
+        self.filehash = None
 
         self.connect('key-press-event', self._key_press_event_cb)
         self.connect('key-release-event', self._key_release_event_cb)
@@ -724,9 +725,11 @@ class ReadActivity(activity.Activity):
         self.metadata['Read_search'] = \
                 self._edit_toolbar._search_entry.props.text
         self.metadata['activity'] = self.get_bundle_id()
-        self.metadata['filehash'] = self.filehash
 
         os.link(self._tempfile, file_path)
+        if self.filehash is None:
+            self.filehash = get_md5(file_path)
+        self.metadata['filehash'] = self.filehash
 
         if self._close_requested:
             _logger.debug("Removing temp file %s because we will close",
