@@ -42,7 +42,7 @@ class EditToolbar(BaseEditToolbar):
 
         self._search_entry = iconentry.IconEntry()
         self._search_entry.set_icon_from_name(iconentry.ICON_ENTRY_PRIMARY,
-                                                'system-search')
+                                                'entry-search')
         self._search_entry.add_clear_button()
         self._search_entry.connect('activate', self._search_entry_activate_cb)
         self._search_entry.connect('changed', self._search_entry_changed_cb)
