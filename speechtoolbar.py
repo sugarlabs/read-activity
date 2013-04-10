@@ -36,6 +36,7 @@ class SpeechToolbar(Gtk.Toolbar):
         self._activity = activity
         if not speech.supported:
             return
+        self.is_paused = False
 
         self._cnf_client = GConf.Client.get_default()
         self.load_speech_parameters()
@@ -129,21 +130,26 @@ class SpeechToolbar(Gtk.Toolbar):
 
     def reset_buttons_cb(self):
         logging.error('reset buttons')
-        self.play_btn.set_named_icon('media-playback-start')
+        self.play_btn.set_icon_name('media-playback-start')
         self.stop_btn.set_sensitive(False)
+        self.is_paused = False
 
     def play_cb(self, widget):
         self.stop_btn.set_sensitive(True)
         if widget.get_active():
-            self.play_btn.set_named_icon('media-playback-pause')
-            if speech.is_stopped():
+            self.play_btn.set_icon_name('media-playback-pause')
+            if not self.is_paused:
                 speech.play(self._activity._view.get_marked_words())
+            else:
+                speech.continue_play()
         else:
-            self.play_btn.set_named_icon('media-playback-start')
+            self.play_btn.set_icon_name('media-playback-start')
+            self.is_paused = True
             speech.pause()
 
     def stop_cb(self, widget):
         self.stop_btn.set_sensitive(False)
-        self.play_btn.set_named_icon('media-playback-start')
+        self.play_btn.set_icon_name('media-playback-start')
         self.play_btn.set_active(False)
+        self.is_paused = False
         speech.stop()

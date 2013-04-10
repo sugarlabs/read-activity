@@ -14,53 +14,47 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import logging
-import pygst
-pygst.require("0.10")
 from gi.repository import Gst
+import logging
 
 import speech
 
-_logger = logging.getLogger('read-etexts-activity')
+_logger = logging.getLogger('read-activity')
+
+
+def get_all_voices():
+    all_voices = {}
+    for voice in Gst.ElementFactory.make('espeak', None).props.voices:
+        name, language, dialect = voice
+        if dialect != 'none':
+            all_voices[language + '_' + dialect] = name
+        else:
+            all_voices[language] = name
+    return all_voices
 
 
 def _message_cb(bus, message, pipe):
-    logging.error('gstreamer message %s', message)
-    if message is None:
-        return
-    if message.type == Gst.Message.EOS:
+    if message.type == Gst.MessageType.EOS:
         pipe.set_state(Gst.State.NULL)
         if speech.end_text_cb != None:
             speech.end_text_cb()
-    if message.type == Gst.Message.ERROR:
+    if message.type == Gst.MessageType.ERROR:
         pipe.set_state(Gst.State.NULL)
         if pipe is play_speaker[1]:
-            if speech.reset_cb is not None:
-                speech.reset_cb()
-            if speech.reset_buttons_cb is not None:
-                speech.reset_buttons_cb()
-    elif message.type == Gst.Message.ELEMENT and \
+            speech.reset_cb()
+    elif message.type == Gst.MessageType.ELEMENT and \
             message.structure.get_name() == 'espeak-mark':
         mark = message.structure['mark']
         speech.highlight_cb(int(mark))
 
 
 def _create_pipe():
-    pipe = Gst.Pipeline()
-    pipe.set_name('pipeline')
-
-    source = Gst.ElementFactory.make('espeak', 'source')
-    pipe.add(source)
-
-    sink = Gst.ElementFactory.make('autoaudiosink', 'sink')
-    pipe.add(sink)
-    source.link(sink)
+    pipe = Gst.parse_launch('espeak name=espeak ! autoaudiosink')
+    source = pipe.get_by_name('espeak')
 
     bus = pipe.get_bus()
     bus.add_signal_watch()
-    logging.error('before adding message callback')
     bus.connect('message', _message_cb, pipe)
-    logging.error('ater adding message callback')
 
     return (source, pipe)
 
@@ -73,7 +67,7 @@ def _speech(speaker, words):
     speaker[1].set_state(Gst.State.NULL)
     speaker[1].set_state(Gst.State.PLAYING)
 
-Gst.init_check(None)
+
 info_speaker = _create_pipe()
 play_speaker = _create_pipe()
 play_speaker[0].props.track = 2
@@ -91,21 +85,20 @@ def play(words):
     _speech(play_speaker, words)
 
 
+def pause():
+    play_speaker[1].set_state(Gst.State.PAUSED)
+
+
+def continue_play():
+    play_speaker[1].set_state(Gst.State.PLAYING)
+
+
 def is_stopped():
-    for i in play_speaker[1].get_state(1):
+    for i in play_speaker[1].get_state():
         if isinstance(i, Gst.State) and i == Gst.State.NULL:
             return True
     return False
 
 
-def pause():
-    play_speaker[1].set_state(Gst.State.NULL)
-
-
 def stop():
     play_speaker[1].set_state(Gst.State.NULL)
-    play_speaker[0].props.text = ''
-    if speech.reset_cb is not None:
-        speech.reset_cb()
-    if speech.reset_buttons_cb is not None:
-        speech.reset_buttons_cb()
