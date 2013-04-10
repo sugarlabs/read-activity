@@ -182,6 +182,10 @@ class ReadActivity(activity.Activity):
         toolbar_box.toolbar.insert(edit_toolbar_button, -1)
         edit_toolbar_button.show()
 
+        self._highlight = self._edit_toolbar.highlight
+        self._highlight_id = self._highlight.connect(
+                'clicked', self.__highlight_cb)
+
         self._view_toolbar = ViewToolbar()
         self._view_toolbar.connect('go-fullscreen',
                 self.__view_toolbar_go_fullscreen_cb)
@@ -215,27 +219,15 @@ class ReadActivity(activity.Activity):
         self._total_page_label = Gtk.Label()
         total_page_item.add(self._total_page_label)
         self._total_page_label.show()
+        self._total_page_label.set_margin_right(5)
         toolbar_box.toolbar.insert(total_page_item, -1)
         total_page_item.show()
-
-        spacer = Gtk.SeparatorToolItem()
-        spacer.set_size_request(0, -1)
-        spacer.props.draw = False
-        toolbar_box.toolbar.insert(spacer, -1)
-        spacer.show()
 
         self._bookmarker = ToggleToolButton('emblem-favorite')
         self._bookmarker_toggle_handler_id = self._bookmarker.connect( \
                 'toggled', self.__bookmarker_toggled_cb)
         self._bookmarker.show()
         toolbar_box.toolbar.insert(self._bookmarker, -1)
-
-        self._highlight = ToggleToolButton('format-text-underline')
-        self._highlight.set_tooltip(_('Highlight'))
-        self._highlight.props.sensitive = False
-        self._highlight_id = self._highlight.connect('clicked', \
-                self.__highlight_cb)
-        toolbar_box.toolbar.insert(self._highlight, -1)
 
         self.speech_toolbar_button = ToolbarButton(icon_name='speak')
         toolbar_box.toolbar.insert(self.speech_toolbar_button, -1)

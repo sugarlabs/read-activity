@@ -71,6 +71,15 @@ class EditToolbar(BaseEditToolbar):
         self.insert(self._next, -1)
         self._next.show()
 
+        separator = Gtk.SeparatorToolItem()
+        separator.show()
+        self.insert(separator, -1)
+
+        self.highlight = ToggleToolButton('format-text-underline')
+        self.highlight.set_tooltip(_('Highlight'))
+        self.highlight.props.sensitive = False
+        self.insert(self.highlight, -1)
+
     def set_view(self, view):
         self._view = view
         self._view.find_set_highlight_search(True)
