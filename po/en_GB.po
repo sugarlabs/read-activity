@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-10 00:31-0400\n"
-"PO-Revision-Date: 2012-10-10 11:27+0200\n"
+"POT-Creation-Date: 2013-04-11 00:31-0400\n"
+"PO-Revision-Date: 2013-04-11 16:51+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en_GB\n"
@@ -71,47 +71,51 @@ msgstr "Go to Bookmark"
 msgid "Remove"
 msgstr "Remove"
 
-#: readactivity.py:232
-msgid "Highlight"
-msgstr "Highlight"
+#: readactivity.py:333
+msgid "No book"
+msgstr "No book"
 
-#: readactivity.py:351
+#: readactivity.py:333
+msgid "Choose something to read"
+msgstr "Choose something to read"
+
+#: readactivity.py:338
 msgid "Back"
 msgstr "Back"
 
-#: readactivity.py:355
+#: readactivity.py:342
 msgid "Previous page"
 msgstr "Previous page"
 
-#: readactivity.py:357
+#: readactivity.py:344
 msgid "Previous bookmark"
 msgstr "Previous bookmark"
 
-#: readactivity.py:369
+#: readactivity.py:356
 msgid "Forward"
 msgstr "Forward"
 
-#: readactivity.py:373
+#: readactivity.py:360
 msgid "Next page"
 msgstr "Next page"
 
-#: readactivity.py:375
+#: readactivity.py:362
 msgid "Next bookmark"
 msgstr "Next bookmark"
 
-#: readactivity.py:412
+#: readactivity.py:413
 msgid "Index"
 msgstr "Index"
 
-#: readactivity.py:533
+#: readactivity.py:534
 msgid "Delete bookmark"
 msgstr "Delete bookmark"
 
-#: readactivity.py:534
+#: readactivity.py:535
 msgid "All the information related with this bookmark will be lost"
 msgstr "All the information related with this bookmark will be lost"
 
-#: readactivity.py:885 readactivity.py:1084
+#: readactivity.py:895 readactivity.py:1090
 #, python-format
 msgid "Page %d"
 msgstr "Page %d"
@@ -140,59 +144,63 @@ msgstr "Previous"
 msgid "Next"
 msgstr "Next"
 
-#: readtoolbar.py:151
+#: readtoolbar.py:79
+msgid "Highlight"
+msgstr "Highlight"
+
+#: readtoolbar.py:160
 msgid "Find first"
 msgstr "Find first"
 
-#: readtoolbar.py:157
+#: readtoolbar.py:166
 msgid "Find previous"
 msgstr "Find previous"
 
-#: readtoolbar.py:159
+#: readtoolbar.py:168
 msgid "Find next"
 msgstr "Find next"
 
-#: readtoolbar.py:180
+#: readtoolbar.py:189
 msgid "Table of contents"
 msgstr "Table of contents"
 
-#: readtoolbar.py:189
+#: readtoolbar.py:198
 msgid "Zoom out"
 msgstr "Zoom out"
 
-#: readtoolbar.py:195
+#: readtoolbar.py:204
 msgid "Zoom in"
 msgstr "Zoom in"
 
-#: readtoolbar.py:201
+#: readtoolbar.py:210
 msgid "Zoom to width"
 msgstr "Zoom to width"
 
-#: readtoolbar.py:207
+#: readtoolbar.py:216
 msgid "Zoom to fit"
 msgstr "Zoom to fit"
 
-#: readtoolbar.py:213
+#: readtoolbar.py:222
 msgid "Actual size"
 msgstr "Actual size"
 
-#: readtoolbar.py:224
+#: readtoolbar.py:233
 msgid "Fullscreen"
 msgstr "Full-screen"
 
-#: readtoolbar.py:292
+#: readtoolbar.py:301
 msgid "Show Tray"
 msgstr "Show Tray"
 
-#: readtoolbar.py:294
+#: readtoolbar.py:303
 msgid "Hide Tray"
 msgstr "Hide Tray"
 
-#: speechtoolbar.py:56
+#: speechtoolbar.py:57
 msgid "Play / Pause"
 msgstr "Play / Pause"
 
-#: speechtoolbar.py:64
+#: speechtoolbar.py:65
 msgid "Stop"
 msgstr "Stop"
 
