@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-10 00:31-0400\n"
-"PO-Revision-Date: 2012-10-13 22:42+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"POT-Creation-Date: 2013-04-11 00:31-0400\n"
+"PO-Revision-Date: 2013-05-22 00:58+0200\n"
+"Last-Translator: EdgarQuispeChambi <quispedgar@yahoo.es>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ayc\n"
 "MIME-Version: 1.0\n"
@@ -28,6 +28,8 @@ msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
 msgstr ""
+"¡Akïri wakichäwi katma niya ullañataki wakichasisna! Computadora juma tuqiru "
+"uñkatayasma kamisa maya ullaña pankarusa katxarkasma ukhama."
 
 #  "Registro agregado por %(user)s %(time)s"
 #. TRANS: This goes like Bookmark added by User 5 days ago
@@ -60,63 +62,66 @@ msgstr "URL sutini ullañataki"
 
 #: linkbutton.py:94
 msgid "Go to Bookmark"
-msgstr ""
+msgstr "Ch'ikunchirinakaru saraña"
 
 #: linkbutton.py:99
 msgid "Remove"
 msgstr "Chhaqtayaña"
 
-#  "Resaltar"
-#: readactivity.py:232
-msgid "Highlight"
-msgstr "Qhanstayaña"
+#: readactivity.py:333
+msgid "No book"
+msgstr "Jani ullaña pankañani"
+
+#: readactivity.py:333
+msgid "Choose something to read"
+msgstr "Ullañataki maski kuna uñachayaña"
 
 #  "Volver"
-#: readactivity.py:351
+#: readactivity.py:338
 msgid "Back"
 msgstr "Qutaña"
 
 #  "Página anterior"
-#: readactivity.py:355
+#: readactivity.py:342
 msgid "Previous page"
 msgstr "Qutir laphi"
 
 #  "Registro anterior"
-#: readactivity.py:357
+#: readactivity.py:344
 msgid "Previous bookmark"
 msgstr "Qutir chimtata"
 
 #  "Avanzar"
-#: readactivity.py:369
+#: readactivity.py:356
 msgid "Forward"
 msgstr "Nayrt'aña"
 
 #  "Página siguiente"
-#: readactivity.py:373
+#: readactivity.py:360
 msgid "Next page"
 msgstr "Jutiri laphi"
 
 #  "Siguiente registro"
-#: readactivity.py:375
+#: readactivity.py:362
 msgid "Next bookmark"
 msgstr "Jutiri chimtaña"
 
-#: readactivity.py:412
+#: readactivity.py:413
 msgid "Index"
 msgstr "Wakichata sutinaka siqi"
 
-#: readactivity.py:533
+#: readactivity.py:534
 msgid "Delete bookmark"
 msgstr "Chhijlliri chhaqtayaña"
 
-#: readactivity.py:534
+#: readactivity.py:535
 msgid "All the information related with this bookmark will be lost"
 msgstr "Chhijllata taqi kuna tuqita yatiyäwinaka chhaqtaniwa"
 
-#: readactivity.py:885 readactivity.py:1084
+#: readactivity.py:895 readactivity.py:1090
 #, python-format
 msgid "Page %d"
-msgstr ""
+msgstr "Laphi chimpu %d"
 
 #  "Cancelar"
 #: readdialog.py:52
@@ -148,69 +153,74 @@ msgstr "Nayrankiri"
 msgid "Next"
 msgstr "Jutiri"
 
+#  "Resaltar"
+#: readtoolbar.py:79
+msgid "Highlight"
+msgstr "Qhanstayaña"
+
 #  "Buscar primero"
-#: readtoolbar.py:151
+#: readtoolbar.py:160
 msgid "Find first"
 msgstr "Mayiri taqaña"
 
 #  "Buscar anterior"
-#: readtoolbar.py:157
+#: readtoolbar.py:166
 msgid "Find previous"
 msgstr "Nayrankiri taqaña"
 
 #  "Buscar siguiente"
-#: readtoolbar.py:159
+#: readtoolbar.py:168
 msgid "Find next"
 msgstr "Jutiri taqaña"
 
-#: readtoolbar.py:180
+#: readtoolbar.py:189
 msgid "Table of contents"
 msgstr "Wakichata sutinaka siqi wakichata"
 
 #  "Alejarse"
-#: readtoolbar.py:189
+#: readtoolbar.py:198
 msgid "Zoom out"
 msgstr "Jisk'aptayaña"
 
 #  "Acercarse"
-#: readtoolbar.py:195
+#: readtoolbar.py:204
 msgid "Zoom in"
 msgstr "Jach'aptayaña"
 
 #  "Ajustar al ancho"
-#: readtoolbar.py:201
+#: readtoolbar.py:210
 msgid "Zoom to width"
 msgstr "Jach'aptayaña lankhuru"
 
 #  "Ajustar a la pantalla"
-#: readtoolbar.py:207
+#: readtoolbar.py:216
 msgid "Zoom to fit"
 msgstr "Suma apxataña qatukañjama"
 
 #  "Tamaño real"
-#: readtoolbar.py:213
+#: readtoolbar.py:222
 msgid "Actual size"
 msgstr "Juq'chajama"
 
 #  "Pantalla completa"
-#: readtoolbar.py:224
+#: readtoolbar.py:233
 msgid "Fullscreen"
 msgstr "Maypacha uñtawi"
 
-#: readtoolbar.py:292
+#: readtoolbar.py:301
 msgid "Show Tray"
-msgstr ""
+msgstr "Imaña wakichata uñachayaña"
 
-#: readtoolbar.py:294
+#: readtoolbar.py:303
 msgid "Hide Tray"
-msgstr ""
+msgstr "Imaña wakichata imantaña"
 
 #  "Reproducir / Detener"
-#: speechtoolbar.py:56
+#: speechtoolbar.py:57
 msgid "Play / Pause"
 msgstr "Qaltaña / Suyt'ayaña"
 
-#: speechtoolbar.py:64
+#: speechtoolbar.py:65
 msgid "Stop"
 msgstr "Sayt'ayaña"
 
