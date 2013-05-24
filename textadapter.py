@@ -88,7 +88,7 @@ class TextViewer(GObject.GObject):
         self._current_page = 0
 
         self.highlight_tag = self.textview.get_buffer().create_tag()
-        self.highlight_tag.set_property('underline', 'single')
+        self.highlight_tag.set_property('underline', Pango.Underline.SINGLE)
         self.highlight_tag.set_property('foreground', 'black')
         self.highlight_tag.set_property('background', 'yellow')
 
