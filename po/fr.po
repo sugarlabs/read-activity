@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xbook.master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-10 00:31-0400\n"
-"PO-Revision-Date: 2012-07-14 00:45+0200\n"
+"POT-Creation-Date: 2013-04-11 00:31-0400\n"
+"PO-Revision-Date: 2013-04-11 18:51+0200\n"
 "Last-Translator: samy boutayeb <s.boutayeb@free.fr>\n"
 "Language-Team: Français <fedora-trans-fr@redhat.com>\n"
 "Language: fr\n"
@@ -35,6 +35,9 @@ msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
 msgstr ""
+"Utilisez cette activité quand vous êtes prêts à lire !  Souvenez-vous de\n"
+"basculer votre ordinateur de côté pour avoir l'impression de tenir un livre "
+"!"
 
 #. TRANS: This goes like Bookmark added by User 5 days ago
 #. TRANS: (the elapsed string gets translated automatically)
@@ -63,56 +66,60 @@ msgstr "URL depuis Lire"
 
 #: linkbutton.py:94
 msgid "Go to Bookmark"
-msgstr ""
+msgstr "Aller au marque-page"
 
 #: linkbutton.py:99
 msgid "Remove"
-msgstr ""
+msgstr "Enlever"
 
-#: readactivity.py:232
-msgid "Highlight"
-msgstr "Surbrillance"
+#: readactivity.py:333
+msgid "No book"
+msgstr "Aucun livre"
 
-#: readactivity.py:351
+#: readactivity.py:333
+msgid "Choose something to read"
+msgstr "Choisir quelque chose à lire"
+
+#: readactivity.py:338
 msgid "Back"
 msgstr "Reculer"
 
-#: readactivity.py:355
+#: readactivity.py:342
 msgid "Previous page"
 msgstr "Page précédente"
 
-#: readactivity.py:357
+#: readactivity.py:344
 msgid "Previous bookmark"
 msgstr "Signet précédent"
 
-#: readactivity.py:369
+#: readactivity.py:356
 msgid "Forward"
 msgstr "Avancer"
 
-#: readactivity.py:373
+#: readactivity.py:360
 msgid "Next page"
 msgstr "Page suivante"
 
-#: readactivity.py:375
+#: readactivity.py:362
 msgid "Next bookmark"
 msgstr "Signet suivant"
 
-#: readactivity.py:412
+#: readactivity.py:413
 msgid "Index"
-msgstr ""
+msgstr "Index"
 
-#: readactivity.py:533
+#: readactivity.py:534
 msgid "Delete bookmark"
 msgstr "Supprimer le marque-page"
 
-#: readactivity.py:534
+#: readactivity.py:535
 msgid "All the information related with this bookmark will be lost"
 msgstr "Toutes les informations liées à ce marque-page seront perdues"
 
-#: readactivity.py:885 readactivity.py:1084
+#: readactivity.py:895 readactivity.py:1090
 #, python-format
 msgid "Page %d"
-msgstr ""
+msgstr "Page %d"
 
 #: readdialog.py:52
 msgid "Cancel"
@@ -138,59 +145,63 @@ msgstr "Précédent"
 msgid "Next"
 msgstr "Suivant"
 
-#: readtoolbar.py:151
+#: readtoolbar.py:79
+msgid "Highlight"
+msgstr "Surbrillance"
+
+#: readtoolbar.py:160
 msgid "Find first"
 msgstr "Trouver le premier"
 
-#: readtoolbar.py:157
+#: readtoolbar.py:166
 msgid "Find previous"
 msgstr "Trouver le précédent"
 
-#: readtoolbar.py:159
+#: readtoolbar.py:168
 msgid "Find next"
 msgstr "Trouver le suivant"
 
-#: readtoolbar.py:180
-msgid "Table of contents"
-msgstr ""
-
 #: readtoolbar.py:189
+msgid "Table of contents"
+msgstr "Table des matières"
+
+#: readtoolbar.py:198
 msgid "Zoom out"
 msgstr "Zoom arrière"
 
-#: readtoolbar.py:195
+#: readtoolbar.py:204
 msgid "Zoom in"
 msgstr "Zoom avant"
 
-#: readtoolbar.py:201
+#: readtoolbar.py:210
 msgid "Zoom to width"
 msgstr "Zoom à la largeur de la page"
 
-#: readtoolbar.py:207
+#: readtoolbar.py:216
 msgid "Zoom to fit"
 msgstr "Zoom plein écran"
 
-#: readtoolbar.py:213
+#: readtoolbar.py:222
 msgid "Actual size"
 msgstr "Dimension actuelle"
 
-#: readtoolbar.py:224
+#: readtoolbar.py:233
 msgid "Fullscreen"
 msgstr "Plein écran"
 
-#: readtoolbar.py:292
+#: readtoolbar.py:301
 msgid "Show Tray"
-msgstr ""
+msgstr "Montrer le tiroir"
 
-#: readtoolbar.py:294
+#: readtoolbar.py:303
 msgid "Hide Tray"
-msgstr ""
+msgstr "Cacher le tiroir"
 
-#: speechtoolbar.py:56
+#: speechtoolbar.py:57
 msgid "Play / Pause"
 msgstr "Lire / Pause"
 
-#: speechtoolbar.py:64
+#: speechtoolbar.py:65
 msgid "Stop"
 msgstr "Arrêter"
 
