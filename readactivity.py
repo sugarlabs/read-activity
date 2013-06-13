@@ -629,7 +629,7 @@ class ReadActivity(activity.Activity):
         """
         if not self._want_document:
             return
-        chooser = ObjectChooser(None, what_filter=mime.GENERIC_TYPE_TEXT)
+        chooser = ObjectChooser(None, what_filter=self.get_bundle_id())
         try:
             result = chooser.run()
             if result == Gtk.ResponseType.ACCEPT:
