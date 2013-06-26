@@ -52,6 +52,8 @@ from sugar3 import profile
 
 from sugar3.datastore import datastore
 from sugar3.graphics.objectchooser import ObjectChooser
+from sugar3.graphics.objectchooser import FILTER_TYPE_MIME_BY_ACTIVITY
+
 from sugar3.graphics import style
 
 from readtoolbar import EditToolbar
@@ -629,7 +631,15 @@ class ReadActivity(activity.Activity):
         """
         if not self._want_document:
             return
-        chooser = ObjectChooser(None, what_filter=self.get_bundle_id())
+
+        try:
+            chooser = ObjectChooser(parent=self,
+                                    what_filter=self.get_bundle_id(),
+                                    filter_type=FILTER_TYPE_MIME_BY_ACTIVITY)
+        except:
+            chooser = ObjectChooser(parent=self,
+                                    what_filter=mime.GENERIC_TYPE_TEXT)
+
         try:
             result = chooser.run()
             if result == Gtk.ResponseType.ACCEPT:
