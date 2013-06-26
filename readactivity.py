@@ -329,7 +329,7 @@ class ReadActivity(activity.Activity):
             else:
                 # Wait for a successful join before trying to get the document
                 self.connect("joined", self._joined_cb)
-        elif self._object_id is None:
+        elif self._object_id is None or self.filehash is None:
             # Not joining, not resuming
             emptypanel.show(self, 'activity-read',
                             _('No book'), _('Choose something to read'),
@@ -648,7 +648,6 @@ class ReadActivity(activity.Activity):
                 jobject = chooser.get_selected_object()
                 if jobject and jobject.file_path:
                     self.read_file(jobject.file_path)
-                    self.set_canvas(self._vbox)
         finally:
             chooser.destroy()
             del chooser
@@ -689,6 +688,7 @@ class ReadActivity(activity.Activity):
         return False
 
     def read_file(self, file_path):
+        self.set_canvas(self._vbox)
         """Load a file from the datastore on activity start."""
         _logger.debug('ReadActivity.read_file: %s', file_path)
         extension = os.path.splitext(file_path)[1]
