@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-10 00:31-0400\n"
+"POT-Creation-Date: 2013-04-11 00:31-0400\n"
 "PO-Revision-Date: 2012-04-05 06:25+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,52 +69,55 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: readactivity.py:232
-#, fuzzy
-msgid "Highlight"
-msgstr "Igaragaza cyane"
+#: readactivity.py:333
+msgid "No book"
+msgstr ""
 
-#: readactivity.py:351
+#: readactivity.py:333
+msgid "Choose something to read"
+msgstr ""
+
+#: readactivity.py:338
 msgid "Back"
 msgstr "Inyuma"
 
-#: readactivity.py:355
+#: readactivity.py:342
 #, fuzzy
 msgid "Previous page"
 msgstr "Ipaji ibanje"
 
-#: readactivity.py:357
+#: readactivity.py:344
 #, fuzzy
 msgid "Previous bookmark"
 msgstr "Akamenyetso kabanza"
 
-#: readactivity.py:369
+#: readactivity.py:356
 msgid "Forward"
 msgstr "Imbere"
 
-#: readactivity.py:373
+#: readactivity.py:360
 #, fuzzy
 msgid "Next page"
 msgstr "Ipaji ikurikira"
 
-#: readactivity.py:375
+#: readactivity.py:362
 #, fuzzy
 msgid "Next bookmark"
 msgstr "Akamenyetso gakurikira"
 
-#: readactivity.py:412
+#: readactivity.py:413
 msgid "Index"
 msgstr ""
 
-#: readactivity.py:533
+#: readactivity.py:534
 msgid "Delete bookmark"
 msgstr ""
 
-#: readactivity.py:534
+#: readactivity.py:535
 msgid "All the information related with this bookmark will be lost"
 msgstr ""
 
-#: readactivity.py:885 readactivity.py:1084
+#: readactivity.py:895 readactivity.py:1090
 #, python-format
 msgid "Page %d"
 msgstr ""
@@ -144,60 +147,65 @@ msgstr "Ibibanziriza"
 msgid "Next"
 msgstr "Ibikurikira"
 
-#: readtoolbar.py:151
+#: readtoolbar.py:79
+#, fuzzy
+msgid "Highlight"
+msgstr "Igaragaza cyane"
+
+#: readtoolbar.py:160
 msgid "Find first"
 msgstr "Shaka mbere"
 
-#: readtoolbar.py:157
+#: readtoolbar.py:166
 msgid "Find previous"
 msgstr "Shaka ibibanziriza"
 
-#: readtoolbar.py:159
+#: readtoolbar.py:168
 msgid "Find next"
 msgstr "Shaka ibikurikira"
 
-#: readtoolbar.py:180
+#: readtoolbar.py:189
 msgid "Table of contents"
 msgstr ""
 
-#: readtoolbar.py:189
+#: readtoolbar.py:198
 msgid "Zoom out"
 msgstr "Kwagura"
 
-#: readtoolbar.py:195
+#: readtoolbar.py:204
 msgid "Zoom in"
 msgstr "Kugabanya"
 
-#: readtoolbar.py:201
+#: readtoolbar.py:210
 msgid "Zoom to width"
 msgstr "Agura ukigira kigari"
 
-#: readtoolbar.py:207
+#: readtoolbar.py:216
 msgid "Zoom to fit"
 msgstr "Agura ikntu ugira ngo gikwire ahantu"
 
-#: readtoolbar.py:213
+#: readtoolbar.py:222
 msgid "Actual size"
 msgstr "Ingano nyayo"
 
-#: readtoolbar.py:224
+#: readtoolbar.py:233
 msgid "Fullscreen"
 msgstr "Ekarayose"
 
-#: readtoolbar.py:292
+#: readtoolbar.py:301
 msgid "Show Tray"
 msgstr ""
 
-#: readtoolbar.py:294
+#: readtoolbar.py:303
 msgid "Hide Tray"
 msgstr ""
 
-#: speechtoolbar.py:56
+#: speechtoolbar.py:57
 #, fuzzy
 msgid "Play / Pause"
 msgstr "Kina / Akaruhuko"
 
-#: speechtoolbar.py:64
+#: speechtoolbar.py:65
 msgid "Stop"
 msgstr ""
 

@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-10 00:31-0400\n"
-"PO-Revision-Date: 2012-10-19 08:29+0200\n"
+"POT-Creation-Date: 2013-04-11 00:31-0400\n"
+"PO-Revision-Date: 2013-04-24 05:50+0200\n"
 "Last-Translator: whe <heppew@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: nl\n"
@@ -76,47 +76,51 @@ msgstr "Ga naar Bladwijzer"
 msgid "Remove"
 msgstr "Verwijder"
 
-#: readactivity.py:232
-msgid "Highlight"
-msgstr "Markeren"
+#: readactivity.py:333
+msgid "No book"
+msgstr "Geen boek"
 
-#: readactivity.py:351
+#: readactivity.py:333
+msgid "Choose something to read"
+msgstr "Kies iets om te lezen"
+
+#: readactivity.py:338
 msgid "Back"
 msgstr "Terug"
 
-#: readactivity.py:355
+#: readactivity.py:342
 msgid "Previous page"
 msgstr "Vorige pagina"
 
-#: readactivity.py:357
+#: readactivity.py:344
 msgid "Previous bookmark"
 msgstr "Vorige bladwijzer"
 
-#: readactivity.py:369
+#: readactivity.py:356
 msgid "Forward"
 msgstr "Vooruit"
 
-#: readactivity.py:373
+#: readactivity.py:360
 msgid "Next page"
 msgstr "Volgende pagina"
 
-#: readactivity.py:375
+#: readactivity.py:362
 msgid "Next bookmark"
 msgstr "Volgende bladwijzer"
 
-#: readactivity.py:412
+#: readactivity.py:413
 msgid "Index"
 msgstr "Index"
 
-#: readactivity.py:533
+#: readactivity.py:534
 msgid "Delete bookmark"
 msgstr "Verwijder bladwijzer"
 
-#: readactivity.py:534
+#: readactivity.py:535
 msgid "All the information related with this bookmark will be lost"
 msgstr "Alle informatie bij deze bladwijzer raakt je kwijt"
 
-#: readactivity.py:885 readactivity.py:1084
+#: readactivity.py:895 readactivity.py:1090
 #, python-format
 msgid "Page %d"
 msgstr "Pagina %d"
@@ -145,59 +149,63 @@ msgstr "Vorige"
 msgid "Next"
 msgstr "Volgende"
 
-#: readtoolbar.py:151
+#: readtoolbar.py:79
+msgid "Highlight"
+msgstr "Markeren"
+
+#: readtoolbar.py:160
 msgid "Find first"
 msgstr "Zoek eerste"
 
-#: readtoolbar.py:157
+#: readtoolbar.py:166
 msgid "Find previous"
 msgstr "Zoek vorige"
 
-#: readtoolbar.py:159
+#: readtoolbar.py:168
 msgid "Find next"
 msgstr "Zoek volgende"
 
-#: readtoolbar.py:180
+#: readtoolbar.py:189
 msgid "Table of contents"
 msgstr "Inhoudsopgave"
 
-#: readtoolbar.py:189
+#: readtoolbar.py:198
 msgid "Zoom out"
 msgstr "Zoom uit"
 
-#: readtoolbar.py:195
+#: readtoolbar.py:204
 msgid "Zoom in"
 msgstr "Zoom in"
 
-#: readtoolbar.py:201
+#: readtoolbar.py:210
 msgid "Zoom to width"
 msgstr "Zoom naar breedte"
 
-#: readtoolbar.py:207
+#: readtoolbar.py:216
 msgid "Zoom to fit"
 msgstr "Zoom naar hele pagina"
 
-#: readtoolbar.py:213
+#: readtoolbar.py:222
 msgid "Actual size"
 msgstr "Werkelijk formaat"
 
-#: readtoolbar.py:224
+#: readtoolbar.py:233
 msgid "Fullscreen"
 msgstr "Schermvullend"
 
-#: readtoolbar.py:292
+#: readtoolbar.py:301
 msgid "Show Tray"
 msgstr "Toon Plateau"
 
-#: readtoolbar.py:294
+#: readtoolbar.py:303
 msgid "Hide Tray"
 msgstr "Verberg Plateau"
 
-#: speechtoolbar.py:56
+#: speechtoolbar.py:57
 msgid "Play / Pause"
 msgstr "Afspelen / Pauze"
 
-#: speechtoolbar.py:64
+#: speechtoolbar.py:65
 msgid "Stop"
 msgstr "Stop"
 

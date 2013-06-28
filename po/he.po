@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-10 00:31-0400\n"
+"POT-Creation-Date: 2013-04-11 00:31-0400\n"
 "PO-Revision-Date: 2008-12-19 23:48-0500\n"
 "Last-Translator: Chris Leonard <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,49 +69,53 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: readactivity.py:232
-msgid "Highlight"
+#: readactivity.py:333
+msgid "No book"
 msgstr ""
 
-#: readactivity.py:351
+#: readactivity.py:333
+msgid "Choose something to read"
+msgstr ""
+
+#: readactivity.py:338
 #, fuzzy
 msgid "Back"
 msgstr "אחורה"
 
-#: readactivity.py:355
+#: readactivity.py:342
 msgid "Previous page"
 msgstr ""
 
-#: readactivity.py:357
+#: readactivity.py:344
 msgid "Previous bookmark"
 msgstr ""
 
-#: readactivity.py:369
+#: readactivity.py:356
 #, fuzzy
 msgid "Forward"
 msgstr "קדימה"
 
-#: readactivity.py:373
+#: readactivity.py:360
 msgid "Next page"
 msgstr ""
 
-#: readactivity.py:375
+#: readactivity.py:362
 msgid "Next bookmark"
 msgstr ""
 
-#: readactivity.py:412
+#: readactivity.py:413
 msgid "Index"
 msgstr ""
 
-#: readactivity.py:533
+#: readactivity.py:534
 msgid "Delete bookmark"
 msgstr ""
 
-#: readactivity.py:534
+#: readactivity.py:535
 msgid "All the information related with this bookmark will be lost"
 msgstr ""
 
-#: readactivity.py:885 readactivity.py:1084
+#: readactivity.py:895 readactivity.py:1090
 #, python-format
 msgid "Page %d"
 msgstr ""
@@ -142,68 +146,72 @@ msgstr "קודם"
 msgid "Next"
 msgstr "הבא"
 
-#: readtoolbar.py:151
+#: readtoolbar.py:79
+msgid "Highlight"
+msgstr ""
+
+#: readtoolbar.py:160
 #, fuzzy
 msgid "Find first"
 msgstr "מצא ראשון"
 
-#: readtoolbar.py:157
+#: readtoolbar.py:166
 #, fuzzy
 msgid "Find previous"
 msgstr "מצא קודם"
 
-#: readtoolbar.py:159
+#: readtoolbar.py:168
 #, fuzzy
 msgid "Find next"
 msgstr "מצא הבא"
 
-#: readtoolbar.py:180
+#: readtoolbar.py:189
 msgid "Table of contents"
 msgstr ""
 
-#: readtoolbar.py:189
+#: readtoolbar.py:198
 #, fuzzy
 msgid "Zoom out"
 msgstr "התרחק"
 
-#: readtoolbar.py:195
+#: readtoolbar.py:204
 #, fuzzy
 msgid "Zoom in"
 msgstr "התקרב"
 
-#: readtoolbar.py:201
+#: readtoolbar.py:210
 #, fuzzy
 msgid "Zoom to width"
 msgstr "צפייה בהתאמה לרוחב"
 
-#: readtoolbar.py:207
+#: readtoolbar.py:216
 #, fuzzy
 msgid "Zoom to fit"
 msgstr "תקריב להתאמה"
 
-#: readtoolbar.py:213
+#: readtoolbar.py:222
 #, fuzzy
 msgid "Actual size"
 msgstr "גודל אמיתי"
 
-#: readtoolbar.py:224
+#: readtoolbar.py:233
 #, fuzzy
 msgid "Fullscreen"
 msgstr "מסך מלא"
 
-#: readtoolbar.py:292
+#: readtoolbar.py:301
 msgid "Show Tray"
 msgstr ""
 
-#: readtoolbar.py:294
+#: readtoolbar.py:303
 msgid "Hide Tray"
 msgstr ""
 
-#: speechtoolbar.py:56
+#: speechtoolbar.py:57
 msgid "Play / Pause"
 msgstr ""
 
-#: speechtoolbar.py:64
+#: speechtoolbar.py:65
 msgid "Stop"
 msgstr ""
 
