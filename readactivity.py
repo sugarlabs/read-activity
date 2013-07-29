@@ -52,7 +52,10 @@ from sugar3 import profile
 
 from sugar3.datastore import datastore
 from sugar3.graphics.objectchooser import ObjectChooser
-from sugar3.graphics.objectchooser import FILTER_TYPE_MIME_BY_ACTIVITY
+try:
+    from sugar3.graphics.objectchooser import FILTER_TYPE_MIME_BY_ACTIVITY
+except:
+    FILTER_TYPE_MIME_BY_ACTIVITY = 'mime_by_activity'
 
 from sugar3.graphics import style
 
