@@ -146,6 +146,7 @@ class ReadActivity(activity.Activity):
     def __init__(self, handle):
         activity.Activity.__init__(self, handle)
 
+        self.max_participants = 1
         self._document = None
         self._fileserver = None
         self._object_id = handle.object_id
@@ -699,6 +700,9 @@ class ReadActivity(activity.Activity):
                                 'tmp%i%s' % (time.time(), extension))
         os.link(file_path, tempfile)
         self._tempfile = tempfile
+        # enable collaboration
+        self.activity_button.page.share.props.sensitive = True
+
         self._load_document('file://' + self._tempfile)
 
         # FIXME: This should obviously be fixed properly
