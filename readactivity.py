@@ -43,6 +43,7 @@ from sugar3.graphics.toolbarbox import ToolbarButton
 from sugar3.graphics.toolcombobox import ToolComboBox
 from sugar3.graphics.toggletoolbutton import ToggleToolButton
 from sugar3.graphics.alert import ConfirmationAlert
+from sugar3.graphics.alert import Alert
 from sugar3.activity.widgets import ActivityToolbarButton
 from sugar3.activity.widgets import StopButton
 from sugar3.graphics.tray import HTray
@@ -138,6 +139,23 @@ class ReadURLDownloader(network.GlibURLDownloader):
 
 
 READ_STREAM_SERVICE = 'read-activity-http'
+
+
+class ProgressAlert(Alert):
+    """
+    Progress alert with a progressbar - to show the advance of a task
+    """
+
+    def __init__(self, timeout=5, **kwargs):
+        Alert.__init__(self, **kwargs)
+
+        self._pb = Gtk.ProgressBar()
+        self._msg_box.pack_start(self._pb, False, False, 0)
+        self._pb.set_size_request(int(Gdk.Screen.width() * 9. / 10.), -1)
+        self._pb.show()
+
+    def set_fraction(self, fraction):
+        self._pb.set_fraction(fraction)
 
 
 class ReadActivity(activity.Activity):
@@ -321,6 +339,8 @@ class ReadActivity(activity.Activity):
 
         h = hash(self._activity_id)
         self.port = 1024 + (h % 64511)
+
+        self._progress_alert = None
 
         if handle.uri:
             self._load_document(handle.uri)
@@ -775,6 +795,9 @@ class ReadActivity(activity.Activity):
         _logger.debug("Got document %s (%s) from tube %u",
                       tempfile, suggested_name, tube_id)
         self.save()
+        if self._progress_alert is not None:
+            self.remove_alert(self._progress_alert)
+            self._progress_alert = None
         self._load_document("file://%s" % tempfile)
 
     def _download_progress_cb(self, getter, bytes_downloaded, tube_id):
@@ -783,6 +806,9 @@ class ReadActivity(activity.Activity):
             _logger.debug("Downloaded %u of %u bytes from tube %u...",
                           bytes_downloaded, self._download_content_length,
                           tube_id)
+            fraction = float(self._download_content_length) / float(
+                bytes_downloaded)
+            self._progress_alert.set_fraction(fraction)
         else:
             _logger.debug("Downloaded %u bytes from tube %u...",
                           bytes_downloaded, tube_id)
@@ -793,6 +819,9 @@ class ReadActivity(activity.Activity):
         self._want_document = True
         self._download_content_length = 0
         self._download_content_type = None
+        if self._progress_alert is not None:
+            self.remove_alert(self._progress_alert)
+            self._progress_alert = None
         GObject.idle_add(self._get_document)
 
     def _download_document(self, tube_id, path):
@@ -854,6 +883,12 @@ class ReadActivity(activity.Activity):
         Get the shared document from another participant.
         """
         self.watch_for_tubes()
+
+        self._progress_alert = ProgressAlert()
+        self._progress_alert.props.title = _('Wait')
+        self._progress_alert.props.msg = _('Receiving boook...')
+        self.add_alert(self._progress_alert)
+
         GObject.idle_add(self._get_document)
 
     def _load_document(self, filepath):
