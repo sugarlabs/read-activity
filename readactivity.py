@@ -699,11 +699,10 @@ class ReadActivity(activity.Activity):
         tempfile = os.path.join(self.get_activity_root(), 'instance',
                                 'tmp%i%s' % (time.time(), extension))
         os.link(file_path, tempfile)
-        self._tempfile = tempfile
         # enable collaboration
         self.activity_button.page.share.props.sensitive = True
 
-        self._load_document('file://' + self._tempfile)
+        self._load_document('file://' + tempfile)
 
         # FIXME: This should obviously be fixed properly
         GObject.timeout_add_seconds(1,
@@ -766,7 +765,6 @@ class ReadActivity(activity.Activity):
 
         del self.unused_download_tubes
 
-        self._tempfile = tempfile
         file_path = os.path.join(self.get_activity_root(), 'instance',
                                     '%i' % time.time())
         _logger.debug("Saving file %s to datastore...", file_path)
@@ -864,7 +862,11 @@ class ReadActivity(activity.Activity):
         filepath -- string starting with file://
 
         """
+        if self._tempfile is not None:
+            # prevent reopen
+            return
         filename = filepath.replace('file://', '')
+        self._tempfile = filename
         if not os.path.exists(filename) or os.path.getsize(filename) == 0:
             return
         mimetype = mime.get_for_file(filepath)
