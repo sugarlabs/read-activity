@@ -151,10 +151,17 @@ class ProgressAlert(Alert):
         self._pb = Gtk.ProgressBar()
         self._msg_box.pack_start(self._pb, False, False, 0)
         self._pb.set_size_request(int(Gdk.Screen.width() * 9. / 10.), -1)
+        self._pb.set_fraction(0.0)
         self._pb.show()
 
     def set_fraction(self, fraction):
-        self._pb.set_fraction(fraction)
+        # update only by 10% fractions
+        if int(fraction * 100) % 10 == 0:
+            self._pb.set_fraction(fraction)
+            self._pb.queue_draw()
+            # force updating the progressbar
+            while Gtk.events_pending():
+                Gtk.main_iteration_do(True)
 
 
 class ReadActivity(activity.Activity):
@@ -350,6 +357,11 @@ class ReadActivity(activity.Activity):
                 # Already joined for some reason, just get the document
                 self._joined_cb(self)
             else:
+                self._progress_alert = ProgressAlert()
+                self._progress_alert.props.title = _('Please wait')
+                self._progress_alert.props.msg = _('Starting connection...')
+                self.add_alert(self._progress_alert)
+
                 # Wait for a successful join before trying to get the document
                 self.connect("joined", self._joined_cb)
         else:
@@ -806,8 +818,8 @@ class ReadActivity(activity.Activity):
             _logger.debug("Downloaded %u of %u bytes from tube %u...",
                           bytes_downloaded, self._download_content_length,
                           tube_id)
-            fraction = float(self._download_content_length) / float(
-                bytes_downloaded)
+            fraction = float(bytes_downloaded) / \
+                float(self._download_content_length)
             self._progress_alert.set_fraction(fraction)
         else:
             _logger.debug("Downloaded %u bytes from tube %u...",
@@ -884,11 +896,8 @@ class ReadActivity(activity.Activity):
         Get the shared document from another participant.
         """
         self.watch_for_tubes()
-
-        self._progress_alert = ProgressAlert()
-        self._progress_alert.props.title = _('Wait')
-        self._progress_alert.props.msg = _('Receiving boook...')
-        self.add_alert(self._progress_alert)
+        if self._progress_alert is not None:
+            self._progress_alert.props.msg = _('Receiving book...')
 
         GObject.idle_add(self._get_document)
 
