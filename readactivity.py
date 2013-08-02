@@ -270,6 +270,11 @@ class ReadActivity(activity.Activity):
         self.set_toolbar_box(toolbar_box)
         toolbar_box.show()
 
+        # This is needed to prevent the call of read_file on
+        # canvas map, becuase interact in a bad way with the emptypanel
+        # the program takes responsability of this task.
+        self._read_file_called = True
+
         self._vbox = Gtk.VBox()
         self._vbox.show()
 
@@ -342,9 +347,6 @@ class ReadActivity(activity.Activity):
 
         self._progress_alert = None
 
-        if handle.uri:
-            self._load_document(handle.uri)
-
         if self.shared_activity:
             # We're joining
             if self.get_shared():
@@ -353,11 +355,16 @@ class ReadActivity(activity.Activity):
             else:
                 # Wait for a successful join before trying to get the document
                 self.connect("joined", self._joined_cb)
-        elif self._object_id is None or self.filehash is None:
-            # Not joining, not resuming
-            emptypanel.show(self, 'activity-read',
-                            _('No book'), _('Choose something to read'),
-                            self._show_journal_object_picker_cb)
+        else:
+            if self._jobject.file_path is not None and \
+                    self._jobject.file_path != '':
+                self.read_file(self._jobject.file_path)
+            else:
+                # Not joining, not resuming or resuming session without file
+                emptypanel.show(self, 'activity-read',
+                                _('No book'), _('Choose something to read'),
+                                self._show_journal_object_picker_cb)
+
 
     def _create_back_button(self):
         back = ToolButton('go-previous-paired')
@@ -672,6 +679,7 @@ class ReadActivity(activity.Activity):
                 jobject = chooser.get_selected_object()
                 if jobject and jobject.file_path:
                     self.read_file(jobject.file_path)
+                    jobject.object_id = self._object_id
         finally:
             chooser.destroy()
             del chooser
@@ -712,7 +720,6 @@ class ReadActivity(activity.Activity):
         return False
 
     def read_file(self, file_path):
-        self.set_canvas(self._vbox)
         """Load a file from the datastore on activity start."""
         _logger.debug('ReadActivity.read_file: %s', file_path)
         extension = os.path.splitext(file_path)[1]
@@ -798,7 +805,8 @@ class ReadActivity(activity.Activity):
         if self._progress_alert is not None:
             self.remove_alert(self._progress_alert)
             self._progress_alert = None
-        self._load_document("file://%s" % tempfile)
+
+        self.read_file(self._jobject.file_path)
 
     def _download_progress_cb(self, getter, bytes_downloaded, tube_id):
         # FIXME: Draw a progress bar
@@ -900,6 +908,9 @@ class ReadActivity(activity.Activity):
         if self._tempfile is not None:
             # prevent reopen
             return
+
+        self.set_canvas(self._vbox)
+
         filename = filepath.replace('file://', '')
         self._tempfile = filename
         if not os.path.exists(filename) or os.path.getsize(filename) == 0:
