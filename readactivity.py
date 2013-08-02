@@ -722,14 +722,10 @@ class ReadActivity(activity.Activity):
     def read_file(self, file_path):
         """Load a file from the datastore on activity start."""
         _logger.debug('ReadActivity.read_file: %s', file_path)
-        extension = os.path.splitext(file_path)[1]
-        tempfile = os.path.join(self.get_activity_root(), 'instance',
-                                'tmp%i%s' % (time.time(), extension))
-        os.link(file_path, tempfile)
         # enable collaboration
         self.activity_button.page.share.props.sensitive = True
 
-        self._load_document('file://' + tempfile)
+        self._load_document('file://' + file_path)
 
         # FIXME: This should obviously be fixed properly
         GObject.timeout_add_seconds(1,
@@ -792,20 +788,20 @@ class ReadActivity(activity.Activity):
 
         del self.unused_download_tubes
 
-        file_path = os.path.join(self.get_activity_root(), 'instance',
-                                    '%i' % time.time())
-        _logger.debug("Saving file %s to datastore...", file_path)
-        os.link(tempfile, file_path)
-        self._jobject.file_path = file_path
-        datastore.write(self._jobject, transfer_ownership=True)
+        _logger.debug("Saving file %s to datastore...", tempfile)
+        self._jobject.file_path = tempfile
+        datastore.write(self._jobject)
 
         _logger.debug("Got document %s (%s) from tube %u",
                       tempfile, suggested_name, tube_id)
-        self.save()
         if self._progress_alert is not None:
             self.remove_alert(self._progress_alert)
             self._progress_alert = None
+        # load the object from the datastore to update the file path
+        GObject.idle_add(self._open_downloaded_file)
 
+    def _open_downloaded_file(self):
+        self._jobject = datastore.get(self._jobject.object_id)
         self.read_file(self._jobject.file_path)
 
     def _download_progress_cb(self, getter, bytes_downloaded, tube_id):
