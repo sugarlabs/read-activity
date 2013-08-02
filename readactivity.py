@@ -40,7 +40,6 @@ from sugar3.activity import activity
 from sugar3.graphics.toolbutton import ToolButton
 from sugar3.graphics.toolbarbox import ToolbarBox
 from sugar3.graphics.toolbarbox import ToolbarButton
-from sugar3.graphics.toolcombobox import ToolComboBox
 from sugar3.graphics.toggletoolbutton import ToggleToolButton
 from sugar3.graphics.alert import ConfirmationAlert
 from sugar3.graphics.alert import Alert
@@ -180,7 +179,7 @@ class ReadActivity(activity.Activity):
         self.dpi = _get_screen_dpi()
         self._bookmark_view = BookmarkView()
         self._bookmark_view.connect('bookmark-changed',
-                self._update_bookmark_cb)
+                                    self._update_bookmark_cb)
 
         tray = HTray()
         self.set_tray(tray, Gtk.PositionType.BOTTOM)
@@ -199,27 +198,25 @@ class ReadActivity(activity.Activity):
         self._edit_toolbar.copy.connect('clicked', self._edit_toolbar_copy_cb)
         self._edit_toolbar.paste.props.visible = False
 
-        edit_toolbar_button = ToolbarButton(
-                page=self._edit_toolbar,
-                icon_name='toolbar-edit')
+        edit_toolbar_button = ToolbarButton(page=self._edit_toolbar,
+                                            icon_name='toolbar-edit')
         self._edit_toolbar.show()
         toolbar_box.toolbar.insert(edit_toolbar_button, -1)
         edit_toolbar_button.show()
 
         self._highlight = self._edit_toolbar.highlight
-        self._highlight_id = self._highlight.connect(
-                'clicked', self.__highlight_cb)
+        self._highlight_id = self._highlight.connect('clicked',
+                                                     self.__highlight_cb)
 
         self._view_toolbar = ViewToolbar()
         self._view_toolbar.connect('go-fullscreen',
-                self.__view_toolbar_go_fullscreen_cb)
+                                   self.__view_toolbar_go_fullscreen_cb)
         self._view_toolbar.connect('toggle-index-show',
-                self.__toogle_navigator_cb)
+                                   self.__toogle_navigator_cb)
         self._view_toolbar.connect('toggle-tray-show',
-                self.__toogle_tray_cb)
-        view_toolbar_button = ToolbarButton(
-                page=self._view_toolbar,
-                icon_name='toolbar-view')
+                                   self.__toogle_tray_cb)
+        view_toolbar_button = ToolbarButton(page=self._view_toolbar,
+                                            icon_name='toolbar-view')
         self._view_toolbar.show()
         toolbar_box.toolbar.insert(view_toolbar_button, -1)
         view_toolbar_button.show()
@@ -248,8 +245,8 @@ class ReadActivity(activity.Activity):
         total_page_item.show()
 
         self._bookmarker = ToggleToolButton('emblem-favorite')
-        self._bookmarker_toggle_handler_id = self._bookmarker.connect( \
-                'toggled', self.__bookmarker_toggled_cb)
+        self._bookmarker_toggle_handler_id = self._bookmarker.connect(
+            'toggled', self.__bookmarker_toggled_cb)
         self._bookmarker.show()
         toolbar_box.toolbar.insert(self._bookmarker, -1)
 
@@ -326,15 +323,15 @@ class ReadActivity(activity.Activity):
                 self._service = dbus.Interface(proxy,
                                                _HARDWARE_MANAGER_INTERFACE)
                 self._scrolled.props.vadjustment.connect("value-changed",
-                                                   self._user_action_cb)
+                                                         self._user_action_cb)
                 self._scrolled.props.hadjustment.connect("value-changed",
-                                                   self._user_action_cb)
+                                                         self._user_action_cb)
                 self.connect("focus-in-event", self._focus_in_event_cb)
                 self.connect("focus-out-event", self._focus_out_event_cb)
                 self.connect("notify::active", self._now_active_cb)
 
                 _logger.debug('Suspend on idle enabled')
-            except dbus.DBusException, e:
+            except dbus.DBusException:
                 _logger.info(
                     'Hardware manager service not found, no idle suspend.')
         else:
@@ -364,7 +361,6 @@ class ReadActivity(activity.Activity):
                 emptypanel.show(self, 'activity-read',
                                 _('No book'), _('Choose something to read'),
                                 self._show_journal_object_picker_cb)
-
 
     def _create_back_button(self):
         back = ToolButton('go-previous-paired')
@@ -447,15 +443,15 @@ class ReadActivity(activity.Activity):
         toc_navigator.append_column(self.treecol_toc)
 
         self._toc_scroller = Gtk.ScrolledWindow(hadjustment=None,
-                vadjustment=None)
+                                                vadjustment=None)
         self._toc_scroller.set_policy(Gtk.PolicyType.AUTOMATIC,
-                Gtk.PolicyType.AUTOMATIC)
+                                      Gtk.PolicyType.AUTOMATIC)
         self._toc_scroller.add(toc_navigator)
         self._hbox.pack_start(self._toc_scroller, expand=False, fill=False,
-                padding=0)
+                              padding=0)
         self._toc_separator = Gtk.VSeparator()
-        self._hbox.pack_start(self._toc_separator, expand=False,
-                fill=False, padding=1)
+        self._hbox.pack_start(self._toc_separator, expand=False, fill=False,
+                              padding=1)
         return toc_navigator
 
     def set_navigator_model(self, model):
@@ -471,7 +467,7 @@ class ReadActivity(activity.Activity):
             self._update_toc_view = True
             self._toc_select_active_page()
             self._toc_scroller.set_size_request(int(Gdk.Screen.width() / 4),
-                    -1)
+                                                -1)
             self._toc_scroller.show_all()
             self._toc_separator.show()
         else:
@@ -518,7 +514,7 @@ class ReadActivity(activity.Activity):
 
     def __highlight_cb(self, button):
         tuples_list = self._bookmarkmanager.get_highlights(
-                self._view.get_current_page())
+            self._view.get_current_page())
         selection_tuple = self._view.get_selection_bounds()
         cursor_position = self._view.get_cursor_position()
 
@@ -534,15 +530,15 @@ class ReadActivity(activity.Activity):
                 old_highlight_found = compare_tuple
                 break
 
-        if old_highlight_found == None:
+        if old_highlight_found is None:
             self._bookmarkmanager.add_highlight(
-                    self._view.get_current_page(), selection_tuple)
+                self._view.get_current_page(), selection_tuple)
         else:
             self._bookmarkmanager.del_highlight(
-                    self._view.get_current_page(), old_highlight_found)
+                self._view.get_current_page(), old_highlight_found)
 
         self._view.show_highlights(self._bookmarkmanager.get_highlights(
-                self._view.get_current_page()))
+            self._view.get_current_page()))
 
     def __prev_bookmark_activate_cb(self, menuitem):
         page = self._view.get_current_page()
@@ -579,12 +575,12 @@ class ReadActivity(activity.Activity):
         elif response_id is Gtk.ResponseType.CANCEL:
             self._bookmarker.handler_block(self._bookmarker_toggle_handler_id)
             self._bookmarker.props.active = True
-            self._bookmarker.handler_unblock(\
+            self._bookmarker.handler_unblock(
                 self._bookmarker_toggle_handler_id)
 
     def __page_changed_cb(self, model, page_from, page_to):
         self._update_nav_buttons(page_to)
-        if self._toc_model != None:
+        if self._toc_model is not None:
             self._toc_select_active_page()
 
         self._bookmark_view.update_for_page(page_to)
@@ -601,7 +597,7 @@ class ReadActivity(activity.Activity):
     def update_bookmark_button(self):
         self._bookmarker.handler_block(self._bookmarker_toggle_handler_id)
         self._bookmarker.props.active = \
-                self._bookmark_view.is_showing_local_bookmark()
+            self._bookmark_view.is_showing_local_bookmark()
         self._bookmarker.handler_unblock(self._bookmarker_toggle_handler_id)
 
     def _update_nav_buttons(self, current_page):
@@ -615,11 +611,11 @@ class ReadActivity(activity.Activity):
     def _update_toc(self):
         if self._view.update_toc(self):
             self._navigator_changed_handler_id = \
-                    self._navigator.connect('cursor-changed',
-                    self.__navigator_cursor_changed_cb)
+                self._navigator.connect('cursor-changed',
+                                        self.__navigator_cursor_changed_cb)
 
     def __navigator_cursor_changed_cb(self, toc_treeview):
-        if toc_treeview.get_selection() == None:
+        if toc_treeview.get_selection() is None:
             return
         treestore, toc_selected = toc_treeview.get_selection().get_selected()
 
@@ -690,7 +686,7 @@ class ReadActivity(activity.Activity):
             if self._idle_timer > 0:
                 GObject.source_remove(self._idle_timer)
             self._idle_timer = GObject.timeout_add_seconds(15,
-                    self._suspend_cb)
+                                                           self._suspend_cb)
             self._sleep_inhibit = False
         else:
             # Now inactive
@@ -728,8 +724,8 @@ class ReadActivity(activity.Activity):
         self._load_document('file://' + file_path)
 
         # FIXME: This should obviously be fixed properly
-        GObject.timeout_add_seconds(1,
-                self.__view_toolbar_needs_update_size_cb, None)
+        GObject.timeout_add_seconds(
+            1, self.__view_toolbar_needs_update_size_cb, None)
 
     def write_file(self, file_path):
         """Write into datastore for Keep.
@@ -747,18 +743,18 @@ class ReadActivity(activity.Activity):
 
         try:
             self.metadata['Read_current_page'] = \
-                        str(self._view.get_current_page())
+                str(self._view.get_current_page())
 
             self._view.update_metadata(self)
 
             self.metadata['Read_search'] = \
-                    self._edit_toolbar._search_entry.props.text
+                self._edit_toolbar._search_entry.props.text
 
         except Exception, e:
             _logger.error('write_file(): %s', e)
 
         self.metadata['Read_search'] = \
-                self._edit_toolbar._search_entry.props.text
+            self._edit_toolbar._search_entry.props.text
         self.metadata['activity'] = self.get_bundle_id()
 
         os.link(self._tempfile, file_path)
@@ -833,10 +829,11 @@ class ReadActivity(activity.Activity):
         # instead of IPv4 (might be more compatible with Rainbow)
         chan = self.shared_activity.telepathy_tubes_chan
         iface = chan[telepathy.CHANNEL_TYPE_TUBES]
-        addr = iface.AcceptStreamTube(tube_id,
-                telepathy.SOCKET_ADDRESS_TYPE_IPV4,
-                telepathy.SOCKET_ACCESS_CONTROL_LOCALHOST, 0,
-                utf8_strings=True)
+        addr = iface.AcceptStreamTube(
+            tube_id,
+            telepathy.SOCKET_ADDRESS_TYPE_IPV4,
+            telepathy.SOCKET_ACCESS_CONTROL_LOCALHOST, 0,
+            utf8_strings=True)
         _logger.debug('Accepted stream tube: listening address is %r', addr)
         # SOCKET_ADDRESS_TYPE_IPV4 is defined to have addresses of type '(sq)'
         assert isinstance(addr, dbus.Struct)
@@ -847,7 +844,7 @@ class ReadActivity(activity.Activity):
         port = int(addr[1])
 
         getter = ReadURLDownloader("http://%s:%d/document"
-                                           % (addr[0], port))
+                                   % (addr[0], port))
         getter.connect("finished", self._download_result_cb, tube_id)
         getter.connect("progress", self._download_progress_cb, tube_id)
         getter.connect("error", self._download_error_cb, tube_id)
@@ -930,7 +927,6 @@ class ReadActivity(activity.Activity):
         self._view_toolbar.set_view(self._view)
         self._edit_toolbar.set_view(self._view)
 
-
         self.filehash = self.metadata.get('filehash', None)
         if self.filehash is None:
             self.filehash = get_md5(filepath)
@@ -938,9 +934,9 @@ class ReadActivity(activity.Activity):
 
         self._bookmarkmanager = BookmarkManager(self.filehash)
         self._bookmarkmanager.connect('added_bookmark',
-                self._added_bookmark_cb)
+                                      self._added_bookmark_cb)
         self._bookmarkmanager.connect('removed_bookmark',
-                self._removed_bookmark_cb)
+                                      self._removed_bookmark_cb)
 
         # Add the bookmarks to the tray
         color = profile.get_color().to_string()
@@ -963,7 +959,7 @@ class ReadActivity(activity.Activity):
         self._update_toolbars()
 
         self._edit_toolbar._search_entry.props.text = \
-                                self.metadata.get('Read_search', '')
+            self.metadata.get('Read_search', '')
 
         current_page = int(self.metadata.get('Read_current_page', '0'))
         _logger.debug('Setting page to: %d', current_page)
@@ -1002,23 +998,24 @@ class ReadActivity(activity.Activity):
 
         _logger.debug('Starting HTTP server on port %d', self.port)
         self._fileserver = ReadHTTPServer(("", self.port),
-            self._tempfile)
+                                          self._tempfile)
 
         # Make a tube for it
         chan = self.shared_activity.telepathy_tubes_chan
         iface = chan[telepathy.CHANNEL_TYPE_TUBES]
-        self._fileserver_tube_id = iface.OfferStreamTube(READ_STREAM_SERVICE,
-                {},
-                telepathy.SOCKET_ADDRESS_TYPE_IPV4,
-                ('127.0.0.1', dbus.UInt16(self.port)),
-                telepathy.SOCKET_ACCESS_CONTROL_LOCALHOST, 0)
+        self._fileserver_tube_id = iface.OfferStreamTube(
+            READ_STREAM_SERVICE,
+            {},
+            telepathy.SOCKET_ADDRESS_TYPE_IPV4,
+            ('127.0.0.1', dbus.UInt16(self.port)),
+            telepathy.SOCKET_ACCESS_CONTROL_LOCALHOST, 0)
 
     def watch_for_tubes(self):
         """Watch for new tubes."""
         tubes_chan = self.shared_activity.telepathy_tubes_chan
 
-        tubes_chan[telepathy.CHANNEL_TYPE_TUBES].connect_to_signal('NewTube',
-            self._new_tube_cb)
+        tubes_chan[telepathy.CHANNEL_TYPE_TUBES].connect_to_signal(
+            'NewTube', self._new_tube_cb)
         tubes_chan[telepathy.CHANNEL_TYPE_TUBES].ListTubes(
             reply_handler=self._list_tubes_reply_cb,
             error_handler=self._list_tubes_error_cb)
@@ -1065,8 +1062,8 @@ class ReadActivity(activity.Activity):
             cursor_position = self._view.get_cursor_position()
             logging.debug('cursor position %d' % cursor_position)
             selection_tuple = self._view.get_selection_bounds()
-            tuples_list = self._bookmarkmanager.get_highlights( \
-                    self._view.get_current_page())
+            tuples_list = self._bookmarkmanager.get_highlights(
+                self._view.get_current_page())
             in_bounds = False
             for highlight_tuple in tuples_list:
                 logging.debug('control tuple  %s' % str(highlight_tuple))
@@ -1081,7 +1078,7 @@ class ReadActivity(activity.Activity):
                     break
 
             self._highlight.props.sensitive = \
-                    view.get_has_selection() or in_bounds
+                view.get_has_selection() or in_bounds
 
             self._highlight.handler_block(self._highlight_id)
             self._highlight.set_active(in_bounds)
