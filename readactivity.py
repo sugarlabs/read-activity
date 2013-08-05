@@ -917,7 +917,12 @@ class ReadActivity(activity.Activity):
         self._tempfile = filename
         if not os.path.exists(filename) or os.path.getsize(filename) == 0:
             return
-        mimetype = mime.get_for_file(filepath)
+        if 'mime_type' not in self.metadata or not self.metadata['mime_type']:
+            mimetype = mime.get_for_file(filepath)
+            self.metadata['mime_type'] = mimetype
+        else:
+            mimetype = self.metadata['mime_type']
+
         if mimetype == 'application/epub+zip':
             import epubadapter
             self._view = epubadapter.EpubViewer()
