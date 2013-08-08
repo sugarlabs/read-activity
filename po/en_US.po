@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-11 00:31-0400\n"
-"PO-Revision-Date: 2013-04-11 16:48+0200\n"
+"POT-Creation-Date: 2013-08-06 00:31-0400\n"
+"PO-Revision-Date: 2013-08-08 19:56+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en_US\n"
@@ -71,51 +71,63 @@ msgstr "Go to Bookmark"
 msgid "Remove"
 msgstr "Remove"
 
-#: readactivity.py:333
+#: readactivity.py:361
+msgid "Please wait"
+msgstr "Please wait"
+
+#: readactivity.py:362
+msgid "Starting connection..."
+msgstr "Starting connection..."
+
+#: readactivity.py:374
 msgid "No book"
 msgstr "No book"
 
-#: readactivity.py:333
+#: readactivity.py:374
 msgid "Choose something to read"
 msgstr "Choose something to read"
 
-#: readactivity.py:338
+#: readactivity.py:379
 msgid "Back"
 msgstr "Back"
 
-#: readactivity.py:342
+#: readactivity.py:383
 msgid "Previous page"
 msgstr "Previous page"
 
-#: readactivity.py:344
+#: readactivity.py:385
 msgid "Previous bookmark"
 msgstr "Previous bookmark"
 
-#: readactivity.py:356
+#: readactivity.py:397
 msgid "Forward"
 msgstr "Forward"
 
-#: readactivity.py:360
+#: readactivity.py:401
 msgid "Next page"
 msgstr "Next page"
 
-#: readactivity.py:362
+#: readactivity.py:403
 msgid "Next bookmark"
 msgstr "Next bookmark"
 
-#: readactivity.py:413
+#: readactivity.py:454
 msgid "Index"
 msgstr "Index"
 
-#: readactivity.py:534
+#: readactivity.py:575
 msgid "Delete bookmark"
 msgstr "Delete bookmark"
 
-#: readactivity.py:535
+#: readactivity.py:576
 msgid "All the information related with this bookmark will be lost"
 msgstr "All the information related with this bookmark will be lost"
 
-#: readactivity.py:895 readactivity.py:1090
+#: readactivity.py:900
+msgid "Receiving book..."
+msgstr "Receiving book..."
+
+#: readactivity.py:966 readactivity.py:1162
 #, python-format
 msgid "Page %d"
 msgstr "Page %d"
