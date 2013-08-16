@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-11 00:31-0400\n"
-"PO-Revision-Date: 2013-04-12 19:34+0200\n"
+"POT-Creation-Date: 2013-08-06 00:31-0400\n"
+"PO-Revision-Date: 2013-08-16 15:41+0200\n"
 "Last-Translator: andika <andika@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: id\n"
@@ -71,51 +71,63 @@ msgstr "Ke Penanda Taut"
 msgid "Remove"
 msgstr "Hapus"
 
-#: readactivity.py:333
+#: readactivity.py:361
+msgid "Please wait"
+msgstr "Harap tunggu"
+
+#: readactivity.py:362
+msgid "Starting connection..."
+msgstr "Memulai koneksi..."
+
+#: readactivity.py:374
 msgid "No book"
 msgstr "Tak ada buku"
 
-#: readactivity.py:333
+#: readactivity.py:374
 msgid "Choose something to read"
 msgstr "Pilih sesuatu untuk dibaca"
 
-#: readactivity.py:338
+#: readactivity.py:379
 msgid "Back"
 msgstr "Mundur"
 
-#: readactivity.py:342
+#: readactivity.py:383
 msgid "Previous page"
 msgstr "Halaman sebelumnya"
 
-#: readactivity.py:344
+#: readactivity.py:385
 msgid "Previous bookmark"
 msgstr "Penanda taut sebelumnya"
 
-#: readactivity.py:356
+#: readactivity.py:397
 msgid "Forward"
 msgstr "Maju"
 
-#: readactivity.py:360
+#: readactivity.py:401
 msgid "Next page"
 msgstr "Halaman selanjutnya"
 
-#: readactivity.py:362
+#: readactivity.py:403
 msgid "Next bookmark"
 msgstr "Penanda taut selanjutnya"
 
-#: readactivity.py:413
+#: readactivity.py:454
 msgid "Index"
 msgstr "Indeks"
 
-#: readactivity.py:534
+#: readactivity.py:575
 msgid "Delete bookmark"
 msgstr "Hapus penanda taut"
 
-#: readactivity.py:535
+#: readactivity.py:576
 msgid "All the information related with this bookmark will be lost"
 msgstr "Semua informasi terkait dengan penanda taut ini akan hilang"
 
-#: readactivity.py:895 readactivity.py:1090
+#: readactivity.py:900
+msgid "Receiving book..."
+msgstr "Menerima buku..."
+
+#: readactivity.py:966 readactivity.py:1162
 #, python-format
 msgid "Page %d"
 msgstr "Halaman %d"
