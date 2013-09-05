@@ -50,7 +50,11 @@ class LinkButton(TrayButton, GObject.GObject):
         # it as single byte string:
         if isinstance(color, unicode):
             color = str(color)
-        self.set_image(buf, color.split(',')[1], color.split(',')[0])
+        if buf is not None:
+            self.set_image(buf, color.split(',')[1], color.split(',')[0])
+        else:
+            self.set_empty_image(page, color.split(',')[1],
+                                 color.split(',')[0])
 
         self.page = int(page)
         info = title + '\n' + owner
@@ -79,6 +83,39 @@ class LinkButton(TrayButton, GObject.GObject):
         thumb_width, thumb_height = style.zoom(100), style.zoom(80)
         context.rectangle(dest_x, dest_y, thumb_width, thumb_height)
         context.fill()
+
+        pixbuf_bg = Gdk.pixbuf_get_from_surface(bg_surface, 0, 0,
+                                                bg_width, bg_height)
+
+        img.set_from_pixbuf(pixbuf_bg)
+        self.set_icon_widget(img)
+        img.show()
+
+    def set_empty_image(self, page, fill='#0000ff', stroke='#4d4c4f'):
+        img = Gtk.Image()
+
+        bg_width, bg_height = style.zoom(120), style.zoom(110)
+        bg_surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, bg_width,
+                                        bg_height)
+        context = cairo.Context(bg_surface)
+        # draw a rectangle in the background with the selected colors
+        context.set_line_width(style.zoom(10))
+        context.set_source_rgba(*style.Color(fill).get_rgba())
+        context.rectangle(0, 0, bg_width, bg_height)
+        context.fill_preserve()
+        context.set_source_rgba(*style.Color(stroke).get_rgba())
+        context.stroke()
+
+        # add the page number
+        context.set_font_size(style.zoom(60))
+        text = str(page)
+        x, y = bg_width / 2, bg_height / 2
+
+        xbearing, ybearing, width, height, xadvance, yadvance = \
+            context.text_extents(text)
+        context.move_to(x - width / 2, y + height / 2)
+        context.show_text(text)
+        context.stroke()
 
         pixbuf_bg = Gdk.pixbuf_get_from_surface(bg_surface, 0, 0,
                                                 bg_width, bg_height)
