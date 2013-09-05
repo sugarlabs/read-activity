@@ -18,7 +18,7 @@ class EpubViewer(epubview.EpubView):
     def setup(self, activity):
         self.set_screen_dpi(activity.dpi)
         self.connect('selection-changed',
-                            activity._view_selection_changed_cb)
+                     activity._view_selection_changed_cb)
 
         activity._hbox.pack_start(self, True, True, 0)
         self.show_all()
@@ -82,8 +82,8 @@ class EpubViewer(epubview.EpubView):
         if end_range > len(self.word_tuples):
             end_range = len(self.word_tuples)
         for word_tuple in self.word_tuples[self.current_word:end_range]:
-            file_str.write('<mark name="' + str(i) + '"/>' + \
-                    word_tuple[2].encode('utf-8'))
+            file_str.write('<mark name="' + str(i) + '"/>' +
+                           word_tuple[2].encode('utf-8'))
             i = i + 1
         self.current_word = i
         file_str.write('</speak>')
@@ -114,7 +114,7 @@ class EpubViewer(epubview.EpubView):
     def connect_zoom_handler(self, handler):
         self._zoom_handler = handler
         self._view_notify_zoom_handler = \
-                self.connect('notify::scale', handler)
+            self.connect('notify::scale', handler)
         return self._view_notify_zoom_handler
 
     def connect_page_changed_handler(self, handler):
@@ -167,7 +167,7 @@ class EpubViewer(epubview.EpubView):
 
         while link_iter is not None and \
                 self._epub.get_links_model().get_value(link_iter, 1) \
-                        != current_link:
+                != current_link:
             link_iter = self._epub.get_links_model().iter_next(link_iter)
         return link_iter
 
@@ -179,10 +179,10 @@ class EpubViewer(epubview.EpubView):
 
     def setup_find_job(self, text, updated_cb):
         self._find_job = JobFind(document=self._epub,
-                start_page=0, n_pages=self.get_pagecount(),
-                text=text, case_sensitive=False)
+                                 start_page=0, n_pages=self.get_pagecount(),
+                                 text=text, case_sensitive=False)
         self._find_updated_handler = self._find_job.connect('updated',
-                updated_cb)
+                                                            updated_cb)
         return self._find_job, self._find_updated_handler
 
 
@@ -205,6 +205,6 @@ class EpubDocument(epubview.Epub):
 class JobFind(epubview.JobFind):
 
     def __init__(self, document, start_page, n_pages, text,
-            case_sensitive=False):
+                 case_sensitive=False):
         epubview.JobFind.__init__(self, document, start_page, n_pages, text,
-            case_sensitive=False)
+                                  case_sensitive=False)

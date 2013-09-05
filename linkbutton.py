@@ -40,8 +40,7 @@ class LinkButton(TrayButton, GObject.GObject):
         'remove_link': (GObject.SignalFlags.RUN_FIRST,
                         None, ([int])),
         'go_to_bookmark': (GObject.SignalFlags.RUN_FIRST,
-                        None, ([int])),
-        }
+                           None, ([int])), }
 
     def __init__(self, buf, color, title, owner, page):
         TrayButton.__init__(self)
@@ -67,7 +66,7 @@ class LinkButton(TrayButton, GObject.GObject):
 
         bg_width, bg_height = style.zoom(120), style.zoom(110)
         bg_surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, bg_width,
-                bg_height)
+                                        bg_height)
         context = cairo.Context(bg_surface)
         # draw a rectangle in the background with the selected colors
         context.set_line_width(style.zoom(10))

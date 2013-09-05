@@ -56,7 +56,8 @@ def _init_db():
         shutil.copy(olddbpath, dbpath)
 
         conn = sqlite3.connect(dbpath)
-        conn.execute("CREATE TABLE  temp_bookmarks  AS SELECT md5, page, " + \
+        conn.execute(
+            "CREATE TABLE  temp_bookmarks  AS SELECT md5, page, " +
             "title 'content', timestamp, user, color, local  FROM bookmarks")
         conn.execute("ALTER TABLE bookmarks RENAME TO bookmarks_old")
         conn.execute("ALTER TABLE temp_bookmarks RENAME TO bookmarks")
@@ -72,15 +73,15 @@ def _init_db():
 
 def _init_db_highlights(conn):
     conn.execute('CREATE TABLE IF NOT EXISTS HIGHLIGHTS ' +
-                '(md5 TEXT, page INTEGER, ' +
-                'init_pos INTEGER, end_pos INTEGER)')
+                 '(md5 TEXT, page INTEGER, ' +
+                 'init_pos INTEGER, end_pos INTEGER)')
     conn.commit()
 
 
 def _init_db_previews(conn):
     conn.execute('CREATE TABLE IF NOT EXISTS PREVIEWS ' +
-                '(md5 TEXT, page INTEGER, ' +
-                'preview)')
+                 '(md5 TEXT, page INTEGER, ' +
+                 'preview)')
     conn.commit()
 
 
@@ -88,10 +89,9 @@ class BookmarkManager(GObject.GObject):
 
     __gsignals__ = {
         'added_bookmark': (GObject.SignalFlags.RUN_FIRST,
-                     None, ([int])),
+                           None, ([int])),
         'removed_bookmark': (GObject.SignalFlags.RUN_FIRST,
-                     None, ([int])),
-        }
+                             None, ([int])), }
 
     def __init__(self, filehash):
         GObject.GObject.__init__(self)
@@ -99,7 +99,7 @@ class BookmarkManager(GObject.GObject):
 
         dbpath = _init_db()
 
-        assert dbpath != None
+        assert dbpath is not None
 
         self._conn = sqlite3.connect(dbpath)
         _init_db_highlights(self._conn)
@@ -120,10 +120,10 @@ class BookmarkManager(GObject.GObject):
         # locale = 0 means that this is a bookmark originally
         # created by the person who originally shared the file
         timestamp = time.time()
-        t = (self._filehash, page, content, timestamp, self._user, \
-                self._color, local)
-        self._conn.execute('insert into bookmarks values ' + \
-                '(?, ?, ?, ?, ?, ?, ?)', t)
+        t = (self._filehash, page, content, timestamp, self._user,
+             self._color, local)
+        self._conn.execute('insert into bookmarks values ' +
+                           '(?, ?, ?, ?, ?, ?, ?)', t)
         self._conn.commit()
 
         self._resync_bookmark_cache()
@@ -133,8 +133,8 @@ class BookmarkManager(GObject.GObject):
         # We delete only the locally made bookmark
         logging.debug('del_bookmark page %d', page)
         t = (self._filehash, page, self._user)
-        self._conn.execute('delete from bookmarks ' + \
-                'where md5=? and page=? and user=?', t)
+        self._conn.execute('delete from bookmarks ' +
+                           'where md5=? and page=? and user=?', t)
         self._conn.commit()
         self._del_bookmark_preview(page)
         self._resync_bookmark_cache()
@@ -143,21 +143,22 @@ class BookmarkManager(GObject.GObject):
     def add_bookmark_preview(self, page, preview):
         logging.debug('add_bookmark_preview page %d', page)
         t = (self._filehash, page, base64.b64encode(preview))
-        self._conn.execute('insert into previews values ' + \
-                '(?, ?, ?)', t)
+        self._conn.execute('insert into previews values ' +
+                           '(?, ?, ?)', t)
         self._conn.commit()
 
     def _del_bookmark_preview(self, page):
         logging.debug('del_bookmark_preview page %d', page)
         t = (self._filehash, page)
-        self._conn.execute('delete from previews ' + \
-                'where md5=? and page=?', t)
+        self._conn.execute('delete from previews ' +
+                           'where md5=? and page=?', t)
         self._conn.commit()
 
     def get_bookmark_preview(self, page):
         logging.debug('get_bookmark page %d', page)
-        rows = self._conn.execute('select preview from previews ' + \
-            'where md5=? and page=?', (self._filehash, page))
+        rows = self._conn.execute('select preview from previews ' +
+                                  'where md5=? and page=?',
+                                  (self._filehash, page))
         for row in rows:
             return base64.b64decode(row[0])
         return None
@@ -165,8 +166,9 @@ class BookmarkManager(GObject.GObject):
     def _populate_bookmarks(self):
         # TODO: Figure out if caching the entire set of bookmarks
         # is a good idea or not
-        rows = self._conn.execute('select * from bookmarks ' + \
-            'where md5=? order by page', (self._filehash, ))
+        rows = self._conn.execute('select * from bookmarks ' +
+                                  'where md5=? order by page',
+                                  (self._filehash, ))
 
         for row in rows:
             self._bookmarks.append(Bookmark(row))
@@ -227,24 +229,24 @@ class BookmarkManager(GObject.GObject):
         logging.error('Adding hg page %d %s' % (page, highlight_tuple))
         self.get_highlights(page).append(highlight_tuple)
 
-        t = (self._filehash, page, highlight_tuple[0],
-                highlight_tuple[1])
-        self._conn.execute('insert into highlights values ' + \
-                '(?, ?, ?, ?)', t)
+        t = (self._filehash, page, highlight_tuple[0], highlight_tuple[1])
+        self._conn.execute('insert into highlights values ' +
+                           '(?, ?, ?, ?)', t)
         self._conn.commit()
 
     def del_highlight(self, page, highlight_tuple):
         self._highlights[page].remove(highlight_tuple)
-        t = (self._filehash, page, highlight_tuple[0], \
-                highlight_tuple[1])
-        self._conn.execute('delete from highlights ' + \
-            'where md5=? and page=? and init_pos=? and end_pos=?', \
-            t)
+        t = (self._filehash, page, highlight_tuple[0],
+             highlight_tuple[1])
+        self._conn.execute(
+            'delete from highlights ' +
+            'where md5=? and page=? and init_pos=? and end_pos=?', t)
         self._conn.commit()
 
     def _populate_highlights(self):
-        rows = self._conn.execute('select * from highlights ' + \
-            'where md5=? order by page', (self._filehash, ))
+        rows = self._conn.execute('select * from highlights ' +
+                                  'where md5=? order by page',
+                                  (self._filehash, ))
         for row in rows:
             # md5 = row[0]
             page = row[1]

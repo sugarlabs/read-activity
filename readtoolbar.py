@@ -42,7 +42,7 @@ class EditToolbar(BaseEditToolbar):
 
         self._search_entry = iconentry.IconEntry()
         self._search_entry.set_icon_from_name(iconentry.ICON_ENTRY_PRIMARY,
-                                                'entry-search')
+                                              'entry-search')
         self._search_entry.add_clear_button()
         self._search_entry.connect('activate', self._search_entry_activate_cb)
         self._search_entry.connect('changed', self._search_entry_changed_cb)
@@ -97,7 +97,7 @@ class EditToolbar(BaseEditToolbar):
         text = self._search_entry.props.text
         if text != "":
             self._find_job, self._find_updated_handler = \
-                        self._view.setup_find_job(text, self._find_updated_cb)
+                self._view.setup_find_job(text, self._find_updated_cb)
         else:
             # FIXME: highlight nothing
             pass
@@ -173,12 +173,11 @@ class ViewToolbar(Gtk.Toolbar):
 
     __gsignals__ = {
         'go-fullscreen': (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE,
-                ([])),
+                          ([])),
         'toggle-index-show': (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE,
-                ([bool])),
+                              ([bool])),
         'toggle-tray-show': (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE,
-                ([bool])),
-    }
+                             ([bool])), }
 
     def __init__(self):
         Gtk.Toolbar.__init__(self)

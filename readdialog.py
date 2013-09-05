@@ -80,15 +80,15 @@ class BaseReadDialog(Gtk.Window):
         self.get_window().set_transient_for(self._parent_window_xid)
 
         self.modify_bg(Gtk.StateType.NORMAL,
-                            style.COLOR_WHITE.get_gdk_color())
+                       style.COLOR_WHITE.get_gdk_color())
 
         if self._canvas is not None:
             self._canvas.modify_bg(Gtk.StateType.NORMAL,
-                style.COLOR_WHITE.get_gdk_color())
+                                   style.COLOR_WHITE.get_gdk_color())
             self._canvas.grab_focus()
 
         self._event_box.modify_bg(Gtk.StateType.NORMAL,
-                style.COLOR_WHITE.get_gdk_color())
+                                  style.COLOR_WHITE.get_gdk_color())
 
     def accept_clicked_cb(self, widget):
         raise NotImplementedError
@@ -100,7 +100,7 @@ class BaseReadDialog(Gtk.Window):
 class BookmarkDialog(BaseReadDialog):
 
     def __init__(self, parent_xid, dialog_title, bookmark_title,
-            bookmark_content, page, sidebarinstance):
+                 bookmark_content, page, sidebarinstance):
         BaseReadDialog.__init__(self, parent_xid, dialog_title)
 
         self._sidebarinstance = sidebarinstance
@@ -117,15 +117,15 @@ class BookmarkDialog(BaseReadDialog):
         label_title.set_use_markup(True)
         label_title.set_alignment(1, 0.5)
         label_title.modify_fg(Gtk.StateType.NORMAL,
-                            style.COLOR_SELECTION_GREY.get_gdk_color())
+                              style.COLOR_SELECTION_GREY.get_gdk_color())
         thbox.pack_start(label_title, False, False, 0)
         label_title.show()
 
         self._title_entry = Gtk.Entry()
         self._title_entry.modify_bg(Gtk.StateType.INSENSITIVE,
-                            style.COLOR_WHITE.get_gdk_color())
+                                    style.COLOR_WHITE.get_gdk_color())
         self._title_entry.modify_base(Gtk.StateType.INSENSITIVE,
-                            style.COLOR_WHITE.get_gdk_color())
+                                      style.COLOR_WHITE.get_gdk_color())
         self._title_entry.set_size_request(int(Gdk.Screen.width() / 3), -1)
 
         thbox.pack_start(self._title_entry, False, False, 0)
@@ -143,7 +143,7 @@ class BookmarkDialog(BaseReadDialog):
         label_content.set_use_markup(True)
         label_content.set_alignment(0, 0)
         label_content.modify_fg(Gtk.StateType.NORMAL,
-                            style.COLOR_SELECTION_GREY.get_gdk_color())
+                                style.COLOR_SELECTION_GREY.get_gdk_color())
         cvbox.pack_start(label_content, False, False, 0)
         label_content.show()
 
@@ -172,17 +172,17 @@ class BookmarkDialog(BaseReadDialog):
 class BookmarkAddDialog(BookmarkDialog):
 
     def __init__(self, parent_xid, dialog_title, bookmark_title,
-            bookmark_content, page, sidebarinstance):
+                 bookmark_content, page, sidebarinstance):
         BookmarkDialog.__init__(self, parent_xid, dialog_title, bookmark_title,
-            bookmark_content, page, sidebarinstance)
+                                bookmark_content, page, sidebarinstance)
 
     def accept_clicked_cb(self, widget):
         title = self._title_entry.get_text()
         details = self._content_entry.get_buffer().props.text
         content = {'title': title.decode('utf-8'),
-                'body': details.decode('utf-8')}
+                   'body': details.decode('utf-8')}
         self._sidebarinstance._real_add_bookmark(self._page,
-                json.dumps(content))
+                                                 json.dumps(content))
         self.destroy()
 
     def cancel_clicked_cb(self, widget):
@@ -193,16 +193,16 @@ class BookmarkAddDialog(BookmarkDialog):
 class BookmarkEditDialog(BookmarkDialog):
 
     def __init__(self, parent_xid, dialog_title, bookmark_title,
-            bookmark_content, page, sidebarinstance):
+                 bookmark_content, page, sidebarinstance):
         BookmarkDialog.__init__(self, parent_xid, dialog_title, bookmark_title,
-            bookmark_content, page, sidebarinstance)
+                                bookmark_content, page, sidebarinstance)
 
     def accept_clicked_cb(self, widget):
         title = self._title_entry.get_text()
         details = self._content_entry.get_buffer().props.text
         content = {'title': title.decode('utf-8'),
-                'body': details.decode('utf-8')}
+                   'body': details.decode('utf-8')}
         self._sidebarinstance.del_bookmark(self._page)
         self._sidebarinstance._real_add_bookmark(self._page,
-                json.dumps(content))
+                                                 json.dumps(content))
         self.destroy()

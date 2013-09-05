@@ -27,19 +27,19 @@ class EvinceViewer():
     def setup(self, activity):
         self._activity = activity
         self._view.connect('selection-changed',
-                            activity._view_selection_changed_cb)
+                           activity._view_selection_changed_cb)
         self._view.connect('external-link', self.__handle_link_cb)
 
         activity._scrolled = Gtk.ScrolledWindow()
         activity._scrolled.set_policy(Gtk.PolicyType.AUTOMATIC,
-                Gtk.PolicyType.AUTOMATIC)
+                                      Gtk.PolicyType.AUTOMATIC)
         activity._scrolled.props.shadow_type = Gtk.ShadowType.NONE
 
         activity._scrolled.add(self._view)
         self._view.show()
 
         self._view.set_events(self._view.get_events() |
-                Gdk.EventMask.TOUCH_MASK)
+                              Gdk.EventMask.TOUCH_MASK)
         self._view.connect('event', self.__view_touch_event_cb)
 
         activity._hbox.pack_start(activity._scrolled, True, True, 0)
@@ -50,7 +50,7 @@ class EvinceViewer():
     def load_document(self, file_path):
         try:
             self._document = \
-                    EvinceDocument.Document.factory_get_document(file_path)
+                EvinceDocument.Document.factory_get_document(file_path)
         except GObject.GError, e:
             _logger.error('Can not load document: %s', e)
             return
@@ -88,12 +88,12 @@ class EvinceViewer():
             'title': "%s: %s" % (_('URL from Read'), url),
             'title_set_by_user': '1',
             'icon-color': profile.get_color().to_string(),
-            'mime_type': 'text/uri-list',
-            }
+            'mime_type': 'text/uri-list', }
+
         for k, v in metadata.items():
             jobject.metadata[k] = v
         file_path = os.path.join(get_activity_root(),
-                'instance', '%i_' % time.time())
+                                 'instance', '%i_' % time.time())
         open(file_path, 'w').write(url + '\r\n')
         os.chmod(file_path, 0755)
         jobject.set_file_path(file_path)
@@ -253,19 +253,19 @@ class EvinceViewer():
     def connect_zoom_handler(self, handler):
         self._zoom_handler = handler
         self._view_notify_zoom_handler = \
-                self._model.connect('notify::scale', handler)
+            self._model.connect('notify::scale', handler)
         return self._view_notify_zoom_handler
 
     def setup_find_job(self, text, updated_cb):
-        self._find_job = EvinceView.JobFind.new(document=self._document,
-                start_page=0,
-                n_pages=self._document.get_n_pages(),
-                text=text, case_sensitive=False)
+        self._find_job = EvinceView.JobFind.new(
+            document=self._document, start_page=0,
+            n_pages=self._document.get_n_pages(),
+            text=text, case_sensitive=False)
         self._find_updated_handler = self._find_job.connect('updated',
-                updated_cb)
+                                                            updated_cb)
         self._view.find_started(self._find_job)
-        EvinceView.Job.scheduler_push_job(self._find_job,
-                EvinceView.JobPriority.PRIORITY_NONE)
+        EvinceView.Job.scheduler_push_job(
+            self._find_job, EvinceView.JobPriority.PRIORITY_NONE)
         return self._find_job, self._find_updated_handler
 
     def connect_page_changed_handler(self, handler):
@@ -281,9 +281,10 @@ class EvinceViewer():
             else:
                 self._job_links = EvinceView.JobLinks.new(document=doc)
                 self._job_links.connect('finished', self.__index_loaded_cb,
-                        activity)
-                EvinceView.Job.scheduler_push_job(self._job_links,
-                        EvinceView.JobPriority.PRIORITY_NONE)
+                                        activity)
+                EvinceView.Job.scheduler_push_job(
+                    self._job_links,
+                    EvinceView.JobPriority.PRIORITY_NONE)
                 return True
         else:
             return False
@@ -296,7 +297,8 @@ class EvinceViewer():
         Check if Evince version is at major or equal than the requested
         """
         evince_version = [EvinceDocument.MAJOR_VERSION,
-                EvinceDocument.MINOR_VERSION, EvinceDocument.MICRO_VERSION]
+                          EvinceDocument.MINOR_VERSION,
+                          EvinceDocument.MICRO_VERSION]
         return evince_version >= [major, minor, micro]
 
     def __index_loaded_cb(self, job, activity):

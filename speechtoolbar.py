@@ -101,13 +101,13 @@ class SpeechToolbar(Gtk.Toolbar):
                 f.close()
 
         self._cnf_client.add_dir('/desktop/sugar/speech',
-                GConf.ClientPreloadType.PRELOAD_NONE)
+                                 GConf.ClientPreloadType.PRELOAD_NONE)
         speech.pitch = self._cnf_client.get_int('/desktop/sugar/speech/pitch')
         speech.rate = self._cnf_client.get_int('/desktop/sugar/speech/rate')
-        self._cnf_client.notify_add('/desktop/sugar/speech/pitch', \
-                self.__conf_changed_cb, None)
-        self._cnf_client.notify_add('/desktop/sugar/speech/rate', \
-                self.__conf_changed_cb, None)
+        self._cnf_client.notify_add('/desktop/sugar/speech/pitch',
+                                    self.__conf_changed_cb, None)
+        self._cnf_client.notify_add('/desktop/sugar/speech/rate',
+                                    self.__conf_changed_cb, None)
 
     def __conf_changed_cb(self, client, connection_id, entry, args):
         key = entry.get_key()

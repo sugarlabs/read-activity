@@ -42,13 +42,13 @@ class BookmarkView(Gtk.EventBox):
 
     __gsignals__ = {
         'bookmark-changed': (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE,
-                              ([])),
+                             ([])),
     }
 
     def __init__(self):
         Gtk.EventBox.__init__(self)
         self.set_size_request(style.GRID_CELL_SIZE,
-                style.GRID_CELL_SIZE * 2)
+                              style.GRID_CELL_SIZE * 2)
         self._xo_color = profile.get_color()
         self._fill_color = style.Color(self._xo_color.get_fill_color())
         self._stroke_color = style.Color(self._xo_color.get_stroke_color())
@@ -85,11 +85,12 @@ class BookmarkView(Gtk.EventBox):
     def _add_bookmark_icon(self, bookmark):
         xocolor = XoColor(str(bookmark.color))
         self._bookmark_icon = Icon(icon_name='emblem-favorite',
-                xo_color=xocolor, icon_size=Gtk.IconSize.LARGE_TOOLBAR)
+                                   xo_color=xocolor,
+                                   icon_size=Gtk.IconSize.LARGE_TOOLBAR)
 
         self._box.props.has_tooltip = True
-        self.__box_query_tooltip_cb_id = self._box.connect('query_tooltip',
-            self.__bookmark_icon_query_tooltip_cb, bookmark)
+        self.__box_query_tooltip_cb_id = self._box.connect(
+            'query_tooltip', self.__bookmark_icon_query_tooltip_cb, bookmark)
 
         self.__event_cb_id = \
             self.connect('event', self.__event_cb, bookmark)
@@ -101,15 +102,16 @@ class BookmarkView(Gtk.EventBox):
             self._is_showing_local_bookmark = True
 
     def __bookmark_icon_query_tooltip_cb(self, widget, x, y, keyboard_mode,
-            tip, bookmark):
+                                         tip, bookmark):
         tooltip_header = bookmark.get_note_title()
         tooltip_body = bookmark.get_note_body()
         time = timestamp_to_elapsed_string(bookmark.timestamp)
         #TRANS: This goes like Bookmark added by User 5 days ago
         #TRANS: (the elapsed string gets translated automatically)
-        tooltip_footer = (_('Bookmark added by %(user)s %(time)s') \
-                % {'user': bookmark.nick.decode('utf-8'),
-                'time': time.decode('utf-8')})
+        tooltip_footer = (
+            _('Bookmark added by %(user)s %(time)s')
+            % {'user': bookmark.nick.decode('utf-8'),
+               'time': time.decode('utf-8')})
 
         vbox = Gtk.VBox()
 
@@ -143,7 +145,7 @@ class BookmarkView(Gtk.EventBox):
 
     def __event_cb(self, widget, event, bookmark):
         if event.type == Gdk.EventType.BUTTON_PRESS and \
-                    self._bookmark_icon is not None:
+                self._bookmark_icon is not None:
 
             bookmark_title = bookmark.get_note_title()
             bookmark_content = bookmark.get_note_body()
