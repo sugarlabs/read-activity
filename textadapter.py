@@ -480,6 +480,8 @@ class TextViewer(GObject.GObject):
     def zoom_to_actual_size(self):
         return False
 
+    def can_rotate(self):
+        return False
 
 class _JobFind(GObject.GObject):
 

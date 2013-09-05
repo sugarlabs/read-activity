@@ -70,6 +70,9 @@ class EpubViewer(epubview.EpubView):
     def can_do_text_to_speech(self):
         return False
 
+    def can_rotate(self):
+        return False
+
     def get_marked_words(self):
         "Adds a mark between each word of text."
         i = self.current_word

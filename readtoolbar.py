@@ -225,7 +225,7 @@ class ViewToolbar(Gtk.Toolbar):
         self._zoom_to_original.show()
 
         spacer = Gtk.SeparatorToolItem()
-        spacer.props.draw = False
+        spacer.props.draw = True
         self.insert(spacer, -1)
         spacer.show()
 
@@ -245,6 +245,23 @@ class ViewToolbar(Gtk.Toolbar):
 
         self._view_notify_zoom_handler = None
 
+        spacer = Gtk.SeparatorToolItem()
+        spacer.props.draw = True
+        self.insert(spacer, -1)
+        spacer.show()
+
+        self._rotate_left = ToolButton('rotate_anticlockwise')
+        self._rotate_left.set_tooltip(_('Rotate left'))
+        self._rotate_left.connect('clicked', self._rotate_left_cb)
+        self.insert(self._rotate_left, -1)
+        self._rotate_left.show()
+
+        self._rotate_right = ToolButton('rotate_clockwise')
+        self._rotate_right.set_tooltip(_('Rotate right'))
+        self._rotate_right.connect('clicked', self._rotate_right_cb)
+        self.insert(self._rotate_right, -1)
+        self._rotate_right.show()
+
     def set_view(self, view):
         self._view = view
         self._update_zoom_buttons()
@@ -259,6 +276,12 @@ class ViewToolbar(Gtk.Toolbar):
 
     def _zoom_in_cb(self, button):
         self.zoom_in()
+
+    def _rotate_left_cb(self, button):
+        self._view.rotate_left()
+
+    def _rotate_right_cb(self, button):
+        self._view.rotate_right()
 
     def zoom_out(self):
         self._view.zoom_out()
@@ -283,6 +306,8 @@ class ViewToolbar(Gtk.Toolbar):
         self._zoom_to_width.props.sensitive = self._view.can_zoom_to_width()
         self._zoom_to_fit.props.sensitive = self._view.can_zoom_to_width()
         self._zoom_to_original.props.sensitive = self._view.can_zoom_to_width()
+        self._rotate_left.props.sensitive = self._view.can_rotate()
+        self._rotate_right.props.sensitive = self._view.can_rotate()
 
     def _zoom_to_fit_cb(self, menu_item):
         self._view.zoom_to_best_fit()

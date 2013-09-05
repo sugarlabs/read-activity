@@ -122,6 +122,17 @@ class EvinceViewer():
     def previous_page(self):
         self._view.previous_page()
 
+    def rotate_left(self):
+        rotation = self._model.get_rotation()
+        self._model.set_rotation(rotation - 90)
+
+    def rotate_right(self):
+        rotation = self._model.get_rotation()
+        self._model.set_rotation(rotation + 90)
+
+    def can_rotate(self):
+        return True
+
     def get_pagecount(self):
         '''
         Returns the pagecount of the loaded file
