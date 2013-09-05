@@ -166,7 +166,8 @@ class TextViewer(GObject.GObject):
             return
         scrollval = scrollbar.get_value()
         scroll_upper = self._v_vscrollbar.props.adjustment.props.upper
-        scroll_page_size = self._v_vscrollbar.props.adjustment.props.page_size
+        #scroll_page_size = \
+        #   self._v_vscrollbar.props.adjustment.props.page_size
 
         if self.__going_fwd and \
                 not self._current_page == self._pagecount:

@@ -17,17 +17,11 @@
 
 from gi.repository import Gtk
 from gi.repository import Gdk
-from gi.repository import GdkPixbuf
 from gi.repository import GObject
-from gi.repository import Rsvg
 
-import os
 import StringIO
 import cairo
 from gettext import gettext as _
-import re
-import gc
-import logging
 
 from sugar3.graphics.palette import Palette
 from sugar3.graphics.tray import TrayButton

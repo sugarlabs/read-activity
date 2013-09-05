@@ -129,7 +129,6 @@ class SpeechToolbar(Gtk.Toolbar):
             f.close()
 
     def reset_buttons_cb(self):
-        logging.error('reset buttons')
         self.play_btn.set_icon_name('media-playback-start')
         self.stop_btn.set_sensitive(False)
         self.is_paused = False

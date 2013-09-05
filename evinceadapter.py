@@ -105,10 +105,6 @@ class EvinceViewer():
     def get_current_page(self):
         return self._model.props.page
 
-    def get_current_link(self):
-        # TODO
-        return ""
-
     def set_current_page(self, page):
         if page >= self._document.get_n_pages():
             page = self._document.get_n_pages() - 1
@@ -315,7 +311,7 @@ class EvinceViewer():
         link_found = ""
         current_page = self._model.props.page
         while True:
-            value = self._index_model.get_value(_iter, 0)
+            #value = self._index_model.get_value(_iter, 0)
             link = self._index_model.get_value(_iter, 1)
             if self._document.get_link_page(link) > current_page:
                 break

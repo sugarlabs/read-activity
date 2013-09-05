@@ -90,6 +90,8 @@ class EpubViewer(epubview.EpubView):
         return file_str.getvalue()
 
     def get_more_text(self):
+        pass
+        """
         if self.current_word < len(self.word_tuples):
             speech.stop()
             more_text = self.get_marked_words()
@@ -97,6 +99,7 @@ class EpubViewer(epubview.EpubView):
         else:
             if speech.reset_buttons_cb is not None:
                 speech.reset_buttons_cb()
+        """
 
     def reset_text_to_speech(self):
         self.current_word = 0
