@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-06 00:31-0400\n"
-"PO-Revision-Date: 2013-08-08 19:56+0200\n"
+"POT-Creation-Date: 2013-09-06 00:31-0400\n"
+"PO-Revision-Date: 2013-09-06 18:03+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en_GB\n"
@@ -38,23 +38,21 @@ msgstr ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
 
-#. TRANS: This goes like Bookmark added by User 5 days ago
-#. TRANS: (the elapsed string gets translated automatically)
-#: bookmarkview.py:110
+#: bookmarkview.py:112
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
 msgstr "Bookmark added by %(user)s %(time)s"
 
-#: bookmarkview.py:153 bookmarkview.py:204
+#: bookmarkview.py:155 bookmarkview.py:206
 msgid "Add notes for bookmark: "
 msgstr "Add notes for bookmark: "
 
-#: bookmarkview.py:200
+#: bookmarkview.py:202
 #, python-format
 msgid "%s's bookmark"
 msgstr "%s's bookmark"
 
-#: bookmarkview.py:201
+#: bookmarkview.py:203
 #, python-format
 msgid "Bookmark for page %d"
 msgstr "Bookmark for page %d"
@@ -63,11 +61,11 @@ msgstr "Bookmark for page %d"
 msgid "URL from Read"
 msgstr "URL from Read"
 
-#: linkbutton.py:94
+#: linkbutton.py:124
 msgid "Go to Bookmark"
 msgstr "Go to Bookmark"
 
-#: linkbutton.py:99
+#: linkbutton.py:129
 msgid "Remove"
 msgstr "Remove"
 
@@ -172,39 +170,47 @@ msgstr "Find previous"
 msgid "Find next"
 msgstr "Find next"
 
-#: readtoolbar.py:189
+#: readtoolbar.py:188
 msgid "Table of contents"
 msgstr "Table of contents"
 
-#: readtoolbar.py:198
+#: readtoolbar.py:197
 msgid "Zoom out"
 msgstr "Zoom out"
 
-#: readtoolbar.py:204
+#: readtoolbar.py:203
 msgid "Zoom in"
 msgstr "Zoom in"
 
-#: readtoolbar.py:210
+#: readtoolbar.py:209
 msgid "Zoom to width"
 msgstr "Zoom to width"
 
-#: readtoolbar.py:216
+#: readtoolbar.py:215
 msgid "Zoom to fit"
 msgstr "Zoom to fit"
 
-#: readtoolbar.py:222
+#: readtoolbar.py:221
 msgid "Actual size"
 msgstr "Actual size"
 
-#: readtoolbar.py:233
+#: readtoolbar.py:232
 msgid "Fullscreen"
 msgstr "Full-screen"
 
-#: readtoolbar.py:301
+#: readtoolbar.py:253
+msgid "Rotate left"
+msgstr "Rotate left"
+
+#: readtoolbar.py:259
+msgid "Rotate right"
+msgstr "Rotate right"
+
+#: readtoolbar.py:325
 msgid "Show Tray"
 msgstr "Show Tray"
 
-#: readtoolbar.py:303
+#: readtoolbar.py:327
 msgid "Hide Tray"
 msgstr "Hide Tray"
 
