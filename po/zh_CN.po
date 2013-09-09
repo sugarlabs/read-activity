@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OLPC XBook\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-11 00:31-0400\n"
-"PO-Revision-Date: 2013-04-11 19:07+0200\n"
+"POT-Creation-Date: 2013-09-06 00:31-0400\n"
+"PO-Revision-Date: 2013-09-09 06:36+0200\n"
 "Last-Translator: lite <litekok@gmail.com>\n"
 "Language-Team: Yuan CHAO <yuanchao@gmail.com>\n"
 "Language: zh_CN\n"
@@ -32,23 +32,21 @@ msgid ""
 "around to feel like you are really holding a book!"
 msgstr "当你准备读书时，请使用此活动！请记住，好像你真的拿着一本书一样翻转你的电脑！"
 
-#. TRANS: This goes like Bookmark added by User 5 days ago
-#. TRANS: (the elapsed string gets translated automatically)
-#: bookmarkview.py:110
+#: bookmarkview.py:112
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
 msgstr "由 %(user)s 在 %(time)s 加入的书签"
 
-#: bookmarkview.py:153 bookmarkview.py:204
+#: bookmarkview.py:155 bookmarkview.py:206
 msgid "Add notes for bookmark: "
 msgstr "为书签添加说明："
 
-#: bookmarkview.py:200
+#: bookmarkview.py:202
 #, python-format
 msgid "%s's bookmark"
 msgstr "%s 的书签"
 
-#: bookmarkview.py:201
+#: bookmarkview.py:203
 #, python-format
 msgid "Bookmark for page %d"
 msgstr "第 %d 页的书签"
@@ -57,59 +55,71 @@ msgstr "第 %d 页的书签"
 msgid "URL from Read"
 msgstr "来自阅读的网址"
 
-#: linkbutton.py:94
+#: linkbutton.py:124
 msgid "Go to Bookmark"
 msgstr "转到书签"
 
-#: linkbutton.py:99
+#: linkbutton.py:129
 msgid "Remove"
 msgstr "删除"
 
-#: readactivity.py:333
+#: readactivity.py:361
+msgid "Please wait"
+msgstr "请等待"
+
+#: readactivity.py:362
+msgid "Starting connection..."
+msgstr "开始连接..."
+
+#: readactivity.py:374
 msgid "No book"
 msgstr "没有书籍"
 
-#: readactivity.py:333
+#: readactivity.py:374
 msgid "Choose something to read"
 msgstr "请选择要读的书"
 
-#: readactivity.py:338
+#: readactivity.py:379
 msgid "Back"
 msgstr "后退"
 
-#: readactivity.py:342
+#: readactivity.py:383
 msgid "Previous page"
 msgstr "上一页"
 
-#: readactivity.py:344
+#: readactivity.py:385
 msgid "Previous bookmark"
 msgstr "上一个书签"
 
-#: readactivity.py:356
+#: readactivity.py:397
 msgid "Forward"
 msgstr "前进"
 
-#: readactivity.py:360
+#: readactivity.py:401
 msgid "Next page"
 msgstr "下一页"
 
-#: readactivity.py:362
+#: readactivity.py:403
 msgid "Next bookmark"
 msgstr "下一个书签"
 
-#: readactivity.py:413
+#: readactivity.py:454
 msgid "Index"
 msgstr "索引"
 
-#: readactivity.py:534
+#: readactivity.py:575
 msgid "Delete bookmark"
 msgstr "删除书签"
 
-#: readactivity.py:535
+#: readactivity.py:576
 msgid "All the information related with this bookmark will be lost"
 msgstr "此书签相关的所有信息都将丢失"
 
-#: readactivity.py:895 readactivity.py:1090
+#: readactivity.py:900
+msgid "Receiving book..."
+msgstr "正在接收书籍中..."
+
+#: readactivity.py:966 readactivity.py:1162
 #, python-format
 msgid "Page %d"
 msgstr "%d 页"
@@ -154,39 +164,47 @@ msgstr "寻找前一个"
 msgid "Find next"
 msgstr "寻找下一个"
 
-#: readtoolbar.py:189
+#: readtoolbar.py:188
 msgid "Table of contents"
 msgstr "目录"
 
-#: readtoolbar.py:198
+#: readtoolbar.py:197
 msgid "Zoom out"
 msgstr "缩小"
 
-#: readtoolbar.py:204
+#: readtoolbar.py:203
 msgid "Zoom in"
 msgstr "放大"
 
-#: readtoolbar.py:210
+#: readtoolbar.py:209
 msgid "Zoom to width"
 msgstr "最适宽度"
 
-#: readtoolbar.py:216
+#: readtoolbar.py:215
 msgid "Zoom to fit"
 msgstr "页面大小"
 
-#: readtoolbar.py:222
+#: readtoolbar.py:221
 msgid "Actual size"
 msgstr "实际大小"
 
-#: readtoolbar.py:233
+#: readtoolbar.py:232
 msgid "Fullscreen"
 msgstr "全屏显示"
 
-#: readtoolbar.py:301
+#: readtoolbar.py:253
+msgid "Rotate left"
+msgstr "向左旋转"
+
+#: readtoolbar.py:259
+msgid "Rotate right"
+msgstr "向右旋转"
+
+#: readtoolbar.py:325
 msgid "Show Tray"
 msgstr "显示托盘"
 
-#: readtoolbar.py:303
+#: readtoolbar.py:327
 msgid "Hide Tray"
 msgstr "隐藏托盘"
 
