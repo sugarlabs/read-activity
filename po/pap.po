@@ -1,29 +1,27 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Wenchi <linguares@yahoo.com>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-11 00:31-0400\n"
-"PO-Revision-Date: 2010-02-28 20:33+0200\n"
-"Last-Translator: <empetronia@yahoo.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2013-08-06 00:31-0400\n"
+"PO-Revision-Date: 2013-09-24 01:33+0200\n"
+"Last-Translator: Chris <cjl@laptop.org>\n"
+"Language-Team: Suares\n"
+"Language: pap\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.1\n"
+"X-Generator: Pootle 2.0.5\n"
 
 #. TRANS: "name" option from activity.info file
 msgid "Read"
@@ -35,88 +33,102 @@ msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
 msgstr ""
+"Uza e aktividat akí ora bo ta kla pa lesa! Kòrda drei bo kòmpiuter pa bo "
+"sinti manera kos ku ta di bèrdat bo ta tene un buki!"
 
 #. TRANS: This goes like Bookmark added by User 5 days ago
 #. TRANS: (the elapsed string gets translated automatically)
 #: bookmarkview.py:110
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
-msgstr "Markador agrega pa %(user)s %(time)s"
+msgstr "Markabuki agregá pa %(user)s %(time)s"
 
 #: bookmarkview.py:153 bookmarkview.py:204
 msgid "Add notes for bookmark: "
-msgstr "Agregá notisianan pa buklèger: "
+msgstr "Agregá nota pa markabuki: "
 
 #: bookmarkview.py:200
 #, python-format
 msgid "%s's bookmark"
-msgstr "%s's buklèger"
+msgstr "%s's markabuki"
 
 #: bookmarkview.py:201
 #, python-format
 msgid "Bookmark for page %d"
-msgstr "Bukelèger pa página %d"
+msgstr "Markabuki pa página %d"
 
 #: evinceadapter.py:88
 msgid "URL from Read"
-msgstr ""
+msgstr "URL di Read"
 
 #: linkbutton.py:94
 msgid "Go to Bookmark"
-msgstr ""
+msgstr "Bai Markabuki"
 
 #: linkbutton.py:99
 msgid "Remove"
-msgstr ""
+msgstr "Eliminá"
 
-#: readactivity.py:333
+#: readactivity.py:361
+msgid "Please wait"
+msgstr "Un momentu por fabor..."
+
+#: readactivity.py:362
+msgid "Starting connection..."
+msgstr "Start konekshon..."
+
+#: readactivity.py:374
 msgid "No book"
-msgstr ""
+msgstr "No tin buki"
 
-#: readactivity.py:333
+#: readactivity.py:374
 msgid "Choose something to read"
-msgstr ""
+msgstr "Skohe algu pa lesa"
 
-#: readactivity.py:338
+#: readactivity.py:379
 msgid "Back"
 msgstr "Bèk"
 
-#: readactivity.py:342
+#: readactivity.py:383
 msgid "Previous page"
-msgstr "Pagina anterior"
+msgstr "Página anterior"
 
-#: readactivity.py:344
+#: readactivity.py:385
 msgid "Previous bookmark"
-msgstr "Buklèger anterior"
+msgstr "Markabuki anterior"
 
-#: readactivity.py:356
+#: readactivity.py:397
 msgid "Forward"
-msgstr "Avànsa"
+msgstr "Padilanti"
 
-#: readactivity.py:360
+#: readactivity.py:401
 msgid "Next page"
-msgstr "Pagina sigiente"
+msgstr "Siguiente página"
 
-#: readactivity.py:362
+#: readactivity.py:403
 msgid "Next bookmark"
-msgstr "Sigiente buklèger"
+msgstr "Siguiente markabuki"
 
-#: readactivity.py:413
+#: readactivity.py:454
 msgid "Index"
-msgstr ""
+msgstr "Indise"
 
-#: readactivity.py:534
+#: readactivity.py:575
 msgid "Delete bookmark"
-msgstr ""
+msgstr "Kita markabuki"
 
-#: readactivity.py:535
+#: readactivity.py:576
 msgid "All the information related with this bookmark will be lost"
-msgstr ""
+msgstr "Lo pèrdè tur informashon relashoná ku e markabuki akí"
 
-#: readactivity.py:895 readactivity.py:1090
+#: readactivity.py:900
+msgid "Receiving book..."
+msgstr "Risibiendo buki..."
+
+#: readactivity.py:966 readactivity.py:1162
 #, python-format
 msgid "Page %d"
-msgstr ""
+msgstr "Página %d"
 
 #: readdialog.py:52
 msgid "Cancel"
@@ -132,7 +144,7 @@ msgstr "<b>Título</b>:"
 
 #: readdialog.py:142
 msgid "<b>Details</b>:"
-msgstr "<b>Detaynan</b>:"
+msgstr "<b>Detayenan</b>:"
 
 #: readtoolbar.py:61
 msgid "Previous"
@@ -140,11 +152,11 @@ msgstr "Anterior"
 
 #: readtoolbar.py:68
 msgid "Next"
-msgstr "Sigiente"
+msgstr "Siguiente"
 
 #: readtoolbar.py:79
 msgid "Highlight"
-msgstr ""
+msgstr "Resaltá"
 
 #: readtoolbar.py:160
 msgid "Find first"
@@ -156,51 +168,51 @@ msgstr "Buska anterior"
 
 #: readtoolbar.py:168
 msgid "Find next"
-msgstr "Buska sigiente"
+msgstr "Buska siguiente"
 
 #: readtoolbar.py:189
 msgid "Table of contents"
-msgstr ""
+msgstr "Tabla di kontenido"
 
 #: readtoolbar.py:198
 msgid "Zoom out"
-msgstr "Hala serka leho"
+msgstr "Hala afó"
 
 #: readtoolbar.py:204
 msgid "Zoom in"
-msgstr "Hala serka"
+msgstr "Hala aden"
 
 #: readtoolbar.py:210
 msgid "Zoom to width"
-msgstr "Agusta e hanchura"
+msgstr "Ahustá na hanchura"
 
 #: readtoolbar.py:216
 msgid "Zoom to fit"
-msgstr "Hala serka pa fit"
+msgstr "Ahustá pa fit"
 
 #: readtoolbar.py:222
 msgid "Actual size"
-msgstr "Tamánjo aktual"
+msgstr "Tamaño real"
 
 #: readtoolbar.py:233
 msgid "Fullscreen"
-msgstr "Pantaya kompleto"
+msgstr "Pantaya kompletu"
 
 #: readtoolbar.py:301
 msgid "Show Tray"
-msgstr ""
+msgstr "Mustra Teblachi"
 
 #: readtoolbar.py:303
 msgid "Hide Tray"
-msgstr ""
+msgstr "Skonde Teblachi"
 
 #: speechtoolbar.py:57
 msgid "Play / Pause"
-msgstr ""
+msgstr "Aktivá / Pousa"
 
 #: speechtoolbar.py:65
 msgid "Stop"
-msgstr ""
+msgstr "Stòp"
 
 #~ msgid "%"
 #~ msgstr "%"
