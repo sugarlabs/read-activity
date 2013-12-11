@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-11 00:31-0400\n"
-"PO-Revision-Date: 2012-06-06 06:22+0200\n"
-"Last-Translator: nirajpaudel <niraj.paudel@olenepal.org>\n"
+"POT-Creation-Date: 2013-09-06 00:31-0400\n"
+"PO-Revision-Date: 2013-11-20 07:20+0200\n"
+"Last-Translator: Ganesh <ganesh.ghimire@olenepal.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ne\n"
 "MIME-Version: 1.0\n"
@@ -35,26 +35,26 @@ msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
 msgstr ""
+"तपाईँ पढ्न चाहनु हुन्छ भने यो क्रियाकलाप प्रयोग गर्न सक्नु हुनेछ। "
+"कम्प्युटरलाई वरिपरि घुमाएर साँच्चैको पुस्तक समाएर पढेको अनुभव गर्नु हुनेछ।"
 
-#. TRANS: This goes like Bookmark added by User 5 days ago
-#. TRANS: (the elapsed string gets translated automatically)
-#: bookmarkview.py:110
+#: bookmarkview.py:112
 #, python-format
 #, python-format,
 msgid "Bookmark added by %(user)s %(time)s"
 msgstr "%(user)s %(time)s द्वारा थपिएको पुस्तक-चिनो"
 
-#: bookmarkview.py:153 bookmarkview.py:204
+#: bookmarkview.py:155 bookmarkview.py:206
 msgid "Add notes for bookmark: "
-msgstr "पुस्तक-चिनोको लागि टिपोटहरु थप: "
+msgstr "पुस्तकचिनोको लागि टिपोटहरु थप: "
 
-#: bookmarkview.py:200
+#: bookmarkview.py:202
 #, python-format
 #, python-format,
 msgid "%s's bookmark"
 msgstr "%s's पुस्तकचिनो"
 
-#: bookmarkview.py:201
+#: bookmarkview.py:203
 #, python-format
 #, python-format,
 msgid "Bookmark for page %d"
@@ -64,62 +64,74 @@ msgstr "%d पानाको लागि पुस्तकचिनो"
 msgid "URL from Read"
 msgstr "पढ देखिको URL"
 
-#: linkbutton.py:94
+#: linkbutton.py:124
 msgid "Go to Bookmark"
-msgstr ""
+msgstr "पुस्तकचिनोमा जाऊ"
 
-#: linkbutton.py:99
+#: linkbutton.py:129
 msgid "Remove"
-msgstr ""
+msgstr "हटाऊ"
 
-#: readactivity.py:333
+#: readactivity.py:361
+msgid "Please wait"
+msgstr "कृपया पर्खनुहोस्"
+
+#: readactivity.py:362
+msgid "Starting connection..."
+msgstr "जडान सुरु हुँदै..."
+
+#: readactivity.py:374
 msgid "No book"
-msgstr ""
+msgstr "पुस्तक छैन"
 
-#: readactivity.py:333
+#: readactivity.py:374
 msgid "Choose something to read"
-msgstr ""
+msgstr "पढ्नको लागि केहि चयन गर्नुहोस्"
 
-#: readactivity.py:338
+#: readactivity.py:379
 msgid "Back"
 msgstr "पछाडि"
 
-#: readactivity.py:342
+#: readactivity.py:383
 msgid "Previous page"
 msgstr "अघिल्लो पाना"
 
-#: readactivity.py:344
+#: readactivity.py:385
 msgid "Previous bookmark"
-msgstr "अघिल्लो पुस्तक-चिनो"
+msgstr "अघिल्लो पुस्तकचिनो"
 
-#: readactivity.py:356
+#: readactivity.py:397
 msgid "Forward"
 msgstr "अगाडि"
 
-#: readactivity.py:360
+#: readactivity.py:401
 msgid "Next page"
 msgstr "अर्को पाना"
 
-#: readactivity.py:362
+#: readactivity.py:403
 msgid "Next bookmark"
-msgstr "अर्को पुस्तक-चिनो"
+msgstr "अर्को पुस्तकचिनो"
 
-#: readactivity.py:413
+#: readactivity.py:454
 msgid "Index"
-msgstr ""
+msgstr "अनुक्रमणिका"
 
-#: readactivity.py:534
+#: readactivity.py:575
 msgid "Delete bookmark"
-msgstr "मेटाउ पुस्तक-चिनो"
+msgstr "मेटाउ पुस्तकचिनो"
 
-#: readactivity.py:535
+#: readactivity.py:576
 msgid "All the information related with this bookmark will be lost"
-msgstr "यो पुस्तककौ सबै सुचना हराउन सक्छ"
+msgstr "यो पुस्तकचिनोसँग सम्बन्धित सबै सुचना हराउने छ"
 
-#: readactivity.py:895 readactivity.py:1090
+#: readactivity.py:900
+msgid "Receiving book..."
+msgstr "पुस्तक प्राप्त गर्दै..."
+
+#: readactivity.py:966 readactivity.py:1162
 #, python-format
 msgid "Page %d"
-msgstr ""
+msgstr "पृष्ठ %d"
 
 #: readdialog.py:52
 msgid "Cancel"
@@ -161,41 +173,49 @@ msgstr "पहिलाको भेट्टाउ"
 msgid "Find next"
 msgstr "पछिको भेट्टाउ"
 
-#: readtoolbar.py:189
+#: readtoolbar.py:188
 msgid "Table of contents"
-msgstr ""
+msgstr "विषय सूची"
 
-#: readtoolbar.py:198
+#: readtoolbar.py:197
 msgid "Zoom out"
 msgstr "सानो बनाऊ"
 
-#: readtoolbar.py:204
+#: readtoolbar.py:203
 msgid "Zoom in"
 msgstr "ठूलो बनाऊ"
 
-#: readtoolbar.py:210
+#: readtoolbar.py:209
 msgid "Zoom to width"
 msgstr "पूरा चौडाई"
 
-#: readtoolbar.py:216
+#: readtoolbar.py:215
 msgid "Zoom to fit"
 msgstr "सबै हेर्ने"
 
-#: readtoolbar.py:222
+#: readtoolbar.py:221
 msgid "Actual size"
 msgstr "वास्तविक आकार"
 
-#: readtoolbar.py:233
+#: readtoolbar.py:232
 msgid "Fullscreen"
 msgstr "पूरा स्क्रिन"
 
-#: readtoolbar.py:301
-msgid "Show Tray"
-msgstr ""
+#: readtoolbar.py:253
+msgid "Rotate left"
+msgstr "वायाँ घुमाउने"
 
-#: readtoolbar.py:303
+#: readtoolbar.py:259
+msgid "Rotate right"
+msgstr "दायाँ घुमाउने"
+
+#: readtoolbar.py:325
+msgid "Show Tray"
+msgstr "ट्रे देखाऊ"
+
+#: readtoolbar.py:327
 msgid "Hide Tray"
-msgstr ""
+msgstr "ट्रे लुकाऊ"
 
 #: speechtoolbar.py:57
 msgid "Play / Pause"
