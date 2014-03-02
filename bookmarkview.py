@@ -86,7 +86,7 @@ class BookmarkView(Gtk.EventBox):
         xocolor = XoColor(str(bookmark.color))
         self._bookmark_icon = Icon(icon_name='emblem-favorite',
                                    xo_color=xocolor,
-                                   icon_size=Gtk.IconSize.LARGE_TOOLBAR)
+                                   pixel_size=style.STANDARD_ICON_SIZE)
 
         self._box.props.has_tooltip = True
         self.__box_query_tooltip_cb_id = self._box.connect(
