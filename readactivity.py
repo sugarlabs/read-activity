@@ -31,6 +31,7 @@ import dbus
 from gi.repository import GObject
 from gi.repository import Gtk
 from gi.repository import Gdk
+from gi.repository import Gio
 
 GObject.threads_init()
 
@@ -918,7 +919,7 @@ class ReadActivity(activity.Activity):
         if not os.path.exists(filename) or os.path.getsize(filename) == 0:
             return
         if 'mime_type' not in self.metadata or not self.metadata['mime_type']:
-            mimetype = mime.get_for_file(filepath)
+            mimetype = Gio.content_type_guess(filepath, None)[0]
             self.metadata['mime_type'] = mimetype
         else:
             mimetype = self.metadata['mime_type']
