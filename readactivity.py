@@ -803,7 +803,16 @@ class ReadActivity(activity.Activity):
 
         del self.unused_download_tubes
 
+        # Use the suggested file, the mime is not recognized if the extension
+        # is wrong in some cases (epub)
+        temp_dir = os.path.dirname(tempfile)
+        new_name = os.path.join(temp_dir, suggested_name)
+        os.rename(tempfile, new_name)
+        tempfile = new_name
+
         _logger.debug("Saving file %s to datastore...", tempfile)
+        mimetype = Gio.content_type_guess(tempfile, None)[0]
+        self._jobject.metadata['mime_type'] = mimetype
         self._jobject.file_path = tempfile
         datastore.write(self._jobject)
 
