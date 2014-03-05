@@ -843,7 +843,7 @@ class ReadActivity(activity.Activity):
             self._progress_alert = None
         GObject.idle_add(self._get_document)
 
-    def _download_document(self, tube_id, path):
+    def _download_document(self, tube_id):
         # FIXME: should ideally have the CM listen on a Unix socket
         # instead of IPv4 (might be more compatible with Rainbow)
         chan = self.shared_activity.telepathy_tubes_chan
@@ -867,8 +867,7 @@ class ReadActivity(activity.Activity):
         getter.connect("finished", self._download_result_cb, tube_id)
         getter.connect("progress", self._download_progress_cb, tube_id)
         getter.connect("error", self._download_error_cb, tube_id)
-        _logger.debug("Starting download to %s...", path)
-        getter.start(path)
+        getter.start()
         self._download_content_length = getter.get_content_length()
         self._download_content_type = getter.get_content_type()
         return False
@@ -876,13 +875,6 @@ class ReadActivity(activity.Activity):
     def _get_document(self):
         if not self._want_document:
             return False
-
-        # Assign a file path to download if one doesn't exist yet
-        if not self._jobject.file_path:
-            path = os.path.join(self.get_activity_root(), 'instance',
-                                'tmp%i' % time.time())
-        else:
-            path = self._jobject.file_path
 
         # Pick an arbitrary tube we can try to download the document from
         try:
@@ -894,7 +886,7 @@ class ReadActivity(activity.Activity):
 
         # Avoid trying to download the document multiple times at once
         self._want_document = False
-        GObject.idle_add(self._download_document, tube_id, path)
+        GObject.idle_add(self._download_document, tube_id)
         return False
 
     def _joined_cb(self, also_self):
