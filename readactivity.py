@@ -734,7 +734,13 @@ class ReadActivity(activity.Activity):
         # enable collaboration
         self.activity_button.page.share.props.sensitive = True
 
-        self._load_document('file://' + file_path)
+        # we need copy the file to a new place, the file_path disappear
+        extension = os.path.splitext(file_path)[1]
+        tempfile = os.path.join(self.get_activity_root(), 'instance',
+                                'tmp%i%s' % (time.time(), extension))
+        os.link(file_path, tempfile)
+
+        self._load_document('file://' + tempfile)
 
         # FIXME: This should obviously be fixed properly
         GObject.timeout_add_seconds(
