@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-06 00:31-0400\n"
-"PO-Revision-Date: 2013-09-24 01:33+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"POT-Creation-Date: 2013-09-06 00:31-0400\n"
+"PO-Revision-Date: 2013-10-30 00:32+0200\n"
+"Last-Translator: June <juneleonora@yahoo.com>\n"
 "Language-Team: Suares\n"
 "Language: pap\n"
 "MIME-Version: 1.0\n"
@@ -36,23 +36,21 @@ msgstr ""
 "Uza e aktividat akí ora bo ta kla pa lesa! Kòrda drei bo kòmpiuter pa bo "
 "sinti manera kos ku ta di bèrdat bo ta tene un buki!"
 
-#. TRANS: This goes like Bookmark added by User 5 days ago
-#. TRANS: (the elapsed string gets translated automatically)
-#: bookmarkview.py:110
+#: bookmarkview.py:112
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
 msgstr "Markabuki agregá pa %(user)s %(time)s"
 
-#: bookmarkview.py:153 bookmarkview.py:204
+#: bookmarkview.py:155 bookmarkview.py:206
 msgid "Add notes for bookmark: "
 msgstr "Agregá nota pa markabuki: "
 
-#: bookmarkview.py:200
+#: bookmarkview.py:202
 #, python-format
 msgid "%s's bookmark"
 msgstr "%s's markabuki"
 
-#: bookmarkview.py:201
+#: bookmarkview.py:203
 #, python-format
 msgid "Bookmark for page %d"
 msgstr "Markabuki pa página %d"
@@ -61,11 +59,11 @@ msgstr "Markabuki pa página %d"
 msgid "URL from Read"
 msgstr "URL di Read"
 
-#: linkbutton.py:94
+#: linkbutton.py:124
 msgid "Go to Bookmark"
 msgstr "Bai Markabuki"
 
-#: linkbutton.py:99
+#: linkbutton.py:129
 msgid "Remove"
 msgstr "Eliminá"
 
@@ -170,39 +168,47 @@ msgstr "Buska anterior"
 msgid "Find next"
 msgstr "Buska siguiente"
 
-#: readtoolbar.py:189
+#: readtoolbar.py:188
 msgid "Table of contents"
 msgstr "Tabla di kontenido"
 
-#: readtoolbar.py:198
+#: readtoolbar.py:197
 msgid "Zoom out"
 msgstr "Hala afó"
 
-#: readtoolbar.py:204
+#: readtoolbar.py:203
 msgid "Zoom in"
 msgstr "Hala aden"
 
-#: readtoolbar.py:210
+#: readtoolbar.py:209
 msgid "Zoom to width"
 msgstr "Ahustá na hanchura"
 
-#: readtoolbar.py:216
+#: readtoolbar.py:215
 msgid "Zoom to fit"
 msgstr "Ahustá pa fit"
 
-#: readtoolbar.py:222
+#: readtoolbar.py:221
 msgid "Actual size"
 msgstr "Tamaño real"
 
-#: readtoolbar.py:233
+#: readtoolbar.py:232
 msgid "Fullscreen"
 msgstr "Pantaya kompletu"
 
-#: readtoolbar.py:301
+#: readtoolbar.py:253
+msgid "Rotate left"
+msgstr "Bira na man robes"
+
+#: readtoolbar.py:259
+msgid "Rotate right"
+msgstr "Bira na man drechi"
+
+#: readtoolbar.py:325
 msgid "Show Tray"
 msgstr "Mustra Teblachi"
 
-#: readtoolbar.py:303
+#: readtoolbar.py:327
 msgid "Hide Tray"
 msgstr "Skonde Teblachi"
 
