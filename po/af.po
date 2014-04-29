@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-11 00:31-0400\n"
+"POT-Creation-Date: 2013-09-06 00:31-0400\n"
 "PO-Revision-Date: 2011-05-24 01:36+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,23 +36,21 @@ msgid ""
 "around to feel like you are really holding a book!"
 msgstr ""
 
-#. TRANS: This goes like Bookmark added by User 5 days ago
-#. TRANS: (the elapsed string gets translated automatically)
-#: bookmarkview.py:110
+#: bookmarkview.py:112
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
 msgstr ""
 
-#: bookmarkview.py:153 bookmarkview.py:204
+#: bookmarkview.py:155 bookmarkview.py:206
 msgid "Add notes for bookmark: "
 msgstr ""
 
-#: bookmarkview.py:200
+#: bookmarkview.py:202
 #, python-format
 msgid "%s's bookmark"
 msgstr ""
 
-#: bookmarkview.py:201
+#: bookmarkview.py:203
 #, python-format
 msgid "Bookmark for page %d"
 msgstr ""
@@ -61,59 +59,71 @@ msgstr ""
 msgid "URL from Read"
 msgstr ""
 
-#: linkbutton.py:94
+#: linkbutton.py:124
 msgid "Go to Bookmark"
 msgstr ""
 
-#: linkbutton.py:99
+#: linkbutton.py:129
 msgid "Remove"
 msgstr ""
 
-#: readactivity.py:333
-msgid "No book"
-msgstr ""
-
-#: readactivity.py:333
-msgid "Choose something to read"
-msgstr ""
-
-#: readactivity.py:338
-msgid "Back"
-msgstr "Terug"
-
-#: readactivity.py:342
-msgid "Previous page"
-msgstr ""
-
-#: readactivity.py:344
-msgid "Previous bookmark"
-msgstr ""
-
-#: readactivity.py:356
-msgid "Forward"
-msgstr "Vorentoe"
-
-#: readactivity.py:360
-msgid "Next page"
+#: readactivity.py:361
+msgid "Please wait"
 msgstr ""
 
 #: readactivity.py:362
+msgid "Starting connection..."
+msgstr ""
+
+#: readactivity.py:374
+msgid "No book"
+msgstr ""
+
+#: readactivity.py:374
+msgid "Choose something to read"
+msgstr ""
+
+#: readactivity.py:379
+msgid "Back"
+msgstr "Terug"
+
+#: readactivity.py:383
+msgid "Previous page"
+msgstr ""
+
+#: readactivity.py:385
+msgid "Previous bookmark"
+msgstr ""
+
+#: readactivity.py:397
+msgid "Forward"
+msgstr "Vorentoe"
+
+#: readactivity.py:401
+msgid "Next page"
+msgstr ""
+
+#: readactivity.py:403
 msgid "Next bookmark"
 msgstr ""
 
-#: readactivity.py:413
+#: readactivity.py:454
 msgid "Index"
 msgstr ""
 
-#: readactivity.py:534
+#: readactivity.py:575
 msgid "Delete bookmark"
 msgstr ""
 
-#: readactivity.py:535
+#: readactivity.py:576
 msgid "All the information related with this bookmark will be lost"
 msgstr ""
 
-#: readactivity.py:895 readactivity.py:1090
+#: readactivity.py:900
+msgid "Receiving book..."
+msgstr ""
+
+#: readactivity.py:966 readactivity.py:1162
 #, python-format
 msgid "Page %d"
 msgstr ""
@@ -158,39 +168,47 @@ msgstr "Soek vorige"
 msgid "Find next"
 msgstr "Soek volgende"
 
-#: readtoolbar.py:189
+#: readtoolbar.py:188
 msgid "Table of contents"
 msgstr ""
 
-#: readtoolbar.py:198
+#: readtoolbar.py:197
 msgid "Zoom out"
 msgstr "Zoem uit"
 
-#: readtoolbar.py:204
+#: readtoolbar.py:203
 msgid "Zoom in"
 msgstr "Zoem in"
 
-#: readtoolbar.py:210
+#: readtoolbar.py:209
 msgid "Zoom to width"
 msgstr "Zoem na wydte"
 
-#: readtoolbar.py:216
+#: readtoolbar.py:215
 msgid "Zoom to fit"
 msgstr "Zoem na pas"
 
-#: readtoolbar.py:222
+#: readtoolbar.py:221
 msgid "Actual size"
 msgstr "Werklike grootte"
 
-#: readtoolbar.py:233
+#: readtoolbar.py:232
 msgid "Fullscreen"
 msgstr "Volskerm"
 
-#: readtoolbar.py:301
+#: readtoolbar.py:253
+msgid "Rotate left"
+msgstr ""
+
+#: readtoolbar.py:259
+msgid "Rotate right"
+msgstr ""
+
+#: readtoolbar.py:325
 msgid "Show Tray"
 msgstr ""
 
-#: readtoolbar.py:303
+#: readtoolbar.py:327
 msgid "Hide Tray"
 msgstr ""
 
