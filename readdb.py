@@ -22,6 +22,7 @@ import shutil
 import sqlite3
 import time
 import base64
+import json
 
 from gi.repository import GObject
 from sugar3 import profile
@@ -89,7 +90,7 @@ class BookmarkManager(GObject.GObject):
 
     __gsignals__ = {
         'added_bookmark': (GObject.SignalFlags.RUN_FIRST,
-                           None, ([int])),
+                           None, ([int, str])),
         'removed_bookmark': (GObject.SignalFlags.RUN_FIRST,
                              None, ([int])), }
 
@@ -127,7 +128,8 @@ class BookmarkManager(GObject.GObject):
         self._conn.commit()
 
         self._resync_bookmark_cache()
-        self.emit('added_bookmark', page + 1)
+        title = json.loads(content)['title']
+        self.emit('added_bookmark', page + 1, title)
 
     def del_bookmark(self, page):
         # We delete only the locally made bookmark

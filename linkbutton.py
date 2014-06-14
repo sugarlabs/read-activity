@@ -50,8 +50,7 @@ class LinkButton(TrayButton, GObject.GObject):
                                  color.split(',')[0])
 
         self.page = int(page)
-        info = title + '\n' + owner
-        self.setup_rollover_options(info)
+        self.setup_rollover_options(title, owner)
 
     def set_image(self, buf, fill='#0000ff', stroke='#4d4c4f'):
         img = Gtk.Image()
@@ -117,8 +116,9 @@ class LinkButton(TrayButton, GObject.GObject):
         self.set_icon_widget(img)
         img.show()
 
-    def setup_rollover_options(self, info):
-        palette = Palette(info, text_maxlen=50)
+    def setup_rollover_options(self, title, info):
+        palette = Palette(title, text_maxlen=50)
+        palette.set_secondary_text(info)
         self.set_palette(palette)
 
         menu_item = Gtk.MenuItem(_('Go to Bookmark'))

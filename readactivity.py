@@ -971,7 +971,8 @@ class ReadActivity(activity.Activity):
                 thumb = self._get_screenshot()
             # The database is zero based
             num_page = int(page) + 1
-            title = _('Page %d') % num_page
+            title = _('%s\n<small><i>Page %d</i></small>') % \
+                            (bookmark.get_note_title(), num_page)
             self._add_link_totray(num_page, thumb, color, title, owner)
 
         self._bookmark_view.set_bookmarkmanager(self._bookmarkmanager)
@@ -1165,9 +1166,9 @@ class ReadActivity(activity.Activity):
     def __view_toolbar_go_fullscreen_cb(self, view_toolbar):
         self.fullscreen()
 
-    def _added_bookmark_cb(self, bookmarkmanager, page):
+    def _added_bookmark_cb(self, bookmarkmanager, page, title):
         logging.error('Bookmark added page %d', page)
-        title = _('Page %d') % page
+        title = _('%s\n<small><i>Page %d</i></small>') % (title, page)
         color = profile.get_color().to_string()
         owner = profile.get_nick_name()
         thumb = self._get_screenshot()
