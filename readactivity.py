@@ -687,6 +687,8 @@ class ReadActivity(activity.Activity):
                               chooser.get_selected_object())
                 jobject = chooser.get_selected_object()
                 if jobject and jobject.file_path:
+                    for key in jobject.metadata.keys():
+                        self.metadata[key] = jobject.metadata[key]
                     self.read_file(jobject.file_path)
                     jobject.object_id = self._object_id
         finally:
