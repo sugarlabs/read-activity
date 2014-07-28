@@ -369,6 +369,8 @@ class ReadActivity(activity.Activity):
             if self._jobject.file_path is not None and \
                     self._jobject.file_path != '':
                 self.read_file(self._jobject.file_path)
+            elif handle.uri:
+                self._load_document(handle.uri)
             else:
                 # Not joining, not resuming or resuming session without file
                 emptypanel.show(self, 'activity-read',
