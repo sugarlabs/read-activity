@@ -941,6 +941,9 @@ class ReadActivity(activity.Activity):
         elif mimetype == 'text/plain' or mimetype == 'application/zip':
             import textadapter
             self._view = textadapter.TextViewer()
+        elif mimetype == 'application/x-cbz':
+            import comicadapter
+            self._view = comicadapter.ComicViewer()
         else:
             import evinceadapter
             self._view = evinceadapter.EvinceViewer()
