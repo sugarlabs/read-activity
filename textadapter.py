@@ -228,6 +228,28 @@ class TextViewer(GObject.GObject):
         return self.textview.get_buffer().get_iter_at_mark(
             insert_mark).get_offset()
 
+    def in_highlight(self, tuples_list):
+        # Verify if the selection already exist or the cursor
+        # is in a highlighted area
+        cursor_position = self.get_cursor_position()
+        logging.debug('cursor position %d' % cursor_position)
+        selection_tuple = self.get_selection_bounds()
+        in_bounds = False
+        highlight_found = None
+        for highlight_tuple in tuples_list:
+            logging.debug('control tuple  %s' % str(highlight_tuple))
+            if selection_tuple:
+                if selection_tuple[0] >= highlight_tuple[0] and \
+                   selection_tuple[1] <= highlight_tuple[1]:
+                    in_bounds = True
+                    highlight_found = highlight_tuple
+                    break
+            if highlight_tuple[0] <= cursor_position >= highlight_tuple[1]:
+                in_bounds = True
+                highlight_found = highlight_tuple
+                break
+        return in_bounds, highlight_found
+
     def show_highlights(self, tuples_list):
         textbuffer = self.textview.get_buffer()
         bounds = textbuffer.get_bounds()

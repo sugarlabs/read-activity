@@ -530,22 +530,11 @@ class ReadActivity(activity.Activity):
     def __highlight_cb(self, button):
         tuples_list = self._bookmarkmanager.get_highlights(
             self._view.get_current_page())
-        selection_tuple = self._view.get_selection_bounds()
-        cursor_position = self._view.get_cursor_position()
 
-        old_highlight_found = None
-        for compare_tuple in tuples_list:
-            if selection_tuple:
-                if selection_tuple[0] >= compare_tuple[0] and \
-                        selection_tuple[1] <= compare_tuple[1]:
-                    old_highlight_found = compare_tuple
-                    break
-            if cursor_position >= compare_tuple[0] and \
-               cursor_position <= compare_tuple[1]:
-                old_highlight_found = compare_tuple
-                break
+        found, old_highlight_found = self._view.in_highlight(tuples_list)
 
-        if old_highlight_found is None:
+        if not found:
+            selection_tuple = self._view.get_selection_bounds()
             self._bookmarkmanager.add_highlight(
                 self._view.get_current_page(), selection_tuple)
         else:
@@ -1087,26 +1076,9 @@ class ReadActivity(activity.Activity):
     def _view_selection_changed_cb(self, view):
         self._edit_toolbar.copy.props.sensitive = view.get_has_selection()
         if self._view.can_highlight():
-            # Verify if the selection already exist or the cursor
-            # is in a highlighted area
-            cursor_position = self._view.get_cursor_position()
-            logging.debug('cursor position %d' % cursor_position)
-            selection_tuple = self._view.get_selection_bounds()
             tuples_list = self._bookmarkmanager.get_highlights(
                 self._view.get_current_page())
-            in_bounds = False
-            for highlight_tuple in tuples_list:
-                logging.debug('control tuple  %s' % str(highlight_tuple))
-                if selection_tuple:
-                    if selection_tuple[0] >= highlight_tuple[0] and \
-                       selection_tuple[1] <= highlight_tuple[1]:
-                        in_bounds = True
-                        break
-                if cursor_position >= highlight_tuple[0] and \
-                   cursor_position <= highlight_tuple[1]:
-                    in_bounds = True
-                    break
-
+            in_bounds, _highlight_found = self._view.in_highlight(tuples_list)
             self._highlight.props.sensitive = \
                 view.get_has_selection() or in_bounds
 
