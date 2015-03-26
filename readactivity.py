@@ -83,7 +83,7 @@ def _get_screen_dpi():
 
 
 def get_md5(filename):
-    #FIXME: Should be moved somewhere else
+    # FIXME: Should be moved somewhere else
     filename = filename.replace('file://', '')  # XXX: hack
     fh = open(filename)
     digest = md5.new()
@@ -968,7 +968,7 @@ class ReadActivity(activity.Activity):
             # The database is zero based
             num_page = int(page) + 1
             title = _('%s\n<small><i>Page %d</i></small>') % \
-                            (bookmark.get_note_title(), num_page)
+                (bookmark.get_note_title(), num_page)
             self._add_link_totray(num_page, thumb, color, title, owner)
 
         self._bookmark_view.set_bookmarkmanager(self._bookmarkmanager)
@@ -1132,8 +1132,8 @@ class ReadActivity(activity.Activity):
             return False
 
     def _key_release_event_cb(self, widget, event):
-        #keyname = Gdk.keyval_name(event.keyval)
-        #_logger.debug("Keyname Release: %s, time: %s", keyname, event.time)
+        # keyname = Gdk.keyval_name(event.keyval)
+        # _logger.debug("Keyname Release: %s, time: %s", keyname, event.time)
         return False
 
     def __view_toolbar_needs_update_size_cb(self, view_toolbar):

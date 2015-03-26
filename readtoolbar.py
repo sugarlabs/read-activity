@@ -128,7 +128,7 @@ class EditToolbar(BaseEditToolbar):
 
     #    GObject.timeout_add(500, self._search_entry_timeout_cb)
     #
-    #def _search_entry_timeout_cb(self):
+    # def _search_entry_timeout_cb(self):
     #    self._clear_find_job()
     #    self._search_find_first()
     #    return False
@@ -237,7 +237,6 @@ class ViewToolbar(Gtk.Toolbar):
         self.traybutton = ToggleToolButton('tray-show')
         self.traybutton.set_icon_name('tray-favourite')
         self.traybutton.connect('toggled', self.__tray_toggled_cb)
-        #self.traybutton.props.sensitive = False
         self.traybutton.props.active = False
         self.insert(self.traybutton, -1)
         self.traybutton.show()

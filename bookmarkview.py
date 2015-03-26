@@ -106,8 +106,8 @@ class BookmarkView(Gtk.EventBox):
         tooltip_header = bookmark.get_note_title()
         tooltip_body = bookmark.get_note_body()
         time = timestamp_to_elapsed_string(bookmark.timestamp)
-        #TRANS: This goes like Bookmark added by User 5 days ago
-        #TRANS: (the elapsed string gets translated automatically)
+        # TRANS: This goes like Bookmark added by User 5 days ago
+        # TRANS: (the elapsed string gets translated automatically)
         tooltip_footer = (
             _('Bookmark added by %(user)s %(time)s')
             % {'user': bookmark.nick.decode('utf-8'),

@@ -311,7 +311,6 @@ class EvinceViewer():
         link_found = ""
         current_page = self._model.props.page
         while True:
-            #value = self._index_model.get_value(_iter, 0)
             link = self._index_model.get_value(_iter, 1)
             if self._document.get_link_page(link) > current_page:
                 break

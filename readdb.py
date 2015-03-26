@@ -39,11 +39,11 @@ def _init_db():
 
     srcpath = os.path.join(os.environ['SUGAR_BUNDLE_PATH'], 'read_v1.db')
 
-    #Situation 0: Db is existent
+    # Situation 0: Db is existent
     if os.path.exists(dbpath):
         return dbpath
 
-    #Situation 1: DB is non-existent at all
+    # Situation 1: DB is non-existent at all
     if not os.path.exists(dbpath) and not os.path.exists(olddbpath):
         try:
             os.makedirs(dbdir)
@@ -52,7 +52,7 @@ def _init_db():
         shutil.copy(srcpath, dbpath)
         return dbpath
 
-    #Situation 2: DB is outdated
+    # Situation 2: DB is outdated
     if not os.path.exists(dbpath) and os.path.exists(olddbpath):
         shutil.copy(olddbpath, dbpath)
 

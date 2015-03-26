@@ -15,14 +15,13 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import zipfile
-import logging
 from gettext import gettext as _
 from gi.repository import GObject
 from gi.repository import Gtk
 
 from sugar3.graphics.alert import Alert
 
-from imageview import ImageViewer, pixbuf_from_data
+from imageview import ImageViewer
 
 IMAGE_ENDINGS = ('.png', '.jpg', '.jpeg', '.gif', '.bmp', '.tiff', '.tif')
 
@@ -58,7 +57,7 @@ class ComicViewer(GObject.GObject):
     def load_document(self, file_path):
         try:
             self._zip = zipfile.ZipFile(file_path.replace('file://', ''))
-        except zipfile.BadZipfile, IOError:
+        except (zipfile.BadZipfile, IOError):
             pass
 
         files = self._zip.namelist()

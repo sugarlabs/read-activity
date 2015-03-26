@@ -17,7 +17,6 @@
 #
 # From ImageViewer Activity - file ImageView.py
 
-import logging
 import cairo
 import math
 
@@ -105,7 +104,7 @@ class ImageViewer(Gtk.DrawingArea, Gtk.Scrollable):
 
     __gsignals__ = {
         'setup-new-surface': (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE,
-                             ([])),
+                              ([])),
     }
 
     def __init__(self):
@@ -372,7 +371,6 @@ class ImageViewer(Gtk.DrawingArea, Gtk.Scrollable):
         prev_target_point = self._target_point
 
         # Set target point to the relative coordinates of this view.
-        alloc = self.get_allocation()
         self._target_point = (coords[1], coords[2])
 
         self._move_anchor_to_target(prev_target_point)

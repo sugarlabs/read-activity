@@ -166,8 +166,6 @@ class TextViewer(GObject.GObject):
             return
         scrollval = scrollbar.get_value()
         scroll_upper = self._v_vscrollbar.props.adjustment.props.upper
-        #scroll_page_size = \
-        #   self._v_vscrollbar.props.adjustment.props.page_size
 
         if self.__going_fwd and \
                 not self._current_page == self._pagecount:
@@ -201,7 +199,7 @@ class TextViewer(GObject.GObject):
             print 'Warning: unknown scrolltype %s with value %f' \
                 % (str(scrolltype), value)
 
-        #FIXME: This should not be needed here
+        # FIXME: This should not be needed here
         self._scrollbar.set_value(self._current_page)
 
     def __touch_event_cb(self, widget, event):
