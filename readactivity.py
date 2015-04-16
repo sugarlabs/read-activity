@@ -25,6 +25,8 @@ import re
 import md5
 import StringIO
 import cairo
+import json
+
 import emptypanel
 
 import dbus
@@ -371,6 +373,8 @@ class ReadActivity(activity.Activity):
                 self.read_file(self._jobject.file_path)
             elif handle.uri:
                 self._load_document(handle.uri)
+                # TODO: we need trasfer the metadata and uodate
+                # bookmarks and urls
             else:
                 # Not joining, not resuming or resuming session without file
                 emptypanel.show(self, 'activity-read',
@@ -774,6 +778,14 @@ class ReadActivity(activity.Activity):
             self.filehash = get_md5(file_path)
         self.metadata['filehash'] = self.filehash
 
+        # save bookmarks in the metadata
+        bookmarks = []
+        for bookmark in self._bookmarkmanager.get_bookmarks():
+            bookmarks.append(bookmark.get_as_dict())
+        self.metadata['bookmarks'] = json.dumps(bookmarks)
+        self.metadata['highlights'] = json.dumps(
+            self._bookmarkmanager.get_all_highlights())
+
         if self._close_requested:
             _logger.debug("Removing temp file %s because we will close",
                           self._tempfile)
@@ -951,6 +963,17 @@ class ReadActivity(activity.Activity):
             logging.error('Calculate hash %s', self.filehash)
 
         self._bookmarkmanager = BookmarkManager(self.filehash)
+
+        # update bookmarks and highlights with the informaiton
+        # from the metadata
+        if 'bookmarks' in self.metadata:
+            self._bookmarkmanager.update_bookmarks(
+                json.loads(self.metadata['bookmarks']))
+
+        if 'highlights' in self.metadata:
+            self._bookmarkmanager.update_highlights(
+                json.loads(self.metadata['highlights']))
+
         self._bookmarkmanager.connect('added_bookmark',
                                       self._added_bookmark_cb)
         self._bookmarkmanager.connect('removed_bookmark',

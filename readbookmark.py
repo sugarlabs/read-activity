@@ -48,3 +48,21 @@ class Bookmark:
 
         note = json.loads(self.content)
         return note['body']
+
+    def get_as_dict(self):
+        return {'md5': self.md5,
+                'page_no': self.page_no,
+                'content': self.content,
+                'timestamp': self.timestamp,
+                'nick': self.nick,
+                'color': self.color,
+                'local': self.local}
+
+    def compare_equal_to_dict(self, _dict):
+        return _dict['md5'] == self.md5 and \
+            _dict['page_no'] == self.page_no and\
+            _dict['content'] == self.content and \
+            _dict['timestamp'] == self.timestamp and \
+            _dict['nick'] == self.nick and \
+            _dict['color'] == self.color and \
+            _dict['local'] == self.local

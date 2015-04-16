@@ -116,9 +116,37 @@ class BookmarkManager(GObject.GObject):
         self._user = profile.get_nick_name()
         self._color = profile.get_color().to_string()
 
+    def update_bookmarks(self, bookmarks_list):
+        need_reync = False
+        for bookmark_data in bookmarks_list:
+            # compare with all the bookmarks
+            found = False
+            for bookmark in self._bookmarks:
+                if bookmark.compare_equal_to_dict(bookmark_data):
+                    found = True
+                    break
+            if not found:
+                if bookmark_data['nick'] == self._user and \
+                        bookmark_data['color'] == self._color:
+                    local = 1
+                else:
+                    local = 0
+                t = (bookmark_data['md5'], bookmark_data['page_no'],
+                     bookmark_data['content'], bookmark_data['timestamp'],
+                     bookmark_data['nick'], bookmark_data['color'], local)
+                self._conn.execute('insert into bookmarks values ' +
+                                   '(?, ?, ?, ?, ?, ?, ?)', t)
+                need_reync = True
+                title = json.loads(bookmark_data['content'])['title']
+                self.emit('added_bookmark', bookmark_data['page_no'] + 1,
+                          title)
+
+        if need_reync:
+            self._resync_bookmark_cache()
+
     def add_bookmark(self, page, content, local=1):
         logging.debug('add_bookmark page %d', page)
-        # locale = 0 means that this is a bookmark originally
+        # local = 0 means that this is a bookmark originally
         # created by the person who originally shared the file
         timestamp = time.time()
         t = (self._filehash, page, content, timestamp, self._user,
@@ -226,6 +254,20 @@ class BookmarkManager(GObject.GObject):
         except KeyError:
             self._highlights[page] = []
             return self._highlights[page]
+
+    def get_all_highlights(self):
+        return self._highlights
+
+    def update_highlights(self, highlights_dict):
+        for page in highlights_dict.keys():
+            # json store the keys as strings
+            # but the page is used as a int in all the code
+            highlights_in_page = highlights_dict[page]
+            page = int(page)
+            highlights_stored = self.get_highlights(page)
+            for highlight_tuple in highlights_in_page:
+                if highlight_tuple not in highlights_stored:
+                    self.add_highlight(page, highlight_tuple)
 
     def add_highlight(self, page, highlight_tuple):
         logging.error('Adding hg page %d %s' % (page, highlight_tuple))
