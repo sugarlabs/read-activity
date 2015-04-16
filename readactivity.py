@@ -980,10 +980,10 @@ class ReadActivity(activity.Activity):
                                       self._removed_bookmark_cb)
 
         # Add the bookmarks to the tray
-        color = profile.get_color().to_string()
-        owner = profile.get_nick_name()
         for bookmark in self._bookmarkmanager.get_bookmarks():
             page = bookmark.page_no
+            color = bookmark.color
+            owner = bookmark.nick
             thumb = self._bookmarkmanager.get_bookmark_preview(page)
             if thumb is None:
                 logging.error('Preview NOT FOUND')

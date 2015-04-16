@@ -23,7 +23,6 @@ from gi.repository import Gdk
 
 from sugar3.graphics.icon import Icon
 from sugar3.graphics.xocolor import XoColor
-from sugar3 import profile
 from sugar3.util import timestamp_to_elapsed_string
 from sugar3.graphics import style
 
@@ -49,9 +48,6 @@ class BookmarkView(Gtk.EventBox):
         Gtk.EventBox.__init__(self)
         self.set_size_request(style.GRID_CELL_SIZE,
                               style.GRID_CELL_SIZE * 2)
-        self._xo_color = profile.get_color()
-        self._fill_color = style.Color(self._xo_color.get_fill_color())
-        self._stroke_color = style.Color(self._xo_color.get_stroke_color())
 
         self._box = Gtk.VButtonBox()
         self._box.set_layout(Gtk.ButtonBoxStyle.CENTER)
@@ -83,9 +79,12 @@ class BookmarkView(Gtk.EventBox):
         ctx.fill()
 
     def _add_bookmark_icon(self, bookmark):
-        xocolor = XoColor(str(bookmark.color))
+        self._bookmark = bookmark
+        self._xo_color = XoColor(str(bookmark.color))
+        self._fill_color = style.Color(self._xo_color.get_fill_color())
+        self._stroke_color = style.Color(self._xo_color.get_stroke_color())
         self._bookmark_icon = Icon(icon_name='emblem-favorite',
-                                   xo_color=xocolor,
+                                   xo_color=self._xo_color,
                                    pixel_size=style.STANDARD_ICON_SIZE)
 
         self._box.props.has_tooltip = True
@@ -199,7 +198,7 @@ class BookmarkView(Gtk.EventBox):
         self.emit('bookmark-changed')
 
     def add_bookmark(self, page):
-        bookmark_title = (_("%s's bookmark") % profile.get_nick_name())
+        bookmark_title = (_("%s's bookmark") % self._bookmark.nick)
         bookmark_content = (_("Bookmark for page %d") % (int(page) + 1))
         dialog = BookmarkAddDialog(
             parent_xid=self.get_toplevel().get_window(),
