@@ -982,8 +982,6 @@ class ReadActivity(activity.Activity):
         # Add the bookmarks to the tray
         for bookmark in self._bookmarkmanager.get_bookmarks():
             page = bookmark.page_no
-            color = bookmark.color
-            owner = bookmark.nick
             thumb = self._bookmarkmanager.get_bookmark_preview(page)
             if thumb is None:
                 logging.error('Preview NOT FOUND')
@@ -992,7 +990,8 @@ class ReadActivity(activity.Activity):
             num_page = int(page) + 1
             title = _('%s (Page %d)') % \
                 (bookmark.get_note_title(), num_page)
-            self._add_link_totray(num_page, thumb, color, title, owner)
+            self._add_link_totray(num_page, thumb, bookmark.color, title,
+                                  bookmark.nick, bookmark.local)
 
         self._bookmark_view.set_bookmarkmanager(self._bookmarkmanager)
         self._update_toc()
@@ -1174,7 +1173,7 @@ class ReadActivity(activity.Activity):
         color = profile.get_color().to_string()
         owner = profile.get_nick_name()
         thumb = self._get_screenshot()
-        self._add_link_totray(page, thumb, color, title, owner)
+        self._add_link_totray(page, thumb, color, title, owner, 1)
         bookmarkmanager.add_bookmark_preview(page - 1, thumb)
 
     def _removed_bookmark_cb(self, bookmarkmanager, page):
@@ -1187,9 +1186,9 @@ class ReadActivity(activity.Activity):
             self.tray.hide()
             self._view_toolbar.traybutton.props.active = False
 
-    def _add_link_totray(self, page, buf, color, title, owner):
+    def _add_link_totray(self, page, buf, color, title, owner, local):
         ''' add a link to the tray '''
-        item = LinkButton(buf, color, title, owner, page)
+        item = LinkButton(buf, color, title, owner, page, local)
         item.connect('clicked', self._bookmark_button_clicked_cb, page)
         item.connect('go_to_bookmark', self._bookmark_button_clicked_cb)
         item.connect('remove_link', self._bookmark_button_removed_cb)

@@ -36,7 +36,7 @@ class LinkButton(TrayButton, GObject.GObject):
         'go_to_bookmark': (GObject.SignalFlags.RUN_FIRST,
                            None, ([int])), }
 
-    def __init__(self, buf, color, title, owner, page):
+    def __init__(self, buf, color, title, owner, page, local):
         TrayButton.__init__(self)
 
         # Color read from the Journal may be Unicode, but Rsvg needs
@@ -51,7 +51,7 @@ class LinkButton(TrayButton, GObject.GObject):
             self.set_empty_image(page)
 
         self.page = int(page)
-        self.setup_rollover_options(title, owner)
+        self.setup_rollover_options(title, owner, local)
 
     def have_preview(self):
         return self._have_preview
@@ -125,7 +125,7 @@ class LinkButton(TrayButton, GObject.GObject):
         self.set_icon_widget(img)
         img.show()
 
-    def setup_rollover_options(self, title, info):
+    def setup_rollover_options(self, title, info, local):
         palette = Palette(title, text_maxlen=50)
         palette.set_secondary_text(info)
         self.set_palette(palette)
@@ -135,10 +135,11 @@ class LinkButton(TrayButton, GObject.GObject):
         palette.menu.append(menu_item)
         menu_item.show()
 
-        menu_item = Gtk.MenuItem(_('Remove'))
-        menu_item.connect('activate', self.item_remove_cb)
-        palette.menu.append(menu_item)
-        menu_item.show()
+        if local == 1:
+            menu_item = Gtk.MenuItem(_('Remove'))
+            menu_item.connect('activate', self.item_remove_cb)
+            palette.menu.append(menu_item)
+            menu_item.show()
 
     def item_remove_cb(self, widget):
         self.emit('remove_link', self.page)
