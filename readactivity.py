@@ -990,7 +990,7 @@ class ReadActivity(activity.Activity):
                 thumb = self._get_screenshot()
             # The database is zero based
             num_page = int(page) + 1
-            title = _('%s\n<small><i>Page %d</i></small>') % \
+            title = _('%s (Page %d)') % \
                 (bookmark.get_note_title(), num_page)
             self._add_link_totray(num_page, thumb, color, title, owner)
 
@@ -1170,7 +1170,7 @@ class ReadActivity(activity.Activity):
 
     def _added_bookmark_cb(self, bookmarkmanager, page, title):
         logging.error('Bookmark added page %d', page)
-        title = _('%s\n<small><i>Page %d</i></small>') % (title, page)
+        title = _('%s (Page %d)') % (title, page)
         color = profile.get_color().to_string()
         owner = profile.get_nick_name()
         thumb = self._get_screenshot()
