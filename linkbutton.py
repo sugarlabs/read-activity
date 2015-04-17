@@ -41,18 +41,25 @@ class LinkButton(TrayButton, GObject.GObject):
 
         # Color read from the Journal may be Unicode, but Rsvg needs
         # it as single byte string:
+        self._color = color
         if isinstance(color, unicode):
-            color = str(color)
+            self._color = str(color)
+        self._have_preview = False
         if buf is not None:
-            self.set_image(buf, color.split(',')[1], color.split(',')[0])
+            self.set_image(buf)
         else:
-            self.set_empty_image(page, color.split(',')[1],
-                                 color.split(',')[0])
+            self.set_empty_image(page)
 
         self.page = int(page)
         self.setup_rollover_options(title, owner)
 
-    def set_image(self, buf, fill='#0000ff', stroke='#4d4c4f'):
+    def have_preview(self):
+        return self._have_preview
+
+    def set_image(self, buf):
+        fill = self._color.split(',')[1]
+        stroke = self._color.split(',')[0]
+        self._have_preview = True
         img = Gtk.Image()
         str_buf = StringIO.StringIO(buf)
         thumb_surface = cairo.ImageSurface.create_from_png(str_buf)
@@ -83,7 +90,9 @@ class LinkButton(TrayButton, GObject.GObject):
         self.set_icon_widget(img)
         img.show()
 
-    def set_empty_image(self, page, fill='#0000ff', stroke='#4d4c4f'):
+    def set_empty_image(self, page):
+        fill = self._color.split(',')[1]
+        stroke = self._color.split(',')[0]
         img = Gtk.Image()
 
         bg_width, bg_height = style.zoom(120), style.zoom(110)

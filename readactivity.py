@@ -1201,6 +1201,18 @@ class ReadActivity(activity.Activity):
     def _bookmark_button_clicked_cb(self, button, page):
         num_page = int(page) - 1
         self._view.set_current_page(num_page)
+        if not button.have_preview():
+            # HACK: we need take the screenshot after the page changed
+            # but we don't have a event yet, Evince model have a event
+            # we need check the differnt backends and implement
+            # in all the backends.
+            GObject.timeout_add_seconds(2, self._update_preview, button, page)
+
+    def _update_preview(self, button, page):
+        thumb = self._get_screenshot()
+        self._bookmarkmanager.add_bookmark_preview(page - 1, thumb)
+        button.set_image(thumb)
+        return False
 
     def _bookmark_button_removed_cb(self, button, page):
         num_page = int(page) - 1
