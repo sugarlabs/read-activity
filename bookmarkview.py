@@ -33,9 +33,6 @@ from gettext import gettext as _
 
 _logger = logging.getLogger('read-activity')
 
-# TODO: Add support for multiple bookmarks in a single page
-# (required when sharing)
-
 
 class BookmarkView(Gtk.EventBox):
 
@@ -46,11 +43,9 @@ class BookmarkView(Gtk.EventBox):
 
     def __init__(self):
         Gtk.EventBox.__init__(self)
-        self.set_size_request(style.GRID_CELL_SIZE,
-                              style.GRID_CELL_SIZE * 2)
-
         self._box = Gtk.VButtonBox()
-        self._box.set_layout(Gtk.ButtonBoxStyle.CENTER)
+        self._box.set_layout(Gtk.ButtonBoxStyle.START)
+        self._box.set_margin_top(style.GRID_CELL_SIZE / 2)
         self.add(self._box)
         self._box.show()
 
@@ -58,11 +53,11 @@ class BookmarkView(Gtk.EventBox):
         self._bookmark_manager = None
         self._is_showing_local_bookmark = False
         self.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
-        self._box.connect('draw', self.__draw_cb)
+        self.connect('draw', self.__draw_cb)
 
     def __draw_cb(self, widget, ctx):
         width = style.GRID_CELL_SIZE
-        height = style.GRID_CELL_SIZE * 2
+        height = style.GRID_CELL_SIZE * (len(self._bookmarks) + 1)
 
         ctx.rectangle(0, 0, width, height)
         ctx.set_source_rgba(*self._fill_color.get_rgba())
@@ -79,13 +74,13 @@ class BookmarkView(Gtk.EventBox):
         ctx.fill()
 
     def _add_bookmark_icon(self, bookmark):
-        self._bookmark = bookmark
         self._xo_color = XoColor(str(bookmark.color))
         self._fill_color = style.Color(self._xo_color.get_fill_color())
         self._stroke_color = style.Color(self._xo_color.get_stroke_color())
         self._bookmark_icon = Icon(icon_name='emblem-favorite',
                                    xo_color=self._xo_color,
                                    pixel_size=style.STANDARD_ICON_SIZE)
+        self._bookmark_icon.set_valign(Gtk.Align.START)
 
         self._box.props.has_tooltip = True
         self.__box_query_tooltip_cb_id = self._box.connect(
@@ -183,21 +178,28 @@ class BookmarkView(Gtk.EventBox):
         if self._bookmark_manager is None:
             return
 
-        bookmarks = self._bookmark_manager.get_bookmarks_for_page(page)
+        self._bookmarks = self._bookmark_manager.get_bookmarks_for_page(page)
 
-        if bookmarks:
+        if self._bookmarks:
             self.show()
         else:
             self.hide()
 
-        for bookmark in bookmarks:
+        for bookmark in self._bookmarks:
             self._add_bookmark_icon(bookmark)
+
+        self.set_size_request(
+            style.GRID_CELL_SIZE,
+            style.GRID_CELL_SIZE * (len(self._bookmarks) + 1))
+
         self.notify_bookmark_change()
 
     def notify_bookmark_change(self):
+        self.queue_draw()
         self.emit('bookmark-changed')
 
     def add_bookmark(self, page):
+        # TODO: manage multiple bookmarks by page
         bookmark_title = (_("%s's bookmark") % self._bookmark.nick)
         bookmark_content = (_("Bookmark for page %d") % (int(page) + 1))
         dialog = BookmarkAddDialog(
