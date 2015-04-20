@@ -86,7 +86,7 @@ class BookmarkView(Gtk.EventBox):
 
         self._box.props.has_tooltip = True
         self.__box_query_tooltip_cb_id = self._box.connect(
-            'query_tooltip', self.__bookmark_icon_query_tooltip_cb, bookmark)
+            'query_tooltip', self.__bookmark_query_tooltip_cb)
 
         self._box.pack_start(self._bookmark_icon, False, False, 0)
         self._bookmark_icon.show_all()
@@ -94,46 +94,45 @@ class BookmarkView(Gtk.EventBox):
         if bookmark.is_local():
             self._is_showing_local_bookmark = True
 
-    def __bookmark_icon_query_tooltip_cb(self, widget, x, y, keyboard_mode,
-                                         tip, bookmark):
-        tooltip_header = bookmark.get_note_title()
-        tooltip_body = bookmark.get_note_body()
-        time = timestamp_to_elapsed_string(bookmark.timestamp)
-        # TRANS: This goes like Bookmark added by User 5 days ago
-        # TRANS: (the elapsed string gets translated automatically)
-        tooltip_footer = (
-            _('Bookmark added by %(user)s %(time)s')
-            % {'user': bookmark.nick.decode('utf-8'),
-               'time': time.decode('utf-8')})
-
+    def __bookmark_query_tooltip_cb(self, widget, x, y, keyboard_mode, tip):
         vbox = Gtk.VBox()
+        for bookmark in self._bookmarks:
 
-        l = Gtk.Label('<big>%s</big>' % tooltip_header)
-        l.set_use_markup(True)
-        l.set_width_chars(40)
-        l.set_line_wrap(True)
-        vbox.pack_start(l, False, False, 0)
-        l.show()
+            tooltip_header = bookmark.get_note_title()
+            tooltip_body = bookmark.get_note_body()
+            time = timestamp_to_elapsed_string(bookmark.timestamp)
+            # TRANS: This goes like Bookmark added by User 5 days ago
+            # TRANS: (the elapsed string gets translated automatically)
+            tooltip_footer = (
+                _('Bookmark added by %(user)s %(time)s')
+                % {'user': bookmark.nick.decode('utf-8'),
+                   'time': time.decode('utf-8')})
 
-        l = Gtk.Label('%s' % tooltip_body)
-        l.set_use_markup(True)
-        l.set_alignment(0, 0)
-        l.set_padding(2, 6)
-        l.set_width_chars(40)
-        l.set_line_wrap(True)
-        l.set_justify(Gtk.Justification.FILL)
-        vbox.pack_start(l, True, True, 0)
-        l.show()
+            l = Gtk.Label('<big>%s</big>' % tooltip_header)
+            l.set_use_markup(True)
+            l.set_width_chars(40)
+            l.set_line_wrap(True)
+            vbox.pack_start(l, False, False, 0)
+            l.show()
 
-        l = Gtk.Label('<small><i>%s</i></small>' % tooltip_footer)
-        l.set_use_markup(True)
-        l.set_width_chars(40)
-        l.set_line_wrap(True)
-        vbox.pack_start(l, False, False, 0)
-        l.show()
+            l = Gtk.Label('%s' % tooltip_body)
+            l.set_use_markup(True)
+            l.set_alignment(0, 0)
+            l.set_padding(2, 6)
+            l.set_width_chars(40)
+            l.set_line_wrap(True)
+            l.set_justify(Gtk.Justification.FILL)
+            vbox.pack_start(l, True, True, 0)
+            l.show()
+
+            l = Gtk.Label('<small><i>%s</i></small>' % tooltip_footer)
+            l.set_use_markup(True)
+            l.set_width_chars(40)
+            l.set_line_wrap(True)
+            vbox.pack_start(l, False, False, 0)
+            l.show()
 
         tip.set_custom(vbox)
-
         return True
 
     def __event_cb(self, widget, event):
