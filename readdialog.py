@@ -99,16 +99,20 @@ class BaseReadDialog(Gtk.Window):
 
 class BookmarkDialog(BaseReadDialog):
 
-    def __init__(self, parent_xid, dialog_title, bookmark_title,
-                 bookmark_content, page, sidebarinstance):
+    def __init__(self, parent_xid, dialog_title, page, sidebarinstance):
         BaseReadDialog.__init__(self, parent_xid, dialog_title)
 
         self._sidebarinstance = sidebarinstance
         self._page = page
 
-        vbox = Gtk.VBox()
+        self._vbox = Gtk.VBox()
+
+        self.set_canvas(self._vbox)
+
+    def add_bookmark_widgets(self, bookmark_title, bookmark_content, local,
+                             nick=''):
         thbox = Gtk.HBox()
-        vbox.pack_start(thbox, False, False, 0)
+        self._vbox.pack_start(thbox, False, False, 0)
         thbox.set_border_width(style.DEFAULT_SPACING * 2)
         thbox.set_spacing(style.DEFAULT_SPACING)
         thbox.show()
@@ -121,20 +125,37 @@ class BookmarkDialog(BaseReadDialog):
         thbox.pack_start(label_title, False, False, 0)
         label_title.show()
 
-        self._title_entry = Gtk.Entry()
-        self._title_entry.modify_bg(Gtk.StateType.INSENSITIVE,
-                                    style.COLOR_WHITE.get_gdk_color())
-        self._title_entry.modify_base(Gtk.StateType.INSENSITIVE,
-                                      style.COLOR_WHITE.get_gdk_color())
-        self._title_entry.set_size_request(int(Gdk.Screen.width() / 3), -1)
+        if local == 1:
+            self._title_entry = Gtk.Entry()
+            self._title_entry.modify_bg(Gtk.StateType.INSENSITIVE,
+                                        style.COLOR_WHITE.get_gdk_color())
+            self._title_entry.modify_base(Gtk.StateType.INSENSITIVE,
+                                          style.COLOR_WHITE.get_gdk_color())
+            self._title_entry.set_size_request(int(Gdk.Screen.width() / 3), -1)
+            thbox.pack_start(self._title_entry, False, False, 0)
+            self._title_entry.show()
+            if bookmark_title is not None:
+                self._title_entry.set_text(bookmark_title)
+        else:
+            title = Gtk.Label(bookmark_title)
+            thbox.pack_start(title, False, False, 0)
 
-        thbox.pack_start(self._title_entry, False, False, 0)
-        self._title_entry.show()
-        if bookmark_title is not None:
-            self._title_entry.set_text(bookmark_title)
+            # show the nickname
+            hbox = Gtk.HBox()
+            hbox.set_margin_left(style.DEFAULT_SPACING * 2)
+            hbox.set_spacing(style.DEFAULT_SPACING)
+            signed_by = Gtk.Label(_('<b>Author</b>:'))
+            signed_by.set_use_markup(True)
+            signed_by.set_alignment(1, 0.5)
+            signed_by.modify_fg(Gtk.StateType.NORMAL,
+                                style.COLOR_SELECTION_GREY.get_gdk_color())
+            hbox.pack_start(signed_by, False, False, 0)
+            nick_label = Gtk.Label(nick)
+            hbox.pack_start(nick_label, False, False, 0)
+            self._vbox.pack_start(hbox, False, False, 0)
+            hbox.show_all()
 
         cvbox = Gtk.VBox()
-        vbox.pack_start(cvbox, True, True, 0)
         cvbox.set_border_width(style.DEFAULT_SPACING * 2)
         cvbox.set_spacing(style.DEFAULT_SPACING / 2)
         cvbox.show()
@@ -147,22 +168,28 @@ class BookmarkDialog(BaseReadDialog):
         cvbox.pack_start(label_content, False, False, 0)
         label_content.show()
 
-        sw = Gtk.ScrolledWindow()
-        sw.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
+        if local == 1:
+            sw = Gtk.ScrolledWindow()
+            sw.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
 
-        self._content_entry = Gtk.TextView()
-        self._content_entry.set_wrap_mode(Gtk.WrapMode.WORD)
+            self._content_entry = Gtk.TextView()
+            self._content_entry.set_wrap_mode(Gtk.WrapMode.WORD)
+            self._content_entry.set_sensitive(local == 1)
 
-        sw.add(self._content_entry)
-        sw.set_shadow_type(Gtk.ShadowType.ETCHED_IN)
+            sw.add(self._content_entry)
+            sw.set_shadow_type(Gtk.ShadowType.ETCHED_IN)
 
-        cvbox.pack_start(sw, True, True, 0)
-        self._content_entry.show()
-        if bookmark_content is not None:
-            buffer = self._content_entry.get_buffer()
-            buffer.set_text(bookmark_content)
-
-        self.set_canvas(vbox)
+            cvbox.pack_start(sw, True, True, 0)
+            self._content_entry.show()
+            if bookmark_content is not None:
+                buffer = self._content_entry.get_buffer()
+                buffer.set_text(bookmark_content)
+            self._vbox.pack_start(cvbox, True, True, 0)
+        else:
+            content = Gtk.Label(bookmark_content)
+            content.set_alignment(0, 0)
+            cvbox.pack_start(content, False, False, 0)
+            self._vbox.pack_start(cvbox, False, False, 0)
 
     def cancel_clicked_cb(self, widget):
         self._sidebarinstance.notify_bookmark_change()
@@ -173,8 +200,9 @@ class BookmarkAddDialog(BookmarkDialog):
 
     def __init__(self, parent_xid, dialog_title, bookmark_title,
                  bookmark_content, page, sidebarinstance):
-        BookmarkDialog.__init__(self, parent_xid, dialog_title, bookmark_title,
-                                bookmark_content, page, sidebarinstance)
+        BookmarkDialog.__init__(self, parent_xid, dialog_title, page,
+                                sidebarinstance)
+        self.add_bookmark_widgets(bookmark_title, bookmark_content, 1)
 
     def accept_clicked_cb(self, widget):
         title = self._title_entry.get_text()
@@ -192,10 +220,15 @@ class BookmarkAddDialog(BookmarkDialog):
 
 class BookmarkEditDialog(BookmarkDialog):
 
-    def __init__(self, parent_xid, dialog_title, bookmark_title,
-                 bookmark_content, page, sidebarinstance):
-        BookmarkDialog.__init__(self, parent_xid, dialog_title, bookmark_title,
-                                bookmark_content, page, sidebarinstance)
+    def __init__(self, parent_xid, dialog_title, bookmarks, page,
+                 sidebarinstance):
+        BookmarkDialog.__init__(self, parent_xid, dialog_title, page,
+                                sidebarinstance)
+        for bookmark in bookmarks:
+            self.add_bookmark_widgets(bookmark.get_note_title(),
+                                      bookmark.get_note_body(),
+                                      bookmark.local,
+                                      bookmark.nick)
 
     def accept_clicked_cb(self, widget):
         title = self._title_entry.get_text()

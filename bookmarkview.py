@@ -25,6 +25,7 @@ from sugar3.graphics.icon import Icon
 from sugar3.graphics.xocolor import XoColor
 from sugar3.util import timestamp_to_elapsed_string
 from sugar3.graphics import style
+from sugar3 import profile
 
 from readdialog import BookmarkAddDialog, BookmarkEditDialog
 
@@ -54,6 +55,7 @@ class BookmarkView(Gtk.EventBox):
         self._is_showing_local_bookmark = False
         self.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
         self.connect('draw', self.__draw_cb)
+        self.connect('event', self.__event_cb)
 
     def __draw_cb(self, widget, ctx):
         width = style.GRID_CELL_SIZE
@@ -85,9 +87,6 @@ class BookmarkView(Gtk.EventBox):
         self._box.props.has_tooltip = True
         self.__box_query_tooltip_cb_id = self._box.connect(
             'query_tooltip', self.__bookmark_icon_query_tooltip_cb, bookmark)
-
-        self.__event_cb_id = \
-            self.connect('event', self.__event_cb, bookmark)
 
         self._box.pack_start(self._bookmark_icon, False, False, 0)
         self._bookmark_icon.show_all()
@@ -137,33 +136,21 @@ class BookmarkView(Gtk.EventBox):
 
         return True
 
-    def __event_cb(self, widget, event, bookmark):
-        if event.type == Gdk.EventType.BUTTON_PRESS and \
-                self._bookmark_icon is not None:
-
-            bookmark_title = bookmark.get_note_title()
-            bookmark_content = bookmark.get_note_body()
-
+    def __event_cb(self, widget, event):
+        if event.type == Gdk.EventType.BUTTON_PRESS:
+            # TODO: show the first bookmark
             dialog = BookmarkEditDialog(
-                parent_xid=self.get_toplevel().get_window(),
-                dialog_title=_("Add notes for bookmark: "),
-                bookmark_title=bookmark_title,
-                bookmark_content=bookmark_content, page=bookmark.page_no,
-                sidebarinstance=self)
+                self.get_toplevel().get_window(),
+                _("Add notes for bookmark: "),
+                self._bookmarks, self._page, self)
             dialog.show_all()
 
         return False
 
     def _clear_bookmarks(self):
         for bookmark_icon in self._box.get_children():
-            self._box.disconnect(self.__box_query_tooltip_cb_id)
-            self.disconnect(self.__event_cb_id)
-
-            bookmark_icon.hide()  # XXX: Is this needed??
             bookmark_icon.destroy()
-
             self._bookmark_icon = None
-
             self._is_showing_local_bookmark = False
 
     def set_bookmarkmanager(self, bookmark_manager):
@@ -173,7 +160,7 @@ class BookmarkView(Gtk.EventBox):
         return (self._bookmark_manager)
 
     def update_for_page(self, page):
-
+        self._page = page
         self._clear_bookmarks()
         if self._bookmark_manager is None:
             return
@@ -199,8 +186,7 @@ class BookmarkView(Gtk.EventBox):
         self.emit('bookmark-changed')
 
     def add_bookmark(self, page):
-        # TODO: manage multiple bookmarks by page
-        bookmark_title = (_("%s's bookmark") % self._bookmark.nick)
+        bookmark_title = (_("%s's bookmark") % profile.get_nick_name())
         bookmark_content = (_("Bookmark for page %d") % (int(page) + 1))
         dialog = BookmarkAddDialog(
             parent_xid=self.get_toplevel().get_window(),
