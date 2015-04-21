@@ -361,7 +361,15 @@ class ReadActivity(activity.Activity):
 
         self._progress_alert = None
 
-        if self.shared_activity:
+        if self._jobject.file_path is not None and \
+                self._jobject.file_path != '':
+            self.read_file(self._jobject.file_path)
+        elif handle.uri:
+            self._load_document(handle.uri)
+            # TODO: we need trasfer the metadata and uodate
+            # bookmarks and urls
+
+        elif self.shared_activity:
             # We're joining
             if self.get_shared():
                 # Already joined for some reason, just get the document
@@ -375,18 +383,10 @@ class ReadActivity(activity.Activity):
                 # Wait for a successful join before trying to get the document
                 self.connect("joined", self._joined_cb)
         else:
-            if self._jobject.file_path is not None and \
-                    self._jobject.file_path != '':
-                self.read_file(self._jobject.file_path)
-            elif handle.uri:
-                self._load_document(handle.uri)
-                # TODO: we need trasfer the metadata and uodate
-                # bookmarks and urls
-            else:
-                # Not joining, not resuming or resuming session without file
-                emptypanel.show(self, 'activity-read',
-                                _('No book'), _('Choose something to read'),
-                                self._show_journal_object_picker_cb)
+            # Not joining, not resuming or resuming session without file
+            emptypanel.show(self, 'activity-read',
+                            _('No book'), _('Choose something to read'),
+                            self._show_journal_object_picker_cb)
 
     def _create_back_button(self):
         back = ToolButton('go-previous-paired')
