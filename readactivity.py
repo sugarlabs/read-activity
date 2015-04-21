@@ -112,21 +112,24 @@ class ReadHTTPRequestHandler(network.ChunkedGlibHTTPRequestHandler):
         if path.endswith('document'):
             return self.server.filepath
         if path.endswith('metadata'):
-            return self.server.metadata_pah
+            return self.server.get_metadata_path()
 
 
 class ReadHTTPServer(network.GlibTCPServer):
     """HTTP Server for transferring document while collaborating."""
 
-    def __init__(self, server_address, filepath, metadata_filepath):
+    def __init__(self, server_address, filepath, create_metadata_cb):
         """Set up the GlibTCPServer with the ReadHTTPRequestHandler.
 
         filepath -- path to shared document to be served.
         """
         self.filepath = filepath
-        self.metadata_pah = metadata_filepath
+        self._create_metadata_cb = create_metadata_cb
         network.GlibTCPServer.__init__(self, server_address,
                                        ReadHTTPRequestHandler)
+
+    def get_metadata_path(self):
+        return self._create_metadata_cb()
 
 
 class ReadURLDownloader(network.GlibURLDownloader):
@@ -1074,20 +1077,9 @@ class ReadActivity(activity.Activity):
 
         _logger.debug('Starting HTTP server on port %d', self.port)
 
-        # store the metadata in a json file
-        self._save_bookmars_in_metadata()
-        metadata_file_path = os.path.join(self.get_activity_root(), 'instance',
-                                          'tmp%i.json' % time.time())
-        shared_metadata = {}
-        for key in self.metadata.keys():
-            if key not in ['preview', 'cover_image']:
-                shared_metadata[str(key)] = self.metadata[key]
-        logging.error('save metadata in %s', metadata_file_path)
-        with open(metadata_file_path, 'w') as json_file:
-            json.dump(shared_metadata, json_file)
-
         self._fileserver = ReadHTTPServer(("", self.port),
-                                          self._tempfile, metadata_file_path)
+                                          self._tempfile,
+                                          self.create_metadata_file)
 
         # Make a tube for it
         chan = self.shared_activity.telepathy_tubes_chan
@@ -1098,6 +1090,20 @@ class ReadActivity(activity.Activity):
             telepathy.SOCKET_ADDRESS_TYPE_IPV4,
             ('127.0.0.1', dbus.UInt16(self.port)),
             telepathy.SOCKET_ACCESS_CONTROL_LOCALHOST, 0)
+
+    def create_metadata_file(self):
+        # store the metadata in a json file
+        self._save_bookmars_in_metadata()
+        metadata_file_path = self._tempfile + '.json'
+
+        shared_metadata = {}
+        for key in self.metadata.keys():
+            if key not in ['preview', 'cover_image']:
+                shared_metadata[str(key)] = self.metadata[key]
+        logging.error('save metadata in %s', metadata_file_path)
+        with open(metadata_file_path, 'w') as json_file:
+            json.dump(shared_metadata, json_file)
+        return metadata_file_path
 
     def watch_for_tubes(self):
         """Watch for new tubes."""
