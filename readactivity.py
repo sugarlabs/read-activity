@@ -109,18 +109,22 @@ class ReadHTTPRequestHandler(network.ChunkedGlibHTTPRequestHandler):
 
     def translate_path(self, path):
         """Return the filepath to the shared document."""
-        return self.server.filepath
+        if path.endswith('document'):
+            return self.server.filepath
+        if path.endswith('metadata'):
+            return self.server.metadata_pah
 
 
 class ReadHTTPServer(network.GlibTCPServer):
     """HTTP Server for transferring document while collaborating."""
 
-    def __init__(self, server_address, filepath):
+    def __init__(self, server_address, filepath, metadata_filepath):
         """Set up the GlibTCPServer with the ReadHTTPRequestHandler.
 
         filepath -- path to shared document to be served.
         """
         self.filepath = filepath
+        self.metadata_pah = metadata_filepath
         network.GlibTCPServer.__init__(self, server_address,
                                        ReadHTTPRequestHandler)
 
@@ -778,6 +782,15 @@ class ReadActivity(activity.Activity):
             self.filehash = get_md5(file_path)
         self.metadata['filehash'] = self.filehash
 
+        self._save_bookmars_in_metadata()
+
+        if self._close_requested:
+            _logger.debug("Removing temp file %s because we will close",
+                          self._tempfile)
+            os.unlink(self._tempfile)
+            self._tempfile = None
+
+    def _save_bookmars_in_metadata(self):
         # save bookmarks in the metadata
         bookmarks = []
         for bookmark in self._bookmarkmanager.get_bookmarks():
@@ -785,12 +798,6 @@ class ReadActivity(activity.Activity):
         self.metadata['bookmarks'] = json.dumps(bookmarks)
         self.metadata['highlights'] = json.dumps(
             self._bookmarkmanager.get_all_highlights())
-
-        if self._close_requested:
-            _logger.debug("Removing temp file %s because we will close",
-                          self._tempfile)
-            os.unlink(self._tempfile)
-            self._tempfile = None
 
     def can_close(self):
         """Prepare to cleanup on closing.
@@ -800,7 +807,8 @@ class ReadActivity(activity.Activity):
         self._close_requested = True
         return True
 
-    def _download_result_cb(self, getter, tempfile, suggested_name, tube_id):
+    def _download_result_cb(self, getter, tempfile, suggested_name, tube_id,
+                            tube_ip, tube_port):
         if self._download_content_type == 'text/html':
             # got an error page instead
             self._download_error_cb(getter, 'HTTP Error', tube_id)
@@ -826,11 +834,25 @@ class ReadActivity(activity.Activity):
         if self._progress_alert is not None:
             self.remove_alert(self._progress_alert)
             self._progress_alert = None
-        # load the object from the datastore to update the file path
-        GObject.idle_add(self._open_downloaded_file)
 
-    def _open_downloaded_file(self):
+        # download the metadata
+        GObject.idle_add(self._download_metadata, tube_id, tube_ip, tube_port)
+
+    def _download_metadata_result_cb(self, getter, tempfile, suggested_name,
+                                     tube_id):
+        # load the shared metadata
+        with open(tempfile) as json_file:
+            shared_metadata = json.load(json_file)
+        os.remove(tempfile)
+
+        # load the object from the datastore to update the file path
+        GObject.idle_add(self._open_downloaded_file, shared_metadata)
+
+    def _open_downloaded_file(self, shared_metadata):
         self._jobject = datastore.get(self._jobject.object_id)
+        for key in shared_metadata.keys():
+            self.metadata[key] = shared_metadata[key]
+
         self.read_file(self._jobject.file_path)
 
     def _download_progress_cb(self, getter, bytes_downloaded, tube_id):
@@ -857,9 +879,8 @@ class ReadActivity(activity.Activity):
             self._progress_alert = None
         GObject.idle_add(self._get_document)
 
-    def _download_document(self, tube_id):
-        # FIXME: should ideally have the CM listen on a Unix socket
-        # instead of IPv4 (might be more compatible with Rainbow)
+    def _get_connection_params(self, tube_id):
+        # return ip and port to download a file
         chan = self.shared_activity.telepathy_tubes_chan
         iface = chan[telepathy.CHANNEL_TYPE_TUBES]
         addr = iface.AcceptStreamTube(
@@ -874,12 +895,26 @@ class ReadActivity(activity.Activity):
         assert isinstance(addr[0], str)
         assert isinstance(addr[1], (int, long))
         assert addr[1] > 0 and addr[1] < 65536
+        ip = addr[0]
         port = int(addr[1])
+        return ip, port
 
-        getter = ReadURLDownloader("http://%s:%d/document"
-                                   % (addr[0], port))
-        getter.connect("finished", self._download_result_cb, tube_id)
+    def _download_document(self, tube_id):
+        ip, port = self._get_connection_params(tube_id)
+
+        getter = ReadURLDownloader("http://%s:%d/document" % (ip, port))
+        getter.connect("finished", self._download_result_cb, tube_id, ip, port)
         getter.connect("progress", self._download_progress_cb, tube_id)
+        getter.connect("error", self._download_error_cb, tube_id)
+        getter.start()
+        self._download_content_length = getter.get_content_length()
+        self._download_content_type = getter.get_content_type()
+        return False
+
+    def _download_metadata(self, tube_id, ip, port):
+        getter = ReadURLDownloader("http://%s:%d/metadata" % (ip, port))
+        getter.connect("finished", self._download_metadata_result_cb, tube_id)
+        # getter.connect("progress", self._download_progress_cb, tube_id)
         getter.connect("error", self._download_error_cb, tube_id)
         getter.start()
         self._download_content_length = getter.get_content_length()
@@ -1038,8 +1073,21 @@ class ReadActivity(activity.Activity):
         # instead of IPv4 (might be more compatible with Rainbow)
 
         _logger.debug('Starting HTTP server on port %d', self.port)
+
+        # store the metadata in a json file
+        self._save_bookmars_in_metadata()
+        metadata_file_path = os.path.join(self.get_activity_root(), 'instance',
+                                          'tmp%i.json' % time.time())
+        shared_metadata = {}
+        for key in self.metadata.keys():
+            if key not in ['preview', 'cover_image']:
+                shared_metadata[str(key)] = self.metadata[key]
+        logging.error('save metadata in %s', metadata_file_path)
+        with open(metadata_file_path, 'w') as json_file:
+            json.dump(shared_metadata, json_file)
+
         self._fileserver = ReadHTTPServer(("", self.port),
-                                          self._tempfile)
+                                          self._tempfile, metadata_file_path)
 
         # Make a tube for it
         chan = self.shared_activity.telepathy_tubes_chan
