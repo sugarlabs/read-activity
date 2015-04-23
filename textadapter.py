@@ -226,9 +226,12 @@ class TextViewer(GObject.GObject):
         return self.textview.get_buffer().get_iter_at_mark(
             insert_mark).get_offset()
 
-    def in_highlight(self, tuples_list):
+    def in_highlight(self):
         # Verify if the selection already exist or the cursor
         # is in a highlighted area
+        tuples_list = self._activity._bookmarkmanager.get_highlights(
+            self.get_current_page())
+
         cursor_position = self.get_cursor_position()
         logging.debug('cursor position %d' % cursor_position)
         selection_tuple = self.get_selection_bounds()
@@ -248,7 +251,8 @@ class TextViewer(GObject.GObject):
                 break
         return in_bounds, highlight_found
 
-    def show_highlights(self, tuples_list):
+    def show_highlights(self, page):
+        tuples_list = self._activity._bookmarkmanager.get_highlights(page)
         textbuffer = self.textview.get_buffer()
         bounds = textbuffer.get_bounds()
         textbuffer.remove_all_tags(bounds[0], bounds[1])
@@ -256,6 +260,19 @@ class TextViewer(GObject.GObject):
             iterStart = textbuffer.get_iter_at_offset(highlight_tuple[0])
             iterEnd = textbuffer.get_iter_at_offset(highlight_tuple[1])
             textbuffer.apply_tag(self.highlight_tag, iterStart, iterEnd)
+
+    def toggle_highlight(self, highlight):
+        found, old_highlight_found = self.in_highlight()
+
+        if highlight:
+            selection_tuple = self.get_selection_bounds()
+            self._activity._bookmarkmanager.add_highlight(
+                self.get_current_page(), selection_tuple)
+        else:
+            self._activity._bookmarkmanager.del_highlight(
+                self.get_current_page(), old_highlight_found)
+
+        self.show_highlights(self.get_current_page())
 
     def connect_page_changed_handler(self, handler):
         self.connect('page-changed', handler)

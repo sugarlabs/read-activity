@@ -539,21 +539,7 @@ class ReadActivity(activity.Activity):
         self._view.next_page()
 
     def __highlight_cb(self, button):
-        tuples_list = self._bookmarkmanager.get_highlights(
-            self._view.get_current_page())
-
-        found, old_highlight_found = self._view.in_highlight(tuples_list)
-
-        if not found:
-            selection_tuple = self._view.get_selection_bounds()
-            self._bookmarkmanager.add_highlight(
-                self._view.get_current_page(), selection_tuple)
-        else:
-            self._bookmarkmanager.del_highlight(
-                self._view.get_current_page(), old_highlight_found)
-
-        self._view.show_highlights(self._bookmarkmanager.get_highlights(
-            self._view.get_current_page()))
+        self._view.toggle_highlight(button.get_active())
 
     def __prev_bookmark_activate_cb(self, menuitem):
         page = self._view.get_current_page()
@@ -601,9 +587,8 @@ class ReadActivity(activity.Activity):
         self._bookmark_view.update_for_page(page_to)
         self.update_bookmark_button()
 
-        tuples_list = self._bookmarkmanager.get_highlights(page_to)
         if self._view.can_highlight():
-            self._view.show_highlights(tuples_list)
+            self._view.show_highlights(page_to)
 
     def _update_bookmark_cb(self, sidebar):
         logging.error('update bookmark event')
@@ -1152,9 +1137,7 @@ class ReadActivity(activity.Activity):
     def _view_selection_changed_cb(self, view):
         self._edit_toolbar.copy.props.sensitive = view.get_has_selection()
         if self._view.can_highlight():
-            tuples_list = self._bookmarkmanager.get_highlights(
-                self._view.get_current_page())
-            in_bounds, _highlight_found = self._view.in_highlight(tuples_list)
+            in_bounds, _highlight_found = self._view.in_highlight()
             self._highlight.props.sensitive = \
                 view.get_has_selection() or in_bounds
 
