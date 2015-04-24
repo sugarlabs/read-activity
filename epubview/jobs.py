@@ -19,12 +19,9 @@
 from gi.repository import GObject
 from gi.repository import Gtk
 import widgets
-import cairo
 import math
 import os.path
 import BeautifulSoup
-
-import epub
 
 import threading
 
@@ -69,7 +66,7 @@ class SearchThread(threading.Thread):
         body = soup.find('body')
         tags = body.findChildren(True)
         for tag in tags:
-            if not tag.string is None:
+            if tag.string is not None:
                 if tag.string.find(self.obj._text) > -1:
                     return True
 
@@ -99,7 +96,7 @@ class _JobPaginator(GObject.GObject):
         self._count = 0
         self._pagecount = 0
 
-        #TODO
+        # TODO
         """
         self._screen = Gdk.Screen.get_default()
         self._old_fontoptions = self._screen.get_font_options()
@@ -120,8 +117,8 @@ class _JobPaginator(GObject.GObject):
         settings.props.serif_font_family = 'DejaVu LGC Serif'
         settings.props.monospace_font_family = 'DejaVu LGC Sans Mono'
         settings.props.enforce_96_dpi = True
-        #FIXME: This does not seem to work
-        #settings.props.auto_shrink_images = False
+        # FIXME: This does not seem to work
+        # settings.props.auto_shrink_images = False
         settings.props.enable_plugins = False
         settings.props.default_font_size = 12
         settings.props.default_monospace_font_size = 10
@@ -132,7 +129,7 @@ class _JobPaginator(GObject.GObject):
         self._dpi = 96
         self._single_page_height = _mm_to_pixel(PAGE_HEIGHT, self._dpi)
         sw.set_size_request(_mm_to_pixel(PAGE_WIDTH, self._dpi),
-                self._single_page_height)
+                            self._single_page_height)
         sw.add(self._temp_view)
         self._temp_win.add(sw)
         self._temp_view.connect('load-finished', self._page_load_finished_cb)
@@ -170,16 +167,16 @@ class _JobPaginator(GObject.GObject):
             else:
                 pagelen = 1 / pages
             self._pagemap[float(self._pagecount + i)] = \
-                    (f.props.uri, (i - 1) / math.ceil(pages), pagelen)
+                (f.props.uri, (i - 1) / math.ceil(pages), pagelen)
 
         self._pagecount += int(math.ceil(pages))
         self._filedict[f.props.uri.replace('file://', '')] = \
-                (math.ceil(pages), math.ceil(pages) - pages)
+            (math.ceil(pages), math.ceil(pages) - pages)
         self._bookheight += pageheight
 
         if self._count + 1 >= len(self._filelist):
             # TODO
-            #self._screen.set_font_options(self._old_fontoptions)
+            # self._screen.set_font_options(self._old_fontoptions)
             self.emit('paginated')
             GObject.idle_add(self._cleanup)
         else:
@@ -218,7 +215,7 @@ class _JobPaginator(GObject.GObject):
         Returns the pageno which begins in filename
         '''
         for key in self._pagemap.keys():
-            if  self._pagemap[key][0].replace('file://', '') == filename:
+            if self._pagemap[key][0].replace('file://', '') == filename:
                 return key
 
         return None
@@ -249,7 +246,7 @@ class _JobFind(GObject.GObject):
     }
 
     def __init__(self, document, start_page, n_pages, text,
-            case_sensitive=False):
+                 case_sensitive=False):
         GObject.GObject.__init__(self)
 
         self._finished = False

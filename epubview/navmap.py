@@ -1,6 +1,5 @@
 import xml.etree.ElementTree as etree
 from gi.repository import Gtk
-import logging
 
 
 class NavPoint(object):
@@ -51,20 +50,21 @@ class NavMap(object):
 
     def _populate_toc(self):
         navmap = self._root.find(
-                '{http://www.daisy.org/z3986/2005/ncx/}navMap')
+            '{http://www.daisy.org/z3986/2005/ncx/}navMap')
         for navpoint in navmap.iterfind(
                 './{http://www.daisy.org/z3986/2005/ncx/}navPoint'):
             self._process_navpoint(navpoint)
 
     def _gettitle(self, navpoint):
-        text = navpoint.find('./{http://www.daisy.org/z3986/2005/ncx/}' +
-                'navLabel/{http://www.daisy.org/z3986/2005/ncx/}text')
+        text = navpoint.find(
+            './{http://www.daisy.org/z3986/2005/ncx/}' +
+            'navLabel/{http://www.daisy.org/z3986/2005/ncx/}text')
         return text.text
 
     def _getcontent(self, navpoint):
         text = navpoint.find(
-                './{http://www.daisy.org/z3986/2005/ncx/}content')
-        if text  is not None:
+            './{http://www.daisy.org/z3986/2005/ncx/}content')
+        if text is not None:
             return self._basepath + text.get('src')
         else:
             return ""
@@ -73,13 +73,13 @@ class NavMap(object):
         title = self._gettitle(navpoint)
         content = self._getcontent(navpoint)
 
-        #print title, content
+        # print title, content
 
         iter = self._gtktreestore.append(parent, [title, content])
-        #self._flattoc.append((title, content))
+        # self._flattoc.append((title, content))
 
         childnavpointlist = list(navpoint.iterfind(
-                './{http://www.daisy.org/z3986/2005/ncx/}navPoint'))
+            './{http://www.daisy.org/z3986/2005/ncx/}navPoint'))
 
         if len(childnavpointlist):
             for childnavpoint in childnavpointlist:
@@ -100,5 +100,3 @@ class NavMap(object):
         rendered.
         '''
         return self._flattoc
-
-#t = TocParser('/home/sayamindu/Desktop/Test/OPS/fb.ncx')

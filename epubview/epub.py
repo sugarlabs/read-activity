@@ -56,7 +56,7 @@ class _Epub(object):
 
     def _unzip(self):
         # This is broken upto python 2.7
-        #self._zobject.extractall(path = self._tempdir)
+        # self._zobject.extractall(path = self._tempdir)
         orig_cwd = os.getcwd()
         os.chdir(self._tempdir)
         for name in self._zobject.namelist():
@@ -79,8 +79,8 @@ class _Epub(object):
         tree = etree.parse(containerfile)
         root = tree.getroot()
 
-        for element in root.iterfind(
-            './/{urn:oasis:names:tc:opendocument:xmlns:container}rootfile'):
+        r_id = './/{urn:oasis:names:tc:opendocument:xmlns:container}rootfile'
+        for element in root.iterfind(r_id):
             if element.get('media-type') == 'application/oebps-package+xml':
                 self._opfpath = element.get('full-path')
 
@@ -117,7 +117,7 @@ class _Epub(object):
 
         self._zobject = zipfile.ZipFile(self._file)
 
-        if not 'mimetype' in self._zobject.namelist():
+        if 'mimetype' not in self._zobject.namelist():
             return False
 
         mtypefile = self._zobject.open('mimetype')

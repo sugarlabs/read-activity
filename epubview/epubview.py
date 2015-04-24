@@ -24,9 +24,7 @@ import logging
 import os.path
 import math
 import shutil
-import BeautifulSoup
 
-from epub import _Epub
 from jobs import _JobPaginator as _Paginator
 
 LOADING_HTML = '''
@@ -40,12 +38,12 @@ class _View(Gtk.HBox):
 
     __gproperties__ = {
         'scale': (GObject.TYPE_FLOAT, 'the zoom level',
-                   'the zoom level of the widget',
-                   0.5, 4.0, 1.0, GObject.PARAM_READWRITE),
+                  'the zoom level of the widget',
+                  0.5, 4.0, 1.0, GObject.PARAM_READWRITE),
     }
     __gsignals__ = {
         'page-changed': (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE,
-                ([int, int])),
+                         ([int, int])),
         'selection-changed': (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE,
                               ([])),
     }
@@ -60,7 +58,7 @@ class _View(Gtk.HBox):
         self._paginator = None
         self._loaded_page = -1
         self._file_loaded = True
-        #self._old_scrollval = -1
+        # self._old_scrollval = -1
         self._loaded_filename = None
         self._pagecount = -1
         self.__going_fwd = True
@@ -86,20 +84,18 @@ class _View(Gtk.HBox):
         self._view.connect('scroll-event', self._view_scroll_event_cb)
         self._view.connect('key-press-event', self._view_keypress_event_cb)
         self._view.connect('selection-changed',
-                self._view_selection_changed_cb)
+                           self._view_selection_changed_cb)
         self._view.connect_after('populate-popup',
-                self._view_populate_popup_cb)
+                                 self._view_populate_popup_cb)
         self._view.connect('touch-change-page', self.__touch_page_changed_cb)
 
         self._sw.add(self._view)
         self._v_vscrollbar = self._sw.get_vscrollbar()
-        self._v_scrollbar_value_changed_cb_id = \
-                self._v_vscrollbar.connect('value-changed', \
-                self._v_scrollbar_value_changed_cb)
+        self._v_scrollbar_value_changed_cb_id = self._v_vscrollbar.connect(
+            'value-changed', self._v_scrollbar_value_changed_cb)
         self._scrollbar = Gtk.VScrollbar()
-        self._scrollbar_change_value_cb_id = \
-                self._scrollbar.connect('change-value', \
-                self._scrollbar_change_value_cb)
+        self._scrollbar_change_value_cb_id = self._scrollbar.connect(
+            'change-value', self._scrollbar_change_value_cb)
 
         overlay = Gtk.Overlay()
         hbox = Gtk.HBox()
@@ -238,7 +234,7 @@ class _View(Gtk.HBox):
         '''
         Returns the currently loaded XML file
         '''
-        #return self._loaded_filename
+        # return self._loaded_filename
         if self._paginator:
             return self._paginator.get_file_for_pageno(self._loaded_page)
         else:
@@ -340,12 +336,12 @@ class _View(Gtk.HBox):
         self._view.grab_focus()
 
         if self._view.search_text(self._findjob.get_search_text(),
-                self._findjob.get_case_sensitive(),
-                True, False):
+                                  self._findjob.get_case_sensitive(),
+                                  True, False):
             return
         else:
             path = os.path.join(self._epub.get_basedir(),
-                    self._findjob.get_next_file())
+                                self._findjob.get_next_file())
             self.__in_search = True
             self.__search_fwd = True
             self._load_file(path)
@@ -357,12 +353,12 @@ class _View(Gtk.HBox):
         self._view.grab_focus()
 
         if self._view.search_text(self._findjob.get_search_text(),
-                                self._findjob.get_case_sensitive(),
-                                False, False):
+                                  self._findjob.get_case_sensitive(),
+                                  False, False):
             return
         else:
             path = os.path.join(self._epub.get_basedir(),
-                    self._findjob.get_prev_file())
+                                self._findjob.get_prev_file())
             self.__in_search = True
             self.__search_fwd = False
             self._load_file(path)
@@ -375,8 +371,9 @@ class _View(Gtk.HBox):
 
     def _mark_found_text(self):
         self._view.unmark_text_matches()
-        self._view.mark_text_matches(self._findjob.get_search_text(),
-                case_sensitive=self._findjob.get_case_sensitive(), limit=0)
+        self._view.mark_text_matches(
+            self._findjob.get_search_text(),
+            case_sensitive=self._findjob.get_case_sensitive(), limit=0)
         self._view.set_highlight_text_matches(True)
 
     def __set_zoom(self, value):
@@ -436,23 +433,23 @@ class _View(Gtk.HBox):
 
         filename = filename.split('#')[0]  # Get rid of anchors
 
-        if self._loaded_page < 1 or filename == None:
+        if self._loaded_page < 1 or filename is None:
             return False
 
         self._loaded_filename = filename
 
         remfactor = self._paginator.get_remfactor_for_file(filename)
         pages = self._paginator.get_pagecount_for_file(filename)
-        extra = int(math.ceil(remfactor *
-                self._view.get_page_height() / (pages - remfactor)))
+        extra = int(math.ceil(
+            remfactor * self._view.get_page_height() / (pages - remfactor)))
         if extra > 0:
             self._view.add_bottom_padding(extra)
 
         if self.__in_search:
             self._mark_found_text()
-            self._view.search_text(self._findjob.get_search_text(), \
-                               self._findjob.get_case_sensitive(), \
-                               self.__search_fwd, False)
+            self._view.search_text(self._findjob.get_search_text(),
+                                   self._findjob.get_case_sensitive(),
+                                   self.__search_fwd, False)
             self.__in_search = False
         else:
             if self.__going_back:
@@ -461,15 +458,15 @@ class _View(Gtk.HBox):
             else:
                 self._scroll_page()
 
-        process_file = True
+        # process_file = True
         if self._internal_link is not None:
             self._view.go_to_link(self._internal_link)
             vertical_pos = \
                 self._view.get_vertical_position_element(self._internal_link)
             # set the page number based in the vertical position
             initial_page = self._paginator.get_base_pageno_for_file(filename)
-            self._loaded_page = initial_page + int(vertical_pos /
-                    self._paginator.get_single_page_height())
+            self._loaded_page = initial_page + int(
+                vertical_pos / self._paginator.get_single_page_height())
 
             # There are epub files, created with Calibre,
             # where the link in the index points to the end of the previos
@@ -484,7 +481,7 @@ class _View(Gtk.HBox):
                     logging.error('load next file %s', next_file)
                     self.__in_search = False
                     self.__going_back = False
-                    process_file = False
+                    # process_file = False
                     GObject.idle_add(self._load_file, next_file)
 
 #        if process_file:
@@ -502,7 +499,7 @@ class _View(Gtk.HBox):
         word_begin = 0
         word_end = 0
         ignore_chars = [' ',  '\n',  u'\r',  '_',  '[', '{', ']', '}', '|',
-                '<',  '>',  '*',  '+',  '/',  '\\']
+                        '<',  '>',  '*',  '+',  '/',  '\\']
         ignore_set = set(ignore_chars)
         self.word_tuples = []
         len_page_text = len(page_text)
@@ -510,19 +507,19 @@ class _View(Gtk.HBox):
             if page_text[i] not in ignore_set:
                 word_begin = i
                 j = i
-                while  j < len_page_text and page_text[j] not in ignore_set:
+                while j < len_page_text and page_text[j] not in ignore_set:
                     j = j + 1
                     word_end = j
                     i = j
                 word_tuple = (word_begin, word_end,
-                        page_text[word_begin: word_end])
+                              page_text[word_begin: word_end])
                 if word_tuple[2] != u'\r':
                     self.word_tuples.append(word_tuple)
             i = i + 1
 
     def _scroll_page_end(self):
         v_upper = self._v_vscrollbar.props.adjustment.props.upper
-        v_page_size = self._v_vscrollbar.props.adjustment.props.page_size
+        # v_page_size = self._v_vscrollbar.props.adjustment.props.page_size
         self._v_vscrollbar.set_value(v_upper)
 
     def _scroll_page(self):
@@ -562,15 +559,14 @@ class _View(Gtk.HBox):
         scroll_upper = self._v_vscrollbar.props.adjustment.props.upper
         scroll_page_size = self._v_vscrollbar.props.adjustment.props.page_size
 
-        if self.__going_fwd == True and \
-            not self._loaded_page == self._pagecount:
+        if self.__going_fwd and not self._loaded_page == self._pagecount:
             if self._paginator.get_file_for_pageno(self._loaded_page) != \
-                self._paginator.get_file_for_pageno(self._loaded_page + 1):
+                    self._paginator.get_file_for_pageno(self._loaded_page + 1):
                 # We don't need this if the next page is in another file
                 return
 
             scrollfactor_next = \
-                    self._paginator.get_scrollfactor_pos_for_pageno(
+                self._paginator.get_scrollfactor_pos_for_pageno(
                     self._loaded_page + 1)
             if scrollval > 0:
                 scrollfactor = scrollval / (scroll_upper - scroll_page_size)
@@ -578,14 +574,13 @@ class _View(Gtk.HBox):
                 scrollfactor = 0
             if scrollfactor >= scrollfactor_next:
                 self._on_page_changed(self._loaded_page, self._loaded_page + 1)
-        elif self.__going_back == True and self._loaded_page > 1:
+        elif self.__going_back and self._loaded_page > 1:
             if self._paginator.get_file_for_pageno(self._loaded_page) != \
-                        self._paginator.get_file_for_pageno(
-                        self._loaded_page - 1):
+                    self._paginator.get_file_for_pageno(self._loaded_page - 1):
                 return
 
             scrollfactor_cur = \
-                    self._paginator.get_scrollfactor_pos_for_pageno(
+                self._paginator.get_scrollfactor_pos_for_pageno(
                     self._loaded_page)
             if scrollval > 0:
                 scrollfactor = scrollval / (scroll_upper - scroll_page_size)
@@ -608,7 +603,7 @@ class _View(Gtk.HBox):
 
     def _load_page(self, pageno):
         if pageno > self._pagecount or pageno < 1:
-            #TODO: Cause an exception
+            # TODO: Cause an exception
             return
         if self._loaded_page == pageno:
             return
@@ -631,6 +626,8 @@ class _View(Gtk.HBox):
             shutil.copy('./epubview/highlight_words.js', destpath)
             self._insert_js_reference(filename.replace('file://', ''),
                     destpath)
+            IMPORTANT: Find a way to do this without modify the files
+            now text highlight is implemented and the epub file is saved
             """
 
             if filename.endswith('xml'):
@@ -647,7 +644,7 @@ class _View(Gtk.HBox):
 
     def _insert_js_reference(self, file_name, path):
         js_reference = '<script type="text/javascript" ' + \
-                'src="./highlight_words.js"></script>'
+            'src="./highlight_words.js"></script>'
         o = open(file_name + '.tmp', 'a')
         for line in open(file_name):
             line = line.replace('</head>', js_reference + '</head>')
@@ -666,7 +663,7 @@ class _View(Gtk.HBox):
                 self._view.load_uri('file://' + filepath)
                 oldpage = self._loaded_page
                 self._loaded_page = \
-                        self._paginator.get_base_pageno_for_file(filepath)
+                    self._paginator.get_base_pageno_for_file(filepath)
                 self._scroll_page()
                 self._on_page_changed(oldpage, self._loaded_page)
                 break
@@ -691,12 +688,12 @@ class _View(Gtk.HBox):
                 self._load_page(round(value))
         else:
             print 'Warning: unknown scrolltype %s with value %f' \
-                    % (str(scrolltype), value)
+                % (str(scrolltype), value)
 
-        #FIXME: This should not be needed here
+        # FIXME: This should not be needed here
         self._scrollbar.set_value(self._loaded_page)
 
-        if self.__page_changed == True:
+        if self.__page_changed:
             self.__page_changed = False
             return False
         else:
