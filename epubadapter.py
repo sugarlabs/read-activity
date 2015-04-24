@@ -4,6 +4,7 @@ import logging
 import epubview
 
 # import speech
+import os
 
 from cStringIO import StringIO
 
@@ -22,6 +23,8 @@ class EpubViewer(epubview.EpubView):
 
         activity._hbox.pack_start(self, True, True, 0)
         self.show_all()
+        self._modified_files = []
+
         # text to speech initialization
         self.current_word = 0
         self.word_tuples = []
@@ -101,6 +104,36 @@ class EpubViewer(epubview.EpubView):
             self._view.execute_script(js)
 
         self._view.set_editable(False)
+        # mark the file as modified
+        current_file = self.get_current_file()
+        logging.error('file %s was modified', current_file)
+        if current_file not in self._modified_files:
+            self._modified_files.append(current_file)
+        GObject.idle_add(self._save_page)
+
+    def _save_page(self):
+        oldtitle = self._view.get_title()
+        self._view.execute_script(
+            "document.title=document.documentElement.innerHTML;")
+        html = self._view.get_title()
+        file_path = self.get_current_file().replace('file:///', '/')
+        logging.error(html)
+        with open(file_path, 'w') as fd:
+            header = """<?xml version="1.0" encoding="utf-8" standalone="no"?>
+                <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+                 "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+                <html xmlns="http://www.w3.org/1999/xhtml">"""
+            fd.write(header)
+            fd.write(html)
+            fd.write('</html>')
+        self._view.execute_script('document.title=%s;' % oldtitle)
+
+    def save(self, file_path):
+        if self._modified_files:
+            self._epub.write(file_path)
+            return True
+
+        return False
 
     def in_highlight(self):
         # Verify if the selection already exist or the cursor

@@ -765,7 +765,17 @@ class ReadActivity(activity.Activity):
             self._edit_toolbar._search_entry.props.text
         self.metadata['activity'] = self.get_bundle_id()
 
-        os.link(self._tempfile, file_path)
+        # the file is only saved if modified
+        saved = False
+        if hasattr(self._view, 'save'):
+            saved = self._view.save(file_path)
+
+        if saved:
+            self.filehash = get_md5(file_path)
+            self.metadata['filehash'] = self.filehash
+        else:
+            os.link(self._tempfile, file_path)
+
         if self.filehash is None:
             self.filehash = get_md5(file_path)
         self.metadata['filehash'] = self.filehash

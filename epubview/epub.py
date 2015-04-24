@@ -156,6 +156,41 @@ class _Epub(object):
         '''
         return self._info.title
 
+    def write(self, file_path):
+        '''Create the ZIP archive.
+        The mimetype must be the first file in the archive
+        and it must not be compressed.'''
+
+        # The EPUB must contain the META-INF and mimetype files at the root, so
+        # we'll create the archive in the working directory first
+        # and move it later
+        current_dir = os.getcwd()
+        os.chdir(self._tempdir)
+
+        # Open a new zipfile for writing
+        epub = zipfile.ZipFile(file_path, 'w')
+
+        # Add the mimetype file first and set it to be uncompressed
+        epub.write('mimetype', compress_type=zipfile.ZIP_STORED)
+
+        # For the remaining paths in the EPUB, add all of their files
+        # using normal ZIP compression
+        self._scan_dir('.', epub)
+
+        epub.close()
+        os.chdir(current_dir)
+
+    def _scan_dir(self, path, epub_file):
+        for p in os.listdir(path):
+            logging.error('add file %s', p)
+            if os.path.isdir(os.path.join(path, p)):
+                self._scan_dir(os.path.join(path, p), epub_file)
+            else:
+                if p != 'mimetype':
+                    epub_file.write(
+                        os.path.join(path, p),
+                        compress_type=zipfile.ZIP_DEFLATED)
+
     def close(self):
         '''
         Cleans up (closes open zip files and deletes
