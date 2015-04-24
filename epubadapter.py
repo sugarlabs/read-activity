@@ -65,7 +65,72 @@ class EpubViewer(epubview.EpubView):
         return False
 
     def can_highlight(self):
-        return False
+        return True
+
+    def show_highlights(self, page):
+        # we save the highlights in the page as html
+        pass
+
+    def toggle_highlight(self, highlight):
+        self._view.set_editable(True)
+
+        if highlight:
+            self._view.execute_script(
+                'document.execCommand("backColor", false, "yellow");')
+        else:
+            # need remove the highlight nodes
+            js = """
+                var selObj = window.getSelection();
+                var range  = selObj.getRangeAt(0);
+                var node = range.startContainer;
+                while (node.parentNode != null) {
+                  if (node.localName == "span") {
+                    if (node.hasAttributes()) {
+                      var attrs = node.attributes;
+                      for(var i = attrs.length - 1; i >= 0; i--) {
+                        if (attrs[i].name == "style" &&
+                            attrs[i].value == "background-color: yellow;") {
+                          node.removeAttribute("style");
+                          break;
+                        };
+                      };
+                    };
+                  };
+                  node = node.parentNode;
+                };"""
+            self._view.execute_script(js)
+
+        self._view.set_editable(False)
+
+    def in_highlight(self):
+        # Verify if the selection already exist or the cursor
+        # is in a highlighted area
+        page_title = self._view.get_title()
+        js = """
+            var selObj = window.getSelection();
+            var range  = selObj.getRangeAt(0);
+            var node = range.startContainer;
+            var onHighlight = false;
+            while (node.parentNode != null) {
+              if (node.localName == "span") {
+                if (node.hasAttributes()) {
+                  var attrs = node.attributes;
+                  for(var i = attrs.length - 1; i >= 0; i--) {
+                    if (attrs[i].name == "style" &&
+                        attrs[i].value == "background-color: yellow;") {
+                      onHighlight = true;
+                    };
+                  };
+                };
+              };
+              node = node.parentNode;
+            };
+            document.title=onHighlight;"""
+        self._view.execute_script(js)
+        on_highlight = self._view.get_title() == 'true'
+        self._view.execute_script('document.title = "%s";' % page_title)
+        # the second parameter is only used in the text backend
+        return on_highlight, None
 
     def can_do_text_to_speech(self):
         return False
