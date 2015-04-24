@@ -232,8 +232,6 @@ class TextViewer(GObject.GObject):
         tuples_list = self._activity._bookmarkmanager.get_highlights(
             self.get_current_page())
 
-        cursor_position = self.get_cursor_position()
-        logging.debug('cursor position %d' % cursor_position)
         selection_tuple = self.get_selection_bounds()
         in_bounds = False
         highlight_found = None
@@ -245,10 +243,7 @@ class TextViewer(GObject.GObject):
                     in_bounds = True
                     highlight_found = highlight_tuple
                     break
-            if highlight_tuple[0] <= cursor_position >= highlight_tuple[1]:
-                in_bounds = True
-                highlight_found = highlight_tuple
-                break
+
         return in_bounds, highlight_found
 
     def show_highlights(self, page):
