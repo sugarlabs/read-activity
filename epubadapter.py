@@ -4,7 +4,6 @@ import logging
 import epubview
 
 # import speech
-import os
 
 from cStringIO import StringIO
 
