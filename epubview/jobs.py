@@ -67,7 +67,7 @@ class SearchThread(threading.Thread):
         tags = body.findChildren(True)
         for tag in tags:
             if tag.string is not None:
-                if tag.string.find(self.obj._text) > -1:
+                if tag.string.lower().find(self.obj._text.lower()) > -1:
                     return True
 
         return False
@@ -247,6 +247,9 @@ class _JobFind(GObject.GObject):
 
     def __init__(self, document, start_page, n_pages, text,
                  case_sensitive=False):
+        """
+        Only case_sensitive=False is implemented
+        """
         GObject.GObject.__init__(self)
 
         self._finished = False
