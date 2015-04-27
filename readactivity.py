@@ -786,6 +786,14 @@ class ReadActivity(activity.Activity):
             _logger.debug("Removing temp file %s because we will close",
                           self._tempfile)
             os.unlink(self._tempfile)
+
+            # remove file used to transmit the metadata if exits
+            try:
+                metadata_file_path = self._tempfile + '.json'
+                os.unlink(metadata_file_path)
+            except OSError:
+                pass
+
             self._tempfile = None
 
     def _save_bookmars_in_metadata(self):
