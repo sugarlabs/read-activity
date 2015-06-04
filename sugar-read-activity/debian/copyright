@@ -1,0 +1,98 @@
+Name: sugar-read-activity
+Maintainer: Gonzalo Odiard <godiard@gmail.com>
+Source: http://download.sugarlabs.org/sources/sucrose/fructose/Read/
+
+
+Files: speechtoolbar.py
+Copyright: (C) 2006, Red Hat, Inc.
+License: GPLv2+
+
+Files: comicadapter.py
+Copyright: (C) 2014, Sam Parkinson
+License: GPLv2+
+
+Files: epubview/epub.py
+Copyright: d
+License: GPLv2+
+
+Files: readactivity.py
+Copyright: (C) 2007, Red Hat, Inc.
+           (C) 2007 Collabora Ltd. <http://www.collabora.co.uk/>
+           d
+           r
+License: GPLv2+
+
+Files: epubview/__init__.py
+Copyright: d
+License: GPLv2+
+
+Files: linkbutton.py
+Copyright: (C) 2007, One Laptop Per Child
+License: GPLv2+
+
+Files: readdb.py
+Copyright: d
+License: GPLv2+
+
+Files: readtoolbar.py
+Copyright: (C) 2006, Red Hat, Inc.
+License: GPLv2+
+
+Files: imageview.py
+Copyright: (C) 2008, One Laptop per Child
+License: GPLv2+
+
+Files: readbookmark.py
+Copyright: d
+License: GPLv2+
+
+Files: speech_dispatcher.py
+Copyright: (C) 2008 James D. Simmons
+License: GPLv2+
+
+Files: bookmarkview.py
+Copyright: d
+License: GPLv2+
+
+Files: setup.py
+Copyright: (C) 2006, Red Hat, Inc.
+License: GPLv2+
+
+Files: speech.py
+Copyright: (C) 2008, 2009 James D. Simmons
+           (C) 2009 Aleksey S. Lim
+License: GPLv2+
+
+Files: speech_gst.py
+Copyright: (C) 2009 Aleksey S. Lim
+License: GPLv2+
+
+Files: epubview/jobs.py
+Copyright: d
+License: GPLv2+
+
+Files: epubview/epubview.py
+Copyright: d
+License: GPLv2+
+
+Files: *
+Copyright: Gonzalo Odiard
+License: GPLv2+
+ 
+ Copyright (C) 2015 Gonzalo Odiard
+ 
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 2 of the License, or
+ (at your option) any later version.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ 
+ On Debian systems, the complete version of the license can be found
+ in the file "/usr/share/common-licenses/GPL-2"
