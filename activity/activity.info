@@ -9,3 +9,4 @@ license = GPLv2+
 summary = Use this activity when you are ready to read! Remember to flip your computer around to feel like you are really holding a book!
 categories = language documents media system
 repository = https://github.com/godiard/read-activity.git
+max_participants = 10
