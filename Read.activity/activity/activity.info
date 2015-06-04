@@ -29,7 +29,7 @@ long_description: Sugar Learning Platform - read activity
  Read activity allows the laptop to act as a book reader. It has a simple interface,
  and will view many kinds of text and image based books. (Pdf, e-pub, etc)
 
-sources_url = http://download.sugarlabs.org/sources/honey/Read/
+sources_url = http://download.sugarlabs.org/sources/sucrose/fructose/Read/
 sources_format = tar.bz2
 
 [Maintainer]
