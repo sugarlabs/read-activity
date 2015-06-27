@@ -45,11 +45,21 @@ def _init_db():
 
     # Situation 1: DB is non-existent at all
     if not os.path.exists(dbpath) and not os.path.exists(olddbpath):
-        try:
-            os.makedirs(dbdir)
-        except:
-            pass
-        shutil.copy(srcpath, dbpath)
+        # in this case, sqlite3 takes care of things
+        conn = sqlite3.connect(dbpath)
+        conn.execute("""
+        CREATE TABLE "bookmarks"(
+              md5 text,
+              page integer,
+              content text,
+              timestamp real,
+              user text,
+              color text,
+              local integer
+            );""")
+        conn.commit()
+        conn.close()
+
         return dbpath
 
     # Situation 2: DB is outdated
