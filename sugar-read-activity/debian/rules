@@ -48,4 +48,3 @@ CDBS_DEPENDS_$(pkg) +=, gst-plugins-espeak
 CDBS_DEPENDS_$(pkg) +=, gir1.2-webkit-3.0
 CDBS_DEPENDS_$(pkg) +=, python-beautifulsoup
 CDBS_DEPENDS_$(pkg) +=, gir1.2-evince-3.0
-CDBS_RECOMMENDS_$(pkg) +=, sugar-$(DEB_SUGAR_PRIMARY_BRANCH)-icon-theme | sugar-icon-theme
