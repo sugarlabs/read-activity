@@ -1,5 +1,5 @@
-sugar-read-activity (116-0~godiard1) UNRELEASED; urgency=low
+sugar-read-activity (117-0~godiard1) UNRELEASED; urgency=low
 
   * Initial version for Debian.
 
- -- Debian Sugar Team <pkg-sugar-devel@lists.alioth.debian.org>  Thu, 04 Jun 2015 12:04:15 -0300
+ -- Debian Sugar Team <pkg-sugar-devel@lists.alioth.debian.org>  Sun, 19 Jul 2015 00:27:21 -0300

@@ -5,79 +5,79 @@ Source: http://download.sugarlabs.org/sources/sucrose/fructose/Read/
 
 Files: speechtoolbar.py
 Copyright: (C) 2006, Red Hat, Inc.
-License: GPLv2+
+License: GPL-2
 
 Files: comicadapter.py
 Copyright: (C) 2014, Sam Parkinson
-License: GPLv2+
+License: GPL-2
 
 Files: epubview/epub.py
 Copyright: d
-License: GPLv2+
+License: GPL-2
 
 Files: readactivity.py
 Copyright: (C) 2007, Red Hat, Inc.
            (C) 2007 Collabora Ltd. <http://www.collabora.co.uk/>
            d
            r
-License: GPLv2+
+License: GPL-2
 
 Files: epubview/__init__.py
 Copyright: d
-License: GPLv2+
+License: GPL-2
 
 Files: linkbutton.py
 Copyright: (C) 2007, One Laptop Per Child
-License: GPLv2+
+License: GPL-2
 
 Files: readdb.py
 Copyright: d
-License: GPLv2+
+License: GPL-2
 
 Files: readtoolbar.py
 Copyright: (C) 2006, Red Hat, Inc.
-License: GPLv2+
+License: GPL-2
 
 Files: imageview.py
 Copyright: (C) 2008, One Laptop per Child
-License: GPLv2+
+License: GPL-2
 
 Files: readbookmark.py
 Copyright: d
-License: GPLv2+
+License: GPL-2
 
 Files: speech_dispatcher.py
 Copyright: (C) 2008 James D. Simmons
-License: GPLv2+
+License: GPL-2
 
 Files: bookmarkview.py
 Copyright: d
-License: GPLv2+
+License: GPL-2
 
 Files: setup.py
 Copyright: (C) 2006, Red Hat, Inc.
-License: GPLv2+
+License: GPL-2
 
 Files: speech.py
 Copyright: (C) 2008, 2009 James D. Simmons
            (C) 2009 Aleksey S. Lim
-License: GPLv2+
+License: GPL-2
 
 Files: speech_gst.py
 Copyright: (C) 2009 Aleksey S. Lim
-License: GPLv2+
+License: GPL-2
 
 Files: epubview/jobs.py
 Copyright: d
-License: GPLv2+
+License: GPL-2
 
 Files: epubview/epubview.py
 Copyright: d
-License: GPLv2+
+License: GPL-2
 
 Files: *
 Copyright: Gonzalo Odiard
-License: GPLv2+
+License: GPL-2
  
  Copyright (C) 2015 Gonzalo Odiard
  
