@@ -426,7 +426,8 @@ class TextViewer(GObject.GObject):
         pass
 
     def copy(self):
-        self.textview.get_buffer().copy_clipboard(Gtk.Clipboard())
+        clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
+        self.textview.get_buffer().copy_clipboard(clipboard)
 
     def _view_buttonrelease_event_cb(self, view, event):
         self._has_selection = \
