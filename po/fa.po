@@ -15,15 +15,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-11 00:31-0400\n"
-"PO-Revision-Date: 2011-03-30 04:18+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"PO-Revision-Date: 2016-05-21 23:32+0000\n"
+"Last-Translator: Chris <cjl@sugarlabs.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Pootle 2.0.1\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1463873550.000000\n"
 
 #. TRANS: "name" option from activity.info file
 msgid "Read"
@@ -35,47 +36,50 @@ msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
 msgstr ""
+"با استفاده از این فعالیت زمانی که شما آماده برای خواندن هستند! به یاد داشته "
+"باشید به تلنگر کامپیوتر خود را در اطراف یک احساس واقعی برای نگه داشتن یک "
+"کتاب!"
 
 #. TRANS: This goes like Bookmark added by User 5 days ago
 #. TRANS: (the elapsed string gets translated automatically)
 #: bookmarkview.py:110
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
-msgstr ""
+msgstr "نشانه گذاری اضافه شده بوسیله %(user)s %(time)s"
 
 #: bookmarkview.py:153 bookmarkview.py:204
 msgid "Add notes for bookmark: "
-msgstr ""
+msgstr "اضافه کردن یادداشت برای نشانه گذاری: "
 
 #: bookmarkview.py:200
 #, python-format
 msgid "%s's bookmark"
-msgstr ""
+msgstr "%s's از نشانه گذاری"
 
 #: bookmarkview.py:201
 #, python-format
 msgid "Bookmark for page %d"
-msgstr ""
+msgstr "نشانه گذاری برای صفحه %d"
 
 #: evinceadapter.py:88
 msgid "URL from Read"
-msgstr ""
+msgstr "آدرس سایت برای خواندن"
 
 #: linkbutton.py:94
 msgid "Go to Bookmark"
-msgstr ""
+msgstr "برو به نشانه گذاری"
 
 #: linkbutton.py:99
 msgid "Remove"
-msgstr ""
+msgstr "حذف"
 
 #: readactivity.py:333
 msgid "No book"
-msgstr ""
+msgstr "بدون هیچ کتابی"
 
 #: readactivity.py:333
 msgid "Choose something to read"
-msgstr ""
+msgstr "انتخاب چیزی برای خواندن"
 
 #: readactivity.py:338
 msgid "Back"
@@ -83,11 +87,11 @@ msgstr "عقب"
 
 #: readactivity.py:342
 msgid "Previous page"
-msgstr ""
+msgstr "صفحهٔ قبلی"
 
 #: readactivity.py:344
 msgid "Previous bookmark"
-msgstr ""
+msgstr "نشانک قبلی"
 
 #: readactivity.py:356
 msgid "Forward"
@@ -95,32 +99,32 @@ msgstr "جلو"
 
 #: readactivity.py:360
 msgid "Next page"
-msgstr ""
+msgstr "صفحهٔ بعد"
 
 #: readactivity.py:362
 msgid "Next bookmark"
-msgstr ""
+msgstr "نشانک بعدی"
 
 #: readactivity.py:413
 msgid "Index"
-msgstr ""
+msgstr "فهرست"
 
 #: readactivity.py:534
 msgid "Delete bookmark"
-msgstr ""
+msgstr "حذف نشانک"
 
 #: readactivity.py:535
 msgid "All the information related with this bookmark will be lost"
-msgstr ""
+msgstr "تمام اطلاعات مرتبط با این نشانک از دست خواهد رفت"
 
 #: readactivity.py:895 readactivity.py:1090
 #, python-format
 msgid "Page %d"
-msgstr ""
+msgstr "صفحه‌ی %d"
 
 #: readdialog.py:52
 msgid "Cancel"
-msgstr ""
+msgstr "لغو"
 
 #: readdialog.py:58
 msgid "Ok"
@@ -128,11 +132,11 @@ msgstr "درست است"
 
 #: readdialog.py:116
 msgid "<b>Title</b>:"
-msgstr ""
+msgstr "<b>عنوان:</b>"
 
 #: readdialog.py:142
 msgid "<b>Details</b>:"
-msgstr ""
+msgstr "<b>جزئیات</b>:"
 
 #: readtoolbar.py:61
 msgid "Previous"
@@ -144,7 +148,7 @@ msgstr "بعدی"
 
 #: readtoolbar.py:79
 msgid "Highlight"
-msgstr ""
+msgstr "پُررنگ"
 
 #: readtoolbar.py:160
 msgid "Find first"
@@ -160,7 +164,7 @@ msgstr "بعدی را بازیاب"
 
 #: readtoolbar.py:189
 msgid "Table of contents"
-msgstr ""
+msgstr "جدول محتویات"
 
 #: readtoolbar.py:198
 msgid "Zoom out"
@@ -184,23 +188,23 @@ msgstr "اندازه واقعی"
 
 #: readtoolbar.py:233
 msgid "Fullscreen"
-msgstr ""
+msgstr "تمام صفحه"
 
 #: readtoolbar.py:301
 msgid "Show Tray"
-msgstr ""
+msgstr "نمایش سینی"
 
 #: readtoolbar.py:303
 msgid "Hide Tray"
-msgstr ""
+msgstr "پنهان کردن سینی"
 
 #: speechtoolbar.py:57
 msgid "Play / Pause"
-msgstr ""
+msgstr "پخش/ مکث"
 
 #: speechtoolbar.py:65
 msgid "Stop"
-msgstr ""
+msgstr "توقف"
 
 #~ msgid "%"
 #~ msgstr "٪"
