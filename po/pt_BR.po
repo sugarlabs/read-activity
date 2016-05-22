@@ -15,15 +15,16 @@ msgstr ""
 "Project-Id-Version: pt_BR\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-11 00:31-0400\n"
-"PO-Revision-Date: 2010-02-12 04:56+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"PO-Revision-Date: 2015-01-30 16:52+0000\n"
+"Last-Translator: Felipe <fefcas@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <fedora-docs-br@redhat.com>\n"
-"Language: \n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Pootle 2.0.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1422636737.000000\n"
 
 #. TRANS: "name" option from activity.info file
 msgid "Read"
@@ -35,6 +36,9 @@ msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
 msgstr ""
+"Use esta atividade quando você estiver pronto para ler! Lembre-se de virar o "
+"computador de maneira a ter a sensação de estar segurando um livro de "
+"verdade!"
 
 #. TRANS: This goes like Bookmark added by User 5 days ago
 #. TRANS: (the elapsed string gets translated automatically)
@@ -59,23 +63,23 @@ msgstr "Favorito para página %d"
 
 #: evinceadapter.py:88
 msgid "URL from Read"
-msgstr ""
+msgstr "URL a partir de Ler"
 
 #: linkbutton.py:94
 msgid "Go to Bookmark"
-msgstr ""
+msgstr "Vá para os favoritos"
 
 #: linkbutton.py:99
 msgid "Remove"
-msgstr ""
+msgstr "Remover"
 
 #: readactivity.py:333
 msgid "No book"
-msgstr ""
+msgstr "Nenhum livro"
 
 #: readactivity.py:333
 msgid "Choose something to read"
-msgstr ""
+msgstr "Escolha algo para ler"
 
 #: readactivity.py:338
 msgid "Back"
@@ -103,20 +107,20 @@ msgstr "Próximo Favorito"
 
 #: readactivity.py:413
 msgid "Index"
-msgstr ""
+msgstr "Índice"
 
 #: readactivity.py:534
 msgid "Delete bookmark"
-msgstr ""
+msgstr "Excluir favorito"
 
 #: readactivity.py:535
 msgid "All the information related with this bookmark will be lost"
-msgstr ""
+msgstr "Todas as informações relacionadas a este favorito serão perdidas"
 
 #: readactivity.py:895 readactivity.py:1090
 #, python-format
 msgid "Page %d"
-msgstr ""
+msgstr "Página %d"
 
 #: readdialog.py:52
 msgid "Cancel"
@@ -144,7 +148,7 @@ msgstr "Próxima"
 
 #: readtoolbar.py:79
 msgid "Highlight"
-msgstr ""
+msgstr "Realçar"
 
 #: readtoolbar.py:160
 msgid "Find first"
@@ -160,7 +164,7 @@ msgstr "Buscar Próximo"
 
 #: readtoolbar.py:189
 msgid "Table of contents"
-msgstr ""
+msgstr "Sumário"
 
 #: readtoolbar.py:198
 msgid "Zoom out"
@@ -189,19 +193,19 @@ msgstr "Tela cheia"
 
 #: readtoolbar.py:301
 msgid "Show Tray"
-msgstr ""
+msgstr "Mostrar Trilha"
 
 #: readtoolbar.py:303
 msgid "Hide Tray"
-msgstr ""
+msgstr "Ocultar Trilha"
 
 #: speechtoolbar.py:57
 msgid "Play / Pause"
-msgstr ""
+msgstr "Reproduzir / Pausar"
 
 #: speechtoolbar.py:65
 msgid "Stop"
-msgstr ""
+msgstr "Parar"
 
 # só o argumento % qual seria o contexto desse caracter?
 #~ msgid "%"
