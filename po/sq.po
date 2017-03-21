@@ -15,19 +15,20 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-11 00:31-0400\n"
-"PO-Revision-Date: 2010-01-28 13:07+0200\n"
-"Last-Translator: jon <joni-ber_rock@hotmail.com>\n"
+"PO-Revision-Date: 2016-11-28 15:54+0000\n"
+"Last-Translator: Besnik_b <besnik@programeshqip.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: sq\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.1\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1480348489.000000\n"
 
 #. TRANS: "name" option from activity.info file
 msgid "Read"
-msgstr "Lexo"
+msgstr "Lexoni"
 
 #. TRANS: "summary" option from activity.info file
 #. TRANS: "description" option from activity.info file
@@ -35,51 +36,54 @@ msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
 msgstr ""
+"Përdoreni këtë veprimtari kur jeni gati të lexoni diçka! Mos harroni ta "
+"rrotulloni kompjuterin tuaj, që t’ju duket se po mbani vërtet një libër në "
+"duar!"
 
 #. TRANS: This goes like Bookmark added by User 5 days ago
 #. TRANS: (the elapsed string gets translated automatically)
 #: bookmarkview.py:110
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
-msgstr ""
+msgstr "Faqerojtës i shtuar nga %(user)s %(time)s"
 
 #: bookmarkview.py:153 bookmarkview.py:204
 msgid "Add notes for bookmark: "
-msgstr ""
+msgstr "Shtoni shënime për faqerojtës:"
 
 #: bookmarkview.py:200
 #, python-format
 msgid "%s's bookmark"
-msgstr ""
+msgstr "Faqerojtësit e %s"
 
 #: bookmarkview.py:201
 #, python-format
 msgid "Bookmark for page %d"
-msgstr ""
+msgstr "Faqerojtës për faqen %d"
 
 #: evinceadapter.py:88
 msgid "URL from Read"
-msgstr ""
+msgstr "URL nga Lexoni"
 
 #: linkbutton.py:94
 msgid "Go to Bookmark"
-msgstr ""
+msgstr "Shko te Faqerojtësi"
 
 #: linkbutton.py:99
 msgid "Remove"
-msgstr ""
+msgstr "Hiqe"
 
 #: readactivity.py:333
 msgid "No book"
-msgstr ""
+msgstr "S’ka libër"
 
 #: readactivity.py:333
 msgid "Choose something to read"
-msgstr ""
+msgstr "Zgjidhni diçka për lexim"
 
 #: readactivity.py:338
 msgid "Back"
-msgstr "Prapa"
+msgstr "Mbrapsht"
 
 #: readactivity.py:342
 msgid "Previous page"
@@ -87,7 +91,7 @@ msgstr "Faqja e mëparshme"
 
 #: readactivity.py:344
 msgid "Previous bookmark"
-msgstr "Faqen e më prapa të shënuar"
+msgstr "Faqerojtësi i mëparshëm"
 
 #: readactivity.py:356
 msgid "Forward"
@@ -95,32 +99,32 @@ msgstr "Përpara"
 
 #: readactivity.py:360
 msgid "Next page"
-msgstr "Faqja tjetër"
+msgstr "Faqja pasuese"
 
 #: readactivity.py:362
 msgid "Next bookmark"
-msgstr "Faqen tjetër të shënuar"
+msgstr "Faqerojtësi pasues"
 
 #: readactivity.py:413
 msgid "Index"
-msgstr ""
+msgstr "Tregues"
 
 #: readactivity.py:534
 msgid "Delete bookmark"
-msgstr ""
+msgstr "Fshije faqerojtësin"
 
 #: readactivity.py:535
 msgid "All the information related with this bookmark will be lost"
-msgstr ""
+msgstr "Krejt të dhënat lidhur me këtë faqerojtës do të humbin"
 
 #: readactivity.py:895 readactivity.py:1090
 #, python-format
 msgid "Page %d"
-msgstr ""
+msgstr "Faqja %d"
 
 #: readdialog.py:52
 msgid "Cancel"
-msgstr "Anulo"
+msgstr "Anuloje"
 
 #: readdialog.py:58
 msgid "Ok"
@@ -128,79 +132,79 @@ msgstr "Ok"
 
 #: readdialog.py:116
 msgid "<b>Title</b>:"
-msgstr "<b>Titullin</b>:"
+msgstr "<b>Titull</b>:"
 
 #: readdialog.py:142
 msgid "<b>Details</b>:"
-msgstr "<b>Detaje</b>:"
+msgstr "<b>Hollësi</b>:"
 
 #: readtoolbar.py:61
 msgid "Previous"
-msgstr "E Përparmja"
+msgstr "E mëparshmja"
 
 #: readtoolbar.py:68
 msgid "Next"
-msgstr "Tjetra"
+msgstr "Pasuesja"
 
 #: readtoolbar.py:79
 msgid "Highlight"
-msgstr ""
+msgstr "Theksoje"
 
 #: readtoolbar.py:160
 msgid "Find first"
-msgstr "Gjeje së pari"
+msgstr "Gjej të parin"
 
 #: readtoolbar.py:166
 msgid "Find previous"
-msgstr "Gjeje të përparmen"
+msgstr "Gjej të mëparshmin"
 
 #: readtoolbar.py:168
 msgid "Find next"
-msgstr "Gjeje tjetrën"
+msgstr "Gjej pasuesin"
 
 #: readtoolbar.py:189
 msgid "Table of contents"
-msgstr ""
+msgstr "Tabelë e lëndës"
 
 #: readtoolbar.py:198
 msgid "Zoom out"
-msgstr "Largohu"
+msgstr "Zvogëloje"
 
 #: readtoolbar.py:204
 msgid "Zoom in"
-msgstr "Afrohu"
+msgstr "Zmadhoje"
 
 #: readtoolbar.py:210
 msgid "Zoom to width"
-msgstr "Përshtate në madhësinë"
+msgstr "Sa gjerësia e faqes"
 
 #: readtoolbar.py:216
 msgid "Zoom to fit"
-msgstr "Përshtate"
+msgstr "Sa ta nxërë"
 
 #: readtoolbar.py:222
 msgid "Actual size"
-msgstr "Madhësija aktuale"
+msgstr "Madhësi faktike"
 
 #: readtoolbar.py:233
 msgid "Fullscreen"
-msgstr "Ekran i plotë"
+msgstr "Sa krejt ekrani"
 
 #: readtoolbar.py:301
 msgid "Show Tray"
-msgstr ""
+msgstr "Shfaq Panelin"
 
 #: readtoolbar.py:303
 msgid "Hide Tray"
-msgstr ""
+msgstr "Fshihe Panelin"
 
 #: speechtoolbar.py:57
 msgid "Play / Pause"
-msgstr ""
+msgstr "Luaje / Pushoje"
 
 #: speechtoolbar.py:65
 msgid "Stop"
-msgstr ""
+msgstr "Ndale"
 
 #~ msgid "%"
 #~ msgstr "%"

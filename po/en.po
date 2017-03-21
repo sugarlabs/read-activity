@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 00:31-0400\n"
+"POT-Creation-Date: 2013-04-11 00:31-0400\n"
 "PO-Revision-Date: 2013-09-06 17:07+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,21 +38,23 @@ msgstr ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
 
-#: bookmarkview.py:112
+#. TRANS: This goes like Bookmark added by User 5 days ago
+#. TRANS: (the elapsed string gets translated automatically)
+#: bookmarkview.py:110
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
 msgstr "Bookmark added by %(user)s %(time)s"
 
-#: bookmarkview.py:155 bookmarkview.py:206
+#: bookmarkview.py:153 bookmarkview.py:204
 msgid "Add notes for bookmark: "
 msgstr "Add notes for bookmark: "
 
-#: bookmarkview.py:202
+#: bookmarkview.py:200
 #, python-format
 msgid "%s's bookmark"
 msgstr "%s's bookmark"
 
-#: bookmarkview.py:203
+#: bookmarkview.py:201
 #, python-format
 msgid "Bookmark for page %d"
 msgstr "Bookmark for page %d"
@@ -61,71 +63,59 @@ msgstr "Bookmark for page %d"
 msgid "URL from Read"
 msgstr "URL from Read"
 
-#: linkbutton.py:124
+#: linkbutton.py:94
 msgid "Go to Bookmark"
 msgstr "Go to Bookmark"
 
-#: linkbutton.py:129
+#: linkbutton.py:99
 msgid "Remove"
 msgstr "Remove"
 
-#: readactivity.py:361
-msgid "Please wait"
-msgstr "Please wait"
-
-#: readactivity.py:362
-msgid "Starting connection..."
-msgstr "Starting connection..."
-
-#: readactivity.py:374
+#: readactivity.py:333
 msgid "No book"
 msgstr "No book"
 
-#: readactivity.py:374
+#: readactivity.py:333
 msgid "Choose something to read"
 msgstr "Choose something to read"
 
-#: readactivity.py:379
+#: readactivity.py:338
 msgid "Back"
 msgstr "Back"
 
-#: readactivity.py:383
+#: readactivity.py:342
 msgid "Previous page"
 msgstr "Previous page"
 
-#: readactivity.py:385
+#: readactivity.py:344
 msgid "Previous bookmark"
 msgstr "Previous bookmark"
 
-#: readactivity.py:397
+#: readactivity.py:356
 msgid "Forward"
 msgstr "Forward"
 
-#: readactivity.py:401
+#: readactivity.py:360
 msgid "Next page"
 msgstr "Next page"
 
-#: readactivity.py:403
+#: readactivity.py:362
 msgid "Next bookmark"
 msgstr "Next bookmark"
 
-#: readactivity.py:454
+#: readactivity.py:413
 msgid "Index"
 msgstr "Index"
 
-#: readactivity.py:575
+#: readactivity.py:534
 msgid "Delete bookmark"
 msgstr "Delete bookmark"
 
-#: readactivity.py:576
+#: readactivity.py:535
 msgid "All the information related with this bookmark will be lost"
 msgstr "All the information related with this bookmark will be lost"
 
-#: readactivity.py:900
-msgid "Receiving book..."
-msgstr "Receiving book..."
-
-#: readactivity.py:966 readactivity.py:1162
+#: readactivity.py:895 readactivity.py:1090
 #, python-format
 msgid "Page %d"
 msgstr "Page %d"
@@ -170,47 +160,39 @@ msgstr "Find previous"
 msgid "Find next"
 msgstr "Find next"
 
-#: readtoolbar.py:188
+#: readtoolbar.py:189
 msgid "Table of contents"
 msgstr "Table of contents"
 
-#: readtoolbar.py:197
+#: readtoolbar.py:198
 msgid "Zoom out"
 msgstr "Zoom out"
 
-#: readtoolbar.py:203
+#: readtoolbar.py:204
 msgid "Zoom in"
 msgstr "Zoom in"
 
-#: readtoolbar.py:209
+#: readtoolbar.py:210
 msgid "Zoom to width"
 msgstr "Zoom to width"
 
-#: readtoolbar.py:215
+#: readtoolbar.py:216
 msgid "Zoom to fit"
 msgstr "Zoom to fit"
 
-#: readtoolbar.py:221
+#: readtoolbar.py:222
 msgid "Actual size"
 msgstr "Actual size"
 
-#: readtoolbar.py:232
+#: readtoolbar.py:233
 msgid "Fullscreen"
 msgstr "Fullscreen"
 
-#: readtoolbar.py:253
-msgid "Rotate left"
-msgstr "Rotate left"
-
-#: readtoolbar.py:259
-msgid "Rotate right"
-msgstr "Rotate right"
-
-#: readtoolbar.py:325
+#: readtoolbar.py:301
 msgid "Show Tray"
 msgstr "Show Tray"
 
-#: readtoolbar.py:327
+#: readtoolbar.py:303
 msgid "Hide Tray"
 msgstr "Hide Tray"
 
@@ -221,6 +203,21 @@ msgstr "Play / Pause"
 #: speechtoolbar.py:65
 msgid "Stop"
 msgstr "Stop"
+
+#~ msgid "Please wait"
+#~ msgstr "Please wait"
+
+#~ msgid "Starting connection..."
+#~ msgstr "Starting connection..."
+
+#~ msgid "Receiving book..."
+#~ msgstr "Receiving book..."
+
+#~ msgid "Rotate left"
+#~ msgstr "Rotate left"
+
+#~ msgid "Rotate right"
+#~ msgstr "Rotate right"
 
 #, python-format
 #~ msgid "Page %(current)i of %(total_pages)i"
