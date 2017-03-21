@@ -3,6 +3,10 @@ import os
 import logging
 import time
 
+import gi
+gi.require_version('EvinceDocument', '3.0')
+gi.require_version('EvinceView', '3.0')
+
 from gi.repository import GObject
 from gi.repository import Gtk
 from gi.repository import Gdk
