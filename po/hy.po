@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 00:31-0400\n"
+"POT-Creation-Date: 2017-03-24 17:39+1100\n"
 "PO-Revision-Date: 2013-09-19 10:21+0200\n"
 "Last-Translator: Jasmine <udea_jasmine@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,111 +17,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Pootle 2.0.5\n"
 
-#. TRANS: "name" option from activity.info file
+#: activity/activity.info:2
 msgid "Read"
 msgstr "Կարդալ"
 
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
 msgstr ""
 "Օգտագործիր այս գործունեությունը, երբ պատրաստ լինես ընթերցելու համար. Հիշիր, "
 "պտտել համակարգիչը, որպեսզի զգաս թե ձեռքերումդ իսկական գիրք է."
-
-#: bookmarkview.py:112
-#, python-format
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr "Էջանիշն ավելացրել է %(user)s օգտագործողը %(time)s"
-
-#: bookmarkview.py:155 bookmarkview.py:206
-msgid "Add notes for bookmark: "
-msgstr "Ավելացնել նշումներ էջանիշի համար. "
-
-#: bookmarkview.py:202
-#, python-format
-msgid "%s's bookmark"
-msgstr "%s - ի էջանիշ"
-
-#: bookmarkview.py:203
-#, python-format
-msgid "Bookmark for page %d"
-msgstr "Էջանիշ %d էջի համար"
-
-# URL - Universal Resource Locator: Համացանցային միջոցների որոնիչ:
-#: evinceadapter.py:88
-msgid "URL from Read"
-msgstr "URL - «Կարդալ» -ից"
-
-#: linkbutton.py:124
-msgid "Go to Bookmark"
-msgstr "Գնալ դեպի Էջանիշ"
-
-#: linkbutton.py:129
-msgid "Remove"
-msgstr "Հեռացնել"
-
-#: readactivity.py:361
-msgid "Please wait"
-msgstr "Սպասեք խնդրեմ:"
-
-#: readactivity.py:362
-msgid "Starting connection..."
-msgstr "Մեկնարկել միացումը"
-
-#: readactivity.py:374
-msgid "No book"
-msgstr "Գիրք չկա"
-
-#: readactivity.py:374
-msgid "Choose something to read"
-msgstr "Ընտրիր որևէ բան ընթերցելու համար"
-
-#: readactivity.py:379
-msgid "Back"
-msgstr "Հետ"
-
-#: readactivity.py:383
-msgid "Previous page"
-msgstr "Նախորդ էջ"
-
-#: readactivity.py:385
-msgid "Previous bookmark"
-msgstr "Նախորդ էջանիշ"
-
-#: readactivity.py:397
-msgid "Forward"
-msgstr "Առաջ"
-
-#: readactivity.py:401
-msgid "Next page"
-msgstr "Հաջորդ էջ"
-
-#: readactivity.py:403
-msgid "Next bookmark"
-msgstr "Հաջորդ էջանիշ"
-
-#: readactivity.py:454
-msgid "Index"
-msgstr "Ցուցիչ"
-
-#: readactivity.py:575
-msgid "Delete bookmark"
-msgstr "Վերացնել էջանիշը"
-
-#: readactivity.py:576
-msgid "All the information related with this bookmark will be lost"
-msgstr "Այս էջանիշի հետ կապված ամբողջ տեղեկույթը կկորչի:"
-
-#: readactivity.py:900
-msgid "Receiving book..."
-msgstr "Ստանում է գիրք..."
-
-#: readactivity.py:966 readactivity.py:1162
-#, python-format
-msgid "Page %d"
-msgstr "Էջ %d"
 
 #: readdialog.py:52
 msgid "Cancel"
@@ -131,13 +37,91 @@ msgstr "Չեղարկել"
 msgid "Ok"
 msgstr "OK"
 
-#: readdialog.py:116
+#: readdialog.py:120
 msgid "<b>Title</b>:"
 msgstr "<b>Վերնագիր</b>."
 
-#: readdialog.py:142
+#: readdialog.py:147
+msgid "<b>Author</b>:"
+msgstr ""
+
+#: readdialog.py:163
 msgid "<b>Details</b>:"
 msgstr "<b>Մանրամասներ</b>."
+
+# URL - Universal Resource Locator: Համացանցային միջոցների որոնիչ:
+#: evinceadapter.py:92
+msgid "URL from Read"
+msgstr "URL - «Կարդալ» -ից"
+
+#: speechtoolbar.py:57
+msgid "Play / Pause"
+msgstr "Գործարկել / Դադար"
+
+#: speechtoolbar.py:65
+msgid "Stop"
+msgstr "Կանգ"
+
+#: readactivity.py:379
+msgid "Please wait"
+msgstr "Սպասեք խնդրեմ:"
+
+#: readactivity.py:380
+msgid "Starting connection..."
+msgstr "Մեկնարկել միացումը"
+
+#: readactivity.py:388
+msgid "No book"
+msgstr "Գիրք չկա"
+
+#: readactivity.py:388
+msgid "Choose something to read"
+msgstr "Ընտրիր որևէ բան ընթերցելու համար"
+
+#: readactivity.py:393
+msgid "Back"
+msgstr "Հետ"
+
+#: readactivity.py:397
+msgid "Previous page"
+msgstr "Նախորդ էջ"
+
+#: readactivity.py:399
+msgid "Previous bookmark"
+msgstr "Նախորդ էջանիշ"
+
+#: readactivity.py:411
+msgid "Forward"
+msgstr "Առաջ"
+
+#: readactivity.py:415
+msgid "Next page"
+msgstr "Հաջորդ էջ"
+
+#: readactivity.py:417
+msgid "Next bookmark"
+msgstr "Հաջորդ էջանիշ"
+
+#: readactivity.py:468
+msgid "Index"
+msgstr "Ցուցիչ"
+
+#: readactivity.py:564
+msgid "Delete bookmark"
+msgstr "Վերացնել էջանիշը"
+
+#: readactivity.py:565
+msgid "All the information related with this bookmark will be lost"
+msgstr "Այս էջանիշի հետ կապված ամբողջ տեղեկույթը կկորչի:"
+
+#: readactivity.py:954
+msgid "Receiving book..."
+msgstr "Ստանում է գիրք..."
+
+#: readactivity.py:1032 readactivity.py:1227
+#, python-format
+msgid "%s (Page %d)"
+msgstr ""
 
 #: readtoolbar.py:61
 msgid "Previous"
@@ -191,33 +175,53 @@ msgstr "Իրական չափս"
 msgid "Fullscreen"
 msgstr "Էկրանի չափով"
 
-#: readtoolbar.py:253
+#: readtoolbar.py:252
 msgid "Rotate left"
 msgstr "Պտտել դեպի ձախ"
 
-#: readtoolbar.py:259
+#: readtoolbar.py:258
 msgid "Rotate right"
 msgstr "Պտտել դեպի աջ"
 
-#: readtoolbar.py:325
+#: readtoolbar.py:324
 msgid "Show Tray"
 msgstr "Ցուցադրել պնակը"
 
-#: readtoolbar.py:327
+#: readtoolbar.py:326
 msgid "Hide Tray"
 msgstr "Թաքցնել պնակը"
 
-#: speechtoolbar.py:57
-msgid "Play / Pause"
-msgstr "Գործարկել / Դադար"
+#: linkbutton.py:133
+msgid "Go to Bookmark"
+msgstr "Գնալ դեպի Էջանիշ"
 
-#: speechtoolbar.py:65
-msgid "Stop"
-msgstr "Կանգ"
+#: linkbutton.py:139
+msgid "Remove"
+msgstr "Հեռացնել"
 
+#: bookmarkview.py:107
 #, python-format
-#~ msgid "Page %(current)i of %(total_pages)i"
-#~ msgstr "Էջ %(current)i of %(total_pages)i"
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "Էջանիշն ավելացրել է %(user)s օգտագործողը %(time)s"
 
-#~ msgid "%"
-#~ msgstr "%"
+#: bookmarkview.py:143 bookmarkview.py:192
+msgid "Add notes for bookmark: "
+msgstr "Ավելացնել նշումներ էջանիշի համար. "
+
+#: bookmarkview.py:188
+#, python-format
+msgid "%s's bookmark"
+msgstr "%s - ի էջանիշ"
+
+#: bookmarkview.py:189
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "Էջանիշ %d էջի համար"
+
+#: comicadapter.py:69
+msgid "Can not read Comic Book Archive"
+msgstr ""
+
+#: comicadapter.py:70
+msgid "No readable images were found"
+msgstr ""

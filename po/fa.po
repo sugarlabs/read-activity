@@ -2,19 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-11 00:31-0400\n"
+"POT-Creation-Date: 2017-03-24 17:39+1100\n"
 "PO-Revision-Date: 2017-03-18 22:07+0000\n"
 "Last-Translator: Chris <cjl@sugarlabs.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,12 +18,11 @@ msgstr ""
 "X-Generator: Pootle 2.5.1.1\n"
 "X-POOTLE-MTIME: 1489874866.000000\n"
 
-#. TRANS: "name" option from activity.info file
+#: activity/activity.info:2
 msgid "Read"
 msgstr "خواندن"
 
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
@@ -39,88 +30,6 @@ msgstr ""
 "با استفاده از این فعالیت زمانی که شما آماده برای خواندن هستند! به یاد داشته "
 "باشید به تلنگر کامپیوتر خود را در اطراف یک احساس واقعی برای نگه داشتن یک "
 "کتاب!"
-
-#. TRANS: This goes like Bookmark added by User 5 days ago
-#. TRANS: (the elapsed string gets translated automatically)
-#: bookmarkview.py:110
-#, python-format
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr "نشانه گذاری اضافه شده بوسیله %(user)s %(time)s"
-
-#: bookmarkview.py:153 bookmarkview.py:204
-msgid "Add notes for bookmark: "
-msgstr "اضافه کردن یادداشت برای نشانه گذاری: "
-
-#: bookmarkview.py:200
-#, python-format
-msgid "%s's bookmark"
-msgstr "%s's از نشانه گذاری"
-
-#: bookmarkview.py:201
-#, python-format
-msgid "Bookmark for page %d"
-msgstr "نشانه گذاری برای صفحه %d"
-
-#: evinceadapter.py:88
-msgid "URL from Read"
-msgstr "آدرس سایت برای خواندن"
-
-#: linkbutton.py:94
-msgid "Go to Bookmark"
-msgstr "برو به نشانه گذاری"
-
-#: linkbutton.py:99
-msgid "Remove"
-msgstr "حذف"
-
-#: readactivity.py:333
-msgid "No book"
-msgstr "بدون هیچ کتابی"
-
-#: readactivity.py:333
-msgid "Choose something to read"
-msgstr "انتخاب چیزی برای خواندن"
-
-#: readactivity.py:338
-msgid "Back"
-msgstr "عقب"
-
-#: readactivity.py:342
-msgid "Previous page"
-msgstr "صفحهٔ قبلی"
-
-#: readactivity.py:344
-msgid "Previous bookmark"
-msgstr "نشانک قبلی"
-
-#: readactivity.py:356
-msgid "Forward"
-msgstr "جلو"
-
-#: readactivity.py:360
-msgid "Next page"
-msgstr "صفحهٔ بعد"
-
-#: readactivity.py:362
-msgid "Next bookmark"
-msgstr "نشانک بعدی"
-
-#: readactivity.py:413
-msgid "Index"
-msgstr "فهرست"
-
-#: readactivity.py:534
-msgid "Delete bookmark"
-msgstr "حذف نشانک"
-
-#: readactivity.py:535
-msgid "All the information related with this bookmark will be lost"
-msgstr "تمام اطلاعات مرتبط با این نشانک از دست خواهد رفت"
-
-#: readactivity.py:895 readactivity.py:1090
-#, python-format
-msgid "Page %d"
-msgstr "صفحه‌ی %d"
 
 #: readdialog.py:52
 msgid "Cancel"
@@ -130,13 +39,90 @@ msgstr "لغو"
 msgid "Ok"
 msgstr "درست است"
 
-#: readdialog.py:116
+#: readdialog.py:120
 msgid "<b>Title</b>:"
 msgstr "<b>عنوان</b>:"
 
-#: readdialog.py:142
+#: readdialog.py:147
+msgid "<b>Author</b>:"
+msgstr ""
+
+#: readdialog.py:163
 msgid "<b>Details</b>:"
 msgstr "<b>جزئیات</b>:"
+
+#: evinceadapter.py:92
+msgid "URL from Read"
+msgstr "آدرس سایت برای خواندن"
+
+#: speechtoolbar.py:57
+msgid "Play / Pause"
+msgstr "پخش/ مکث"
+
+#: speechtoolbar.py:65
+msgid "Stop"
+msgstr "توقف"
+
+#: readactivity.py:379
+msgid "Please wait"
+msgstr ""
+
+#: readactivity.py:380
+msgid "Starting connection..."
+msgstr ""
+
+#: readactivity.py:388
+msgid "No book"
+msgstr "بدون هیچ کتابی"
+
+#: readactivity.py:388
+msgid "Choose something to read"
+msgstr "انتخاب چیزی برای خواندن"
+
+#: readactivity.py:393
+msgid "Back"
+msgstr "عقب"
+
+#: readactivity.py:397
+msgid "Previous page"
+msgstr "صفحهٔ قبلی"
+
+#: readactivity.py:399
+msgid "Previous bookmark"
+msgstr "نشانک قبلی"
+
+#: readactivity.py:411
+msgid "Forward"
+msgstr "جلو"
+
+#: readactivity.py:415
+msgid "Next page"
+msgstr "صفحهٔ بعد"
+
+#: readactivity.py:417
+msgid "Next bookmark"
+msgstr "نشانک بعدی"
+
+#: readactivity.py:468
+msgid "Index"
+msgstr "فهرست"
+
+#: readactivity.py:564
+msgid "Delete bookmark"
+msgstr "حذف نشانک"
+
+#: readactivity.py:565
+msgid "All the information related with this bookmark will be lost"
+msgstr "تمام اطلاعات مرتبط با این نشانک از دست خواهد رفت"
+
+#: readactivity.py:954
+msgid "Receiving book..."
+msgstr ""
+
+#: readactivity.py:1032 readactivity.py:1227
+#, python-format
+msgid "%s (Page %d)"
+msgstr ""
 
 #: readtoolbar.py:61
 msgid "Previous"
@@ -162,55 +148,81 @@ msgstr "گذشته را بازیاب"
 msgid "Find next"
 msgstr "بعدی را بازیاب"
 
-#: readtoolbar.py:189
+#: readtoolbar.py:188
 msgid "Table of contents"
 msgstr "جدول محتویات"
 
-#: readtoolbar.py:198
+#: readtoolbar.py:197
 msgid "Zoom out"
 msgstr "کوچکنمایی"
 
-#: readtoolbar.py:204
+#: readtoolbar.py:203
 msgid "Zoom in"
 msgstr "بزرگنمایی"
 
-#: readtoolbar.py:210
+#: readtoolbar.py:209
 msgid "Zoom to width"
 msgstr "بزرگنمایی به عرض"
 
-#: readtoolbar.py:216
+#: readtoolbar.py:215
 msgid "Zoom to fit"
 msgstr "بزرگنمایی به اندازه"
 
-#: readtoolbar.py:222
+#: readtoolbar.py:221
 msgid "Actual size"
 msgstr "اندازه واقعی"
 
-#: readtoolbar.py:233
+#: readtoolbar.py:232
 msgid "Fullscreen"
 msgstr "تمام صفحه"
 
-#: readtoolbar.py:301
+#: readtoolbar.py:252
+msgid "Rotate left"
+msgstr ""
+
+#: readtoolbar.py:258
+msgid "Rotate right"
+msgstr ""
+
+#: readtoolbar.py:324
 msgid "Show Tray"
 msgstr "نمایش سینی"
 
-#: readtoolbar.py:303
+#: readtoolbar.py:326
 msgid "Hide Tray"
 msgstr "پنهان کردن سینی"
 
-#: speechtoolbar.py:57
-msgid "Play / Pause"
-msgstr "پخش/ مکث"
+#: linkbutton.py:133
+msgid "Go to Bookmark"
+msgstr "برو به نشانه گذاری"
 
-#: speechtoolbar.py:65
-msgid "Stop"
-msgstr "توقف"
+#: linkbutton.py:139
+msgid "Remove"
+msgstr "حذف"
 
-#~ msgid "%"
-#~ msgstr "٪"
+#: bookmarkview.py:107
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "نشانه گذاری اضافه شده بوسیله %(user)s %(time)s"
 
-#~ msgid "Edit"
-#~ msgstr "ویراستن"
+#: bookmarkview.py:143 bookmarkview.py:192
+msgid "Add notes for bookmark: "
+msgstr "اضافه کردن یادداشت برای نشانه گذاری: "
 
-#~ msgid "View"
-#~ msgstr "دیدن"
+#: bookmarkview.py:188
+#, python-format
+msgid "%s's bookmark"
+msgstr "%s's از نشانه گذاری"
+
+#: bookmarkview.py:189
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "نشانه گذاری برای صفحه %d"
+
+#: comicadapter.py:69
+msgid "Can not read Comic Book Archive"
+msgstr ""
+
+#: comicadapter.py:70
+msgid "No readable images were found"
+msgstr ""

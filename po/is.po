@@ -2,21 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-11 00:31-0400\n"
-"PO-Revision-Date: 2017-01-02 16:50+0000\n"
-"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
+"POT-Creation-Date: 2017-03-24 17:39+1100\n"
+"PO-Revision-Date: 2017-04-17 06:00+0000\n"
+"Last-Translator: Chris <cjl@sugarlabs.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
@@ -24,102 +16,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.1.1\n"
-"X-POOTLE-MTIME: 1483375838.000000\n"
+"X-POOTLE-MTIME: 1492408842.000000\n"
 
-#. TRANS: "name" option from activity.info file
+#: activity/activity.info:2
 msgid "Read"
 msgstr "Lesa"
 
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
 msgstr ""
 "Notaðu þetta verkefni þegar þú ert tilbúinn að lesa! Mundu að þú getur velt "
 "tölvunni þinni á hlið svo að þetta sé eins og að lesa bók!"
-
-#. TRANS: This goes like Bookmark added by User 5 days ago
-#. TRANS: (the elapsed string gets translated automatically)
-#: bookmarkview.py:110
-#, python-format
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr "Bókamerki bætt við af %(user)s %(time)s"
-
-#: bookmarkview.py:153 bookmarkview.py:204
-msgid "Add notes for bookmark: "
-msgstr "Bæta við athugasemd vegna bókamerkis: "
-
-#: bookmarkview.py:200
-#, python-format
-msgid "%s's bookmark"
-msgstr "Bókamerki fyrir %s"
-
-#: bookmarkview.py:201
-#, python-format
-msgid "Bookmark for page %d"
-msgstr "Bókamerki fyrir síðuna %d"
-
-#: evinceadapter.py:88
-msgid "URL from Read"
-msgstr "Slóð úr Lesa"
-
-#: linkbutton.py:94
-msgid "Go to Bookmark"
-msgstr "Fara á bókamerki"
-
-#: linkbutton.py:99
-msgid "Remove"
-msgstr "Fjarlægja"
-
-#: readactivity.py:333
-msgid "No book"
-msgstr "Engin bók"
-
-#: readactivity.py:333
-msgid "Choose something to read"
-msgstr "Veldu eitthvað til að lesa"
-
-#: readactivity.py:338
-msgid "Back"
-msgstr "Aftur"
-
-#: readactivity.py:342
-msgid "Previous page"
-msgstr "Fyrri síða"
-
-#: readactivity.py:344
-msgid "Previous bookmark"
-msgstr "Fyrra bókamerki"
-
-#: readactivity.py:356
-msgid "Forward"
-msgstr "Áfram"
-
-#: readactivity.py:360
-msgid "Next page"
-msgstr "Næsta síða"
-
-#: readactivity.py:362
-msgid "Next bookmark"
-msgstr "Næsta bókamerki"
-
-#: readactivity.py:413
-msgid "Index"
-msgstr "Atriðaskrá"
-
-#: readactivity.py:534
-msgid "Delete bookmark"
-msgstr "Eyða bókamerki"
-
-#: readactivity.py:535
-msgid "All the information related with this bookmark will be lost"
-msgstr "Allar upplýsingar sem tengjast þessu bókamerki munu glatast"
-
-#: readactivity.py:895 readactivity.py:1090
-#, python-format
-msgid "Page %d"
-msgstr "Síða %d"
 
 #: readdialog.py:52
 msgid "Cancel"
@@ -129,13 +38,90 @@ msgstr "Hætta við"
 msgid "Ok"
 msgstr "Í lagi"
 
-#: readdialog.py:116
+#: readdialog.py:120
 msgid "<b>Title</b>:"
 msgstr "<b>Titill</b>:"
 
-#: readdialog.py:142
+#: readdialog.py:147
+msgid "<b>Author</b>:"
+msgstr "<b>Höfundur</b>:"
+
+#: readdialog.py:163
 msgid "<b>Details</b>:"
 msgstr "<b>Nánar</b>:"
+
+#: evinceadapter.py:92
+msgid "URL from Read"
+msgstr "Slóð úr Lesa"
+
+#: speechtoolbar.py:57
+msgid "Play / Pause"
+msgstr "Spila / Bíða"
+
+#: speechtoolbar.py:65
+msgid "Stop"
+msgstr "Stöðva"
+
+#: readactivity.py:379
+msgid "Please wait"
+msgstr "Hinkraðu aðeins"
+
+#: readactivity.py:380
+msgid "Starting connection..."
+msgstr "Ræsi tengingu..."
+
+#: readactivity.py:388
+msgid "No book"
+msgstr "Engin bók"
+
+#: readactivity.py:388
+msgid "Choose something to read"
+msgstr "Veldu eitthvað til að lesa"
+
+#: readactivity.py:393
+msgid "Back"
+msgstr "Aftur"
+
+#: readactivity.py:397
+msgid "Previous page"
+msgstr "Fyrri síða"
+
+#: readactivity.py:399
+msgid "Previous bookmark"
+msgstr "Fyrra bókamerki"
+
+#: readactivity.py:411
+msgid "Forward"
+msgstr "Áfram"
+
+#: readactivity.py:415
+msgid "Next page"
+msgstr "Næsta síða"
+
+#: readactivity.py:417
+msgid "Next bookmark"
+msgstr "Næsta bókamerki"
+
+#: readactivity.py:468
+msgid "Index"
+msgstr "Atriðaskrá"
+
+#: readactivity.py:564
+msgid "Delete bookmark"
+msgstr "Eyða bókamerki"
+
+#: readactivity.py:565
+msgid "All the information related with this bookmark will be lost"
+msgstr "Allar upplýsingar sem tengjast þessu bókamerki munu glatast"
+
+#: readactivity.py:954
+msgid "Receiving book..."
+msgstr "Móttek bók..."
+
+#: readactivity.py:1032 readactivity.py:1227
+#, python-format
+msgid "%s (Page %d)"
+msgstr "%s (Síða %d)"
 
 #: readtoolbar.py:61
 msgid "Previous"
@@ -161,55 +147,81 @@ msgstr "Finna fyrri"
 msgid "Find next"
 msgstr "Finna næsta"
 
-#: readtoolbar.py:189
+#: readtoolbar.py:188
 msgid "Table of contents"
 msgstr "Efnisyfirlit"
 
-#: readtoolbar.py:198
+#: readtoolbar.py:197
 msgid "Zoom out"
 msgstr "Renna frá"
 
-#: readtoolbar.py:204
+#: readtoolbar.py:203
 msgid "Zoom in"
 msgstr "Renna að"
 
-#: readtoolbar.py:210
+#: readtoolbar.py:209
 msgid "Zoom to width"
 msgstr "Aðdráttur að breidd"
 
-#: readtoolbar.py:216
+#: readtoolbar.py:215
 msgid "Zoom to fit"
 msgstr "Aðdráttur til að passa"
 
-#: readtoolbar.py:222
+#: readtoolbar.py:221
 msgid "Actual size"
 msgstr "Raunstærð"
 
-#: readtoolbar.py:233
+#: readtoolbar.py:232
 msgid "Fullscreen"
 msgstr "Fylla skjá"
 
-#: readtoolbar.py:301
+#: readtoolbar.py:252
+msgid "Rotate left"
+msgstr "Snúa til vinstri"
+
+#: readtoolbar.py:258
+msgid "Rotate right"
+msgstr "Snúa til hægri"
+
+#: readtoolbar.py:324
 msgid "Show Tray"
 msgstr "Birta bakka"
 
-#: readtoolbar.py:303
+#: readtoolbar.py:326
 msgid "Hide Tray"
 msgstr "Fela bakka"
 
-#: speechtoolbar.py:57
-msgid "Play / Pause"
-msgstr "Spila / Bíða"
+#: linkbutton.py:133
+msgid "Go to Bookmark"
+msgstr "Fara á bókamerki"
 
-#: speechtoolbar.py:65
-msgid "Stop"
-msgstr "Stöðva"
+#: linkbutton.py:139
+msgid "Remove"
+msgstr "Fjarlægja"
 
-#~ msgid "%"
-#~ msgstr "%"
+#: bookmarkview.py:107
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "Bókamerki bætt við af %(user)s %(time)s"
 
-#~ msgid "Edit"
-#~ msgstr "Breyta"
+#: bookmarkview.py:143 bookmarkview.py:192
+msgid "Add notes for bookmark: "
+msgstr "Bæta við athugasemd vegna bókamerkis: "
 
-#~ msgid "View"
-#~ msgstr "Sýna"
+#: bookmarkview.py:188
+#, python-format
+msgid "%s's bookmark"
+msgstr "Bókamerki fyrir %s"
+
+#: bookmarkview.py:189
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "Bókamerki fyrir síðuna %d"
+
+#: comicadapter.py:69
+msgid "Can not read Comic Book Archive"
+msgstr "Get ekki lesið myndasögusafnskrá"
+
+#: comicadapter.py:70
+msgid "No readable images were found"
+msgstr "Engar læsilegar myndir fundust"

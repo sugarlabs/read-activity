@@ -2,21 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-11 00:31-0400\n"
-"PO-Revision-Date: 2016-04-20 23:44+0000\n"
-"Last-Translator: Anonymous Pootle User\n"
+"POT-Creation-Date: 2017-03-24 17:39+1100\n"
+"PO-Revision-Date: 2017-04-17 06:15+0000\n"
+"Last-Translator: Chris <cjl@sugarlabs.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -25,102 +17,19 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.1.1\n"
-"X-POOTLE-MTIME: 1461195884.000000\n"
+"X-POOTLE-MTIME: 1492409727.000000\n"
 
-#. TRANS: "name" option from activity.info file
+#: activity/activity.info:2
 msgid "Read"
 msgstr "Читать"
 
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
 msgstr ""
 "Используй это приложение, когда готов читать! Не забудь повернуть свой "
 "компьютер так, будто ты по-настоящему держишь в руках книгу!"
-
-#. TRANS: This goes like Bookmark added by User 5 days ago
-#. TRANS: (the elapsed string gets translated automatically)
-#: bookmarkview.py:110
-#, python-format
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr "Закладка добавлена %(time)s пользователем %(user)s"
-
-#: bookmarkview.py:153 bookmarkview.py:204
-msgid "Add notes for bookmark: "
-msgstr "Добавить заметку к закладке: "
-
-#: bookmarkview.py:200
-#, python-format
-msgid "%s's bookmark"
-msgstr "%s's закладка"
-
-#: bookmarkview.py:201
-#, python-format
-msgid "Bookmark for page %d"
-msgstr "Закладка страницы %d"
-
-#: evinceadapter.py:88
-msgid "URL from Read"
-msgstr "URL из Read"
-
-#: linkbutton.py:94
-msgid "Go to Bookmark"
-msgstr "Перейти к Закладке"
-
-#: linkbutton.py:99
-msgid "Remove"
-msgstr "Удалить"
-
-#: readactivity.py:333
-msgid "No book"
-msgstr "Нет книг"
-
-#: readactivity.py:333
-msgid "Choose something to read"
-msgstr "Выберите книгу для чтения"
-
-#: readactivity.py:338
-msgid "Back"
-msgstr "Назад"
-
-#: readactivity.py:342
-msgid "Previous page"
-msgstr "Предыдущая страница"
-
-#: readactivity.py:344
-msgid "Previous bookmark"
-msgstr "Предыдущая закладка"
-
-#: readactivity.py:356
-msgid "Forward"
-msgstr "Вперед"
-
-#: readactivity.py:360
-msgid "Next page"
-msgstr "Следующая страница"
-
-#: readactivity.py:362
-msgid "Next bookmark"
-msgstr "Следующая закладка"
-
-#: readactivity.py:413
-msgid "Index"
-msgstr "Содержание"
-
-#: readactivity.py:534
-msgid "Delete bookmark"
-msgstr "Удалить закладку"
-
-#: readactivity.py:535
-msgid "All the information related with this bookmark will be lost"
-msgstr "Вся информация, связанная с этой закладкой, будет потеряна."
-
-#: readactivity.py:895 readactivity.py:1090
-#, python-format
-msgid "Page %d"
-msgstr "Страница %d"
 
 #: readdialog.py:52
 msgid "Cancel"
@@ -130,13 +39,90 @@ msgstr "Отмена"
 msgid "Ok"
 msgstr "Ок"
 
-#: readdialog.py:116
+#: readdialog.py:120
 msgid "<b>Title</b>:"
 msgstr "<b>Заголовок</b>:"
 
-#: readdialog.py:142
+#: readdialog.py:147
+msgid "<b>Author</b>:"
+msgstr ""
+
+#: readdialog.py:163
 msgid "<b>Details</b>:"
 msgstr "<b>Детали</b>:"
+
+#: evinceadapter.py:92
+msgid "URL from Read"
+msgstr "URL из Read"
+
+#: speechtoolbar.py:57
+msgid "Play / Pause"
+msgstr "Воспр. / Пауза"
+
+#: speechtoolbar.py:65
+msgid "Stop"
+msgstr "Стоп"
+
+#: readactivity.py:379
+msgid "Please wait"
+msgstr ""
+
+#: readactivity.py:380
+msgid "Starting connection..."
+msgstr ""
+
+#: readactivity.py:388
+msgid "No book"
+msgstr "Нет книг"
+
+#: readactivity.py:388
+msgid "Choose something to read"
+msgstr "Выберите книгу для чтения"
+
+#: readactivity.py:393
+msgid "Back"
+msgstr "Назад"
+
+#: readactivity.py:397
+msgid "Previous page"
+msgstr "Предыдущая страница"
+
+#: readactivity.py:399
+msgid "Previous bookmark"
+msgstr "Предыдущая закладка"
+
+#: readactivity.py:411
+msgid "Forward"
+msgstr "Вперед"
+
+#: readactivity.py:415
+msgid "Next page"
+msgstr "Следующая страница"
+
+#: readactivity.py:417
+msgid "Next bookmark"
+msgstr "Следующая закладка"
+
+#: readactivity.py:468
+msgid "Index"
+msgstr "Содержание"
+
+#: readactivity.py:564
+msgid "Delete bookmark"
+msgstr "Удалить закладку"
+
+#: readactivity.py:565
+msgid "All the information related with this bookmark will be lost"
+msgstr "Вся информация, связанная с этой закладкой, будет потеряна"
+
+#: readactivity.py:954
+msgid "Receiving book..."
+msgstr ""
+
+#: readactivity.py:1032 readactivity.py:1227
+#, python-format
+msgid "%s (Page %d)"
+msgstr ""
 
 #: readtoolbar.py:61
 msgid "Previous"
@@ -162,65 +148,81 @@ msgstr "Найти предыдущий"
 msgid "Find next"
 msgstr "Найти следующий"
 
-#: readtoolbar.py:189
+#: readtoolbar.py:188
 msgid "Table of contents"
 msgstr "Оглавление"
 
-#: readtoolbar.py:198
+#: readtoolbar.py:197
 msgid "Zoom out"
 msgstr "Увеличить"
 
-#: readtoolbar.py:204
+#: readtoolbar.py:203
 msgid "Zoom in"
 msgstr "Уменьшить"
 
-#: readtoolbar.py:210
+#: readtoolbar.py:209
 msgid "Zoom to width"
 msgstr "Масштабировать по ширине"
 
-#: readtoolbar.py:216
+#: readtoolbar.py:215
 msgid "Zoom to fit"
 msgstr "Масштабировать по размеру"
 
-#: readtoolbar.py:222
+#: readtoolbar.py:221
 msgid "Actual size"
 msgstr "Оригинальный размер"
 
-#: readtoolbar.py:233
+#: readtoolbar.py:232
 msgid "Fullscreen"
 msgstr "Полный экран"
 
-#: readtoolbar.py:301
+#: readtoolbar.py:252
+msgid "Rotate left"
+msgstr ""
+
+#: readtoolbar.py:258
+msgid "Rotate right"
+msgstr ""
+
+#: readtoolbar.py:324
 msgid "Show Tray"
 msgstr "Показать Лоток"
 
-#: readtoolbar.py:303
+#: readtoolbar.py:326
 msgid "Hide Tray"
 msgstr "Скрыть Лоток"
 
-#: speechtoolbar.py:57
-msgid "Play / Pause"
-msgstr "Воспр. / Пауза"
+#: linkbutton.py:133
+msgid "Go to Bookmark"
+msgstr "Перейти к Закладке"
 
-#: speechtoolbar.py:65
-msgid "Stop"
-msgstr "Стоп"
+#: linkbutton.py:139
+msgid "Remove"
+msgstr "Удалить"
 
-#~ msgid "%"
-#~ msgstr "%"
-
-#~ msgid "Choose document"
-#~ msgstr "Выбрать документ"
-
+#: bookmarkview.py:107
 #, python-format
-#~ msgid "Page %i of %i"
-#~ msgstr "Страница %i из %i"
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "Закладка добавлена %(time)s пользователем %(user)s"
 
-#~ msgid "Edit"
-#~ msgstr "Редактировать"
+#: bookmarkview.py:143 bookmarkview.py:192
+msgid "Add notes for bookmark: "
+msgstr "Добавить заметку к закладке: "
 
-#~ msgid "View"
-#~ msgstr "Просмотреть"
+#: bookmarkview.py:188
+#, python-format
+msgid "%s's bookmark"
+msgstr "%s's закладка"
 
-#~ msgid "Read Activity"
-#~ msgstr "Активность Чтение"
+#: bookmarkview.py:189
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "Закладка страницы %d"
+
+#: comicadapter.py:69
+msgid "Can not read Comic Book Archive"
+msgstr ""
+
+#: comicadapter.py:70
+msgid "No readable images were found"
+msgstr ""

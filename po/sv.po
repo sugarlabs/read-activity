@@ -2,121 +2,33 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-11 00:31-0400\n"
-"PO-Revision-Date: 2010-02-12 05:58+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"POT-Creation-Date: 2017-03-24 17:39+1100\n"
+"PO-Revision-Date: 2017-03-28 23:07+0000\n"
+"Last-Translator: Anders <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.1\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1490742444.000000\n"
 
-#. TRANS: "name" option from activity.info file
+#: activity/activity.info:2
 msgid "Read"
 msgstr "Läs"
 
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
 msgstr ""
-
-#. TRANS: This goes like Bookmark added by User 5 days ago
-#. TRANS: (the elapsed string gets translated automatically)
-#: bookmarkview.py:110
-#, python-format
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr "Bokmärke skapat av %(user)s kl %(time)s"
-
-#: bookmarkview.py:153 bookmarkview.py:204
-msgid "Add notes for bookmark: "
-msgstr "Lägg till kommentar till bokmärke: "
-
-#: bookmarkview.py:200
-#, python-format
-msgid "%s's bookmark"
-msgstr "%ss bokmärke"
-
-#: bookmarkview.py:201
-#, python-format
-msgid "Bookmark for page %d"
-msgstr "bokmärke for sida %d"
-
-#: evinceadapter.py:88
-msgid "URL from Read"
-msgstr ""
-
-#: linkbutton.py:94
-msgid "Go to Bookmark"
-msgstr ""
-
-#: linkbutton.py:99
-msgid "Remove"
-msgstr ""
-
-#: readactivity.py:333
-msgid "No book"
-msgstr ""
-
-#: readactivity.py:333
-msgid "Choose something to read"
-msgstr ""
-
-#: readactivity.py:338
-msgid "Back"
-msgstr "Tillbaka"
-
-#: readactivity.py:342
-msgid "Previous page"
-msgstr "Föregående sida"
-
-#: readactivity.py:344
-msgid "Previous bookmark"
-msgstr "Föregående bokmärke"
-
-#: readactivity.py:356
-msgid "Forward"
-msgstr "Framåt"
-
-#: readactivity.py:360
-msgid "Next page"
-msgstr "Nästa sida"
-
-#: readactivity.py:362
-msgid "Next bookmark"
-msgstr "Nästa bokmärke"
-
-#: readactivity.py:413
-msgid "Index"
-msgstr ""
-
-#: readactivity.py:534
-msgid "Delete bookmark"
-msgstr ""
-
-#: readactivity.py:535
-msgid "All the information related with this bookmark will be lost"
-msgstr ""
-
-#: readactivity.py:895 readactivity.py:1090
-#, python-format
-msgid "Page %d"
-msgstr ""
+"Använd denna aktivitet då du vill läsa! Kom ihåg att vrida på din dator så "
+"att det känns som att du verkligen håller i en bok!"
 
 #: readdialog.py:52
 msgid "Cancel"
@@ -126,13 +38,90 @@ msgstr "Avbryt"
 msgid "Ok"
 msgstr "Ok"
 
-#: readdialog.py:116
+#: readdialog.py:120
 msgid "<b>Title</b>:"
 msgstr "<b>Titel</b>:"
 
-#: readdialog.py:142
+#: readdialog.py:147
+msgid "<b>Author</b>:"
+msgstr "<b>Författare</b>:"
+
+#: readdialog.py:163
 msgid "<b>Details</b>:"
 msgstr "<b>Detaljer</b>:"
+
+#: evinceadapter.py:92
+msgid "URL from Read"
+msgstr "URL från Läs"
+
+#: speechtoolbar.py:57
+msgid "Play / Pause"
+msgstr "Spela / Pausa"
+
+#: speechtoolbar.py:65
+msgid "Stop"
+msgstr "Stoppa"
+
+#: readactivity.py:379
+msgid "Please wait"
+msgstr "Var god vänta"
+
+#: readactivity.py:380
+msgid "Starting connection..."
+msgstr "Startar anslutning..."
+
+#: readactivity.py:388
+msgid "No book"
+msgstr "Ingen bok"
+
+#: readactivity.py:388
+msgid "Choose something to read"
+msgstr "Välj något att läsa"
+
+#: readactivity.py:393
+msgid "Back"
+msgstr "Tillbaka"
+
+#: readactivity.py:397
+msgid "Previous page"
+msgstr "Föregående sida"
+
+#: readactivity.py:399
+msgid "Previous bookmark"
+msgstr "Föregående bokmärke"
+
+#: readactivity.py:411
+msgid "Forward"
+msgstr "Framåt"
+
+#: readactivity.py:415
+msgid "Next page"
+msgstr "Nästa sida"
+
+#: readactivity.py:417
+msgid "Next bookmark"
+msgstr "Nästa bokmärke"
+
+#: readactivity.py:468
+msgid "Index"
+msgstr "Index"
+
+#: readactivity.py:564
+msgid "Delete bookmark"
+msgstr "Ta bort bokmärke"
+
+#: readactivity.py:565
+msgid "All the information related with this bookmark will be lost"
+msgstr "All information som hör till detta bokmärke kommer att gå förlorad"
+
+#: readactivity.py:954
+msgid "Receiving book..."
+msgstr "Tar emot bok..."
+
+#: readactivity.py:1032 readactivity.py:1227
+#, python-format
+msgid "%s (Page %d)"
+msgstr "%s (sida %d)"
 
 #: readtoolbar.py:61
 msgid "Previous"
@@ -144,7 +133,7 @@ msgstr "Nästa"
 
 #: readtoolbar.py:79
 msgid "Highlight"
-msgstr ""
+msgstr "Markera"
 
 #: readtoolbar.py:160
 msgid "Find first"
@@ -158,62 +147,81 @@ msgstr "Sök föregående"
 msgid "Find next"
 msgstr "Sök nästa"
 
-#: readtoolbar.py:189
+#: readtoolbar.py:188
 msgid "Table of contents"
-msgstr ""
+msgstr "Innehållsförteckning"
 
-#: readtoolbar.py:198
+#: readtoolbar.py:197
 msgid "Zoom out"
 msgstr "Zooma ut"
 
-#: readtoolbar.py:204
+#: readtoolbar.py:203
 msgid "Zoom in"
 msgstr "Zooma in"
 
-#: readtoolbar.py:210
+#: readtoolbar.py:209
 msgid "Zoom to width"
 msgstr "Anpassa till bredd"
 
-#: readtoolbar.py:216
+#: readtoolbar.py:215
 msgid "Zoom to fit"
 msgstr "Bästa anpassning"
 
-#: readtoolbar.py:222
+#: readtoolbar.py:221
 msgid "Actual size"
 msgstr "Verklig storlek"
 
-#: readtoolbar.py:233
+#: readtoolbar.py:232
 msgid "Fullscreen"
 msgstr "Helskärm"
 
-#: readtoolbar.py:301
+#: readtoolbar.py:252
+msgid "Rotate left"
+msgstr "Vrid vänster"
+
+#: readtoolbar.py:258
+msgid "Rotate right"
+msgstr "Vrid höger"
+
+#: readtoolbar.py:324
 msgid "Show Tray"
-msgstr ""
+msgstr "Visa list"
 
-#: readtoolbar.py:303
+#: readtoolbar.py:326
 msgid "Hide Tray"
-msgstr ""
+msgstr "Dölj list"
 
-#: speechtoolbar.py:57
-msgid "Play / Pause"
-msgstr ""
+#: linkbutton.py:133
+msgid "Go to Bookmark"
+msgstr "Gå till bokmärke"
 
-#: speechtoolbar.py:65
-msgid "Stop"
-msgstr ""
+#: linkbutton.py:139
+msgid "Remove"
+msgstr "Ta bort"
 
-#~ msgid "%"
-#~ msgstr "%"
-
-#~ msgid "Choose document"
-#~ msgstr "Välj dokument"
-
+#: bookmarkview.py:107
 #, python-format
-#~ msgid "Page %i of %i"
-#~ msgstr "Sida %i av %i"
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "Bokmärke skapat av %(user)s kl %(time)s"
 
-#~ msgid "Edit"
-#~ msgstr "Redigera"
+#: bookmarkview.py:143 bookmarkview.py:192
+msgid "Add notes for bookmark: "
+msgstr "Lägg till kommentar till bokmärke: "
 
-#~ msgid "View"
-#~ msgstr "Visa"
+#: bookmarkview.py:188
+#, python-format
+msgid "%s's bookmark"
+msgstr "Bokmärke som tillhör %s"
+
+#: bookmarkview.py:189
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "Bokmärke för sida %d"
+
+#: comicadapter.py:69
+msgid "Can not read Comic Book Archive"
+msgstr "Kan inte läsa serietidningsarkiv"
+
+#: comicadapter.py:70
+msgid "No readable images were found"
+msgstr "Inga läsbara bilder hittades"

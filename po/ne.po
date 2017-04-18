@@ -2,19 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 00:31-0400\n"
+"POT-Creation-Date: 2017-03-24 17:39+1100\n"
 "PO-Revision-Date: 2013-11-20 07:20+0200\n"
 "Last-Translator: Ganesh <ganesh.ghimire@olenepal.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,113 +17,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.0.5\n"
 
-#. TRANS: "name" option from activity.info file
+#: activity/activity.info:2
 msgid "Read"
 msgstr "पढ"
 
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
 msgstr ""
-"तपाईँ पढ्न चाहनु हुन्छ भने यो क्रियाकलाप प्रयोग गर्न सक्नु हुनेछ। "
-"कम्प्युटरलाई वरिपरि घुमाएर साँच्चैको पुस्तक समाएर पढेको अनुभव गर्नु हुनेछ।"
-
-#: bookmarkview.py:112
-#, python-format
-#, python-format,
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr "%(user)s %(time)s द्वारा थपिएको पुस्तक-चिनो"
-
-#: bookmarkview.py:155 bookmarkview.py:206
-msgid "Add notes for bookmark: "
-msgstr "पुस्तकचिनोको लागि टिपोटहरु थप: "
-
-#: bookmarkview.py:202
-#, python-format
-#, python-format,
-msgid "%s's bookmark"
-msgstr "%s's पुस्तकचिनो"
-
-#: bookmarkview.py:203
-#, python-format
-#, python-format,
-msgid "Bookmark for page %d"
-msgstr "%d पानाको लागि पुस्तकचिनो"
-
-#: evinceadapter.py:88
-msgid "URL from Read"
-msgstr "पढ देखिको URL"
-
-#: linkbutton.py:124
-msgid "Go to Bookmark"
-msgstr "पुस्तकचिनोमा जाऊ"
-
-#: linkbutton.py:129
-msgid "Remove"
-msgstr "हटाऊ"
-
-#: readactivity.py:361
-msgid "Please wait"
-msgstr "कृपया पर्खनुहोस्"
-
-#: readactivity.py:362
-msgid "Starting connection..."
-msgstr "जडान सुरु हुँदै..."
-
-#: readactivity.py:374
-msgid "No book"
-msgstr "पुस्तक छैन"
-
-#: readactivity.py:374
-msgid "Choose something to read"
-msgstr "पढ्नको लागि केहि चयन गर्नुहोस्"
-
-#: readactivity.py:379
-msgid "Back"
-msgstr "पछाडि"
-
-#: readactivity.py:383
-msgid "Previous page"
-msgstr "अघिल्लो पाना"
-
-#: readactivity.py:385
-msgid "Previous bookmark"
-msgstr "अघिल्लो पुस्तकचिनो"
-
-#: readactivity.py:397
-msgid "Forward"
-msgstr "अगाडि"
-
-#: readactivity.py:401
-msgid "Next page"
-msgstr "अर्को पाना"
-
-#: readactivity.py:403
-msgid "Next bookmark"
-msgstr "अर्को पुस्तकचिनो"
-
-#: readactivity.py:454
-msgid "Index"
-msgstr "अनुक्रमणिका"
-
-#: readactivity.py:575
-msgid "Delete bookmark"
-msgstr "मेटाउ पुस्तकचिनो"
-
-#: readactivity.py:576
-msgid "All the information related with this bookmark will be lost"
-msgstr "यो पुस्तकचिनोसँग सम्बन्धित सबै सुचना हराउने छ"
-
-#: readactivity.py:900
-msgid "Receiving book..."
-msgstr "पुस्तक प्राप्त गर्दै..."
-
-#: readactivity.py:966 readactivity.py:1162
-#, python-format
-msgid "Page %d"
-msgstr "पृष्ठ %d"
+"तपाईँ पढ्न चाहनु हुन्छ भने यो क्रियाकलाप प्रयोग गर्न सक्नु हुनेछ। कम्प्युटरला"
+"ई वरिपरि घुमाएर साँच्चैको पुस्तक समाएर पढेको अनुभव गर्नु हुनेछ।"
 
 #: readdialog.py:52
 msgid "Cancel"
@@ -141,13 +37,90 @@ msgstr "रद्द गर्नुहोस"
 msgid "Ok"
 msgstr "ठीक"
 
-#: readdialog.py:116
+#: readdialog.py:120
 msgid "<b>Title</b>:"
 msgstr "<b>शीर्षक</b>:"
 
-#: readdialog.py:142
+#: readdialog.py:147
+msgid "<b>Author</b>:"
+msgstr ""
+
+#: readdialog.py:163
 msgid "<b>Details</b>:"
 msgstr "<b>विवरण</b>:"
+
+#: evinceadapter.py:92
+msgid "URL from Read"
+msgstr "पढ देखिको URL"
+
+#: speechtoolbar.py:57
+msgid "Play / Pause"
+msgstr "प्ले / पज"
+
+#: speechtoolbar.py:65
+msgid "Stop"
+msgstr "रोक"
+
+#: readactivity.py:379
+msgid "Please wait"
+msgstr "कृपया पर्खनुहोस्"
+
+#: readactivity.py:380
+msgid "Starting connection..."
+msgstr "जडान सुरु हुँदै..."
+
+#: readactivity.py:388
+msgid "No book"
+msgstr "पुस्तक छैन"
+
+#: readactivity.py:388
+msgid "Choose something to read"
+msgstr "पढ्नको लागि केहि चयन गर्नुहोस्"
+
+#: readactivity.py:393
+msgid "Back"
+msgstr "पछाडि"
+
+#: readactivity.py:397
+msgid "Previous page"
+msgstr "अघिल्लो पाना"
+
+#: readactivity.py:399
+msgid "Previous bookmark"
+msgstr "अघिल्लो पुस्तकचिनो"
+
+#: readactivity.py:411
+msgid "Forward"
+msgstr "अगाडि"
+
+#: readactivity.py:415
+msgid "Next page"
+msgstr "अर्को पाना"
+
+#: readactivity.py:417
+msgid "Next bookmark"
+msgstr "अर्को पुस्तकचिनो"
+
+#: readactivity.py:468
+msgid "Index"
+msgstr "अनुक्रमणिका"
+
+#: readactivity.py:564
+msgid "Delete bookmark"
+msgstr "मेटाउ पुस्तकचिनो"
+
+#: readactivity.py:565
+msgid "All the information related with this bookmark will be lost"
+msgstr "यो पुस्तकचिनोसँग सम्बन्धित सबै सुचना हराउने छ"
+
+#: readactivity.py:954
+msgid "Receiving book..."
+msgstr "पुस्तक प्राप्त गर्दै..."
+
+#: readactivity.py:1032 readactivity.py:1227
+#, python-format
+msgid "%s (Page %d)"
+msgstr ""
 
 #: readtoolbar.py:61
 msgid "Previous"
@@ -201,55 +174,56 @@ msgstr "वास्तविक आकार"
 msgid "Fullscreen"
 msgstr "पूरा स्क्रिन"
 
-#: readtoolbar.py:253
+#: readtoolbar.py:252
 msgid "Rotate left"
 msgstr "वायाँ घुमाउने"
 
-#: readtoolbar.py:259
+#: readtoolbar.py:258
 msgid "Rotate right"
 msgstr "दायाँ घुमाउने"
 
-#: readtoolbar.py:325
+#: readtoolbar.py:324
 msgid "Show Tray"
 msgstr "ट्रे देखाऊ"
 
-#: readtoolbar.py:327
+#: readtoolbar.py:326
 msgid "Hide Tray"
 msgstr "ट्रे लुकाऊ"
 
-#: speechtoolbar.py:57
-msgid "Play / Pause"
-msgstr "प्ले / पज"
+#: linkbutton.py:133
+msgid "Go to Bookmark"
+msgstr "पुस्तकचिनोमा जाऊ"
 
-#: speechtoolbar.py:65
-msgid "Stop"
-msgstr "रोक"
+#: linkbutton.py:139
+msgid "Remove"
+msgstr "हटाऊ"
 
+#: bookmarkview.py:107
 #, python-format
-#~ msgid "Page %(current)i of %(total_pages)i"
-#~ msgstr "%(total_pages)i को पृष्ठ %(current)i"
+#, python-format,
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "%(user)s %(time)s द्वारा थपिएको पुस्तक-चिनो"
 
-#~ msgid "%"
-#~ msgstr "%"
+#: bookmarkview.py:143 bookmarkview.py:192
+msgid "Add notes for bookmark: "
+msgstr "पुस्तकचिनोको लागि टिपोटहरु थप: "
 
-#~ msgid "pitch adjusted"
-#~ msgstr "पिच समायोजन गरिसक्यो"
+#: bookmarkview.py:188
+#, python-format
+#, python-format,
+msgid "%s's bookmark"
+msgstr "%s's पुस्तकचिनो"
 
-#~ msgid "rate adjusted"
-#~ msgstr "दर समायोजन गरिसक्यो"
+#: bookmarkview.py:189
+#, python-format
+#, python-format,
+msgid "Bookmark for page %d"
+msgstr "%d पानाको लागि पुस्तकचिनो"
 
-#~ msgid "Choose document"
-#~ msgstr "कागतपत्र छान"
+#: comicadapter.py:69
+msgid "Can not read Comic Book Archive"
+msgstr ""
 
-#, python-format, 
-#~ msgid "Page %i of %i"
-#~ msgstr "%iको %i पाना"
-
-#~ msgid "Edit"
-#~ msgstr "सम्पादन"
-
-#~ msgid "View"
-#~ msgstr "दृश्य"
-
-#~ msgid "Read Activity"
-#~ msgstr "पढाई क्रियाकलाप "
+#: comicadapter.py:70
+msgid "No readable images were found"
+msgstr ""

@@ -7,18 +7,18 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-24 17:39+1100\n"
-"PO-Revision-Date: 2008-03-21 07:29-0400\n"
-"Last-Translator: Adi Roiban <adiroiban@gmail.com>\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: ro\n"
+"Language: agr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Pootle 1.1.0rc2\n"
+"X-Generator: Translate Toolkit 1.11.0\n"
 
 #: activity/activity.info:2
 msgid "Read"
-msgstr "Citește"
+msgstr ""
 
 #: activity/activity.info:3
 msgid ""
@@ -76,7 +76,7 @@ msgstr ""
 
 #: readactivity.py:393
 msgid "Back"
-msgstr "Înapoi"
+msgstr ""
 
 #: readactivity.py:397
 msgid "Previous page"
@@ -88,7 +88,7 @@ msgstr ""
 
 #: readactivity.py:411
 msgid "Forward"
-msgstr "Înainte"
+msgstr ""
 
 #: readactivity.py:415
 msgid "Next page"
@@ -121,11 +121,11 @@ msgstr ""
 
 #: readtoolbar.py:61
 msgid "Previous"
-msgstr "Anterior"
+msgstr ""
 
 #: readtoolbar.py:68
 msgid "Next"
-msgstr "Următor"
+msgstr ""
 
 #: readtoolbar.py:79
 msgid "Highlight"
@@ -133,15 +133,15 @@ msgstr ""
 
 #: readtoolbar.py:160
 msgid "Find first"
-msgstr "Caută prima potrivire"
+msgstr ""
 
 #: readtoolbar.py:166
 msgid "Find previous"
-msgstr "Caută anterior"
+msgstr ""
 
 #: readtoolbar.py:168
 msgid "Find next"
-msgstr "Caută următor"
+msgstr ""
 
 #: readtoolbar.py:188
 msgid "Table of contents"
@@ -149,27 +149,27 @@ msgstr ""
 
 #: readtoolbar.py:197
 msgid "Zoom out"
-msgstr "Micește lupa"
+msgstr ""
 
 #: readtoolbar.py:203
 msgid "Zoom in"
-msgstr "Mărește lupa"
+msgstr ""
 
 #: readtoolbar.py:209
 msgid "Zoom to width"
-msgstr "Potrivește în lățime"
+msgstr ""
 
 #: readtoolbar.py:215
 msgid "Zoom to fit"
-msgstr "Potrivește în întregime"
+msgstr ""
 
 #: readtoolbar.py:221
 msgid "Actual size"
-msgstr "Mărime actuală"
+msgstr ""
 
 #: readtoolbar.py:232
 msgid "Fullscreen"
-msgstr "Pe tot ecranul"
+msgstr ""
 
 #: readtoolbar.py:252
 msgid "Rotate left"

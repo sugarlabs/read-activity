@@ -2,14 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-11 00:31-0400\n"
-"PO-Revision-Date: 2017-02-09 20:03+0000\n"
-"Last-Translator: MartínOesterreich <martin.otte80@gmail.com>\n"
+"POT-Creation-Date: 2017-03-24 17:39+1100\n"
+"PO-Revision-Date: 2017-04-17 05:55+0000\n"
+"Last-Translator: Chris <cjl@sugarlabs.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: gug\n"
 "MIME-Version: 1.0\n"
@@ -17,14 +16,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Pootle 2.5.1.1\n"
-"X-POOTLE-MTIME: 1486670589.000000\n"
+"X-POOTLE-MTIME: 1492408506.000000\n"
 
-#. TRANS: "name" option from activity.info file
+#: activity/activity.info:2
 msgid "Read"
 msgstr "Moñe'ẽ"
 
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
@@ -32,168 +30,198 @@ msgstr ""
 "Eiporu ko tembiapo eĩrovẽ emoñe'ẽhag̃ua! Nemandu'avaera embojere hag̃ua nde "
 "XO reimo'ãta reguerekoha peteĩ kuatiahai."
 
-#. TRANS: This goes like Bookmark added by User 5 days ago
-#. TRANS: (the elapsed string gets translated automatically)
-#: bookmarkview.py:110
+#: readdialog.py:52
+msgid "Cancel"
+msgstr "Momba"
+
+#: readdialog.py:58
+msgid "Ok"
+msgstr "Hẽe"
+
+#: readdialog.py:120
+msgid "<b>Title</b>:"
+msgstr "<b>Akã</b>:"
+
+#: readdialog.py:147
+msgid "<b>Author</b>:"
+msgstr "<b>Ojapovaekue</b>:"
+
+#: readdialog.py:163
+msgid "<b>Details</b>:"
+msgstr "<b>Amombe'upaite akue</b>:"
+
+#: evinceadapter.py:92
+msgid "URL from Read"
+msgstr "URL moñe'ẽ rehegua"
+
+#: speechtoolbar.py:57
+msgid "Play / Pause"
+msgstr "Ñemoña / Mombyta"
+
+#: speechtoolbar.py:65
+msgid "Stop"
+msgstr "Mombyta"
+
+#: readactivity.py:379
+msgid "Please wait"
+msgstr "Ẽha'arõmina"
+
+#: readactivity.py:380
+msgid "Starting connection..."
+msgstr "Joapyha ñepyrũ..."
+
+#: readactivity.py:388
+msgid "No book"
+msgstr "Ndaipori kautiahai"
+
+#: readactivity.py:388
+msgid "Choose something to read"
+msgstr "Ehechauka peteĩ mba'e emoñe'ẽ hag̃ua"
+
+#: readactivity.py:393
+msgid "Back"
+msgstr "Jere jey"
+
+#: readactivity.py:397
+msgid "Previous page"
+msgstr "Kuatia rogue tenondegua"
+
+#: readactivity.py:399
+msgid "Previous bookmark"
+msgstr "Moha'anga tenondegua"
+
+#: readactivity.py:411
+msgid "Forward"
+msgstr "Ñemotenonde"
+
+#: readactivity.py:415
+msgid "Next page"
+msgstr "Kuatia rogue uperiregua"
+
+#: readactivity.py:417
+msgid "Next bookmark"
+msgstr "Moha'anga uperiregua"
+
+#: readactivity.py:468
+msgid "Index"
+msgstr "Ñepyrũha"
+
+#: readactivity.py:564
+msgid "Delete bookmark"
+msgstr "Mbogue moha'anga"
+
+#: readactivity.py:565
+msgid "All the information related with this bookmark will be lost"
+msgstr "Maymáva momarandu jokuaa ndie ko mohaànga omokañyta"
+
+#: readactivity.py:954
+msgid "Receiving book..."
+msgstr "Oguahẽ che pópe nde kuatiañe'ê..."
+
+#: readactivity.py:1032 readactivity.py:1227
+#, python-format
+msgid "%s (Page %d)"
+msgstr "%s (Kuatia rogue %d)"
+
+#: readtoolbar.py:61
+msgid "Previous"
+msgstr "Tenondegua"
+
+#: readtoolbar.py:68
+msgid "Next"
+msgstr "Uperiregua"
+
+#: readtoolbar.py:79
+msgid "Highlight"
+msgstr "Jechakuaa"
+
+#: readtoolbar.py:160
+msgid "Find first"
+msgstr "Heka tenonderã"
+
+#: readtoolbar.py:166
+msgid "Find previous"
+msgstr "Heka tenondegua"
+
+#: readtoolbar.py:168
+msgid "Find next"
+msgstr "Heka uperiregua"
+
+#: readtoolbar.py:188
+msgid "Table of contents"
+msgstr "Techaukaha jokopapyre"
+
+#: readtoolbar.py:197
+msgid "Zoom out"
+msgstr "Omomombyry"
+
+#: readtoolbar.py:203
+msgid "Zoom in"
+msgstr "Añemboja"
+
+#: readtoolbar.py:209
+msgid "Zoom to width"
+msgstr "Mbojoja pe"
+
+#: readtoolbar.py:215
+msgid "Zoom to fit"
+msgstr "Mbojoja tenda jepyso ohechaukáva ta'anga"
+
+#: readtoolbar.py:221
+msgid "Actual size"
+msgstr "Jakatuha ha´ete"
+
+#: readtoolbar.py:232
+msgid "Fullscreen"
+msgstr "Tenda jepyso ohechaukáva ta'anga ojapopa"
+
+#: readtoolbar.py:252
+msgid "Rotate left"
+msgstr "Mbojopyru asúpe"
+
+#: readtoolbar.py:258
+msgid "Rotate right"
+msgstr "Mbojopyru akatúape"
+
+#: readtoolbar.py:324
+msgid "Show Tray"
+msgstr "Hechauka ña'embe"
+
+#: readtoolbar.py:326
+msgid "Hide Tray"
+msgstr "Mo'ã ña'embe"
+
+#: linkbutton.py:133
+msgid "Go to Bookmark"
+msgstr "Ahá moha'angapapyre"
+
+#: linkbutton.py:139
+msgid "Remove"
+msgstr "Pe'a"
+
+#: bookmarkview.py:107
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
-msgstr "Pe moha'anga mbojoapypyre gui %(user)s %(time)s."
+msgstr "Pe moha'anga mbojoapypyre gui %(user)s %(time)s"
 
-#: bookmarkview.py:153 bookmarkview.py:204
+#: bookmarkview.py:143 bookmarkview.py:192
 msgid "Add notes for bookmark: "
-msgstr "Mbojo'a ohesaho guarã pe moha'anga."
+msgstr "Mbojo'a ohesaho guarã pe moha'anga: "
 
-#: bookmarkview.py:200
+#: bookmarkview.py:188
 #, python-format
 msgid "%s's bookmark"
 msgstr "Moha'angaha %s"
 
-#: bookmarkview.py:201
+#: bookmarkview.py:189
 #, python-format
 msgid "Bookmark for page %d"
-msgstr "Moha'angaha kuatia rogue %d."
+msgstr "Moha'angaha kuatia rogue %d"
 
-#: evinceadapter.py:88
-msgid "URL from Read"
-msgstr "URL moñe'ẽ rehegua"
+#: comicadapter.py:69
+msgid "Can not read Comic Book Archive"
+msgstr "Ndikatúi emoñe'ẽ ñongatuha ta'ãngahaipyre oguatáva"
 
-#: linkbutton.py:94
-msgid "Go to Bookmark"
-msgstr "Ahá moha'angapapyre."
-
-#: linkbutton.py:99
-msgid "Remove"
-msgstr "Pe'a."
-
-#: readactivity.py:333
-msgid "No book"
-msgstr "Ndaipori kautiahai"
-
-#: readactivity.py:333
-msgid "Choose something to read"
-msgstr "Ehechauka peteĩ mba'e emoñe'ẽ hag̃ua"
-
-#: readactivity.py:338
-msgid "Back"
-msgstr "Jere jey"
-
-#: readactivity.py:342
-msgid "Previous page"
-msgstr "Kuatia rogue tenondegua."
-
-#: readactivity.py:344
-msgid "Previous bookmark"
-msgstr "Moha'anga tenondegua."
-
-#: readactivity.py:356
-msgid "Forward"
-msgstr "Ñemotenonde."
-
-#: readactivity.py:360
-msgid "Next page"
-msgstr "Kuatia rogue uperiregua."
-
-#: readactivity.py:362
-msgid "Next bookmark"
-msgstr "Moha'anga uperiregua."
-
-#: readactivity.py:413
-msgid "Index"
-msgstr "Ñepyrũha"
-
-#: readactivity.py:534
-msgid "Delete bookmark"
-msgstr "Mbogue moha'anga."
-
-#: readactivity.py:535
-msgid "All the information related with this bookmark will be lost"
-msgstr "Maymáva momarandu jokuaa ndie ko mohaànga omokañyta."
-
-#: readactivity.py:895 readactivity.py:1090
-#, python-format
-msgid "Page %d"
-msgstr "Kuatia rogue %d."
-
-#: readdialog.py:52
-msgid "Cancel"
-msgstr "Momba."
-
-#: readdialog.py:58
-msgid "Ok"
-msgstr "Hẽe."
-
-#: readdialog.py:116
-msgid "<b>Title</b>:"
-msgstr "<b>akã</b>:"
-
-#: readdialog.py:142
-msgid "<b>Details</b>:"
-msgstr "<b>amombe'upaite akue</b>:"
-
-#: readtoolbar.py:61
-msgid "Previous"
-msgstr "Tenondegua."
-
-#: readtoolbar.py:68
-msgid "Next"
-msgstr "Uperiregua."
-
-#: readtoolbar.py:79
-msgid "Highlight"
-msgstr "Jechakuaa."
-
-#: readtoolbar.py:160
-msgid "Find first"
-msgstr "Heka tenonderã."
-
-#: readtoolbar.py:166
-msgid "Find previous"
-msgstr "Heka tenondegua."
-
-#: readtoolbar.py:168
-msgid "Find next"
-msgstr "Heka uperiregua."
-
-#: readtoolbar.py:189
-msgid "Table of contents"
-msgstr "Techaukaha jokopapyre."
-
-#: readtoolbar.py:198
-msgid "Zoom out"
-msgstr "Omomombyry"
-
-#: readtoolbar.py:204
-msgid "Zoom in"
-msgstr "Añemboja."
-
-#: readtoolbar.py:210
-msgid "Zoom to width"
-msgstr "Mbojoja pe "
-
-#: readtoolbar.py:216
-msgid "Zoom to fit"
-msgstr "Mbojoja tenda jepyso ohechaukáva ta'anga."
-
-#: readtoolbar.py:222
-msgid "Actual size"
-msgstr "Jakatuha  ha´ete."
-
-#: readtoolbar.py:233
-msgid "Fullscreen"
-msgstr "Tenda jepyso ohechaukáva ta'anga ojapopa."
-
-#: readtoolbar.py:301
-msgid "Show Tray"
-msgstr "Hechauka ña'embe."
-
-#: readtoolbar.py:303
-msgid "Hide Tray"
-msgstr "Mo'ã ña'embe."
-
-#: speechtoolbar.py:57
-msgid "Play / Pause"
-msgstr "Ñemoña/mombyta."
-
-#: speechtoolbar.py:65
-msgid "Stop"
-msgstr "Mombyta."
+#: comicadapter.py:70
+msgid "No readable images were found"
+msgstr "Ndojetopái ta'anga hesakãva"

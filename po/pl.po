@@ -2,19 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-11 00:31-0400\n"
+"POT-Creation-Date: 2017-03-24 17:39+1100\n"
 "PO-Revision-Date: 2015-02-19 20:41+0000\n"
 "Last-Translator: Tymon <dwgipk@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,100 +19,17 @@ msgstr ""
 "X-Generator: Pootle 2.5.1.1\n"
 "X-POOTLE-MTIME: 1424378492.000000\n"
 
-#. TRANS: "name" option from activity.info file
+#: activity/activity.info:2
 msgid "Read"
 msgstr "Czytaj"
 
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
 msgstr ""
 "Użyj tej aktywności, gdy będziesz gotowy, aby przeczytać. Pamiętaj, aby "
 "obracać komputerem tak, jakby to była książka."
-
-#. TRANS: This goes like Bookmark added by User 5 days ago
-#. TRANS: (the elapsed string gets translated automatically)
-#: bookmarkview.py:110
-#, python-format
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr "Zakładka dodana przez %(user)s %(time)s"
-
-#: bookmarkview.py:153 bookmarkview.py:204
-msgid "Add notes for bookmark: "
-msgstr "Dodaj notatki do zakładki: "
-
-#: bookmarkview.py:200
-#, python-format
-msgid "%s's bookmark"
-msgstr "Zakładka użytk.: %s"
-
-#: bookmarkview.py:201
-#, python-format
-msgid "Bookmark for page %d"
-msgstr "Zakładka na stronie %d"
-
-#: evinceadapter.py:88
-msgid "URL from Read"
-msgstr "URL z Napisz"
-
-#: linkbutton.py:94
-msgid "Go to Bookmark"
-msgstr "Idź do Zakładka"
-
-#: linkbutton.py:99
-msgid "Remove"
-msgstr "Usuń"
-
-#: readactivity.py:333
-msgid "No book"
-msgstr "Brak książki"
-
-#: readactivity.py:333
-msgid "Choose something to read"
-msgstr "Wybierz coś do czytania"
-
-#: readactivity.py:338
-msgid "Back"
-msgstr "Wstecz"
-
-#: readactivity.py:342
-msgid "Previous page"
-msgstr "Poprzednia strona"
-
-#: readactivity.py:344
-msgid "Previous bookmark"
-msgstr "Poprzednia zakładka"
-
-#: readactivity.py:356
-msgid "Forward"
-msgstr "Dalej"
-
-#: readactivity.py:360
-msgid "Next page"
-msgstr "Następna strona"
-
-#: readactivity.py:362
-msgid "Next bookmark"
-msgstr "Następna zakładka"
-
-#: readactivity.py:413
-msgid "Index"
-msgstr "Indeks"
-
-#: readactivity.py:534
-msgid "Delete bookmark"
-msgstr "Usuń zakładkę"
-
-#: readactivity.py:535
-msgid "All the information related with this bookmark will be lost"
-msgstr "Wszelkie informacje dotyczące tej zakładki zostaną utracone"
-
-#: readactivity.py:895 readactivity.py:1090
-#, python-format
-msgid "Page %d"
-msgstr "Strona %d"
 
 #: readdialog.py:52
 msgid "Cancel"
@@ -130,13 +39,90 @@ msgstr "Anuluj"
 msgid "Ok"
 msgstr "Ok"
 
-#: readdialog.py:116
+#: readdialog.py:120
 msgid "<b>Title</b>:"
 msgstr "<b>Tytuł</b>:"
 
-#: readdialog.py:142
+#: readdialog.py:147
+msgid "<b>Author</b>:"
+msgstr ""
+
+#: readdialog.py:163
 msgid "<b>Details</b>:"
 msgstr "<b>Szczegóły</b>:"
+
+#: evinceadapter.py:92
+msgid "URL from Read"
+msgstr "URL z Napisz"
+
+#: speechtoolbar.py:57
+msgid "Play / Pause"
+msgstr "Odtwarzaj / Pauza"
+
+#: speechtoolbar.py:65
+msgid "Stop"
+msgstr "Zatrzymaj"
+
+#: readactivity.py:379
+msgid "Please wait"
+msgstr ""
+
+#: readactivity.py:380
+msgid "Starting connection..."
+msgstr ""
+
+#: readactivity.py:388
+msgid "No book"
+msgstr "Brak książki"
+
+#: readactivity.py:388
+msgid "Choose something to read"
+msgstr "Wybierz coś do czytania"
+
+#: readactivity.py:393
+msgid "Back"
+msgstr "Wstecz"
+
+#: readactivity.py:397
+msgid "Previous page"
+msgstr "Poprzednia strona"
+
+#: readactivity.py:399
+msgid "Previous bookmark"
+msgstr "Poprzednia zakładka"
+
+#: readactivity.py:411
+msgid "Forward"
+msgstr "Dalej"
+
+#: readactivity.py:415
+msgid "Next page"
+msgstr "Następna strona"
+
+#: readactivity.py:417
+msgid "Next bookmark"
+msgstr "Następna zakładka"
+
+#: readactivity.py:468
+msgid "Index"
+msgstr "Indeks"
+
+#: readactivity.py:564
+msgid "Delete bookmark"
+msgstr "Usuń zakładkę"
+
+#: readactivity.py:565
+msgid "All the information related with this bookmark will be lost"
+msgstr "Wszelkie informacje dotyczące tej zakładki zostaną utracone"
+
+#: readactivity.py:954
+msgid "Receiving book..."
+msgstr ""
+
+#: readactivity.py:1032 readactivity.py:1227
+#, python-format
+msgid "%s (Page %d)"
+msgstr ""
 
 #: readtoolbar.py:61
 msgid "Previous"
@@ -162,76 +148,81 @@ msgstr "Znajdź poprzedni"
 msgid "Find next"
 msgstr "Znajdź następny"
 
-#: readtoolbar.py:189
+#: readtoolbar.py:188
 msgid "Table of contents"
 msgstr "Zawartość"
 
-#: readtoolbar.py:198
+#: readtoolbar.py:197
 msgid "Zoom out"
 msgstr "Zmniejsz"
 
-#: readtoolbar.py:204
+#: readtoolbar.py:203
 msgid "Zoom in"
 msgstr "Powiększ"
 
-#: readtoolbar.py:210
+#: readtoolbar.py:209
 msgid "Zoom to width"
 msgstr "Dopasuj do szerokości"
 
-#: readtoolbar.py:216
+#: readtoolbar.py:215
 msgid "Zoom to fit"
 msgstr "Dopasuj"
 
-#: readtoolbar.py:222
+#: readtoolbar.py:221
 msgid "Actual size"
 msgstr "Aktualny rozmiar"
 
-#: readtoolbar.py:233
+#: readtoolbar.py:232
 msgid "Fullscreen"
 msgstr "Pełny ekran"
 
-#: readtoolbar.py:301
+#: readtoolbar.py:252
+msgid "Rotate left"
+msgstr ""
+
+#: readtoolbar.py:258
+msgid "Rotate right"
+msgstr ""
+
+#: readtoolbar.py:324
 msgid "Show Tray"
 msgstr "Pokaż tackę"
 
-#: readtoolbar.py:303
+#: readtoolbar.py:326
 msgid "Hide Tray"
 msgstr "Ukryj tackę"
 
-#: speechtoolbar.py:57
-msgid "Play / Pause"
-msgstr "Odtwarzaj / Pauza"
+#: linkbutton.py:133
+msgid "Go to Bookmark"
+msgstr "Idź do Zakładka"
 
-#: speechtoolbar.py:65
-msgid "Stop"
-msgstr "Zatrzymaj"
+#: linkbutton.py:139
+msgid "Remove"
+msgstr "Usuń"
 
+#: bookmarkview.py:107
 #, python-format
-#~ msgid "Page %(current)i of %(total_pages)i"
-#~ msgstr "Strona %(current)i z %(total_pages)i"
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "Zakładka dodana przez %(user)s %(time)s"
 
-#~ msgid "%"
-#~ msgstr "%"
+#: bookmarkview.py:143 bookmarkview.py:192
+msgid "Add notes for bookmark: "
+msgstr "Dodaj notatki do zakładki: "
 
-#~ msgid "pitch adjusted"
-#~ msgstr "wysokość ustawiona"
-
-#~ msgid "rate adjusted"
-#~ msgstr "częstotliwość ustawiona"
-
-#~ msgid "Choose document"
-#~ msgstr "Wybierz plik"
-
+#: bookmarkview.py:188
 #, python-format
-#~ msgid "Page %i of %i"
-#~ msgstr "Strona %i z %i"
+msgid "%s's bookmark"
+msgstr "Zakładka użytk.: %s"
 
-#~ msgid "Edit"
-#~ msgstr "Edytuj"
+#: bookmarkview.py:189
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "Zakładka na stronie %d"
 
-#~ msgid "View"
-#~ msgstr "Widok"
+#: comicadapter.py:69
+msgid "Can not read Comic Book Archive"
+msgstr ""
 
-#, fuzzy
-#~ msgid "Read Activity"
-#~ msgstr "Czytanka"
+#: comicadapter.py:70
+msgid "No readable images were found"
+msgstr ""
