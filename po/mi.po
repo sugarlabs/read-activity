@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-11 00:31-0400\n"
+"POT-Creation-Date: 2017-03-24 17:39+1100\n"
 "PO-Revision-Date: 2012-10-01 06:37+0200\n"
 "Last-Translator: hariru <hariruroa@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,100 +17,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.0.5\n"
 
-#. TRANS: "name" option from activity.info file
+#: activity/activity.info:2
 msgid "Read"
 msgstr "Pānui"
 
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
 msgstr ""
 "Whakamahi i tēnei hohe kia reri koe ki te pānui! Me maumahara ki te tītaka i "
 "tō rorohiko kia pērā ki te pukapuka!"
-
-#. TRANS: This goes like Bookmark added by User 5 days ago
-#. TRANS: (the elapsed string gets translated automatically)
-#: bookmarkview.py:110
-#, python-format
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr "Tohuwāhi kua tāpirihia e %(user)s %(time)s"
-
-#: bookmarkview.py:153 bookmarkview.py:204
-msgid "Add notes for bookmark: "
-msgstr "Tāpiri tuhipoka mō te tohuwāhi: "
-
-#: bookmarkview.py:200
-#, python-format
-msgid "%s's bookmark"
-msgstr "%s's tohuwāhi"
-
-#: bookmarkview.py:201
-#, python-format
-msgid "Bookmark for page %d"
-msgstr "Tohuwāhi mō te whārangi %d"
-
-#: evinceadapter.py:88
-msgid "URL from Read"
-msgstr "URL mai i te Pānui"
-
-#: linkbutton.py:94
-msgid "Go to Bookmark"
-msgstr ""
-
-#: linkbutton.py:99
-msgid "Remove"
-msgstr ""
-
-#: readactivity.py:333
-msgid "No book"
-msgstr ""
-
-#: readactivity.py:333
-msgid "Choose something to read"
-msgstr ""
-
-#: readactivity.py:338
-msgid "Back"
-msgstr "Hoki"
-
-#: readactivity.py:342
-msgid "Previous page"
-msgstr "Whārangi tōmua"
-
-#: readactivity.py:344
-msgid "Previous bookmark"
-msgstr "Tohuwāhi tōmua"
-
-#: readactivity.py:356
-msgid "Forward"
-msgstr "Whakamua"
-
-#: readactivity.py:360
-msgid "Next page"
-msgstr "Whārangi panuku"
-
-#: readactivity.py:362
-msgid "Next bookmark"
-msgstr "Tohuwāhi panuku"
-
-#: readactivity.py:413
-msgid "Index"
-msgstr "Taupū"
-
-#: readactivity.py:534
-msgid "Delete bookmark"
-msgstr "Muku tohuwāhi"
-
-#: readactivity.py:535
-msgid "All the information related with this bookmark will be lost"
-msgstr "Ka ngaro ngā mōhiohio katoa e hāngai ana ki tēnei tohuwāhi"
-
-#: readactivity.py:895 readactivity.py:1090
-#, python-format
-msgid "Page %d"
-msgstr ""
 
 #: readdialog.py:52
 msgid "Cancel"
@@ -120,13 +37,90 @@ msgstr "Whakakore"
 msgid "Ok"
 msgstr "Āe"
 
-#: readdialog.py:116
+#: readdialog.py:120
 msgid "<b>Title</b>:"
 msgstr "<b>Taitara</b>:"
 
-#: readdialog.py:142
+#: readdialog.py:147
+msgid "<b>Author</b>:"
+msgstr ""
+
+#: readdialog.py:163
 msgid "<b>Details</b>:"
 msgstr "<b>Taipitopito</b>:"
+
+#: evinceadapter.py:92
+msgid "URL from Read"
+msgstr "URL mai i te Pānui"
+
+#: speechtoolbar.py:57
+msgid "Play / Pause"
+msgstr "Pūrei / Tatari"
+
+#: speechtoolbar.py:65
+msgid "Stop"
+msgstr "Tū"
+
+#: readactivity.py:379
+msgid "Please wait"
+msgstr ""
+
+#: readactivity.py:380
+msgid "Starting connection..."
+msgstr ""
+
+#: readactivity.py:388
+msgid "No book"
+msgstr ""
+
+#: readactivity.py:388
+msgid "Choose something to read"
+msgstr ""
+
+#: readactivity.py:393
+msgid "Back"
+msgstr "Hoki"
+
+#: readactivity.py:397
+msgid "Previous page"
+msgstr "Whārangi tōmua"
+
+#: readactivity.py:399
+msgid "Previous bookmark"
+msgstr "Tohuwāhi tōmua"
+
+#: readactivity.py:411
+msgid "Forward"
+msgstr "Whakamua"
+
+#: readactivity.py:415
+msgid "Next page"
+msgstr "Whārangi panuku"
+
+#: readactivity.py:417
+msgid "Next bookmark"
+msgstr "Tohuwāhi panuku"
+
+#: readactivity.py:468
+msgid "Index"
+msgstr "Taupū"
+
+#: readactivity.py:564
+msgid "Delete bookmark"
+msgstr "Muku tohuwāhi"
+
+#: readactivity.py:565
+msgid "All the information related with this bookmark will be lost"
+msgstr "Ka ngaro ngā mōhiohio katoa e hāngai ana ki tēnei tohuwāhi"
+
+#: readactivity.py:954
+msgid "Receiving book..."
+msgstr ""
+
+#: readactivity.py:1032 readactivity.py:1227
+#, python-format
+msgid "%s (Page %d)"
+msgstr ""
 
 #: readtoolbar.py:61
 msgid "Previous"
@@ -152,50 +146,81 @@ msgstr "Kimi tōmua"
 msgid "Find next"
 msgstr "Kimi panuku"
 
-#: readtoolbar.py:189
+#: readtoolbar.py:188
 msgid "Table of contents"
 msgstr "Ngā Ihirangi"
 
-#: readtoolbar.py:198
+#: readtoolbar.py:197
 msgid "Zoom out"
 msgstr "Topa atu"
 
-#: readtoolbar.py:204
+#: readtoolbar.py:203
 msgid "Zoom in"
 msgstr "Topa mai"
 
-#: readtoolbar.py:210
+#: readtoolbar.py:209
 msgid "Zoom to width"
 msgstr "Topa ki te whānuitanga"
 
-#: readtoolbar.py:216
+#: readtoolbar.py:215
 msgid "Zoom to fit"
 msgstr "Topa kia uru"
 
-#: readtoolbar.py:222
+#: readtoolbar.py:221
 msgid "Actual size"
 msgstr "Rahi tūturu"
 
-#: readtoolbar.py:233
+#: readtoolbar.py:232
 msgid "Fullscreen"
 msgstr "Matakatoa"
 
-#: readtoolbar.py:301
+#: readtoolbar.py:252
+msgid "Rotate left"
+msgstr ""
+
+#: readtoolbar.py:258
+msgid "Rotate right"
+msgstr ""
+
+#: readtoolbar.py:324
 msgid "Show Tray"
 msgstr ""
 
-#: readtoolbar.py:303
+#: readtoolbar.py:326
 msgid "Hide Tray"
 msgstr ""
 
-#: speechtoolbar.py:57
-msgid "Play / Pause"
-msgstr "Pūrei / Tatari"
+#: linkbutton.py:133
+msgid "Go to Bookmark"
+msgstr ""
 
-#: speechtoolbar.py:65
-msgid "Stop"
-msgstr "Tū"
+#: linkbutton.py:139
+msgid "Remove"
+msgstr ""
 
+#: bookmarkview.py:107
 #, python-format
-#~ msgid "Page %(current)i of %(total_pages)i"
-#~ msgstr "Whārangi %(current)i o %(total_pages)i"
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "Tohuwāhi kua tāpirihia e %(user)s %(time)s"
+
+#: bookmarkview.py:143 bookmarkview.py:192
+msgid "Add notes for bookmark: "
+msgstr "Tāpiri tuhipoka mō te tohuwāhi: "
+
+#: bookmarkview.py:188
+#, python-format
+msgid "%s's bookmark"
+msgstr "%s's tohuwāhi"
+
+#: bookmarkview.py:189
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "Tohuwāhi mō te whārangi %d"
+
+#: comicadapter.py:69
+msgid "Can not read Comic Book Archive"
+msgstr ""
+
+#: comicadapter.py:70
+msgid "No readable images were found"
+msgstr ""

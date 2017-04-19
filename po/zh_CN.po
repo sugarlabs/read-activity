@@ -2,15 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: OLPC XBook\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 00:31-0400\n"
+"POT-Creation-Date: 2017-03-24 17:39+1100\n"
 "PO-Revision-Date: 2013-09-09 06:36+0200\n"
 "Last-Translator: lite <litekok@gmail.com>\n"
 "Language-Team: Yuan CHAO <yuanchao@gmail.com>\n"
@@ -21,108 +17,15 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Pootle 2.0.5\n"
 
-#. TRANS: "name" option from activity.info file
+#: activity/activity.info:2
 msgid "Read"
 msgstr "阅读"
 
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
 msgstr "当你准备读书时，请使用此活动！请记住，好像你真的拿着一本书一样翻转你的电脑！"
-
-#: bookmarkview.py:112
-#, python-format
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr "由 %(user)s 在 %(time)s 加入的书签"
-
-#: bookmarkview.py:155 bookmarkview.py:206
-msgid "Add notes for bookmark: "
-msgstr "为书签添加说明："
-
-#: bookmarkview.py:202
-#, python-format
-msgid "%s's bookmark"
-msgstr "%s 的书签"
-
-#: bookmarkview.py:203
-#, python-format
-msgid "Bookmark for page %d"
-msgstr "第 %d 页的书签"
-
-#: evinceadapter.py:88
-msgid "URL from Read"
-msgstr "来自阅读的网址"
-
-#: linkbutton.py:124
-msgid "Go to Bookmark"
-msgstr "转到书签"
-
-#: linkbutton.py:129
-msgid "Remove"
-msgstr "删除"
-
-#: readactivity.py:361
-msgid "Please wait"
-msgstr "请等待"
-
-#: readactivity.py:362
-msgid "Starting connection..."
-msgstr "开始连接..."
-
-#: readactivity.py:374
-msgid "No book"
-msgstr "没有书籍"
-
-#: readactivity.py:374
-msgid "Choose something to read"
-msgstr "请选择要读的书"
-
-#: readactivity.py:379
-msgid "Back"
-msgstr "后退"
-
-#: readactivity.py:383
-msgid "Previous page"
-msgstr "上一页"
-
-#: readactivity.py:385
-msgid "Previous bookmark"
-msgstr "上一个书签"
-
-#: readactivity.py:397
-msgid "Forward"
-msgstr "前进"
-
-#: readactivity.py:401
-msgid "Next page"
-msgstr "下一页"
-
-#: readactivity.py:403
-msgid "Next bookmark"
-msgstr "下一个书签"
-
-#: readactivity.py:454
-msgid "Index"
-msgstr "索引"
-
-#: readactivity.py:575
-msgid "Delete bookmark"
-msgstr "删除书签"
-
-#: readactivity.py:576
-msgid "All the information related with this bookmark will be lost"
-msgstr "此书签相关的所有信息都将丢失"
-
-#: readactivity.py:900
-msgid "Receiving book..."
-msgstr "正在接收书籍中..."
-
-#: readactivity.py:966 readactivity.py:1162
-#, python-format
-msgid "Page %d"
-msgstr "%d 页"
 
 #: readdialog.py:52
 msgid "Cancel"
@@ -132,13 +35,90 @@ msgstr "取消"
 msgid "Ok"
 msgstr "确定"
 
-#: readdialog.py:116
+#: readdialog.py:120
 msgid "<b>Title</b>:"
 msgstr "<b>标题</b>："
 
-#: readdialog.py:142
+#: readdialog.py:147
+msgid "<b>Author</b>:"
+msgstr ""
+
+#: readdialog.py:163
 msgid "<b>Details</b>:"
 msgstr "<b>详细说明</b>："
+
+#: evinceadapter.py:92
+msgid "URL from Read"
+msgstr "来自阅读的网址"
+
+#: speechtoolbar.py:57
+msgid "Play / Pause"
+msgstr "播放 / 暂停"
+
+#: speechtoolbar.py:65
+msgid "Stop"
+msgstr "停止"
+
+#: readactivity.py:379
+msgid "Please wait"
+msgstr "请等待"
+
+#: readactivity.py:380
+msgid "Starting connection..."
+msgstr "开始连接..."
+
+#: readactivity.py:388
+msgid "No book"
+msgstr "没有书籍"
+
+#: readactivity.py:388
+msgid "Choose something to read"
+msgstr "请选择要读的书"
+
+#: readactivity.py:393
+msgid "Back"
+msgstr "后退"
+
+#: readactivity.py:397
+msgid "Previous page"
+msgstr "上一页"
+
+#: readactivity.py:399
+msgid "Previous bookmark"
+msgstr "上一个书签"
+
+#: readactivity.py:411
+msgid "Forward"
+msgstr "前进"
+
+#: readactivity.py:415
+msgid "Next page"
+msgstr "下一页"
+
+#: readactivity.py:417
+msgid "Next bookmark"
+msgstr "下一个书签"
+
+#: readactivity.py:468
+msgid "Index"
+msgstr "索引"
+
+#: readactivity.py:564
+msgid "Delete bookmark"
+msgstr "删除书签"
+
+#: readactivity.py:565
+msgid "All the information related with this bookmark will be lost"
+msgstr "此书签相关的所有信息都将丢失"
+
+#: readactivity.py:954
+msgid "Receiving book..."
+msgstr "正在接收书籍中..."
+
+#: readactivity.py:1032 readactivity.py:1227
+#, python-format
+msgid "%s (Page %d)"
+msgstr ""
 
 #: readtoolbar.py:61
 msgid "Previous"
@@ -192,42 +172,53 @@ msgstr "实际大小"
 msgid "Fullscreen"
 msgstr "全屏显示"
 
-#: readtoolbar.py:253
+#: readtoolbar.py:252
 msgid "Rotate left"
 msgstr "向左旋转"
 
-#: readtoolbar.py:259
+#: readtoolbar.py:258
 msgid "Rotate right"
 msgstr "向右旋转"
 
-#: readtoolbar.py:325
+#: readtoolbar.py:324
 msgid "Show Tray"
 msgstr "显示托盘"
 
-#: readtoolbar.py:327
+#: readtoolbar.py:326
 msgid "Hide Tray"
 msgstr "隐藏托盘"
 
-#: speechtoolbar.py:57
-msgid "Play / Pause"
-msgstr "播放 / 暂停"
+#: linkbutton.py:133
+msgid "Go to Bookmark"
+msgstr "转到书签"
 
-#: speechtoolbar.py:65
-msgid "Stop"
-msgstr "停止"
+#: linkbutton.py:139
+msgid "Remove"
+msgstr "删除"
 
+#: bookmarkview.py:107
 #, python-format
-#~ msgid "Page %(current)i of %(total_pages)i"
-#~ msgstr "%(current)i / %(total_pages)i"
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "由 %(user)s 在 %(time)s 加入的书签"
 
-#~ msgid "%"
-#~ msgstr "%"
+#: bookmarkview.py:143 bookmarkview.py:192
+msgid "Add notes for bookmark: "
+msgstr "为书签添加说明："
 
-#~ msgid "Choose document"
-#~ msgstr "选择文档"
+#: bookmarkview.py:188
+#, python-format
+msgid "%s's bookmark"
+msgstr "%s 的书签"
 
-#~ msgid "Edit"
-#~ msgstr "编辑"
+#: bookmarkview.py:189
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "第 %d 页的书签"
 
-#~ msgid "View"
-#~ msgstr "查看"
+#: comicadapter.py:69
+msgid "Can not read Comic Book Archive"
+msgstr ""
+
+#: comicadapter.py:70
+msgid "No readable images were found"
+msgstr ""

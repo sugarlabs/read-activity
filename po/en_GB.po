@@ -2,133 +2,33 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 00:31-0400\n"
-"PO-Revision-Date: 2013-09-06 18:03+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"POT-Creation-Date: 2017-03-24 17:39+1100\n"
+"PO-Revision-Date: 2017-03-26 00:31+0000\n"
+"Last-Translator: Chris <cjl@sugarlabs.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.5\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1490488318.000000\n"
 
-#. TRANS: "name" option from activity.info file
+#: activity/activity.info:2
 msgid "Read"
 msgstr "Read"
 
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
 msgstr ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
-
-#: bookmarkview.py:112
-#, python-format
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr "Bookmark added by %(user)s %(time)s"
-
-#: bookmarkview.py:155 bookmarkview.py:206
-msgid "Add notes for bookmark: "
-msgstr "Add notes for bookmark: "
-
-#: bookmarkview.py:202
-#, python-format
-msgid "%s's bookmark"
-msgstr "%s's bookmark"
-
-#: bookmarkview.py:203
-#, python-format
-msgid "Bookmark for page %d"
-msgstr "Bookmark for page %d"
-
-#: evinceadapter.py:88
-msgid "URL from Read"
-msgstr "URL from Read"
-
-#: linkbutton.py:124
-msgid "Go to Bookmark"
-msgstr "Go to Bookmark"
-
-#: linkbutton.py:129
-msgid "Remove"
-msgstr "Remove"
-
-#: readactivity.py:361
-msgid "Please wait"
-msgstr "Please wait"
-
-#: readactivity.py:362
-msgid "Starting connection..."
-msgstr "Starting connection..."
-
-#: readactivity.py:374
-msgid "No book"
-msgstr "No book"
-
-#: readactivity.py:374
-msgid "Choose something to read"
-msgstr "Choose something to read"
-
-#: readactivity.py:379
-msgid "Back"
-msgstr "Back"
-
-#: readactivity.py:383
-msgid "Previous page"
-msgstr "Previous page"
-
-#: readactivity.py:385
-msgid "Previous bookmark"
-msgstr "Previous bookmark"
-
-#: readactivity.py:397
-msgid "Forward"
-msgstr "Forward"
-
-#: readactivity.py:401
-msgid "Next page"
-msgstr "Next page"
-
-#: readactivity.py:403
-msgid "Next bookmark"
-msgstr "Next bookmark"
-
-#: readactivity.py:454
-msgid "Index"
-msgstr "Index"
-
-#: readactivity.py:575
-msgid "Delete bookmark"
-msgstr "Delete bookmark"
-
-#: readactivity.py:576
-msgid "All the information related with this bookmark will be lost"
-msgstr "All the information related with this bookmark will be lost"
-
-#: readactivity.py:900
-msgid "Receiving book..."
-msgstr "Receiving book..."
-
-#: readactivity.py:966 readactivity.py:1162
-#, python-format
-msgid "Page %d"
-msgstr "Page %d"
 
 #: readdialog.py:52
 msgid "Cancel"
@@ -138,13 +38,90 @@ msgstr "Cancel"
 msgid "Ok"
 msgstr "Ok"
 
-#: readdialog.py:116
+#: readdialog.py:120
 msgid "<b>Title</b>:"
 msgstr "<b>Title</b>:"
 
-#: readdialog.py:142
+#: readdialog.py:147
+msgid "<b>Author</b>:"
+msgstr "<b>Author</b>:"
+
+#: readdialog.py:163
 msgid "<b>Details</b>:"
 msgstr "<b>Details</b>:"
+
+#: evinceadapter.py:92
+msgid "URL from Read"
+msgstr "URL from Read"
+
+#: speechtoolbar.py:57
+msgid "Play / Pause"
+msgstr "Play / Pause"
+
+#: speechtoolbar.py:65
+msgid "Stop"
+msgstr "Stop"
+
+#: readactivity.py:379
+msgid "Please wait"
+msgstr "Please wait"
+
+#: readactivity.py:380
+msgid "Starting connection..."
+msgstr "Starting connection..."
+
+#: readactivity.py:388
+msgid "No book"
+msgstr "No book"
+
+#: readactivity.py:388
+msgid "Choose something to read"
+msgstr "Choose something to read"
+
+#: readactivity.py:393
+msgid "Back"
+msgstr "Back"
+
+#: readactivity.py:397
+msgid "Previous page"
+msgstr "Previous page"
+
+#: readactivity.py:399
+msgid "Previous bookmark"
+msgstr "Previous bookmark"
+
+#: readactivity.py:411
+msgid "Forward"
+msgstr "Forward"
+
+#: readactivity.py:415
+msgid "Next page"
+msgstr "Next page"
+
+#: readactivity.py:417
+msgid "Next bookmark"
+msgstr "Next bookmark"
+
+#: readactivity.py:468
+msgid "Index"
+msgstr "Index"
+
+#: readactivity.py:564
+msgid "Delete bookmark"
+msgstr "Delete bookmark"
+
+#: readactivity.py:565
+msgid "All the information related with this bookmark will be lost"
+msgstr "All the information related with this bookmark will be lost"
+
+#: readactivity.py:954
+msgid "Receiving book..."
+msgstr "Receiving book..."
+
+#: readactivity.py:1032 readactivity.py:1227
+#, python-format
+msgid "%s (Page %d)"
+msgstr "%s (Page %d)"
 
 #: readtoolbar.py:61
 msgid "Previous"
@@ -198,46 +175,53 @@ msgstr "Actual size"
 msgid "Fullscreen"
 msgstr "Full-screen"
 
-#: readtoolbar.py:253
+#: readtoolbar.py:252
 msgid "Rotate left"
 msgstr "Rotate left"
 
-#: readtoolbar.py:259
+#: readtoolbar.py:258
 msgid "Rotate right"
 msgstr "Rotate right"
 
-#: readtoolbar.py:325
+#: readtoolbar.py:324
 msgid "Show Tray"
 msgstr "Show Tray"
 
-#: readtoolbar.py:327
+#: readtoolbar.py:326
 msgid "Hide Tray"
 msgstr "Hide Tray"
 
-#: speechtoolbar.py:57
-msgid "Play / Pause"
-msgstr "Play / Pause"
+#: linkbutton.py:133
+msgid "Go to Bookmark"
+msgstr "Go to Bookmark"
 
-#: speechtoolbar.py:65
-msgid "Stop"
-msgstr "Stop"
+#: linkbutton.py:139
+msgid "Remove"
+msgstr "Remove"
 
+#: bookmarkview.py:107
 #, python-format
-#~ msgid "Page %(current)i of %(total_pages)i"
-#~ msgstr "Page %(current)i of %(total_pages)i"
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "Bookmark added by %(user)s %(time)s"
 
-#~ msgid "%"
-#~ msgstr "%"
+#: bookmarkview.py:143 bookmarkview.py:192
+msgid "Add notes for bookmark: "
+msgstr "Add notes for bookmark: "
 
-#~ msgid "pitch adjusted"
-#~ msgstr "pitch adjusted"
-
-#~ msgid "rate adjusted"
-#~ msgstr "rate adjusted"
-
-#~ msgid "Choose document"
-#~ msgstr "Choose document"
-
+#: bookmarkview.py:188
 #, python-format
-#~ msgid "Page %i of %i"
-#~ msgstr "Page %i of %i"
+msgid "%s's bookmark"
+msgstr "%s's bookmark"
+
+#: bookmarkview.py:189
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "Bookmark for page %d"
+
+#: comicadapter.py:69
+msgid "Can not read Comic Book Archive"
+msgstr "Can not read Comic Book Archive"
+
+#: comicadapter.py:70
+msgid "No readable images were found"
+msgstr "No readable images were found"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-11 00:31-0400\n"
+"POT-Creation-Date: 2017-03-24 17:39+1100\n"
 "PO-Revision-Date: 2012-06-24 02:13+0200\n"
 "Last-Translator: ing.arturo.lara <ing.arturo.lara@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,97 +17,14 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.0.5\n"
 
-#. TRANS: "name" option from activity.info file
+#: activity/activity.info:2
 msgid "Read"
 msgstr "Ajiy"
 
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
-msgstr ""
-
-#. TRANS: This goes like Bookmark added by User 5 days ago
-#. TRANS: (the elapsed string gets translated automatically)
-#: bookmarkview.py:110
-#, python-format
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr "Pulik tejwa'medhom puk'udh k'al a %(user)s %(time)s"
-
-#: bookmarkview.py:153 bookmarkview.py:204
-msgid "Add notes for bookmark: "
-msgstr "Ka punk'uy jun i tsakam dhuchlab abal an pulik tejwa'medhom: "
-
-#: bookmarkview.py:200
-#, python-format
-msgid "%s's bookmark"
-msgstr "In pulik tejwa'medhom a %s"
-
-#: bookmarkview.py:201
-#, python-format
-msgid "Bookmark for page %d"
-msgstr "Pulik tejwa'medhom abal an walxeklek %d"
-
-#: evinceadapter.py:88
-msgid "URL from Read"
-msgstr ""
-
-#: linkbutton.py:94
-msgid "Go to Bookmark"
-msgstr ""
-
-#: linkbutton.py:99
-msgid "Remove"
-msgstr ""
-
-#: readactivity.py:333
-msgid "No book"
-msgstr ""
-
-#: readactivity.py:333
-msgid "Choose something to read"
-msgstr ""
-
-#: readactivity.py:338
-msgid "Back"
-msgstr "Wíchiy"
-
-#: readactivity.py:342
-msgid "Previous page"
-msgstr "Ok'xidh walxeklek"
-
-#: readactivity.py:344
-msgid "Previous bookmark"
-msgstr "Ok'xidh pulik tejwa'medhom"
-
-#: readactivity.py:356
-msgid "Forward"
-msgstr "Ne'etsnanchj"
-
-#: readactivity.py:360
-msgid "Next page"
-msgstr "Júnakej walxeklek"
-
-#: readactivity.py:362
-msgid "Next bookmark"
-msgstr "Júnakej pulik tejwa'medhom"
-
-#: readactivity.py:413
-msgid "Index"
-msgstr ""
-
-#: readactivity.py:534
-msgid "Delete bookmark"
-msgstr ""
-
-#: readactivity.py:535
-msgid "All the information related with this bookmark will be lost"
-msgstr ""
-
-#: readactivity.py:895 readactivity.py:1090
-#, python-format
-msgid "Page %d"
 msgstr ""
 
 #: readdialog.py:52
@@ -118,13 +35,90 @@ msgstr "T'apiy"
 msgid "Ok"
 msgstr "Ne'ets kin t'aja'"
 
-#: readdialog.py:116
+#: readdialog.py:120
 msgid "<b>Title</b>:"
 msgstr "<b>Bíj</b>:"
 
-#: readdialog.py:142
+#: readdialog.py:147
+msgid "<b>Author</b>:"
+msgstr ""
+
+#: readdialog.py:163
 msgid "<b>Details</b>:"
 msgstr "<b>Alwa' met'adh</b>:"
+
+#: evinceadapter.py:92
+msgid "URL from Read"
+msgstr ""
+
+#: speechtoolbar.py:57
+msgid "Play / Pause"
+msgstr "K'wajba' / Tonk'iy"
+
+#: speechtoolbar.py:65
+msgid "Stop"
+msgstr "Kuba'"
+
+#: readactivity.py:379
+msgid "Please wait"
+msgstr ""
+
+#: readactivity.py:380
+msgid "Starting connection..."
+msgstr ""
+
+#: readactivity.py:388
+msgid "No book"
+msgstr ""
+
+#: readactivity.py:388
+msgid "Choose something to read"
+msgstr ""
+
+#: readactivity.py:393
+msgid "Back"
+msgstr "Wíchiy"
+
+#: readactivity.py:397
+msgid "Previous page"
+msgstr "Ok'xidh walxeklek"
+
+#: readactivity.py:399
+msgid "Previous bookmark"
+msgstr "Ok'xidh pulik tejwa'medhom"
+
+#: readactivity.py:411
+msgid "Forward"
+msgstr "Ne'etsnanchj"
+
+#: readactivity.py:415
+msgid "Next page"
+msgstr "Júnakej walxeklek"
+
+#: readactivity.py:417
+msgid "Next bookmark"
+msgstr "Júnakej pulik tejwa'medhom"
+
+#: readactivity.py:468
+msgid "Index"
+msgstr ""
+
+#: readactivity.py:564
+msgid "Delete bookmark"
+msgstr ""
+
+#: readactivity.py:565
+msgid "All the information related with this bookmark will be lost"
+msgstr ""
+
+#: readactivity.py:954
+msgid "Receiving book..."
+msgstr ""
+
+#: readactivity.py:1032 readactivity.py:1227
+#, python-format
+msgid "%s (Page %d)"
+msgstr ""
 
 #: readtoolbar.py:61
 msgid "Previous"
@@ -150,70 +144,82 @@ msgstr "Aliy xi ok'xidh"
 msgid "Find next"
 msgstr "Aliy xi júnakej"
 
-#: readtoolbar.py:189
+#: readtoolbar.py:188
 msgid "Table of contents"
 msgstr ""
 
-#: readtoolbar.py:198
+#: readtoolbar.py:197
 msgid "Zoom out"
 msgstr "Tsipti'méjdha'"
 
 # Se puede aplicar de igual forma Utuw porque significa acercar y el efecto al acercar cualquier objeto se percibe de mayor tamaño.
-#: readtoolbar.py:204
+#: readtoolbar.py:203
 msgid "Zoom in"
 msgstr "Puwedha'"
 
-#: readtoolbar.py:210
+#: readtoolbar.py:209
 msgid "Zoom to width"
 msgstr "Ka junkuw tin ts'ikwtal"
 
-#: readtoolbar.py:216
+#: readtoolbar.py:215
 msgid "Zoom to fit"
 msgstr "Ka junkuw ti walek"
 
-#: readtoolbar.py:222
+#: readtoolbar.py:221
 msgid "Actual size"
 msgstr "In léj puwél"
 
-#: readtoolbar.py:233
+#: readtoolbar.py:232
 msgid "Fullscreen"
 msgstr "Putat walek"
 
-#: readtoolbar.py:301
+#: readtoolbar.py:252
+msgid "Rotate left"
+msgstr ""
+
+#: readtoolbar.py:258
+msgid "Rotate right"
+msgstr ""
+
+#: readtoolbar.py:324
 msgid "Show Tray"
 msgstr ""
 
-#: readtoolbar.py:303
+#: readtoolbar.py:326
 msgid "Hide Tray"
 msgstr ""
 
-#: speechtoolbar.py:57
-msgid "Play / Pause"
-msgstr "K'wajba' / Tonk'iy"
+#: linkbutton.py:133
+msgid "Go to Bookmark"
+msgstr ""
 
-#: speechtoolbar.py:65
-msgid "Stop"
-msgstr "Kuba'"
+#: linkbutton.py:139
+msgid "Remove"
+msgstr ""
 
+#: bookmarkview.py:107
 #, python-format
-#, python-format, ,
-#~ msgid "Page %(current)i of %(total_pages)i"
-#~ msgstr "Walxeklek %(current)i a xi ti %(total_pages)i"
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "Pulik tejwa'medhom puk'udh k'al a %(user)s %(time)s"
 
-#~ msgid "%"
-#~ msgstr "%"
+#: bookmarkview.py:143 bookmarkview.py:192
+msgid "Add notes for bookmark: "
+msgstr "Ka punk'uy jun i tsakam dhuchlab abal an pulik tejwa'medhom: "
 
-#~ msgid "pitch adjusted"
-#~ msgstr "janidhtaláb t'ojojodh"
-
-# tasa ajustada (tasa se refiere a un nivel, índice)
-# Ejemplo: "Tasa de natalidad"="ïndice de natalidad"
-#~ msgid "rate adjusted"
-#~ msgstr "bajudh adhiktalab"
-
-#~ msgid "Choose document"
-#~ msgstr "Takuy dhuchadh úw"
-
+#: bookmarkview.py:188
 #, python-format
-#~ msgid "Page %i of %i"
-#~ msgstr "Walxeklek %i a xi ti %i"
+msgid "%s's bookmark"
+msgstr "In pulik tejwa'medhom a %s"
+
+#: bookmarkview.py:189
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "Pulik tejwa'medhom abal an walxeklek %d"
+
+#: comicadapter.py:69
+msgid "Can not read Comic Book Archive"
+msgstr ""
+
+#: comicadapter.py:70
+msgid "No readable images were found"
+msgstr ""

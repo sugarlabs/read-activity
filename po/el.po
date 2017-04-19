@@ -1,12 +1,4 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# Greek translation of Xbook project.
+# Greek translation of Read project.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Simos Xenitellis <simos.lists@googlemail.com>, 2007.
@@ -14,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xbook project\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-11 00:31-0400\n"
+"POT-Creation-Date: 2017-03-24 17:39+1100\n"
 "PO-Revision-Date: 2012-09-14 20:09+0200\n"
 "Last-Translator: Yannis <kiolalis@gmail.com>\n"
 "Language-Team: Greek <olpc@grnet.gr>\n"
@@ -25,97 +17,14 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.0.5\n"
 
-#. TRANS: "name" option from activity.info file
+#: activity/activity.info:2
 msgid "Read"
 msgstr "Ανάγνωση"
 
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
-msgstr ""
-
-#. TRANS: This goes like Bookmark added by User 5 days ago
-#. TRANS: (the elapsed string gets translated automatically)
-#: bookmarkview.py:110
-#, python-format
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr "Σελιδοδείκτης που προστέθηκε από τον %(user)s %(time)s"
-
-#: bookmarkview.py:153 bookmarkview.py:204
-msgid "Add notes for bookmark: "
-msgstr "Προσθήκη σημειώσεων για τον σελιδοδείκτη: "
-
-#: bookmarkview.py:200
-#, python-format
-msgid "%s's bookmark"
-msgstr "%s's σελιδοδείκτης"
-
-#: bookmarkview.py:201
-#, python-format
-msgid "Bookmark for page %d"
-msgstr "Σελιδοδείκτης για τη σελίδα %d"
-
-#: evinceadapter.py:88
-msgid "URL from Read"
-msgstr "URL από τη δραστηριότητα Ανάγνωση"
-
-#: linkbutton.py:94
-msgid "Go to Bookmark"
-msgstr ""
-
-#: linkbutton.py:99
-msgid "Remove"
-msgstr ""
-
-#: readactivity.py:333
-msgid "No book"
-msgstr ""
-
-#: readactivity.py:333
-msgid "Choose something to read"
-msgstr ""
-
-#: readactivity.py:338
-msgid "Back"
-msgstr "Πίσω"
-
-#: readactivity.py:342
-msgid "Previous page"
-msgstr "Προηγούμενη σελίδα"
-
-#: readactivity.py:344
-msgid "Previous bookmark"
-msgstr "Προηγούμενος σελιδοδείκτης"
-
-#: readactivity.py:356
-msgid "Forward"
-msgstr "Μπροστά"
-
-#: readactivity.py:360
-msgid "Next page"
-msgstr "Επόμενη σελίδα"
-
-#: readactivity.py:362
-msgid "Next bookmark"
-msgstr "Επόμενος σελιδοδείκτης"
-
-#: readactivity.py:413
-msgid "Index"
-msgstr "Ευρετήριο"
-
-#: readactivity.py:534
-msgid "Delete bookmark"
-msgstr "Διαγραφή σελιδοδείκτη"
-
-#: readactivity.py:535
-msgid "All the information related with this bookmark will be lost"
-msgstr "Όλες οι πληροφορίες που σχετίζονται με αυτόν τον σελιδοδείκτη θα χαθούν"
-
-#: readactivity.py:895 readactivity.py:1090
-#, python-format
-msgid "Page %d"
 msgstr ""
 
 #: readdialog.py:52
@@ -126,13 +35,90 @@ msgstr "Άκυρο"
 msgid "Ok"
 msgstr "Εντάξει"
 
-#: readdialog.py:116
+#: readdialog.py:120
 msgid "<b>Title</b>:"
 msgstr "<b>Τίτλος</b>:"
 
-#: readdialog.py:142
+#: readdialog.py:147
+msgid "<b>Author</b>:"
+msgstr ""
+
+#: readdialog.py:163
 msgid "<b>Details</b>:"
 msgstr "<b>Λεπτομέρειες</b>:"
+
+#: evinceadapter.py:92
+msgid "URL from Read"
+msgstr "URL από τη δραστηριότητα Ανάγνωση"
+
+#: speechtoolbar.py:57
+msgid "Play / Pause"
+msgstr "Αναπαραγωγή / Παύση"
+
+#: speechtoolbar.py:65
+msgid "Stop"
+msgstr "Διακοπή"
+
+#: readactivity.py:379
+msgid "Please wait"
+msgstr ""
+
+#: readactivity.py:380
+msgid "Starting connection..."
+msgstr ""
+
+#: readactivity.py:388
+msgid "No book"
+msgstr ""
+
+#: readactivity.py:388
+msgid "Choose something to read"
+msgstr ""
+
+#: readactivity.py:393
+msgid "Back"
+msgstr "Πίσω"
+
+#: readactivity.py:397
+msgid "Previous page"
+msgstr "Προηγούμενη σελίδα"
+
+#: readactivity.py:399
+msgid "Previous bookmark"
+msgstr "Προηγούμενος σελιδοδείκτης"
+
+#: readactivity.py:411
+msgid "Forward"
+msgstr "Μπροστά"
+
+#: readactivity.py:415
+msgid "Next page"
+msgstr "Επόμενη σελίδα"
+
+#: readactivity.py:417
+msgid "Next bookmark"
+msgstr "Επόμενος σελιδοδείκτης"
+
+#: readactivity.py:468
+msgid "Index"
+msgstr "Ευρετήριο"
+
+#: readactivity.py:564
+msgid "Delete bookmark"
+msgstr "Διαγραφή σελιδοδείκτη"
+
+#: readactivity.py:565
+msgid "All the information related with this bookmark will be lost"
+msgstr "Όλες οι πληροφορίες που σχετίζονται με αυτόν τον σελιδοδείκτη θα χαθούν"
+
+#: readactivity.py:954
+msgid "Receiving book..."
+msgstr ""
+
+#: readactivity.py:1032 readactivity.py:1227
+#, python-format
+msgid "%s (Page %d)"
+msgstr ""
 
 #: readtoolbar.py:61
 msgid "Previous"
@@ -158,76 +144,81 @@ msgstr "Εύρεση του προηγούμενου"
 msgid "Find next"
 msgstr "Εύρεση του επόμενου"
 
-#: readtoolbar.py:189
+#: readtoolbar.py:188
 msgid "Table of contents"
 msgstr "Πίνακας περιεχομένων"
 
-#: readtoolbar.py:198
+#: readtoolbar.py:197
 msgid "Zoom out"
 msgstr "Σμίκρυνση"
 
-#: readtoolbar.py:204
+#: readtoolbar.py:203
 msgid "Zoom in"
 msgstr "Μεγέθυνση"
 
-#: readtoolbar.py:210
+#: readtoolbar.py:209
 msgid "Zoom to width"
 msgstr "Προσαρμογή στο πλάτος"
 
-#: readtoolbar.py:216
+#: readtoolbar.py:215
 msgid "Zoom to fit"
 msgstr "Προσαρμογή στη σελίδα"
 
-#: readtoolbar.py:222
+#: readtoolbar.py:221
 msgid "Actual size"
 msgstr "Πραγματικό μέγεθος"
 
-#: readtoolbar.py:233
+#: readtoolbar.py:232
 msgid "Fullscreen"
 msgstr "Πλήρης οθόνη"
 
-#: readtoolbar.py:301
+#: readtoolbar.py:252
+msgid "Rotate left"
+msgstr ""
+
+#: readtoolbar.py:258
+msgid "Rotate right"
+msgstr ""
+
+#: readtoolbar.py:324
 msgid "Show Tray"
 msgstr ""
 
-#: readtoolbar.py:303
+#: readtoolbar.py:326
 msgid "Hide Tray"
 msgstr ""
 
-#: speechtoolbar.py:57
-msgid "Play / Pause"
-msgstr "Αναπαραγωγή / Παύση"
+#: linkbutton.py:133
+msgid "Go to Bookmark"
+msgstr ""
 
-#: speechtoolbar.py:65
-msgid "Stop"
-msgstr "Διακοπή"
+#: linkbutton.py:139
+msgid "Remove"
+msgstr ""
 
+#: bookmarkview.py:107
 #, python-format
-#, python-format,
-#~ msgid "Page %(current)i of %(total_pages)i"
-#~ msgstr "Σελίδα %(current)i από %(total_pages)i"
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "Σελιδοδείκτης που προστέθηκε από τον %(user)s %(time)s"
 
-#~ msgid "%"
-#~ msgstr "%"
+#: bookmarkview.py:143 bookmarkview.py:192
+msgid "Add notes for bookmark: "
+msgstr "Προσθήκη σημειώσεων για τον σελιδοδείκτη: "
 
-#~ msgid "pitch adjusted"
-#~ msgstr "ο τόνος ρυθμίστηκε"
-
-#~ msgid "rate adjusted"
-#~ msgstr "ο ρυθμός ρυθμίστηκε"
-
-#~ msgid "Choose document"
-#~ msgstr "Επιλογή εγγράφου"
-
+#: bookmarkview.py:188
 #, python-format
-#~ msgid "Page %i of %i"
-#~ msgstr "Σελίδα %i από %i"
+msgid "%s's bookmark"
+msgstr "%s's σελιδοδείκτης"
 
-#~ msgid "Edit"
-#~ msgstr "Επεξεργασία"
+#: bookmarkview.py:189
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "Σελιδοδείκτης για τη σελίδα %d"
 
-#~ msgid "View"
-#~ msgstr "Προβολή"
+#: comicadapter.py:69
+msgid "Can not read Comic Book Archive"
+msgstr ""
 
-#~ msgid "Read Activity"
-#~ msgstr "Ανάγνωση δραστηριότητας"
+#: comicadapter.py:70
+msgid "No readable images were found"
+msgstr ""

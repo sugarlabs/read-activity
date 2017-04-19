@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-11 00:31-0400\n"
-"PO-Revision-Date: 2016-05-21 23:32+0000\n"
+"POT-Creation-Date: 2017-03-24 17:39+1100\n"
+"PO-Revision-Date: 2017-04-17 06:14+0000\n"
 "Last-Translator: Chris <cjl@sugarlabs.org>\n"
 "Language-Team: Voluntarios Quechua Sugar Camp\n"
 "Language: quz\n"
@@ -16,121 +16,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : 1;\n"
 "X-Generator: Pootle 2.5.1.1\n"
-"X-POOTLE-MTIME: 1463873520.000000\n"
+"X-POOTLE-MTIME: 1492409673.000000\n"
 
 #  "Leer"
-#. TRANS: "name" option from activity.info file
+#: activity/activity.info:2
 msgid "Read"
 msgstr "Ñawinchay"
 
 # LBRO, ¿p'anta? o ¿P'anqa?... por ahora mejor, libro
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
 msgstr ""
 "¡Sichus ñawinchayta atinkiña chayqa, kay rurayta apaykachay! Ichaqa "
 "p'anqatahina ñawinchanapaqqa kumputaroraykita kinrakiy."
-
-# Marcador agregado por %(user)s %(time)s
-#. TRANS: This goes like Bookmark added by User 5 days ago
-#. TRANS: (the elapsed string gets translated automatically)
-#: bookmarkview.py:110
-#, fuzzy, python-format
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr "Kay %(user)s %(time)s nisqam t'upsinataqa yaparin %(user)s %(time)s"
-
-#  "Añadir notas para el marcador: "
-#: bookmarkview.py:153 bookmarkview.py:204
-msgid "Add notes for bookmark: "
-msgstr "T'upsinapaq huch'uy willakunata yapay: "
-
-#  "Marcador de %s"
-#: bookmarkview.py:200
-#, python-format
-msgid "%s's bookmark"
-msgstr "Kay %s nisqap t'upsiqnin"
-
-#  "Marcador para página %d"
-#: bookmarkview.py:201
-#, python-format
-msgid "Bookmark for page %d"
-msgstr "Kay %d nisqa raphip t'upsiqnin"
-
-#: evinceadapter.py:88
-msgid "URL from Read"
-msgstr "Ñawinchanap URL nisqan"
-
-#: linkbutton.py:94
-msgid "Go to Bookmark"
-msgstr "T'upsichiqkunaman riy"
-
-#: linkbutton.py:99
-msgid "Remove"
-msgstr "Chinkachiy"
-
-# Liwrunaq
-#: readactivity.py:333
-msgid "No book"
-msgstr "Mana p'anqayuq"
-
-# Mostrar algo para leer
-# 
-#: readactivity.py:333
-msgid "Choose something to read"
-msgstr "Ñawinchanapaq imachatapas rikurichiy"
-
-#  "Volver"
-#: readactivity.py:338
-msgid "Back"
-msgstr "Kutichiy"
-
-#  "Página anterior"
-#: readactivity.py:342
-msgid "Previous page"
-msgstr "Ñawpa raphi"
-
-#  "Registro anterior"
-#  [ES] "Marcador anterior"
-#: readactivity.py:344
-msgid "Previous bookmark"
-msgstr "Ñawpa t'upsichiq"
-
-#  "Avanzar"
-#: readactivity.py:356
-msgid "Forward"
-msgstr "Ñawpay"
-
-#  "Página siguiente"
-#: readactivity.py:360
-msgid "Next page"
-msgstr "Hamuq raphi"
-
-# Marcador siguiente
-#: readactivity.py:362
-msgid "Next bookmark"
-msgstr "Hamuq t'upsichiq"
-
-#  [ES] "Índice"
-#: readactivity.py:413
-msgid "Index"
-msgstr "Lliw rikuchiq"
-
-#: readactivity.py:534
-msgid "Delete bookmark"
-msgstr "T'upsichiqta pichay"
-
-# Toda la información relacionada con este marcador se perderá
-# 
-#: readactivity.py:535
-msgid "All the information related with this bookmark will be lost"
-msgstr "Kay t'upsichiqwan llapan willanakuna masichakuqqa chinkarunqan"
-
-#: readactivity.py:895 readactivity.py:1090
-#, python-format
-msgid "Page %d"
-msgstr "Raphi %d"
 
 #  "Cancelar"
 #: readdialog.py:52
@@ -143,14 +43,106 @@ msgid "Ok"
 msgstr "Allinmi"
 
 #  "<b>Título</b>:"
-#: readdialog.py:116
+#: readdialog.py:120
 msgid "<b>Title</b>:"
 msgstr "<b>Sutinchaynin</b>:"
 
+#: readdialog.py:147
+msgid "<b>Author</b>:"
+msgstr ""
+
 #  "<b>Detalles</b>:"
-#: readdialog.py:142
+#: readdialog.py:163
 msgid "<b>Details</b>:"
 msgstr "<b>Ima nisqan</b>:"
+
+#: evinceadapter.py:92
+msgid "URL from Read"
+msgstr "Ñawinchanap URL nisqan"
+
+# Detener UTICHIY??
+#: speechtoolbar.py:57
+msgid "Play / Pause"
+msgstr "Purichiy / Sayachiy"
+
+# Detener
+#: speechtoolbar.py:65
+msgid "Stop"
+msgstr "Sayachiy"
+
+#: readactivity.py:379
+msgid "Please wait"
+msgstr ""
+
+#: readactivity.py:380
+msgid "Starting connection..."
+msgstr ""
+
+# Liwrunaq
+#: readactivity.py:388
+msgid "No book"
+msgstr "Mana p'anqayuq"
+
+# Mostrar algo para leer
+#
+#: readactivity.py:388
+msgid "Choose something to read"
+msgstr "Ñawinchanapaq imachatapas rikurichiy"
+
+#  "Volver"
+#: readactivity.py:393
+msgid "Back"
+msgstr "Kutichiy"
+
+#  "Página anterior"
+#: readactivity.py:397
+msgid "Previous page"
+msgstr "Ñawpa raphi"
+
+#  "Registro anterior"
+#  [ES] "Marcador anterior"
+#: readactivity.py:399
+msgid "Previous bookmark"
+msgstr "Ñawpa t'upsichiq"
+
+#  "Avanzar"
+#: readactivity.py:411
+msgid "Forward"
+msgstr "Ñawpay"
+
+#  "Página siguiente"
+#: readactivity.py:415
+msgid "Next page"
+msgstr "Hamuq raphi"
+
+# Marcador siguiente
+#: readactivity.py:417
+msgid "Next bookmark"
+msgstr "Hamuq t'upsichiq"
+
+#  [ES] "Índice"
+#: readactivity.py:468
+msgid "Index"
+msgstr "Lliw rikuchiq"
+
+#: readactivity.py:564
+msgid "Delete bookmark"
+msgstr "T'upsichiqta pichay"
+
+# Toda la información relacionada con este marcador se perderá
+#
+#: readactivity.py:565
+msgid "All the information related with this bookmark will be lost"
+msgstr "Kay t'upsichiqwan llapan willanakuna masichakuqqa chinkarunqan"
+
+#: readactivity.py:954
+msgid "Receiving book..."
+msgstr ""
+
+#: readactivity.py:1032 readactivity.py:1227
+#, python-format
+msgid "%s (Page %d)"
+msgstr ""
 
 #  "Anterior"
 #: readtoolbar.py:61
@@ -183,65 +175,93 @@ msgid "Find next"
 msgstr "Hamuqta maskay"
 
 #  [ES] "Tabla de contenidos"
-#: readtoolbar.py:189
+#: readtoolbar.py:188
 msgid "Table of contents"
 msgstr "Lliw qhawarichiq sinri"
 
 # volver pequeño, letras muy pequeñas
-#: readtoolbar.py:198
+#: readtoolbar.py:197
 msgid "Zoom out"
 msgstr "Huch'uyachiy"
 
 # Aumentar
-#: readtoolbar.py:204
+#: readtoolbar.py:203
 msgid "Zoom in"
 msgstr "Hatunyachiy"
 
 #  "Ajustar al ancho"
-#: readtoolbar.py:210
+#: readtoolbar.py:209
 msgid "Zoom to width"
 msgstr "Kinrayninman mat'iy"
 
 #  "Ajustar a la pantalla"
-#: readtoolbar.py:216
+#: readtoolbar.py:215
 msgid "Zoom to fit"
 msgstr "Pantallaman mat'iy"
 
 #  "Tamaño real"
-#: readtoolbar.py:222
+#: readtoolbar.py:221
 msgid "Actual size"
 msgstr "Kikin sayan"
 
 #  "Pantalla completa"
-#: readtoolbar.py:233
+#: readtoolbar.py:232
 msgid "Fullscreen"
 msgstr "Hunt'asqa pantalla"
 
+#: readtoolbar.py:252
+msgid "Rotate left"
+msgstr ""
+
+#: readtoolbar.py:258
+msgid "Rotate right"
+msgstr ""
+
 #  [ES] "Mostrar Bandeja"
-#: readtoolbar.py:301
+#: readtoolbar.py:324
 msgid "Show Tray"
 msgstr "Chaskinata Rikuchiy"
 
 #  [ES] "Ocultar Bandeja"
-#: readtoolbar.py:303
+#: readtoolbar.py:326
 msgid "Hide Tray"
 msgstr "Chaskinata pakay"
 
-# Detener UTICHIY??
-#: speechtoolbar.py:57
-msgid "Play / Pause"
-msgstr "Purichiy / Sayachiy"
+#: linkbutton.py:133
+msgid "Go to Bookmark"
+msgstr "T'upsichiqkunaman riy"
 
-# Detener
-#: speechtoolbar.py:65
-msgid "Stop"
-msgstr "Sayachiy"
+#: linkbutton.py:139
+msgid "Remove"
+msgstr "Chinkachiy"
 
-#  "Página %(current)i de %(total_pages)i"
+# Marcador agregado por %(user)s %(time)s
+#: bookmarkview.py:107
+#, python-format, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "Kay %(user)s %(time)s nisqam t'upsinataqa yaparin"
+
+#  "Añadir notas para el marcador: "
+#: bookmarkview.py:143 bookmarkview.py:192
+msgid "Add notes for bookmark: "
+msgstr "T'upsinapaq huch'uy willakunata yapay: "
+
+#  "Marcador de %s"
+#: bookmarkview.py:188
 #, python-format
-#~ msgid "Page %(current)i of %(total_pages)i"
-#~ msgstr "Llapan %(total_pages)i nisqamanta %(current)i kay raphi"
+msgid "%s's bookmark"
+msgstr "Kay %s nisqap t'upsiqnin"
 
-#  "%"
-#~ msgid "%"
-#~ msgstr "%"
+#  "Marcador para página %d"
+#: bookmarkview.py:189
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "Kay %d nisqa raphip t'upsiqnin"
+
+#: comicadapter.py:69
+msgid "Can not read Comic Book Archive"
+msgstr ""
+
+#: comicadapter.py:70
+msgid "No readable images were found"
+msgstr ""

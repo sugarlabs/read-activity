@@ -1,15 +1,3 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # translation of read-activity.po to Hindi
 # G Karunakar <karunakar@indlinux.org>, 2007.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
@@ -18,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: read-activity\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 00:31-0400\n"
-"PO-Revision-Date: 2016-02-24 04:28+0000\n"
+"POT-Creation-Date: 2017-03-24 17:39+1100\n"
+"PO-Revision-Date: 2017-04-17 05:58+0000\n"
 "Last-Translator: Chris <cjl@sugarlabs.org>\n"
 "Language-Team: Hindi <indlinux-hindi@lists.sourceforge.net>\n"
 "Language: hi\n"
@@ -28,112 +16,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.1.1\n"
-"X-POOTLE-MTIME: 1456288101.000000\n"
+"X-POOTLE-MTIME: 1492408704.000000\n"
 
-#. TRANS: "name" option from activity.info file
+#: activity/activity.info:2
 msgid "Read"
 msgstr "पढ़ें"
 
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
 msgstr ""
 "इस कार्यकलाप का प्रयोग करे जब आप पढ़ने के लिए तैयार हों ! किताब जैसे अनुभव के"
 " लिए संगणक को घुमाना न भूले I!"
-
-#: bookmarkview.py:112
-#, python-format
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr "%(user)s %(time)s द्वारा पसंदीदा जोड़े गए"
-
-#: bookmarkview.py:155 bookmarkview.py:206
-msgid "Add notes for bookmark: "
-msgstr "पसंदीदा के लिए टीप जोड़ें: "
-
-#: bookmarkview.py:202
-#, python-format
-msgid "%s's bookmark"
-msgstr "%s का पसंदीदा"
-
-#: bookmarkview.py:203
-#, python-format
-msgid "Bookmark for page %d"
-msgstr "पृष्ठ %d के लिए पसंदीदा"
-
-#: evinceadapter.py:88
-msgid "URL from Read"
-msgstr "रीड से यूआरएल"
-
-#: linkbutton.py:124
-msgid "Go to Bookmark"
-msgstr "पुस्तचिह्न पर जाएँ"
-
-#: linkbutton.py:129
-msgid "Remove"
-msgstr "हटाएँ"
-
-#: readactivity.py:361
-msgid "Please wait"
-msgstr "कृपया प्रतीक्षा करें"
-
-#: readactivity.py:362
-msgid "Starting connection..."
-msgstr "कनेक्शन चालू हो रहा है..."
-
-#: readactivity.py:374
-msgid "No book"
-msgstr "कोई किताब नहीं"
-
-#: readactivity.py:374
-msgid "Choose something to read"
-msgstr "पढ़ने के लिए कुछ चुनें"
-
-#: readactivity.py:379
-msgid "Back"
-msgstr "पीछे"
-
-#: readactivity.py:383
-msgid "Previous page"
-msgstr "पिछला पेज"
-
-#: readactivity.py:385
-msgid "Previous bookmark"
-msgstr "पिछला पसंदीदा"
-
-#: readactivity.py:397
-msgid "Forward"
-msgstr "आगे"
-
-#: readactivity.py:401
-msgid "Next page"
-msgstr "अगला पेज"
-
-#: readactivity.py:403
-msgid "Next bookmark"
-msgstr "अगला पसंदीदा"
-
-#: readactivity.py:454
-msgid "Index"
-msgstr "सूची"
-
-#: readactivity.py:575
-msgid "Delete bookmark"
-msgstr "पुस्तचिह्न मिटाएँ"
-
-#: readactivity.py:576
-msgid "All the information related with this bookmark will be lost"
-msgstr "पृष्ठ स्मृति से जुड़ी सारी सूचना खो जाएगी I"
-
-#: readactivity.py:900
-msgid "Receiving book..."
-msgstr "किताब पहुंच रही है..."
-
-#: readactivity.py:966 readactivity.py:1162
-#, python-format
-msgid "Page %d"
-msgstr "पृष्ठ %d"
 
 #: readdialog.py:52
 msgid "Cancel"
@@ -143,13 +38,90 @@ msgstr "रद्द करें"
 msgid "Ok"
 msgstr "ठीक"
 
-#: readdialog.py:116
+#: readdialog.py:120
 msgid "<b>Title</b>:"
 msgstr "<b>शीर्षक</b>:"
 
-#: readdialog.py:142
+#: readdialog.py:147
+msgid "<b>Author</b>:"
+msgstr "<b>लेखक</b>:"
+
+#: readdialog.py:163
 msgid "<b>Details</b>:"
 msgstr "<b>विवरण</b>:"
+
+#: evinceadapter.py:92
+msgid "URL from Read"
+msgstr "रीड से यूआरएल"
+
+#: speechtoolbar.py:57
+msgid "Play / Pause"
+msgstr "प्ले करें / ठहरें"
+
+#: speechtoolbar.py:65
+msgid "Stop"
+msgstr "रोकें"
+
+#: readactivity.py:379
+msgid "Please wait"
+msgstr "कृपया प्रतीक्षा करें"
+
+#: readactivity.py:380
+msgid "Starting connection..."
+msgstr "कनेक्शन चालू हो रहा है..."
+
+#: readactivity.py:388
+msgid "No book"
+msgstr "कोई किताब नहीं"
+
+#: readactivity.py:388
+msgid "Choose something to read"
+msgstr "पढ़ने के लिए कुछ चुनें"
+
+#: readactivity.py:393
+msgid "Back"
+msgstr "पीछे"
+
+#: readactivity.py:397
+msgid "Previous page"
+msgstr "पिछला पेज"
+
+#: readactivity.py:399
+msgid "Previous bookmark"
+msgstr "पिछला पसंदीदा"
+
+#: readactivity.py:411
+msgid "Forward"
+msgstr "आगे"
+
+#: readactivity.py:415
+msgid "Next page"
+msgstr "अगला पेज"
+
+#: readactivity.py:417
+msgid "Next bookmark"
+msgstr "अगला पसंदीदा"
+
+#: readactivity.py:468
+msgid "Index"
+msgstr "सूची"
+
+#: readactivity.py:564
+msgid "Delete bookmark"
+msgstr "पुस्तचिह्न मिटाएँ"
+
+#: readactivity.py:565
+msgid "All the information related with this bookmark will be lost"
+msgstr "पृष्ठ स्मृति से जुड़ी सारी सूचना खो जाएगी I"
+
+#: readactivity.py:954
+msgid "Receiving book..."
+msgstr "किताब पहुंच रही है..."
+
+#: readactivity.py:1032 readactivity.py:1227
+#, python-format
+msgid "%s (Page %d)"
+msgstr "%s (पृष्ठ %d)"
 
 #: readtoolbar.py:61
 msgid "Previous"
@@ -203,56 +175,53 @@ msgstr "असली आकार"
 msgid "Fullscreen"
 msgstr "पूर्ण स्क्रीन"
 
-#: readtoolbar.py:253
+#: readtoolbar.py:252
 msgid "Rotate left"
 msgstr "बाएं घुमाएँ"
 
-#: readtoolbar.py:259
+#: readtoolbar.py:258
 msgid "Rotate right"
 msgstr "दाहिने घुमाएँ"
 
-#: readtoolbar.py:325
+#: readtoolbar.py:324
 msgid "Show Tray"
 msgstr "ट्रे दिखाएँ"
 
-#: readtoolbar.py:327
+#: readtoolbar.py:326
 msgid "Hide Tray"
 msgstr "ट्रे छुपाएँ"
 
-#: speechtoolbar.py:57
-msgid "Play / Pause"
-msgstr "प्ले करें / ठहरें"
+#: linkbutton.py:133
+msgid "Go to Bookmark"
+msgstr "पुस्तचिह्न पर जाएँ"
 
-#: speechtoolbar.py:65
-msgid "Stop"
-msgstr "रोकें"
+#: linkbutton.py:139
+msgid "Remove"
+msgstr "हटाएँ"
 
+#: bookmarkview.py:107
 #, python-format
-#, python-format,
-#~ msgid "Page %(current)i of %(total_pages)i"
-#~ msgstr "पेज %(current)i मैं %(total_pages)i"
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "%(user)s %(time)s द्वारा पसंदीदा जोड़े गए"
 
-#~ msgid "%"
-#~ msgstr "%"
+#: bookmarkview.py:143 bookmarkview.py:192
+msgid "Add notes for bookmark: "
+msgstr "पसंदीदा के लिए टीप जोड़ें: "
 
-#~ msgid "pitch adjusted"
-#~ msgstr "पिच समायोजित"
-
-#~ msgid "rate adjusted"
-#~ msgstr "दर समायोजित"
-
-#~ msgid "Choose document"
-#~ msgstr "दस्तावेज़ चुनें"
-
+#: bookmarkview.py:188
 #, python-format
-#~ msgid "Page %i of %i"
-#~ msgstr "पृष्ठ %i में से: %i"
+msgid "%s's bookmark"
+msgstr "%s का पसंदीदा"
 
-#~ msgid "Edit"
-#~ msgstr "संपादन"
+#: bookmarkview.py:189
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "पृष्ठ %d के लिए पसंदीदा"
 
-#~ msgid "View"
-#~ msgstr "दृश्य"
+#: comicadapter.py:69
+msgid "Can not read Comic Book Archive"
+msgstr "हास्य पुस्तक पुरालेख नही खोली जा सकती है"
 
-#~ msgid "Read Activity"
-#~ msgstr "पढ़ने के क्रियाकलाप"
+#: comicadapter.py:70
+msgid "No readable images were found"
+msgstr "कोई छवियां नहीं मिलीं"

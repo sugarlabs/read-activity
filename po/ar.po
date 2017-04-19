@@ -1,6 +1,3 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
 # translation of read-activity.po to Arabic
 # Khaled Hosny <khaledhosny@eglug.org>, 2007, 2011.
 # Ahmed Mansour <atphalix@users.arabeyes.org>, 2008.
@@ -10,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: read-activity\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 00:31-0400\n"
+"POT-Creation-Date: 2017-03-24 17:39+1100\n"
 "PO-Revision-Date: 2014-04-29 01:37+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
@@ -22,110 +19,17 @@ msgstr ""
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 "X-Generator: Pootle 2.0.5\n"
 
-#. TRANS: "name" option from activity.info file
+#: activity/activity.info:2
 msgid "Read"
 msgstr "القراءه"
 
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
 msgstr ""
 "إستخدم هذا النشاط حين ترغب بالقراءه. فلا شيئ فى العالم تفعله لتكوين فِكرك "
 "وشخصيتك يضاهى قراءه كتاب جيد فى الصِغَر."
-
-#: bookmarkview.py:112
-#, python-format
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr "علامه مُضافه من قِبَل %(user)s فى %(time)s"
-
-#: bookmarkview.py:155 bookmarkview.py:206
-msgid "Add notes for bookmark: "
-msgstr "أضف مُلاحظات على العلامه : "
-
-#: bookmarkview.py:202
-#, python-format
-msgid "%s's bookmark"
-msgstr "علامه خاصه بـ %s"
-
-#: bookmarkview.py:203
-#, python-format
-msgid "Bookmark for page %d"
-msgstr "علامه للصفحه %d"
-
-#: evinceadapter.py:88
-msgid "URL from Read"
-msgstr ""
-
-#: linkbutton.py:124
-msgid "Go to Bookmark"
-msgstr "إذهب إلى العلامه"
-
-#: linkbutton.py:129
-msgid "Remove"
-msgstr "إحذف"
-
-#: readactivity.py:361
-msgid "Please wait"
-msgstr "يُرجى اﻹنتظار"
-
-#: readactivity.py:362
-msgid "Starting connection..."
-msgstr "جارٍ بدأ اﻹتصال..."
-
-#: readactivity.py:374
-msgid "No book"
-msgstr "بلا كتاب"
-
-#: readactivity.py:374
-msgid "Choose something to read"
-msgstr "إختر شيئاً ما لقرائته"
-
-#: readactivity.py:379
-msgid "Back"
-msgstr "للخلف"
-
-#: readactivity.py:383
-msgid "Previous page"
-msgstr "الصفحة السابقة"
-
-#: readactivity.py:385
-msgid "Previous bookmark"
-msgstr "العلامة السابقة"
-
-#: readactivity.py:397
-msgid "Forward"
-msgstr "للأمام"
-
-#: readactivity.py:401
-msgid "Next page"
-msgstr "الصفحة التالية"
-
-#: readactivity.py:403
-msgid "Next bookmark"
-msgstr "العلامه التاليه"
-
-#: readactivity.py:454
-msgid "Index"
-msgstr "الفهرس"
-
-#: readactivity.py:575
-msgid "Delete bookmark"
-msgstr "إحذف العلامه"
-
-#: readactivity.py:576
-msgid "All the information related with this bookmark will be lost"
-msgstr "سوف تُمحى كافه المعلومات المتعلقه بهذه العلامه"
-
-#: readactivity.py:900
-msgid "Receiving book..."
-msgstr "جارٍ إستلام الكتاب..."
-
-#: readactivity.py:966 readactivity.py:1162
-#, python-format
-msgid "Page %d"
-msgstr "الصفحه %d"
 
 #: readdialog.py:52
 msgid "Cancel"
@@ -135,13 +39,90 @@ msgstr "إلغ اﻷمر"
 msgid "Ok"
 msgstr "حسناً"
 
-#: readdialog.py:116
+#: readdialog.py:120
 msgid "<b>Title</b>:"
 msgstr "<b>العنوان</b> :"
 
-#: readdialog.py:142
+#: readdialog.py:147
+msgid "<b>Author</b>:"
+msgstr ""
+
+#: readdialog.py:163
 msgid "<b>Details</b>:"
 msgstr "<b>التفاصيل</b> :"
+
+#: evinceadapter.py:92
+msgid "URL from Read"
+msgstr ""
+
+#: speechtoolbar.py:57
+msgid "Play / Pause"
+msgstr "شغّل / ألبِث"
+
+#: speechtoolbar.py:65
+msgid "Stop"
+msgstr "إوقف"
+
+#: readactivity.py:379
+msgid "Please wait"
+msgstr "يُرجى اﻹنتظار"
+
+#: readactivity.py:380
+msgid "Starting connection..."
+msgstr "جارٍ بدأ اﻹتصال..."
+
+#: readactivity.py:388
+msgid "No book"
+msgstr "بلا كتاب"
+
+#: readactivity.py:388
+msgid "Choose something to read"
+msgstr "إختر شيئاً ما لقرائته"
+
+#: readactivity.py:393
+msgid "Back"
+msgstr "للخلف"
+
+#: readactivity.py:397
+msgid "Previous page"
+msgstr "الصفحة السابقة"
+
+#: readactivity.py:399
+msgid "Previous bookmark"
+msgstr "العلامة السابقة"
+
+#: readactivity.py:411
+msgid "Forward"
+msgstr "للأمام"
+
+#: readactivity.py:415
+msgid "Next page"
+msgstr "الصفحة التالية"
+
+#: readactivity.py:417
+msgid "Next bookmark"
+msgstr "العلامه التاليه"
+
+#: readactivity.py:468
+msgid "Index"
+msgstr "الفهرس"
+
+#: readactivity.py:564
+msgid "Delete bookmark"
+msgstr "إحذف العلامه"
+
+#: readactivity.py:565
+msgid "All the information related with this bookmark will be lost"
+msgstr "سوف تُمحى كافه المعلومات المتعلقه بهذه العلامه"
+
+#: readactivity.py:954
+msgid "Receiving book..."
+msgstr "جارٍ إستلام الكتاب..."
+
+#: readactivity.py:1032 readactivity.py:1227
+#, python-format
+msgid "%s (Page %d)"
+msgstr ""
 
 #: readtoolbar.py:61
 msgid "Previous"
@@ -195,55 +176,53 @@ msgstr "المقاس الفعلى"
 msgid "Fullscreen"
 msgstr "الشاشه الكامله"
 
-#: readtoolbar.py:253
+#: readtoolbar.py:252
 msgid "Rotate left"
 msgstr "دَوِر يساراً"
 
-#: readtoolbar.py:259
+#: readtoolbar.py:258
 msgid "Rotate right"
 msgstr "دَوِر يميناً"
 
-#: readtoolbar.py:325
+#: readtoolbar.py:324
 msgid "Show Tray"
 msgstr "إظهر الصينيه"
 
-#: readtoolbar.py:327
+#: readtoolbar.py:326
 msgid "Hide Tray"
 msgstr "إخف الصينيه"
 
-#: speechtoolbar.py:57
-msgid "Play / Pause"
-msgstr "شغّل / ألبِث"
+#: linkbutton.py:133
+msgid "Go to Bookmark"
+msgstr "إذهب إلى العلامه"
 
-#: speechtoolbar.py:65
-msgid "Stop"
-msgstr "إوقف"
+#: linkbutton.py:139
+msgid "Remove"
+msgstr "إحذف"
 
+#: bookmarkview.py:107
 #, python-format
-#~ msgid "Page %(current)i of %(total_pages)i"
-#~ msgstr "صفحة %(current)i من %(total_pages)i"
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "علامه مُضافه من قِبَل %(user)s فى %(time)s"
 
-#~ msgid "%"
-#~ msgstr "%"
+#: bookmarkview.py:143 bookmarkview.py:192
+msgid "Add notes for bookmark: "
+msgstr "أضف مُلاحظات على العلامه : "
 
-#~ msgid "pitch adjusted"
-#~ msgstr "ضُبِطت الشَّدة"
-
-#~ msgid "rate adjusted"
-#~ msgstr "ضُبِطت السرعة"
-
-#~ msgid "Choose document"
-#~ msgstr "اختر الوثيقة"
-
+#: bookmarkview.py:188
 #, python-format
-#~ msgid "Page %i of %i"
-#~ msgstr "صفحة %i من %i"
+msgid "%s's bookmark"
+msgstr "علامه خاصه بـ %s"
 
-#~ msgid "Edit"
-#~ msgstr "تحرير"
+#: bookmarkview.py:189
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "علامه للصفحه %d"
 
-#~ msgid "View"
-#~ msgstr "عرض"
+#: comicadapter.py:69
+msgid "Can not read Comic Book Archive"
+msgstr ""
 
-#~ msgid "Read Activity"
-#~ msgstr "نشاط القراءة"
+#: comicadapter.py:70
+msgid "No readable images were found"
+msgstr ""

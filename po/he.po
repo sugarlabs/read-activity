@@ -2,19 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-11 00:31-0400\n"
+"POT-Creation-Date: 2017-03-24 17:39+1100\n"
 "PO-Revision-Date: 2016-11-13 12:53+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,100 +18,17 @@ msgstr ""
 "X-Generator: Pootle 2.5.1.1\n"
 "X-POOTLE-MTIME: 1479041587.000000\n"
 
-#. TRANS: "name" option from activity.info file
+#: activity/activity.info:2
 msgid "Read"
 msgstr "קריאה"
 
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
 msgstr ""
 "ניתן להשתמש בפעילות זו כשהתכוננת לקריאה! כדאי להפוך את המחשב כדי לקבל את "
 "התחושה כאילו יש לך ספר בידיים!"
-
-#. TRANS: This goes like Bookmark added by User 5 days ago
-#. TRANS: (the elapsed string gets translated automatically)
-#: bookmarkview.py:110
-#, python-format
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr "נוספה סימנייה ע״י %(user)s ב־%(time)s"
-
-#: bookmarkview.py:153 bookmarkview.py:204
-msgid "Add notes for bookmark: "
-msgstr "הוספת הערות לסימנייה: "
-
-#: bookmarkview.py:200
-#, python-format
-msgid "%s's bookmark"
-msgstr "הסימניות של %s"
-
-#: bookmarkview.py:201
-#, python-format
-msgid "Bookmark for page %d"
-msgstr "סימנייה עבור עמוד %d"
-
-#: evinceadapter.py:88
-msgid "URL from Read"
-msgstr "כתובת מיישום הקריאה"
-
-#: linkbutton.py:94
-msgid "Go to Bookmark"
-msgstr "מעבר לסימנייה"
-
-#: linkbutton.py:99
-msgid "Remove"
-msgstr "הסרה"
-
-#: readactivity.py:333
-msgid "No book"
-msgstr "אין ספר"
-
-#: readactivity.py:333
-msgid "Choose something to read"
-msgstr "ניתן לבחור משהו לקריאה"
-
-#: readactivity.py:338
-msgid "Back"
-msgstr "חזרה"
-
-#: readactivity.py:342
-msgid "Previous page"
-msgstr "העמוד הקודם"
-
-#: readactivity.py:344
-msgid "Previous bookmark"
-msgstr "הסימנייה הקודמת"
-
-#: readactivity.py:356
-msgid "Forward"
-msgstr "קדימה"
-
-#: readactivity.py:360
-msgid "Next page"
-msgstr "העמוד הבא"
-
-#: readactivity.py:362
-msgid "Next bookmark"
-msgstr "הסימנייה הבאה"
-
-#: readactivity.py:413
-msgid "Index"
-msgstr "מפתח"
-
-#: readactivity.py:534
-msgid "Delete bookmark"
-msgstr "מחיקת סימנייה"
-
-#: readactivity.py:535
-msgid "All the information related with this bookmark will be lost"
-msgstr "כל המידע שקשור לסימנייה זו ילך לאיבוד"
-
-#: readactivity.py:895 readactivity.py:1090
-#, python-format
-msgid "Page %d"
-msgstr "עמוד %d"
 
 #: readdialog.py:52
 msgid "Cancel"
@@ -129,13 +38,90 @@ msgstr "ביטול"
 msgid "Ok"
 msgstr "אישור"
 
-#: readdialog.py:116
+#: readdialog.py:120
 msgid "<b>Title</b>:"
 msgstr "<b>כותרת</b>:"
 
-#: readdialog.py:142
+#: readdialog.py:147
+msgid "<b>Author</b>:"
+msgstr ""
+
+#: readdialog.py:163
 msgid "<b>Details</b>:"
 msgstr "<b>פרטים</b>:"
+
+#: evinceadapter.py:92
+msgid "URL from Read"
+msgstr "כתובת מיישום הקריאה"
+
+#: speechtoolbar.py:57
+msgid "Play / Pause"
+msgstr "ניגון / השהיה"
+
+#: speechtoolbar.py:65
+msgid "Stop"
+msgstr "עצירה"
+
+#: readactivity.py:379
+msgid "Please wait"
+msgstr ""
+
+#: readactivity.py:380
+msgid "Starting connection..."
+msgstr ""
+
+#: readactivity.py:388
+msgid "No book"
+msgstr "אין ספר"
+
+#: readactivity.py:388
+msgid "Choose something to read"
+msgstr "ניתן לבחור משהו לקריאה"
+
+#: readactivity.py:393
+msgid "Back"
+msgstr "חזרה"
+
+#: readactivity.py:397
+msgid "Previous page"
+msgstr "העמוד הקודם"
+
+#: readactivity.py:399
+msgid "Previous bookmark"
+msgstr "הסימנייה הקודמת"
+
+#: readactivity.py:411
+msgid "Forward"
+msgstr "קדימה"
+
+#: readactivity.py:415
+msgid "Next page"
+msgstr "העמוד הבא"
+
+#: readactivity.py:417
+msgid "Next bookmark"
+msgstr "הסימנייה הבאה"
+
+#: readactivity.py:468
+msgid "Index"
+msgstr "מפתח"
+
+#: readactivity.py:564
+msgid "Delete bookmark"
+msgstr "מחיקת סימנייה"
+
+#: readactivity.py:565
+msgid "All the information related with this bookmark will be lost"
+msgstr "כל המידע שקשור לסימנייה זו ילך לאיבוד"
+
+#: readactivity.py:954
+msgid "Receiving book..."
+msgstr ""
+
+#: readactivity.py:1032 readactivity.py:1227
+#, python-format
+msgid "%s (Page %d)"
+msgstr ""
 
 #: readtoolbar.py:61
 msgid "Previous"
@@ -161,58 +147,81 @@ msgstr "חיפוש הקודם"
 msgid "Find next"
 msgstr "חיפוש הבא"
 
-#: readtoolbar.py:189
+#: readtoolbar.py:188
 msgid "Table of contents"
 msgstr "טבלת התכנים"
 
-#: readtoolbar.py:198
+#: readtoolbar.py:197
 msgid "Zoom out"
 msgstr "התרחקות"
 
-#: readtoolbar.py:204
+#: readtoolbar.py:203
 msgid "Zoom in"
 msgstr "התקרבות"
 
-#: readtoolbar.py:210
+#: readtoolbar.py:209
 msgid "Zoom to width"
 msgstr "התאמה לרוחב"
 
-#: readtoolbar.py:216
+#: readtoolbar.py:215
 msgid "Zoom to fit"
 msgstr "תקריב להתאמה"
 
-#: readtoolbar.py:222
+#: readtoolbar.py:221
 msgid "Actual size"
 msgstr "גודל אמתי"
 
-#: readtoolbar.py:233
+#: readtoolbar.py:232
 msgid "Fullscreen"
 msgstr "מסך מלא"
 
-#: readtoolbar.py:301
+#: readtoolbar.py:252
+msgid "Rotate left"
+msgstr ""
+
+#: readtoolbar.py:258
+msgid "Rotate right"
+msgstr ""
+
+#: readtoolbar.py:324
 msgid "Show Tray"
 msgstr "הצגת סמל באזור ההודעות"
 
-#: readtoolbar.py:303
+#: readtoolbar.py:326
 msgid "Hide Tray"
 msgstr "הסתרת סמל באזור ההודעות"
 
-#: speechtoolbar.py:57
-msgid "Play / Pause"
-msgstr "ניגון / השהיה"
+#: linkbutton.py:133
+msgid "Go to Bookmark"
+msgstr "מעבר לסימנייה"
 
-#: speechtoolbar.py:65
-msgid "Stop"
-msgstr "עצירה"
+#: linkbutton.py:139
+msgid "Remove"
+msgstr "הסרה"
 
-#, fuzzy
-#~ msgid "%"
-#~ msgstr "%"
+#: bookmarkview.py:107
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
+msgstr "נוספה סימנייה ע״י %(user)s ב־%(time)s"
 
-#, fuzzy
-#~ msgid "Edit"
-#~ msgstr "עריכה"
+#: bookmarkview.py:143 bookmarkview.py:192
+msgid "Add notes for bookmark: "
+msgstr "הוספת הערות לסימנייה: "
 
-#, fuzzy
-#~ msgid "View"
-#~ msgstr "צפייה"
+#: bookmarkview.py:188
+#, python-format
+msgid "%s's bookmark"
+msgstr "הסימניות של %s"
+
+#: bookmarkview.py:189
+#, python-format
+msgid "Bookmark for page %d"
+msgstr "סימנייה עבור עמוד %d"
+
+#: comicadapter.py:69
+msgid "Can not read Comic Book Archive"
+msgstr ""
+
+#: comicadapter.py:70
+msgid "No readable images were found"
+msgstr ""
