@@ -1,3 +1,10 @@
+118
+
+* Trim headers, synch to Pootle (Chris Leonard)
+* Suppress Python GI API version warnings (James Cameron)
+* translate.sugarlabs.org synchronisation (Chris Leonard)
+* New Yoruba L10n (@iamutkarshtiwari)
+
 78
 
 * Add footnotes and intra-document links support in EPUB
