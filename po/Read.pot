@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-24 17:39+1100\n"
+"POT-Creation-Date: 2017-06-01 08:19+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,36 +27,43 @@ msgid ""
 "around to feel like you are really holding a book!"
 msgstr ""
 
-#: readdialog.py:52
-msgid "Cancel"
+#: bookmarkview.py:107
+#, python-format
+msgid "Bookmark added by %(user)s %(time)s"
 msgstr ""
 
-#: readdialog.py:58
-msgid "Ok"
+#: bookmarkview.py:143 bookmarkview.py:192
+msgid "Add notes for bookmark: "
 msgstr ""
 
-#: readdialog.py:120
-msgid "<b>Title</b>:"
+#: bookmarkview.py:188
+#, python-format
+msgid "%s's bookmark"
 msgstr ""
 
-#: readdialog.py:147
-msgid "<b>Author</b>:"
+#: bookmarkview.py:189
+#, python-format
+msgid "Bookmark for page %d"
 msgstr ""
 
-#: readdialog.py:163
-msgid "<b>Details</b>:"
+#: comicadapter.py:69
+msgid "Can not read Comic Book Archive"
+msgstr ""
+
+#: comicadapter.py:70
+msgid "No readable images were found"
 msgstr ""
 
 #: evinceadapter.py:92
 msgid "URL from Read"
 msgstr ""
 
-#: speechtoolbar.py:57
-msgid "Play / Pause"
+#: linkbutton.py:133
+msgid "Go to Bookmark"
 msgstr ""
 
-#: speechtoolbar.py:65
-msgid "Stop"
+#: linkbutton.py:139
+msgid "Remove"
 msgstr ""
 
 #: readactivity.py:379
@@ -118,6 +125,26 @@ msgstr ""
 #: readactivity.py:1032 readactivity.py:1227
 #, python-format
 msgid "%s (Page %d)"
+msgstr ""
+
+#: readdialog.py:52
+msgid "Cancel"
+msgstr ""
+
+#: readdialog.py:58
+msgid "Ok"
+msgstr ""
+
+#: readdialog.py:120
+msgid "<b>Title</b>:"
+msgstr ""
+
+#: readdialog.py:147
+msgid "<b>Author</b>:"
+msgstr ""
+
+#: readdialog.py:163
+msgid "<b>Details</b>:"
 msgstr ""
 
 #: readtoolbar.py:61
@@ -188,37 +215,10 @@ msgstr ""
 msgid "Hide Tray"
 msgstr ""
 
-#: linkbutton.py:133
-msgid "Go to Bookmark"
+#: speechtoolbar.py:57
+msgid "Play / Pause"
 msgstr ""
 
-#: linkbutton.py:139
-msgid "Remove"
-msgstr ""
-
-#: bookmarkview.py:107
-#, python-format
-msgid "Bookmark added by %(user)s %(time)s"
-msgstr ""
-
-#: bookmarkview.py:143 bookmarkview.py:192
-msgid "Add notes for bookmark: "
-msgstr ""
-
-#: bookmarkview.py:188
-#, python-format
-msgid "%s's bookmark"
-msgstr ""
-
-#: bookmarkview.py:189
-#, python-format
-msgid "Bookmark for page %d"
-msgstr ""
-
-#: comicadapter.py:69
-msgid "Can not read Comic Book Archive"
-msgstr ""
-
-#: comicadapter.py:70
-msgid "No readable images were found"
+#: speechtoolbar.py:65
+msgid "Stop"
 msgstr ""
