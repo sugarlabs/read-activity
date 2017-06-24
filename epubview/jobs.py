@@ -21,7 +21,11 @@ from gi.repository import Gtk
 import widgets
 import math
 import os.path
-import BeautifulSoup
+
+try:
+    from bs4 import BeautifulSoup
+except ImportError:
+    from BeautifulSoup import BeautifulSoup
 
 import threading
 
@@ -62,7 +66,7 @@ class SearchThread(threading.Thread):
         return False
 
     def _searchfile(self, fileobj):
-        soup = BeautifulSoup.BeautifulSoup(fileobj)
+        soup = BeautifulSoup(fileobj)
         body = soup.find('body')
         tags = body.findChildren(True)
         for tag in tags:
