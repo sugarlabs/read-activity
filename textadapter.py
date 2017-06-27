@@ -333,7 +333,6 @@ class TextViewer(GObject.GObject):
 
     def update_metadata(self, activity):
         self.metadata = activity.metadata
-        logging.error('Saving zoom %s', self.get_zoom())
         self.metadata['Read_zoom'] = self.get_zoom()
 
     def load_metadata(self, activity):

@@ -56,7 +56,6 @@ class _WebView(WebKit.WebView):
         """ % hide_scrollbar_js
         self.execute_script(js)
         ret = self.get_main_frame().get_title()
-        logging.error('get_page_height %s', ret)
         self.execute_script('document.title=%s;' % oldtitle)
         try:
             return int(ret)

@@ -591,7 +591,6 @@ class ReadActivity(activity.Activity):
             self._view.show_highlights(page_to)
 
     def _update_bookmark_cb(self, sidebar):
-        logging.error('update bookmark event')
         self.update_bookmark_button()
 
     def update_bookmark_button(self):
@@ -1001,7 +1000,6 @@ class ReadActivity(activity.Activity):
         self.filehash = self.metadata.get('filehash', None)
         if self.filehash is None:
             self.filehash = get_md5(filepath)
-            logging.error('Calculate hash %s', self.filehash)
 
         self._bookmarkmanager = BookmarkManager(self.filehash)
 
