@@ -1,5 +1,8 @@
 import logging
 
+import gi
+gi.require_version('WebKit', '3.0')
+
 from gi.repository import WebKit
 from gi.repository import Gdk
 from gi.repository import GObject
