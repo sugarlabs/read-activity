@@ -21,7 +21,7 @@ from gi.repository import Gtk
 import widgets
 import math
 import os.path
-import BeautifulSoup
+import xml.etree.ElementTree as etree
 
 import threading
 
@@ -62,12 +62,20 @@ class SearchThread(threading.Thread):
         return False
 
     def _searchfile(self, fileobj):
-        soup = BeautifulSoup.BeautifulSoup(fileobj)
-        body = soup.find('body')
-        tags = body.findChildren(True)
-        for tag in tags:
-            if tag.string is not None:
-                if tag.string.lower().find(self.obj._text.lower()) > -1:
+        tree = etree.parse(fileobj)
+        root = tree.getroot()
+
+        body = None
+        for child in root:
+            if child.tag.endswith('body'):
+                body = child
+
+        if body is None:
+            return False
+
+        for child in body.iter():
+            if child.text is not None:
+                if child.text.lower().find(self.obj._text.lower()) > -1:
                     return True
 
         return False
