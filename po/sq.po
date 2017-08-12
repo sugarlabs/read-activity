@@ -2,6 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -226,3 +234,23 @@ msgstr ""
 #: comicadapter.py:70
 msgid "No readable images were found"
 msgstr ""
+
+#, python-format
+#~ msgid "Page %d"
+#~ msgstr "Faqja %d"
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgid "Choose document"
+#~ msgstr "Zgjidhe dokumentin"
+
+#, python-format
+#~ msgid "Page %i of %i"
+#~ msgstr "Faqe %i e %i"
+
+#~ msgid "Edit"
+#~ msgstr "Ndrysho"
+
+#~ msgid "View"
+#~ msgstr "Shikim"

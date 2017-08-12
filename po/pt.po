@@ -1,3 +1,11 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # Portuguese translations for PACKAGE package.
 # Copyright (C) 2007 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
@@ -224,3 +232,48 @@ msgstr ""
 #: comicadapter.py:70
 msgid "No readable images were found"
 msgstr ""
+
+#, python-format
+#~ msgid "Page %d"
+#~ msgstr "Página %d"
+
+#, python-format
+#~ msgid "Page %(current)i of %(total_pages)i"
+#~ msgstr "Página %(current)i de %(total_pages)i"
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgid "pitch adjusted"
+#~ msgstr "altura ajustada"
+
+#~ msgid "rate adjusted"
+#~ msgstr "velocidade ajustada"
+
+#~ msgid "Choose document"
+#~ msgstr "Escolhe o documento"
+
+#, python-format
+#~ msgid "Page %i of %i"
+#~ msgstr "Página %i de %i"
+
+#~ msgid "Edit"
+#~ msgstr "Editar"
+
+#~ msgid "View"
+#~ msgstr "Ver"
+
+#~ msgid "Read Activity"
+#~ msgstr "Actividade Ler"
+
+#~ msgid "Open a document to read"
+#~ msgstr "Abrir um documento para o ler"
+
+#~ msgid "All supported formats"
+#~ msgstr "Todos os formatos suportados"
+
+#~ msgid "All files"
+#~ msgstr "Todos os ficheiros"
+
+#~ msgid "Open"
+#~ msgstr "Abrir"

@@ -259,3 +259,28 @@ msgstr ""
 #: comicadapter.py:70
 msgid "No readable images were found"
 msgstr ""
+
+#, python-format
+#~ msgid "Page %d"
+#~ msgstr "%d jakhuni laphi"
+
+#  "Página
+#, python-format
+#~ msgid "Page %(current)i of %(total_pages)i"
+#~ msgstr "Laphi %(current)i qipatsti %(total_pages)i"
+
+#  "%"
+#~ msgid "%"
+#~ msgstr "%"
+
+#  "tono ajustado"
+#~ msgid "pitch adjusted"
+#~ msgstr "istaña jitinakayaña"
+
+#  "velocidad ajustada"
+#~ msgid "rate adjusted"
+#~ msgstr "katakikuna jitinakayaña"
+
+#  "Escoger documento"
+#~ msgid "Choose document"
+#~ msgstr "Wakichaña qatukaña"

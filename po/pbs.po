@@ -223,3 +223,13 @@ msgstr ""
 #: comicadapter.py:70
 msgid "No readable images were found"
 msgstr ""
+
+# please do not translate %(total_pages)i
+#, python-format
+#, python-format,
+#, python-format, ,
+#~ msgid "Page %(current)i of %(total_pages)i"
+#~ msgstr "Ne nixií %(current)i de %(total_pages)i"
+
+#~ msgid "%"
+#~ msgstr "%"

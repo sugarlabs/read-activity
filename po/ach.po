@@ -225,3 +225,7 @@ msgstr "Pe romo kwano Comic Book Archive"
 #: comicadapter.py:70
 msgid "No readable images were found"
 msgstr "Calere maromo kwane pe onwongere"
+
+#, python-format
+#~ msgid "Page %d"
+#~ msgstr "Potbuk %d"

@@ -1,3 +1,11 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # translation of pt_BR.po to Brazilian Portuguese
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
@@ -7,8 +15,8 @@ msgstr ""
 "Project-Id-Version: pt_BR\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-24 17:39+1100\n"
-"PO-Revision-Date: 2015-01-30 16:52+0000\n"
-"Last-Translator: Felipe <fefcas@gmail.com>\n"
+"PO-Revision-Date: 2017-06-14 21:01+0000\n"
+"Last-Translator: Mariana <dias.inkscape@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <fedora-docs-br@redhat.com>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +24,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.1.1\n"
-"X-POOTLE-MTIME: 1422636737.000000\n"
+"X-POOTLE-MTIME: 1497474090.000000\n"
 
 #: activity/activity.info:2
 msgid "Read"
@@ -45,7 +53,7 @@ msgstr "<b>Título</b>:"
 
 #: readdialog.py:147
 msgid "<b>Author</b>:"
-msgstr ""
+msgstr "<b>Autor</b>:"
 
 #: readdialog.py:163
 msgid "<b>Details</b>:"
@@ -65,11 +73,11 @@ msgstr "Parar"
 
 #: readactivity.py:379
 msgid "Please wait"
-msgstr ""
+msgstr "Por favor aguarde"
 
 #: readactivity.py:380
 msgid "Starting connection..."
-msgstr ""
+msgstr "Iniciando conexão..."
 
 #: readactivity.py:388
 msgid "No book"
@@ -117,12 +125,12 @@ msgstr "Todas as informações relacionadas a este favorito serão perdidas"
 
 #: readactivity.py:954
 msgid "Receiving book..."
-msgstr ""
+msgstr "Recebendo livro..."
 
 #: readactivity.py:1032 readactivity.py:1227
 #, python-format
 msgid "%s (Page %d)"
-msgstr ""
+msgstr "%s (Página %d)"
 
 #: readtoolbar.py:61
 msgid "Previous"
@@ -179,11 +187,11 @@ msgstr "Tela cheia"
 
 #: readtoolbar.py:252
 msgid "Rotate left"
-msgstr ""
+msgstr "Girar para a esquerda"
 
 #: readtoolbar.py:258
 msgid "Rotate right"
-msgstr ""
+msgstr "Girar para a direira"
 
 #: readtoolbar.py:324
 msgid "Show Tray"
@@ -222,8 +230,32 @@ msgstr "Favorito para página %d"
 
 #: comicadapter.py:69
 msgid "Can not read Comic Book Archive"
-msgstr ""
+msgstr "Não é possível ler o Arquivo de Histórias em Quadrinhos"
 
 #: comicadapter.py:70
 msgid "No readable images were found"
-msgstr ""
+msgstr "Nenhuma imagem legível foi encontrada"
+
+#, python-format
+#~ msgid "Page %d"
+#~ msgstr "Página %d"
+
+# só o argumento % qual seria o contexto desse caracter?
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgid "Choose document"
+#~ msgstr "Escolha o documento"
+
+#, python-format
+#~ msgid "Page %i of %i"
+#~ msgstr "Página %i de %i"
+
+#~ msgid "Edit"
+#~ msgstr "Editar"
+
+#~ msgid "View"
+#~ msgstr "Ver"
+
+#~ msgid "Read Activity"
+#~ msgstr "Ler a Atividade"

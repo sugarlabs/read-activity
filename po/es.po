@@ -1,3 +1,23 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # Spanish translations for PACKAGE package.
 # Copyright (C) 2007 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
@@ -225,3 +245,48 @@ msgstr "No se puede leer el Archivo de Libro de Comics"
 #: comicadapter.py:70
 msgid "No readable images were found"
 msgstr "No se encontraron imágenes legibles"
+
+#, python-format
+#~ msgid "Page %d"
+#~ msgstr "Página %d"
+
+#, python-format
+#~ msgid "Page %(current)i of %(total_pages)i"
+#~ msgstr "Página %(current)i de %(total_pages)i"
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgid "pitch adjusted"
+#~ msgstr "tono ajustado"
+
+#~ msgid "rate adjusted"
+#~ msgstr "velocidad ajustada"
+
+#~ msgid "Choose document"
+#~ msgstr "Escoger documento"
+
+#, python-format
+#~ msgid "Page %i of %i"
+#~ msgstr "Página %i de %i"
+
+#~ msgid "Edit"
+#~ msgstr "Editar"
+
+#~ msgid "View"
+#~ msgstr "Ver"
+
+#~ msgid "Read Activity"
+#~ msgstr "Actividad Leer"
+
+#~ msgid "Open a document to read"
+#~ msgstr "Abrir un documento para leer"
+
+#~ msgid "All supported formats"
+#~ msgstr "Todos los formatos soportados"
+
+#~ msgid "All files"
+#~ msgstr "Todos los ficheros"
+
+#~ msgid "Open"
+#~ msgstr "Abrir"

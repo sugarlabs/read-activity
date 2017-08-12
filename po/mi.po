@@ -224,3 +224,7 @@ msgstr ""
 #: comicadapter.py:70
 msgid "No readable images were found"
 msgstr ""
+
+#, python-format
+#~ msgid "Page %(current)i of %(total_pages)i"
+#~ msgstr "Whārangi %(current)i o %(total_pages)i"

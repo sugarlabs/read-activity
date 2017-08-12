@@ -2,110 +2,105 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-24 17:39+1100\n"
-"PO-Revision-Date: 2009-07-01 03:26-0400\n"
-"Last-Translator: Abdulhadi Hairan <abdulhadi@paiwastoon.com.af>\n"
+"PO-Revision-Date: 2017-06-10 11:29+0000\n"
+"Last-Translator: belkacem77 <belkacem77@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: ps\n"
+"Language: kab\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 1.2.1\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1497094194.000000\n"
 
 #: activity/activity.info:2
 msgid "Read"
-msgstr "لوستل"
+msgstr "Ɣer"
 
 #: activity/activity.info:3
 msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
 msgstr ""
+"Seqdec armud-agi ticki theggaḍ i tɣuri! Mekti-d ad terreḍ aselkim deg idis "
+"akken ad tɣileḍ teṭṭfeḍ adlis!"
 
 #: readdialog.py:52
 msgid "Cancel"
-msgstr ""
+msgstr "Sefsex"
 
 #: readdialog.py:58
 msgid "Ok"
-msgstr ""
+msgstr "Ih"
 
 #: readdialog.py:120
 msgid "<b>Title</b>:"
-msgstr ""
+msgstr "<b>Azwel</b> :"
 
 #: readdialog.py:147
 msgid "<b>Author</b>:"
-msgstr ""
+msgstr "<b>Ameskar</b>&nbsp;:"
 
 #: readdialog.py:163
 msgid "<b>Details</b>:"
-msgstr ""
+msgstr "<b>Talqayt</b> :"
 
 #: evinceadapter.py:92
 msgid "URL from Read"
-msgstr ""
+msgstr "Tansa URL seg Ɣer"
 
 #: speechtoolbar.py:57
 msgid "Play / Pause"
-msgstr ""
+msgstr "Urar/ Rǧu"
 
 #: speechtoolbar.py:65
 msgid "Stop"
-msgstr ""
+msgstr "Seḥbes"
 
 #: readactivity.py:379
 msgid "Please wait"
-msgstr ""
+msgstr "Rǧu ma ulac aɣilif"
 
 #: readactivity.py:380
 msgid "Starting connection..."
-msgstr ""
+msgstr "Tuqqna tetteddu..."
 
 #: readactivity.py:388
 msgid "No book"
-msgstr ""
+msgstr "Ulac adlis"
 
 #: readactivity.py:388
 msgid "Choose something to read"
-msgstr ""
+msgstr "Fren ayen ara d-iniḍ"
 
 #: readactivity.py:393
 msgid "Back"
-msgstr "شاته"
+msgstr "Ar deffir"
 
 #: readactivity.py:397
 msgid "Previous page"
-msgstr "مخکینۍ پاڼه"
+msgstr "Asebter yezrin"
 
 #: readactivity.py:399
 msgid "Previous bookmark"
-msgstr "مخکینۍ یادنښه"
+msgstr ""
 
 #: readactivity.py:411
 msgid "Forward"
-msgstr "مخته"
+msgstr ""
 
 #: readactivity.py:415
 msgid "Next page"
-msgstr "بل مخ"
+msgstr ""
 
 #: readactivity.py:417
 msgid "Next bookmark"
-msgstr "بله یادنښه"
+msgstr ""
 
 #: readactivity.py:468
 msgid "Index"
@@ -130,11 +125,11 @@ msgstr ""
 
 #: readtoolbar.py:61
 msgid "Previous"
-msgstr "مخكینى"
+msgstr ""
 
 #: readtoolbar.py:68
 msgid "Next"
-msgstr "بل"
+msgstr ""
 
 #: readtoolbar.py:79
 msgid "Highlight"
@@ -142,15 +137,15 @@ msgstr ""
 
 #: readtoolbar.py:160
 msgid "Find first"
-msgstr "لومړنی موندل"
+msgstr ""
 
 #: readtoolbar.py:166
 msgid "Find previous"
-msgstr "مخکینی موندل"
+msgstr ""
 
 #: readtoolbar.py:168
 msgid "Find next"
-msgstr "بل موندل"
+msgstr ""
 
 #: readtoolbar.py:188
 msgid "Table of contents"
@@ -158,27 +153,27 @@ msgstr ""
 
 #: readtoolbar.py:197
 msgid "Zoom out"
-msgstr "لوكمول"
+msgstr ""
 
 #: readtoolbar.py:203
 msgid "Zoom in"
-msgstr "لوډېرول"
+msgstr ""
 
 #: readtoolbar.py:209
 msgid "Zoom to width"
-msgstr "سور سره برابرول"
+msgstr ""
 
 #: readtoolbar.py:215
 msgid "Zoom to fit"
-msgstr "برابر سمول"
+msgstr ""
 
 #: readtoolbar.py:221
 msgid "Actual size"
-msgstr "اصلي کچه"
+msgstr ""
 
 #: readtoolbar.py:232
 msgid "Fullscreen"
-msgstr "بشپړه پرده"
+msgstr ""
 
 #: readtoolbar.py:252
 msgid "Rotate left"
@@ -206,9 +201,8 @@ msgstr ""
 
 #: bookmarkview.py:107
 #, python-format
-#, fuzzy
 msgid "Bookmark added by %(user)s %(time)s"
-msgstr "یادنښه د (کارن)انو لخوا په (وخت)ونو زیاته شوه"
+msgstr ""
 
 #: bookmarkview.py:143 bookmarkview.py:192
 msgid "Add notes for bookmark: "
@@ -231,15 +225,3 @@ msgstr ""
 #: comicadapter.py:70
 msgid "No readable images were found"
 msgstr ""
-
-#~ msgid "%"
-#~ msgstr "%"
-
-#~ msgid "Choose document"
-#~ msgstr "لاسوند غوره کړئ"
-
-#~ msgid "Edit"
-#~ msgstr "سمون"
-
-#~ msgid "View"
-#~ msgstr "ليد"

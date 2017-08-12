@@ -225,3 +225,7 @@ msgstr "Ndikatúi emoñe'ẽ ñongatuha ta'ãngahaipyre oguatáva"
 #: comicadapter.py:70
 msgid "No readable images were found"
 msgstr "Ndojetopái ta'anga hesakãva"
+
+#, python-format
+#~ msgid "Page %d"
+#~ msgstr "Kuatia rogue %d."

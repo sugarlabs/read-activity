@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-01 08:19+1000\n"
+"POT-Creation-Date: 2017-08-12 13:27+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -118,11 +118,11 @@ msgstr ""
 msgid "All the information related with this bookmark will be lost"
 msgstr ""
 
-#: readactivity.py:954
+#: readactivity.py:953
 msgid "Receiving book..."
 msgstr ""
 
-#: readactivity.py:1032 readactivity.py:1227
+#: readactivity.py:1027 readactivity.py:1222
 #, python-format
 msgid "%s (Page %d)"
 msgstr ""

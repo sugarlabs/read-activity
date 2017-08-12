@@ -1,3 +1,15 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # translation of read-activity.po to Hindi
 # G Karunakar <karunakar@indlinux.org>, 2007.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
@@ -225,3 +237,37 @@ msgstr "हास्य पुस्तक पुरालेख नही ख�
 #: comicadapter.py:70
 msgid "No readable images were found"
 msgstr "कोई छवियां नहीं मिलीं"
+
+#, python-format
+#~ msgid "Page %d"
+#~ msgstr "पृष्ठ %d"
+
+#, python-format
+#, python-format,
+#~ msgid "Page %(current)i of %(total_pages)i"
+#~ msgstr "पेज %(current)i मैं %(total_pages)i"
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgid "pitch adjusted"
+#~ msgstr "पिच समायोजित"
+
+#~ msgid "rate adjusted"
+#~ msgstr "दर समायोजित"
+
+#~ msgid "Choose document"
+#~ msgstr "दस्तावेज़ चुनें"
+
+#, python-format
+#~ msgid "Page %i of %i"
+#~ msgstr "पृष्ठ %i में से: %i"
+
+#~ msgid "Edit"
+#~ msgstr "संपादन"
+
+#~ msgid "View"
+#~ msgstr "दृश्य"
+
+#~ msgid "Read Activity"
+#~ msgstr "पढ़ने के क्रियाकलाप"
