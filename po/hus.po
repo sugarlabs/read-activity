@@ -223,3 +223,26 @@ msgstr ""
 #: comicadapter.py:70
 msgid "No readable images were found"
 msgstr ""
+
+#, python-format
+#, python-format, ,
+#~ msgid "Page %(current)i of %(total_pages)i"
+#~ msgstr "Walxeklek %(current)i a xi ti %(total_pages)i"
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgid "pitch adjusted"
+#~ msgstr "janidhtaláb t'ojojodh"
+
+# tasa ajustada (tasa se refiere a un nivel, índice)
+# Ejemplo: "Tasa de natalidad"="ïndice de natalidad"
+#~ msgid "rate adjusted"
+#~ msgstr "bajudh adhiktalab"
+
+#~ msgid "Choose document"
+#~ msgstr "Takuy dhuchadh úw"
+
+#, python-format
+#~ msgid "Page %i of %i"
+#~ msgstr "Walxeklek %i a xi ti %i"

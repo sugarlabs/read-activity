@@ -1,4 +1,12 @@
-# Greek translation of Read project.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Greek translation of Xbook project.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Simos Xenitellis <simos.lists@googlemail.com>, 2007.
@@ -222,3 +230,33 @@ msgstr ""
 #: comicadapter.py:70
 msgid "No readable images were found"
 msgstr ""
+
+#, python-format
+#, python-format,
+#~ msgid "Page %(current)i of %(total_pages)i"
+#~ msgstr "Σελίδα %(current)i από %(total_pages)i"
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgid "pitch adjusted"
+#~ msgstr "ο τόνος ρυθμίστηκε"
+
+#~ msgid "rate adjusted"
+#~ msgstr "ο ρυθμός ρυθμίστηκε"
+
+#~ msgid "Choose document"
+#~ msgstr "Επιλογή εγγράφου"
+
+#, python-format
+#~ msgid "Page %i of %i"
+#~ msgstr "Σελίδα %i από %i"
+
+#~ msgid "Edit"
+#~ msgstr "Επεξεργασία"
+
+#~ msgid "View"
+#~ msgstr "Προβολή"
+
+#~ msgid "Read Activity"
+#~ msgstr "Ανάγνωση δραστηριότητας"

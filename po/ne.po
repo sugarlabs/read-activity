@@ -2,6 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -227,3 +235,36 @@ msgstr ""
 #: comicadapter.py:70
 msgid "No readable images were found"
 msgstr ""
+
+#, python-format
+#~ msgid "Page %d"
+#~ msgstr "पृष्ठ %d"
+
+#, python-format
+#~ msgid "Page %(current)i of %(total_pages)i"
+#~ msgstr "%(total_pages)i को पृष्ठ %(current)i"
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgid "pitch adjusted"
+#~ msgstr "पिच समायोजन गरिसक्यो"
+
+#~ msgid "rate adjusted"
+#~ msgstr "दर समायोजन गरिसक्यो"
+
+#~ msgid "Choose document"
+#~ msgstr "कागतपत्र छान"
+
+#, python-format, 
+#~ msgid "Page %i of %i"
+#~ msgstr "%iको %i पाना"
+
+#~ msgid "Edit"
+#~ msgstr "सम्पादन"
+
+#~ msgid "View"
+#~ msgstr "दृश्य"
+
+#~ msgid "Read Activity"
+#~ msgstr "पढाई क्रियाकलाप "

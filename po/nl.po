@@ -2,6 +2,18 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -226,3 +238,36 @@ msgstr "Kan het Stripboekarchief niet lezen"
 #: comicadapter.py:70
 msgid "No readable images were found"
 msgstr "Geen leesbare afbeeldingen gevonden"
+
+#, python-format
+#~ msgid "Page %d"
+#~ msgstr "Pagina %d"
+
+#, python-format
+#~ msgid "Page %(current)i of %(total_pages)i"
+#~ msgstr "Pagina %(current)i van %(total_pages)i"
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgid "pitch adjusted"
+#~ msgstr "toonhoogte aangepast"
+
+#~ msgid "rate adjusted"
+#~ msgstr "frequentie aangepast"
+
+#~ msgid "Choose document"
+#~ msgstr "Kies document"
+
+#, python-format
+#~ msgid "Page %i of %i"
+#~ msgstr "Pagina %i van %i"
+
+#~ msgid "Edit"
+#~ msgstr "Bewerken"
+
+#~ msgid "View"
+#~ msgstr "Beeld"
+
+#~ msgid "Read Activity"
+#~ msgstr "Lezen Activiteit"

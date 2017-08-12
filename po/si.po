@@ -2,6 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -222,3 +230,25 @@ msgstr ""
 #: comicadapter.py:70
 msgid "No readable images were found"
 msgstr ""
+
+#, python-format
+#~ msgid "Page %(current)i of %(total_pages)i"
+#~ msgstr "%(total_pages)i කින් %(current)i පිටුව"
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgid "pitch adjusted"
+#~ msgstr "තාරතාව සීරු මාරු කරන ලදි"
+
+#~ msgid "rate adjusted"
+#~ msgstr "සීඝ්‍රතාව සීරු මාරු කරන ලදි"
+
+#~ msgid "Choose document"
+#~ msgstr "ලිපි ගොනුව තෝරන්න"
+
+#~ msgid "Edit"
+#~ msgstr "සංස්කරණය කරන්න"
+
+#~ msgid "View"
+#~ msgstr "දර්ශනය කරන්න"

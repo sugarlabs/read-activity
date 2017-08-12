@@ -1,3 +1,6 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 # translation of read-activity.po to Arabic
 # Khaled Hosny <khaledhosny@eglug.org>, 2007, 2011.
 # Ahmed Mansour <atphalix@users.arabeyes.org>, 2008.
@@ -226,3 +229,36 @@ msgstr ""
 #: comicadapter.py:70
 msgid "No readable images were found"
 msgstr ""
+
+#, python-format
+#~ msgid "Page %d"
+#~ msgstr "الصفحه %d"
+
+#, python-format
+#~ msgid "Page %(current)i of %(total_pages)i"
+#~ msgstr "صفحة %(current)i من %(total_pages)i"
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgid "pitch adjusted"
+#~ msgstr "ضُبِطت الشَّدة"
+
+#~ msgid "rate adjusted"
+#~ msgstr "ضُبِطت السرعة"
+
+#~ msgid "Choose document"
+#~ msgstr "اختر الوثيقة"
+
+#, python-format
+#~ msgid "Page %i of %i"
+#~ msgstr "صفحة %i من %i"
+
+#~ msgid "Edit"
+#~ msgstr "تحرير"
+
+#~ msgid "View"
+#~ msgstr "عرض"
+
+#~ msgid "Read Activity"
+#~ msgstr "نشاط القراءة"

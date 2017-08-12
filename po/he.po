@@ -2,12 +2,20 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-24 17:39+1100\n"
-"PO-Revision-Date: 2016-11-13 12:53+0000\n"
+"PO-Revision-Date: 2017-04-23 18:07+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: he\n"
@@ -16,7 +24,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.1.1\n"
-"X-POOTLE-MTIME: 1479041587.000000\n"
+"X-POOTLE-MTIME: 1492970823.000000\n"
 
 #: activity/activity.info:2
 msgid "Read"
@@ -44,7 +52,7 @@ msgstr "<b>כותרת</b>:"
 
 #: readdialog.py:147
 msgid "<b>Author</b>:"
-msgstr ""
+msgstr "<b>מחבר</b>:"
 
 #: readdialog.py:163
 msgid "<b>Details</b>:"
@@ -64,11 +72,11 @@ msgstr "עצירה"
 
 #: readactivity.py:379
 msgid "Please wait"
-msgstr ""
+msgstr "נא להמתין"
 
 #: readactivity.py:380
 msgid "Starting connection..."
-msgstr ""
+msgstr "החיבור נוצר…"
 
 #: readactivity.py:388
 msgid "No book"
@@ -116,12 +124,12 @@ msgstr "כל המידע שקשור לסימנייה זו ילך לאיבוד"
 
 #: readactivity.py:954
 msgid "Receiving book..."
-msgstr ""
+msgstr "הספר מתקבל…"
 
 #: readactivity.py:1032 readactivity.py:1227
 #, python-format
 msgid "%s (Page %d)"
-msgstr ""
+msgstr "%s (עמוד %d)"
 
 #: readtoolbar.py:61
 msgid "Previous"
@@ -177,11 +185,11 @@ msgstr "מסך מלא"
 
 #: readtoolbar.py:252
 msgid "Rotate left"
-msgstr ""
+msgstr "הטייה שמאלה"
 
 #: readtoolbar.py:258
 msgid "Rotate right"
-msgstr ""
+msgstr "הטייה ימינה"
 
 #: readtoolbar.py:324
 msgid "Show Tray"
@@ -220,8 +228,24 @@ msgstr "סימנייה עבור עמוד %d"
 
 #: comicadapter.py:69
 msgid "Can not read Comic Book Archive"
-msgstr ""
+msgstr "לא ניתן לקרוא את ארכיון ספרי הקומיקס"
 
 #: comicadapter.py:70
 msgid "No readable images were found"
-msgstr ""
+msgstr "לא נמצאו תמונות שניתן לקרוא"
+
+#, python-format
+#~ msgid "Page %d"
+#~ msgstr "עמוד %d"
+
+#, fuzzy
+#~ msgid "%"
+#~ msgstr "%"
+
+#, fuzzy
+#~ msgid "Edit"
+#~ msgstr "עריכה"
+
+#, fuzzy
+#~ msgid "View"
+#~ msgstr "צפייה"

@@ -1,3 +1,11 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # translation of xbook.master.po to Français
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
@@ -225,3 +233,36 @@ msgstr "Impossible de lire l'archive Comic Book"
 #: comicadapter.py:70
 msgid "No readable images were found"
 msgstr "Aucune image lisible n'a été trouvée"
+
+#, python-format
+#~ msgid "Page %d"
+#~ msgstr "Page %d"
+
+#, python-format
+#~ msgid "Page %(current)i of %(total_pages)i"
+#~ msgstr "Page %(current)i sur %(total_pages)i"
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgid "pitch adjusted"
+#~ msgstr "hauteur ajustée"
+
+#~ msgid "rate adjusted"
+#~ msgstr "fréquence ajustée"
+
+#~ msgid "Choose document"
+#~ msgstr "Choisir un document"
+
+#, python-format
+#~ msgid "Page %i of %i"
+#~ msgstr "Page %i sur %i"
+
+#~ msgid "Edit"
+#~ msgstr "Éditer"
+
+#~ msgid "View"
+#~ msgstr "Afficher"
+
+#~ msgid "Read Activity"
+#~ msgstr "Lecture"

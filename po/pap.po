@@ -1,6 +1,12 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 # Wenchi <linguares@yahoo.com>, 2013.
 msgid ""
 msgstr ""
@@ -225,3 +231,24 @@ msgstr ""
 #: comicadapter.py:70
 msgid "No readable images were found"
 msgstr ""
+
+#, python-format
+#~ msgid "Page %d"
+#~ msgstr "Página %d"
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgid "Choose document"
+#~ msgstr "Skohe dokumento"
+
+# TRANS: Tradusi e  saki komo página i di m (pe: Pagina 4 di 334)
+#, python-format
+#~ msgid "Page %i of %i"
+#~ msgstr "Pagina %iof%i"
+
+#~ msgid "Edit"
+#~ msgstr "Edita"
+
+#~ msgid "View"
+#~ msgstr "Mira"

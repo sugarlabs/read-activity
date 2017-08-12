@@ -1,245 +1,226 @@
-# SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# This file is distributed under the same license as the Read package.
+# Božidar Putanec <bozidarp@yahoo.com>, 2017.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Read\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-24 17:39+1100\n"
-"PO-Revision-Date: 2009-07-01 03:26-0400\n"
-"Last-Translator: Abdulhadi Hairan <abdulhadi@paiwastoon.com.af>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: ps\n"
+"PO-Revision-Date: 2017-05-16 15:02-0700\n"
+"Last-Translator: Božidar Putanec <bozidarp@yahoo.com>\n"
+"Language-Team: Croatian <LL@li.org>\n"
+"Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 1.2.1\n"
+"X-Generator: Poedit 2.0.1\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: activity/activity.info:2
 msgid "Read"
-msgstr "لوستل"
+msgstr "Čitamo"
 
 #: activity/activity.info:3
 msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
 msgstr ""
+"Otvori ovu aktivnost kad si spreman i želiš čitati.  Koristi računalo kao "
+"knjigu!"
 
 #: readdialog.py:52
 msgid "Cancel"
-msgstr ""
+msgstr "Odustajem"
 
 #: readdialog.py:58
 msgid "Ok"
-msgstr ""
+msgstr "U redu"
 
 #: readdialog.py:120
 msgid "<b>Title</b>:"
-msgstr ""
+msgstr "<b>Naslov</b>:"
 
 #: readdialog.py:147
 msgid "<b>Author</b>:"
-msgstr ""
+msgstr "<b>Autor</b>:"
 
 #: readdialog.py:163
 msgid "<b>Details</b>:"
-msgstr ""
+msgstr "<b>Pojedinosti</b>:"
 
 #: evinceadapter.py:92
 msgid "URL from Read"
-msgstr ""
+msgstr "URL od „Čitamo“"
 
 #: speechtoolbar.py:57
 msgid "Play / Pause"
-msgstr ""
+msgstr "Kreni/Stani"
 
 #: speechtoolbar.py:65
 msgid "Stop"
-msgstr ""
+msgstr "Stop"
 
 #: readactivity.py:379
 msgid "Please wait"
-msgstr ""
+msgstr "Pričekaj"
 
 #: readactivity.py:380
 msgid "Starting connection..."
-msgstr ""
+msgstr "Započinje povezivanje..."
 
 #: readactivity.py:388
 msgid "No book"
-msgstr ""
+msgstr "Nema knjige"
 
 #: readactivity.py:388
 msgid "Choose something to read"
-msgstr ""
+msgstr "Odaberi nešto za čitanje"
 
 #: readactivity.py:393
 msgid "Back"
-msgstr "شاته"
+msgstr "Natrag"
 
 #: readactivity.py:397
 msgid "Previous page"
-msgstr "مخکینۍ پاڼه"
+msgstr "Prethodna stranica"
 
 #: readactivity.py:399
 msgid "Previous bookmark"
-msgstr "مخکینۍ یادنښه"
+msgstr "Prethodna knjižna oznaka"
 
 #: readactivity.py:411
 msgid "Forward"
-msgstr "مخته"
+msgstr "Naprijed"
 
 #: readactivity.py:415
 msgid "Next page"
-msgstr "بل مخ"
+msgstr "Sljedeća stranica"
 
 #: readactivity.py:417
 msgid "Next bookmark"
-msgstr "بله یادنښه"
+msgstr "Sljedeća knjižna oznaka"
 
 #: readactivity.py:468
 msgid "Index"
-msgstr ""
+msgstr "Indeks"
 
 #: readactivity.py:564
 msgid "Delete bookmark"
-msgstr ""
+msgstr "Ukloni knjižnu oznaku"
 
 #: readactivity.py:565
 msgid "All the information related with this bookmark will be lost"
-msgstr ""
+msgstr "Sve informacije vezane uz ovu knjižnu oznaku biti će izgubljene"
 
 #: readactivity.py:954
 msgid "Receiving book..."
-msgstr ""
+msgstr "Preuzimanje knjige..."
 
 #: readactivity.py:1032 readactivity.py:1227
 #, python-format
 msgid "%s (Page %d)"
-msgstr ""
+msgstr "%s (Stranica %d)"
 
 #: readtoolbar.py:61
 msgid "Previous"
-msgstr "مخكینى"
+msgstr "Prethodna"
 
 #: readtoolbar.py:68
 msgid "Next"
-msgstr "بل"
+msgstr "Sljedeća"
 
 #: readtoolbar.py:79
 msgid "Highlight"
-msgstr ""
+msgstr "Isticanje"
 
 #: readtoolbar.py:160
 msgid "Find first"
-msgstr "لومړنی موندل"
+msgstr "Nađi prvi"
 
 #: readtoolbar.py:166
 msgid "Find previous"
-msgstr "مخکینی موندل"
+msgstr "Nađi prethodni"
 
 #: readtoolbar.py:168
 msgid "Find next"
-msgstr "بل موندل"
+msgstr "Nađi sljedeći"
 
 #: readtoolbar.py:188
 msgid "Table of contents"
-msgstr ""
+msgstr "Sadržaj"
 
 #: readtoolbar.py:197
 msgid "Zoom out"
-msgstr "لوكمول"
+msgstr "Smanjivanje"
 
 #: readtoolbar.py:203
 msgid "Zoom in"
-msgstr "لوډېرول"
+msgstr "Povećavanje"
 
 #: readtoolbar.py:209
 msgid "Zoom to width"
-msgstr "سور سره برابرول"
+msgstr "Povećaj do širine"
 
 #: readtoolbar.py:215
 msgid "Zoom to fit"
-msgstr "برابر سمول"
+msgstr "Povećaj da stane"
 
 #: readtoolbar.py:221
 msgid "Actual size"
-msgstr "اصلي کچه"
+msgstr "Stvarna veličina"
 
 #: readtoolbar.py:232
 msgid "Fullscreen"
-msgstr "بشپړه پرده"
+msgstr "Po cijelom zaslonu"
 
 #: readtoolbar.py:252
 msgid "Rotate left"
-msgstr ""
+msgstr "Rotiraj nalijevo"
 
 #: readtoolbar.py:258
 msgid "Rotate right"
-msgstr ""
+msgstr "Rotiraj nadesno"
 
 #: readtoolbar.py:324
 msgid "Show Tray"
-msgstr ""
+msgstr "Pokaži traku"
 
 #: readtoolbar.py:326
 msgid "Hide Tray"
-msgstr ""
+msgstr "Sakrij traku"
 
 #: linkbutton.py:133
 msgid "Go to Bookmark"
-msgstr ""
+msgstr "Idi na knjižnu oznaku"
 
 #: linkbutton.py:139
 msgid "Remove"
-msgstr ""
+msgstr "Ukloni"
 
 #: bookmarkview.py:107
 #, python-format
-#, fuzzy
 msgid "Bookmark added by %(user)s %(time)s"
-msgstr "یادنښه د (کارن)انو لخوا په (وخت)ونو زیاته شوه"
+msgstr "Knjižnu oznaku je dodao %(user)s %(time)s"
 
 #: bookmarkview.py:143 bookmarkview.py:192
 msgid "Add notes for bookmark: "
-msgstr ""
+msgstr "Dodaj bilješku za knjižnu oznaku: "
 
 #: bookmarkview.py:188
 #, python-format
 msgid "%s's bookmark"
-msgstr ""
+msgstr "knjižna oznaka od %s"
 
 #: bookmarkview.py:189
 #, python-format
 msgid "Bookmark for page %d"
-msgstr ""
+msgstr "Knjižna oznaka za stranicu %d"
 
 #: comicadapter.py:69
 msgid "Can not read Comic Book Archive"
-msgstr ""
+msgstr "Nije moguće čitati Comic Book arhivu"
 
 #: comicadapter.py:70
 msgid "No readable images were found"
-msgstr ""
-
-#~ msgid "%"
-#~ msgstr "%"
-
-#~ msgid "Choose document"
-#~ msgstr "لاسوند غوره کړئ"
-
-#~ msgid "Edit"
-#~ msgstr "سمون"
-
-#~ msgid "View"
-#~ msgstr "ليد"
+msgstr "Nijedna čitljiva slika nije nađena"

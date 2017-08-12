@@ -2,6 +2,10 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: OLPC XBook\n"
@@ -223,3 +227,33 @@ msgstr ""
 #: comicadapter.py:70
 msgid "No readable images were found"
 msgstr ""
+
+#, python-format
+#~ msgid "Page %d"
+#~ msgstr "第 %d 頁"
+
+#, python-format
+#~ msgid "Page %(current)i of %(total_pages)i"
+#~ msgstr "%(total_pages)i 頁中的第 %(current)i 頁"
+
+#~ msgid "%"
+#~ msgstr "％"
+
+#~ msgid "pitch adjusted"
+#~ msgstr "音高已調整"
+
+#~ msgid "rate adjusted"
+#~ msgstr "速度已調整"
+
+#~ msgid "Choose document"
+#~ msgstr "選擇文件"
+
+#, python-format
+#~ msgid "Page %i of %i"
+#~ msgstr "第 %i 頁 共 %i 頁"
+
+#~ msgid "Edit"
+#~ msgstr "編輯"
+
+#~ msgid "View"
+#~ msgstr "檢視"
