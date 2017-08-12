@@ -1,3 +1,11 @@
+119
+
+* New translations (Chris Leonard, et al)
+* Remove EPUB support to remove WebKit 3.0 API dependency (James Cameron)
+* Replace BeautifulSoup dependency with ElementTree (James Cameron)
+* Remove unused screenshots (James Cameron)
+* Remove some unnecessary errors from log (James Cameron)
+
 118
 
 * Trim headers, synch to Pootle (Chris Leonard)
