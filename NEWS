@@ -1,3 +1,10 @@
+118.1
+
+* New translations (Chris Leonard, et al)
+* Replace BeautifulSoup dependency with ElementTree (James Cameron)
+* Remove unused screenshots (James Cameron)
+* Remove some unnecessary errors from log (James Cameron)
+
 118
 
 * Trim headers, synch to Pootle (Chris Leonard)
