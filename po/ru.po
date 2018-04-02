@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-24 17:39+1100\n"
-"PO-Revision-Date: 2017-04-17 06:15+0000\n"
-"Last-Translator: Chris <cjl@sugarlabs.org>\n"
+"PO-Revision-Date: 2017-10-14 08:59+0000\n"
+"Last-Translator: yuray <yuray@komyakino.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.1.1\n"
-"X-POOTLE-MTIME: 1492409727.000000\n"
+"X-POOTLE-MTIME: 1507971582.000000\n"
 
 #: activity/activity.info:2
 msgid "Read"
@@ -53,7 +53,7 @@ msgstr "<b>Заголовок</b>:"
 
 #: readdialog.py:147
 msgid "<b>Author</b>:"
-msgstr ""
+msgstr "<b>Автор</b>:"
 
 #: readdialog.py:163
 msgid "<b>Details</b>:"
@@ -73,11 +73,11 @@ msgstr "Стоп"
 
 #: readactivity.py:379
 msgid "Please wait"
-msgstr ""
+msgstr "Подождите"
 
 #: readactivity.py:380
 msgid "Starting connection..."
-msgstr ""
+msgstr "Начинается подключение…"
 
 #: readactivity.py:388
 msgid "No book"
@@ -125,12 +125,12 @@ msgstr "Вся информация, связанная с этой заклад
 
 #: readactivity.py:954
 msgid "Receiving book..."
-msgstr ""
+msgstr "Получение книги…"
 
 #: readactivity.py:1032 readactivity.py:1227
 #, python-format
 msgid "%s (Page %d)"
-msgstr ""
+msgstr "%s (страница %d)"
 
 #: readtoolbar.py:61
 msgid "Previous"
@@ -186,11 +186,11 @@ msgstr "Полный экран"
 
 #: readtoolbar.py:252
 msgid "Rotate left"
-msgstr ""
+msgstr "Повернуть влево"
 
 #: readtoolbar.py:258
 msgid "Rotate right"
-msgstr ""
+msgstr "Повернуть вправо"
 
 #: readtoolbar.py:324
 msgid "Show Tray"
@@ -229,11 +229,11 @@ msgstr "Закладка страницы %d"
 
 #: comicadapter.py:69
 msgid "Can not read Comic Book Archive"
-msgstr ""
+msgstr "Невозможно прочитать архив книги комиксов"
 
 #: comicadapter.py:70
 msgid "No readable images were found"
-msgstr ""
+msgstr "Доступные для чтения изображения не найдены"
 
 #, python-format
 #~ msgid "Page %d"

@@ -1,3 +1,9 @@
+120
+
+* Fix use of Gst.Message.structure (James Cameron),
+* Port from GConf (James Cameron),
+* New translations (Chris Leonard et al).
+
 119
 
 * New translations (Chris Leonard, et al)

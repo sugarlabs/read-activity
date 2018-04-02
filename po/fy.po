@@ -2,255 +2,227 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-24 17:39+1100\n"
-"PO-Revision-Date: 2018-02-03 21:13+0000\n"
-"Last-Translator: Besnik_b <besnik@programeshqip.org>\n"
+"PO-Revision-Date: 2017-12-15 18:48+0000\n"
+"Last-Translator: Berend <berendy@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: sq\n"
+"Language: fy\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.1.1\n"
-"X-POOTLE-MTIME: 1517692424.000000\n"
+"X-POOTLE-MTIME: 1513363716.000000\n"
 
 #: activity/activity.info:2
 msgid "Read"
-msgstr "Lexoni"
+msgstr "Lêze"
 
 #: activity/activity.info:3
 msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
 msgstr ""
-"Përdoreni këtë veprimtari kur jeni gati të lexoni diçka! Mos harroni ta "
-"rrotulloni kompjuterin tuaj, që t’ju duket se po mbani vërtet një libër në "
-"duar!"
+"Brûk dizze aktiviteit ast klear bist om te lêzen! Tink derom om dyn "
+"kompjûter sa no en dan om te slaan om it gefoel fan it fêsthâlden fan in "
+"echt boek te behâlden!"
 
 #: readdialog.py:52
 msgid "Cancel"
-msgstr "Anuloje"
+msgstr "Ofbrekke"
 
 #: readdialog.py:58
 msgid "Ok"
-msgstr "Ok"
+msgstr "Okee"
 
 #: readdialog.py:120
 msgid "<b>Title</b>:"
-msgstr "<b>Titull</b>:"
+msgstr "<b>Titel</b>:"
 
 #: readdialog.py:147
 msgid "<b>Author</b>:"
-msgstr "<b>Autor</b>:"
+msgstr "<b>Skriuwer</b>:"
 
 #: readdialog.py:163
 msgid "<b>Details</b>:"
-msgstr "<b>Hollësi</b>:"
+msgstr "<b>Details</b>:"
 
 #: evinceadapter.py:92
 msgid "URL from Read"
-msgstr "URL nga Lexoni"
+msgstr "URL-adres fan lêzen"
 
 #: speechtoolbar.py:57
 msgid "Play / Pause"
-msgstr "Luaje / Pushoje"
+msgstr "Ofspylje / Skoftsje"
 
 #: speechtoolbar.py:65
 msgid "Stop"
-msgstr "Ndale"
+msgstr "Ophâlde"
 
 #: readactivity.py:379
 msgid "Please wait"
-msgstr "Ju lutemi, pritni"
+msgstr "In amerijke"
 
 #: readactivity.py:380
 msgid "Starting connection..."
-msgstr "Po fillohet lidhja…"
+msgstr "Ferbining opbouwe..."
 
 #: readactivity.py:388
 msgid "No book"
-msgstr "S’ka libër"
+msgstr "Gjin boek"
 
 #: readactivity.py:388
 msgid "Choose something to read"
-msgstr "Zgjidhni diçka për lexim"
+msgstr "Kies wat om te lêzen"
 
 #: readactivity.py:393
 msgid "Back"
-msgstr "Mbrapsht"
+msgstr "Tebek"
 
 #: readactivity.py:397
 msgid "Previous page"
-msgstr "Faqja e mëparshme"
+msgstr "Foarige side"
 
 #: readactivity.py:399
 msgid "Previous bookmark"
-msgstr "Faqerojtësi i mëparshëm"
+msgstr "Foarige blêdwizer"
 
 #: readactivity.py:411
 msgid "Forward"
-msgstr "Përpara"
+msgstr "Folgjende"
 
 #: readactivity.py:415
 msgid "Next page"
-msgstr "Faqja pasuese"
+msgstr "Folgjende side"
 
 #: readactivity.py:417
 msgid "Next bookmark"
-msgstr "Faqerojtësi pasues"
+msgstr "Folgjende blêdwizer"
 
 #: readactivity.py:468
 msgid "Index"
-msgstr "Tregues"
+msgstr "Yndeks"
 
 #: readactivity.py:564
 msgid "Delete bookmark"
-msgstr "Fshije faqerojtësin"
+msgstr "Blêdwizer wiskje"
 
 #: readactivity.py:565
 msgid "All the information related with this bookmark will be lost"
-msgstr "Krejt të dhënat lidhur me këtë faqerojtës do të humbin"
+msgstr "Alle ynformaasje by dizze blêdwizer sil ferlern gean"
 
 #: readactivity.py:954
 msgid "Receiving book..."
-msgstr "Po merret libër…"
+msgstr "Untfang boek..."
 
 #: readactivity.py:1032 readactivity.py:1227
 #, python-format
 msgid "%s (Page %d)"
-msgstr "%s (Faqja %d)"
+msgstr "%s (Side %d)"
 
 #: readtoolbar.py:61
 msgid "Previous"
-msgstr "E mëparshmja"
+msgstr "Foarige"
 
 #: readtoolbar.py:68
 msgid "Next"
-msgstr "Pasuesja"
+msgstr "Folgjende"
 
 #: readtoolbar.py:79
 msgid "Highlight"
-msgstr "Theksoje"
+msgstr "Markearje"
 
 #: readtoolbar.py:160
 msgid "Find first"
-msgstr "Gjej të parin"
+msgstr "Folgjende side"
 
 #: readtoolbar.py:166
 msgid "Find previous"
-msgstr "Gjej të mëparshmin"
+msgstr "Foarige sykje"
 
 #: readtoolbar.py:168
 msgid "Find next"
-msgstr "Gjej pasuesin"
+msgstr "Folgjende sykje"
 
 #: readtoolbar.py:188
 msgid "Table of contents"
-msgstr "Pasqyrë e lëndës"
+msgstr "Ynhâldsopjefte"
 
 #: readtoolbar.py:197
 msgid "Zoom out"
-msgstr "Zvogëloje"
+msgstr "Zoom út"
 
 #: readtoolbar.py:203
 msgid "Zoom in"
-msgstr "Zmadhoje"
+msgstr "Zoom yn"
 
 #: readtoolbar.py:209
 msgid "Zoom to width"
-msgstr "Sa gjerësia e faqes"
+msgstr "Zoom neffens breedte"
 
 #: readtoolbar.py:215
 msgid "Zoom to fit"
-msgstr "Sa ta nxërë"
+msgstr "Zoom nei hiele side"
 
 #: readtoolbar.py:221
 msgid "Actual size"
-msgstr "Madhësi faktike"
+msgstr "Wiere grutte"
 
 #: readtoolbar.py:232
 msgid "Fullscreen"
-msgstr "Sa krejt ekrani"
+msgstr "Folslein skerm"
 
 #: readtoolbar.py:252
 msgid "Rotate left"
-msgstr "Rrotulloje majtas"
+msgstr "Links rotearje"
 
 #: readtoolbar.py:258
 msgid "Rotate right"
-msgstr "Rrotulloje djathtas"
+msgstr "Rjochts rotearje"
 
 #: readtoolbar.py:324
 msgid "Show Tray"
-msgstr "Shfaq Panelin"
+msgstr "Plato sjen litte"
 
 #: readtoolbar.py:326
 msgid "Hide Tray"
-msgstr "Fshihe Panelin"
+msgstr "Plato ferbergje"
 
 #: linkbutton.py:133
 msgid "Go to Bookmark"
-msgstr "Shko te Faqerojtësi"
+msgstr "Gean nei blêdwizer"
 
 #: linkbutton.py:139
 msgid "Remove"
-msgstr "Hiqe"
+msgstr "Wiskje"
 
 #: bookmarkview.py:107
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
-msgstr "Faqerojtës i shtuar nga %(user)s %(time)s"
+msgstr "Blêdwizer taheakke troch %(user)s %(time)s"
 
 #: bookmarkview.py:143 bookmarkview.py:192
 msgid "Add notes for bookmark: "
-msgstr "Shtoni shënime për faqerojtës: "
+msgstr "Notysjes foar blêdwizer taheakje: "
 
 #: bookmarkview.py:188
 #, python-format
 msgid "%s's bookmark"
-msgstr "Faqerojtësit e %s"
+msgstr "%s's blêdwizer"
 
 #: bookmarkview.py:189
 #, python-format
 msgid "Bookmark for page %d"
-msgstr "Faqerojtës për faqen %d"
+msgstr "Blêdwizer foar side %d"
 
 #: comicadapter.py:69
 msgid "Can not read Comic Book Archive"
-msgstr "S’lexohet dot te Comic Book Archive"
+msgstr "Kin it stripboek argyf net lêze"
 
 #: comicadapter.py:70
 msgid "No readable images were found"
-msgstr "S’u gjetën figura të lexueshme"
-
-#, python-format
-#~ msgid "Page %d"
-#~ msgstr "Faqja %d"
-
-#~ msgid "%"
-#~ msgstr "%"
-
-#~ msgid "Choose document"
-#~ msgstr "Zgjidhe dokumentin"
-
-#, python-format
-#~ msgid "Page %i of %i"
-#~ msgstr "Faqe %i e %i"
-
-#~ msgid "Edit"
-#~ msgstr "Ndrysho"
-
-#~ msgid "View"
-#~ msgstr "Shikim"
+msgstr "Gjin te lêzen ôfbyldings binne fûn"

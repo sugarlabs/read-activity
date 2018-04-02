@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-24 17:39+1100\n"
-"PO-Revision-Date: 2017-06-10 11:29+0000\n"
-"Last-Translator: belkacem77 <belkacem77@gmail.com>\n"
+"PO-Revision-Date: 2017-12-06 14:53+0000\n"
+"Last-Translator: hociben <hociben@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: kab\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.1.1\n"
-"X-POOTLE-MTIME: 1497094194.000000\n"
+"X-POOTLE-MTIME: 1512572038.000000\n"
 
 #: activity/activity.info:2
 msgid "Read"
@@ -88,19 +88,19 @@ msgstr "Asebter yezrin"
 
 #: readactivity.py:399
 msgid "Previous bookmark"
-msgstr ""
+msgstr "Ticreḍt n deffir"
 
 #: readactivity.py:411
 msgid "Forward"
-msgstr ""
+msgstr "Ɣer zdat"
 
 #: readactivity.py:415
 msgid "Next page"
-msgstr ""
+msgstr "Asebter ɣer zdat"
 
 #: readactivity.py:417
 msgid "Next bookmark"
-msgstr ""
+msgstr "Ticreḍt n zdat"
 
 #: readactivity.py:468
 msgid "Index"
@@ -108,11 +108,11 @@ msgstr ""
 
 #: readactivity.py:564
 msgid "Delete bookmark"
-msgstr ""
+msgstr "Kkes ticreḍt"
 
 #: readactivity.py:565
 msgid "All the information related with this bookmark will be lost"
-msgstr ""
+msgstr "Talɣut akk yerzan ticreḍt-agi ad truḥ"
 
 #: readactivity.py:954
 msgid "Receiving book..."
@@ -121,23 +121,23 @@ msgstr ""
 #: readactivity.py:1032 readactivity.py:1227
 #, python-format
 msgid "%s (Page %d)"
-msgstr ""
+msgstr "%s (Asebter %d)"
 
 #: readtoolbar.py:61
 msgid "Previous"
-msgstr ""
+msgstr "Send"
 
 #: readtoolbar.py:68
 msgid "Next"
-msgstr ""
+msgstr "Seld"
 
 #: readtoolbar.py:79
 msgid "Highlight"
-msgstr ""
+msgstr "Asebrureq"
 
 #: readtoolbar.py:160
 msgid "Find first"
-msgstr ""
+msgstr "Af-d d amezwaru"
 
 #: readtoolbar.py:166
 msgid "Find previous"
@@ -149,7 +149,7 @@ msgstr ""
 
 #: readtoolbar.py:188
 msgid "Table of contents"
-msgstr ""
+msgstr "Agbur"
 
 #: readtoolbar.py:197
 msgid "Zoom out"
@@ -193,11 +193,11 @@ msgstr ""
 
 #: linkbutton.py:133
 msgid "Go to Bookmark"
-msgstr ""
+msgstr "Ddu ɣer ticreḍt "
 
 #: linkbutton.py:139
 msgid "Remove"
-msgstr ""
+msgstr "Kkes"
 
 #: bookmarkview.py:107
 #, python-format

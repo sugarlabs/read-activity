@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-24 17:39+1100\n"
-"PO-Revision-Date: 2011-12-18 22:47+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"PO-Revision-Date: 2017-12-03 16:41+0000\n"
+"Last-Translator: Martin <miles@filmsi.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3);\n"
-"X-Generator: Pootle 2.0.5\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1512319274.000000\n"
 
 #: activity/activity.info:2
 msgid "Read"
@@ -35,6 +36,8 @@ msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
 msgstr ""
+"Uporabi to dejavnost, ko želiš brati! Ne pozabiti obrniti računalnika "
+"pokonci, da dobiš občutek, da v roki držiš knjigo!"
 
 #: readdialog.py:52
 msgid "Cancel"
@@ -50,7 +53,7 @@ msgstr "<b>Naslov</b>:"
 
 #: readdialog.py:147
 msgid "<b>Author</b>:"
-msgstr ""
+msgstr "<b>Avtor</b>:"
 
 #: readdialog.py:163
 msgid "<b>Details</b>:"
@@ -58,7 +61,7 @@ msgstr "<b>Podrobnosti</b>:"
 
 #: evinceadapter.py:92
 msgid "URL from Read"
-msgstr ""
+msgstr "URL iz Beri"
 
 #: speechtoolbar.py:57
 msgid "Play / Pause"
@@ -66,23 +69,23 @@ msgstr "Predvajaj / Premor"
 
 #: speechtoolbar.py:65
 msgid "Stop"
-msgstr ""
+msgstr "Ustavi"
 
 #: readactivity.py:379
 msgid "Please wait"
-msgstr ""
+msgstr "Počakaj malo"
 
 #: readactivity.py:380
 msgid "Starting connection..."
-msgstr ""
+msgstr "Povezava se vzpostavlja ..."
 
 #: readactivity.py:388
 msgid "No book"
-msgstr ""
+msgstr "Ni knjige"
 
 #: readactivity.py:388
 msgid "Choose something to read"
-msgstr ""
+msgstr "Izberi nekaj za branje"
 
 #: readactivity.py:393
 msgid "Back"
@@ -110,24 +113,24 @@ msgstr "Naslednji zaznamek"
 
 #: readactivity.py:468
 msgid "Index"
-msgstr ""
+msgstr "Kazalo"
 
 #: readactivity.py:564
 msgid "Delete bookmark"
-msgstr ""
+msgstr "Izbriši zaznamek"
 
 #: readactivity.py:565
 msgid "All the information related with this bookmark will be lost"
-msgstr ""
+msgstr "Vsi podatki o tem zaznamku bodo izgubljeni"
 
 #: readactivity.py:954
 msgid "Receiving book..."
-msgstr ""
+msgstr "Prejemanje knjige ..."
 
 #: readactivity.py:1032 readactivity.py:1227
 #, python-format
 msgid "%s (Page %d)"
-msgstr ""
+msgstr "%s (stran %d)"
 
 #: readtoolbar.py:61
 msgid "Previous"
@@ -155,7 +158,7 @@ msgstr "Najdi naslednjega"
 
 #: readtoolbar.py:188
 msgid "Table of contents"
-msgstr ""
+msgstr "Kazalo vsebine"
 
 #: readtoolbar.py:197
 msgid "Zoom out"
@@ -183,27 +186,27 @@ msgstr "Cel zaslon"
 
 #: readtoolbar.py:252
 msgid "Rotate left"
-msgstr ""
+msgstr "Zasukaj levo"
 
 #: readtoolbar.py:258
 msgid "Rotate right"
-msgstr ""
+msgstr "Zasukaj desno"
 
 #: readtoolbar.py:324
 msgid "Show Tray"
-msgstr ""
+msgstr "Pokaži pladenj"
 
 #: readtoolbar.py:326
 msgid "Hide Tray"
-msgstr ""
+msgstr "Skrij pladenj"
 
 #: linkbutton.py:133
 msgid "Go to Bookmark"
-msgstr ""
+msgstr "Pojdi na zaznamek"
 
 #: linkbutton.py:139
 msgid "Remove"
-msgstr ""
+msgstr "Odstrani"
 
 #: bookmarkview.py:107
 #, python-format
@@ -226,11 +229,11 @@ msgstr "Zaznamek za stran %d"
 
 #: comicadapter.py:69
 msgid "Can not read Comic Book Archive"
-msgstr ""
+msgstr "Ni mogoče brati iz Comic Book Archive"
 
 #: comicadapter.py:70
 msgid "No readable images were found"
-msgstr ""
+msgstr "Nobenih berljivih slik ni mogoče najti"
 
 #, python-format
 #~ msgid "Page %(current)i of %(total_pages)i"
