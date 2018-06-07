@@ -196,7 +196,7 @@ class BookmarkView(Gtk.EventBox):
         dialog.show_all()
 
     def _real_add_bookmark(self, page, content):
-        self._bookmark_manager.add_bookmark(page, unicode(content))
+        self._bookmark_manager.add_bookmark(page, str(content))
         self.update_for_page(page)
 
     def del_bookmark(self, page):

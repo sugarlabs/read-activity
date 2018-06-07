@@ -2,7 +2,7 @@
 name = Read
 bundle_id = org.laptop.sugar.ReadActivity
 icon = activity-read
-exec = sugar-activity readactivity.ReadActivity
+exec = sugar-activity3 readactivity.ReadActivity
 activity_version = 122
 mime_types = application/pdf;image/vnd.djvu;image/x.djvu;image/tiff;application/epub+zip;text/plain;application/zip;application/x-cbz
 max_participants = 10

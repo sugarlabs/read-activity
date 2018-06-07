@@ -149,7 +149,7 @@ class TextViewer(GObject.GObject):
                 break
             else:
                 line = _clean_text(line)
-                label_text = label_text + unicode(line, "iso-8859-1")
+                label_text = label_text + str(line,  "iso-8859-1")
             line_increment = (len(line) / 80) + 1
             linecount = linecount + line_increment
         textbuffer = self.textview.get_buffer()
@@ -283,7 +283,7 @@ class TextViewer(GObject.GObject):
             marked_up_text = marked_up_text + \
               ' <mark name="' + str(i) + '"/>' + word_tuple[2]
             i = i + 1
-        print marked_up_text
+        print(marked_up_text)
         return marked_up_text + '</speak>'
 
     def reset_text_to_speech(self):
@@ -294,8 +294,8 @@ class TextViewer(GObject.GObject):
         j = 0
         word_begin = 0
         word_end = 0
-        ignore_chars = [' ', '\n', u'\r', '_', '[', '{', ']', '}', '|',
-                        '<', '>', '*', '+', '/', '\\']
+        ignore_chars = [' ',  '\n',  '\r',  '_',  '[', '{', ']', '}', '|',
+                        '<',  '>',  '*',  '+',  '/',  '\\']
         ignore_set = set(ignore_chars)
         self.word_tuples = []
         len_page_text = len(page_text)
@@ -309,7 +309,7 @@ class TextViewer(GObject.GObject):
                     i = j
                 word_tuple = (word_begin, word_end,
                               page_text[word_begin: word_end])
-                if word_tuple[2] != u'\r':
+                if word_tuple[2] != '\r':
                     self.word_tuples.append(word_tuple)
             i = i + 1
 
@@ -590,7 +590,7 @@ class _SearchThread(threading.Thread):
         self._current_found_item = -1
         self.obj._text_file.seek(0)
         while self.obj._text_file:
-            line = unicode(self.obj._text_file.readline(), "iso-8859-1")
+            line = str(self.obj._text_file.readline(), "iso-8859-1")
             line = _clean_text(line)
             line_length = len(line)
             if not line:
