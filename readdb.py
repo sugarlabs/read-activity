@@ -37,8 +37,6 @@ def _init_db():
     dbpath = os.path.join(dbdir, 'read_v1.db')
     olddbpath = os.path.join(dbdir, 'read.db')
 
-    srcpath = os.path.join(os.environ['SUGAR_BUNDLE_PATH'], 'read_v1.db')
-
     # Situation 0: Db is existent
     if os.path.exists(dbpath):
         return dbpath

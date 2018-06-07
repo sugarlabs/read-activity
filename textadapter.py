@@ -196,8 +196,8 @@ class TextViewer(GObject.GObject):
             self._current_page = int(value)
             self.emit('page-changed', old_page, self._current_page)
         else:
-            print 'Warning: unknown scrolltype %s with value %f' \
-                % (str(scrolltype), value)
+            print('Warning: unknown scrolltype %s with value %f'
+                  % (str(scrolltype), value))
 
         # FIXME: This should not be needed here
         self._scrollbar.set_value(self._current_page)
@@ -436,7 +436,7 @@ class TextViewer(GObject.GObject):
     def get_has_selection(self):
         return self._has_selection
 
-    def find_set_highlight_search(self, True):
+    def find_set_highlight_search(self, boolean):
         pass
 
     def setup_find_job(self, text, _find_updated_cb):
