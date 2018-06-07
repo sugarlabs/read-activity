@@ -114,7 +114,7 @@ class BookmarkManager(GObject.GObject):
         _init_db_highlights(self._conn)
         _init_db_previews(self._conn)
 
-        self._conn.text_factory = lambda x: unicode(x, "utf-8", "ignore")
+        self._conn.text_factory = lambda x: str(x, "utf-8", "ignore")
 
         self._bookmarks = []
         self._populate_bookmarks()
@@ -267,7 +267,7 @@ class BookmarkManager(GObject.GObject):
         return self._highlights
 
     def update_highlights(self, highlights_dict):
-        for page in highlights_dict.keys():
+        for page in list(highlights_dict.keys()):
             # json store the keys as strings
             # but the page is used as a int in all the code
             highlights_in_page = highlights_dict[page]

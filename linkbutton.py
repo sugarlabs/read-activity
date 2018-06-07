@@ -19,7 +19,7 @@ from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import GObject
 
-import StringIO
+import io
 import cairo
 from gettext import gettext as _
 
@@ -42,7 +42,7 @@ class LinkButton(TrayButton, GObject.GObject):
         # Color read from the Journal may be Unicode, but Rsvg needs
         # it as single byte string:
         self._color = color
-        if isinstance(color, unicode):
+        if isinstance(color, str):
             self._color = str(color)
         self._have_preview = False
         if buf is not None:
@@ -61,7 +61,7 @@ class LinkButton(TrayButton, GObject.GObject):
         stroke = self._color.split(',')[0]
         self._have_preview = True
         img = Gtk.Image()
-        str_buf = StringIO.StringIO(buf)
+        str_buf = io.StringIO(buf)
         thumb_surface = cairo.ImageSurface.create_from_png(str_buf)
 
         bg_width, bg_height = style.zoom(120), style.zoom(110)

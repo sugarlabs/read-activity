@@ -22,8 +22,8 @@ import os
 import time
 from gettext import gettext as _
 import re
-import md5
-import StringIO
+import hashlib
+import io
 import cairo
 import json
 
@@ -94,7 +94,7 @@ def get_md5(filename):
     # FIXME: Should be moved somewhere else
     filename = filename.replace('file://', '')  # XXX: hack
     fh = open(filename)
-    digest = md5.new()
+    digest = hashlib.md5()
     while 1:
         buf = fh.read(4096)
         if buf == "":
@@ -679,7 +679,7 @@ class ReadActivity(activity.Activity):
                               chooser.get_selected_object())
                 jobject = chooser.get_selected_object()
                 if jobject and jobject.file_path:
-                    for key in jobject.metadata.keys():
+                    for key in list(jobject.metadata.keys()):
                         self.metadata[key] = jobject.metadata[key]
                     self.read_file(jobject.file_path)
                     jobject.object_id = self._object_id
@@ -763,7 +763,7 @@ class ReadActivity(activity.Activity):
             self.metadata['Read_search'] = \
                 self._edit_toolbar._search_entry.props.text
 
-        except Exception, e:
+        except Exception as e:
             _logger.error('write_file(): %s', e)
 
         self.metadata['Read_search'] = \
@@ -861,7 +861,7 @@ class ReadActivity(activity.Activity):
 
     def _open_downloaded_file(self, shared_metadata):
         self._jobject = datastore.get(self._jobject.object_id)
-        for key in shared_metadata.keys():
+        for key in list(shared_metadata.keys()):
             self.metadata[key] = shared_metadata[key]
 
         self.read_file(self._jobject.file_path)
@@ -904,7 +904,7 @@ class ReadActivity(activity.Activity):
         assert isinstance(addr, dbus.Struct)
         assert len(addr) == 2
         assert isinstance(addr[0], str)
-        assert isinstance(addr[1], (int, long))
+        assert isinstance(addr[1], int)
         assert addr[1] > 0 and addr[1] < 65536
         ip = addr[0]
         port = int(addr[1])
@@ -939,7 +939,7 @@ class ReadActivity(activity.Activity):
         # Pick an arbitrary tube we can try to download the document from
         try:
             tube_id = self.unused_download_tubes.pop()
-        except (ValueError, KeyError), e:
+        except (ValueError, KeyError) as e:
             _logger.debug('No tubes to get the document from right now: %s',
                           e)
             return False
@@ -1063,7 +1063,7 @@ class ReadActivity(activity.Activity):
             if self.get_shared():
                 self.watch_for_tubes()
                 self._share_document()
-        except Exception, e:
+        except Exception as e:
             _logger.debug('Sharing failed: %s', e)
 
     def _update_toolbars(self):
@@ -1102,7 +1102,7 @@ class ReadActivity(activity.Activity):
         metadata_file_path = self._tempfile + '.json'
 
         shared_metadata = {}
-        for key in self.metadata.keys():
+        for key in list(self.metadata.keys()):
             if key not in ['preview', 'cover_image']:
                 shared_metadata[str(key)] = self.metadata[key]
         logging.debug('save metadata in %s', metadata_file_path)
@@ -1322,6 +1322,6 @@ class ReadActivity(activity.Activity):
         cr.set_source_surface(screenshot_surface)
         cr.paint()
 
-        preview_str = StringIO.StringIO()
+        preview_str = io.StringIO()
         preview_surface.write_to_png(preview_str)
         return preview_str.getvalue()
