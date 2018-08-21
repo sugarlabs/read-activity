@@ -24,8 +24,7 @@ from sugar3.graphics.toolbutton import ToolButton
 from sugar3.graphics.toggletoolbutton import ToggleToolButton
 from sugar3.graphics.combobox import ComboBox
 from sugar3.graphics.toolcombobox import ToolComboBox
-
-import speech
+from sugar3.speech import SpeechManager
 
 
 class SpeechToolbar(Gtk.Toolbar):
@@ -33,57 +32,74 @@ class SpeechToolbar(Gtk.Toolbar):
     def __init__(self, activity):
         Gtk.Toolbar.__init__(self)
         self._activity = activity
-        if not speech.supported:
-            return
-        self.is_paused = False
+        self._speech = SpeechManager()
+        self._is_paused = False
 
         self.load_speech_parameters()
 
-        self.sorted_voices = [i for i in speech.voices()]
-        self.sorted_voices.sort(self.compare_voices)
-        default = 0
-        for voice in self.sorted_voices:
-            if voice[0] == speech.voice[0]:
-                break
-            default = default + 1
+        self._voices = self._speech.get_all_voices()  # a dictionary
+
+        locale = os.environ.get('LANG', '')
+        language_location = locale.split('.', 1)[0].lower()
+        language = language_location.split('_')[0]
+        # if the language is es but not es_es default to es_la (latin voice)
+        if language == 'es' and language_location != 'es_es':
+            language_location = 'es_la'
+
+        self._voice = 'en_us'
+        if language_location in self._voices:
+            self._voice = language_location
+        elif language in self._voices:
+            self._voice = language
+
+        voice_names = []
+        for language, name in self._voices.iteritems():
+            voice_names.append((language, name))
+        voice_names.sort(self._compare_voice)
 
         # Play button
-        self.play_btn = ToggleToolButton('media-playback-start')
-        self.play_btn.show()
-        self.play_btn.connect('toggled', self.play_cb)
-        self.insert(self.play_btn, -1)
-        self.play_btn.set_tooltip(_('Play / Pause'))
+        self._play_button = ToggleToolButton('media-playback-start')
+        self._play_button.show()
+        self._play_button.connect('toggled', self._play_toggled_cb)
+        self.insert(self._play_button, -1)
+        self._play_button.set_tooltip(_('Play / Pause'))
 
         # Stop button
-        self.stop_btn = ToolButton('media-playback-stop')
-        self.stop_btn.show()
-        self.stop_btn.connect('clicked', self.stop_cb)
-        self.stop_btn.set_sensitive(False)
-        self.insert(self.stop_btn, -1)
-        self.stop_btn.set_tooltip(_('Stop'))
+        self._stop_button = ToolButton('media-playback-stop')
+        self._stop_button.show()
+        self._stop_button.connect('clicked', self._stop_clicked_cb)
+        self._stop_button.set_sensitive(False)
+        self.insert(self._stop_button, -1)
+        self._stop_button.set_tooltip(_('Stop'))
 
-        self.voice_combo = ComboBox()
-        for voice in self.sorted_voices:
-            self.voice_combo.append_item(voice, voice[0])
-        self.voice_combo.set_active(default)
+        # Language list
+        combo = ComboBox()
+        which = 0
+        for pair in voice_names:
+            language, name = pair
+            combo.append_item(language, name)
+            if language == self._voice:
+                combo.set_active(which)
+            which += 1
 
-        self.voice_combo.connect('changed', self.voice_changed_cb)
-        combotool = ToolComboBox(self.voice_combo)
+        combo.connect('changed', self._voice_changed_cb)
+        combotool = ToolComboBox(combo)
         self.insert(combotool, -1)
         combotool.show()
-        speech.reset_buttons_cb = self.reset_buttons_cb
 
-    def compare_voices(self, a, b):
-        if a[0].lower() == b[0].lower():
+        self._speech.connect('stop', self._reset_buttons_cb)
+
+    def _compare_voice(self, a, b):
+        if a[1].lower() == b[1].lower():
             return 0
-        if a[0] .lower() < b[0].lower():
+        if a[1].lower() < b[1].lower():
             return -1
-        if a[0] .lower() > b[0].lower():
+        if a[1].lower() > b[1].lower():
             return 1
 
-    def voice_changed_cb(self, combo):
-        speech.voice = combo.props.value
-        speech.say(speech.voice[0])
+    def _voice_changed_cb(self, combo):
+        self._voice = combo.props.value
+        self._speech.say_text(self._voices[self._voice])
         self.save_speech_parameters()
 
     def load_speech_parameters(self):
@@ -94,13 +110,13 @@ class SpeechToolbar(Gtk.Toolbar):
             f = open(data_file_name, 'r')
             try:
                 speech_parameters = json.load(f)
-                speech.voice = speech_parameters['voice']
+                self._voice = speech_parameters['voice']
             finally:
                 f.close()
 
     def save_speech_parameters(self):
         speech_parameters = {}
-        speech_parameters['voice'] = speech.voice
+        speech_parameters['voice'] = self._voice
         data_path = os.path.join(self._activity.get_activity_root(), 'data')
         data_file_name = os.path.join(data_path, 'speech_params.json')
         f = open(data_file_name, 'w')
@@ -109,27 +125,29 @@ class SpeechToolbar(Gtk.Toolbar):
         finally:
             f.close()
 
-    def reset_buttons_cb(self):
-        self.play_btn.set_icon_name('media-playback-start')
-        self.stop_btn.set_sensitive(False)
-        self.is_paused = False
+    def _reset_buttons_cb(self, widget=None):
+        self._play_button.set_icon_name('media-playback-start')
+        self._stop_button.set_sensitive(False)
+        self._is_paused = False
 
-    def play_cb(self, widget):
-        self.stop_btn.set_sensitive(True)
+    def _play_toggled_cb(self, widget):
+        self._stop_button.set_sensitive(True)
         if widget.get_active():
-            self.play_btn.set_icon_name('media-playback-pause')
-            if not self.is_paused:
-                speech.play(self._activity._view.get_marked_words())
+            self._play_button.set_icon_name('media-playback-pause')
+            if not self._is_paused:
+                self._speech.say_text(
+                    self._activity._view.get_marked_words(),
+                    lang_code=self._voice)
             else:
-                speech.continue_play()
+                self._speech.restart()
         else:
-            self.play_btn.set_icon_name('media-playback-start')
-            self.is_paused = True
-            speech.pause()
+            self._play_button.set_icon_name('media-playback-start')
+            self._is_paused = True
+            self._speech.pause()
 
-    def stop_cb(self, widget):
-        self.stop_btn.set_sensitive(False)
-        self.play_btn.set_icon_name('media-playback-start')
-        self.play_btn.set_active(False)
-        self.is_paused = False
-        speech.stop()
+    def _stop_clicked_cb(self, widget):
+        self._stop_button.set_sensitive(False)
+        self._play_button.set_icon_name('media-playback-start')
+        self._play_button.set_active(False)
+        self._is_paused = False
+        self._speech.stop()
