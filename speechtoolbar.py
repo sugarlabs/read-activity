@@ -73,7 +73,7 @@ class SpeechToolbar(Gtk.Toolbar):
         combotool.show()
         speech.reset_buttons_cb = self.reset_buttons_cb
 
-    def compare_voices(self,  a,  b):
+    def compare_voices(self, a, b):
         if a[0].lower() == b[0].lower():
             return 0
         if a[0] .lower() < b[0].lower():

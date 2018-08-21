@@ -97,7 +97,7 @@ class TextViewer(GObject.GObject):
         self.spoken_word_tag = self.textview.get_buffer().create_tag()
         self.spoken_word_tag.set_property('weight', Pango.Weight.BOLD)
         self.normal_tag = self.textview.get_buffer().create_tag()
-        self.normal_tag.set_property('weight',  Pango.Weight.NORMAL)
+        self.normal_tag.set_property('weight', Pango.Weight.NORMAL)
 
     def load_document(self, file_path):
 
@@ -150,7 +150,7 @@ class TextViewer(GObject.GObject):
                 break
             else:
                 line = _clean_text(line)
-                label_text = label_text + unicode(line,  "iso-8859-1")
+                label_text = label_text + unicode(line, "iso-8859-1")
             line_increment = (len(line) / 80) + 1
             linecount = linecount + line_increment
         textbuffer = self.textview.get_buffer()
@@ -295,8 +295,8 @@ class TextViewer(GObject.GObject):
         j = 0
         word_begin = 0
         word_end = 0
-        ignore_chars = [' ',  '\n',  u'\r',  '_',  '[', '{', ']', '}', '|',
-                        '<',  '>',  '*',  '+',  '/',  '\\']
+        ignore_chars = [' ', '\n', u'\r', '_', '[', '{', ']', '}', '|',
+                        '<', '>', '*', '+', '/', '\\']
         ignore_set = set(ignore_chars)
         self.word_tuples = []
         len_page_text = len(page_text)
@@ -314,14 +314,14 @@ class TextViewer(GObject.GObject):
                     self.word_tuples.append(word_tuple)
             i = i + 1
 
-    def highlight_next_word(self,  word_count):
+    def highlight_next_word(self, word_count):
         if word_count < len(self.word_tuples):
             word_tuple = self.word_tuples[word_count]
             textbuffer = self.textview.get_buffer()
             iterStart = textbuffer.get_iter_at_offset(word_tuple[0])
             iterEnd = textbuffer.get_iter_at_offset(word_tuple[1])
             bounds = textbuffer.get_bounds()
-            textbuffer.apply_tag(self.normal_tag,  bounds[0], iterStart)
+            textbuffer.apply_tag(self.normal_tag, bounds[0], iterStart)
             textbuffer.apply_tag(self.spoken_word_tag, iterStart, iterEnd)
             v_adjustment = self._sw.get_vadjustment()
             max_pos = v_adjustment.get_upper() - v_adjustment.get_page_size()
@@ -622,7 +622,7 @@ class _SearchThread(threading.Thread):
 
         return False
 
-    def _allindices(self,  line, search, listindex=None,  offset=0):
+    def _allindices(self, line, search, listindex=None, offset=0):
         if listindex is None:
             listindex = []
         if (line.find(search) == -1):
