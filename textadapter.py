@@ -104,7 +104,7 @@ class TextViewer(GObject.GObject):
         file_name = file_path.replace('file://', '')
         mimetype = mime.get_for_file(file_path)
         if mimetype == 'application/zip':
-            logging.error('opening zip file')
+            logging.debug('opening zip file')
             self.zf = zipfile.ZipFile(file_path.replace('file://', ''), 'r')
             self.book_files = self.zf.namelist()
             extract_path = os.path.join(self._activity.get_activity_root(),
@@ -114,7 +114,7 @@ class TextViewer(GObject.GObject):
                     self.zf.extract(book_file, extract_path)
                     file_name = os.path.join(extract_path, book_file)
 
-        logging.error('opening file_name %s' % file_name)
+        logging.debug('opening file_name %s' % file_name)
         self._etext_file = open(file_name, 'r')
 
         self.page_index = [0]
@@ -339,7 +339,7 @@ class TextViewer(GObject.GObject):
         self.metadata = activity.metadata
         if 'Read_zoom' in self.metadata:
             try:
-                logging.error('Loading zoom %s', self.metadata['Read_zoom'])
+                logging.debug('Loading zoom %s', self.metadata['Read_zoom'])
                 self.set_zoom(float(self.metadata['Read_zoom']))
             except:
                 pass
