@@ -510,10 +510,10 @@ class ReadActivity(activity.Activity):
 
     def __toogle_tray_cb(self, button, visible):
         if visible:
-            logging.error('Show tray')
+            logging.debug('Show tray')
             self.tray.show()
         else:
-            logging.error('Hide tray')
+            logging.debug('Hide tray')
             self.tray.hide()
 
     def __num_page_entry_insert_text_cb(self, entry, text, length, position):
@@ -1025,7 +1025,7 @@ class ReadActivity(activity.Activity):
             page = bookmark.page_no
             thumb = self._bookmarkmanager.get_bookmark_preview(page)
             if thumb is None:
-                logging.error('Preview NOT FOUND')
+                logging.debug('Preview NOT FOUND')
                 thumb = self._get_screenshot()
             # The database is zero based
             num_page = int(page) + 1
@@ -1103,7 +1103,7 @@ class ReadActivity(activity.Activity):
         for key in self.metadata.keys():
             if key not in ['preview', 'cover_image']:
                 shared_metadata[str(key)] = self.metadata[key]
-        logging.error('save metadata in %s', metadata_file_path)
+        logging.debug('save metadata in %s', metadata_file_path)
         with open(metadata_file_path, 'w') as json_file:
             json.dump(shared_metadata, json_file)
         return metadata_file_path
@@ -1223,7 +1223,7 @@ class ReadActivity(activity.Activity):
         self.fullscreen()
 
     def _added_bookmark_cb(self, bookmarkmanager, page, title):
-        logging.error('Bookmark added page %d', page)
+        logging.debug('Bookmark added page %d', page)
         title = _('%s (Page %d)') % (title, page)
         color = profile.get_color().to_string()
         owner = profile.get_nick_name()
@@ -1232,7 +1232,7 @@ class ReadActivity(activity.Activity):
         bookmarkmanager.add_bookmark_preview(page - 1, thumb)
 
     def _removed_bookmark_cb(self, bookmarkmanager, page):
-        logging.error('Bookmark removed page %d', page)
+        logging.debug('Bookmark removed page %d', page)
         # remove button from tray
         for button in self.tray.get_children():
             if button.page == page:
