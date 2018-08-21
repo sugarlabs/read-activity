@@ -1,3 +1,15 @@
+121
+
+* Add README.md (Rudra Sadhu),
+* Flake8 fixes (Rahul Bothra),
+* Update metadata (Rahul Bothra),
+* Add metedata, license copies and screenshot (Vipul Gupta),
+* Port from GObject to GLib (James Cameron),
+* Move PyGObject API version check to main program (James Cameron),
+* Port to TelepathyGLib (James Cameron),
+* Remove some log warnings and errors (James Cameron),
+* Port to sugar3.speech (James Cameron).
+
 120
 
 * Fix use of Gst.Message.structure (James Cameron),
