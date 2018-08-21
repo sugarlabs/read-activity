@@ -53,6 +53,7 @@ from sugar3.graphics.alert import Alert
 from sugar3.activity.widgets import ActivityToolbarButton
 from sugar3.activity.widgets import StopButton
 from sugar3.graphics.tray import HTray
+from sugar3.graphics.menuitem import MenuItem
 from sugar3 import network
 from sugar3 import mime
 from sugar3 import profile
@@ -71,8 +72,8 @@ from readtoolbar import EditToolbar
 from readtoolbar import ViewToolbar
 from bookmarkview import BookmarkView
 from readdb import BookmarkManager
-from sugar3.graphics.menuitem import MenuItem
 from linkbutton import LinkButton
+from speechtoolbar import SpeechToolbar
 
 _HARDWARE_MANAGER_INTERFACE = 'org.laptop.HardwareManager'
 _HARDWARE_MANAGER_SERVICE = 'org.laptop.HardwareManager'
@@ -1069,12 +1070,9 @@ class ReadActivity(activity.Activity):
         if self._view.can_highlight():
             self._highlight.show()
         if self._view.can_do_text_to_speech():
-            import speech
-            from speechtoolbar import SpeechToolbar
-            if speech.supported:
-                self.speech_toolbar = SpeechToolbar(self)
-                self.speech_toolbar_button.set_page(self.speech_toolbar)
-                self.speech_toolbar_button.show()
+            self.speech_toolbar = SpeechToolbar(self)
+            self.speech_toolbar_button.set_page(self.speech_toolbar)
+            self.speech_toolbar_button.show()
 
     def _share_document(self):
         """Share the document."""
