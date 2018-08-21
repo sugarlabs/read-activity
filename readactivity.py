@@ -30,6 +30,7 @@ import json
 import emptypanel
 
 import dbus
+from gi.repository import GLib
 from gi.repository import GObject
 from gi.repository import Gtk
 from gi.repository import Gdk
@@ -685,9 +686,9 @@ class ReadActivity(activity.Activity):
         if self.props.active:
             # Now active, start initial suspend timeout
             if self._idle_timer > 0:
-                GObject.source_remove(self._idle_timer)
-            self._idle_timer = GObject.timeout_add_seconds(15,
-                                                           self._suspend_cb)
+                GLib.source_remove(self._idle_timer)
+            self._idle_timer = GLib.timeout_add_seconds(15,
+                                                        self._suspend_cb)
             self._sleep_inhibit = False
         else:
             # Now inactive
@@ -705,8 +706,8 @@ class ReadActivity(activity.Activity):
     def _user_action_cb(self, widget):
         """Set a timer for going back to ebook mode idle sleep."""
         if self._idle_timer > 0:
-            GObject.source_remove(self._idle_timer)
-        self._idle_timer = GObject.timeout_add_seconds(5, self._suspend_cb)
+            GLib.source_remove(self._idle_timer)
+        self._idle_timer = GLib.timeout_add_seconds(5, self._suspend_cb)
 
     def _suspend_cb(self):
         """Go into ebook mode idle sleep."""
@@ -731,7 +732,7 @@ class ReadActivity(activity.Activity):
         self._load_document('file://' + tempfile)
 
         # FIXME: This should obviously be fixed properly
-        GObject.timeout_add_seconds(
+        GLib.timeout_add_seconds(
             1, self.__view_toolbar_needs_update_size_cb, None)
 
     def write_file(self, file_path):
@@ -841,7 +842,7 @@ class ReadActivity(activity.Activity):
             self._progress_alert = None
 
         # download the metadata
-        GObject.idle_add(self._download_metadata, tube_id, tube_ip, tube_port)
+        GLib.idle_add(self._download_metadata, tube_id, tube_ip, tube_port)
 
     def _download_metadata_result_cb(self, getter, tempfile, suggested_name,
                                      tube_id):
@@ -851,7 +852,7 @@ class ReadActivity(activity.Activity):
         os.remove(tempfile)
 
         # load the object from the datastore to update the file path
-        GObject.idle_add(self._open_downloaded_file, shared_metadata)
+        GLib.idle_add(self._open_downloaded_file, shared_metadata)
 
     def _open_downloaded_file(self, shared_metadata):
         self._jobject = datastore.get(self._jobject.object_id)
@@ -882,7 +883,7 @@ class ReadActivity(activity.Activity):
         if self._progress_alert is not None:
             self.remove_alert(self._progress_alert)
             self._progress_alert = None
-        GObject.idle_add(self._get_document)
+        GLib.idle_add(self._get_document)
 
     def _get_connection_params(self, tube_id):
         # return ip and port to download a file
@@ -940,7 +941,7 @@ class ReadActivity(activity.Activity):
 
         # Avoid trying to download the document multiple times at once
         self._want_document = False
-        GObject.idle_add(self._download_document, tube_id)
+        GLib.idle_add(self._download_document, tube_id)
         return False
 
     def _joined_cb(self, also_self):
@@ -952,7 +953,7 @@ class ReadActivity(activity.Activity):
         if self._progress_alert is not None:
             self._progress_alert.props.msg = _('Receiving book...')
 
-        GObject.idle_add(self._get_document)
+        GLib.idle_add(self._get_document)
 
     def _load_document(self, filepath):
         """Load the specified document and set up the UI.
@@ -1124,7 +1125,7 @@ class ReadActivity(activity.Activity):
             self.unused_download_tubes.add(tube_id)
             # if no download is in progress, let's fetch the document
             if self._want_document:
-                GObject.idle_add(self._get_document)
+                GLib.idle_add(self._get_document)
 
     def _list_tubes_reply_cb(self, tubes):
         """Callback when new tubes are available."""
@@ -1255,7 +1256,7 @@ class ReadActivity(activity.Activity):
             # but we don't have a event yet, Evince model have a event
             # we need check the differnt backends and implement
             # in all the backends.
-            GObject.timeout_add_seconds(2, self._update_preview, button, page)
+            GLib.timeout_add_seconds(2, self._update_preview, button, page)
 
     def _update_preview(self, button, page):
         thumb = self._get_screenshot()

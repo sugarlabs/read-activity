@@ -20,6 +20,7 @@
 import cairo
 import math
 
+from gi.repository import GLib
 from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import GdkPixbuf
@@ -92,14 +93,14 @@ class ImageViewer(Gtk.DrawingArea, Gtk.Scrollable):
     __gproperties__ = {
         "hscroll-policy": (Gtk.ScrollablePolicy, "hscroll-policy",
                            "hscroll-policy", Gtk.ScrollablePolicy.MINIMUM,
-                           GObject.PARAM_READWRITE),
+                           GObject.ParamFlags.READWRITE),
         "hadjustment": (Gtk.Adjustment, "hadjustment", "hadjustment",
-                        GObject.PARAM_READWRITE),
+                        GObject.ParamFlags.READWRITE),
         "vscroll-policy": (Gtk.ScrollablePolicy, "hscroll-policy",
                            "hscroll-policy", Gtk.ScrollablePolicy.MINIMUM,
-                           GObject.PARAM_READWRITE),
+                           GObject.ParamFlags.READWRITE),
         "vadjustment": (Gtk.Adjustment, "hadjustment", "hadjustment",
-                        GObject.PARAM_READWRITE),
+                        GObject.ParamFlags.READWRITE),
     }
 
     __gsignals__ = {
@@ -222,9 +223,9 @@ class ImageViewer(Gtk.DrawingArea, Gtk.Scrollable):
         # be set to False.  This is to perform a faster drawing while
         # scrolling.
         if self._scrolling_hid is not None:
-            GObject.source_remove(self._scrolling_hid)
-        self._scrolling_hid = GObject.timeout_add(200,
-                                                  self._stop_scrolling)
+            GLib.source_remove(self._scrolling_hid)
+        self._scrolling_hid = GLib.timeout_add(200,
+                                               self._stop_scrolling)
 
     def __hadj_value_changed_cb(self, adj):
         alloc = self.get_allocation()
