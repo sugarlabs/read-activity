@@ -26,15 +26,15 @@ try:
     Gst.init(None)
     Gst.ElementFactory.make('espeak', None)
     from speech_gst import *
-    _logger.error('use gst-plugins-espeak')
+    _logger.debug('use gst-plugins-espeak')
 except Exception, e:
-    _logger.error('disable gst-plugins-espeak: %s' % e)
+    _logger.debug('disable gst-plugins-espeak: %s' % e)
     try:
         from speech_dispatcher import *
-        _logger.error('use speech-dispatcher')
+        _logger.debug('use speech-dispatcher')
     except Exception, e:
         supported = False
-        _logger.error('disable speech: %s' % e)
+        _logger.debug('disable speech: %s' % e)
 
 voice = 'default'
 pitch = 0
