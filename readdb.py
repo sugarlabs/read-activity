@@ -118,7 +118,7 @@ class BookmarkManager(GObject.GObject):
 
         self._bookmarks = []
         self._populate_bookmarks()
-        self._highlights = {0:  []}
+        self._highlights = {0: []}
         self._populate_highlights()
 
         self._user = profile.get_nick_name()
