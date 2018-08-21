@@ -126,7 +126,7 @@ class EditToolbar(BaseEditToolbar):
         self._search_entry_changed = True
         self._update_find_buttons()
 
-    #    GObject.timeout_add(500, self._search_entry_timeout_cb)
+    #    GLib.timeout_add(500, self._search_entry_timeout_cb)
     #
     # def _search_entry_timeout_cb(self):
     #    self._clear_find_job()
