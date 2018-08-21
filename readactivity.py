@@ -27,9 +27,11 @@ import StringIO
 import cairo
 import json
 
-import emptypanel
-
 import dbus
+
+import gi
+gi.require_version('Gtk', '3.0')
+
 from gi.repository import GLib
 from gi.repository import GObject
 from gi.repository import Gtk
@@ -63,6 +65,7 @@ except:
 
 from sugar3.graphics import style
 
+import emptypanel
 from readtoolbar import EditToolbar
 from readtoolbar import ViewToolbar
 from bookmarkview import BookmarkView
