@@ -30,14 +30,16 @@ import json
 import emptypanel
 
 import dbus
+
+import gi
+gi.require_version('TelepathyGLib', '0.12')
 from gi.repository import GObject
 from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import Gio
+from gi.repository import TelepathyGLib
 
 GObject.threads_init()
-
-import telepathy
 
 from sugar3.activity import activity
 from sugar3.graphics.toolbutton import ToolButton
@@ -57,7 +59,7 @@ from sugar3.datastore import datastore
 from sugar3.graphics.objectchooser import ObjectChooser
 try:
     from sugar3.graphics.objectchooser import FILTER_TYPE_MIME_BY_ACTIVITY
-except:
+except ImportError:
     FILTER_TYPE_MIME_BY_ACTIVITY = 'mime_by_activity'
 
 from sugar3.graphics import style
@@ -662,7 +664,7 @@ class ReadActivity(activity.Activity):
             chooser = ObjectChooser(parent=self,
                                     what_filter=self.get_bundle_id(),
                                     filter_type=FILTER_TYPE_MIME_BY_ACTIVITY)
-        except:
+        except BaseException:
             chooser = ObjectChooser(parent=self,
                                     what_filter=mime.GENERIC_TYPE_TEXT)
 
@@ -887,14 +889,14 @@ class ReadActivity(activity.Activity):
     def _get_connection_params(self, tube_id):
         # return ip and port to download a file
         chan = self.shared_activity.telepathy_tubes_chan
-        iface = chan[telepathy.CHANNEL_TYPE_TUBES]
+        iface = chan[TelepathyGLib.IFACE_CHANNEL_TYPE_TUBES]
         addr = iface.AcceptStreamTube(
             tube_id,
-            telepathy.SOCKET_ADDRESS_TYPE_IPV4,
-            telepathy.SOCKET_ACCESS_CONTROL_LOCALHOST, 0,
+            TelepathyGLib.SocketAddressType.IPV4,
+            TelepathyGLib.SocketAccessControl.LOCALHOST, 0,
             utf8_strings=True)
         _logger.debug('Accepted stream tube: listening address is %r', addr)
-        # SOCKET_ADDRESS_TYPE_IPV4 is defined to have addresses of type '(sq)'
+        # SocketAddressType.IPV4 is defined to have addresses of type '(sq)'
         assert isinstance(addr, dbus.Struct)
         assert len(addr) == 2
         assert isinstance(addr[0], str)
@@ -1081,13 +1083,13 @@ class ReadActivity(activity.Activity):
 
         # Make a tube for it
         chan = self.shared_activity.telepathy_tubes_chan
-        iface = chan[telepathy.CHANNEL_TYPE_TUBES]
+        iface = chan[TelepathyGLib.IFACE_CHANNEL_TYPE_TUBES]
         self._fileserver_tube_id = iface.OfferStreamTube(
             READ_STREAM_SERVICE,
             {},
-            telepathy.SOCKET_ADDRESS_TYPE_IPV4,
+            TelepathyGLib.SocketAddressType.IPV4,
             ('127.0.0.1', dbus.UInt16(self.port)),
-            telepathy.SOCKET_ACCESS_CONTROL_LOCALHOST, 0)
+            TelepathyGLib.SocketAccessControl.LOCALHOST, 0)
 
     def create_metadata_file(self):
         # store the metadata in a json file
@@ -1107,9 +1109,9 @@ class ReadActivity(activity.Activity):
         """Watch for new tubes."""
         tubes_chan = self.shared_activity.telepathy_tubes_chan
 
-        tubes_chan[telepathy.CHANNEL_TYPE_TUBES].connect_to_signal(
+        tubes_chan[TelepathyGLib.IFACE_CHANNEL_TYPE_TUBES].connect_to_signal(
             'NewTube', self._new_tube_cb)
-        tubes_chan[telepathy.CHANNEL_TYPE_TUBES].ListTubes(
+        tubes_chan[TelepathyGLib.IFACE_CHANNEL_TYPE_TUBES].ListTubes(
             reply_handler=self._list_tubes_reply_cb,
             error_handler=self._list_tubes_error_cb)
 
