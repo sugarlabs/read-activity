@@ -10,8 +10,6 @@ import threading
 from sugar3 import mime
 from sugar3.graphics import style
 
-import speech
-
 PAGE_SIZE = 38
 
 
@@ -136,8 +134,9 @@ class TextViewer(GObject.GObject):
         self._scrollbar.set_range(1.0, self._pagecount - 1.0)
         self._scrollbar.set_increments(1.0, 1.0)
 
-        speech.highlight_cb = self.highlight_next_word
-        speech.reset_cb = self.reset_text_to_speech
+        # TODO: if ever sugar3.speech has word signals
+        # call self.highlight_next_word on each word
+        # call self.reset_text_to_speech at end
 
     def _show_page(self, page_number):
         position = self.page_index[page_number]
@@ -281,8 +280,8 @@ class TextViewer(GObject.GObject):
         marked_up_text = '<speak> '
         while i < len(self.word_tuples):
             word_tuple = self.word_tuples[i]
-            marked_up_text = marked_up_text + '<mark name="' + str(i) + '"/>' \
-                + word_tuple[2]
+            marked_up_text = marked_up_text + \
+                '<mark name="' + str(i) + '"/>' + word_tuple[2]
             i = i + 1
         print marked_up_text
         return marked_up_text + '</speak>'
@@ -341,7 +340,7 @@ class TextViewer(GObject.GObject):
             try:
                 logging.error('Loading zoom %s', self.metadata['Read_zoom'])
                 self.set_zoom(float(self.metadata['Read_zoom']))
-            except:
+            except BaseException:
                 pass
 
     def set_current_page(self, page):
