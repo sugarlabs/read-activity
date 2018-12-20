@@ -828,7 +828,7 @@ class ReadActivity(activity.Activity):
         del self.unused_download_tubes
 
         # Use the suggested file, the mime is not recognized if the extension
-        # is wrong in some cases
+        # is wrong in some cases (epub)
         temp_dir = os.path.dirname(tempfile)
         new_name = os.path.join(temp_dir, suggested_name)
         os.rename(tempfile, new_name)
@@ -982,7 +982,10 @@ class ReadActivity(activity.Activity):
         else:
             mimetype = self.metadata['mime_type']
 
-        if mimetype == 'text/plain' or mimetype == 'application/zip':
+        if mimetype == 'application/epub+zip':
+            import epubadapter
+            self._view = epubadapter.EpubViewer()
+        elif mimetype == 'text/plain' or mimetype == 'application/zip':
             import textadapter
             self._view = textadapter.TextViewer()
         elif mimetype == 'application/x-cbz':
