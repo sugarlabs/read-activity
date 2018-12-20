@@ -1,5 +1,6 @@
 # Copyright 2009 One Laptop Per Child
 # Author: Sayamindu Dasgupta <sayamindu@laptop.org>
+# WebKit2 port Copyright (C) 2018 Lubomir Rintel <lkundrak@v3.sk>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,9 +16,13 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import gi
+gi.require_version('WebKit2', '4.0')
 
 from gi.repository import GObject
 from gi.repository import Gtk
+from gi.repository import Gdk
+from gi.repository import WebKit2
 import widgets
 import math
 import os.path
@@ -121,35 +126,31 @@ class _JobPaginator(GObject.GObject):
         """
 
         self._temp_win = Gtk.Window()
-        self._temp_view = widgets._WebView(only_to_measure=True)
+        self._temp_view = widgets._WebView()
 
         settings = self._temp_view.get_settings()
         settings.props.default_font_family = 'DejaVu LGC Serif'
         settings.props.sans_serif_font_family = 'DejaVu LGC Sans'
         settings.props.serif_font_family = 'DejaVu LGC Serif'
         settings.props.monospace_font_family = 'DejaVu LGC Sans Mono'
-        settings.props.enforce_96_dpi = True
         # FIXME: This does not seem to work
         # settings.props.auto_shrink_images = False
         settings.props.enable_plugins = False
-        settings.props.default_font_size = 12
-        settings.props.default_monospace_font_size = 10
-        settings.props.default_encoding = 'utf-8'
+        settings.props.default_font_size = 16
+        settings.props.default_monospace_font_size = 13
+        settings.props.default_charset = 'utf-8'
 
-        sw = Gtk.ScrolledWindow()
-        sw.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER)
-        self._dpi = 96
+        self._dpi = Gdk.Screen.get_default().get_resolution()
         self._single_page_height = _mm_to_pixel(PAGE_HEIGHT, self._dpi)
-        sw.set_size_request(_mm_to_pixel(PAGE_WIDTH, self._dpi),
-                            self._single_page_height)
-        sw.add(self._temp_view)
-        self._temp_win.add(sw)
-        self._temp_view.connect('load-finished', self._page_load_finished_cb)
+        self._temp_view.set_size_request(_mm_to_pixel(PAGE_WIDTH, self._dpi), self._single_page_height)
+
+        self._temp_win.add(self._temp_view)
+        self._temp_view.connect('load-changed', self._page_load_changed_cb)
 
         self._temp_win.show_all()
         self._temp_win.unmap()
 
-        self._temp_view.open(self._filelist[self._count])
+        self._temp_view.load_uri('file://' + self._filelist[self._count])
 
     def get_single_page_height(self):
         """
@@ -165,8 +166,10 @@ class _JobPaginator(GObject.GObject):
                     return self._filelist[n + 1]
         return None
 
-    def _page_load_finished_cb(self, v, frame):
-        f = v.get_main_frame()
+    def _page_load_changed_cb(self, v, load_event):
+        if load_event != WebKit2.LoadEvent.FINISHED:
+            return True
+
         pageheight = v.get_page_height()
 
         if pageheight <= self._single_page_height:
@@ -179,10 +182,10 @@ class _JobPaginator(GObject.GObject):
             else:
                 pagelen = 1 / pages
             self._pagemap[float(self._pagecount + i)] = \
-                (f.props.uri, (i - 1) / math.ceil(pages), pagelen)
+                (v.get_uri(), (i - 1) / math.ceil(pages), pagelen)
 
         self._pagecount += int(math.ceil(pages))
-        self._filedict[f.props.uri.replace('file://', '')] = \
+        self._filedict[v.get_uri().replace('file://', '')] = \
             (math.ceil(pages), math.ceil(pages) - pages)
         self._bookheight += pageheight
 
@@ -191,9 +194,10 @@ class _JobPaginator(GObject.GObject):
             # self._screen.set_font_options(self._old_fontoptions)
             self.emit('paginated')
             GObject.idle_add(self._cleanup)
+
         else:
             self._count += 1
-            self._temp_view.open(self._filelist[self._count])
+            self._temp_view.load_uri('file://' + self._filelist[self._count])
 
     def _cleanup(self):
         self._temp_win.destroy()
@@ -324,8 +328,13 @@ class _JobFind(GObject.GObject):
         '''
         return self._text
 
-    def get_case_sensitive(self):
+    def get_flags(self, forward=True):
         '''
-        Returns True if the search is case-sensitive
+        Returns the search flags
         '''
-        return self._case_sensitive
+        flags = WebKit2.FindOptions.NONE
+        if self._case_sensitive:
+            flags = flags | WebKit2.FindOptions.CASE_INSENSITIVE
+        if not forward:
+            flags = flags | WebKit2.FindOptions.BACKWARDS
+        return flags

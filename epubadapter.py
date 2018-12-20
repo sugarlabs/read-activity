@@ -76,30 +76,35 @@ class EpubViewer(epubview.EpubView):
         self._view.set_editable(True)
 
         if highlight:
-            self._view.execute_script(
-                'document.execCommand("backColor", false, "yellow");')
+            js = 'document.execCommand("backColor", false, "yellow");'
         else:
             # need remove the highlight nodes
-            js = """
-                var selObj = window.getSelection();
-                var range  = selObj.getRangeAt(0);
-                var node = range.startContainer;
-                while (node.parentNode != null) {
-                  if (node.localName == "span") {
-                    if (node.hasAttributes()) {
-                      var attrs = node.attributes;
-                      for(var i = attrs.length - 1; i >= 0; i--) {
-                        if (attrs[i].name == "style" &&
-                            attrs[i].value == "background-color: yellow;") {
-                          node.removeAttribute("style");
-                          break;
+            js = '''
+                (function(){
+                    var selObj = window.getSelection();
+                    if (selObj.rangeCount < 1)
+                        return;
+                    var range  = selObj.getRangeAt(0);
+                    var node = range.startContainer;
+                    while (node.parentNode != null) {
+                      if (node.localName == "span") {
+                        if (node.hasAttributes()) {
+                          var attrs = node.attributes;
+                          for (var i = attrs.length - 1; i >= 0; i--) {
+                            if (attrs[i].name == "style" &&
+                                attrs[i].value == "background-color: yellow;") {
+                              node.removeAttribute("style");
+                              break;
+                            };
+                          };
                         };
                       };
+                      node = node.parentNode;
                     };
-                  };
-                  node = node.parentNode;
-                };"""
-            self._view.execute_script(js)
+                }())
+            '''
+
+        self._view.run_javascript(js)
 
         self._view.set_editable(False)
         # mark the file as modified
@@ -110,10 +115,7 @@ class EpubViewer(epubview.EpubView):
         GObject.idle_add(self._save_page)
 
     def _save_page(self):
-        oldtitle = self._view.get_title()
-        self._view.execute_script(
-            "document.title=document.documentElement.innerHTML;")
-        html = self._view.get_title()
+        html = self._view._execute_script_sync("document.documentElement.innerHTML")
         file_path = self.get_current_file().replace('file:///', '/')
         logging.error(html)
         with open(file_path, 'w') as fd:
@@ -124,7 +126,6 @@ class EpubViewer(epubview.EpubView):
             fd.write(header)
             fd.write(html)
             fd.write('</html>')
-        self._view.execute_script('document.title=%s;' % oldtitle)
 
     def save(self, file_path):
         if self._modified_files:
@@ -136,32 +137,29 @@ class EpubViewer(epubview.EpubView):
     def in_highlight(self):
         # Verify if the selection already exist or the cursor
         # is in a highlighted area
-        page_title = self._view.get_title()
-        js = """
-            var selObj = window.getSelection();
-            var range  = selObj.getRangeAt(0);
-            var node = range.startContainer;
-            var onHighlight = false;
-            while (node.parentNode != null) {
-              if (node.localName == "span") {
-                if (node.hasAttributes()) {
-                  var attrs = node.attributes;
-                  for(var i = attrs.length - 1; i >= 0; i--) {
-                    if (attrs[i].name == "style" &&
-                        attrs[i].value == "background-color: yellow;") {
-                      onHighlight = true;
+        return self._view._execute_script_sync("""
+            (function(){
+                var selObj = window.getSelection();
+                if (selObj.rangeCount < 1)
+                    return false;
+                var range  = selObj.getRangeAt(0);
+                var node = range.startContainer;
+                while (node.parentNode != null) {
+                  if (node.localName == "span") {
+                    if (node.hasAttributes()) {
+                      var attrs = node.attributes;
+                      for(var i = attrs.length - 1; i >= 0; i--) {
+                        if (attrs[i].name == "style" &&
+                            attrs[i].value == "background-color: yellow;") {
+                          return true;
+                        };
+                      };
                     };
                   };
+                  node = node.parentNode;
                 };
-              };
-              node = node.parentNode;
-            };
-            document.title=onHighlight;"""
-        self._view.execute_script(js)
-        on_highlight = self._view.get_title() == 'true'
-        self._view.execute_script('document.title = "%s";' % page_title)
-        # the second parameter is only used in the text backend
-        return on_highlight, None
+                return false;
+            })()""") == "true", None;
 
     def can_do_text_to_speech(self):
         return False
@@ -230,7 +228,7 @@ class EpubViewer(epubview.EpubView):
         return
 
     def find_set_highlight_search(self, set_highlight_search):
-        self._view.set_highlight_text_matches(set_highlight_search)
+        pass
 
     def set_current_page(self, n):
         # When the book is being loaded, calling this does not help
