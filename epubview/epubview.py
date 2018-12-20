@@ -1,5 +1,6 @@
 # Copyright 2009 One Laptop Per Child
 # Author: Sayamindu Dasgupta <sayamindu@laptop.org>
+# WebKit2 port Copyright (C) 2018 Lubomir Rintel <lkundrak@v3.sk>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,9 +16,13 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import gi
+gi.require_version('WebKit2', '4.0')
+
 from gi.repository import Gtk
 from gi.repository import GObject
 from gi.repository import Gdk
+from gi.repository import WebKit2
 import widgets
 
 import logging
@@ -28,11 +33,14 @@ import shutil
 from jobs import _JobPaginator as _Paginator
 
 LOADING_HTML = '''
-<div style="width:100%;height:100%;text-align:center;padding-top:50%;">
-    <h1>Loading...</h1>
-</div>
+<html style="height: 100%; margin: 0; padding: 0; width: 100%;">
+    <body style="display: table; height: 100%; margin: 0; padding: 0; width: 100%;">
+        <div style="display: table-cell; text-align: center; vertical-align: middle;">
+            <h1>Loading...</h1>
+        </div>
+    </body>
+</html>
 '''
-
 
 class _View(Gtk.HBox):
 
@@ -57,14 +65,13 @@ class _View(Gtk.HBox):
         self._ready = False
         self._paginator = None
         self._loaded_page = -1
-        self._file_loaded = True
         # self._old_scrollval = -1
         self._loaded_filename = None
         self._pagecount = -1
-        self.__going_fwd = True
-        self.__going_back = False
+        self.__scroll_to_end = False
         self.__page_changed = False
         self._has_selection = False
+        self._scrollval = 0.0
         self.scale = 1.0
         self._epub = None
         self._findjob = None
@@ -73,41 +80,35 @@ class _View(Gtk.HBox):
         self._filelist = None
         self._internal_link = None
 
-        self._sw = Gtk.ScrolledWindow()
         self._view = widgets._WebView()
-        self._view.load_string(LOADING_HTML, 'text/html', 'utf-8', '/')
+        self._view.load_html(LOADING_HTML, '/')
         settings = self._view.get_settings()
         settings.props.default_font_family = 'DejaVu LGC Serif'
         settings.props.enable_plugins = False
-        settings.props.default_encoding = 'utf-8'
-        self._view.connect('load-finished', self._view_load_finished_cb)
-        self._view.connect('scroll-event', self._view_scroll_event_cb)
-        self._view.connect('key-press-event', self._view_keypress_event_cb)
-        self._view.connect('selection-changed',
-                           self._view_selection_changed_cb)
-        self._view.connect_after('populate-popup',
-                                 self._view_populate_popup_cb)
-        self._view.connect('touch-change-page', self.__touch_page_changed_cb)
+        settings.props.default_charset = 'utf-8'
+        self._view.connect('load-changed', self._view_load_changed_cb)
+        self._view.connect('scrolled', self._view_scrolled_cb)
+        self._view.connect('scrolled-top', self._view_scrolled_top_cb)
+        self._view.connect('scrolled-bottom', self._view_scrolled_bottom_cb)
+        self._view.connect('selection-changed', self._view_selection_changed_cb)
 
-        self._sw.add(self._view)
-        self._v_vscrollbar = self._sw.get_vscrollbar()
-        self._v_scrollbar_value_changed_cb_id = self._v_vscrollbar.connect(
-            'value-changed', self._v_scrollbar_value_changed_cb)
+        find = self._view.get_find_controller()
+        find.connect('failed-to-find-text', self._find_failed_cb)
+
+        self._eventbox = Gtk.EventBox()
+        self._eventbox.connect('scroll-event', self._eventbox_scroll_event_cb)
+        self._eventbox.add_events(Gdk.EventMask.SCROLL_MASK)
+        self._eventbox.add(self._view)
+
         self._scrollbar = Gtk.VScrollbar()
         self._scrollbar_change_value_cb_id = self._scrollbar.connect(
             'change-value', self._scrollbar_change_value_cb)
 
-        overlay = Gtk.Overlay()
         hbox = Gtk.HBox()
-        overlay.add(hbox)
-        hbox.add(self._sw)
+        hbox.pack_start(self._eventbox, True, True, 0)
+        hbox.pack_end(self._scrollbar, False, True, 0)
 
-        self._scrollbar.props.halign = Gtk.Align.END
-        self._scrollbar.props.valign = Gtk.Align.FILL
-        overlay.add_overlay(self._scrollbar)
-
-        self.pack_start(overlay, True, True, 0)
-
+        self.pack_start(hbox, True, True, 0)
         self._view.set_can_default(True)
         self._view.set_can_focus(True)
 
@@ -142,7 +143,7 @@ class _View(Gtk.HBox):
         '''
         Returns True if any part of the content is selected
         '''
-        return self._view.can_copy_clipboard()
+        return self._has_selection
 
     def get_zoom(self):
         '''
@@ -198,13 +199,13 @@ class _View(Gtk.HBox):
         """
         Used to save the scrolled position and restore when needed
         """
-        return self._v_vscrollbar.get_adjustment().get_value()
+        return self._scrollval
 
     def set_vertical_pos(self, position):
         """
         Used to save the scrolled position and restore when needed
         """
-        self._v_vscrollbar.get_adjustment().set_value(position)
+        self._view.scroll_to(position)
 
     def can_zoom_in(self):
         '''
@@ -282,40 +283,25 @@ class _View(Gtk.HBox):
         Valid scrolltypes are:
         Gtk.ScrollType.PAGE_BACKWARD, Gtk.ScrollType.PAGE_FORWARD,
         Gtk.ScrollType.STEP_BACKWARD, Gtk.ScrollType.STEP_FORWARD
-        Gtk.ScrollType.STEP_START and Gtk.ScrollType.STEP_STOP
+        Gtk.ScrollType.STEP_START and Gtk.ScrollType.STEP_END
         '''
         if scrolltype == Gtk.ScrollType.PAGE_BACKWARD:
-            self.__going_back = True
-            self.__going_fwd = False
-            if not self._do_page_transition():
-                self._view.move_cursor(Gtk.MovementStep.PAGES, -1)
+            pages = self._paginator.get_pagecount_for_file(self._loaded_filename)
+            self._view.scroll_by(self._page_height / pages * -1)
         elif scrolltype == Gtk.ScrollType.PAGE_FORWARD:
-            self.__going_back = False
-            self.__going_fwd = True
-            if not self._do_page_transition():
-                self._view.move_cursor(Gtk.MovementStep.PAGES, 1)
+            pages = self._paginator.get_pagecount_for_file(self._loaded_filename)
+            self._view.scroll_by(self._page_height / pages * 1)
         elif scrolltype == Gtk.ScrollType.STEP_BACKWARD:
-            self.__going_fwd = False
-            self.__going_back = True
-            if not self._do_page_transition():
-                self._view.move_cursor(Gtk.MovementStep.DISPLAY_LINES, -1)
+            self._view.scroll_by(self._view.get_settings().get_default_font_size() * -3)
         elif scrolltype == Gtk.ScrollType.STEP_FORWARD:
-            self.__going_fwd = True
-            self.__going_back = False
-            if not self._do_page_transition():
-                self._view.move_cursor(Gtk.MovementStep.DISPLAY_LINES, 1)
+            self._view.scroll_by(self._view.get_settings().get_default_font_size() * 3)
         elif scrolltype == Gtk.ScrollType.START:
-            self.__going_back = True
-            self.__going_fwd = False
-            if not self._do_page_transition():
-                self.set_current_page(1)
+            self.set_current_page(0)
         elif scrolltype == Gtk.ScrollType.END:
-            self.__going_back = False
-            self.__going_fwd = True
-            if not self._do_page_transition():
-                self.set_current_page(self._pagecount - 1)
+            self.__scroll_to_end = True
+            self.set_current_page(self._pagecount - 1)
         else:
-            print ('Got unsupported scrolltype %s' % str(scrolltype))
+            print('Got unsupported scrolltype %s' % str(scrolltype))
 
     def __touch_page_changed_cb(self, widget, forward):
         if forward:
@@ -327,105 +313,108 @@ class _View(Gtk.HBox):
         '''
         Copies the current selection to clipboard.
         '''
-        self._view.copy_clipboard()
+        self._view.run_javascript('document.execCommand("copy")')
 
     def find_next(self):
         '''
         Highlights the next matching item for current search
         '''
         self._view.grab_focus()
-
-        if self._view.search_text(self._findjob.get_search_text(),
-                                  self._findjob.get_case_sensitive(),
-                                  True, False):
-            return
-        else:
-            path = os.path.join(self._epub.get_basedir(),
-                                self._findjob.get_next_file())
-            self.__in_search = True
-            self.__search_fwd = True
-            self._load_file(path)
+        self.__search_fwd = True
+        self._view.get_find_controller().search_next()
 
     def find_previous(self):
         '''
         Highlights the previous matching item for current search
         '''
         self._view.grab_focus()
+        self.__search_fwd = False
+        self._view.get_find_controller().search_previous()
 
-        if self._view.search_text(self._findjob.get_search_text(),
-                                  self._findjob.get_case_sensitive(),
-                                  False, False):
-            return
-        else:
-            path = os.path.join(self._epub.get_basedir(),
-                                self._findjob.get_prev_file())
+    def _find_failed_cb(self, find_controller):
+        try:
+            if self.__search_fwd:
+                path = os.path.join(self._epub.get_basedir(),
+                                    self._findjob.get_next_file())
+            else:
+                path = os.path.join(self._epub.get_basedir(),
+                                    self._findjob.get_prev_file())
             self.__in_search = True
-            self.__search_fwd = False
             self._load_file(path)
+        except IndexError:
+            # No match anywhere, no other file to pick
+            pass
 
     def _find_changed(self, job):
         self._view.grab_focus()
         self._findjob = job
-        self._mark_found_text()
-        self.find_next()
-
-    def _mark_found_text(self):
-        self._view.unmark_text_matches()
-        self._view.mark_text_matches(
-            self._findjob.get_search_text(),
-            case_sensitive=self._findjob.get_case_sensitive(), limit=0)
-        self._view.set_highlight_text_matches(True)
+        find = self._view.get_find_controller()
+        find.search (self._findjob.get_search_text(),
+                     self._findjob.get_flags(),
+                     GObject.G_MAXUINT)
 
     def __set_zoom(self, value):
         self._view.set_zoom_level(value)
         self.scale = value
 
-    def _view_populate_popup_cb(self, view, menu):
-        menu.destroy()  # HACK
-        return
+    def _view_scrolled_cb(self, view, scrollval):
+        if self._loaded_page < 1:
+            return
 
-    def _view_selection_changed_cb(self, view):
+        self._scrollval = scrollval
+        scroll_upper = self._page_height
+        scroll_page_size = self._view.get_allocated_height()
+
+        if scrollval > 0:
+            scrollfactor = scrollval / (scroll_upper - scroll_page_size)
+        else:
+            scrollfactor = 0
+
+        if not self._loaded_page == self._pagecount and \
+           not self._paginator.get_file_for_pageno(self._loaded_page) != \
+               self._paginator.get_file_for_pageno(self._loaded_page + 1):
+
+            scrollfactor_next = \
+                self._paginator.get_scrollfactor_pos_for_pageno(
+                    self._loaded_page + 1)
+            if scrollfactor >= scrollfactor_next:
+                self._on_page_changed(self._loaded_page, self._loaded_page + 1)
+                return
+
+        if self._loaded_page > 1 and \
+           not self._paginator.get_file_for_pageno(self._loaded_page) != \
+               self._paginator.get_file_for_pageno(self._loaded_page - 1):
+
+            scrollfactor_cur = \
+                self._paginator.get_scrollfactor_pos_for_pageno(
+                    self._loaded_page)
+            if scrollfactor <= scrollfactor_cur:
+                self._on_page_changed(self._loaded_page, self._loaded_page - 1)
+                return
+
+    def _view_scrolled_top_cb(self, view):
+        if self._loaded_page > 1:
+            self.__scroll_to_end = True
+            self._load_prev_page()
+
+    def _view_scrolled_bottom_cb(self, view):
+        if self._loaded_page < self._pagecount:
+            self._load_next_page()
+
+    def _view_selection_changed_cb(self, view, has_selection):
+        self._has_selection = has_selection
         self.emit('selection-changed')
 
-    def _view_keypress_event_cb(self, view, event):
-        name = Gdk.keyval_name(event.keyval)
-        if name == 'Page_Down' or name == 'Down':
-            self.__going_back = False
-            self.__going_fwd = True
-        elif name == 'Page_Up' or name == 'Up':
-            self.__going_back = True
-            self.__going_fwd = False
-
-        self._do_page_transition()
-
-    def _view_scroll_event_cb(self, view, event):
+    def _eventbox_scroll_event_cb(self, view, event):
         if event.direction == Gdk.ScrollDirection.DOWN:
-            self.__going_back = False
-            self.__going_fwd = True
+            self.scroll(Gtk.ScrollType.STEP_FORWARD, False)
         elif event.direction == Gdk.ScrollDirection.UP:
-            self.__going_back = True
-            self.__going_fwd = False
+            self.scroll(Gtk.ScrollType.STEP_BACKWARD, False)
 
-        self._do_page_transition()
+    def _view_load_changed_cb(self, v, load_event):
+        if load_event != WebKit2.LoadEvent.FINISHED:
+            return True
 
-    def _do_page_transition(self):
-        if self.__going_fwd:
-            if self._v_vscrollbar.get_value() >= \
-                self._v_vscrollbar.props.adjustment.props.upper - \
-                    self._v_vscrollbar.props.adjustment.props.page_size:
-                self._load_page(self._loaded_page + 1)
-                return True
-        elif self.__going_back:
-            if self._v_vscrollbar.get_value() == \
-                    self._v_vscrollbar.props.adjustment.props.lower:
-                self._load_page(self._loaded_page - 1)
-                return True
-
-        return False
-
-    def _view_load_finished_cb(self, v, frame):
-
-        self._file_loaded = True
         filename = self._view.props.uri.replace('file://', '')
         if os.path.exists(filename.replace('xhtml', 'xml')):
             # Hack for making javascript work
@@ -444,19 +433,16 @@ class _View(Gtk.HBox):
             remfactor * self._view.get_page_height() / (pages - remfactor)))
         if extra > 0:
             self._view.add_bottom_padding(extra)
+        self._page_height = self._view.get_page_height()
 
         if self.__in_search:
-            self._mark_found_text()
-            self._view.search_text(self._findjob.get_search_text(),
-                                   self._findjob.get_case_sensitive(),
-                                   self.__search_fwd, False)
             self.__in_search = False
+            find = self._view.get_find_controller()
+            find.search (self._findjob.get_search_text(),
+                         self._findjob.get_flags(self.__search_fwd),
+                         GObject.G_MAXUINT)
         else:
-            if self.__going_back:
-                # We need to scroll to the last page
-                self._scroll_page_end()
-            else:
-                self._scroll_page()
+            self._scroll_page()
 
         # process_file = True
         if self._internal_link is not None:
@@ -474,13 +460,13 @@ class _View(Gtk.HBox):
             # if the link is at the bottom of the page, we open the next file
             one_page_height = self._paginator.get_single_page_height()
             self._internal_link = None
-            if vertical_pos > self._view.get_page_height() - one_page_height:
+            if vertical_pos > self._page_height - one_page_height:
                 logging.error('bottom page link, go to next file')
                 next_file = self._paginator.get_next_filename(filename)
                 if next_file is not None:
                     logging.error('load next file %s', next_file)
                     self.__in_search = False
-                    self.__going_back = False
+                    self.__scroll_to_end = False
                     # process_file = False
                     GObject.idle_add(self._load_file, next_file)
 
@@ -517,19 +503,17 @@ class _View(Gtk.HBox):
                     self.word_tuples.append(word_tuple)
             i = i + 1
 
-    def _scroll_page_end(self):
-        v_upper = self._v_vscrollbar.props.adjustment.props.upper
-        # v_page_size = self._v_vscrollbar.props.adjustment.props.page_size
-        self._v_vscrollbar.set_value(v_upper)
-
     def _scroll_page(self):
-        pageno = self._loaded_page
-
-        v_upper = self._v_vscrollbar.props.adjustment.props.upper
-        v_page_size = self._v_vscrollbar.props.adjustment.props.page_size
-
-        scrollfactor = self._paginator.get_scrollfactor_pos_for_pageno(pageno)
-        self._v_vscrollbar.set_value((v_upper - v_page_size) * scrollfactor)
+        v_upper = self._page_height
+        if self.__scroll_to_end:
+            # We need to scroll to the last page
+            scrollval = v_upper
+            self.__scroll_to_end = False
+        else:
+            pageno = self._loaded_page
+            scrollfactor = self._paginator.get_scrollfactor_pos_for_pageno(pageno)
+            scrollval = math.ceil(v_upper  * scrollfactor)
+        self._view.scroll_to(scrollval)
 
     def _paginate(self):
         filelist = []
@@ -552,44 +536,6 @@ class _View(Gtk.HBox):
     def _load_prev_page(self):
         self._load_page(self._loaded_page - 1)
 
-    def _v_scrollbar_value_changed_cb(self, scrollbar):
-        if self._loaded_page < 1:
-            return
-        scrollval = scrollbar.get_value()
-        scroll_upper = self._v_vscrollbar.props.adjustment.props.upper
-        scroll_page_size = self._v_vscrollbar.props.adjustment.props.page_size
-
-        if self.__going_fwd and not self._loaded_page == self._pagecount:
-            if self._paginator.get_file_for_pageno(self._loaded_page) != \
-                    self._paginator.get_file_for_pageno(self._loaded_page + 1):
-                # We don't need this if the next page is in another file
-                return
-
-            scrollfactor_next = \
-                self._paginator.get_scrollfactor_pos_for_pageno(
-                    self._loaded_page + 1)
-            if scrollval > 0:
-                scrollfactor = scrollval / (scroll_upper - scroll_page_size)
-            else:
-                scrollfactor = 0
-            if scrollfactor >= scrollfactor_next:
-                self._on_page_changed(self._loaded_page, self._loaded_page + 1)
-        elif self.__going_back and self._loaded_page > 1:
-            if self._paginator.get_file_for_pageno(self._loaded_page) != \
-                    self._paginator.get_file_for_pageno(self._loaded_page - 1):
-                return
-
-            scrollfactor_cur = \
-                self._paginator.get_scrollfactor_pos_for_pageno(
-                    self._loaded_page)
-            if scrollval > 0:
-                scrollfactor = scrollval / (scroll_upper - scroll_page_size)
-            else:
-                scrollfactor = 0
-
-            if scrollfactor <= scrollfactor_cur:
-                self._on_page_changed(self._loaded_page, self._loaded_page - 1)
-
     def _on_page_changed(self, oldpage, pageno):
         if oldpage == pageno:
             return
@@ -608,15 +554,13 @@ class _View(Gtk.HBox):
         if self._loaded_page == pageno:
             return
 
+        oldpage = self._loaded_page
+
         filename = self._paginator.get_file_for_pageno(pageno)
         filename = filename.replace('file://', '')
 
         if filename != self._loaded_filename:
             self._loaded_filename = filename
-            if not self._file_loaded:
-                # wait until the file is loaded
-                return
-            self._file_loaded = False
 
             """
             TODO: disabled because javascript can't be executed
@@ -630,6 +574,7 @@ class _View(Gtk.HBox):
             now text highlight is implemented and the epub file is saved
             """
 
+            self._view.stop_loading()
             if filename.endswith('xml'):
                 dest = filename.replace('xml', 'xhtml')
                 if not os.path.exists(dest):
@@ -640,7 +585,7 @@ class _View(Gtk.HBox):
         else:
             self._loaded_page = pageno
             self._scroll_page()
-        self._on_page_changed(self._loaded_page, pageno)
+        self._on_page_changed(oldpage, pageno)
 
     def _insert_js_reference(self, file_name, path):
         js_reference = '<script type="text/javascript" ' + \
@@ -669,23 +614,16 @@ class _View(Gtk.HBox):
                 break
 
     def _scrollbar_change_value_cb(self, range, scrolltype, value):
-        if scrolltype == Gtk.ScrollType.STEP_FORWARD:
-            self.__going_fwd = True
-            self.__going_back = False
-            if not self._do_page_transition():
-                self._view.move_cursor(Gtk.MovementStep.DISPLAY_LINES, 1)
-        elif scrolltype == Gtk.ScrollType.STEP_BACKWARD:
-            self.__going_fwd = False
-            self.__going_back = True
-            if not self._do_page_transition():
-                self._view.move_cursor(Gtk.MovementStep.DISPLAY_LINES, -1)
+        if scrolltype == Gtk.ScrollType.STEP_FORWARD or \
+                scrolltype == Gtk.ScrollType.STEP_BACKWARD:
+            self.scroll(scrolltype, False)
         elif scrolltype == Gtk.ScrollType.JUMP or \
-            scrolltype == Gtk.ScrollType.PAGE_FORWARD or \
+                scrolltype == Gtk.ScrollType.PAGE_FORWARD or \
                 scrolltype == Gtk.ScrollType.PAGE_BACKWARD:
             if value > self._scrollbar.props.adjustment.props.upper:
                 self._load_page(self._pagecount)
             else:
-                self._load_page(round(value))
+                self._load_page(int(value))
         else:
             print 'Warning: unknown scrolltype %s with value %f' \
                 % (str(scrolltype), value)
@@ -703,7 +641,7 @@ class _View(Gtk.HBox):
         self._ready = True
 
         self._pagecount = self._paginator.get_total_pagecount()
-        self._scrollbar.set_range(1.0, self._pagecount - 1.0)
+        self._scrollbar.set_range(1.0, self._pagecount)
         self._scrollbar.set_increments(1.0, 1.0)
         self._view.grab_focus()
         self._view.grab_default()
