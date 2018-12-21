@@ -22,6 +22,7 @@ import widgets
 import math
 import os.path
 import xml.etree.ElementTree as etree
+import htmlentitydefs as html_entities
 
 import threading
 
@@ -62,7 +63,10 @@ class SearchThread(threading.Thread):
         return False
 
     def _searchfile(self, fileobj):
-        tree = etree.parse(fileobj)
+        parser = etree.XMLParser(html=1)
+        for name, codepoint in html_entities.name2codepoint.iteritems():
+            parser.entity[name] = unichr(codepoint)
+        tree = etree.parse(fileobj, parser=parser)
         root = tree.getroot()
 
         body = None
