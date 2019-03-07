@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-02 15:53+1000\n"
+"POT-Creation-Date: 2019-03-07 20:17+1100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,65 +66,65 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: readactivity.py:379
+#: readactivity.py:385
 msgid "Please wait"
 msgstr ""
 
-#: readactivity.py:380
+#: readactivity.py:386
 msgid "Starting connection..."
 msgstr ""
 
-#: readactivity.py:388
+#: readactivity.py:394
 msgid "No book"
 msgstr ""
 
-#: readactivity.py:388
+#: readactivity.py:394
 msgid "Choose something to read"
 msgstr ""
 
-#: readactivity.py:393
+#: readactivity.py:399
 msgid "Back"
 msgstr ""
 
-#: readactivity.py:397
+#: readactivity.py:403
 msgid "Previous page"
 msgstr ""
 
-#: readactivity.py:399
+#: readactivity.py:405
 msgid "Previous bookmark"
 msgstr ""
 
-#: readactivity.py:411
+#: readactivity.py:417
 msgid "Forward"
 msgstr ""
 
-#: readactivity.py:415
+#: readactivity.py:421
 msgid "Next page"
 msgstr ""
 
-#: readactivity.py:417
+#: readactivity.py:423
 msgid "Next bookmark"
 msgstr ""
 
-#: readactivity.py:468
+#: readactivity.py:474
 msgid "Index"
 msgstr ""
 
-#: readactivity.py:564
+#: readactivity.py:570
 msgid "Delete bookmark"
 msgstr ""
 
-#: readactivity.py:565
+#: readactivity.py:571
 msgid "All the information related with this bookmark will be lost"
 msgstr ""
 
-#: readactivity.py:953
+#: readactivity.py:959
 msgid "Receiving book..."
 msgstr ""
 
-#: readactivity.py:1027 readactivity.py:1222
+#: readactivity.py:1036 readactivity.py:1229
 #, python-format
-msgid "%s (Page %d)"
+msgid "%(title)s (Page %(number)d)"
 msgstr ""
 
 #: readdialog.py:52
@@ -215,10 +215,10 @@ msgstr ""
 msgid "Hide Tray"
 msgstr ""
 
-#: speechtoolbar.py:55
+#: speechtoolbar.py:65
 msgid "Play / Pause"
 msgstr ""
 
-#: speechtoolbar.py:63
+#: speechtoolbar.py:73
 msgid "Stop"
 msgstr ""
