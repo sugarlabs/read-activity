@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: pt_BR\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-24 17:39+1100\n"
-"PO-Revision-Date: 2017-06-14 21:01+0000\n"
-"Last-Translator: Mariana <dias.inkscape@gmail.com>\n"
+"PO-Revision-Date: 2018-09-05 18:37+0000\n"
+"Last-Translator: Paulo Francisco <slomp@ufrgs.br>\n"
 "Language-Team: Brazilian Portuguese <fedora-docs-br@redhat.com>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.1.1\n"
-"X-POOTLE-MTIME: 1497474090.000000\n"
+"X-POOTLE-MTIME: 1536172654.000000\n"
 
 #: activity/activity.info:2
 msgid "Read"
@@ -45,7 +45,7 @@ msgstr "Cancelar"
 
 #: readdialog.py:58
 msgid "Ok"
-msgstr "Confirma"
+msgstr "Ok"
 
 #: readdialog.py:120
 msgid "<b>Title</b>:"
@@ -61,7 +61,7 @@ msgstr "<b>Detalhes</b>:"
 
 #: evinceadapter.py:92
 msgid "URL from Read"
-msgstr "URL a partir de Ler"
+msgstr "URL de Ler"
 
 #: speechtoolbar.py:57
 msgid "Play / Pause"
@@ -93,7 +93,7 @@ msgstr "Voltar"
 
 #: readactivity.py:397
 msgid "Previous page"
-msgstr "página anterior"
+msgstr "Página anterior"
 
 #: readactivity.py:399
 msgid "Previous bookmark"
@@ -101,7 +101,7 @@ msgstr "Favorito anterior"
 
 #: readactivity.py:411
 msgid "Forward"
-msgstr "Ir adiante"
+msgstr "Avançar"
 
 #: readactivity.py:415
 msgid "Next page"
@@ -171,7 +171,7 @@ msgstr "Aumentar zoom"
 # baseado na tradução que tenho do Evince
 #: readtoolbar.py:209
 msgid "Zoom to width"
-msgstr "Ajustar para largura"
+msgstr "Ajustar para largura de tela"
 
 #: readtoolbar.py:215
 msgid "Zoom to fit"
@@ -191,19 +191,19 @@ msgstr "Girar para a esquerda"
 
 #: readtoolbar.py:258
 msgid "Rotate right"
-msgstr "Girar para a direira"
+msgstr "Girar para a direita"
 
 #: readtoolbar.py:324
 msgid "Show Tray"
-msgstr "Mostrar Trilha"
+msgstr "Mostrar Bandeja"
 
 #: readtoolbar.py:326
 msgid "Hide Tray"
-msgstr "Ocultar Trilha"
+msgstr "Ocultar Bandeja"
 
 #: linkbutton.py:133
 msgid "Go to Bookmark"
-msgstr "Vá para os favoritos"
+msgstr "Ir para os favoritos"
 
 #: linkbutton.py:139
 msgid "Remove"
@@ -230,7 +230,7 @@ msgstr "Favorito para página %d"
 
 #: comicadapter.py:69
 msgid "Can not read Comic Book Archive"
-msgstr "Não é possível ler o Arquivo de Histórias em Quadrinhos"
+msgstr "Não é possível ler o arquivo de Histórias em Quadrinhos"
 
 #: comicadapter.py:70
 msgid "No readable images were found"
