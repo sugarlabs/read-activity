@@ -7,3 +7,4 @@ locale
 MANIFEST
 dist/
 epubview/.svn/
+.flake8
