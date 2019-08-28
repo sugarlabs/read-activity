@@ -93,11 +93,11 @@ def _get_screen_dpi():
 def get_md5(filename):
     # FIXME: Should be moved somewhere else
     filename = filename.replace('file://', '')  # XXX: hack
-    fh = open(filename)
+    fh = open(filename, 'rb')
     digest = hashlib.md5()
     while 1:
         buf = fh.read(4096)
-        if buf == "":
+        if buf == b'':
             break
         digest.update(buf)
     fh.close()
