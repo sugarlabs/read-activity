@@ -177,7 +177,9 @@ class ViewToolbar(Gtk.Toolbar):
         'toggle-index-show': (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE,
                               ([bool])),
         'toggle-tray-show': (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE,
-                             ([bool])), }
+                             ([bool])),
+        'toggle-inverted-colors': (GObject.SignalFlags.RUN_FIRST,
+                                   GObject.TYPE_NONE, ([bool])), }
 
     def __init__(self):
         Gtk.Toolbar.__init__(self)
@@ -260,6 +262,17 @@ class ViewToolbar(Gtk.Toolbar):
         self.insert(self._rotate_right, -1)
         self._rotate_right.show()
 
+        spacer = Gtk.SeparatorToolItem()
+        self.insert(spacer, -1)
+        spacer.show()
+
+        self._inverted_colors = ToggleToolButton(icon_name='dark-theme')
+        self._inverted_colors.set_tooltip(_('Inverted Colors'))
+        self._inverted_colors.set_accelerator('<Ctrl>i')
+        self._inverted_colors.connect(
+            'toggled', self.__inverted_colors_toggled_cb)
+        self.insert(self._inverted_colors, -1)
+
     def set_view(self, view):
         self._view = view
         self._update_zoom_buttons()
@@ -324,3 +337,19 @@ class ViewToolbar(Gtk.Toolbar):
             self.traybutton.set_tooltip(_('Show Tray'))
         else:
             self.traybutton.set_tooltip(_('Hide Tray'))
+
+    def __inverted_colors_toggled_cb(self, button):
+        self.emit('toggle-inverted-colors', button.props.active)
+        if button.props.active:
+            button.set_icon_name('light-theme')
+            button.set_tooltip(_('Normal Colors'))
+        else:
+            button.set_icon_name('dark-theme')
+            button.set_tooltip(_('Inverted Colors'))
+
+    def show_inverted_colors_button(self):
+        self._inverted_colors.show()
+
+    def toggle_inverted_colors(self):
+        self._inverted_colors.set_active(
+            not self._inverted_colors.get_active())

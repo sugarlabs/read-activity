@@ -207,12 +207,20 @@ msgstr ""
 msgid "Rotate right"
 msgstr ""
 
+#: readtoolbar.py:270 readtoolbar.py:348
+msgid "Inverted Colors"
+msgstr ""
+
 #: readtoolbar.py:324
 msgid "Show Tray"
 msgstr ""
 
 #: readtoolbar.py:326
 msgid "Hide Tray"
+msgstr ""
+
+#: readtoolbar.py:345
+msgid "Normal Colors"
 msgstr ""
 
 #: speechtoolbar.py:57
