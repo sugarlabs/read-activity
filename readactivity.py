@@ -238,6 +238,8 @@ class ReadActivity(activity.Activity):
                                    self.__toogle_navigator_cb)
         self._view_toolbar.connect('toggle-tray-show',
                                    self.__toogle_tray_cb)
+        self._view_toolbar.connect('toggle-inverted-colors',
+                                   self.__toggle_inverted_colors_cb)
         view_toolbar_button = ToolbarButton(page=self._view_toolbar,
                                             icon_name='toolbar-view')
         self._view_toolbar.show()
@@ -516,6 +518,10 @@ class ReadActivity(activity.Activity):
         else:
             logging.debug('Hide tray')
             self.tray.hide()
+
+    def __toggle_inverted_colors_cb(self, button, active):
+        if hasattr(self._view._model, 'set_inverted_colors'):
+            self._view._model.set_inverted_colors(active)
 
     def __num_page_entry_insert_text_cb(self, entry, text, length, position):
         if not re.match('[0-9]', text):
@@ -994,6 +1000,7 @@ class ReadActivity(activity.Activity):
         else:
             import evinceadapter
             self._view = evinceadapter.EvinceViewer()
+            self._view_toolbar.show_inverted_colors_button()
 
         self._view.setup(self)
         self._view.load_document(filepath)
@@ -1182,6 +1189,9 @@ class ReadActivity(activity.Activity):
             return True
         elif keyname == 'KP_End':
             self._view_toolbar.zoom_out()
+            return True
+        elif keyname == 'i' and event.state & Gdk.ModifierType.CONTROL_MASK:
+            self._view_toolbar.toggle_inverted_colors()
             return True
         elif keyname == 'Home':
             self._view.scroll(Gtk.ScrollType.START, False)
