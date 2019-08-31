@@ -235,9 +235,9 @@ class ReadActivity(activity.Activity):
         self._view_toolbar.connect('go-fullscreen',
                                    self.__view_toolbar_go_fullscreen_cb)
         self._view_toolbar.connect('toggle-index-show',
-                                   self.__toogle_navigator_cb)
+                                   self.__toggle_navigator_cb)
         self._view_toolbar.connect('toggle-tray-show',
-                                   self.__toogle_tray_cb)
+                                   self.__toggle_tray_cb)
         self._view_toolbar.connect('toggle-inverted-colors',
                                    self.__toggle_inverted_colors_cb)
         view_toolbar_button = ToolbarButton(page=self._view_toolbar,
@@ -492,7 +492,7 @@ class ReadActivity(activity.Activity):
         self._toc_model = model
         self._navigator.set_model(model)
 
-    def __toogle_navigator_cb(self, button, visible):
+    def __toggle_navigator_cb(self, button, visible):
         scrollbar_pos = -1
         if hasattr(self._view, 'get_vertical_pos'):
             scrollbar_pos = self._view.get_vertical_pos()
@@ -511,7 +511,7 @@ class ReadActivity(activity.Activity):
         if scrollbar_pos > -1:
             self._view.set_vertical_pos(scrollbar_pos)
 
-    def __toogle_tray_cb(self, button, visible):
+    def __toggle_tray_cb(self, button, visible):
         if visible:
             logging.debug('Show tray')
             self.tray.show()
