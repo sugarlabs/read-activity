@@ -791,7 +791,7 @@ class ReadActivity(activity.Activity):
             self.filehash = get_md5(file_path)
         self.metadata['filehash'] = self.filehash
 
-        self._save_bookmars_in_metadata()
+        self._save_bookmarks_in_metadata()
 
         if self._close_requested:
             _logger.debug("Removing temp file %s because we will close",
@@ -807,7 +807,7 @@ class ReadActivity(activity.Activity):
 
             self._tempfile = None
 
-    def _save_bookmars_in_metadata(self):
+    def _save_bookmarks_in_metadata(self):
         # save bookmarks in the metadata
         bookmarks = []
         for bookmark in self._bookmarkmanager.get_bookmarks():
@@ -1105,7 +1105,7 @@ class ReadActivity(activity.Activity):
 
     def create_metadata_file(self):
         # store the metadata in a json file
-        self._save_bookmars_in_metadata()
+        self._save_bookmarks_in_metadata()
         metadata_file_path = self._tempfile + '.json'
 
         shared_metadata = {}
