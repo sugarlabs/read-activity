@@ -77,8 +77,8 @@ class TextViewer(GObject.GObject):
 
         activity._hbox.pack_start(overlay, True, True, 0)
 
-        self._font_size = style.zoom(10)
-        self.font_desc = Pango.FontDescription("sans %d" % self._font_size)
+        self._font_size = style.zoom(12)
+        self.font_desc = Pango.FontDescription("mono %d" % self._font_size)
         self.textview.modify_font(self.font_desc)
         self._zoom = 100
         self.font_zoom_relation = self._zoom / self._font_size
