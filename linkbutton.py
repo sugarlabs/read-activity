@@ -61,7 +61,7 @@ class LinkButton(TrayButton, GObject.GObject):
         stroke = self._color.split(',')[0]
         self._have_preview = True
         img = Gtk.Image()
-        str_buf = io.StringIO(buf)
+        str_buf = io.BytesIO(buf)
         thumb_surface = cairo.ImageSurface.create_from_png(str_buf)
 
         bg_width, bg_height = style.zoom(120), style.zoom(110)

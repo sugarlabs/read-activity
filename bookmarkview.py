@@ -105,8 +105,8 @@ class BookmarkView(Gtk.EventBox):
             # TRANS: (the elapsed string gets translated automatically)
             tooltip_footer = (
                 _('Bookmark added by %(user)s %(time)s')
-                % {'user': bookmark.nick.decode('utf-8'),
-                   'time': time.decode('utf-8')})
+                % {'user': bookmark.nick,
+                   'time': time})
 
             l = Gtk.Label('<big>%s</big>' % tooltip_header)
             l.set_use_markup(True)
