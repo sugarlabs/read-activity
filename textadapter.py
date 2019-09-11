@@ -81,7 +81,7 @@ class TextViewer(GObject.GObject):
         self.font_desc = Pango.FontDescription("mono %d" % self._font_size)
         self.textview.modify_font(self.font_desc)
         self._zoom = 100
-        self.font_zoom_relation = self._zoom / self._font_size
+        self.font_zoom_relation = self._zoom // self._font_size
         self._current_page = 0
 
         self.highlight_tag = self.textview.get_buffer().create_tag()
@@ -122,7 +122,7 @@ class TextViewer(GObject.GObject):
             line = self._etext_file.readline()
             if not line:
                 break
-            line_increment = (len(line) / 80) + 1
+            line_increment = (len(line) // 80) + 1
             linecount = linecount + line_increment
             if linecount >= PAGE_SIZE:
                 position = self._etext_file.tell()
@@ -131,10 +131,10 @@ class TextViewer(GObject.GObject):
                 pagecount = pagecount + 1
         self._pagecount = pagecount + 1
         self.set_current_page(0)
-        self._scrollbar.set_range(1.0, self._pagecount - 1.0)
+        self._scrollbar.set_range(0.0, self._pagecount - 1.0)
         self._scrollbar.set_increments(1.0, 1.0)
 
-        # TODO: if ever sugar3.speech has word signals
+        # TODO: now that sugar3.speech has word signals
         # call self.highlight_next_word on each word
         # call self.reset_text_to_speech at end
 
@@ -149,8 +149,8 @@ class TextViewer(GObject.GObject):
                 break
             else:
                 line = _clean_text(line)
-                label_text = label_text + str(line,  "iso-8859-1")
-            line_increment = (len(line) / 80) + 1
+                label_text = label_text + line
+            line_increment = (len(line) // 80) + 1
             linecount = linecount + line_increment
         textbuffer = self.textview.get_buffer()
         label_text = label_text + '\n\n\n'
@@ -177,7 +177,7 @@ class TextViewer(GObject.GObject):
 
     def _scrollbar_change_value_cb(self, range, scrolltype, value):
         """
-        This is the fake scrollbar visible, used to show the lenght of the book
+        This is the fake scrollbar visible, used to show the length of the book
         """
         old_page = self._current_page
         if scrolltype == Gtk.ScrollType.STEP_FORWARD:
@@ -190,7 +190,7 @@ class TextViewer(GObject.GObject):
                 scrolltype == Gtk.ScrollType.PAGE_FORWARD or \
                 scrolltype == Gtk.ScrollType.PAGE_BACKWARD:
             if value > self._scrollbar.props.adjustment.props.upper:
-                value = self._pagecount
+                value = self._pagecount - 1
             self._show_page(int(value))
             self._current_page = int(value)
             self.emit('page-changed', old_page, self._current_page)
@@ -205,9 +205,9 @@ class TextViewer(GObject.GObject):
         if event.type == Gdk.EventType.TOUCH_BEGIN:
             x = event.touch.x
             view_width = widget.get_allocation().width
-            if x > view_width * 3 / 4:
+            if x > view_width * 3 // 4:
                 self.scroll(Gtk.ScrollType.PAGE_FORWARD, False)
-            elif x < view_width * 1 / 4:
+            elif x < view_width * 1 // 4:
                 self.scroll(Gtk.ScrollType.PAGE_BACKWARD, False)
 
     def can_highlight(self):
@@ -325,14 +325,14 @@ class TextViewer(GObject.GObject):
             v_adjustment = self._sw.get_vadjustment()
             max_pos = v_adjustment.get_upper() - v_adjustment.get_page_size()
             max_pos = max_pos * word_count
-            max_pos = max_pos / len(self.word_tuples)
+            max_pos = max_pos // len(self.word_tuples)
             v_adjustment.set_value(max_pos)
             self.current_word = word_count
         return True
 
     def update_metadata(self, activity):
         self.metadata = activity.metadata
-        self.metadata['Read_zoom'] = self.get_zoom()
+        self.metadata['Read_zoom'] = str(self.get_zoom())
 
     def load_metadata(self, activity):
         self.metadata = activity.metadata
@@ -401,12 +401,13 @@ class TextViewer(GObject.GObject):
         v_adjustment = self._sw.get_vadjustment()
         v_adjustment.set_value(v_adjustment.get_upper() -
                                v_adjustment.get_page_size())
-        self.set_current_page(self.get_current_page() - 1)
+        self.set_current_page(max(0, self.get_current_page() - 1))
 
     def next_page(self):
         v_adjustment = self._sw.get_vadjustment()
         v_adjustment.set_value(v_adjustment.get_lower())
-        self.set_current_page(self.get_current_page() + 1)
+        self.set_current_page(
+            min(self._pagecount - 1, self.get_current_page() + 1))
 
     def get_current_page(self):
         return self._current_page
@@ -476,7 +477,7 @@ class TextViewer(GObject.GObject):
 
     def set_zoom(self, value):
         self._zoom = value
-        self._font_size = int(self._zoom / self.font_zoom_relation)
+        self._font_size = self._zoom // self.font_zoom_relation
         self.font_desc.set_size(self._font_size * 1024)
         self.textview.modify_font(self.font_desc)
 
@@ -590,12 +591,12 @@ class _SearchThread(threading.Thread):
         self._current_found_item = -1
         self.obj._text_file.seek(0)
         while self.obj._text_file:
-            line = str(self.obj._text_file.readline(), "iso-8859-1")
+            line = self.obj._text_file.readline()
             line = _clean_text(line)
             line_length = len(line)
             if not line:
                 break
-            line_increment = (len(line) / 80) + 1
+            line_increment = (len(line) // 80) + 1
             linecount = linecount + line_increment
             positions = self._allindices(line.lower(), self.obj._text.lower())
             for position in positions:
