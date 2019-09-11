@@ -616,7 +616,11 @@ class ReadActivity(activity.Activity):
         self._forward_button.props.sensitive = \
             current_page < self._view.get_pagecount() - 1
 
+        self._num_page_entry.handler_block_by_func(
+            self.__num_page_entry_insert_text_cb)
         self._num_page_entry.props.text = str(current_page + 1)
+        self._num_page_entry.handler_unblock_by_func(
+            self.__num_page_entry_insert_text_cb)
         self._set_total_page_label(self._view.get_pagecount())
 
     def _update_toc(self):
