@@ -43,7 +43,7 @@ class TextViewer(GObject.GObject):
         self.textview.set_cursor_visible(False)
         self.textview.set_left_margin(50)
         self.textview.set_right_margin(50)
-        self.textview.set_justification(Gtk.Justification.FILL)
+        self.textview.set_justification(Gtk.Justification.LEFT)
         self.textview.set_wrap_mode(Gtk.WrapMode.WORD)
         self.textview.connect('button-release-event',
                               self._view_buttonrelease_event_cb)
