@@ -1,3 +1,11 @@
+123
+
+* Use named arguments in translatable strings (Hrishi Patel),
+* Add dark mode for PDFs (Swarup N),
+* Port to Python 3 (Rahul Bothra, James Cameron),
+* Text objects show left justify and monospaced (James Cameron),
+* Remove speech language choice (James Cameron),
+
 122
 
 * Restore EPUB support for WebKit 3.0 API (Lubomir Rintel),
