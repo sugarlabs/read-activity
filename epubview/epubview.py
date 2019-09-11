@@ -23,14 +23,14 @@ from gi.repository import Gtk
 from gi.repository import GObject
 from gi.repository import Gdk
 from gi.repository import WebKit2
-import widgets
+from . import widgets
 
 import logging
 import os.path
 import math
 import shutil
 
-from jobs import _JobPaginator as _Paginator
+from .jobs import _JobPaginator as _Paginator
 
 LOADING_HTML = '''
 <html style="height: 100%; margin: 0; padding: 0; width: 100%;">
@@ -484,7 +484,7 @@ class _View(Gtk.HBox):
         j = 0
         word_begin = 0
         word_end = 0
-        ignore_chars = [' ',  '\n',  u'\r',  '_',  '[', '{', ']', '}', '|',
+        ignore_chars = [' ',  '\n',  '\r',  '_',  '[', '{', ']', '}', '|',
                         '<',  '>',  '*',  '+',  '/',  '\\']
         ignore_set = set(ignore_chars)
         self.word_tuples = []
@@ -499,7 +499,7 @@ class _View(Gtk.HBox):
                     i = j
                 word_tuple = (word_begin, word_end,
                               page_text[word_begin: word_end])
-                if word_tuple[2] != u'\r':
+                if word_tuple[2] != '\r':
                     self.word_tuples.append(word_tuple)
             i = i + 1
 
@@ -625,8 +625,8 @@ class _View(Gtk.HBox):
             else:
                 self._load_page(int(value))
         else:
-            print 'Warning: unknown scrolltype %s with value %f' \
-                % (str(scrolltype), value)
+            print('Warning: unknown scrolltype %s with value %f' \
+                % (str(scrolltype), value))
 
         # FIXME: This should not be needed here
         self._scrollbar.set_value(self._loaded_page)

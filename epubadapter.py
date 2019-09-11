@@ -5,7 +5,7 @@ import epubview
 
 # import speech
 
-from cStringIO import StringIO
+from io import StringIO
 
 _logger = logging.getLogger('read-activity')
 
@@ -51,7 +51,7 @@ class EpubViewer(epubview.EpubView):
 
     def update_metadata(self, activity):
         self.metadata = activity.metadata
-        self.metadata['Read_zoom'] = self.get_zoom()
+        self.metadata['Read_zoom'] = str(self.get_zoom())
 
     def zoom_to_width(self):
         pass

@@ -23,11 +23,11 @@ from gi.repository import GObject
 from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import WebKit2
-import widgets
+from . import widgets
 import math
 import os.path
 import xml.etree.ElementTree as etree
-import htmlentitydefs as html_entities
+import html.entities as html_entities
 
 import threading
 
@@ -69,8 +69,8 @@ class SearchThread(threading.Thread):
 
     def _searchfile(self, fileobj):
         parser = etree.XMLParser(html=1)
-        for name, codepoint in html_entities.name2codepoint.iteritems():
-            parser.entity[name] = unichr(codepoint)
+        for name, codepoint in html_entities.name2codepoint.items():
+            parser.entity[name] = chr(codepoint)
         tree = etree.parse(fileobj, parser=parser)
         root = tree.getroot()
 
@@ -230,7 +230,7 @@ class _JobPaginator(GObject.GObject):
         '''
         Returns the pageno which begins in filename
         '''
-        for key in self._pagemap.keys():
+        for key in list(self._pagemap.keys()):
             if self._pagemap[key][0].replace('file://', '') == filename:
                 return key
 

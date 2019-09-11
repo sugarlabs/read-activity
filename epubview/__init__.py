@@ -15,6 +15,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from epub import _Epub as Epub
-from epubview import _View as EpubView
-from jobs import _JobFind as JobFind
+from .epub import _Epub as Epub
+from .epubview import _View as EpubView
+from .jobs import _JobFind as JobFind

@@ -22,8 +22,8 @@ import xml.etree.ElementTree as etree
 import shutil
 import logging
 
-import navmap
-import epubinfo
+from . import navmap
+from . import epubinfo
 
 
 class _Epub(object):
@@ -40,7 +40,7 @@ class _Epub(object):
         self._tempdir = tempfile.mkdtemp()
 
         if not self._verify():
-            print 'Warning: This does not seem to be a valid epub file'
+            print('Warning: This does not seem to be a valid epub file')
 
         self._get_opf()
         self._get_ncx()
@@ -111,7 +111,7 @@ class _Epub(object):
         Method to crudely check to verify that what we
         are dealing with is a epub file or not
         '''
-        if isinstance(self._file, basestring):
+        if isinstance(self._file, str):
             if not os.path.exists(self._file):
                 return False
 
@@ -124,7 +124,7 @@ class _Epub(object):
         mimetype = mtypefile.readline()
 
         # Some files seem to have trailing characters
-        if not mimetype.startswith('application/epub+zip'):
+        if not mimetype.startswith(b'application/epub+zip'):
             return False
 
         return True
