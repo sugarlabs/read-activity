@@ -1336,6 +1336,6 @@ class ReadActivity(activity.Activity):
         cr.set_source_surface(screenshot_surface)
         cr.paint()
 
-        preview_str = io.StringIO()
+        preview_str = io.BytesIO()
         preview_surface.write_to_png(preview_str)
         return preview_str.getvalue()
