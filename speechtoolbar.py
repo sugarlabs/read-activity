@@ -14,16 +14,12 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import os
-import json
 from gettext import gettext as _
 
 from gi.repository import Gtk
 
 from sugar3.graphics.toolbutton import ToolButton
 from sugar3.graphics.toggletoolbutton import ToggleToolButton
-from sugar3.graphics.combobox import ComboBox
-from sugar3.graphics.toolcombobox import ToolComboBox
 from sugar3.speech import SpeechManager
 
 
