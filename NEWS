@@ -1,3 +1,11 @@
+118.2
+
+* Remove more unnecessary errors from log (James Cameron)
+* New translations (Chris Leonard, et al)
+* Add dark mode for PDFs (Swarup N),
+* Text objects show left justify and monospaced (James Cameron),
+* Remove speech language choice (James Cameron),
+
 118.1
 
 * New translations (Chris Leonard, et al)
