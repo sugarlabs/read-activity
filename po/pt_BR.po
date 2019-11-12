@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: pt_BR\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-24 17:39+1100\n"
-"PO-Revision-Date: 2018-09-05 18:37+0000\n"
+"PO-Revision-Date: 2019-03-09 01:02+0000\n"
 "Last-Translator: Paulo Francisco <slomp@ufrgs.br>\n"
 "Language-Team: Brazilian Portuguese <fedora-docs-br@redhat.com>\n"
 "Language: pt_BR\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.1.1\n"
-"X-POOTLE-MTIME: 1536172654.000000\n"
+"X-POOTLE-MTIME: 1552093329.000000\n"
 
 #: activity/activity.info:2
 msgid "Read"
@@ -105,11 +105,11 @@ msgstr "Avançar"
 
 #: readactivity.py:415
 msgid "Next page"
-msgstr "Próxima Página"
+msgstr "Próxima página"
 
 #: readactivity.py:417
 msgid "Next bookmark"
-msgstr "Próximo Favorito"
+msgstr "Próximo favorito"
 
 #: readactivity.py:468
 msgid "Index"
@@ -146,15 +146,15 @@ msgstr "Realçar"
 
 #: readtoolbar.py:160
 msgid "Find first"
-msgstr "Buscar Primeiro"
+msgstr "Buscar primeiro"
 
 #: readtoolbar.py:166
 msgid "Find previous"
-msgstr "Buscar Anterior"
+msgstr "Buscar anterior"
 
 #: readtoolbar.py:168
 msgid "Find next"
-msgstr "Buscar Próximo"
+msgstr "Buscar próximo"
 
 #: readtoolbar.py:188
 msgid "Table of contents"
