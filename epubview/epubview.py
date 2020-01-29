@@ -366,7 +366,10 @@ class _View(Gtk.HBox):
         scroll_page_size = self._view.get_allocated_height()
 
         if scrollval > 0:
-            scrollfactor = scrollval / (scroll_upper - scroll_page_size)
+            try:
+                scrollfactor = scrollval / (scroll_upper - scroll_page_size)
+            except ZeroDivisionError:
+                scrollfactor = 0
         else:
             scrollfactor = 0
 
