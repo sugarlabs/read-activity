@@ -142,7 +142,8 @@ class _JobPaginator(GObject.GObject):
 
         self._dpi = Gdk.Screen.get_default().get_resolution()
         self._single_page_height = _mm_to_pixel(PAGE_HEIGHT, self._dpi)
-        self._temp_view.set_size_request(_mm_to_pixel(PAGE_WIDTH, self._dpi), self._single_page_height)
+        self._temp_view.set_size_request(
+            _mm_to_pixel(PAGE_WIDTH, self._dpi), self._single_page_height)
 
         self._temp_win.add(self._temp_view)
         self._temp_view.connect('load-changed', self._page_load_changed_cb)

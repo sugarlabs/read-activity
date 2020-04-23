@@ -34,13 +34,16 @@ from .jobs import _JobPaginator as _Paginator
 
 LOADING_HTML = '''
 <html style="height: 100%; margin: 0; padding: 0; width: 100%;">
-    <body style="display: table; height: 100%; margin: 0; padding: 0; width: 100%;">
-        <div style="display: table-cell; text-align: center; vertical-align: middle;">
+    <body style="display: table; height: 100%; margin: 0; padding: 0;
+        width: 100%;">
+        <div style="display: table-cell; text-align: center;
+            vertical-align: middle;">
             <h1>Loading...</h1>
         </div>
     </body>
 </html>
 '''
+
 
 class _View(Gtk.HBox):
 
@@ -90,7 +93,8 @@ class _View(Gtk.HBox):
         self._view.connect('scrolled', self._view_scrolled_cb)
         self._view.connect('scrolled-top', self._view_scrolled_top_cb)
         self._view.connect('scrolled-bottom', self._view_scrolled_bottom_cb)
-        self._view.connect('selection-changed', self._view_selection_changed_cb)
+        self._view.connect(
+            'selection-changed', self._view_selection_changed_cb)
 
         find = self._view.get_find_controller()
         find.connect('failed-to-find-text', self._find_failed_cb)
@@ -286,15 +290,19 @@ class _View(Gtk.HBox):
         Gtk.ScrollType.STEP_START and Gtk.ScrollType.STEP_END
         '''
         if scrolltype == Gtk.ScrollType.PAGE_BACKWARD:
-            pages = self._paginator.get_pagecount_for_file(self._loaded_filename)
+            pages = self._paginator.get_pagecount_for_file(
+                self._loaded_filename)
             self._view.scroll_by(self._page_height / pages * -1)
         elif scrolltype == Gtk.ScrollType.PAGE_FORWARD:
-            pages = self._paginator.get_pagecount_for_file(self._loaded_filename)
+            pages = self._paginator.get_pagecount_for_file(
+                self._loaded_filename)
             self._view.scroll_by(self._page_height / pages * 1)
         elif scrolltype == Gtk.ScrollType.STEP_BACKWARD:
-            self._view.scroll_by(self._view.get_settings().get_default_font_size() * -3)
+            self._view.scroll_by(
+                self._view.get_settings().get_default_font_size() * -3)
         elif scrolltype == Gtk.ScrollType.STEP_FORWARD:
-            self._view.scroll_by(self._view.get_settings().get_default_font_size() * 3)
+            self._view.scroll_by(
+                self._view.get_settings().get_default_font_size() * 3)
         elif scrolltype == Gtk.ScrollType.START:
             self.set_current_page(0)
         elif scrolltype == Gtk.ScrollType.END:
@@ -349,9 +357,9 @@ class _View(Gtk.HBox):
         self._view.grab_focus()
         self._findjob = job
         find = self._view.get_find_controller()
-        find.search (self._findjob.get_search_text(),
-                     self._findjob.get_flags(),
-                     GObject.G_MAXUINT)
+        find.search(self._findjob.get_search_text(),
+                    self._findjob.get_flags(),
+                    GObject.G_MAXUINT)
 
     def __set_zoom(self, value):
         self._view.set_zoom_level(value)
@@ -374,8 +382,8 @@ class _View(Gtk.HBox):
             scrollfactor = 0
 
         if not self._loaded_page == self._pagecount and \
-           not self._paginator.get_file_for_pageno(self._loaded_page) != \
-               self._paginator.get_file_for_pageno(self._loaded_page + 1):
+            not self._paginator.get_file_for_pageno(self._loaded_page) != \
+                self._paginator.get_file_for_pageno(self._loaded_page + 1):
 
             scrollfactor_next = \
                 self._paginator.get_scrollfactor_pos_for_pageno(
@@ -385,8 +393,8 @@ class _View(Gtk.HBox):
                 return
 
         if self._loaded_page > 1 and \
-           not self._paginator.get_file_for_pageno(self._loaded_page) != \
-               self._paginator.get_file_for_pageno(self._loaded_page - 1):
+            not self._paginator.get_file_for_pageno(self._loaded_page) != \
+                self._paginator.get_file_for_pageno(self._loaded_page - 1):
 
             scrollfactor_cur = \
                 self._paginator.get_scrollfactor_pos_for_pageno(
@@ -441,9 +449,9 @@ class _View(Gtk.HBox):
         if self.__in_search:
             self.__in_search = False
             find = self._view.get_find_controller()
-            find.search (self._findjob.get_search_text(),
-                         self._findjob.get_flags(self.__search_fwd),
-                         GObject.G_MAXUINT)
+            find.search(self._findjob.get_search_text(),
+                        self._findjob.get_flags(self.__search_fwd),
+                        GObject.G_MAXUINT)
         else:
             self._scroll_page()
 
@@ -487,8 +495,8 @@ class _View(Gtk.HBox):
         j = 0
         word_begin = 0
         word_end = 0
-        ignore_chars = [' ',  '\n',  '\r',  '_',  '[', '{', ']', '}', '|',
-                        '<',  '>',  '*',  '+',  '/',  '\\']
+        ignore_chars = [' ', '\n', '\r', '_', '[', '{', ']', '}', '|',
+                        '<', '>', '*', '+', '/', '\\']
         ignore_set = set(ignore_chars)
         self.word_tuples = []
         len_page_text = len(page_text)
@@ -514,8 +522,9 @@ class _View(Gtk.HBox):
             self.__scroll_to_end = False
         else:
             pageno = self._loaded_page
-            scrollfactor = self._paginator.get_scrollfactor_pos_for_pageno(pageno)
-            scrollval = math.ceil(v_upper  * scrollfactor)
+            scrollfactor = self._paginator.get_scrollfactor_pos_for_pageno(
+                pageno)
+            scrollval = math.ceil(v_upper * scrollfactor)
         self._view.scroll_to(scrollval)
 
     def _paginate(self):
@@ -628,8 +637,8 @@ class _View(Gtk.HBox):
             else:
                 self._load_page(int(value))
         else:
-            print('Warning: unknown scrolltype %s with value %f' \
-                % (str(scrolltype), value))
+            print('Warning: unknown scrolltype %s with value %f' %
+                  (str(scrolltype), value))
 
         # FIXME: This should not be needed here
         self._scrollbar.set_value(self._loaded_page)
