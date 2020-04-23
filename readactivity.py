@@ -55,16 +55,11 @@ from sugar3.activity.widgets import StopButton
 from sugar3.graphics.tray import HTray
 from sugar3.graphics.menuitem import MenuItem
 from sugar3 import network
-from sugar3 import mime
 from sugar3 import profile
 
 from sugar3.datastore import datastore
 from sugar3.graphics.objectchooser import ObjectChooser
-try:
-    from sugar3.graphics.objectchooser import FILTER_TYPE_MIME_BY_ACTIVITY
-except:
-    FILTER_TYPE_MIME_BY_ACTIVITY = 'mime_by_activity'
-
+from sugar3.graphics.objectchooser import FILTER_TYPE_MIME_BY_ACTIVITY
 from sugar3.graphics import style
 
 import emptypanel
@@ -674,13 +669,9 @@ class ReadActivity(activity.Activity):
         if not self._want_document:
             return
 
-        try:
-            chooser = ObjectChooser(parent=self,
-                                    what_filter=self.get_bundle_id(),
-                                    filter_type=FILTER_TYPE_MIME_BY_ACTIVITY)
-        except:
-            chooser = ObjectChooser(parent=self,
-                                    what_filter=mime.GENERIC_TYPE_TEXT)
+        chooser = ObjectChooser(parent=self,
+                                what_filter=self.get_bundle_id(),
+                                filter_type=FILTER_TYPE_MIME_BY_ACTIVITY)
 
         try:
             result = chooser.run()
