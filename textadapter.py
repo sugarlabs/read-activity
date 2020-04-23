@@ -281,7 +281,7 @@ class TextViewer(GObject.GObject):
         while i < len(self.word_tuples):
             word_tuple = self.word_tuples[i]
             marked_up_text = marked_up_text + \
-              ' <mark name="' + str(i) + '"/>' + word_tuple[2]
+                ' <mark name="' + str(i) + '"/>' + word_tuple[2]
             i = i + 1
         print(marked_up_text)
         return marked_up_text + '</speak>'
@@ -294,8 +294,8 @@ class TextViewer(GObject.GObject):
         j = 0
         word_begin = 0
         word_end = 0
-        ignore_chars = [' ',  '\n',  '\r',  '_',  '[', '{', ']', '}', '|',
-                        '<',  '>',  '*',  '+',  '/',  '\\']
+        ignore_chars = [' ', '\n', '\r', '_', '[', '{', ']', '}', '|',
+                        '<', '>', '*', '+', '/', '\\']
         ignore_set = set(ignore_chars)
         self.word_tuples = []
         len_page_text = len(page_text)

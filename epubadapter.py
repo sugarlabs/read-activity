@@ -80,28 +80,28 @@ class EpubViewer(epubview.EpubView):
         else:
             # need remove the highlight nodes
             js = '''
-                (function(){
-                    var selObj = window.getSelection();
-                    if (selObj.rangeCount < 1)
-                        return;
-                    var range  = selObj.getRangeAt(0);
-                    var node = range.startContainer;
-                    while (node.parentNode != null) {
-                      if (node.localName == "span") {
-                        if (node.hasAttributes()) {
-                          var attrs = node.attributes;
-                          for (var i = attrs.length - 1; i >= 0; i--) {
-                            if (attrs[i].name == "style" &&
-                                attrs[i].value == "background-color: yellow;") {
-                              node.removeAttribute("style");
-                              break;
-                            };
-                          };
-                        };
-                      };
-                      node = node.parentNode;
-                    };
-                }())
+(function(){
+    var selObj = window.getSelection();
+    if (selObj.rangeCount < 1)
+        return;
+    var range  = selObj.getRangeAt(0);
+    var node = range.startContainer;
+    while (node.parentNode != null) {
+      if (node.localName == "span") {
+        if (node.hasAttributes()) {
+          var attrs = node.attributes;
+          for (var i = attrs.length - 1; i >= 0; i--) {
+            if (attrs[i].name == "style" &&
+                attrs[i].value == "background-color: yellow;") {
+              node.removeAttribute("style");
+              break;
+            };
+          };
+        };
+      };
+      node = node.parentNode;
+    };
+}())
             '''
 
         self._view.run_javascript(js)
@@ -115,7 +115,8 @@ class EpubViewer(epubview.EpubView):
         GObject.idle_add(self._save_page)
 
     def _save_page(self):
-        html = self._view._execute_script_sync("document.documentElement.innerHTML")
+        html = self._view._execute_script_sync(
+            "document.documentElement.innerHTML")
         file_path = self.get_current_file().replace('file:///', '/')
         logging.error(html)
         with open(file_path, 'w') as fd:
@@ -137,29 +138,31 @@ class EpubViewer(epubview.EpubView):
     def in_highlight(self):
         # Verify if the selection already exist or the cursor
         # is in a highlighted area
-        return self._view._execute_script_sync("""
-            (function(){
-                var selObj = window.getSelection();
-                if (selObj.rangeCount < 1)
-                    return false;
-                var range  = selObj.getRangeAt(0);
-                var node = range.startContainer;
-                while (node.parentNode != null) {
-                  if (node.localName == "span") {
-                    if (node.hasAttributes()) {
-                      var attrs = node.attributes;
-                      for(var i = attrs.length - 1; i >= 0; i--) {
-                        if (attrs[i].name == "style" &&
-                            attrs[i].value == "background-color: yellow;") {
-                          return true;
-                        };
-                      };
-                    };
-                  };
-                  node = node.parentNode;
-                };
-                return false;
-            })()""") == "true", None;
+        return self._view._execute_script_sync(
+            """
+(function(){
+    var selObj = window.getSelection();
+    if (selObj.rangeCount < 1)
+        return false;
+    var range  = selObj.getRangeAt(0);
+    var node = range.startContainer;
+    while (node.parentNode != null) {
+      if (node.localName == "span") {
+        if (node.hasAttributes()) {
+          var attrs = node.attributes;
+          for(var i = attrs.length - 1; i >= 0; i--) {
+            if (attrs[i].name == "style" &&
+                attrs[i].value == "background-color: yellow;") {
+              return true;
+            };
+          };
+        };
+      };
+      node = node.parentNode;
+    };
+    return false;
+})()
+        """) == "true", None
 
     def can_do_text_to_speech(self):
         return False
@@ -198,7 +201,7 @@ class EpubViewer(epubview.EpubView):
     def reset_text_to_speech(self):
         self.current_word = 0
 
-    def highlight_next_word(self,  word_count):
+    def highlight_next_word(self, word_count):
         pass
         """
         TODO: disabled because javascript can't be executed
