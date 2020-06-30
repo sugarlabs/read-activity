@@ -278,7 +278,7 @@ class BookmarkManager(GObject.GObject):
                     self.add_highlight(page, highlight_tuple)
 
     def add_highlight(self, page, highlight_tuple):
-        logging.error('Adding hg page %d %s' % (page, highlight_tuple))
+        logging.debug('Adding hg page %d %s' % (page, highlight_tuple))
         self.get_highlights(page).append(highlight_tuple)
 
         t = (self._filehash, page, highlight_tuple[0], highlight_tuple[1])
