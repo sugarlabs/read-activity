@@ -272,7 +272,7 @@ class EvinceViewer():
         self._model.connect('page-changed', handler)
 
     def update_toc(self, activity):
-        if self._validate_min_version(3, 5, 92):
+        if self._validate_min_version(3, 5):
             # check version because does not work and crash with older evince
             doc = self._model.get_document()
             if not doc.has_document_links():
@@ -292,14 +292,13 @@ class EvinceViewer():
     def handle_link(self, link):
         self._view.handle_link(link)
 
-    def _validate_min_version(self, major, minor, micro):
+    def _validate_min_version(self, major, minor):
         """
         Check if Evince version is at major or equal than the requested
         """
         evince_version = [EvinceDocument.MAJOR_VERSION,
-                          EvinceDocument.MINOR_VERSION,
-                          EvinceDocument.MICRO_VERSION]
-        return evince_version >= [major, minor, micro]
+                          EvinceDocument.MINOR_VERSION]
+        return evince_version >= [major, minor]
 
     def __index_loaded_cb(self, job, activity):
         self._index_model = job.get_model()
