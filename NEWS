@@ -1,3 +1,9 @@
+124
+
+The Evince component used to supply a major version, a minor version, and a micro version. Now it only provides major
+and minor, and because of that the previous version which checked all three would not start. Removed the check
+for the micro version, so the Read Activity can start. (James Simmons)
+
 123
 
 * Use named arguments in translatable strings (Hrishi Patel),
