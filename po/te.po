@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-24 17:39+1100\n"
-"PO-Revision-Date: 2017-03-26 18:42+0000\n"
+"PO-Revision-Date: 2022-07-13 18:46+0000\n"
 "Last-Translator: GeeKrypter <psramaraju@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: te\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.1.1\n"
-"X-POOTLE-MTIME: 1490553774.000000\n"
+"X-POOTLE-MTIME: 1657738016.000000\n"
 
 #: activity/activity.info:2
 msgid "Read"
@@ -82,7 +82,7 @@ msgstr ""
 
 #: readactivity.py:388
 msgid "Choose something to read"
-msgstr ""
+msgstr "చదవడానికి ఏదైనా ఎంచుకోండి"
 
 #: readactivity.py:393
 msgid "Back"
