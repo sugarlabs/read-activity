@@ -8,118 +8,123 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-07 20:17+1100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2024-11-01 07:26+0000\n"
+"Last-Translator: NF <rkavt@smartprojects.ge>\n"
+"Language-Team: Georgian <http://weblate.sugarlabs.org/projects/"
+"sugar-activities/read/ka/>\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.4.2\n"
 
 #: activity/activity.info:2
 msgid "Read"
-msgstr ""
+msgstr "წაკითხვა"
 
 #: activity/activity.info:3
 msgid ""
 "Use this activity when you are ready to read! Remember to flip your computer "
 "around to feel like you are really holding a book!"
 msgstr ""
+"გამოიყენეთ ეს აქტივობა, როცა მზად ბრძანდებით, წაიკითხოთ! დაიმახსოვრეთ, რომ "
+"გადააბრუნოთ თქვენი კომპიუტერი ისე, თითქოს წიგნი გიჭირავთ!"
 
 #: bookmarkview.py:107
 #, python-format
 msgid "Bookmark added by %(user)s %(time)s"
-msgstr ""
+msgstr "სანიშნეს ავტორია %(user)s%(time)s"
 
 #: bookmarkview.py:143 bookmarkview.py:192
 msgid "Add notes for bookmark: "
-msgstr ""
+msgstr "სანიშნესთვის შენიშვნის დამატება: "
 
 #: bookmarkview.py:188
 #, python-format
 msgid "%s's bookmark"
-msgstr ""
+msgstr "%s-ის სანიშნე"
 
 #: bookmarkview.py:189
 #, python-format
 msgid "Bookmark for page %d"
-msgstr ""
+msgstr "სანიშნე გვერდისთვის %d"
 
 #: comicadapter.py:69
 msgid "Can not read Comic Book Archive"
-msgstr ""
+msgstr "კომიქსებს წიგნის არქივის წაკითხვა შეუძლებელია"
 
 #: comicadapter.py:70
 msgid "No readable images were found"
-msgstr ""
+msgstr "წაკითხვადი გამოსახულებები აღმოჩენილი არაა"
 
 #: evinceadapter.py:92
 msgid "URL from Read"
-msgstr ""
+msgstr "URL Read-დან"
 
 #: linkbutton.py:133
 msgid "Go to Bookmark"
-msgstr ""
+msgstr "სანიშნეზე გადასვლა"
 
 #: linkbutton.py:139
 msgid "Remove"
-msgstr ""
+msgstr "წაშლა"
 
 #: readactivity.py:385
 msgid "Please wait"
-msgstr ""
+msgstr "მოითმინეთ"
 
 #: readactivity.py:386
 msgid "Starting connection..."
-msgstr ""
+msgstr "კავშირის დაწყება..."
 
 #: readactivity.py:394
 msgid "No book"
-msgstr ""
+msgstr "წიგნების გარეშე"
 
 #: readactivity.py:394
 msgid "Choose something to read"
-msgstr ""
+msgstr "აირჩიეთ რამე წასაკითხად"
 
 #: readactivity.py:399
 msgid "Back"
-msgstr ""
+msgstr "უკან"
 
 #: readactivity.py:403
 msgid "Previous page"
-msgstr ""
+msgstr "წინა გვერდი"
 
 #: readactivity.py:405
 msgid "Previous bookmark"
-msgstr ""
+msgstr "წინა სანიშნე"
 
 #: readactivity.py:417
 msgid "Forward"
-msgstr ""
+msgstr "წინ"
 
 #: readactivity.py:421
 msgid "Next page"
-msgstr ""
+msgstr "შემდეგი გვერდი"
 
 #: readactivity.py:423
 msgid "Next bookmark"
-msgstr ""
+msgstr "შემდეგი სანიშნე"
 
 #: readactivity.py:474
 msgid "Index"
-msgstr ""
+msgstr "ინდექსი"
 
 #: readactivity.py:570
 msgid "Delete bookmark"
-msgstr ""
+msgstr "სანიშნეს წაშლა"
 
 #: readactivity.py:571
 msgid "All the information related with this bookmark will be lost"
-msgstr ""
+msgstr "ამ სანიშნესთან დაკავშირებული ყველა ინფორმაცია დაიკარგება"
 
 #: readactivity.py:959
 msgid "Receiving book..."
-msgstr ""
+msgstr "წიგნის მიღება..."
 
 #: readactivity.py:1036 readactivity.py:1229
 #, python-format
@@ -128,83 +133,83 @@ msgstr ""
 
 #: readdialog.py:52
 msgid "Cancel"
-msgstr ""
+msgstr "გაუქმება"
 
 #: readdialog.py:58
 msgid "Ok"
-msgstr ""
+msgstr "დიახ"
 
 #: readdialog.py:120
 msgid "<b>Title</b>:"
-msgstr ""
+msgstr "<b>სათაური</b>:"
 
 #: readdialog.py:147
 msgid "<b>Author</b>:"
-msgstr ""
+msgstr "<b>ავტორი</b>:"
 
 #: readdialog.py:163
 msgid "<b>Details</b>:"
-msgstr ""
+msgstr "<b>დეტალები</b>:"
 
 #: readtoolbar.py:61
 msgid "Previous"
-msgstr ""
+msgstr "წინა"
 
 #: readtoolbar.py:68
 msgid "Next"
-msgstr ""
+msgstr "შემდეგი"
 
 #: readtoolbar.py:79
 msgid "Highlight"
-msgstr ""
+msgstr "გამოკვეთა"
 
 #: readtoolbar.py:160
 msgid "Find first"
-msgstr ""
+msgstr "პირველის მოძებნა"
 
 #: readtoolbar.py:166
 msgid "Find previous"
-msgstr ""
+msgstr "წინას მოძებნა"
 
 #: readtoolbar.py:168
 msgid "Find next"
-msgstr ""
+msgstr "შემდეგის მოძებნა"
 
 #: readtoolbar.py:188
 msgid "Table of contents"
-msgstr ""
+msgstr "სარჩევი"
 
 #: readtoolbar.py:197
 msgid "Zoom out"
-msgstr ""
+msgstr "დაპატარავება"
 
 #: readtoolbar.py:203
 msgid "Zoom in"
-msgstr ""
+msgstr "გადიდება"
 
 #: readtoolbar.py:209
 msgid "Zoom to width"
-msgstr ""
+msgstr "ჩატევა სიგანეში"
 
 #: readtoolbar.py:215
 msgid "Zoom to fit"
-msgstr ""
+msgstr "გადიდება ჩატევამდე"
 
 #: readtoolbar.py:221
 msgid "Actual size"
-msgstr ""
+msgstr "ნამდვილი ზომა"
 
 #: readtoolbar.py:232
 msgid "Fullscreen"
-msgstr ""
+msgstr "სრულ ეკრანზე"
 
 #: readtoolbar.py:252
 msgid "Rotate left"
-msgstr ""
+msgstr "შებრუნება მარცხნივ"
 
 #: readtoolbar.py:258
 msgid "Rotate right"
-msgstr ""
+msgstr "შებრუნება მარჯვნივ"
 
 #: readtoolbar.py:270 readtoolbar.py:348
 msgid "Inverted Colors"
@@ -212,11 +217,11 @@ msgstr ""
 
 #: readtoolbar.py:324
 msgid "Show Tray"
-msgstr ""
+msgstr "სისტემური კუთხის ჩვენება"
 
 #: readtoolbar.py:326
 msgid "Hide Tray"
-msgstr ""
+msgstr "სისტემური კუთხის დამალვა"
 
 #: readtoolbar.py:345
 msgid "Normal Colors"
@@ -224,8 +229,13 @@ msgstr ""
 
 #: speechtoolbar.py:65
 msgid "Play / Pause"
-msgstr ""
+msgstr "დაკვრა / შეჩერება"
 
 #: speechtoolbar.py:73
 msgid "Stop"
-msgstr ""
+msgstr "გაჩერება"
+
+#: readactivity.py:1032 readactivity.py:1227
+#, python-format
+msgid "%s (Page %d)"
+msgstr "%s (%d-ე გვერდი)"
