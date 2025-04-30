@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-07 20:17+1100\n"
-"PO-Revision-Date: 2024-11-01 07:26+0000\n"
+"PO-Revision-Date: 2025-04-30 05:36+0000\n"
 "Last-Translator: NF <rkavt@smartprojects.ge>\n"
 "Language-Team: Georgian <http://weblate.sugarlabs.org/projects/"
 "sugar-activities/read/ka/>\n"
@@ -76,7 +76,7 @@ msgstr "მოითმინეთ"
 
 #: readactivity.py:386
 msgid "Starting connection..."
-msgstr "კავშირის დაწყება..."
+msgstr "დაკავსირების დაწყება..."
 
 #: readactivity.py:394
 msgid "No book"
