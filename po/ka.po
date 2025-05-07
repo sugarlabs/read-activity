@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-07 20:17+1100\n"
-"PO-Revision-Date: 2025-04-30 05:36+0000\n"
+"PO-Revision-Date: 2025-05-07 04:48+0000\n"
 "Last-Translator: NF <rkavt@smartprojects.ge>\n"
 "Language-Team: Georgian <http://weblate.sugarlabs.org/projects/"
 "sugar-activities/read/ka/>\n"
@@ -229,7 +229,7 @@ msgstr ""
 
 #: speechtoolbar.py:65
 msgid "Play / Pause"
-msgstr "დაკვრა / შეჩერება"
+msgstr "დაკვრა / პაუზა"
 
 #: speechtoolbar.py:73
 msgid "Stop"
