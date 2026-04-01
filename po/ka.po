@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-07 20:17+1100\n"
-"PO-Revision-Date: 2026-03-18 06:28+0000\n"
+"PO-Revision-Date: 2026-04-01 08:11+0000\n"
 "Last-Translator: NF <rkavt@smartprojects.ge>\n"
 "Language-Team: Georgian <http://weblate.sugarlabs.org/projects/"
 "sugar-activities/read/ka/>\n"
@@ -96,7 +96,7 @@ msgstr "წინა გვერდი"
 
 #: readactivity.py:405
 msgid "Previous bookmark"
-msgstr "წინა სანიშნე"
+msgstr "წინა სანიშნი"
 
 #: readactivity.py:417
 msgid "Forward"
@@ -108,7 +108,7 @@ msgstr "შემდეგი გვერდი"
 
 #: readactivity.py:423
 msgid "Next bookmark"
-msgstr "შემდეგი სანიშნე"
+msgstr "შემდეგი სანიშნი"
 
 #: readactivity.py:474
 msgid "Index"
