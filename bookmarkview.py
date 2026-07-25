@@ -19,13 +19,13 @@ import logging
 
 from gi.repository import GObject
 from gi.repository import Gtk
-from gi.repository import Gdk
+from gi.repository import Graphene
 
-from sugar3.graphics.icon import Icon
-from sugar3.graphics.xocolor import XoColor
-from sugar3.util import timestamp_to_elapsed_string
-from sugar3.graphics import style
-from sugar3 import profile
+from sugar4.graphics.icon import Icon
+from sugar4.graphics.xocolor import XoColor
+from sugar4.util import timestamp_to_elapsed_string
+from sugar4.graphics import style
+from sugar4 import profile
 
 from readdialog import BookmarkAddDialog, BookmarkEditDialog
 
@@ -35,7 +35,7 @@ from gettext import gettext as _
 _logger = logging.getLogger('read-activity')
 
 
-class BookmarkView(Gtk.EventBox):
+class BookmarkView(Gtk.Box):
 
     __gsignals__ = {
         'bookmark-changed': (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE,
@@ -43,21 +43,26 @@ class BookmarkView(Gtk.EventBox):
     }
 
     def __init__(self):
-        Gtk.EventBox.__init__(self)
-        self._box = Gtk.VButtonBox()
-        self._box.set_layout(Gtk.ButtonBoxStyle.START)
+        super().__init__()
+        self._box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        self._box.set_valign(Gtk.Align.START)
         self._box.set_margin_top(style.GRID_CELL_SIZE / 2)
-        self.add(self._box)
-        self._box.show()
-
+        self.append(self._box)
+        self._box.set_visible(True)
+        self._bookmarks = []
         self._bookmark_icon = None
         self._bookmark_manager = None
         self._is_showing_local_bookmark = False
-        self.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
-        self.connect('draw', self.__draw_cb)
-        self.connect('event', self.__event_cb)
 
-    def __draw_cb(self, widget, ctx):
+        click_controller = Gtk.GestureClick()
+        click_controller.connect('pressed', self.__click_pressed_cb)
+        self.add_controller(click_controller)
+
+    def do_snapshot(self, snapshot):
+        width = self.get_width()
+        height = self.get_height()
+        bounds = Graphene.Rect().init(0, 0, width, height)
+        ctx = snapshot.append_cairo(bounds)
         width = style.GRID_CELL_SIZE
         height = style.GRID_CELL_SIZE * (len(self._bookmarks) + 1)
 
@@ -84,18 +89,17 @@ class BookmarkView(Gtk.EventBox):
                                    pixel_size=style.STANDARD_ICON_SIZE)
         self._bookmark_icon.set_valign(Gtk.Align.START)
 
-        self._box.props.has_tooltip = True
-        self.__box_query_tooltip_cb_id = self._box.connect(
+        self._bookmark_icon.props.has_tooltip = True
+        self.__box_query_tooltip_cb_id = self._bookmark_icon.connect(
             'query_tooltip', self.__bookmark_query_tooltip_cb)
 
-        self._box.pack_start(self._bookmark_icon, False, False, 0)
-        self._bookmark_icon.show_all()
+        self._box.append(self._bookmark_icon)
 
         if bookmark.is_local():
             self._is_showing_local_bookmark = True
 
     def __bookmark_query_tooltip_cb(self, widget, x, y, keyboard_mode, tip):
-        vbox = Gtk.VBox()
+        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         for bookmark in self._bookmarks:
 
             tooltip_header = bookmark.get_note_title()
@@ -108,47 +112,49 @@ class BookmarkView(Gtk.EventBox):
                 % {'user': bookmark.nick,
                    'time': time})
 
-            a = Gtk.Label('<big>%s</big>' % tooltip_header)
+            a = Gtk.Label(label='<big>%s</big>' % tooltip_header)
             a.set_use_markup(True)
             a.set_width_chars(40)
-            a.set_line_wrap(True)
-            vbox.pack_start(a, False, False, 0)
-            a.show()
+            a.set_wrap(True)
+            vbox.append(a)
 
-            a = Gtk.Label('%s' % tooltip_body)
+            a = Gtk.Label(label='%s' % tooltip_body)
             a.set_use_markup(True)
-            a.set_alignment(0, 0)
-            a.set_padding(2, 6)
+            a.set_xalign(0.0)
+            a.set_yalign(0.0)
+            a.set_margin_start(2)
+            a.set_margin_end(2)
+            a.set_margin_top(6)
+            a.set_margin_bottom(6)
             a.set_width_chars(40)
-            a.set_line_wrap(True)
+            a.set_wrap(True)
             a.set_justify(Gtk.Justification.FILL)
-            vbox.pack_start(a, True, True, 0)
-            a.show()
+            vbox.append(a)
 
-            a = Gtk.Label('<small><i>%s</i></small>' % tooltip_footer)
+            a = Gtk.Label(label='<small><i>%s</i></small>' % tooltip_footer)
             a.set_use_markup(True)
             a.set_width_chars(40)
-            a.set_line_wrap(True)
-            vbox.pack_start(a, False, False, 0)
-            a.show()
+            a.set_wrap(True)
+            vbox.append(a)
 
         tip.set_custom(vbox)
         return True
 
-    def __event_cb(self, widget, event):
-        if event.type == Gdk.EventType.BUTTON_PRESS:
-            # TODO: show the first bookmark
-            dialog = BookmarkEditDialog(
-                self.get_toplevel().get_window(),
-                _("Add notes for bookmark: "),
-                self._bookmarks, self._page, self)
-            dialog.show_all()
-
-        return False
+    def __click_pressed_cb(self, gesture, n_press, x, y):
+        # TODO: show the first bookmark
+        self._dialog = BookmarkEditDialog(
+            self.get_root(),
+            _("Add notes for bookmark: "),
+            self._bookmarks, self._page, self)
+        self._dialog.present()
+        return True
 
     def _clear_bookmarks(self):
-        for bookmark_icon in self._box.get_children():
-            bookmark_icon.destroy()
+        child = self._box.get_first_child()
+        while child is not None:
+            next_child = child.get_next_sibling()
+            self._box.remove(child)
+            child = next_child
             self._bookmark_icon = None
             self._is_showing_local_bookmark = False
 
@@ -167,9 +173,9 @@ class BookmarkView(Gtk.EventBox):
         self._bookmarks = self._bookmark_manager.get_bookmarks_for_page(page)
 
         if self._bookmarks:
-            self.show()
+            self.set_visible(True)
         else:
-            self.hide()
+            self.set_visible(False)
 
         for bookmark in self._bookmarks:
             self._add_bookmark_icon(bookmark)
@@ -187,13 +193,13 @@ class BookmarkView(Gtk.EventBox):
     def add_bookmark(self, page):
         bookmark_title = (_("%s's bookmark") % profile.get_nick_name())
         bookmark_content = (_("Bookmark for page %d") % (int(page) + 1))
-        dialog = BookmarkAddDialog(
-            parent_xid=self.get_toplevel().get_window(),
+        self._dialog = BookmarkAddDialog(
+            parent_window=self.get_root(),
             dialog_title=_("Add notes for bookmark: "),
             bookmark_title=bookmark_title,
             bookmark_content=bookmark_content, page=page,
             sidebarinstance=self)
-        dialog.show_all()
+        self._dialog.present()
 
     def _real_add_bookmark(self, page, content):
         self._bookmark_manager.add_bookmark(page, str(content))

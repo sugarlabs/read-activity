@@ -40,8 +40,8 @@ def pixbuf_from_data(data):
 
 def _surface_from_data(data, ctx):
     pixbuf = pixbuf_from_data(data)
-    surface = ctx.get_target().create_similar(
-        cairo.CONTENT_COLOR_ALPHA, pixbuf.get_width(),
+    surface = cairo.ImageSurface(
+        cairo.FORMAT_ARGB32, pixbuf.get_width(),
         pixbuf.get_height())
 
     ctx_surface = cairo.Context(surface)
@@ -52,8 +52,8 @@ def _surface_from_data(data, ctx):
 
 def _rotate_surface(surface, direction):
     ctx = cairo.Context(surface)
-    new_surface = ctx.get_target().create_similar(
-        cairo.CONTENT_COLOR_ALPHA, surface.get_height(),
+    new_surface = cairo.ImageSurface(
+        cairo.FORMAT_ARGB32, surface.get_height(),
         surface.get_width())
 
     ctx_surface = cairo.Context(new_surface)
@@ -73,8 +73,8 @@ def _rotate_surface(surface, direction):
 
 def _flip_surface(surface):
     ctx = cairo.Context(surface)
-    new_surface = ctx.get_target().create_similar(
-        cairo.CONTENT_COLOR_ALPHA, surface.get_width(),
+    new_surface = cairo.ImageSurface(
+        cairo.FORMAT_ARGB32, surface.get_width(),
         surface.get_height())
 
     ctx_surface = cairo.Context(new_surface)
@@ -96,10 +96,10 @@ class ImageViewer(Gtk.DrawingArea, Gtk.Scrollable):
                            GObject.ParamFlags.READWRITE),
         "hadjustment": (Gtk.Adjustment, "hadjustment", "hadjustment",
                         GObject.ParamFlags.READWRITE),
-        "vscroll-policy": (Gtk.ScrollablePolicy, "hscroll-policy",
-                           "hscroll-policy", Gtk.ScrollablePolicy.MINIMUM,
+        "vscroll-policy": (Gtk.ScrollablePolicy, "vscroll-policy",
+                           "vscroll-policy", Gtk.ScrollablePolicy.MINIMUM,
                            GObject.ParamFlags.READWRITE),
-        "vadjustment": (Gtk.Adjustment, "hadjustment", "hadjustment",
+        "vadjustment": (Gtk.Adjustment, "vadjustment", "vadjustment",
                         GObject.ParamFlags.READWRITE),
     }
 
@@ -109,7 +109,7 @@ class ImageViewer(Gtk.DrawingArea, Gtk.Scrollable):
     }
 
     def __init__(self):
-        Gtk.DrawingArea.__init__(self)
+        super().__init__()
 
         self._data = None
         self._data_changed = False
@@ -129,7 +129,7 @@ class ImageViewer(Gtk.DrawingArea, Gtk.Scrollable):
         self._hadj_value_changed_hid = None
         self._vadj_value_changed_hid = None
 
-        self.connect('draw', self.__draw_cb)
+        self.set_draw_func(self.__draw_cb)
 
     def set_data(self, data):
         self._data = data
@@ -294,11 +294,9 @@ class ImageViewer(Gtk.DrawingArea, Gtk.Scrollable):
 
     def can_zoom_in(self):
         return self._zoom + ZOOM_STEP < ZOOM_MAX
-        self.update_adjustments()
 
     def can_zoom_out(self):
         return self._zoom - ZOOM_STEP > ZOOM_MIN
-        self.update_adjustments()
 
     def zoom_in(self):
         if not self.can_zoom_in():
@@ -310,7 +308,7 @@ class ImageViewer(Gtk.DrawingArea, Gtk.Scrollable):
     def zoom_out(self):
         if not self.can_zoom_out():
             return
-        self._zoom -= ZOOM_MIN
+        self._zoom -= ZOOM_STEP
 
         self._center_if_small()
         self.update_adjustments()
@@ -487,7 +485,7 @@ class ImageViewer(Gtk.DrawingArea, Gtk.Scrollable):
         self.update_adjustments()
         self.queue_draw()
 
-    def __draw_cb(self, widget, ctx):
+    def __draw_cb(self, widget, ctx, width, height):
 
         # If the image surface is not set, it reads it from the data  If the
         # data is not set yet, it just returns.

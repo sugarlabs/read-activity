@@ -1,17 +1,17 @@
-import gi
-try:
-    gi.require_version('WebKit2', '4.1')
-except:
-    gi.require_version('WebKit2', '4.0')
-gi.require_version('Gtk', '3.0')
+import logging
 
-from gi.repository import WebKit2
+import gi
+gi.require_version('WebKit', '6.0')
+gi.require_version('Gtk', '4.0')
+
+from gi.repository import WebKit
 from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import GObject
+from gi.repository import GLib
 
 
-class _WebView(WebKit2.WebView):
+class _WebView(WebKit.WebView):
 
     __gsignals__ = {
         'touch-change-page': (
@@ -27,13 +27,13 @@ class _WebView(WebKit2.WebView):
     }
 
     def __init__(self, **kwargs):
-        cm = WebKit2.UserContentManager()
+        cm = WebKit.UserContentManager()
 
         cm.register_script_message_handler('scrolled')
         cm.connect(
             'script-message-received::scrolled',
             lambda cm, result: self.emit(
-                'scrolled', result.get_js_value().to_double()))
+                'scrolled', result.to_double()))
 
         cm.register_script_message_handler('scrolled_top')
         cm.connect(
@@ -49,10 +49,10 @@ class _WebView(WebKit2.WebView):
         cm.connect(
             'script-message-received::selection_changed',
             lambda cm, result: self.emit(
-                'selection-changed', result.get_js_value().to_boolean()))
+                'selection-changed', result.to_boolean()))
 
         cm.add_script(
-            WebKit2.UserScript(
+            WebKit.UserScript(
                 '''
 window.addEventListener("scroll", function(){
     var handler = window.webkit.messageHandlers.scrolled;
@@ -63,54 +63,58 @@ document.addEventListener("selectionchange", function() {
     handler.postMessage(window.getSelection() != '');
 });
                 ''',
-                WebKit2.UserContentInjectedFrames.ALL_FRAMES,
-                WebKit2.UserScriptInjectionTime.START, None, None))
+                WebKit.UserContentInjectedFrames.ALL_FRAMES,
+                WebKit.UserScriptInjectionTime.START, None, None))
 
         cm.add_style_sheet(
-            WebKit2.UserStyleSheet(
+            WebKit.UserStyleSheet(
                 '''
 html { margin: 50px; }
 body { overflow: hidden; }
                 ''',
-                WebKit2.UserContentInjectedFrames.ALL_FRAMES,
-                WebKit2.UserStyleLevel.USER, None, None))
+                WebKit.UserContentInjectedFrames.ALL_FRAMES,
+                WebKit.UserStyleLevel.USER, None, None))
 
-        WebKit2.WebView.__init__(self, user_content_manager=cm, **kwargs)
-        self.get_settings().set_enable_write_console_messages_to_stdout(True)
+        super().__init__(user_content_manager=cm, **kwargs)
+        self.set_hexpand(True)
+        self.set_vexpand(True)
 
-    def do_context_menu(self, context_menu, event, hit_test_result):
-        # nope nope nope nopenopenopenenope
+    def do_context_menu(self, context_menu, hit_test_result):
+        # Disable default WebKit context menu
         return True
 
     def setup_touch(self):
-        self.get_window().set_events(
-            self.get_window().get_events() | Gdk.EventMask.TOUCH_MASK)
-        self.connect('event', self.__event_cb)
+        self._click_gesture = Gtk.GestureClick.new()
+        self._click_gesture.set_button(0)
+        self._click_gesture.connect('pressed', self.__event_cb)
+        self.add_controller(self._click_gesture)
 
-    def __event_cb(self, widget, event):
-        if event.type == Gdk.EventType.TOUCH_BEGIN:
-            x = event.touch.x
-            view_width = widget.get_allocation().width
-            if x > view_width * 3 / 4:
-                self.emit('touch-change-page', True)
-            elif x < view_width * 1 / 4:
-                self.emit('touch-change-page', False)
+    def __event_cb(self, gesture, n_press, x, y):
+        view_width = self.get_width()
+        if x > view_width * 3 / 4:
+            self.emit('touch-change-page', True)
+        elif x < view_width * 1 / 4:
+            self.emit('touch-change-page', False)
 
     def _execute_script_sync(self, js):
         '''
-        This sad function aims to provide synchronous script execution like
-        WebKit-1.0's WebView.execute_script() to ease porting.
+        Executes JavaScript synchronously and returns the string result.
         '''
         res = ["0"]
+        loop = GLib.MainLoop()
 
         def callback(self, task, user_data):
-            Gtk.main_quit()
-            result = self.run_javascript_finish(task)
-            if result is not None:
-                res[0] = result.get_js_value().to_string()
+            try:
+                result = self.evaluate_javascript_finish(task)
+                if result is not None:
+                    res[0] = result.to_string()
+            except Exception as e:
+                logging.error('Error executing script: %s', e)
+            finally:
+                loop.quit()
 
-        self.run_javascript(js, None, callback, None)
-        Gtk.main()
+        self.evaluate_javascript(js, -1, None, None, None, callback, None)
+        loop.run()
         return res[0]
 
     def get_page_height(self):
@@ -136,17 +140,17 @@ body { overflow: hidden; }
         '''
         Adds incr pixels of margin to the end of the loaded (X)HTML page.
         '''
-        self.run_javascript(
-            'document.body.style.marginBottom = "%dpx";' % (incr + 50))
+        self.evaluate_javascript(
+            'document.body.style.marginBottom = "%dpx";' % (incr + 50), -1, None, None, None, None, None)
 
     def highlight_next_word(self):
         '''
         Highlight next word (for text to speech)
         '''
-        self.run_javascript('highLightNextWord();')
+        self.evaluate_javascript('highLightNextWord();', -1, None, None, None, None, None)
 
     def go_to_link(self, id_link):
-        self.run_javascript('window.location.href = "%s";' % id_link)
+        self.evaluate_javascript('window.location.href = "%s";' % id_link, -1, None, None, None, None, None)
 
     def get_vertical_position_element(self, id_link):
         '''
@@ -177,13 +181,13 @@ body { overflow: hidden; }
         '''
         Set the vertical position in a document to a value in pixels.
         '''
-        self.run_javascript('window.scrollTo(-1, %d);' % to)
+        self.evaluate_javascript('window.scrollTo(-1, %d);' % to, -1, None, None, None, None, None)
 
     def scroll_by(self, by):
         '''
         Modify the vertical position in a document by a value in pixels.
         '''
-        self.run_javascript(
+        self.evaluate_javascript(
             '''
 (function(by){
     var before = window.scrollY;
@@ -198,4 +202,4 @@ body { overflow: hidden; }
         }
     }
 }(%d))
-            ''' % by)
+            ''' % by, -1, None, None, None, None, None)

@@ -4,11 +4,12 @@ import logging
 from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import Pango
+from gi.repository import GLib
 from gi.repository import GObject
 import threading
 
-from sugar3 import mime
-from sugar3.graphics import style
+from sugar4 import mime
+from sugar4.graphics import style
 
 PAGE_SIZE = 38
 
@@ -40,61 +41,93 @@ class TextViewer(GObject.GObject):
 
         self.textview = Gtk.TextView()
         self.textview.set_editable(False)
-        self.textview.set_cursor_visible(False)
+        # Cursor must be visible to draw selection
+        self.textview.set_cursor_visible(True)
         self.textview.set_left_margin(50)
         self.textview.set_right_margin(50)
         self.textview.set_justification(Gtk.Justification.LEFT)
         self.textview.set_wrap_mode(Gtk.WrapMode.WORD)
-        self.textview.connect('button-release-event',
-                              self._view_buttonrelease_event_cb)
+        # Connect notify::has-selection to prevent excessive firing from programmatic mark changes
+        self.textview.get_buffer().connect(
+            'notify::has-selection', self._view_selection_changed_cb)
         self.connect('selection-changed',
                      activity._view_selection_changed_cb)
 
-        self.textview.set_events(self.textview.get_events() |
-                                 Gdk.EventMask.TOUCH_MASK)
-        self.textview.connect('event', self.__touch_event_cb)
+        self._click_gesture = Gtk.GestureClick.new()
+        self._click_gesture.set_button(0)
+        self._click_gesture.connect('pressed', self.__touch_event_cb)
+        self.textview.add_controller(self._click_gesture)
 
         self._sw = Gtk.ScrolledWindow()
-        self._sw.add(self.textview)
+        self._sw.set_vexpand(True)
+        self._sw.set_hexpand(True)
+        self._sw.set_child(self.textview)
+        
+        self._scroll_controller = Gtk.EventControllerScroll.new(
+            Gtk.EventControllerScrollFlags.VERTICAL)
+        self._scroll_controller.connect('scroll', self._on_scroll)
+        self._sw.add_controller(self._scroll_controller)
+        
         self._v_vscrollbar = self._sw.get_vscrollbar()
-        self._v_scrollbar_value_changed_cb_id = \
-            self._v_vscrollbar.connect('value-changed',
-                                       self._v_scrollbar_value_changed_cb)
-        self._scrollbar = Gtk.VScrollbar()
+        self._adjustment = Gtk.Adjustment()
+        self._scrollbar = Gtk.Scrollbar(
+            orientation=Gtk.Orientation.VERTICAL, adjustment=self._adjustment)
         self._scrollbar_change_value_cb_id = \
-            self._scrollbar.connect('change-value',
-                                    self._scrollbar_change_value_cb)
+            self._adjustment.connect('value-changed',
+                                     self._scrollbar_change_value_cb)
 
         overlay = Gtk.Overlay()
-        hbox = Gtk.HBox()
-        overlay.add(hbox)
-        hbox.add(self._sw)
+        hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        overlay.set_child(hbox)
+        hbox.append(self._sw)
 
         self._scrollbar.props.halign = Gtk.Align.END
         self._scrollbar.props.valign = Gtk.Align.FILL
         overlay.add_overlay(self._scrollbar)
-        overlay.show_all()
+        overlay.set_visible(True)
 
-        activity._hbox.pack_start(overlay, True, True, 0)
+        overlay.set_hexpand(True)
+        overlay.set_vexpand(True)
+        activity._hbox.append(overlay)
 
+        self.page_index = []
         self._font_size = style.zoom(12)
-        self.font_desc = Pango.FontDescription("mono %d" % self._font_size)
-        self.textview.modify_font(self.font_desc)
+        self._inverted = False
+        self._css_provider = Gtk.CssProvider()
+        self.textview.get_style_context().add_provider(
+            self._css_provider,
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+        )
+        
         self._zoom = 100
         self.font_zoom_relation = self._zoom // self._font_size
+        self._update_font()
         self._current_page = 0
+        self._search_text = ""
 
-        self.highlight_tag = self.textview.get_buffer().create_tag()
+        yellow = Gdk.RGBA()
+        yellow.parse('yellow')
+        black = Gdk.RGBA()
+        black.parse('black')
+        gray = Gdk.RGBA()
+        gray.parse('gray')
+
+        self.highlight_tag = self.textview.get_buffer().create_tag("highlight")
         self.highlight_tag.set_property('underline', Pango.Underline.SINGLE)
-        self.highlight_tag.set_property('foreground', 'black')
-        self.highlight_tag.set_property('background', 'yellow')
+        self.highlight_tag.set_property('foreground-rgba', black)
+        self.highlight_tag.set_property('background-rgba', yellow)
+
+        self.found_tag = self.textview.get_buffer().create_tag("found")
+        self.found_tag.set_property('foreground-rgba', black)
+        self.found_tag.set_property('background-rgba', yellow)
+        self.found_tag.set_property('weight', Pango.Weight.BOLD)
 
         # text to speech initialization
         self.current_word = 0
         self.word_tuples = []
-        self.spoken_word_tag = self.textview.get_buffer().create_tag()
+        self.spoken_word_tag = self.textview.get_buffer().create_tag("spoken")
         self.spoken_word_tag.set_property('weight', Pango.Weight.BOLD)
-        self.normal_tag = self.textview.get_buffer().create_tag()
+        self.normal_tag = self.textview.get_buffer().create_tag("normal")
         self.normal_tag.set_property('weight', Pango.Weight.NORMAL)
 
     def load_document(self, file_path):
@@ -131,10 +164,10 @@ class TextViewer(GObject.GObject):
                 pagecount = pagecount + 1
         self._pagecount = pagecount + 1
         self.set_current_page(0)
-        self._scrollbar.set_range(0.0, self._pagecount - 1.0)
-        self._scrollbar.set_increments(1.0, 1.0)
+        self._adjustment.configure(0.0, 0.0, self._pagecount - 1.0,
+                                   1.0, 1.0, 0.0)
 
-        # TODO: now that sugar3.speech has word signals
+        # TODO: now that sugar4.speech has word signals
         # call self.highlight_next_word on each word
         # call self.reset_text_to_speech at end
 
@@ -157,58 +190,60 @@ class TextViewer(GObject.GObject):
         textbuffer.set_text(label_text)
         self._prepare_text_to_speech(label_text)
 
-    def _v_scrollbar_value_changed_cb(self, scrollbar):
-        """
-        This is the real scrollbar containing the text view
-        """
-        if self._current_page < 1:
-            return
-        scrollval = scrollbar.get_value()
-        scroll_upper = self._v_vscrollbar.props.adjustment.props.upper
+    def _on_scroll(self, controller, dx, dy):
+        adjustment = self._sw.get_vadjustment()
+        scrollval = adjustment.get_value()
+        scroll_upper = adjustment.props.upper - adjustment.props.page_size
+        
+        # dy > 0 means scrolling down
+        if dy > 0 and scrollval >= scroll_upper - 1.0:
+            if self._current_page < self._pagecount - 1:
+                self.next_page()
+                return True
+        elif dy < 0 and scrollval <= 1.0:
+            if self._current_page > 0:
+                self.previous_page()
+                return True
+        return False
 
-        if self.__going_fwd and \
-                not self._current_page == self._pagecount:
-
-            if scrollval == scroll_upper:
-                self.set_current_page(self._current_page + 1)
-        elif self.__going_back and self._current_page > 1:
-            if scrollval == 0.0:
-                self.set_current_page(self._current_page - 1)
-
-    def _scrollbar_change_value_cb(self, range, scrolltype, value):
+    def _scrollbar_change_value_cb(self, adjustment):
         """
         This is the fake scrollbar visible, used to show the length of the book
         """
+        value = adjustment.get_value()
         old_page = self._current_page
-        if scrolltype == Gtk.ScrollType.STEP_FORWARD:
+        
+        if value > old_page:
             self.__going_fwd = True
             self.__going_back = False
-        elif scrolltype == Gtk.ScrollType.STEP_BACKWARD:
+        elif value < old_page:
             self.__going_fwd = False
             self.__going_back = True
-        elif scrolltype == Gtk.ScrollType.JUMP or \
-                scrolltype == Gtk.ScrollType.PAGE_FORWARD or \
-                scrolltype == Gtk.ScrollType.PAGE_BACKWARD:
-            if value > self._scrollbar.props.adjustment.props.upper:
-                value = self._pagecount - 1
-            self._show_page(int(value))
-            self._current_page = int(value)
+
+        if value > adjustment.props.upper:
+            value = self._pagecount - 1
+            
+        new_page = int(value)
+        if new_page != old_page:
+            
+            # Reset inner scroll position to the top of the new page
+            v_adjustment = self._sw.get_vadjustment()
+            v_adjustment.set_value(0.0)
+            
+            self._show_page(new_page)
+            self._current_page = new_page
             self.emit('page-changed', old_page, self._current_page)
-        else:
-            print('Warning: unknown scrolltype %s with value %f'
-                  % (str(scrolltype), value))
 
-        # FIXME: This should not be needed here
-        self._scrollbar.set_value(self._current_page)
-
-    def __touch_event_cb(self, widget, event):
-        if event.type == Gdk.EventType.TOUCH_BEGIN:
-            x = event.touch.x
-            view_width = widget.get_allocation().width
-            if x > view_width * 3 // 4:
-                self.scroll(Gtk.ScrollType.PAGE_FORWARD, False)
-            elif x < view_width * 1 // 4:
-                self.scroll(Gtk.ScrollType.PAGE_BACKWARD, False)
+    def __touch_event_cb(self, gesture, n_press, x, y):
+        device = gesture.get_current_event_device()
+        if not device or device.get_source() != Gdk.InputSource.TOUCHSCREEN:
+            return
+            
+        view_width = self.textview.get_width()
+        if x > view_width * 3 / 4:
+            self.scroll(Gtk.ScrollType.PAGE_FORWARD, False)
+        elif x < view_width * 1 / 4:
+            self.scroll(Gtk.ScrollType.PAGE_BACKWARD, False)
 
     def can_highlight(self):
         return True
@@ -340,16 +375,16 @@ class TextViewer(GObject.GObject):
             try:
                 logging.debug('Loading zoom %s', self.metadata['Read_zoom'])
                 self.set_zoom(float(self.metadata['Read_zoom']))
-            except:
+            except Exception:
                 pass
 
     def set_current_page(self, page):
         old_page = self._current_page
         self._current_page = page
         self._show_page(self._current_page)
-        self._scrollbar.handler_block(self._scrollbar_change_value_cb_id)
-        self._scrollbar.set_value(self._current_page)
-        self._scrollbar.handler_unblock(self._scrollbar_change_value_cb_id)
+        self._adjustment.handler_block(self._scrollbar_change_value_cb_id)
+        self._adjustment.set_value(self._current_page)
+        self._adjustment.handler_unblock(self._scrollbar_change_value_cb_id)
         self.emit('page-changed', old_page, self._current_page)
 
     def scroll(self, scrolltype, horizontal):
@@ -367,8 +402,8 @@ class TextViewer(GObject.GObject):
             self.__going_back = True
             if v_value <= v_adjustment.get_lower():
                 self.previous_page()
-                v_adjustment.set_value(v_adjustment.get_upper() -
-                                       v_adjustment.get_page_size())
+                v_adjustment.set_value(v_adjustment.get_upper()
+                                       - v_adjustment.get_page_size())
                 return
             if v_value > v_adjustment.get_lower():
                 new_value = v_value - step
@@ -399,8 +434,8 @@ class TextViewer(GObject.GObject):
 
     def previous_page(self):
         v_adjustment = self._sw.get_vadjustment()
-        v_adjustment.set_value(v_adjustment.get_upper() -
-                               v_adjustment.get_page_size())
+        v_adjustment.set_value(v_adjustment.get_upper()
+                               - v_adjustment.get_page_size())
         self.set_current_page(max(0, self.get_current_page() - 1))
 
     def next_page(self):
@@ -424,13 +459,18 @@ class TextViewer(GObject.GObject):
     def get_current_file(self):
         pass
 
+    def get_current_link(self):
+        return ""
+
+    def get_link_iter(self, link):
+        return None
+
     def copy(self):
-        clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
+        clipboard = self.textview.get_clipboard()
         self.textview.get_buffer().copy_clipboard(clipboard)
 
-    def _view_buttonrelease_event_cb(self, view, event):
-        self._has_selection = \
-            self.textview.get_buffer().get_selection_bounds() != ()
+    def _view_selection_changed_cb(self, buffer, pspec=None):
+        self._has_selection = buffer.get_has_selection()
         self.emit('selection-changed')
 
     def get_has_selection(self):
@@ -439,13 +479,28 @@ class TextViewer(GObject.GObject):
     def find_set_highlight_search(self, boolean):
         pass
 
-    def setup_find_job(self, text, _find_updated_cb):
-        self._find_job = _JobFind(self._etext_file, start_page=0,
-                                  n_pages=self._pagecount,
-                                  text=text, case_sensitive=False)
-        self._find_updated_handler = self._find_job.connect(
-            'updated', _find_updated_cb)
-        return self._find_job, self._find_updated_handler
+    def start_search(self, text, updated_cb=None):
+        if text != self._search_text:
+            self._search_text = text
+            self._find_job = _JobFind(self._etext_file, start_page=0,
+                                      n_pages=self._pagecount,
+                                      text=text, case_sensitive=False)
+        if updated_cb:
+            self._find_updated_handler = self._find_job.connect(
+                'updated', updated_cb)
+        
+        # Trigger highlighting when a match is found
+        self._find_job.connect('updated', self.find_changed)
+        
+        return self._find_job
+
+    def clear_search(self):
+        if hasattr(self, '_find_job') and self._find_job:
+            self._find_job.cancel()
+            self._find_job = None
+
+    def has_search_results(self):
+        return hasattr(self, '_find_job') and self._find_job is not None
 
     def find_next(self):
         self._find_job.find_next()
@@ -453,19 +508,30 @@ class TextViewer(GObject.GObject):
     def find_previous(self):
         self._find_job.find_previous()
 
-    def find_changed(self, job, page):
+    def find_changed(self, job):
         self.set_current_page(job.get_page())
         self._show_found_text(job.get_founded_tuple())
 
     def _show_found_text(self, founded_tuple):
+        if not founded_tuple:
+            return
+            
         textbuffer = self.textview.get_buffer()
-        tag = textbuffer.create_tag()
-        tag.set_property('weight', Pango.Weight.BOLD)
-        tag.set_property('foreground', 'white')
-        tag.set_property('background', 'black')
+        bounds = textbuffer.get_bounds()
+        textbuffer.remove_tag(self.found_tag, bounds[0], bounds[1])
+        
         iterStart = textbuffer.get_iter_at_offset(founded_tuple[1])
         iterEnd = textbuffer.get_iter_at_offset(founded_tuple[2])
-        textbuffer.apply_tag(tag, iterStart, iterEnd)
+        
+        # Guaranteed-visible highlight, independent of focus/theme
+        textbuffer.apply_tag(self.found_tag, iterStart, iterEnd)
+        
+        # Real selection too, so copy/bookmark still work off get_selection_bounds()
+        textbuffer.select_range(iterStart, iterEnd)
+        self.textview.grab_focus()
+        
+        # Ensure the found text is scrolled into view
+        self.textview.scroll_to_iter(iterStart, 0.1, True, 0.5, 0.5)
 
     def get_zoom(self):
         return self.font_zoom_relation * self._font_size
@@ -478,8 +544,7 @@ class TextViewer(GObject.GObject):
     def set_zoom(self, value):
         self._zoom = value
         self._font_size = self._zoom // self.font_zoom_relation
-        self.font_desc.set_size(self._font_size * 1024)
-        self.textview.modify_font(self.font_desc)
+        self._update_font()
 
     def zoom_in(self):
         self._set_font_size(self._font_size + 1)
@@ -489,10 +554,37 @@ class TextViewer(GObject.GObject):
 
     def _set_font_size(self, size):
         self._font_size = size
-        self.font_desc.set_size(self._font_size * 1024)
-        self.textview.modify_font(self.font_desc)
+        self._update_font()
         self._zoom = self.font_zoom_relation * self._font_size
         self.emit('zoom-changed', self._zoom)
+
+    def _update_font(self):
+        fg = "white" if self._inverted else "black"
+        bg = "black" if self._inverted else "white"
+        css = f"""
+        textview {{ 
+            font-family: monospace; 
+            font-size: {self._font_size}pt; 
+            color: {fg};
+            background-color: {bg}; 
+            caret-color: transparent;
+        }}
+        textview text {{
+            font-family: monospace; 
+            font-size: {self._font_size}pt; 
+            background-color: transparent; 
+        }}
+        textview selection, textview text selection {{
+            background-color: yellow;
+            color: black;
+        }}
+        """
+        self._css_provider.load_from_data(css.encode('utf-8'))
+
+    def set_inverted_colors(self, inverted):
+        if self._inverted != inverted:
+            self._inverted = inverted
+            self._update_font()
 
     def zoom_to_width(self):
         pass
@@ -523,8 +615,7 @@ class _JobFind(GObject.GObject):
 
     def __init__(self, text_file, start_page, n_pages, text,
                  case_sensitive=False):
-        GObject.GObject.__init__(self)
-        Gdk.threads_init()
+        super().__init__()
 
         self._finished = False
         self._text_file = text_file
@@ -615,11 +706,12 @@ class _SearchThread(threading.Thread):
                 self._found_records[self._current_found_item]
             self._page = self.current_found_tuple[0]
 
-        Gdk.threads_enter()
+        GLib.idle_add(self._emit_updated)
+        return False
+
+    def _emit_updated(self):
         self.obj._finished = True
         self.obj.emit('updated')
-        Gdk.threads_leave()
-
         return False
 
     def _allindices(self, line, search, listindex=None, offset=0):
@@ -640,6 +732,8 @@ class _SearchThread(threading.Thread):
         self.stopthread.set()
 
     def find_next(self):
+        if not self._found_records:
+            return
         self._current_found_item = self._current_found_item + 1
         if self._current_found_item >= len(self._found_records):
             self._current_found_item = 0
@@ -649,8 +743,10 @@ class _SearchThread(threading.Thread):
         self.obj.emit('updated')
 
     def find_previous(self):
+        if not self._found_records:
+            return
         self._current_found_item = self._current_found_item - 1
-        if self._current_found_item <= 0:
+        if self._current_found_item < 0:
             self._current_found_item = len(self._found_records) - 1
         self.current_found_tuple = \
             self._found_records[self._current_found_item]

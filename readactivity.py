@@ -30,7 +30,7 @@ import json
 import dbus
 
 import gi
-gi.require_version('Gtk', '3.0')
+gi.require_version('Gtk', '4.0')
 gi.require_version('Gst', '1.0')
 gi.require_version('TelepathyGLib', '0.12')
 
@@ -40,27 +40,27 @@ from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import Gio
 from gi.repository import TelepathyGLib
+from gi.repository import Graphene
 
-GObject.threads_init()
+from sugar4.activity import activity
+from sugar4.graphics.toolbutton import ToolButton
+from sugar4.graphics.toolbarbox import ToolbarBox
+from sugar4.graphics.toolbarbox import ToolbarButton
+from sugar4.graphics.toggletoolbutton import ToggleToolButton
+from sugar4.graphics.alert import ConfirmationAlert
+from sugar4.graphics.alert import Alert
+from sugar4.activity.widgets import ActivityToolbarButton
+from sugar4.activity.widgets import StopButton
+from sugar4.graphics.tray import HTray
+from sugar4.graphics.menuitem import MenuItem
+from sugar4 import network
+from sugar4 import profile
 
-from sugar3.activity import activity
-from sugar3.graphics.toolbutton import ToolButton
-from sugar3.graphics.toolbarbox import ToolbarBox
-from sugar3.graphics.toolbarbox import ToolbarButton
-from sugar3.graphics.toggletoolbutton import ToggleToolButton
-from sugar3.graphics.alert import ConfirmationAlert
-from sugar3.graphics.alert import Alert
-from sugar3.activity.widgets import ActivityToolbarButton
-from sugar3.activity.widgets import StopButton
-from sugar3.graphics.tray import HTray
-from sugar3.graphics.menuitem import MenuItem
-from sugar3 import network
-from sugar3 import profile
+from sugar4.datastore import datastore
+from sugar4.graphics.objectchooser import ObjectChooser
+from sugar4.graphics.objectchooser import FILTER_TYPE_MIME_BY_ACTIVITY
 
-from sugar3.datastore import datastore
-from sugar3.graphics.objectchooser import ObjectChooser
-from sugar3.graphics.objectchooser import FILTER_TYPE_MIME_BY_ACTIVITY
-from sugar3.graphics import style
+from sugar4.graphics import style
 
 import emptypanel
 from readtoolbar import EditToolbar
@@ -68,7 +68,8 @@ from readtoolbar import ViewToolbar
 from bookmarkview import BookmarkView
 from readdb import BookmarkManager
 from linkbutton import LinkButton
-from speechtoolbar import SpeechToolbar
+# FIXME: Speech disabled pending sugar-toolkit-gtk4 TTS support
+# from speechtoolbar import SpeechToolbar
 
 _HARDWARE_MANAGER_INTERFACE = 'org.laptop.HardwareManager'
 _HARDWARE_MANAGER_SERVICE = 'org.laptop.HardwareManager'
@@ -83,6 +84,24 @@ def _get_screen_dpi():
     xft_dpi = Gtk.Settings.get_default().get_property('gtk-xft-dpi')
     _logger.debug('Setting dpi to %f', float(xft_dpi / 1024))
     return float(xft_dpi / 1024)
+
+
+def get_screen_width():
+    display = Gdk.Display.get_default()
+    if display:
+        monitors = display.get_monitors()
+        if monitors and monitors.get_n_items() > 0:
+            return monitors.get_item(0).get_geometry().width
+    return 1200
+
+
+def get_screen_height():
+    display = Gdk.Display.get_default()
+    if display:
+        monitors = display.get_monitors()
+        if monitors and monitors.get_n_items() > 0:
+            return monitors.get_item(0).get_geometry().height
+    return 900
 
 
 def get_md5(filename):
@@ -126,8 +145,7 @@ class ReadHTTPServer(network.GlibTCPServer):
         """
         self.filepath = filepath
         self._create_metadata_cb = create_metadata_cb
-        network.GlibTCPServer.__init__(self, server_address,
-                                       ReadHTTPRequestHandler)
+        super().__init__(server_address, ReadHTTPRequestHandler)
 
     def get_metadata_path(self):
         return self._create_metadata_cb()
@@ -157,13 +175,13 @@ class ProgressAlert(Alert):
     """
 
     def __init__(self, timeout=5, **kwargs):
-        Alert.__init__(self, **kwargs)
+        super().__init__(**kwargs)
 
         self._pb = Gtk.ProgressBar()
-        self._msg_box.pack_start(self._pb, False, False, 0)
-        self._pb.set_size_request(int(Gdk.Screen.width() * 9. / 10.), -1)
+        self._msg_box.append(self._pb)
+        self._pb.set_size_request(int(get_screen_width() * 9. / 10.), -1)
         self._pb.set_fraction(0.0)
-        self._pb.show()
+        self._pb.set_visible(True)
 
     def set_fraction(self, fraction):
         # update only by 10% fractions
@@ -176,10 +194,30 @@ class ProgressAlert(Alert):
 
 
 class ReadActivity(activity.Activity):
-    """The Read sugar activity."""
+    """The Read sugar activity.
+
+
+    Attributes:
+        max_participants (int): Maximum number of participants in a shared activity.
+        dpi (float): Screen DPI for rendering.
+        activity_button (ActivityToolbarButton): The main activity toolbar button.
+        port (int): Port used for the HTTP server when sharing documents.
+        filehash (str): MD5 hash of the currently loaded document.
+    """
 
     def __init__(self, handle):
-        activity.Activity.__init__(self, handle)
+        super().__init__(handle)
+
+        # Load local CSS for PapersView and activity-specific styling
+        css_provider = Gtk.CssProvider()
+        css_path = os.path.join(activity.get_bundle_path(), "activity.css")
+        if os.path.exists(css_path):
+            css_provider.load_from_path(css_path)
+            Gtk.StyleContext.add_provider_for_display(
+                Gdk.Display.get_default(),
+                css_provider,
+                Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+            )
 
         self.max_participants = 1
         self._document = None
@@ -188,8 +226,10 @@ class ReadActivity(activity.Activity):
         self._toc_model = None
         self.filehash = None
 
-        self.connect('key-press-event', self._key_press_event_cb)
-        self.connect('key-release-event', self._key_release_event_cb)
+        self._key_controller = Gtk.EventControllerKey()
+        self._key_controller.connect('key-pressed', self._key_press_event_cb)
+        self._key_controller.connect('key-released', self._key_release_event_cb)
+        self.add_controller(self._key_controller)
 
         _logger.debug('Starting Read...')
 
@@ -199,14 +239,12 @@ class ReadActivity(activity.Activity):
         self._bookmark_view.connect('bookmark-changed',
                                     self._update_bookmark_cb)
 
-        tray = HTray()
-        self.set_tray(tray, Gtk.PositionType.BOTTOM)
 
         toolbar_box = ToolbarBox()
 
         self.activity_button = ActivityToolbarButton(self)
-        toolbar_box.toolbar.insert(self.activity_button, 0)
-        self.activity_button.show()
+        toolbar_box.toolbar.prepend(self.activity_button)
+        self.activity_button.set_visible(True)
 
         self._edit_toolbar = EditToolbar()
         self._edit_toolbar.undo.props.visible = False
@@ -218,9 +256,14 @@ class ReadActivity(activity.Activity):
 
         edit_toolbar_button = ToolbarButton(page=self._edit_toolbar,
                                             icon_name='toolbar-edit')
-        self._edit_toolbar.show()
-        toolbar_box.toolbar.insert(edit_toolbar_button, -1)
-        edit_toolbar_button.show()
+        toolbar_box.toolbar.append(edit_toolbar_button)
+        edit_toolbar_button.set_visible(True)
+        
+        def _edit_toolbar_expanded_cb(button, pspec):
+            if not button.props.expanded:
+                self._edit_toolbar._clear_find_job()
+        
+        edit_toolbar_button.connect('notify::expanded', _edit_toolbar_expanded_cb)
 
         self._highlight = self._edit_toolbar.highlight
         self._highlight_id = self._highlight.connect('clicked',
@@ -237,69 +280,70 @@ class ReadActivity(activity.Activity):
                                    self.__toggle_inverted_colors_cb)
         view_toolbar_button = ToolbarButton(page=self._view_toolbar,
                                             icon_name='toolbar-view')
-        self._view_toolbar.show()
-        toolbar_box.toolbar.insert(view_toolbar_button, -1)
-        view_toolbar_button.show()
+        self._view_toolbar.set_visible(True)
+        toolbar_box.toolbar.append(view_toolbar_button)
+        view_toolbar_button.set_visible(True)
 
         self._back_button = self._create_back_button()
-        toolbar_box.toolbar.insert(self._back_button, -1)
-        self._back_button.show()
+        toolbar_box.toolbar.append(self._back_button)
+        self._back_button.set_visible(True)
 
         self._forward_button = self._create_forward_button()
-        toolbar_box.toolbar.insert(self._forward_button, -1)
-        self._forward_button.show()
+        toolbar_box.toolbar.append(self._forward_button)
+        self._forward_button.set_visible(True)
 
-        num_page_item = Gtk.ToolItem()
+        num_page_item = Gtk.Box()
         self._num_page_entry = self._create_search()
-        num_page_item.add(self._num_page_entry)
-        self._num_page_entry.show()
-        toolbar_box.toolbar.insert(num_page_item, -1)
-        num_page_item.show()
+        num_page_item.append(self._num_page_entry)
+        self._num_page_entry.set_visible(True)
+        toolbar_box.toolbar.append(num_page_item)
+        num_page_item.set_visible(True)
 
-        total_page_item = Gtk.ToolItem()
+        total_page_item = Gtk.Box()
         self._total_page_label = Gtk.Label()
-        total_page_item.add(self._total_page_label)
-        self._total_page_label.show()
-        self._total_page_label.set_margin_right(5)
-        toolbar_box.toolbar.insert(total_page_item, -1)
-        total_page_item.show()
+        total_page_item.append(self._total_page_label)
+        self._total_page_label.set_visible(True)
+        self._total_page_label.set_margin_end(5)
+        toolbar_box.toolbar.append(total_page_item)
+        total_page_item.set_visible(True)
 
         self._bookmarker = ToggleToolButton('emblem-favorite')
         self._bookmarker_toggle_handler_id = self._bookmarker.connect(
             'toggled', self.__bookmarker_toggled_cb)
-        self._bookmarker.show()
-        toolbar_box.toolbar.insert(self._bookmarker, -1)
+        self._bookmarker.set_visible(True)
+        toolbar_box.toolbar.append(self._bookmarker)
 
-        self.speech_toolbar_button = ToolbarButton(icon_name='speak')
-        toolbar_box.toolbar.insert(self.speech_toolbar_button, -1)
+        # FIXME: Speech disabled pending sugar-toolkit-gtk4 TTS support
+        # self.speech_toolbar_button = ToolbarButton(icon_name='speak')
+        # toolbar_box.toolbar.append(self.speech_toolbar_button)
 
-        separator = Gtk.SeparatorToolItem()
-        separator.props.draw = False
+        separator = Gtk.Separator(orientation=Gtk.Orientation.VERTICAL)
+        separator.set_opacity(0)
         separator.set_size_request(0, -1)
-        separator.set_expand(True)
-        toolbar_box.toolbar.insert(separator, -1)
-        separator.show()
+        separator.set_hexpand(True)
+        toolbar_box.toolbar.append(separator)
+        separator.set_visible(True)
 
         stop_button = StopButton(self)
-        toolbar_box.toolbar.insert(stop_button, -1)
-        stop_button.show()
+        toolbar_box.toolbar.append(stop_button)
+        stop_button.set_visible(True)
 
         self.set_toolbar_box(toolbar_box)
-        toolbar_box.show()
+        toolbar_box.set_visible(True)
 
         # This is needed to prevent the call of read_file on
         # canvas map, becuase interact in a bad way with the emptypanel
         # the program takes responsability of this task.
         self._read_file_called = True
 
-        self._vbox = Gtk.VBox()
-        self._vbox.show()
+        self._vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        self._vbox.set_visible(True)
 
         overlay = Gtk.Overlay()
 
-        self._hbox = Gtk.HBox()
-        self._hbox.show()
-        overlay.add(self._hbox)
+        self._hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        self._hbox.set_visible(True)
+        overlay.set_child(self._hbox)
 
         self._bookmark_view.props.halign = Gtk.Align.END
         self._bookmark_view.props.valign = Gtk.Align.START
@@ -310,11 +354,16 @@ class ReadActivity(activity.Activity):
         else:
             scrollbar_width = 11
 
-        self._bookmark_view.props.margin_right = scrollbar_width
+        self._bookmark_view.props.margin_end = scrollbar_width
         overlay.add_overlay(self._bookmark_view)
-        overlay.show()
-        self._vbox.pack_start(overlay, True, True, 0)
+        overlay.set_visible(True)
+        overlay.set_vexpand(True)
+        self._vbox.append(overlay)
         self.set_canvas(self._vbox)
+
+        tray = HTray()
+        self.set_tray(tray, Gtk.PositionType.BOTTOM)
+        self.tray.set_visible(False)
 
         self._navigator = self._create_navigator()
 
@@ -398,9 +447,9 @@ class ReadActivity(activity.Activity):
         palette = back.get_palette()
 
         previous_page = MenuItem(text_label=_("Previous page"))
-        previous_page.show()
+        previous_page.set_visible(True)
         previous_bookmark = MenuItem(text_label=_("Previous bookmark"))
-        previous_bookmark.show()
+        previous_bookmark.set_visible(True)
         palette.menu.append(previous_page)
         palette.menu.append(previous_bookmark)
 
@@ -416,9 +465,9 @@ class ReadActivity(activity.Activity):
         palette = forward.get_palette()
 
         next_page = MenuItem(text_label=_("Next page"))
-        next_page.show()
+        next_page.set_visible(True)
         next_bookmark = MenuItem(text_label=_("Next bookmark"))
-        next_bookmark.show()
+        next_bookmark.set_visible(True)
 
         palette.menu.append(next_page)
         palette.menu.append(next_bookmark)
@@ -475,12 +524,10 @@ class ReadActivity(activity.Activity):
                                                 vadjustment=None)
         self._toc_scroller.set_policy(Gtk.PolicyType.AUTOMATIC,
                                       Gtk.PolicyType.AUTOMATIC)
-        self._toc_scroller.add(toc_navigator)
-        self._hbox.pack_start(self._toc_scroller, expand=False, fill=False,
-                              padding=0)
-        self._toc_separator = Gtk.VSeparator()
-        self._hbox.pack_start(self._toc_separator, expand=False, fill=False,
-                              padding=1)
+        self._toc_scroller.set_child(toc_navigator)
+        self._hbox.append(self._toc_scroller)
+        self._toc_separator = Gtk.Separator(orientation=Gtk.Orientation.VERTICAL)
+        self._hbox.append(self._toc_separator)
         return toc_navigator
 
     def set_navigator_model(self, model):
@@ -495,28 +542,47 @@ class ReadActivity(activity.Activity):
             self._toc_visible = True
             self._update_toc_view = True
             self._toc_select_active_page()
-            self._toc_scroller.set_size_request(int(Gdk.Screen.width() / 4),
+            self._toc_scroller.set_size_request(int(get_screen_width() / 4),
                                                 -1)
-            self._toc_scroller.show_all()
-            self._toc_separator.show()
+            self._toc_scroller.set_visible(True)
+            self._toc_separator.set_visible(True)
         else:
             self._toc_visible = False
-            self._toc_scroller.hide()
-            self._toc_separator.hide()
+            self._toc_scroller.set_visible(False)
+            self._toc_separator.set_visible(False)
         if scrollbar_pos > -1:
             self._view.set_vertical_pos(scrollbar_pos)
 
     def __toggle_tray_cb(self, button, visible):
         if visible:
             logging.debug('Show tray')
-            self.tray.show()
+            self.tray.set_visible(True)
         else:
             logging.debug('Hide tray')
-            self.tray.hide()
+            self.tray.set_visible(False)
 
     def __toggle_inverted_colors_cb(self, button, active):
-        if hasattr(self._view._model, 'set_inverted_colors'):
-            self._view._model.set_inverted_colors(active)
+        try:
+            # Toggle global GTK dark theme (Sugar Artwork uses this)
+            settings = Gtk.Settings.get_default()
+            if settings:
+                settings.set_property('gtk-application-prefer-dark-theme', active)
+
+            if self._view is not None:
+                if hasattr(self._view, '_model'):
+                    if hasattr(self._view._model, 'props') and hasattr(self._view._model.props, 'inverted_colors'):
+                        self._view._model.props.inverted_colors = active
+                    elif hasattr(self._view._model, 'set_inverted_colors'):
+                        self._view._model.set_inverted_colors(active)
+                elif hasattr(self._view, 'set_inverted_colors'):
+                    self._view.set_inverted_colors(active)
+
+                # Force a redraw of the view in case it doesn't happen automatically
+                if hasattr(self._view, '_view') and hasattr(self._view._view, 'queue_draw'):
+                    self._view._view.queue_draw()
+        except Exception as e:
+            import logging
+            logging.error(f"Failed to toggle inverted colors: {e}")
 
     def __num_page_entry_insert_text_cb(self, entry, text, length, position):
         if not re.match('[0-9]', text):
@@ -534,10 +600,10 @@ class ReadActivity(activity.Activity):
         entry.props.text = str(page + 1)
 
     def __go_back_cb(self, button):
-        self._view.scroll(Gtk.ScrollType.PAGE_BACKWARD, False)
+        self._view.previous_page()
 
     def __go_forward_cb(self, button):
-        self._view.scroll(Gtk.ScrollType.PAGE_FORWARD, False)
+        self._view.next_page()
 
     def __go_back_page_cb(self, button):
         self._view.previous_page()
@@ -573,7 +639,7 @@ class ReadActivity(activity.Activity):
                                 'with this bookmark will be lost')
             self.add_alert(alert)
             alert.connect('response', self.__alert_response_cb, page)
-            alert.show()
+            alert.set_visible(True)
 
     def __alert_response_cb(self, alert, response_id, page):
         self.remove_alert(alert)
@@ -982,19 +1048,24 @@ class ReadActivity(activity.Activity):
             self.metadata['mime_type'] = mimetype
         else:
             mimetype = self.metadata['mime_type']
+            
 
-        if mimetype == 'application/epub+zip':
+        if mimetype == 'application/epub+zip' or filepath.endswith('.epub'):
             import epubadapter
             self._view = epubadapter.EpubViewer()
+        elif mimetype in ['application/x-cbz', 'application/vnd.comicbook+zip'] or filepath.endswith('.cbz') or filepath.endswith('.cbr'):
+            import comicadapter
+            self._view = comicadapter.ComicViewer()
         elif mimetype == 'text/plain' or mimetype == 'application/zip':
             import textadapter
             self._view = textadapter.TextViewer()
-        elif mimetype == 'application/x-cbz':
-            import comicadapter
-            self._view = comicadapter.ComicViewer()
         else:
-            import evinceadapter
-            self._view = evinceadapter.EvinceViewer()
+            try:
+                import papersadapter
+                self._view = papersadapter.PapersViewer()
+            except Exception as e:
+                _logger.error('Failed to load papersadapter: %s', e)
+                raise RuntimeError("Cannot start Read Activity: PDF support missing.") from e
             self._view_toolbar.show_inverted_colors_button()
 
         self._view.setup(self)
@@ -1071,11 +1142,13 @@ class ReadActivity(activity.Activity):
     def _update_toolbars(self):
         self._view_toolbar._update_zoom_buttons()
         if self._view.can_highlight():
-            self._highlight.show()
+            self._highlight.set_visible(True)
         if self._view.can_do_text_to_speech():
-            self.speech_toolbar = SpeechToolbar(self)
-            self.speech_toolbar_button.set_page(self.speech_toolbar)
-            self.speech_toolbar_button.show()
+            pass
+            # FIXME: Speech disabled pending sugar-toolkit-gtk4 TTS support
+            # self.speech_toolbar = SpeechToolbar(self)
+            # self.speech_toolbar_button.set_page(self.speech_toolbar)
+            # self.speech_toolbar_button.show()
 
     def _share_document(self):
         """Share the document."""
@@ -1157,11 +1230,17 @@ class ReadActivity(activity.Activity):
         self._share_document()
 
     def _view_selection_changed_cb(self, view):
-        self._edit_toolbar.copy.props.sensitive = view.get_has_selection()
+        has_sel = False
+        if hasattr(view, 'get_has_selection'):
+            has_sel = view.get_has_selection()
+        elif hasattr(view, 'has_selection'):
+            has_sel = view.has_selection()
+
+        self._edit_toolbar.copy.props.sensitive = has_sel
         if self._view.can_highlight():
             in_bounds, _highlight_found = self._view.in_highlight()
             self._highlight.props.sensitive = \
-                view.get_has_selection() or in_bounds
+                has_sel or in_bounds
 
             self._highlight.handler_block(self._highlight_id)
             self._highlight.set_active(in_bounds)
@@ -1170,12 +1249,12 @@ class ReadActivity(activity.Activity):
     def _edit_toolbar_copy_cb(self, button):
         self._view.copy()
 
-    def _key_press_event_cb(self, widget, event):
+    def _key_press_event_cb(self, controller, keyval, keycode, state):
         if self.activity_button.page.title.has_focus() or \
                 self._num_page_entry.has_focus():
             return False
-        keyname = Gdk.keyval_name(event.keyval)
-        if keyname == 'c' and event.state & Gdk.ModifierType.CONTROL_MASK:
+        keyname = Gdk.keyval_name(keyval)
+        if keyname == 'c' and state & Gdk.ModifierType.CONTROL_MASK:
             self._view.copy()
             return True
         elif keyname == 'KP_Home':
@@ -1185,7 +1264,7 @@ class ReadActivity(activity.Activity):
         elif keyname == 'KP_End':
             self._view_toolbar.zoom_out()
             return True
-        elif keyname == 'i' and event.state & Gdk.ModifierType.CONTROL_MASK:
+        elif keyname == 'i' and state & Gdk.ModifierType.CONTROL_MASK:
             self._view_toolbar.toggle_inverted_colors()
             return True
         elif keyname == 'Home':
@@ -1215,9 +1294,9 @@ class ReadActivity(activity.Activity):
         else:
             return False
 
-    def _key_release_event_cb(self, widget, event):
-        # keyname = Gdk.keyval_name(event.keyval)
-        # _logger.debug("Keyname Release: %s, time: %s", keyname, event.time)
+    def _key_release_event_cb(self, controller, keyval, keycode, state):
+        # keyname = Gdk.keyval_name(keyval)
+        # _logger.debug("Keyname Release: %s", keyname)
         return False
 
     def __view_toolbar_needs_update_size_cb(self, view_toolbar):
@@ -1246,7 +1325,7 @@ class ReadActivity(activity.Activity):
             if button.page == page:
                 self.tray.remove_item(button)
         if len(self.tray.get_children()) == 0:
-            self.tray.hide()
+            self.tray.set_visible(False)
             self._view_toolbar.traybutton.props.active = False
 
     def _add_link_totray(self, page, buf, color, title, owner, local):
@@ -1255,9 +1334,9 @@ class ReadActivity(activity.Activity):
         item.connect('clicked', self._bookmark_button_clicked_cb, page)
         item.connect('go_to_bookmark', self._bookmark_button_clicked_cb)
         item.connect('remove_link', self._bookmark_button_removed_cb)
-        self.tray.show()
+        self.tray.set_visible(True)
         self.tray.add_item(item)
-        item.show()
+        item.set_visible(True)
         self._view_toolbar.traybutton.props.active = True
 
     def _bookmark_button_clicked_cb(self, button, page):
@@ -1281,52 +1360,64 @@ class ReadActivity(activity.Activity):
         self._bookmark_view.del_bookmark(num_page)
 
     def _get_screenshot(self):
-        """Copied from activity.get_preview()
-        """
-        if self.canvas is None or not hasattr(self.canvas, 'get_window'):
+        """Generate a screenshot for the bookmark thumbnail."""
+        if self.canvas is None:
             return None
 
-        window = self.canvas.get_window()
-        if window is None:
+        try:
+            canvas_width = self.canvas.get_width()
+            canvas_height = self.canvas.get_height()
+            if canvas_width <= 0 or canvas_height <= 0:
+                return None
+
+            native = self.canvas.get_native()
+            if native is None:
+                return None
+
+            renderer = native.get_renderer()
+            if renderer is None:
+                return None
+
+            paintable = Gtk.WidgetPaintable.new(self.canvas)
+            snapshot = Gtk.Snapshot()
+            paintable.snapshot(snapshot, canvas_width, canvas_height)
+            node = snapshot.to_node()
+            if node is None:
+                return None
+
+            viewport = Graphene.Rect()
+            viewport.init(0, 0, canvas_width, canvas_height)
+            texture = renderer.render_texture(node, viewport)
+
+            png_data = texture.save_to_png_bytes()
+            screenshot_surface = cairo.ImageSurface.create_from_png(
+                io.BytesIO(png_data.get_data())
+            )
+
+            preview_width, preview_height = style.zoom(100), style.zoom(80)
+            preview_surface = cairo.ImageSurface(cairo.FORMAT_ARGB32,
+                                                 preview_width, preview_height)
+            cr = cairo.Context(preview_surface)
+
+            scale_w = preview_width * 1.0 / canvas_width
+            scale_h = preview_height * 1.0 / canvas_height
+            scale = min(scale_w, scale_h)
+
+            translate_x = int((preview_width - (canvas_width * scale)) / 2)
+            translate_y = int((preview_height - (canvas_height * scale)) / 2)
+
+            cr.translate(translate_x, translate_y)
+            cr.scale(scale, scale)
+
+            cr.set_source_rgba(1, 1, 1, 0)
+            cr.set_operator(cairo.OPERATOR_SOURCE)
+            cr.paint()
+            cr.set_source_surface(screenshot_surface)
+            cr.paint()
+
+            preview_str = io.BytesIO()
+            preview_surface.write_to_png(preview_str)
+            return preview_str.getvalue()
+        except Exception as e:
+            logging.error(f"Error generating preview: {e}")
             return None
-
-        alloc = self.canvas.get_allocation()
-
-        dummy_cr = Gdk.cairo_create(window)
-        target = dummy_cr.get_target()
-        canvas_width, canvas_height = alloc.width, alloc.height
-        screenshot_surface = target.create_similar(cairo.CONTENT_COLOR,
-                                                   canvas_width, canvas_height)
-        del dummy_cr, target
-
-        cr = cairo.Context(screenshot_surface)
-        r, g, b, a_ = style.COLOR_PANEL_GREY.get_rgba()
-        cr.set_source_rgb(r, g, b)
-        cr.paint()
-        self.canvas.draw(cr)
-        del cr
-
-        preview_width, preview_height = style.zoom(100), style.zoom(80)
-        preview_surface = cairo.ImageSurface(cairo.FORMAT_ARGB32,
-                                             preview_width, preview_height)
-        cr = cairo.Context(preview_surface)
-
-        scale_w = preview_width * 1.0 / canvas_width
-        scale_h = preview_height * 1.0 / canvas_height
-        scale = min(scale_w, scale_h)
-
-        translate_x = int((preview_width - (canvas_width * scale)) / 2)
-        translate_y = int((preview_height - (canvas_height * scale)) / 2)
-
-        cr.translate(translate_x, translate_y)
-        cr.scale(scale, scale)
-
-        cr.set_source_rgba(1, 1, 1, 0)
-        cr.set_operator(cairo.OPERATOR_SOURCE)
-        cr.paint()
-        cr.set_source_surface(screenshot_surface)
-        cr.paint()
-
-        preview_str = io.BytesIO()
-        preview_surface.write_to_png(preview_str)
-        return preview_str.getvalue()

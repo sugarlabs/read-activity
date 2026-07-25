@@ -18,32 +18,33 @@ from gettext import gettext as _
 
 from gi.repository import Gtk
 
-from sugar3.graphics.toolbutton import ToolButton
-from sugar3.graphics.toggletoolbutton import ToggleToolButton
-from sugar3.speech import SpeechManager
+from sugar4.graphics.toolbutton import ToolButton
+from sugar4.graphics.toggletoolbutton import ToggleToolButton
+from sugar4.speech import SpeechManager
 
 
-class SpeechToolbar(Gtk.Toolbar):
+class SpeechToolbar(Gtk.Box):
 
     def __init__(self, activity):
-        Gtk.Toolbar.__init__(self)
+        super().__init__(orientation=Gtk.Orientation.HORIZONTAL)
+        self.add_css_class("toolbar")
         self._activity = activity
         self._speech = SpeechManager()
         self._is_paused = False
 
         # Play button
         self._play_button = ToggleToolButton('media-playback-start')
-        self._play_button.show()
+        self._play_button.set_visible(True)
         self._play_button.connect('toggled', self._play_toggled_cb)
-        self.insert(self._play_button, -1)
+        self.append(self._play_button)
         self._play_button.set_tooltip(_('Play / Pause'))
 
         # Stop button
         self._stop_button = ToolButton('media-playback-stop')
-        self._stop_button.show()
+        self._stop_button.set_visible(True)
         self._stop_button.connect('clicked', self._stop_clicked_cb)
         self._stop_button.set_sensitive(False)
-        self.insert(self._stop_button, -1)
+        self.append(self._stop_button)
         self._stop_button.set_tooltip(_('Stop'))
 
         self._speech.connect('stop', self._reset_buttons_cb)

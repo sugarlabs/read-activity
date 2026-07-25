@@ -19,7 +19,7 @@ from gettext import gettext as _
 from gi.repository import GObject
 from gi.repository import Gtk
 
-from sugar3.graphics.alert import Alert
+from sugar4.graphics.alert import Alert
 
 from imageview import ImageViewer
 
@@ -45,14 +45,14 @@ class ComicViewer(GObject.GObject):
 
         self._sw = Gtk.ScrolledWindow()
         self._sw.set_policy(Gtk.PolicyType.ALWAYS, Gtk.PolicyType.ALWAYS)
-        self._activity._hbox.pack_start(self._sw, True, True, 0)
-        self._sw.show()
+        self._sw.set_hexpand(True)
+        self._sw.set_vexpand(True)
+        self._activity._hbox.append(self._sw)
 
         self._view = ImageViewer()
         self._view.set_zoom(1.0)
         self._view.connect('setup-new-surface', self.__new_surface_cb)
-        self._sw.add(self._view)
-        self._view.show()
+        self._sw.set_child(self._view)
 
     def load_document(self, file_path):
         try:
@@ -190,9 +190,9 @@ class ComicViewer(GObject.GObject):
         elif scrolltype == Gtk.ScrollType.STEP_FORWARD:
             self._scroll_step(True, horizontal)
         elif scrolltype == Gtk.ScrollType.START:
-            self.set_current_page(1)
+            self.set_current_page(0)
         elif scrolltype == Gtk.ScrollType.END:
-            self.set_current_page(self._document.get_n_pages())
+            self.set_current_page(self.get_pagecount() - 1)
         else:
             pass
 

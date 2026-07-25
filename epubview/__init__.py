@@ -17,4 +17,3 @@
 
 from .epub import _Epub as Epub
 from .epubview import _View as EpubView
-from .jobs import _JobFind as JobFind

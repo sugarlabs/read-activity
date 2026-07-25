@@ -3,7 +3,6 @@ import logging
 
 import epubview
 
-# import speech
 
 from io import StringIO
 
@@ -20,8 +19,9 @@ class EpubViewer(epubview.EpubView):
         self.connect('selection-changed',
                      activity._view_selection_changed_cb)
 
-        activity._hbox.pack_start(self, True, True, 0)
-        self.show_all()
+        self.set_hexpand(True)
+        activity._hbox.append(self)
+        self.set_visible(True)
         self._modified_files = []
 
         # text to speech initialization
@@ -30,9 +30,6 @@ class EpubViewer(epubview.EpubView):
 
     def load_document(self, file_path):
         self.set_document(EpubDocument(self, file_path.replace('file://', '')))
-        # speech.highlight_cb = self.highlight_next_word
-        # speech.reset_cb = self.reset_text_to_speech
-        # speech.end_text_cb = self.get_more_text
 
     def load_metadata(self, activity):
 
@@ -104,7 +101,7 @@ class EpubViewer(epubview.EpubView):
 }())
             '''
 
-        self._view.run_javascript(js)
+        self._view.evaluate_javascript(js, -1, None, None, None, None, None)
 
         self._view.set_editable(False)
         # mark the file as modified
@@ -188,28 +185,12 @@ class EpubViewer(epubview.EpubView):
 
     def get_more_text(self):
         pass
-        """
-        if self.current_word < len(self.word_tuples):
-            speech.stop()
-            more_text = self.get_marked_words()
-            speech.play(more_text)
-        else:
-            if speech.reset_buttons_cb is not None:
-                speech.reset_buttons_cb()
-        """
 
     def reset_text_to_speech(self):
         self.current_word = 0
 
     def highlight_next_word(self, word_count):
         pass
-        """
-        TODO: disabled because javascript can't be executed
-        with the velocity needed
-        self.current_word = word_count
-        self._view.highlight_next_word()
-        return True
-        """
 
     def connect_zoom_handler(self, handler):
         self._zoom_handler = handler
@@ -271,19 +252,8 @@ class EpubViewer(epubview.EpubView):
             link_iter = self._epub.get_links_model().iter_next(link_iter)
         return link_iter
 
-    def find_changed(self, job, page=None):
-        self._find_changed(job)
-
     def handle_link(self, link):
         self._load_file(link)
-
-    def setup_find_job(self, text, updated_cb):
-        self._find_job = JobFind(document=self._epub,
-                                 start_page=0, n_pages=self.get_pagecount(),
-                                 text=text, case_sensitive=False)
-        self._find_updated_handler = self._find_job.connect('updated',
-                                                            updated_cb)
-        return self._find_job, self._find_updated_handler
 
 
 class EpubDocument(epubview.Epub):
@@ -302,9 +272,3 @@ class EpubDocument(epubview.Epub):
         return self.get_toc_model()
 
 
-class JobFind(epubview.JobFind):
-
-    def __init__(self, document, start_page, n_pages, text,
-                 case_sensitive=False):
-        epubview.JobFind.__init__(self, document, start_page, n_pages, text,
-                                  case_sensitive=False)

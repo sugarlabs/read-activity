@@ -19,12 +19,11 @@ import logging
 
 from gi.repository import GObject
 from gi.repository import Gtk
-from gi.repository import Gdk
 
-from sugar3.graphics.toolbutton import ToolButton
-from sugar3.graphics.toggletoolbutton import ToggleToolButton
-from sugar3.graphics import iconentry
-from sugar3.activity.widgets import EditToolbar as BaseEditToolbar
+from sugar4.graphics.toolbutton import ToolButton
+from sugar4.graphics.toggletoolbutton import ToggleToolButton
+from sugar4.graphics import iconentry
+from sugar4.activity.widgets import EditToolbar as BaseEditToolbar
 
 
 class EditToolbar(BaseEditToolbar):
@@ -32,13 +31,12 @@ class EditToolbar(BaseEditToolbar):
     __gtype_name__ = 'EditToolbar'
 
     def __init__(self):
-        BaseEditToolbar.__init__(self)
+        super().__init__()
+        self.add_css_class("toolbar")
 
         self._view = None
 
-        self._find_job = None
-
-        search_item = Gtk.ToolItem()
+        search_item = Gtk.Box()
 
         self._search_entry = iconentry.IconEntry()
         self._search_entry.set_icon_from_name(iconentry.ICON_ENTRY_PRIMARY,
@@ -48,56 +46,59 @@ class EditToolbar(BaseEditToolbar):
         self._search_entry.connect('changed', self._search_entry_changed_cb)
         self._search_entry_changed = True
 
-        width = int(Gdk.Screen.width() / 3)
+        from readactivity import get_screen_width
+        width = int(get_screen_width() / 3)
         self._search_entry.set_size_request(width, -1)
 
-        search_item.add(self._search_entry)
-        self._search_entry.show()
+        search_item.append(self._search_entry)
+        self._search_entry.set_visible(True)
 
-        self.insert(search_item, -1)
-        search_item.show()
+        self.append(search_item)
+        search_item.set_visible(True)
+
+        self._nav_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        self._nav_box.add_css_class('linked')
 
         self._prev = ToolButton('go-previous-paired')
         self._prev.set_tooltip(_('Previous'))
         self._prev.props.sensitive = False
         self._prev.connect('clicked', self._find_prev_cb)
-        self.insert(self._prev, -1)
-        self._prev.show()
+        self._nav_box.append(self._prev)
+        self._prev.set_visible(True)
 
         self._next = ToolButton('go-next-paired')
         self._next.set_tooltip(_('Next'))
         self._next.props.sensitive = False
         self._next.connect('clicked', self._find_next_cb)
-        self.insert(self._next, -1)
-        self._next.show()
+        self._nav_box.append(self._next)
+        self._next.set_visible(True)
 
-        separator = Gtk.SeparatorToolItem()
-        separator.show()
-        self.insert(separator, -1)
+        self.append(self._nav_box)
+        self._nav_box.set_visible(True)
+
+        separator = Gtk.Separator(orientation=Gtk.Orientation.VERTICAL)
+        separator.set_visible(True)
+        self.append(separator)
 
         self.highlight = ToggleToolButton('format-text-underline')
         self.highlight.set_tooltip(_('Highlight'))
         self.highlight.props.sensitive = False
-        self.insert(self.highlight, -1)
+        self.append(self.highlight)
 
     def set_view(self, view):
         self._view = view
-        self._view.find_set_highlight_search(True)
+        if hasattr(self._view, 'find_set_highlight_search'):
+            self._view.find_set_highlight_search(True)
 
     def _clear_find_job(self):
-        if self._find_job is None:
-            return
-        if not self._find_job.is_finished():
-            self._find_job.cancel()
-        self._find_job.disconnect(self._find_updated_handler)
-        self._find_job = None
+        if self._view and hasattr(self._view, 'clear_search'):
+            self._view.clear_search()
 
     def _search_find_first(self):
         self._clear_find_job()
         text = self._search_entry.props.text
-        if text != "":
-            self._find_job, self._find_updated_handler = \
-                self._view.setup_find_job(text, self._find_updated_cb)
+        if text != "" and hasattr(self._view, 'start_search'):
+            self._view.start_search(text, self._find_updated_cb)
         else:
             # FIXME: highlight nothing
             pass
@@ -106,14 +107,18 @@ class EditToolbar(BaseEditToolbar):
         self._update_find_buttons()
 
     def _search_find_next(self):
-        self._view.find_next()
+        if hasattr(self._view, 'find_next'):
+            self._view.find_next()
+        self._update_find_buttons()
 
     def _search_find_last(self):
-        # FIXME: does Evince support find last?
+        # FIXME: does Papers support find last?
         return
 
     def _search_find_prev(self):
-        self._view.find_previous()
+        if hasattr(self._view, 'find_previous'):
+            self._view.find_previous()
+        self._update_find_buttons()
 
     def _search_entry_activate_cb(self, entry):
         if self._search_entry_changed:
@@ -124,6 +129,8 @@ class EditToolbar(BaseEditToolbar):
     def _search_entry_changed_cb(self, entry):
         logging.debug('Search entry: %s' % (entry.props.text))
         self._search_entry_changed = True
+        if entry.props.text == "":
+            self._clear_find_job()
         self._update_find_buttons()
 
     #    GLib.timeout_add(500, self._search_entry_timeout_cb)
@@ -136,8 +143,8 @@ class EditToolbar(BaseEditToolbar):
     def _find_changed_cb(self, page, spec):
         self._update_find_buttons()
 
-    def _find_updated_cb(self, job, page=None):
-        self._view.find_changed(job, page)
+    def _find_updated_cb(self, job=None, page=None):
+        self._update_find_buttons()
 
     def _find_prev_cb(self, button):
         if self._search_entry_changed:
@@ -152,23 +159,27 @@ class EditToolbar(BaseEditToolbar):
             self._search_find_next()
 
     def _update_find_buttons(self):
+        has_results = False
+        if self._view and hasattr(self._view, 'has_search_results'):
+            has_results = self._view.has_search_results()
+
         if self._search_entry_changed:
             if self._search_entry.props.text != "":
                 self._prev.props.sensitive = False
-#                self._prev.set_tooltip(_('Find last'))
                 self._next.props.sensitive = True
                 self._next.set_tooltip(_('Find first'))
             else:
                 self._prev.props.sensitive = False
                 self._next.props.sensitive = False
         else:
-            self._prev.props.sensitive = True
+            # Enable previous/next if we actually found results
+            self._prev.props.sensitive = has_results
             self._prev.set_tooltip(_('Find previous'))
-            self._next.props.sensitive = True
+            self._next.props.sensitive = has_results
             self._next.set_tooltip(_('Find next'))
 
 
-class ViewToolbar(Gtk.Toolbar):
+class ViewToolbar(Gtk.Box):
     __gtype_name__ = 'ViewToolbar'
 
     __gsignals__ = {
@@ -182,104 +193,104 @@ class ViewToolbar(Gtk.Toolbar):
                                    GObject.TYPE_NONE, ([bool])), }
 
     def __init__(self):
-        Gtk.Toolbar.__init__(self)
+        super().__init__(orientation=Gtk.Orientation.HORIZONTAL)
+        self.add_css_class("toolbar")
 
         self._view = None
 
         self._navigator_button = ToggleToolButton('view-list')
         self._navigator_button.set_tooltip(_('Table of contents'))
         self._navigator_button.connect('toggled', self.__navigator_toggled_cb)
-        self.insert(self._navigator_button, -1)
+        self.append(self._navigator_button)
 
-        self._spacer_navigator = Gtk.SeparatorToolItem()
-        self._spacer_navigator.props.draw = False
-        self.insert(self._spacer_navigator, -1)
+        self._spacer_navigator = Gtk.Separator(
+            orientation=Gtk.Orientation.VERTICAL)
+        self._spacer_navigator.set_opacity(0)
+        self.append(self._spacer_navigator)
 
         self._zoom_out = ToolButton('zoom-out')
         self._zoom_out.set_tooltip(_('Zoom out'))
         self._zoom_out.connect('clicked', self._zoom_out_cb)
-        self.insert(self._zoom_out, -1)
-        self._zoom_out.show()
+        self.append(self._zoom_out)
+        self._zoom_out.set_visible(True)
 
         self._zoom_in = ToolButton('zoom-in')
         self._zoom_in.set_tooltip(_('Zoom in'))
         self._zoom_in.connect('clicked', self._zoom_in_cb)
-        self.insert(self._zoom_in, -1)
-        self._zoom_in.show()
+        self.append(self._zoom_in)
+        self._zoom_in.set_visible(True)
 
         self._zoom_to_width = ToolButton('zoom-to-width')
         self._zoom_to_width.set_tooltip(_('Zoom to width'))
         self._zoom_to_width.connect('clicked', self._zoom_to_width_cb)
-        self.insert(self._zoom_to_width, -1)
-        self._zoom_to_width.show()
+        self.append(self._zoom_to_width)
+        self._zoom_to_width.set_visible(True)
 
         self._zoom_to_fit = ToolButton('zoom-best-fit')
         self._zoom_to_fit.set_tooltip(_('Zoom to fit'))
         self._zoom_to_fit.connect('clicked', self._zoom_to_fit_cb)
-        self.insert(self._zoom_to_fit, -1)
-        self._zoom_to_fit.show()
+        self.append(self._zoom_to_fit)
+        self._zoom_to_fit.set_visible(True)
 
         self._zoom_to_original = ToolButton('zoom-original')
         self._zoom_to_original.set_tooltip(_('Actual size'))
         self._zoom_to_original.connect('clicked', self._actual_size_cb)
-        self.insert(self._zoom_to_original, -1)
-        self._zoom_to_original.show()
+        self.append(self._zoom_to_original)
+        self._zoom_to_original.set_visible(True)
 
-        spacer = Gtk.SeparatorToolItem()
-        spacer.props.draw = True
-        self.insert(spacer, -1)
-        spacer.show()
+        spacer = Gtk.Separator(orientation=Gtk.Orientation.VERTICAL)
+        self.append(spacer)
+        spacer.set_visible(True)
 
         self._fullscreen = ToolButton('view-fullscreen')
         self._fullscreen.set_tooltip(_('Fullscreen'))
         self._fullscreen.connect('clicked', self._fullscreen_cb)
-        self.insert(self._fullscreen, -1)
-        self._fullscreen.show()
+        self.append(self._fullscreen)
+        self._fullscreen.set_visible(True)
 
         self.traybutton = ToggleToolButton('tray-show')
         self.traybutton.set_icon_name('tray-favourite')
         self.traybutton.connect('toggled', self.__tray_toggled_cb)
         self.traybutton.props.active = False
-        self.insert(self.traybutton, -1)
-        self.traybutton.show()
+        self.append(self.traybutton)
+        self.traybutton.set_visible(True)
 
         self._view_notify_zoom_handler = None
 
-        spacer = Gtk.SeparatorToolItem()
-        spacer.props.draw = True
-        self.insert(spacer, -1)
-        spacer.show()
+        spacer = Gtk.Separator(orientation=Gtk.Orientation.VERTICAL)
+        self.append(spacer)
+        spacer.set_visible(True)
 
         self._rotate_left = ToolButton('rotate_anticlockwise')
         self._rotate_left.set_tooltip(_('Rotate left'))
         self._rotate_left.connect('clicked', self._rotate_left_cb)
-        self.insert(self._rotate_left, -1)
-        self._rotate_left.show()
+        self.append(self._rotate_left)
+        self._rotate_left.set_visible(True)
 
         self._rotate_right = ToolButton('rotate_clockwise')
         self._rotate_right.set_tooltip(_('Rotate right'))
         self._rotate_right.connect('clicked', self._rotate_right_cb)
-        self.insert(self._rotate_right, -1)
-        self._rotate_right.show()
+        self.append(self._rotate_right)
+        self._rotate_right.set_visible(True)
 
-        spacer = Gtk.SeparatorToolItem()
-        self.insert(spacer, -1)
-        spacer.show()
+        spacer = Gtk.Separator(orientation=Gtk.Orientation.VERTICAL)
+        self.append(spacer)
+        spacer.set_visible(True)
 
         self._inverted_colors = ToggleToolButton(icon_name='dark-theme')
         self._inverted_colors.set_tooltip(_('Inverted Colors'))
         self._inverted_colors.set_accelerator('<Ctrl>i')
         self._inverted_colors.connect(
             'toggled', self.__inverted_colors_toggled_cb)
-        self.insert(self._inverted_colors, -1)
+        self.append(self._inverted_colors)
 
     def set_view(self, view):
         self._view = view
         self._update_zoom_buttons()
 
     def show_nav_button(self):
-        self._navigator_button.show()
-        self._spacer_navigator.show()
+        self._navigator_button.set_visible(True)
+        self._spacer_navigator.set_visible(True)
 
     def zoom_in(self):
         self._view.zoom_in()
@@ -348,7 +359,7 @@ class ViewToolbar(Gtk.Toolbar):
             button.set_tooltip(_('Inverted Colors'))
 
     def show_inverted_colors_button(self):
-        self._inverted_colors.show()
+        self._inverted_colors.set_visible(True)
 
     def toggle_inverted_colors(self):
         self._inverted_colors.set_active(

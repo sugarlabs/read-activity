@@ -17,15 +17,12 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import gi
-try:
-    gi.require_version('WebKit2', '4.1')
-except:
-    gi.require_version('WebKit2', '4.0')
+gi.require_version('WebKit', '6.0')
 
 from gi.repository import Gtk
 from gi.repository import GObject
 from gi.repository import Gdk
-from gi.repository import WebKit2
+from gi.repository import WebKit
 from . import widgets
 
 import logging
@@ -48,12 +45,12 @@ LOADING_HTML = '''
 '''
 
 
-class _View(Gtk.HBox):
+class _View(Gtk.Box):
 
     __gproperties__ = {
-        'scale': (GObject.TYPE_FLOAT, 'the zoom level',
+        'scale': (GObject.TYPE_DOUBLE, 'the zoom level',
                   'the zoom level of the widget',
-                  0.5, 4.0, 1.0, GObject.PARAM_READWRITE),
+                  0.01, 10.0, 1.0, GObject.PARAM_READWRITE),
     }
     __gsignals__ = {
         'page-changed': (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE,
@@ -63,8 +60,7 @@ class _View(Gtk.HBox):
     }
 
     def __init__(self):
-        GObject.threads_init()
-        Gtk.HBox.__init__(self)
+        super().__init__(orientation=Gtk.Orientation.HORIZONTAL)
 
         self.connect("destroy", self._destroy_cb)
 
@@ -83,6 +79,7 @@ class _View(Gtk.HBox):
         self._findjob = None
         self.__in_search = False
         self.__search_fwd = True
+        self.__has_active_search = False
         self._filelist = None
         self._internal_link = None
 
@@ -90,7 +87,6 @@ class _View(Gtk.HBox):
         self._view.load_html(LOADING_HTML, '/')
         settings = self._view.get_settings()
         settings.props.default_font_family = 'DejaVu LGC Serif'
-        settings.props.enable_plugins = False
         settings.props.default_charset = 'utf-8'
         self._view.connect('load-changed', self._view_load_changed_cb)
         self._view.connect('scrolled', self._view_scrolled_cb)
@@ -102,22 +98,28 @@ class _View(Gtk.HBox):
         find = self._view.get_find_controller()
         find.connect('failed-to-find-text', self._find_failed_cb)
 
-        self._eventbox = Gtk.EventBox()
-        self._eventbox.connect('scroll-event', self._eventbox_scroll_event_cb)
-        self._eventbox.add_events(Gdk.EventMask.SCROLL_MASK)
-        self._eventbox.add(self._view)
+        self._eventbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        scroll_ctrl = Gtk.EventControllerScroll.new(Gtk.EventControllerScrollFlags.VERTICAL)
+        scroll_ctrl.connect('scroll', self._eventbox_scroll_event_cb)
+        self._eventbox.add_controller(scroll_ctrl)
+        self._eventbox.append(self._view)
 
-        self._scrollbar = Gtk.VScrollbar()
-        self._scrollbar_change_value_cb_id = self._scrollbar.connect(
-            'change-value', self._scrollbar_change_value_cb)
+        adj = Gtk.Adjustment()
+        self._scrollbar = Gtk.Scrollbar(orientation=Gtk.Orientation.VERTICAL, adjustment=adj)
+        self._scrollbar_change_value_cb_id = self._scrollbar.get_adjustment().connect(
+            'value-changed', self._scrollbar_change_value_cb)
 
-        hbox = Gtk.HBox()
-        hbox.pack_start(self._eventbox, True, True, 0)
-        hbox.pack_end(self._scrollbar, False, True, 0)
+        hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        self._eventbox.set_hexpand(True)
+        self._eventbox.set_vexpand(True)
+        hbox.append(self._eventbox)
+        hbox.append(self._scrollbar)
 
-        self.pack_start(hbox, True, True, 0)
-        self._view.set_can_default(True)
-        self._view.set_can_focus(True)
+        hbox.set_hexpand(True)
+        hbox.set_vexpand(True)
+        self.append(hbox)
+        self._view.set_receives_default(True)
+        self._view.set_focusable(True)
 
         def map_cp(widget):
             widget.setup_touch()
@@ -324,7 +326,7 @@ class _View(Gtk.HBox):
         '''
         Copies the current selection to clipboard.
         '''
-        self._view.run_javascript('document.execCommand("copy")')
+        self._view.evaluate_javascript('document.execCommand("copy")', -1, None, None, None, None, None)
 
     def find_next(self):
         '''
@@ -342,27 +344,41 @@ class _View(Gtk.HBox):
         self.__search_fwd = False
         self._view.get_find_controller().search_previous()
 
-    def _find_failed_cb(self, find_controller):
-        try:
-            if self.__search_fwd:
-                path = os.path.join(self._epub.get_basedir(),
-                                    self._findjob.get_next_file())
-            else:
-                path = os.path.join(self._epub.get_basedir(),
-                                    self._findjob.get_prev_file())
-            self.__in_search = True
-            self._load_file(path)
-        except IndexError:
-            # No match anywhere, no other file to pick
-            pass
+    def clear_search(self):
+        '''
+        Clears the current search
+        '''
+        self._view.get_find_controller().search_finish()
+        self.__has_active_search = False
 
-    def _find_changed(self, job):
+    def _find_failed_cb(self, find_controller):
+        # TODO: Implement cross-page search navigation when a term is not found on the current page
+        pass
+
+    def has_search_results(self):
+        '''
+        Returns True if there is an active search with results
+        '''
+        return self.__has_active_search
+
+    def start_search(self, text, updated_cb=None):
         self._view.grab_focus()
-        self._findjob = job
+        self.__in_search = True
+        self.__search_fwd = True
+        self.__has_active_search = True
         find = self._view.get_find_controller()
-        find.search(self._findjob.get_search_text(),
-                    self._findjob.get_flags(),
-                    GObject.G_MAXUINT)
+        options = WebKit.FindOptions.CASE_INSENSITIVE | WebKit.FindOptions.WRAP_AROUND
+        find.search(text, options, GObject.G_MAXUINT)
+
+    def set_inverted_colors(self, active):
+        '''
+        Invert colors in the EPUB view via CSS filter injection
+        '''
+        if active:
+            js = 'document.documentElement.style.filter = "invert(1) hue-rotate(180deg)";'
+        else:
+            js = 'document.documentElement.style.filter = "none";'
+        self._view.evaluate_javascript(js, -1, None, None, None, None, None)
 
     def __set_zoom(self, value):
         self._view.set_zoom_level(value)
@@ -419,14 +435,14 @@ class _View(Gtk.HBox):
         self._has_selection = has_selection
         self.emit('selection-changed')
 
-    def _eventbox_scroll_event_cb(self, view, event):
-        if event.direction == Gdk.ScrollDirection.DOWN:
+    def _eventbox_scroll_event_cb(self, controller, dx, dy):
+        if dy > 0:
             self.scroll(Gtk.ScrollType.STEP_FORWARD, False)
-        elif event.direction == Gdk.ScrollDirection.UP:
+        elif dy < 0:
             self.scroll(Gtk.ScrollType.STEP_BACKWARD, False)
 
     def _view_load_changed_cb(self, v, load_event):
-        if load_event != WebKit2.LoadEvent.FINISHED:
+        if load_event != WebKit.LoadEvent.FINISHED:
             return True
 
         filename = self._view.props.uri.replace('file://', '')
@@ -452,8 +468,11 @@ class _View(Gtk.HBox):
         if self.__in_search:
             self.__in_search = False
             find = self._view.get_find_controller()
-            find.search(self._findjob.get_search_text(),
-                        self._findjob.get_flags(self.__search_fwd),
+            options = WebKit.FindOptions.CASE_INSENSITIVE | WebKit.FindOptions.WRAP_AROUND
+            if not self.__search_fwd:
+                options |= WebKit.FindOptions.BACKWARDS
+            find.search(find.get_search_text(),
+                        options,
                         GObject.G_MAXUINT)
         else:
             self._scroll_page()
@@ -483,39 +502,6 @@ class _View(Gtk.HBox):
                     self.__scroll_to_end = False
                     # process_file = False
                     GObject.idle_add(self._load_file, next_file)
-
-#        if process_file:
-#            # prepare text to speech
-#            html_file = open(self._loaded_filename)
-#            soup = BeautifulSoup.BeautifulSoup(html_file)
-#            body = soup.find('body')
-#            tags = body.findAll(text=True)
-#            self._all_text = ''.join([tag for tag in tags])
-#            self._prepare_text_to_speech(self._all_text)
-
-    def _prepare_text_to_speech(self, page_text):
-        i = 0
-        j = 0
-        word_begin = 0
-        word_end = 0
-        ignore_chars = [' ', '\n', '\r', '_', '[', '{', ']', '}', '|',
-                        '<', '>', '*', '+', '/', '\\']
-        ignore_set = set(ignore_chars)
-        self.word_tuples = []
-        len_page_text = len(page_text)
-        while i < len_page_text:
-            if page_text[i] not in ignore_set:
-                word_begin = i
-                j = i
-                while j < len_page_text and page_text[j] not in ignore_set:
-                    j = j + 1
-                    word_end = j
-                    i = j
-                word_tuple = (word_begin, word_end,
-                              page_text[word_begin: word_end])
-                if word_tuple[2] != '\r':
-                    self.word_tuples.append(word_tuple)
-            i = i + 1
 
     def _scroll_page(self):
         v_upper = self._page_height
@@ -556,9 +542,9 @@ class _View(Gtk.HBox):
             return
         self.__page_changed = True
         self._loaded_page = pageno
-        self._scrollbar.handler_block(self._scrollbar_change_value_cb_id)
-        self._scrollbar.set_value(pageno)
-        self._scrollbar.handler_unblock(self._scrollbar_change_value_cb_id)
+        self._scrollbar.get_adjustment().handler_block(self._scrollbar_change_value_cb_id)
+        self._scrollbar.get_adjustment().set_value(pageno)
+        self._scrollbar.get_adjustment().handler_unblock(self._scrollbar_change_value_cb_id)
         # the indexes in read activity are zero based
         self.emit('page-changed', (oldpage - 1), (pageno - 1))
 
@@ -577,17 +563,7 @@ class _View(Gtk.HBox):
         if filename != self._loaded_filename:
             self._loaded_filename = filename
 
-            """
-            TODO: disabled because javascript can't be executed
-            with the velocity needed
-            # Copy javascript to highligth text to speech
-            destpath, destname = os.path.split(filename.replace('file://', ''))
-            shutil.copy('./epubview/highlight_words.js', destpath)
-            self._insert_js_reference(filename.replace('file://', ''),
-                    destpath)
-            IMPORTANT: Find a way to do this without modify the files
-            now text highlight is implemented and the epub file is saved
-            """
+
 
             self._view.stop_loading()
             if filename.endswith('xml'):
@@ -601,16 +577,6 @@ class _View(Gtk.HBox):
             self._loaded_page = pageno
             self._scroll_page()
         self._on_page_changed(oldpage, pageno)
-
-    def _insert_js_reference(self, file_name, path):
-        js_reference = '<script type="text/javascript" ' + \
-            'src="./highlight_words.js"></script>'
-        o = open(file_name + '.tmp', 'a')
-        for line in open(file_name):
-            line = line.replace('</head>', js_reference + '</head>')
-            o.write(line + "\n")
-        o.close()
-        shutil.copy(file_name + '.tmp', file_name)
 
     def _load_file(self, path):
         self._internal_link = None
@@ -628,23 +594,15 @@ class _View(Gtk.HBox):
                 self._on_page_changed(oldpage, self._loaded_page)
                 break
 
-    def _scrollbar_change_value_cb(self, range, scrolltype, value):
-        if scrolltype == Gtk.ScrollType.STEP_FORWARD or \
-                scrolltype == Gtk.ScrollType.STEP_BACKWARD:
-            self.scroll(scrolltype, False)
-        elif scrolltype == Gtk.ScrollType.JUMP or \
-                scrolltype == Gtk.ScrollType.PAGE_FORWARD or \
-                scrolltype == Gtk.ScrollType.PAGE_BACKWARD:
-            if value > self._scrollbar.props.adjustment.props.upper:
-                self._load_page(self._pagecount)
-            else:
-                self._load_page(int(value))
+    def _scrollbar_change_value_cb(self, adjustment):
+        value = adjustment.get_value()
+        if value > adjustment.props.upper:
+            self._load_page(self._pagecount)
         else:
-            print('Warning: unknown scrolltype %s with value %f' %
-                  (str(scrolltype), value))
+            self._load_page(int(value))
 
         # FIXME: This should not be needed here
-        self._scrollbar.set_value(self._loaded_page)
+        adjustment.set_value(self._loaded_page)
 
         if self.__page_changed:
             self.__page_changed = False
@@ -656,10 +614,13 @@ class _View(Gtk.HBox):
         self._ready = True
 
         self._pagecount = self._paginator.get_total_pagecount()
-        self._scrollbar.set_range(1.0, self._pagecount)
-        self._scrollbar.set_increments(1.0, 1.0)
+        adj = self._scrollbar.get_adjustment()
+        adj.props.lower = 1.0
+        adj.props.upper = self._pagecount
+        adj.props.step_increment = 1.0
+        adj.props.page_increment = 1.0
         self._view.grab_focus()
-        self._view.grab_default()
 
     def _destroy_cb(self, widget):
-        self._epub.close()
+        if self._epub:
+            self._epub.close()

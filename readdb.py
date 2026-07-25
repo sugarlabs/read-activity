@@ -25,7 +25,7 @@ import base64
 import json
 
 from gi.repository import GObject
-from sugar3 import profile
+from sugar4 import profile
 
 from readbookmark import Bookmark
 
@@ -103,7 +103,7 @@ class BookmarkManager(GObject.GObject):
                              None, ([int])), }
 
     def __init__(self, filehash):
-        GObject.GObject.__init__(self)
+        super().__init__()
         self._filehash = filehash
 
         dbpath = _init_db()

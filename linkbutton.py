@@ -18,32 +18,37 @@
 from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import GObject
+from gi.repository import GLib
 
 import io
 import cairo
 from gettext import gettext as _
 
-from sugar3.graphics.palette import Palette
-from sugar3.graphics.tray import TrayButton
-from sugar3.graphics import style
+from sugar4.graphics.palette import Palette
+from sugar4.graphics.tray import TrayButton
+from sugar4.graphics.menuitem import MenuItem
+from sugar4.graphics import style
 
 
-class LinkButton(TrayButton, GObject.GObject):
+class LinkButton(TrayButton):
+    """
+    A TrayButton that represents a visual link or bookmark to a specific page.
+
+    Attributes:
+        page (int): The target page number this link points to.
+    """
     __gtype_name__ = 'LinkButton'
     __gsignals__ = {
         'remove_link': (GObject.SignalFlags.RUN_FIRST,
-                        None, ([int])),
+                        None, (int,)),
         'go_to_bookmark': (GObject.SignalFlags.RUN_FIRST,
-                           None, ([int])), }
+                           None, (int,)),
+    }
 
     def __init__(self, buf, color, title, owner, page, local):
-        TrayButton.__init__(self)
+        super().__init__()
 
-        # Color read from the Journal may be Unicode, but Rsvg needs
-        # it as single byte string:
         self._color = color
-        if isinstance(color, str):
-            self._color = str(color)
         self._have_preview = False
         if buf is not None:
             self.set_image(buf)
@@ -60,7 +65,7 @@ class LinkButton(TrayButton, GObject.GObject):
         fill = self._color.split(',')[1]
         stroke = self._color.split(',')[0]
         self._have_preview = True
-        img = Gtk.Image()
+        img = Gtk.Picture()
         str_buf = io.BytesIO(buf)
         thumb_surface = cairo.ImageSurface.create_from_png(str_buf)
 
@@ -83,17 +88,19 @@ class LinkButton(TrayButton, GObject.GObject):
         context.rectangle(dest_x, dest_y, thumb_width, thumb_height)
         context.fill()
 
-        pixbuf_bg = Gdk.pixbuf_get_from_surface(bg_surface, 0, 0,
-                                                bg_width, bg_height)
+        stream = io.BytesIO()
+        bg_surface.write_to_png(stream)
+        png_bytes = GLib.Bytes.new(stream.getvalue())
+        texture = Gdk.Texture.new_from_bytes(png_bytes)
 
-        img.set_from_pixbuf(pixbuf_bg)
+        img.set_paintable(texture)
+        img.set_size_request(bg_width, bg_height)
         self.set_icon_widget(img)
-        img.show()
 
     def set_empty_image(self, page):
         fill = self._color.split(',')[1]
         stroke = self._color.split(',')[0]
-        img = Gtk.Image()
+        img = Gtk.Picture()
 
         bg_width, bg_height = style.zoom(120), style.zoom(110)
         bg_surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, bg_width,
@@ -116,30 +123,29 @@ class LinkButton(TrayButton, GObject.GObject):
             context.text_extents(text)
         context.move_to(x - width / 2, y + height / 2)
         context.show_text(text)
-        context.stroke()
 
-        pixbuf_bg = Gdk.pixbuf_get_from_surface(bg_surface, 0, 0,
-                                                bg_width, bg_height)
+        stream = io.BytesIO()
+        bg_surface.write_to_png(stream)
+        png_bytes = GLib.Bytes.new(stream.getvalue())
+        texture = Gdk.Texture.new_from_bytes(png_bytes)
 
-        img.set_from_pixbuf(pixbuf_bg)
+        img.set_paintable(texture)
+        img.set_size_request(bg_width, bg_height)
         self.set_icon_widget(img)
-        img.show()
 
     def setup_rollover_options(self, title, info, local):
         palette = Palette(title, text_maxlen=50)
         palette.set_secondary_text(info)
         self.set_palette(palette)
 
-        menu_item = Gtk.MenuItem(_('Go to Bookmark'))
+        menu_item = MenuItem(_('Go to Bookmark'))
         menu_item.connect('activate', self.go_to_bookmark_cb)
         palette.menu.append(menu_item)
-        menu_item.show()
 
-        if local == 1:
-            menu_item = Gtk.MenuItem(_('Remove'))
+        if local:
+            menu_item = MenuItem(_('Remove'))
             menu_item.connect('activate', self.item_remove_cb)
             palette.menu.append(menu_item)
-            menu_item.show()
 
     def item_remove_cb(self, widget):
         self.emit('remove_link', self.page)
